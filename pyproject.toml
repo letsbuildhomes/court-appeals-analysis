@@ -1,0 +1,13 @@
+[project]
+name = "data-court-review"
+version = "0.1.0"
+description = "Vermont Environmental Division PDF archive ingestion"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "beautifulsoup4>=4.12,<5",
+    "duckdb>=1.1,<2",
+    "httpx>=0.27,<1",
+]
+
+[tool.uv]
+package = false
