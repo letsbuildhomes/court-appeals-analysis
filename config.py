@@ -8,6 +8,7 @@ RAW_DIR = ROOT / "in"
 LISTINGS_DIR = RAW_DIR / "listings"
 PDF_DIR = RAW_DIR / "pdfs"
 DB_PATH = ROOT / "data" / "archive.duckdb"
+TEXT_DB_PATH = ROOT / "data" / "text.duckdb"
 
 SOURCE_URL = (
     "https://www.vtcourts.gov/opinions-decisions"

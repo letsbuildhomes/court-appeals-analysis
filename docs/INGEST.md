@@ -6,7 +6,7 @@ This document describes **implemented behavior** as of September 23, 2026. The [
 
 The latest completed snapshot is `20260922T204351Z-76e9f5ca` from the [Vermont Judiciary Environmental opinions listing](https://www.vtcourts.gov/opinions-decisions?f%5B0%5D=court_division_opinions_library_%3A3). It has **104 pages**, **2,581 posting rows**, and **2,578 distinct media URLs**. These are archive postings, not a count of housing projects, municipal appeals, or cases.
 
-The initial capped runs proved cache reuse and verified the first ten URL records. A subsequent bulk run populated **2,577 successful URL records**, representing **2,560 unique PDF files** (about 457 MiB). `make verify` passed for all **2,577/2,577** successful URL records on September 23. One URL, `/media/3427`, points to a `.docm` document rather than a PDF; the PDF-only downloader correctly rejected it and recorded `status='failed'`. A repeat full-archive run will retry that URL until it is explicitly classified as a non-PDF source. No persisted text extraction pipeline, OCR, housing filtering, case linking, or timeline analysis has run.
+The initial capped runs proved cache reuse and verified the first ten URL records. A subsequent bulk run populated **2,577 successful URL records**, representing **2,560 unique PDF files** (about 457 MiB). `make verify` passed for all **2,577/2,577** successful URL records on September 23. One URL, `/media/3427`, points to a `.docm` document rather than a PDF; the PDF-only downloader correctly rejected it and recorded `status='failed'`. A repeat full-archive run will retry that URL until it is explicitly classified as a non-PDF source. The [text pipeline](TEXT-PIPELINE.md) now has inventory, native extraction, triage, OCR, selection, and automated audit stages. Housing filtering, case linking, and timeline analysis have not run.
 
 ## Setup and commands
 
@@ -85,6 +85,6 @@ PY
 - The downloader checks the PDF signature near the start and local integrity. The full archive passed a size and SHA-256 check, but renderability, page count, text quality, relevance, and completeness of the site's archive have not been validated at scale. A 150-document read-only text probe is described in [TEXT-EXTRACTION-PLAN.md](TEXT-EXTRACTION-PLAN.md).
 - The listing includes both municipal and Act 250 matters; consolidated cases can contain both. Nothing here classifies appeal type or grounds. Later stages must distinguish documents, dockets, appeals, and housing projects, with evidence from PDF pages and explicit uncertainty.
 
-## Next implementation step
+## Downstream handoff
 
-Build a **document inventory/text extraction stage** over the 2,560 unique content-addressed PDFs. The proposed page-level workflow and OCR pilot are in [TEXT-EXTRACTION-PLAN.md](TEXT-EXTRACTION-PLAN.md). The later relevance, case-linking, chronology, and appeal-ground stages remain design work in the proposal; they have not been implemented or validated.
+The **document inventory/native extraction/triage/OCR/selection/audit** stages are implemented over the content-addressed PDFs; see [TEXT-PIPELINE.md](TEXT-PIPELINE.md). The production page-level handoff is the `current_analysis_pages` view in `data/text.duckdb`, and `make text-check` verifies its current coverage without altering it. [TEXT-EXTRACTION-PLAN.md](TEXT-EXTRACTION-PLAN.md) records the initial design; [TRIAGE-QA-EXPERIMENT.md](TRIAGE-QA-EXPERIMENT.md) records the separate native-text QA experiment. Relevance filtering, case linking, chronology, and appeal-ground analysis remain downstream work.

@@ -1,8 +1,19 @@
 UV_CACHE_DIR ?= .uv-cache
 export UV_CACHE_DIR
 LIMIT ?= 5
+TEXT_ARGS ?=
+QA_ARGS ?=
+REVIEW_PORT ?= 8766
+TEXT_IMAGE ?= data-court-review-text:local
+TEXT_IMAGE_STAMP = .docker-text-image.stamp
+TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
+	--network none \
+	--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
+	--mount type=bind,source="$(CURDIR)/data",target=/workspace/data \
+	--mount type=bind,source="$(CURDIR)/data/archive.duckdb",target=/workspace/data/archive.duckdb,readonly \
+	$(TEXT_IMAGE)
 
-.PHONY: all extract extract-all refresh-listings verify serve
+.PHONY: all extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review serve
 
 all: extract
 
@@ -17,6 +28,73 @@ refresh-listings:
 
 verify:
 	uv run python extract.py --verify-only
+
+$(TEXT_IMAGE_STAMP): Dockerfile pyproject.toml uv.lock
+	docker build -t $(TEXT_IMAGE) -f Dockerfile .
+	@touch $(TEXT_IMAGE_STAMP)
+
+text-image: $(TEXT_IMAGE_STAMP)
+	@docker image inspect $(TEXT_IMAGE) >/dev/null 2>&1 || { \
+		docker build -t $(TEXT_IMAGE) -f Dockerfile . && touch $(TEXT_IMAGE_STAMP); \
+	}
+
+text-test: text-image
+	$(TEXT_DOCKER) python -m unittest discover -s tests -v
+
+text-inventory: text-image
+	$(TEXT_DOCKER) python text_pipeline.py inventory $(TEXT_ARGS)
+
+text-native: text-image
+	$(TEXT_DOCKER) python text_pipeline.py native $(TEXT_ARGS)
+
+text-triage: text-image
+	$(TEXT_DOCKER) python text_pipeline.py triage $(TEXT_ARGS)
+
+text-all: text-image
+	$(TEXT_DOCKER) python text_pipeline.py all $(TEXT_ARGS)
+
+text-ocr: text-image
+	$(TEXT_DOCKER) python text_finish.py ocr $(TEXT_ARGS)
+
+text-select: text-image
+	$(TEXT_DOCKER) python text_finish.py select $(TEXT_ARGS)
+
+text-audit: text-image
+	$(TEXT_DOCKER) python text_finish.py audit $(TEXT_ARGS)
+
+text-finish: text-image
+	$(TEXT_DOCKER) python text_finish.py all $(TEXT_ARGS)
+
+text-complete: text-all
+	$(TEXT_DOCKER) python text_finish.py all $(TEXT_ARGS)
+
+text-status: text-image
+	$(TEXT_DOCKER) python text_finish.py status
+
+text-check: text-image
+	$(TEXT_DOCKER) python text_check.py
+
+# Exploratory native-text QA. Results stay in data/triage_qa.duckdb.
+text-qa-screen: text-image
+	$(TEXT_DOCKER) python qa_triage.py screen $(QA_ARGS)
+
+text-qa-compare: text-image
+	$(TEXT_DOCKER) python qa_triage.py compare $(QA_ARGS)
+
+text-qa-recompare: text-image
+	$(TEXT_DOCKER) python qa_triage.py recompare $(QA_ARGS)
+
+text-qa-status: text-image
+	$(TEXT_DOCKER) python qa_triage.py status
+
+text-qa: text-image
+	$(TEXT_DOCKER) python qa_triage.py all $(QA_ARGS)
+
+review: text-image
+	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
+		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
+		--publish "127.0.0.1:$(REVIEW_PORT):8766" $(TEXT_IMAGE) \
+		python review_server.py --host 0.0.0.0 --port 8766
 
 serve:
 	python3 -m http.server 8765
