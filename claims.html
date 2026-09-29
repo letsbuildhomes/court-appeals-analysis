@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claims explorer · Court review</title>
+  <style>
+    :root { --bg:#f4f6f2; --paper:#fffefa; --ink:#1e302d; --muted:#61736d; --line:#dbe3db; --accent:#1b6e5d; --soft:#e6f2ea; --warning:#92512c; --warn-bg:#fff1e2; --shadow:0 8px 30px #243a2b12; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none!important; }
+    html,body { margin:0; height:100%; }
+    body { background:var(--bg); color:var(--ink); font:14px/1.48 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    .app { height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+    .topbar { flex:none; height:58px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 23px; background:var(--paper); border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:750; letter-spacing:-.02em; white-space:nowrap; }
+    .brandmark { display:grid; place-items:center; width:27px; height:27px; border-radius:8px; background:var(--accent); color:white; font-family:Georgia,serif; font-size:18px; }
+    .topnote { color:var(--muted); font-size:12px; white-space:nowrap; }
+    .topcontrols { display:flex; align-items:center; gap:12px; }
+    .schema-label { display:flex; align-items:center; gap:6px; color:var(--muted); font-size:12px; font-weight:700; white-space:nowrap; }
+    .view { min-height:0; flex:1; }
+    #listView { overflow:auto; }
+    .dashboard { max-width:1380px; margin:auto; padding:31px 32px 45px; }
+    .eyebrow { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    h1,h2,h3,p { margin-top:0; }
+    .lead { display:flex; align-items:end; justify-content:space-between; gap:25px; margin:8px 0 22px; }
+    h1 { font-size:30px; letter-spacing:-.045em; line-height:1.1; margin:0 0 8px; }
+    .lede { color:var(--muted); margin:0; }
+    .stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:22px 0 24px; }
+    .stat { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px 19px; box-shadow:var(--shadow); }
+    .stat strong { display:block; font-size:24px; font-weight:720; letter-spacing:-.05em; line-height:1.1; }
+    .stat span { color:var(--muted); font-size:12px; }
+    .tablecard { background:var(--paper); border:1px solid var(--line); border-radius:13px; overflow:hidden; box-shadow:var(--shadow); }
+    .tablehead { display:flex; align-items:center; gap:12px; padding:15px 18px; border-bottom:1px solid var(--line); }
+    .tablehead h2 { font-size:15px; margin:0 auto 0 0; letter-spacing:-.02em; }
+    .search { width:min(330px,35vw); height:34px; border:1px solid var(--line); border-radius:7px; padding:0 10px; background:white; color:var(--ink); }
+    .filter { height:34px; border:1px solid var(--line); border-radius:7px; padding:0 8px; color:var(--ink); background:white; }
+    .tablewrap { overflow:auto; }
+    table { width:100%; border-collapse:collapse; table-layout:fixed; }
+    th { text-align:left; color:var(--muted); background:#f8faf7; padding:10px 16px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; }
+    td { border-top:1px solid #e9eee8; padding:12px 16px; vertical-align:middle; }
+    tbody tr:hover { background:#f5faf6; }
+    th:nth-child(1) { width:42%; } th:nth-child(2) { width:15%; } th:nth-child(3) { width:12%; } th:nth-child(4) { width:23%; } th:nth-child(5) { width:8%; }
+    .doclink { display:block; border:0; background:none; padding:0; max-width:100%; color:var(--ink); text-align:left; font-weight:690; line-height:1.28; }
+    .doclink:hover { color:var(--accent); text-decoration:underline; }
+    .subline { display:block; color:var(--muted); font-size:11px; margin-top:4px; }
+    .badge { display:inline-block; border-radius:99px; padding:3px 8px; font-size:11px; font-weight:720; background:#edf0eb; color:#596b64; white-space:nowrap; }
+    .badge.extracted { background:#e3f2e9; color:#17634c; }
+    .badge.failed { background:var(--warn-bg); color:var(--warning); }
+    .muted { color:var(--muted); }
+    .tablefoot { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    .smallbtn { background:white; border:1px solid var(--line); border-radius:7px; padding:6px 10px; color:var(--ink); font-weight:600; }
+    .smallbtn:hover { border-color:#a5bbae; background:#fafdfa; }
+    .smallbtn:disabled { opacity:.38; cursor:default; }
+    #detailView { display:none; flex-direction:column; overflow:hidden; }
+    #detailView.active { display:flex; }
+    .detailbar { flex:none; display:flex; align-items:center; gap:14px; padding:11px 18px; background:var(--paper); border-bottom:1px solid var(--line); min-height:56px; }
+    .backbtn { border:0; background:none; color:var(--accent); font-weight:730; padding:6px 4px; white-space:nowrap; }
+    .barname { font-size:14px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+    .barfill { flex:1; }
+    .attempt-label { display:flex; align-items:center; gap:6px; color:var(--muted); font-size:11px; white-space:nowrap; }
+    .attempt-label select { max-width:260px; }
+    .detailgrid { flex:1; min-height:0; display:grid; grid-template-columns:minmax(0,1fr); }
+    #detailView.with-source .detailgrid { grid-template-columns:minmax(480px,1.04fr) minmax(420px,.96fr); }
+    .claims-column { min-height:0; overflow:auto; padding:20px min(3vw,36px) 45px; }
+    .claims-content { max-width:970px; margin:auto; }
+    .detail-title { font-size:26px; letter-spacing:-.04em; line-height:1.17; margin:8px 0 9px; }
+    .detail-meta { display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin:0 0 14px; color:var(--muted); font-size:12px; }
+    .claim-index { border:1px solid var(--line); border-radius:10px; background:var(--paper); padding:11px 13px; margin:0 0 13px; }
+    .claim-index-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .claim-index-head h2 { margin:0; font-size:13px; letter-spacing:-.01em; }
+    .claim-index-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:5px; }
+    .jump { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:5px 8px; border:1px solid #dce7dc; border-radius:6px; background:#f8fbf7; color:var(--ink); text-align:left; font-size:11px; font-weight:650; }
+    .jump:hover:not(:disabled) { border-color:#9dc9af; background:#edf7ed; }
+    .jump:disabled { opacity:.5; cursor:default; }
+    .jump strong { color:var(--accent); font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .jump:disabled strong { color:var(--muted); }
+    .json-details { margin-top:8px; }
+    .json-details summary { width:max-content; max-width:100%; cursor:pointer; color:var(--accent); font-size:11px; font-weight:700; }
+    .json-details summary:hover { text-decoration:underline; }
+    .json-details pre { max-height:420px; overflow:auto; margin:7px 0 0; padding:10px; border:1px solid var(--line); border-radius:6px; background:#f5f7f4; color:#304039; font:11px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; white-space:pre; }
+    .dot { color:#9cac9d; }
+    .overview { border:1px solid #cddfd0; border-radius:10px; background:linear-gradient(135deg,#f7fbf6,#edf6ed); padding:11px 13px; margin-bottom:15px; }
+    .overview .key { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .overview p { margin:5px 0 0; font-size:13px; line-height:1.4; }
+    .section { margin:16px 0 0; scroll-margin-top:10px; }
+    .sectionhead { display:flex; align-items:center; gap:7px; border-bottom:1px solid var(--line); padding:0 0 5px; margin-bottom:6px; }
+    .sectionhead h2 { margin:0; font-size:15px; letter-spacing:-.025em; }
+    .count { border-radius:99px; background:#e7eee7; color:#4b6759; font-size:11px; font-weight:750; padding:2px 7px; }
+    .item { background:var(--paper); border:1px solid var(--line); border-radius:8px; margin:5px 0; padding:9px 11px; }
+    .nested { border-left:2px solid #dce8dd; margin:6px 0 3px 8px; padding:3px 0 3px 9px; }
+    .nested-label { color:var(--accent); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    .item-top { display:flex; align-items:flex-start; gap:7px; margin-bottom:3px; }
+    .item-number { border-radius:4px; background:#eff4ee; color:#56816c; width:18px; height:18px; display:grid; place-items:center; font-size:10px; font-weight:750; flex:none; }
+    .item-title { font-size:12.5px; font-weight:700; line-height:1.35; flex:1; }
+    .fields { display:flex; flex-wrap:wrap; align-items:baseline; gap:3px 12px; margin:5px 0; }
+    .field { min-width:0; display:inline-flex; align-items:baseline; gap:4px; }
+    .field.wide { flex-basis:100%; }
+    .field-label { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.045em; font-weight:800; white-space:nowrap; }
+    .field-value { white-space:pre-wrap; overflow-wrap:anywhere; font-size:11.5px; }
+    .enum { display:inline-block; border-radius:4px; background:#eaf2ea; color:#2d7052; padding:1px 4px; font-size:10px; font-weight:700; }
+    .evidence { border-top:1px solid #e6ece5; padding-top:5px; margin-top:5px; }
+    .evidence-label { color:var(--muted); font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-bottom:2px; }
+    .citation { display:flex; align-items:center; gap:7px; min-width:0; margin:2px 0; }
+    .sourcebtn { flex:none; border:1px solid #bdd7c2; background:#f0f7ef; color:#246d4f; border-radius:5px; padding:2px 5px; font-size:10px; font-weight:750; white-space:nowrap; }
+    .sourcebtn:hover { background:#dfeddf; }
+    .citation q { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#4a5f55; font:11px/1.3 Georgia,"Times New Roman",serif; }
+    .warning-list { background:var(--warn-bg); border:1px solid #ecd7c4; border-radius:10px; padding:13px 18px; color:#714b33; }
+    .warning-list li { margin:4px 0; }
+    .source-pane { display:none; min-height:0; min-width:0; flex-direction:column; border-left:1px solid var(--line); background:#e6ebe6; }
+    #detailView.with-source .source-pane { display:flex; }
+    .source-toolbar { flex:none; display:flex; align-items:center; gap:7px; padding:10px 12px; background:var(--paper); border-bottom:1px solid var(--line); }
+    .source-toolbar strong { margin-right:auto; font-size:12px; white-space:nowrap; }
+    .source-quote { flex:none; background:#f4f7f2; border-bottom:1px solid var(--line); padding:8px 14px; color:#52675d; font:12px/1.38 Georgia,"Times New Roman",serif; max-height:75px; overflow:auto; }
+    .source-canvas { flex:1; min-height:0; display:grid; place-items:center; overflow:auto; padding:11px; }
+    .source-canvas img { display:block; max-width:100%; max-height:100%; object-fit:contain; box-shadow:0 3px 15px #13231d3b; background:white; }
+    .source-canvas img[hidden] { display:none; }
+    .source-message { color:var(--muted); font-size:12px; }
+    .empty-state { color:var(--muted); padding:30px; text-align:center; }
+    .v3-summary { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:13px 16px; margin:13px 0; }
+    .v3-summary p { margin:6px 0 0; font-size:13px; line-height:1.5; }
+    .v3-card { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:13px 15px; margin:8px 0; }
+    .v3-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .v3-head h3 { font-size:16px; line-height:1.3; margin:0; letter-spacing:-.02em; }
+    .v3-badges { display:flex; flex-wrap:wrap; align-items:center; gap:5px; }
+    .v3-badge { display:inline-block; border-radius:5px; background:#edf3ed; color:#35624b; padding:2px 6px; font-size:10px; font-weight:750; white-space:nowrap; }
+    .v3-key { color:var(--muted); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+    .v3-value { font-size:12px; font-weight:650; }
+    .v3-project-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:12px; }
+    .v3-project-grid strong { display:block; font-size:15px; margin-top:2px; overflow-wrap:anywhere; }
+    .v3-units { font-size:23px!important; line-height:1; color:var(--accent); }
+    .v3-people { margin:9px 0 0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:5px; }
+    .v3-people li { background:#f3f6f2; border:1px solid var(--line); padding:3px 7px; border-radius:5px; font-size:11px; }
+    .v3-process { background:var(--paper); border:1px solid #cddfd0; border-radius:11px; padding:15px 16px; margin:12px 0; }
+    .v3-process-head { display:flex; align-items:flex-start; gap:13px; margin-bottom:10px; }
+    .v3-process-index { width:26px; height:26px; display:grid; place-items:center; flex:none; border-radius:50%; background:var(--accent); color:white; font-size:12px; font-weight:800; }
+    .v3-process-head h3 { margin:0 0 5px; font-size:17px; letter-spacing:-.03em; }
+    .v3-subhead { display:flex; align-items:center; gap:7px; margin:16px 0 7px; padding-top:11px; border-top:1px solid var(--line); font-size:12px; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:.055em; }
+    .v3-appeal { background:#f7faf5; border:1px solid #d9e6d7; border-radius:8px; padding:10px 12px; margin:6px 0; }
+    .v3-appeal-title { font-size:13px; font-weight:750; margin:4px 0 8px; }
+    .v3-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-bottom:8px; }
+    .v3-pair span { display:block; overflow-wrap:anywhere; }
+    .v3-decision { background:white; border-left:3px solid #9fc4a8; padding:7px 9px; margin:6px 0; font-size:12px; }
+    .v3-timeline { border-left:2px solid #d5e7d9; margin-left:5px; padding-left:10px; }
+    .v3-event { display:grid; grid-template-columns:93px minmax(0,1fr); gap:10px; padding:8px 0; border-bottom:1px solid #edf1eb; }
+    .v3-event:last-child { border-bottom:0; }
+    .v3-date { font-size:11px; font-weight:750; color:#48715a; font-variant-numeric:tabular-nums; }
+    .v3-event-title { display:flex; align-items:center; gap:6px; flex-wrap:wrap; font-size:12px; font-weight:700; }
+    .v3-event-summary { margin:3px 0; font-size:12px; line-height:1.4; }
+    .v3-event-meta { color:var(--muted); font-size:10px; }
+    .v3-question { border:1px solid var(--line); border-radius:8px; padding:9px 11px; margin:6px 0; }
+    .v3-question-title { display:flex; align-items:center; gap:7px; flex-wrap:wrap; font-size:12px; font-weight:800; }
+    .v3-question p { font-size:12px; margin:6px 0; }
+    .v3-answer { display:grid; grid-template-columns:55px minmax(0,1fr); gap:8px; margin-top:5px; font-size:11.5px; }
+    .v3-sources { display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-top:8px; }
+    .v3-sources .json-details { margin:0 0 0 3px; }
+    .v3-sources .json-details pre { max-height:180px; }
+    .v3-note { background:#f9faf7; border:1px solid var(--line); border-radius:7px; padding:8px 10px; margin:5px 0; font-size:12px; }
+    @media (max-width:660px) { .v3-project-grid { grid-template-columns:1fr 1fr; } .v3-event { grid-template-columns:76px minmax(0,1fr); gap:6px; } .v3-pair { grid-template-columns:1fr; } }
+    @media (max-width:920px) { .topnote { display:none; } .dashboard { padding:22px 15px 30px; } #detailView.with-source .detailgrid { grid-template-columns:1fr; grid-template-rows:minmax(280px,1fr) minmax(300px,1fr); } .source-pane { border-left:0; border-top:1px solid var(--line); } .claims-column { padding:18px 14px; } th:nth-child(3),td:nth-child(3),th:nth-child(5),td:nth-child(5) { display:none; } }
+    @media (max-width:660px) { .stats { grid-template-columns:repeat(3,1fr); } .stat { padding:10px; } .stat strong { font-size:18px; } .tablehead { flex-wrap:wrap; } .tablehead h2 { flex-basis:100%; } .search { flex:1; width:auto; } th:nth-child(2),td:nth-child(2),th:nth-child(4),td:nth-child(4) { display:none; } .detailbar { gap:7px; } }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar"><div class="brand"><span class="brandmark">§</span> Court claims explorer</div><div class="topcontrols"><span class="topnote">PDF evidence · Document-level scouting</span><a class="schema-label" href="/runs" style="color:var(--accent);text-decoration:none">Group runs →</a><label class="schema-label">Schema <select id="schemaSelect" class="filter" aria-label="Scouting schema version"><option value="v1">V1</option><option value="v2">V2</option><option value="v3">V3</option></select></label></div></header>
+  <main class="view" id="listView">
+    <div class="dashboard">
+      <div class="eyebrow">Scouting workspace</div>
+      <div class="lead"><div><h1>Documents & claims</h1><p class="lede">Browse the archive, inspect model output, and trace each claim to its page.</p></div></div>
+      <div class="stats"><div class="stat"><strong id="statAll">—</strong><span>PDFs in archive</span></div><div class="stat"><strong id="statExtracted">—</strong><span>With extracted claims</span></div><div class="stat"><strong id="statFlags">—</strong><span>Validation flags</span></div></div>
+      <section class="tablecard" aria-label="PDF document table">
+        <div class="tablehead"><h2>PDF inventory</h2><input id="search" class="search" type="search" placeholder="Search titles or PDF hash…" aria-label="Search documents"><select id="filter" class="filter" aria-label="Filter extraction status"><option value="extracted">Extracted in this version</option><option value="all">All PDFs</option><option value="failed">Failed</option><option value="not_scouted">Not scouted</option></select></div>
+        <div class="tablewrap"><table><thead><tr><th>Document</th><th>Status</th><th>Posted</th><th>Extracted features</th><th>Pages</th></tr></thead><tbody id="rows"><tr><td colspan="5" class="empty-state">Loading PDF inventory…</td></tr></tbody></table></div>
+        <div class="tablefoot"><span id="pageInfo">—</span><div><button id="prevList" class="smallbtn" type="button">Previous</button> <button id="nextList" class="smallbtn" type="button">Next</button></div></div>
+      </section>
+    </div>
+  </main>
+  <main class="view" id="detailView">
+    <div class="detailbar"><button class="backbtn" id="back" type="button">← Documents</button><span class="barname" id="barName"></span><span class="barfill"></span><label class="attempt-label" id="attemptWrap" hidden>Attempt <select id="attemptSelect" class="filter" aria-label="Extraction attempt"></select></label><button class="smallbtn" id="openPdf" type="button">Open full PDF ↗</button></div>
+    <div class="detailgrid"><div class="claims-column"><div class="claims-content" id="claimsContent"></div></div>
+      <aside class="source-pane" aria-label="Source PDF page"><div class="source-toolbar"><strong id="sourceTitle">Source page</strong><button class="smallbtn" id="prevSource" type="button" aria-label="Previous PDF page">←</button><button class="smallbtn" id="nextSource" type="button" aria-label="Next PDF page">→</button><button class="smallbtn" id="closeSource" type="button">Close</button></div><div class="source-quote" id="sourceQuote"></div><div class="source-canvas"><span id="sourceMessage" class="source-message">Choose a citation.</span><img id="sourceImage" alt="Rendered PDF page" hidden></div></aside>
+    </div>
+  </main>
+</div>
+<script>
+  const $ = id => document.getElementById(id);
+  const sectionsV1 = [
+    ['appeal_postures','Appeal posture'], ['project_mentions','Projects & places'],
+    ['docket_references','Docket references'], ['participants','Participants'],
+    ['issues','Issues & grounds'], ['events','Events'],
+    ['case_relationships','Case relationships'], ['additional_observations','Additional observations']
+  ];
+  const sectionsV2 = [
+    ['appeals','Appeals & appealed decisions'], ['docket_references','Docket references'],
+    ['participants','Participants'], ['issues','Questions before the court'],
+    ['issue_actions','Actions on questions'], ['events','Process events'],
+    ['case_relationships','Case relationships'], ['schema_suggestions','Schema suggestions']
+  ];
+  const sectionsFor = schema => schema==='v2' ? sectionsV2 : sectionsV1;
+  const enumFields = new Set(['kind','role','use','track','topic','finality','source_role','relation','decision_outcome','appellant_relation','posture','court','outcome','entity_type','scope_kind','basis','unit_count_basis','process_stage','process_effect','action','disposition_mechanism','relationship']);
+  const proseFields = new Set(['summary','description','court_action','effect','disposition','observation','why_useful','question','answer','reason']);
+  const $el = (tag, cls='', text='') => { const e=document.createElement(tag); if(cls)e.className=cls; if(text!==null)e.textContent=String(text); return e; };
+  let documents=[], filtered=[], pageIndex=0, current=null, sourcePage=0, sourceQuote='', loadId=0;
+  let selectedSchema=['v1','v2','v3'].includes(new URL(location.href).searchParams.get('schema')) ? new URL(location.href).searchParams.get('schema') : 'v1';
+  const pageSize=50;
+  const plain = value => String(value ?? '').replaceAll('_',' ');
+  function featureText(doc) {
+    if (doc.status!=='extracted') return '—';
+    const c=doc.feature_counts;
+    const labels=selectedSchema==='v3' ? [['processes','processes'],['appeals','appeals'],['questions','questions'],['events','events']] : selectedSchema==='v2' ? [['appeals','appeals'],['docket_references','dockets'],['issues','issues'],['issue_actions','actions'],['events','events']] : [['appeal_postures','postures'],['docket_references','dockets'],['issues','issues'],['events','events']];
+    const bits=labels.filter(([key])=>c[key]);
+    return bits.length ? bits.map(([key,label])=>`${c[key]} ${label}`).join(' · ') : `${doc.feature_count} features`;
+  }
+  function renderList() {
+    const q=$('search').value.trim().toLowerCase(), mode=$('filter').value;
+    filtered=documents.filter(d=>(mode==='all'||d.status===mode)&&(!q||`${d.title} ${d.sha}`.toLowerCase().includes(q)));
+    const maxPage=Math.max(0,Math.ceil(filtered.length/pageSize)-1); pageIndex=Math.min(pageIndex,maxPage);
+    const begin=pageIndex*pageSize, shown=filtered.slice(begin,begin+pageSize);
+    const body=$('rows'); body.replaceChildren();
+    if (!shown.length) { const tr=$el('tr'); const td=$el('td','empty-state',mode==='extracted'&&!q?`No successful ${selectedSchema.toUpperCase()} extractions yet. Choose All PDFs to browse the archive.`:'No documents match this search.'); td.colSpan=5; tr.append(td); body.append(tr); }
+    for(const d of shown) {
+      const tr=$el('tr'); tr.onclick=()=>openDocument(d.sha); tr.onkeydown=event=>{if(event.target===tr&&(event.key==='Enter'||event.key===' ')){event.preventDefault();openDocument(d.sha);}}; tr.tabIndex=0;
+      const name=$el('td'); const link=$el('button','doclink',d.title); link.type='button'; name.append(link,$el('span','subline',d.sha.slice(0,12)+'…')); tr.append(name);
+      const status=$el('td'); status.append($el('span','badge '+d.status,plain(d.status))); tr.append(status);
+      tr.append($el('td','muted',d.posted_date ? d.posted_date.slice(0,10) : '—'));
+      const features=$el('td'); features.append($el('span','',featureText(d))); if(d.warning_count)features.append($el('span','subline',`${d.warning_count} validation flag${d.warning_count===1?'':'s'}`)); tr.append(features);
+      tr.append($el('td','muted',d.page_count)); body.append(tr);
+    }
+    $('pageInfo').textContent=filtered.length?`${begin+1}–${Math.min(begin+pageSize,filtered.length)} of ${filtered.length.toLocaleString()} PDFs`:'0 PDFs';
+    $('prevList').disabled=pageIndex===0; $('nextList').disabled=pageIndex>=maxPage;
+  }
+  function addField(grid,key,value) {
+    if(value===null||value===undefined||value==='')return;
+    if(typeof value==='object' && !Array.isArray(value))return;
+    if(Array.isArray(value) && value.some(part=>typeof part==='object'))return;
+    const wide=proseFields.has(key)||String(value).length>90;
+    const field=$el('div','field'+(wide?' wide':'')); field.append($el('span','field-label',plain(key)));
+    const display=$el('span','field-value');
+    if(enumFields.has(key)) display.append($el('span','enum',plain(value)));
+    else display.textContent=Array.isArray(value)?value.join(', '):String(value);
+    field.append(display); grid.append(field);
+  }
+  function jsonDisclosure(value,label) {
+    const details=$el('details','json-details'), summary=$el('summary','',label);
+    const pre=$el('pre'); pre.textContent=JSON.stringify(value,null,2);
+    details.append(summary,pre); return details;
+  }
+  function claimIndex(claims,warnings) {
+    const nav=$el('nav','claim-index'); nav.setAttribute('aria-label','Jump to claim type');
+    const head=$el('div','claim-index-head'); head.append($el('h2','','Claims at a glance')); nav.append(head);
+    const grid=$el('div','claim-index-grid');
+    const entries=sectionsFor(selectedSchema).map(([key,label])=>[key,label,Array.isArray(claims[key])?claims[key].length:null]);
+    if(selectedSchema==='v2')entries.unshift(['subject_project','Subject project',claims.subject_project?1:0]);
+    entries.push(['uncertainties','Uncertainties',Array.isArray(claims.uncertainties)?claims.uncertainties.length:0]);
+    entries.push(['warnings','Validation flags',warnings.length]);
+    for(const [key,label,count] of entries) {
+      const button=$el('button','jump'); button.type='button'; button.disabled=count===0;
+      button.append($el('span','',label),$el('strong','',count===null?'not coded':count));
+      button.onclick=()=>document.getElementById(`section-${key}`)?.scrollIntoView({behavior:'smooth',block:'start'});
+      grid.append(button);
+    }
+    nav.append(grid,jsonDisclosure(claims,'Show full extracted JSON')); return nav;
+  }
+  function citationList(parent,item) {
+    const evidence=Array.isArray(item.evidence)?item.evidence:[];
+    if(!evidence.length)return;
+    const box=$el('div','evidence'); box.append($el('div','evidence-label','Source evidence'));
+    for(const cite of evidence) {
+      const row=$el('div','citation'); const button=$el('button','sourcebtn',`Show source · p. ${cite.page}`); button.type='button';
+      button.onclick=()=>showSource(Number(cite.page),cite.quote||''); row.append(button,$el('q','',cite.quote||'')); row.title=cite.quote||''; box.append(row);
+    }
+    parent.append(box);
+  }
+  function claimCard(item,index,group) {
+    item=item&&typeof item==='object'&&!Array.isArray(item)?item:{value:item};
+    const card=$el('article','item'), top=$el('div','item-top'); top.append($el('span','item-number',index+1));
+    const title=item.description||item.question||item.answer||item.observation||item.name_raw||item.docket_raw||item.posture||item.relation||plain(group);
+    top.append($el('div','item-title',title)); card.append(top);
+    const fields=$el('div','fields');
+    for(const [key,value] of Object.entries(item)) if(!['evidence','description','observation'].includes(key))addField(fields,key,value);
+    if(fields.childNodes.length)card.append(fields);
+    for(const [key,value] of Object.entries(item)) {
+      if(key==='evidence'||value===null||typeof value!=='object')continue;
+      const nestedItems=Array.isArray(value)?value:[value];
+      if(!nestedItems.some(part=>part&&typeof part==='object'))continue;
+      for(const [i,nestedItem] of nestedItems.entries()) {
+        if(!nestedItem||typeof nestedItem!=='object')continue;
+        const block=$el('div','nested'); block.append($el('div','nested-label',`${plain(key)}${Array.isArray(value)?` ${i+1}`:''}`));
+        const inner=$el('div','fields'); for(const [nestedKey,nestedValue] of Object.entries(nestedItem))if(nestedKey!=='evidence')addField(inner,nestedKey,nestedValue);
+        block.append(inner); citationList(block,nestedItem); card.append(block);
+      }
+    }
+    citationList(card,item); card.append(jsonDisclosure(item,'Show claim JSON')); return card;
+  }
+  function section(label,count,id) { const box=$el('section','section'); box.id=id; const head=$el('div','sectionhead'); head.append($el('h2','',label),$el('span','count',count)); box.append(head); return box; }
+  function v3Badge(parent,value) { if(value)parent.append($el('span','v3-badge',plain(value))); }
+  function v3Sources(parent,item) {
+    const citations=Array.isArray(item?.evidence)?item.evidence:[];
+    if(!citations.length)return;
+    const row=$el('div','v3-sources'); row.append($el('span','v3-key','Sources'));
+    for(const cite of citations) {
+      const button=$el('button','sourcebtn',`p. ${cite.page}`); button.type='button';
+      button.onclick=()=>showSource(Number(cite.page),cite.quote||''); row.append(button);
+    }
+    const details=$el('details','json-details'); details.append($el('summary','','Quotes'));
+    for(const cite of citations)details.append($el('div','v3-note',`p. ${cite.page}: “${cite.quote||''}”`));
+    row.append(details); parent.append(row);
+  }
+  function v3Index(claims,warnings) {
+    const processes=Array.isArray(claims.processes)?claims.processes:[];
+    const total=key=>processes.reduce((sum,p)=>sum+(Array.isArray(p[key])?p[key].length:0),0);
+    const entries=[['project','Project',claims.project?1:0],['entities','People & organizations',(claims.entities||[]).length],
+      ['processes','Decision processes',processes.length],['appeals','Appeals',total('appeals')],
+      ['events','Timeline events',total('events')],['questions','Court questions',total('questions')],
+      ['uncertainties','Uncertainties',(claims.uncertainties||[]).length],['suggestions','Suggestions',(claims.suggestions||[]).length],
+      ['warnings','Validation flags',warnings.length]];
+    const nav=$el('nav','claim-index'); nav.setAttribute('aria-label','Jump to claim type');
+    const head=$el('div','claim-index-head'); head.append($el('h2','','Claims at a glance')); nav.append(head);
+    const grid=$el('div','claim-index-grid');
+    for(const [key,label,count] of entries) {
+      const button=$el('button','jump'); button.type='button'; button.disabled=!count;
+      button.append($el('span','',label),$el('strong','',count));
+      button.onclick=()=>document.getElementById(`section-${key}`)?.scrollIntoView({behavior:'smooth',block:'start'});
+      grid.append(button);
+    }
+    nav.append(grid,jsonDisclosure(claims,'Show full extracted JSON')); return nav;
+  }
+  function renderV3Claims(root,d) {
+    const claims=d.claims, processes=Array.isArray(claims.processes)?claims.processes:[];
+    root.append(v3Index(claims,d.warnings));
+    const doc=claims.document||{}, intro=$el('div','v3-summary');
+    const docHead=$el('div','v3-head'); docHead.append($el('span','v3-key','Court document'));
+    const docBadges=$el('div','v3-badges'); v3Badge(docBadges,doc.kind); docHead.append(docBadges); intro.append(docHead);
+    intro.append($el('p','',doc.summary||'No summary returned.')); v3Sources(intro,doc);
+    intro.append(jsonDisclosure(doc,'Show document JSON')); root.append(intro);
+
+    if(claims.project) {
+      const project=claims.project, group=section('Subject project',1,'section-project');
+      const card=$el('div','v3-card'); card.append($el('div','v3-key','Proposed development'));
+      card.append($el('h3','',project.description||'Development project'));
+      const badges=$el('div','v3-badges'); v3Badge(badges,project.use); card.append(badges);
+      const grid=$el('div','v3-project-grid');
+      for(const [label,value,cls] of [['Address',project.address,''],['Municipality',project.municipality,''],['Proposed homes',project.proposed_units,'v3-units']]) {
+        if(value===null||value===undefined||value==='')continue;
+        const cell=$el('div'); cell.append($el('span','v3-key',label),$el('strong',cls,String(value))); grid.append(cell);
+      }
+      card.append(grid); v3Sources(card,project); card.append(jsonDisclosure(project,'Show project JSON'));
+      group.append(card); root.append(group);
+    }
+
+    const entities=Array.isArray(claims.entities)?claims.entities:[];
+    if(entities.length) {
+      const group=section('People & organizations',entities.length,'section-entities');
+      for(const entity of entities) {
+        const card=$el('article','v3-card'), head=$el('div','v3-head'); head.append($el('h3','',entity.name||'Unnamed entity'));
+        const badges=$el('div','v3-badges'); v3Badge(badges,entity.kind); if(entity.project_role!==entity.kind)v3Badge(badges,entity.project_role); head.append(badges); card.append(head);
+        if(Array.isArray(entity.people)&&entity.people.length) {
+          const people=$el('ul','v3-people'); for(const person of entity.people)people.append($el('li','',`${person.name||'Unnamed'} · ${plain(person.role||'role unclear')}`)); card.append(people);
+        }
+        v3Sources(card,entity); card.append(jsonDisclosure(entity,'Show entity JSON')); group.append(card);
+      }
+      root.append(group);
+    }
+
+    if(processes.length) {
+      const group=section('Decision processes',processes.length,'section-processes');
+      const anchors=new Set();
+      for(const [index,process] of processes.entries()) {
+        const card=$el('article','v3-process'), head=$el('div','v3-process-head');
+        head.append($el('span','v3-process-index',index+1)); const heading=$el('div');
+        heading.append($el('h3','',process.authority||plain(process.kind)||'Decision process'));
+        const badges=$el('div','v3-badges'); v3Badge(badges,process.kind); for(const docket of process.dockets||[])v3Badge(badges,`Docket ${docket}`); heading.append(badges); head.append(heading); card.append(head);
+        if(process.applicant)card.append($el('div','v3-value',`Applicant: ${process.applicant}`));
+        const appeals=Array.isArray(process.appeals)?process.appeals:[];
+        if(appeals.length) {
+          const sub=$el('div','v3-subhead',`Appeal${appeals.length===1?'':'s'} · ${appeals.length}`); if(!anchors.has('appeals')){sub.id='section-appeals';anchors.add('appeals');} card.append(sub);
+          for(const appeal of appeals) {
+            const box=$el('div','v3-appeal'), badges=$el('div','v3-badges'); v3Badge(badges,`${plain(appeal.track||'unclear')} appeal`); if(appeal.docket)v3Badge(badges,appeal.docket); box.append(badges);
+            const decision=appeal.decision||{};
+            box.append($el('div','v3-appeal-title',`Appeal of ${plain(decision.outcome||'an')} decision`));
+            const pair=$el('div','v3-pair');
+            for(const [label,value] of [['Appellant',appeal.appellant],['Appellee',appeal.appellee]])if(value){const cell=$el('div');cell.append($el('span','v3-key',label),$el('span','v3-value',value));pair.append(cell);} box.append(pair);
+            const challenged=$el('div','v3-decision'); challenged.append($el('span','v3-key','Decision challenged'));
+            challenged.append($el('div','',`${decision.authority||'Unknown body'}${decision.date?` · ${decision.date}`:''}${decision.outcome?` · ${plain(decision.outcome)}`:''}`));
+            if(decision.summary)challenged.append($el('div','',decision.summary));
+            if(decision.permit)challenged.append($el('div','muted',`Permit ${decision.permit}`));
+            box.append(challenged); v3Sources(box,appeal); box.append(jsonDisclosure(appeal,'Show appeal JSON')); card.append(box);
+          }
+        }
+        const events=Array.isArray(process.events)?process.events:[];
+        if(events.length) {
+          const sub=$el('div','v3-subhead',`Timeline · ${events.length} events`); if(!anchors.has('events')){sub.id='section-events';anchors.add('events');} card.append(sub);
+          const timeline=$el('div','v3-timeline');
+          for(const event of events) {
+            const row=$el('div','v3-event'); row.append($el('div','v3-date',event.date||'Date unknown'));
+            const body=$el('div'), title=$el('div','v3-event-title'); title.append($el('span','',plain(event.kind||'event')));
+            v3Badge(title,event.effect); if(event.outcome)v3Badge(title,event.outcome); body.append(title);
+            body.append($el('div','v3-event-summary',event.summary||''));
+            const meta=[event.actor, event.reported_as?plain(event.reported_as):null].filter(Boolean).join(' · ');
+            if(meta)body.append($el('div','v3-event-meta',meta));
+            v3Sources(body,event); body.append(jsonDisclosure(event,'Show event JSON')); row.append(body); timeline.append(row);
+          }
+          card.append(timeline);
+        }
+        const questions=Array.isArray(process.questions)?process.questions:[];
+        if(questions.length) {
+          const sub=$el('div','v3-subhead',`Questions · ${questions.length}`); if(!anchors.has('questions')){sub.id='section-questions';anchors.add('questions');} card.append(sub);
+          for(const question of questions) {
+            const box=$el('div','v3-question'), title=$el('div','v3-question-title');
+            title.append($el('span','',question.label||'Unnumbered question'));
+            v3Badge(title,question.topic); v3Badge(title,question.action); v3Badge(title,question.mechanism); if(question.docket)v3Badge(title,question.docket); box.append(title);
+            if(question.text)box.append($el('p','',question.text));
+            for(const [label,value] of [['Answer',question.answer],['Why',question.reason]])if(value){const line=$el('div','v3-answer');line.append($el('span','v3-key',label),$el('span','',value));box.append(line);}
+            v3Sources(box,question); box.append(jsonDisclosure(question,'Show question JSON')); card.append(box);
+          }
+        }
+        const links=Array.isArray(process.links)?process.links:[];
+        if(links.length) {
+          card.append($el('div','v3-subhead',`Connected dockets · ${links.length}`));
+          for(const link of links) { const box=$el('div','v3-note',`${plain(link.relation||'related')} · ${link.docket||'Unknown docket'}`); v3Sources(box,link); card.append(box); }
+        }
+        card.append(jsonDisclosure(process,'Show process JSON')); group.append(card);
+      }
+      root.append(group);
+    }
+    for(const [key,label] of [['uncertainties','Uncertainties'],['suggestions','Suggestions']]) {
+      const items=Array.isArray(claims[key])?claims[key]:[]; if(!items.length)continue;
+      const group=section(label,items.length,`section-${key}`);
+      for(const item of items)group.append($el('div','v3-note',typeof item==='string'?item:`${item.idea||''}${item.why?` — ${item.why}`:''}${item.page?` (p. ${item.page})`:''}`));
+      root.append(group);
+    }
+    if(d.warnings.length) { const group=section('Validation flags',d.warnings.length,'section-warnings'), list=$el('ul','warning-list'); for(const value of d.warnings)list.append($el('li','',value)); group.append(list); root.append(group); }
+  }
+  function renderDetail(d) {
+    current=d; $('barName').textContent=d.title; document.title=`${d.title} · Claims explorer`;
+    const attempts=d.attempts||[]; $('attemptWrap').hidden=attempts.length<2; $('attemptSelect').replaceChildren();
+    for(const attempt of attempts) {
+      const tokens=attempt.total_tokens==null?'':` · ${attempt.total_tokens.toLocaleString()} tokens`;
+      const option=$el('option','',`${attempt.reasoning||'default'} reasoning${tokens} · ${attempt.attempted_at.slice(0,16).replace('T',' ')} · ${attempt.attempt_id.slice(0,8)}`);
+      option.value=attempt.attempt_id; $('attemptSelect').append(option);
+    }
+    if(d.attempt_id)$('attemptSelect').value=d.attempt_id;
+    const root=$('claimsContent'); root.replaceChildren();
+    root.append($el('div','eyebrow','Document claims'),$el('h1','detail-title',d.title));
+    const meta=$el('div','detail-meta'); meta.append($el('span','badge '+d.status,plain(d.status)));
+    const selectedAttempt=d.attempts?.find(a=>a.attempt_id===d.attempt_id);
+    for(const piece of [d.schema.toUpperCase(),`${d.page_count} pages`,d.posted_date?`Posted ${d.posted_date.slice(0,10)}`:null,selectedAttempt?.prompt||null,d.model?`Model ${d.model}`:null,selectedAttempt?`Reasoning ${selectedAttempt.reasoning}`:null,selectedAttempt?.total_tokens!=null?`${selectedAttempt.total_tokens.toLocaleString()} tokens`:null,d.attempted_at?`Extracted ${d.attempted_at.slice(0,16).replace('T',' ')} UTC`:null]) if(piece)meta.append($el('span','',piece));
+    root.append(meta);
+    if(!d.claims) {
+      const box=$el('div','overview'); box.append($el('div','key',`No successful ${d.schema.toUpperCase()} extraction`),$el('p','',d.latest_failure?`${plain(d.latest_failure.status)}: ${d.latest_failure.error||'No result available.'}`:'This PDF has not been processed with this schema.'));
+      root.append(box); return;
+    }
+    if(selectedSchema==='v3') { renderV3Claims(root,d); return; }
+    root.append(claimIndex(d.claims,d.warnings));
+    const doc=d.claims.document||{}; const overview=$el('div','overview'); overview.append($el('div','key','Court document'));
+    overview.append($el('p','',doc.summary||'No document summary returned.'));
+    const overviewFields=$el('div','fields'); for(const [key,value] of Object.entries(doc)) if(!['summary','evidence'].includes(key))addField(overviewFields,key,value);
+    if(overviewFields.childNodes.length)overview.append(overviewFields);
+    citationList(overview,doc); overview.append(jsonDisclosure(doc,'Show document JSON')); root.append(overview);
+    if(selectedSchema==='v2' && d.claims.subject_project) {
+      const project=section('Subject project',1,'section-subject_project'); project.append(claimCard(d.claims.subject_project,0,'subject_project')); root.append(project);
+    }
+    for(const [key,label] of sectionsFor(selectedSchema)) {
+      const items=Array.isArray(d.claims[key])?d.claims[key]:[];
+      if(!items.length)continue;
+      const group=section(label,items.length,`section-${key}`); for(const [i,item] of items.entries())group.append(claimCard(item,i,key)); root.append(group);
+    }
+    if(selectedSchema==='v1'&&!Array.isArray(d.claims.appeal_postures)) {
+      const note=section('Appeal posture', 'not coded','section-appeal_postures');
+      note.append($el('p','muted','This extraction predates the dedicated appeal-posture field. Participant, project, issue, and event claims above may still describe who appealed which decision.'));
+      root.append(note);
+    }
+    const uncertainty=Array.isArray(d.claims.uncertainties)?d.claims.uncertainties:[];
+    if(uncertainty.length) { const group=section('Uncertainties',uncertainty.length,'section-uncertainties'); for(const value of uncertainty)group.append($el('article','item',value)); root.append(group); }
+    if(d.warnings.length) { const group=section('Validation flags',d.warnings.length,'section-warnings'), list=$el('ul','warning-list'); for(const value of d.warnings)list.append($el('li','',value)); group.append(list); root.append(group); }
+  }
+  function showSource(page,quote='') {
+    if(!current||!Number.isInteger(page)||page<1||page>current.page_count)return;
+    sourcePage=page; sourceQuote=quote; $('detailView').classList.add('with-source');
+    $('sourceTitle').textContent=`PDF page ${page} of ${current.page_count}`;
+    $('prevSource').disabled=page<=1; $('nextSource').disabled=page>=current.page_count;
+    $('sourceQuote').textContent=quote?`Evidence quote: “${quote}”`:'Browsing PDF page';
+    $('sourceMessage').hidden=false; $('sourceMessage').textContent='Rendering PDF page…';
+    const image=$('sourceImage'); image.hidden=true; image.onload=()=>{image.hidden=false;$('sourceMessage').hidden=true;};
+    image.onerror=()=>{image.hidden=true;$('sourceMessage').hidden=false;$('sourceMessage').textContent='Could not render this PDF page.';};
+    image.src=`/api/render?sha=${encodeURIComponent(current.sha)}&page=${page}`;
+    const url=new URL(location.href); url.searchParams.set('page',page); history.replaceState(null,'',url);
+  }
+  async function openDocument(sha,push=true) {
+    const id=++loadId; $('listView').style.display='none'; $('detailView').classList.add('active'); $('detailView').classList.remove('with-source'); $('claimsContent').replaceChildren($el('div','empty-state','Loading claims…'));
+    try {
+      const attempt=new URL(location.href).searchParams.get('attempt');
+      const params=new URLSearchParams({sha,schema:selectedSchema}); if(!push&&attempt)params.set('attempt',attempt);
+      const response=await fetch(`/api/document?${params}`), data=await response.json();
+      if(!response.ok)throw Error(data.error||'Could not load document');
+      if(id!==loadId)return;
+      renderDetail(data);
+      if(push){const url=new URL(location.href);url.searchParams.set('sha',sha);url.searchParams.delete('page');url.searchParams.delete('attempt');history.pushState(null,'',url);}
+      else { const requested=Number(new URL(location.href).searchParams.get('page')); if(requested)showSource(requested); }
+    } catch(error) { if(id===loadId)$('claimsContent').replaceChildren($el('div','empty-state',error.message)); }
+  }
+  function goList(push=true) { ++loadId; current=null; $('detailView').classList.remove('active','with-source'); $('listView').style.display=''; document.title='Claims explorer · Court review'; if(push){const url=new URL(location.href);url.searchParams.delete('sha');url.searchParams.delete('page');url.searchParams.delete('attempt');history.pushState(null,'',url);} }
+  async function loadSchema() {
+    try {
+      $('schemaSelect').value=selectedSchema;
+      const response=await fetch(`/api/documents?schema=${selectedSchema}`), data=await response.json(); if(!response.ok)throw Error(data.error||'Could not load inventory');
+      documents=data.documents; $('statAll').textContent=documents.length.toLocaleString(); $('statExtracted').textContent=documents.filter(d=>d.status==='extracted').length.toLocaleString(); $('statFlags').textContent=documents.reduce((sum,d)=>sum+d.warning_count,0).toLocaleString(); renderList();
+      const sha=new URL(location.href).searchParams.get('sha'); if(sha)await openDocument(sha,false);
+    } catch(error) { $('rows').replaceChildren(); const tr=$el('tr'),td=$el('td','empty-state',error.message);td.colSpan=5;tr.append(td);$('rows').append(tr); }
+  }
+  $('search').oninput=()=>{pageIndex=0;renderList();}; $('filter').onchange=()=>{pageIndex=0;renderList();};
+  $('schemaSelect').onchange=async()=>{
+    selectedSchema=$('schemaSelect').value; pageIndex=0;
+    const url=new URL(location.href);url.searchParams.set('schema',selectedSchema);url.searchParams.delete('attempt');url.searchParams.delete('page');history.pushState(null,'',url);
+    await loadSchema();
+  };
+  $('attemptSelect').onchange=()=>{
+    if(!current)return;
+    const url=new URL(location.href);url.searchParams.set('attempt',$('attemptSelect').value);url.searchParams.delete('page');history.pushState(null,'',url);
+    openDocument(current.sha,false);
+  };
+  $('prevList').onclick=()=>{pageIndex--;renderList();}; $('nextList').onclick=()=>{pageIndex++;renderList();};
+  $('back').onclick=()=>goList(); $('closeSource').onclick=()=>{ $('detailView').classList.remove('with-source');const url=new URL(location.href);url.searchParams.delete('page');history.replaceState(null,'',url);};
+  $('prevSource').onclick=()=>showSource(sourcePage-1); $('nextSource').onclick=()=>showSource(sourcePage+1);
+  $('openPdf').onclick=()=>{if(current)window.open(`/api/pdf?sha=${encodeURIComponent(current.sha)}#page=${sourcePage||1}`,'_blank','noopener');};
+  window.onpopstate=()=>{const url=new URL(location.href);const schema=url.searchParams.get('schema')||'v1';if(schema!==selectedSchema){selectedSchema=schema;loadSchema();return;}const sha=url.searchParams.get('sha');if(sha)openDocument(sha,false);else goList(false);};
+  loadSchema();
+</script>
+</body>
+</html>

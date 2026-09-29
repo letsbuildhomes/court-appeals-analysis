@@ -1,0 +1,24 @@
+{
+  "description": "Source-reviewed regression checkpoints; duration overlaps are intentional and must not be summed. Eight repeat-test groups, not a representative sample.",
+  "scope": {
+    "g-101-5-07-vtec": ["yes", "yes"],
+    "g-150-10-14-vtec": ["yes", "yes"],
+    "g-24-env-00057": ["yes", "unclear"],
+    "g-116-6-09-vtec": ["yes", "yes"],
+    "g-106-10-18-vtec": ["yes", "yes"],
+    "g-75-4-06-vtec": ["yes", "unclear"],
+    "g-104-6-03-vtec": ["yes", "no"],
+    "g-23-env-00112": ["no", "yes"]
+  },
+  "duration": {
+    "101-5-07 Vtec": ["at_least", 757],
+    "293-12-08 Vtec": ["at_least", 364],
+    "231-11-09 Vtec": ["exact", 153],
+    "150-10-14 Vtec": ["at_least", 388],
+    "24-ENV-00057": ["at_least", 83],
+    "116-6-09 Vtec": ["at_least", 147],
+    "117-6-09 Vtec": ["at_least", 147],
+    "106-10-18 Vtec": ["at_least", 357],
+    "75-4-06 Vtec": ["exact", 272]
+  }
+}

@@ -65,6 +65,22 @@ beside its production-selected, native, or available OCR text, with random sampl
 The [image inventory](docs/IMAGE-INVENTORY.md) counts embedded raster images
 and records why visual-exhibit descriptions are deferred.
 
-The proposed next phase—scouting document claims, linking cases and projects,
-then rolling out in small batches—is outlined in
-[docs/DOCUMENT-ANALYSIS-PLAN.md](docs/DOCUMENT-ANALYSIS-PLAN.md).
+## Municipal housing appeal extraction
+
+The finalized extraction, review, duration and visualizer workflow is documented
+in [docs/APPEALS.md](docs/APPEALS.md). Start with `make appeals-plan`, execute or
+resume with `make appeals-run`, and browse completed records and their evidence
+with `make appeals-view` at <http://127.0.0.1:8769/>.
+
+Configure `APPEALS_API_BASE_URL` (or the complete `APPEALS_API_URL`),
+`APPEALS_API_KEY`, and `APPEALS_MODEL` directly; no proxy is required.
+Failed calls can be resumed with `--retry-failed`, including output-limit failures.
+See the operating guide for retry allowances and preserved attempt logs.
+
+The [research summary](docs/APPEALS-RESEARCH.md) explains the selected approach and
+its limits. The [release check](docs/APPEALS-RELEASE-CHECK.md) records regression
+results. Earlier experimental files have been removed;
+`appeals.py` and `prompts/appeals/` are the supported entry points for new runs.
+The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted research
+artifacts. Source PDFs, production databases, and supported appeal run logs are
+preserved.

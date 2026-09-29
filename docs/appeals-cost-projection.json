@@ -1,0 +1,496 @@
+{
+  "pricing_per_million_tokens": {
+    "cache_hit": 0.003,
+    "cache_miss": 0.15,
+    "output": 0.6
+  },
+  "multiplier": 1,
+  "eligible_groups": 1391,
+  "eligible_source_chars": 44577476,
+  "oversized_outside_projection": {
+    "groups": 4,
+    "chars": 1902798
+  },
+  "measured_token_profiles": {
+    "triage": {
+      "requests": 25,
+      "chars": 1026105,
+      "input": 260489,
+      "cached": 3200,
+      "output": 65500,
+      "reasoning": 58050
+    },
+    "extract": {
+      "requests": 8,
+      "chars": 284856,
+      "input": 90473,
+      "cached": 73856,
+      "output": 57592,
+      "reasoning": 44817
+    },
+    "repair_excluded": {
+      "requests": 2,
+      "chars": 63084,
+      "input": 26582,
+      "cached": 9984,
+      "output": 2943,
+      "reasoning": 2620
+    },
+    "repair_retained": {
+      "requests": 14,
+      "chars": 408204,
+      "input": 201286,
+      "cached": 54912,
+      "output": 371347,
+      "reasoning": 361154
+    }
+  },
+  "duration_profile": {
+    "groups": 6,
+    "chars": 233113,
+    "usage": {
+      "prompt_tokens": 74862,
+      "completion_tokens": 28290,
+      "total_tokens": 103152,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 24296
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 74350
+    }
+  },
+  "scenarios": {
+    "central": {
+      "stages": {
+        "triage": {
+          "groups": 1391,
+          "source_chars": 44577476,
+          "input_tokens": 11316524.279448984,
+          "cached_input_tokens": 139018.83647385013,
+          "output_tokens": 3644420.0,
+          "reasoning_tokens_included_in_output": 3229902.0,
+          "uncached_input_tokens": 11177505.442975134,
+          "dollars": 3.8636948729556915,
+          "dollars_no_cache": 3.884130641917348
+        },
+        "extract": {
+          "groups": 507.7805907172995,
+          "source_chars": 15118667.528889103,
+          "input_tokens": 4801833.934834386,
+          "cached_input_tokens": 3919890.432406667,
+          "output_tokens": 3655512.472573839,
+          "reasoning_tokens_included_in_output": 2844650.3417721516,
+          "uncached_input_tokens": 881943.5024277191,
+          "dollars": 2.337358680205681,
+          "dollars_no_cache": 2.913582573769461
+        },
+        "repair_retained": {
+          "groups": 507.7805907172995,
+          "source_chars": 15118667.528889103,
+          "input_tokens": 7401433.578996697,
+          "cached_input_tokens": 2529848.708860759,
+          "output_tokens": 13468771.358649787,
+          "reasoning_tokens_included_in_output": 13099070.818565398,
+          "uncached_input_tokens": 4871584.870135939,
+          "dollars": 8.819590091836846,
+          "dollars_no_cache": 9.191477852039377
+        },
+        "repair_excluded": {
+          "groups": 883.2194092827006,
+          "source_chars": 29458808.471110895,
+          "input_tokens": 12159923.799596198,
+          "cached_input_tokens": 4404039.291139241,
+          "output_tokens": 1299657.360759494,
+          "reasoning_tokens_included_in_output": 1157017.4261603376,
+          "uncached_input_tokens": 7755884.508456957,
+          "dollars": 1.9563892105976575,
+          "dollars_no_cache": 2.6037829863951263
+        },
+        "joint_repair_retained": {
+          "groups": 507.7805907172995,
+          "approximate_batches": 84.63009845288325,
+          "input_tokens": 5621859.550768842,
+          "cached_input_tokens": 417481.45147679315,
+          "uncached_input_tokens": 5204378.099292049,
+          "output_tokens": 2919992.286919831,
+          "reasoning_tokens_included_in_output": 2699276.990154711,
+          "dollars": 2.533904531400136,
+          "dollars_no_cache": 2.595274304767225
+        },
+        "duration_bounds": {
+          "groups": 507.7805907172995,
+          "input_tokens": 4855214.803754814,
+          "cached_input_tokens": 0,
+          "uncached_input_tokens": 4855214.803754814,
+          "output_tokens": 2394185.4852320673,
+          "reasoning_tokens_included_in_output": 2056172.8720112515,
+          "dollars": 2.1647935117024626,
+          "dollars_no_cache": 2.1647935117024626
+        }
+      },
+      "first_pass": {
+        "input_tokens": 16118358.21428337,
+        "cached_input_tokens": 4058909.268880517,
+        "uncached_input_tokens": 12059448.945402853,
+        "output_tokens": 7299932.472573839,
+        "reasoning_tokens_included_in_output": 6074552.341772152,
+        "dollars": 6.201053553161373,
+        "dollars_no_cache": 6.797713215686809,
+        "total_tokens": 23418290.68685721
+      },
+      "with_retained_repair": {
+        "input_tokens": 23519791.79328007,
+        "cached_input_tokens": 6588757.977741277,
+        "uncached_input_tokens": 16931033.81553879,
+        "output_tokens": 20768703.831223626,
+        "reasoning_tokens_included_in_output": 19173623.16033755,
+        "dollars": 15.020643644998218,
+        "dollars_no_cache": 15.989191067726185,
+        "total_tokens": 44288495.624503694
+      },
+      "with_all_group_repair": {
+        "input_tokens": 35679715.59287626,
+        "cached_input_tokens": 10992797.268880518,
+        "uncached_input_tokens": 24686918.323995747,
+        "output_tokens": 22068361.19198312,
+        "reasoning_tokens_included_in_output": 20330640.586497888,
+        "dollars": 16.977032855595876,
+        "dollars_no_cache": 18.592974054121314,
+        "total_tokens": 57748076.78485938
+      },
+      "with_joint_retained_repair": {
+        "input_tokens": 21740217.765052214,
+        "cached_input_tokens": 4476390.72035731,
+        "uncached_input_tokens": 17263827.0446949,
+        "output_tokens": 10219924.75949367,
+        "reasoning_tokens_included_in_output": 8773829.331926864,
+        "dollars": 8.734958084561509,
+        "dollars_no_cache": 9.392987520454035,
+        "total_tokens": 31960142.524545886
+      },
+      "with_joint_retained_and_individual_excluded_repair": {
+        "input_tokens": 33900141.56464841,
+        "cached_input_tokens": 8880430.011496551,
+        "uncached_input_tokens": 25019711.553151857,
+        "output_tokens": 11519582.120253164,
+        "reasoning_tokens_included_in_output": 9930846.758087201,
+        "dollars": 10.691347295159167,
+        "dollars_no_cache": 11.99677050684916,
+        "total_tokens": 45419723.68490158
+      },
+      "with_joint_retained_repair_and_duration": {
+        "input_tokens": 26595432.56880703,
+        "cached_input_tokens": 4476390.72035731,
+        "uncached_input_tokens": 22119041.848449714,
+        "output_tokens": 12614110.244725738,
+        "reasoning_tokens_included_in_output": 10830002.203938114,
+        "dollars": 10.899751596263972,
+        "dollars_no_cache": 11.557781032156496,
+        "total_tokens": 39209542.81353277
+      },
+      "with_all_group_review_and_duration": {
+        "input_tokens": 38755356.368403226,
+        "cached_input_tokens": 8880430.011496551,
+        "uncached_input_tokens": 29874926.35690667,
+        "output_tokens": 13913767.60548523,
+        "reasoning_tokens_included_in_output": 11987019.63009845,
+        "dollars": 12.856140806861628,
+        "dollars_no_cache": 14.161564018551623,
+        "total_tokens": 52669123.97388846
+      }
+    },
+    "lower_routing": {
+      "stages": {
+        "triage": {
+          "groups": 1391,
+          "source_chars": 44577476,
+          "input_tokens": 11316524.279448984,
+          "cached_input_tokens": 139018.83647385013,
+          "output_tokens": 3644420.0,
+          "reasoning_tokens_included_in_output": 3229902.0,
+          "uncached_input_tokens": 11177505.442975134,
+          "dollars": 3.8636948729556915,
+          "dollars_no_cache": 3.884130641917348
+        },
+        "extract": {
+          "groups": 288.5,
+          "source_chars": 6606580.968449416,
+          "input_tokens": 2098313.533710099,
+          "cached_input_tokens": 1712920.3668021737,
+          "output_tokens": 2076911.5,
+          "reasoning_tokens_included_in_output": 1616213.0625,
+          "uncached_input_tokens": 385393.16690792516,
+          "dollars": 1.3090946361365952,
+          "dollars_no_cache": 1.5608939300565148
+        },
+        "repair_retained": {
+          "groups": 288.5,
+          "source_chars": 6606580.968449416,
+          "input_tokens": 3566804.0030482705,
+          "cached_input_tokens": 1435200.0,
+          "output_tokens": 7652400.678571428,
+          "reasoning_tokens_included_in_output": 7442352.071428572,
+          "uncached_input_tokens": 2131604.0030482705,
+          "dollars": 4.915486607600098,
+          "dollars_no_cache": 5.126461007600098
+        },
+        "repair_excluded": {
+          "groups": 1102.5,
+          "source_chars": 37970895.031550586,
+          "input_tokens": 15494183.3880806,
+          "cached_input_tokens": 5498688.0,
+          "output_tokens": 1622328.75,
+          "reasoning_tokens_included_in_output": 1444275.0,
+          "uncached_input_tokens": 9995495.3880806,
+          "dollars": 2.48921762221209,
+          "dollars_no_cache": 3.29752475821209
+        },
+        "joint_repair_retained": {
+          "groups": 288.5,
+          "approximate_batches": 48.083333333333336,
+          "input_tokens": 2512068.5525312466,
+          "cached_input_tokens": 235040.0,
+          "uncached_input_tokens": 2277028.5525312466,
+          "output_tokens": 1659019.25,
+          "reasoning_tokens_included_in_output": 1533617.9166666667,
+          "dollars": 1.3376709528796868,
+          "dollars_no_cache": 1.372221832879687
+        },
+        "duration_bounds": {
+          "groups": 288.5,
+          "input_tokens": 2121639.99631106,
+          "cached_input_tokens": 0,
+          "uncached_input_tokens": 2121639.99631106,
+          "output_tokens": 1360277.5,
+          "reasoning_tokens_included_in_output": 1168232.6666666667,
+          "dollars": 1.134412499446659,
+          "dollars_no_cache": 1.134412499446659
+        }
+      },
+      "first_pass": {
+        "input_tokens": 13414837.813159082,
+        "cached_input_tokens": 1851939.2032760237,
+        "uncached_input_tokens": 11562898.609883059,
+        "output_tokens": 5721331.5,
+        "reasoning_tokens_included_in_output": 4846115.0625,
+        "dollars": 5.172789509092286,
+        "dollars_no_cache": 5.445024571973863,
+        "total_tokens": 19136169.313159082
+      },
+      "with_retained_repair": {
+        "input_tokens": 16981641.816207353,
+        "cached_input_tokens": 3287139.2032760237,
+        "uncached_input_tokens": 13694502.61293133,
+        "output_tokens": 13373732.17857143,
+        "reasoning_tokens_included_in_output": 12288467.13392857,
+        "dollars": 10.088276116692384,
+        "dollars_no_cache": 10.571485579573961,
+        "total_tokens": 30355373.994778782
+      },
+      "with_all_group_repair": {
+        "input_tokens": 32475825.204287954,
+        "cached_input_tokens": 8785827.203276023,
+        "uncached_input_tokens": 23689998.00101193,
+        "output_tokens": 14996060.92857143,
+        "reasoning_tokens_included_in_output": 13732742.13392857,
+        "dollars": 12.577493738904474,
+        "dollars_no_cache": 13.869010337786051,
+        "total_tokens": 47471886.13285938
+      },
+      "with_joint_retained_repair": {
+        "input_tokens": 15926906.36569033,
+        "cached_input_tokens": 2086979.2032760237,
+        "uncached_input_tokens": 13839927.162414305,
+        "output_tokens": 7380350.75,
+        "reasoning_tokens_included_in_output": 6379732.979166667,
+        "dollars": 6.510460461971974,
+        "dollars_no_cache": 6.81724640485355,
+        "total_tokens": 23307257.11569033
+      },
+      "with_joint_retained_and_individual_excluded_repair": {
+        "input_tokens": 31421089.75377093,
+        "cached_input_tokens": 7585667.203276024,
+        "uncached_input_tokens": 23835422.550494906,
+        "output_tokens": 9002679.5,
+        "reasoning_tokens_included_in_output": 7824007.979166667,
+        "dollars": 8.999678084184064,
+        "dollars_no_cache": 10.11477116306564,
+        "total_tokens": 40423769.25377093
+      },
+      "with_joint_retained_repair_and_duration": {
+        "input_tokens": 18048546.36200139,
+        "cached_input_tokens": 2086979.2032760237,
+        "uncached_input_tokens": 15961567.158725366,
+        "output_tokens": 8740628.25,
+        "reasoning_tokens_included_in_output": 7547965.645833334,
+        "dollars": 7.644872961418632,
+        "dollars_no_cache": 7.951658904300208,
+        "total_tokens": 26789174.61200139
+      },
+      "with_all_group_review_and_duration": {
+        "input_tokens": 33542729.75008199,
+        "cached_input_tokens": 7585667.203276024,
+        "uncached_input_tokens": 25957062.546805967,
+        "output_tokens": 10362957.0,
+        "reasoning_tokens_included_in_output": 8992240.645833334,
+        "dollars": 10.134090583630723,
+        "dollars_no_cache": 11.249183662512298,
+        "total_tokens": 43905686.750081986
+      }
+    },
+    "higher_routing": {
+      "stages": {
+        "triage": {
+          "groups": 1391,
+          "source_chars": 44577476,
+          "input_tokens": 11316524.279448984,
+          "cached_input_tokens": 139018.83647385013,
+          "output_tokens": 3644420.0,
+          "reasoning_tokens_included_in_output": 3229902.0,
+          "uncached_input_tokens": 11177505.442975134,
+          "dollars": 3.8636948729556915,
+          "dollars_no_cache": 3.884130641917348
+        },
+        "extract": {
+          "groups": 750.3333333333333,
+          "source_chars": 31460451.61016759,
+          "input_tokens": 9992141.42769221,
+          "cached_input_tokens": 8156904.239758114,
+          "output_tokens": 5401649.666666666,
+          "reasoning_tokens_included_in_output": 4203461.125,
+          "uncached_input_tokens": 1835237.187934096,
+          "dollars": 3.540746090909388,
+          "dollars_no_cache": 4.7398110141538305
+        },
+        "repair_retained": {
+          "groups": 750.3333333333333,
+          "source_chars": 31460451.61016759,
+          "input_tokens": 13872562.366191415,
+          "cached_input_tokens": 3740671.9999999995,
+          "output_tokens": 19902430.88095238,
+          "reasoning_tokens_included_in_output": 19356134.619047616,
+          "uncached_input_tokens": 10131890.366191415,
+          "dollars": 13.472464099500142,
+          "dollars_no_cache": 14.02234288350014
+        },
+        "repair_excluded": {
+          "groups": 640.6666666666667,
+          "source_chars": 13117024.389832411,
+          "input_tokens": 6649421.7914913185,
+          "cached_input_tokens": 3193216.0000000005,
+          "output_tokens": 942741.0000000001,
+          "reasoning_tokens_included_in_output": 839273.3333333335,
+          "uncached_input_tokens": 3456205.791491318,
+          "dollars": 1.0936551167236976,
+          "dollars_no_cache": 1.563057868723698
+        },
+        "joint_repair_retained": {
+          "groups": 750.3333333333333,
+          "approximate_batches": 125.05555555555554,
+          "input_tokens": 11443685.489957755,
+          "cached_input_tokens": 619285.3333333333,
+          "uncached_input_tokens": 10824400.156624421,
+          "output_tokens": 4314791.833333333,
+          "reasoning_tokens_included_in_output": 3988646.944444444,
+          "dollars": 4.214392979493662,
+          "dollars_no_cache": 4.305427923493663
+        },
+        "duration_bounds": {
+          "groups": 750.3333333333333,
+          "input_tokens": 10103221.735554716,
+          "cached_input_tokens": 0,
+          "uncached_input_tokens": 10103221.735554716,
+          "output_tokens": 3537821.666666666,
+          "reasoning_tokens_included_in_output": 3038349.7777777775,
+          "dollars": 3.6381762603332066,
+          "dollars_no_cache": 3.6381762603332066
+        }
+      },
+      "first_pass": {
+        "input_tokens": 21308665.707141194,
+        "cached_input_tokens": 8295923.076231965,
+        "uncached_input_tokens": 13012742.63090923,
+        "output_tokens": 9046069.666666666,
+        "reasoning_tokens_included_in_output": 7433363.125,
+        "dollars": 7.404440963865079,
+        "dollars_no_cache": 8.623941656071178,
+        "total_tokens": 30354735.373807862
+      },
+      "with_retained_repair": {
+        "input_tokens": 35181228.07333261,
+        "cached_input_tokens": 12036595.076231964,
+        "uncached_input_tokens": 23144632.997100644,
+        "output_tokens": 28948500.547619045,
+        "reasoning_tokens_included_in_output": 26789497.744047616,
+        "dollars": 20.87690506336522,
+        "dollars_no_cache": 22.64628453957132,
+        "total_tokens": 64129728.62095165
+      },
+      "with_all_group_repair": {
+        "input_tokens": 41830649.86482393,
+        "cached_input_tokens": 15229811.076231964,
+        "uncached_input_tokens": 26600838.788591962,
+        "output_tokens": 29891241.54761905,
+        "reasoning_tokens_included_in_output": 27628771.077380948,
+        "dollars": 21.97056018008892,
+        "dollars_no_cache": 24.20934240829502,
+        "total_tokens": 71721891.41244298
+      },
+      "with_joint_retained_repair": {
+        "input_tokens": 32752351.197098948,
+        "cached_input_tokens": 8915208.409565298,
+        "uncached_input_tokens": 23837142.787533652,
+        "output_tokens": 13360861.5,
+        "reasoning_tokens_included_in_output": 11422010.069444444,
+        "dollars": 11.61883394335874,
+        "dollars_no_cache": 12.929369579564842,
+        "total_tokens": 46113212.69709895
+      },
+      "with_joint_retained_and_individual_excluded_repair": {
+        "input_tokens": 39401772.98859027,
+        "cached_input_tokens": 12108424.409565298,
+        "uncached_input_tokens": 27293348.57902497,
+        "output_tokens": 14303602.5,
+        "reasoning_tokens_included_in_output": 12261283.402777778,
+        "dollars": 12.71248906008244,
+        "dollars_no_cache": 14.49242744828854,
+        "total_tokens": 53705375.48859027
+      },
+      "with_joint_retained_repair_and_duration": {
+        "input_tokens": 42855572.932653666,
+        "cached_input_tokens": 8915208.409565298,
+        "uncached_input_tokens": 33940364.523088366,
+        "output_tokens": 16898683.166666664,
+        "reasoning_tokens_included_in_output": 14460359.847222222,
+        "dollars": 15.257010203691948,
+        "dollars_no_cache": 16.56754583989805,
+        "total_tokens": 59754256.09932033
+      },
+      "with_all_group_review_and_duration": {
+        "input_tokens": 49504994.72414498,
+        "cached_input_tokens": 12108424.409565298,
+        "uncached_input_tokens": 37396570.31457969,
+        "output_tokens": 17841424.166666664,
+        "reasoning_tokens_included_in_output": 15299633.180555556,
+        "dollars": 16.350665320415647,
+        "dollars_no_cache": 18.130603708621745,
+        "total_tokens": 67346418.89081165
+      }
+    }
+  },
+  "limitations": [
+    "Historical era x housing-keyword poststratification estimates routes, not confirmed housing truth; retained includes uncertain scope.",
+    "Large groups use pooled routing. Routing sensitivity changes one observation per cell; not a confidence interval.",
+    "First-pass input scales by source characters; output and reasoning scale by groups. Fixed review prefix scales by groups, remaining input by characters.",
+    "Repair calibration is 14 purposively selected retained groups and only 2 exclusions; difficult cases may overstate average repair output.",
+    "Joint repair is an exploratory estimate from one six-retained-group batch. It assumes six cases fit together; larger groups need smaller batches or individual review. Use individual-review projections as a planning alternative, not a guaranteed ceiling.",
+    "Duration bounds, when present, are calibrated on six difficult retained groups, with no assumed input caching. Output scales by group, input by archive source characters. This is a rough incremental estimate, not a representative population sample.",
+    "Repair assumes a warm 4992-token prefix only, with no cross-pass source cache credit. First pass uses observed cache fractions; no-cache totals also provided.",
+    "Reasoning tokens are part of output, never added a second time. No retry allowance in base projections; reserve 25% for operational variation.",
+    "Four groups above 400000 characters require a separately designed route and are excluded, not silently truncated.",
+    "Estimates describe a fresh full run, not incremental cost after reusing existing results. Prices are project-configured DeepSeek Flash non-peak rates."
+  ]
+}

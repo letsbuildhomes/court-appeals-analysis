@@ -1,0 +1,76 @@
+## Step 2: extract the observed case history
+
+Use only documents whose membership is yes or unclear. The research concerns elapsed legal proceedings, who appealed and where, grounds and court treatment, express conduct criticism, stays/remands, and changes to proposed housing. The PDFs are incomplete observations, not complete dockets or evidence of construction delay.
+
+Return this flat object, in this order:
+
+{"schema_version":"v4.5","project":null,"processes":[],"participants":[],"grounds":[],"remarks":[],"events":[],"uncertainties":[],"suggestions":[]}
+
+## Identity, scope, and support
+
+Separate three things throughout: the application/action currently appealed; earlier proceedings recounted as history; and what this court actually decides. A fact about one is not automatically a fact about another. Keep summaries under 30 words.
+
+Every participant, ground, remark, and event has `p`, the 1-based position in `processes`. When its process has several dockets, each event, ground, and remark has `dockets`, an array of all and only the affected dockets. If applicability is unknown use [] and note uncertainty. Split a ruling only where docket subsets have different outcomes or finality; do not duplicate a shared disposition.
+
+Each factual object except a process has `evidence`: one or two `{doc,page,quote}` objects. Use an exact continuous passage of at most 25 words per quote. Choose support for the recorded interpretation, not merely shared names. Use separate quotes for separate passages. Omit unsupported optional facts. An uncertainty note never licenses an unsupported categorical value.
+
+## Project and processes
+
+`project`: `{summary,municipality,address?,units?,lots?,evidence}`, or null.
+
+`units` is the count of new dwellings sought by the application currently appealed, not existing units or units sought only in historical applications. An explicit single-family home or duplex fixes 1 or 2. `lots` counts net-new residential lots sought by that application when dwelling approval is not itself sought. Both are nonnegative integers; lots and dwellings are distinct measures. Omit counts when the application, new/existing status, or quantity is unknown. An enforcement allegation alone does not establish a proposed-unit count. Describe disputed facts as allegations. Record supported changes separately as event effects.
+
+`processes`: one `{level,body,dockets?,applicant?}` per decision-making level in chronological order, including earlier levels described in the documents.
+
+- `level`: municipal, act_250, state_agency, environmental_division, supreme_court, other.
+- `body`: the institution's name as printed, with capitalization normalized, preserving historical identity.
+- `dockets`: actual proceeding identifiers at this level. Normalize equivalent formats into one case. A reporter citation is not a docket; conflicting header numbers alone do not establish two proceedings. Preserve unresolved identity as uncertainty.
+- `applicant`: applicant at municipal/agency/Act 250 level, when stated.
+
+## Participants
+
+`participants`: parties who appeared at a court level, each `{p,name,kind,roles,relation,members?,counsel?,attorneys?,evidence}`.
+
+- `kind`: person, business, group, municipality, agency, other.
+- `roles`: array of appellant, cross_appellant, applicant, interested_person, other. Roles belong to this court level. A municipality defending its decision is interested_person. There need not be exactly two sides.
+- `relation`: developer, neighbor, resident_group, advocacy_group, municipality, agency, other, unclear. Neighbor requires stated nearby ownership/residence.
+- People acting as one party may be grouped with `members`; do not also list those same members separately at that level.
+- `counsel`: represented or pro_se, only expressly supported; omission means unknown. A notification list or absent attorney name proves neither.
+- Party appearance, roles, and representation do not propagate from a lower to a higher court. Judges and witnesses are not parties.
+
+## Grounds: one claim with one judicial treatment
+
+`grounds`: material arguments about whether the appealed decision or the whole appeal can stand, normally one to eight per court level. Each is `{p,summary,raised_by,topic,category,result,applies?,reason?,evidence}`.
+
+The summary states the raiser's position; reason states the court's response. Include only arguments the documents state, including earlier arguments recounted later. `raised_by` names the supported raiser; use `unknown` if the argument is established but its raiser is not. A court's holding alone does not identify who argued for it.
+
+Merge related questions only when their position and judicial treatment match. Separate propositions decided differently, especially accepted legal interpretation versus unresolved factual compliance. A party's overall loss does not make every argument fail. Keep the latest observed treatment at the level where the argument was made; a higher court's account can supply evidence of that treatment.
+
+- `topic`: use, density, dimensional, design, traffic, character, environment, infrastructure, procedure, standing, jurisdiction, other.
+- `category` describes the governing criterion: objective (measurable threshold), discretionary (land-use judgment standard), procedural (notice, standing, jurisdiction, timeliness), mixed (several types), unclear (not established or not fitting these types).
+- `result`: succeeded (position accepted); failed (position rejected on substance); dismissed (not reached because removed or outside the court's authority); withdrawn; undecided (still open, deferred, or reserved for remand); mixed (one inseparable proposition decided partly each way).
+- `applies:false` only if the court expressly finds the invoked criterion does not govern. Otherwise omit.
+- `reason`: concise judicial reasoning when stated.
+
+A motion is a procedural vehicle, not another ground. Record its ruling as an event. A challenge to the whole appeal's standing/jurisdiction/timeliness is a ground; case-management motions and individual-party dismissal motions are events. When a question is dismissed, record that question's disposition without adding its motion as a duplicate ground.
+
+## Events: what happened, when, and what ended
+
+`events`: dated chronology within each process, each `{p,date?,kind,summary,outcome?,final?,mechanism?,effects?,conditions?,evidence}`.
+
+- `date`: YYYY-MM-DD, YYYY-MM, or YYYY, only at stated precision. A written order uses its issue/signature date. Do not infer event dates from docket numbers; the export handles docket-month fallback separately.
+- `kind`: application, decision (municipal/agency), appeal (filed into this level), stay, ruling (court), settlement, withdrawal, other.
+- Include material earlier applications/decisions/appeals and each observed ruling once. Omit routine filings, hearings, site visits, scheduling, and property history. Distinguish an earlier judgment from a later ruling on relief from that judgment.
+- `outcome`: approved, approved_with_conditions, denied, affirmed, reversed, remanded, dismissed, mixed, interim, other. These describe the permit/proceeding disposition, not the aggregate success of motions. A ruling leaving permit merits/proceedings open is interim. A remand is a ruling with remanded outcome; a subsequent municipal decision is another event.
+- `final`: for court rulings, true if that docket proceeding ended at this level when issued, even if later reopened; false otherwise. Ground resolution and finality are independent.
+- `mechanism`: merits, summary_judgment, standing, jurisdiction, timeliness, procedural, stipulation, withdrawal, other. Include only for a final ruling or dismissal of an appeal/appellant.
+- Stay events state requested/granted/denied in summary; a decided stay has outcome granted, denied, or mixed. A request is not an operative stay.
+- `conditions`: stated conditions imposed, briefly.
+
+`effects`: changes imposed on a proposal relative to the application, attached to the decision/ruling that imposed them. Each is `{measure,change,from?,to?,summary}`. Measures: units, lots, floor_area, land, other. Changes: removed, reduced, increased, conditioned, restored, other. Numeric from/to only when supported. A complete denial is an outcome, not a separate housing effect. Preserve effects of historical decisions as historical events; do not transfer their quantities into the current project.
+
+## Remarks and scouting feedback
+
+`remarks`: explicit court criticism, warnings, sanctions, or fees directed at a litigant's litigation conduct. Each `{p,kind,target,summary,evidence}`; kind is criticism, sanction, fees, warning, other. Distinguish threatened from imposed sanctions. An adverse ruling, weak argument, procedural explanation, criticism of a lower body, or underlying zoning penalty is not a conduct remark. Most cases have none.
+
+`uncertainties`: short strings recording material unresolved ambiguities. `suggestions`: `{idea,why}` observations about research-relevant gaps in the schema. These two fields are scouting feedback only and will be removed from the final production prompt/model; they are not research facts.

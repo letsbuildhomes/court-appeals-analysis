@@ -4,6 +4,9 @@ LIMIT ?= 5
 TEXT_ARGS ?=
 QA_ARGS ?=
 REVIEW_PORT ?= 8766
+CLAIMS_PORT ?= 8767
+APPEALS_ARGS ?=
+APPEALS_PORT ?= 8769
 TEXT_IMAGE ?= data-court-review-text:local
 TEXT_IMAGE_STAMP = .docker-text-image.stamp
 TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
@@ -13,7 +16,7 @@ TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
 	--mount type=bind,source="$(CURDIR)/data/archive.duckdb",target=/workspace/data/archive.duckdb,readonly \
 	$(TEXT_IMAGE)
 
-.PHONY: all extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review serve
+.PHONY: all extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review claims serve group-build group-status
 
 all: extract
 
@@ -96,5 +99,33 @@ review: text-image
 		--publish "127.0.0.1:$(REVIEW_PORT):8766" $(TEXT_IMAGE) \
 		python review_server.py --host 0.0.0.0 --port 8766
 
+claims: text-image
+	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
+		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
+		--publish "127.0.0.1:$(CLAIMS_PORT):8767" $(TEXT_IMAGE) \
+		python claims_server.py --host 0.0.0.0 --port 8767
+
 serve:
 	python3 -m http.server 8765
+
+# Build the upstream docket groups.
+group-build:
+	uv run python groups.py build
+
+group-status:
+	uv run python groups.py status
+
+# Supported municipal housing appeal pipeline.
+.PHONY: appeals-plan appeals-run appeals-export appeals-status appeals-view appeals-test
+appeals-plan:
+	uv run python appeals.py plan $(APPEALS_ARGS)
+appeals-run:
+	uv run python appeals.py run $(APPEALS_ARGS)
+appeals-export:
+	uv run python appeals.py export $(APPEALS_ARGS)
+appeals-status:
+	uv run python appeals.py status $(APPEALS_ARGS)
+appeals-view:
+	uv run python appeals.py serve --port $(APPEALS_PORT)
+appeals-test:
+	uv run python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
