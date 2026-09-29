@@ -14,6 +14,42 @@ from appeals import SAFE
 import duckdb
 from groups import GROUPS_DB_PATH
 from appeal_stats import research_stats
+from scout import usage_counts, reasoning_tokens
+from group_scout import PRICES_PER_M
+
+
+def live_usage(folder):
+    """Estimate Flash costs per request, including archived retry attempts."""
+    totals = dict(requests=0, input=0, cached=0, output=0, reasoning=0,
+                  estimated_usd=0.0, reserved_usd=0.0, unreported=0, inferred_times=0)
+    for path in (folder/'calls').rglob('*.result.json'):
+        call = read(path)
+        totals['requests'] += 1
+        counts = usage_counts(call.get('usage'))
+        if counts is None:
+            totals['reserved_usd'] += call.get('charged_or_reserved_usd', 0)
+            totals['unreported'] += 1
+            continue
+        stamp = call.get('requested_at')
+        if stamp:
+            when = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+        else:
+            # Frozen request files survive retries alongside their original results.
+            request = path.with_name(path.name.replace('.result.json', '.request.json'))
+            when = datetime.fromtimestamp((request if request.exists() else path).stat().st_mtime, timezone.utc)
+            totals['inferred_times'] += 1
+        hour = when.astimezone(timezone.utc).hour
+        multiplier = 2 if 1 <= hour < 4 or 6 <= hour < 10 else 1
+        prompt, cached, output, _ = counts
+        cached = cached or 0
+        totals['input'] += prompt
+        totals['cached'] += cached
+        totals['output'] += output
+        totals['reasoning'] += reasoning_tokens(call.get('usage')) or 0
+        totals['estimated_usd'] += multiplier * (
+            cached * PRICES_PER_M['cache_hit'] + (prompt-cached) * PRICES_PER_M['cache_miss']
+            + output * PRICES_PER_M['output']) / 1_000_000
+    return totals
 
 
 def lines(path):
@@ -74,6 +110,7 @@ def overview(folder):
     summary={'name':manifest['name'],'groups':len(cases),'complete':sum(c['status']=='complete' for c in cases),
              'records':len(records),'running':running,'review_groups':len(review),
              'cost_usd':sum(c.get('charged_or_reserved_usd',0) for c in calls),
+             'usage':live_usage(folder),
              'failed':sum(c['status'] in ('incomplete','review_failed','duration_failed','interrupted','too_large','scope_flagged') for c in cases)}
     return {'summary':summary,'cases':cases,'records':records,'review':review,
             'research':research_stats(cases,records),'updated_at':datetime.now(timezone.utc).isoformat()}
@@ -92,9 +129,14 @@ def archive_overview(root):
                 'status':'not_planned','scope':{},'route':{},'review_required':False,
                 'source_documents':documents.get(gid,[])} for gid,dockets,count,title in rows}
     records,review={},{}
+    usage = None
     manifests=sorted(root.glob('*/manifest.json'),key=lambda p:read(p)['created_at'])
     for manifest in manifests:
         state=overview(manifest.parent)
+        if usage is None:
+            usage = dict(state['summary']['usage'])
+        else:
+            for key, value in state['summary']['usage'].items():usage[key] += value
         grouped={}
         for r in state['records']:grouped.setdefault(r['group'],[]).append(r)
         notes={r['group']:r for r in state['review']}
@@ -108,7 +150,8 @@ def archive_overview(root):
             'review':[r for r in review.values() if r],
             'research':research_stats(values,selected_records),
             'summary':{'groups':len(values),'complete':sum(c['status']=='complete' for c in values),
-                       'planned':sum(c['run'] is not None for c in values),'running':False,'name':'All groups'},
+                       'planned':sum(c['run'] is not None for c in values),'running':False,'name':'All groups',
+                       'usage':usage},
             'updated_at':datetime.now(timezone.utc).isoformat()}
 
 

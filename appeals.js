@@ -174,7 +174,12 @@ function renderProgress() {
   }
   const reviewCount=state.cases.filter(c=>c.review_required).length;
   if (reviewCount) {const item=node('span');item.append(node('b',number(reviewCount)),node('span','research review flags'));$('stageCounts').append(item);}
-  $('cost').textContent = s.cost_usd == null ? '' : `$${s.cost_usd.toFixed(3)} API cost / reserved`;
+  $('cost').textContent = '';
+  const u=s.usage || {}, money=v=>`$${(v||0).toFixed(2)}`;
+  $('usageMetrics').replaceChildren();
+  for (const [label,value] of [['Estimated API cost',money(u.estimated_usd)],['Reserved / unconfirmed',money(u.reserved_usd)],['Input tokens',number(u.input||0)],['Cached input (included)',number(u.cached||0)],['Output tokens',number(u.output||0)],['Requests',number(u.requests||0)]]) {
+    const metric=node('div'); metric.append(node('span',label,'muted'),node('strong',value)); $('usageMetrics').append(metric);
+  }
   $('freshness').textContent = 'Auto-updates every 5 seconds';
 }
 function renderTable() {

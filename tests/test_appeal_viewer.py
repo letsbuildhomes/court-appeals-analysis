@@ -10,10 +10,39 @@ from unittest.mock import patch
 import duckdb
 
 from appeal_runtime import save
-from appeal_viewer import archive_overview, overview
+from appeal_viewer import archive_overview, overview, live_usage
 
 
 class LiveViewerTests(unittest.TestCase):
+    def test_live_cost_peak_boundaries_and_retries(self):
+        usage={'prompt_tokens':1000000,'prompt_cache_hit_tokens':400000,
+               'completion_tokens':100000,'completion_tokens_details':{'reasoning_tokens':10}}
+        for hour, multiplier in [(0,1),(1,2),(3,2),(4,1),(6,2),(9,2),(10,1)]:
+            with self.subTest(hour=hour), TemporaryDirectory() as temp:
+                folder=Path(temp)
+                save(folder/'calls'/'a.result.json',{'usage':usage,'requested_at':f'2026-09-29T{hour:02}:00:00Z'})
+                save(folder/'calls'/'attempts'/'retry'/'a.result.json',{'usage':usage,'requested_at':'2026-09-29T12:00:00Z'})
+                save(folder/'calls'/'pending.result.json',{'status':'pending','charged_or_reserved_usd':0.5})
+                totals=live_usage(folder)
+                self.assertAlmostEqual(totals['estimated_usd'],0.1512*(multiplier+1))
+                self.assertEqual(totals['reserved_usd'],0.5)
+                self.assertEqual(totals['requests'],3)
+                self.assertEqual(totals['input'],2000000)
+                self.assertEqual(totals['cached'],800000)
+                self.assertEqual(totals['output'],200000)
+                self.assertEqual(totals['reasoning'],20)
+
+    def test_live_cost_legacy_request_timestamp(self):
+        save(self.folder/'calls'/'a.result.json',{'usage':{'prompt_tokens':1000000,'completion_tokens':0}})
+        request=self.folder/'calls'/'a.request.json'
+        save(request,{})
+        from datetime import datetime, timezone
+        stamp=datetime(2026,9,29,2,tzinfo=timezone.utc).timestamp()
+        os.utime(request,(stamp,stamp))
+        totals=live_usage(self.folder)
+        self.assertAlmostEqual(totals['estimated_usd'],0.3)
+        self.assertEqual(totals['inferred_times'],1)
+
     def setUp(self):
         self.temp=TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

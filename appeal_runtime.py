@@ -1,6 +1,7 @@
 """Atomic checkpoints, bounded API spending, and immutable replay."""
 import hashlib
 import copy
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -124,6 +125,7 @@ class Client:
             if self.spent()+bound > self.limit:
                 raise ValueError('Run spending cap reached; raise --max-spend to resume')
             state = {'status':'pending','charged_or_reserved_usd':bound,
+                     'requested_at':datetime.now(timezone.utc).isoformat(),
                      'price_multiplier':self.multiplier}
             save(result,state)
             save(req,request)
