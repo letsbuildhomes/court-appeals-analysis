@@ -43,6 +43,12 @@ appear before the run's final export. Completed scope exclusions count toward
 processing progress; research uncertainty/review flags are separate. A stopped
 process with an unfinished active checkpoint is shown as interrupted.
 
+Progress has separate bars for the first pass and finalized results, with PDF
+counts, percentages and group counts. PDFs are counted once by checksum. A first
+pass counts only after scope checking and any required extraction succeed;
+later review failures do not erase that milestone. Finalized coverage includes
+reviewed exclusions. Archive coverage uses the latest planned run for each group.
+
 Live research summaries above processing coverage use completed, confirmed
 municipal housing appeal dockets in the selected archive/run view. Related dockets
 count separately; group counts are shown alongside them. Uncertain-scope records

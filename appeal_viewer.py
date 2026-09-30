@@ -1,6 +1,8 @@
 """Read-only viewer of final appeal exports and frozen evidence."""
 import html
 import fcntl
+import json
+import math
 from datetime import datetime, timezone
 from http import HTTPStatus
 from pathlib import Path
@@ -52,6 +54,118 @@ def live_usage(folder):
     return totals
 
 
+def elapsed_time(folder, running, now=None):
+    """Wall time from the first saved request; stopped runs end at saved activity."""
+    starts, activity = [], []
+    for request in (folder/'calls').rglob('*.request.json'):
+        try:
+            start = request.stat().st_mtime
+            result = request.with_name(request.name.replace('.request.json', '.result.json'))
+            if result.exists():
+                stamp = read(result).get('requested_at')
+                if stamp:
+                    parsed = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+                    start = parsed.replace(tzinfo=parsed.tzinfo or timezone.utc).timestamp()
+            starts.append(start)
+        except FileNotFoundError:
+            continue  # A running retry can move the files into its history directory.
+    if not starts:
+        return {'seconds':None, 'started_at':None, 'ended_at':None}
+    for directory in ('calls', 'activity', 'first_pass', 'results'):
+        for path in (folder/directory).rglob('*'):
+            try:
+                if path.is_file():activity.append(path.stat().st_mtime)
+            except FileNotFoundError:
+                continue
+    start = min(starts)
+    end = (now or datetime.now(timezone.utc)).timestamp() if running else max([*starts, *activity])
+    return {'seconds':max(0, int(end-start)),
+            'started_at':datetime.fromtimestamp(start, timezone.utc).isoformat(),
+            'ended_at':None if running else datetime.fromtimestamp(end, timezone.utc).isoformat()}
+
+
+def completion_estimates(folder, manifest, cases, running, now=None):
+    """Central estimates from observed processing rates; no pipeline or API writes."""
+    now = now or datetime.now(timezone.utc)
+    if not cases:
+        return {'first_pass':{'status':'learning'}, 'finalized':{'status':'learning'}}
+    intervals, completed = [], {c['group'] for c in cases if c.get('first_pass_complete')}
+    samples = {'review':[], 'duration':[]}
+
+    def collect(root, first=False):
+        for path in (root/'calls').rglob('*.result.json'):
+            try:
+                result = read(path)
+                seconds = result.get('elapsed_seconds', 0)
+                if result.get('status') != 'ok' or not isinstance(seconds, (int,float)) or seconds <= 0:
+                    continue
+                name = path.name.removesuffix('.result.json')
+                request = path.with_name(name+'.request.json')
+                if first and name.endswith(('.triage', '.extract')) and name.rsplit('.',1)[0] in completed:
+                    start = request.stat().st_mtime
+                    if result.get('requested_at'):
+                        start = datetime.fromisoformat(result['requested_at'].replace('Z','+00:00')).timestamp()
+                    intervals.append((start, start+seconds))
+                stage = next((s for s in samples if name.startswith(s+'-') and '.' not in name), None)
+                if stage:
+                    payload = read(request)
+                    members = json.loads(payload['messages'][-1]['content'])['cases']
+                    if members:samples[stage].append(seconds/len(members))
+            except (FileNotFoundError, KeyError, ValueError, TypeError):
+                continue
+
+    collect(folder, first=True)
+    historical = set()
+    missing = {s for s in samples if not samples[s]}
+    if missing and manifest.get('model') and manifest.get('prompt_sha256'):
+        for previous in sorted(folder.parent.glob('*/manifest.json')):
+            if previous.parent == folder:continue
+            old = read(previous)
+            if any(old.get(k) != manifest.get(k) for k in ('model','prompt_sha256','review_batch_size','review_batch_chars')):continue
+            current = {s:list(v) for s,v in samples.items()}
+            collect(previous.parent)
+            for stage in samples:
+                if stage not in missing:samples[stage] = current[stage]
+                elif len(samples[stage]) > len(current[stage]):historical.add(stage)
+
+    busy, end = 0, 0
+    for start, stop in sorted(intervals):
+        busy += max(0, stop-max(start,end))
+        end = max(end, stop)
+    # Issues remain visible in progress, but do not represent scheduled work in the ETA.
+    issue_statuses = {'incomplete','too_large','interrupted','review_failed','duration_failed','scope_flagged'}
+    work = [c for c in cases if c['status'] not in issue_statuses]
+    remaining_first = sum(not c.get('first_pass_complete') for c in work)
+    first_seconds = (busy/len(completed)*remaining_first
+                     if len(completed)>=3 and intervals else None)
+    if not remaining_first:first_seconds = 0
+    assessed = [c for c in cases if c.get('first_pass_complete')]
+    retained_share = (sum(c.get('route',{}).get('route')=='extract' for c in assessed)/len(assessed)
+                      if assessed else None)
+    review_remaining = sum(c['status'] not in {'reviewed','complete','measuring'} for c in work)
+    duration_remaining = sum(c['status']!='complete' and c.get('route',{}).get('route')=='extract'
+                             for c in work if c.get('first_pass_complete'))
+    if retained_share is not None:duration_remaining += remaining_first*retained_share
+    final_seconds = first_seconds
+    for stage, count in [('review',review_remaining),('duration',duration_remaining)]:
+        if count:
+            if not samples[stage] or final_seconds is None:final_seconds = None
+            else:final_seconds += sum(samples[stage])/len(samples[stage])*count
+    if remaining_first and retained_share is None:final_seconds = None
+
+    def estimate(seconds, complete, finished, history=False):
+        if complete:return {'status':'complete'}
+        if finished:return {'status':'finished'}
+        if seconds is None:return {'status':'learning'}
+        seconds = max(1, math.ceil(seconds))
+        return {'status':'running' if running else 'paused', 'remaining_seconds':seconds,
+                'finish_at':datetime.fromtimestamp(now.timestamp()+seconds,timezone.utc).isoformat() if running else None,
+                'historical':history}
+    return {'first_pass':estimate(first_seconds, all(c.get('first_pass_complete') for c in cases), not remaining_first),
+            'finalized':estimate(final_seconds, bool(cases) and all(c['status']=='complete' for c in cases),
+                                 not any(c['status']!='complete' for c in work), bool(historical))}
+
+
 def lines(path):
     import json
     return [json.loads(s) for s in path.read_text().splitlines() if s.strip()] if path.exists() else []
@@ -62,6 +176,35 @@ def run_folder(root, name):
     folder = root/name
     if not (folder/'manifest.json').is_file():raise ValueError('Run not found')
     return folder
+
+
+def first_pass_status(record, status):
+    """Keep first-pass outcomes independent of subsequent review and duration work."""
+    if record.get('status') in {'extracted','reviewed','complete','review_failed','duration_failed','scope_flagged'}:
+        route = record.get('route',{}).get('route')
+        if route == 'extract':return 'retained'
+        if route in {'out_of_scope','no_members'}:return 'excluded'
+        return 'issues'
+    if status in {'triaging','extracting'}:return 'active'
+    if status in {'incomplete','interrupted','too_large'}:return 'issues'
+    return 'waiting'
+
+
+def processing_progress(cases):
+    """Count saved milestones, with source PDFs deduplicated by checksum."""
+    documents, first_pass, complete = set(), set(), set()
+    for case in cases:
+        sources = {d['sha'] for d in case['source_documents']}
+        documents.update(sources)
+        if case.get('first_pass_complete'):
+            first_pass.update(sources)
+        if case['status'] == 'complete':
+            complete.update(sources)
+    return {'groups':len(cases),
+            'first_pass_groups':sum(c.get('first_pass_complete',False) for c in cases),
+            'complete_groups':sum(c['status']=='complete' for c in cases),
+            'documents':len(documents),'first_pass_documents':len(first_pass),
+            'complete_documents':len(complete)}
 
 
 def overview(folder):
@@ -78,12 +221,17 @@ def overview(folder):
         path=max(paths,key=lambda p:p.stat().st_mtime_ns) if paths else folder/'results'/f'{gid}.json'
         result=read(path) if path.exists() else {'status':'pending'}
         status=result['status']
+        # Later review failures or interruption do not erase a successful first pass.
+        first_pass_complete=status in {'extracted','reviewed','complete',
+                                      'review_failed','duration_failed','scope_flagged'}
         activity=folder/'activity'/f'{gid}.json'
         if activity.exists() and (not path.exists() or activity.stat().st_mtime_ns>path.stat().st_mtime_ns):
             stage=read(activity)['stage']
             if stage in ('triaging','extracting','reviewing','measuring'):
                 status=stage if running else 'interrupted'
         if not group.get('eligible',True):status='too_large'
+        first_path=folder/'first_pass'/f'{gid}.json'
+        first_record=read(first_path) if first_path.exists() else result
         scope=result.get('triage',{})
         reasons=list(dict.fromkeys(result.get('warnings',[])))
         reasons.extend(f['issue'] for f in result.get('review',{}).get('flags',[]))
@@ -95,6 +243,8 @@ def overview(folder):
         cases.append({'group':gid,'run':manifest['name'],'dockets':group['dockets'],
                       'title':title,'description':scope.get('matter'),
                       'status':status,'route':result.get('route',{}),'scope':scope,
+                      'first_pass_complete':first_pass_complete,
+                      'first_pass_status':first_pass_status(first_record,status),
                       'scope_review':result.get('review',{}).get('scope',{}),
                       'documents':len(docs),'source_documents':docs,'review_required':bool(reasons)})
         # Read completed checkpoints directly so the dashboard need not wait for end-of-run export.
@@ -111,6 +261,9 @@ def overview(folder):
              'records':len(records),'running':running,'review_groups':len(review),
              'cost_usd':sum(c.get('charged_or_reserved_usd',0) for c in calls),
              'usage':live_usage(folder),
+             'progress':processing_progress(cases),
+             'elapsed':elapsed_time(folder, running),
+             'estimates':completion_estimates(folder, manifest, cases, running),
              'failed':sum(c['status'] in ('incomplete','review_failed','duration_failed','interrupted','too_large','scope_flagged') for c in cases)}
     return {'summary':summary,'cases':cases,'records':records,'review':review,
             'research':research_stats(cases,records),'updated_at':datetime.now(timezone.utc).isoformat()}
@@ -127,6 +280,7 @@ def archive_overview(root):
             documents.setdefault(gid,[]).append({'doc':ordinal,'sha':sha,'title':title,'pages':pages})
     cases={gid:{'group':gid,'run':None,'dockets':dockets,'documents':count,'title':title or gid,
                 'status':'not_planned','scope':{},'route':{},'review_required':False,
+                'first_pass_complete':False,
                 'source_documents':documents.get(gid,[])} for gid,dockets,count,title in rows}
     records,review={},{}
     usage = None
@@ -151,6 +305,7 @@ def archive_overview(root):
             'research':research_stats(values,selected_records),
             'summary':{'groups':len(values),'complete':sum(c['status']=='complete' for c in values),
                        'planned':sum(c['run'] is not None for c in values),'running':False,'name':'All groups',
+                       'progress':processing_progress(values),
                        'usage':usage},
             'updated_at':datetime.now(timezone.utc).isoformat()}
 

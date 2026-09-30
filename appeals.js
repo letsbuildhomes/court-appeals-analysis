@@ -60,7 +60,7 @@ function municipalName(c) {
 function updateURL(push = false) {
   const url = new URL(location.href);
   url.search = '';
-  if (view !== 'all') url.searchParams.set('run', view);
+  url.searchParams.set('run', view);
   if (selected) url.searchParams.set('group', selected);
   if (selected && docket) url.searchParams.set('docket', docket);
   history[push ? 'pushState' : 'replaceState'](null, '', url);
@@ -77,7 +77,7 @@ function goHome(event) {
 function groupLink(c, text, className) {
   const link = node('a', text, className);
   const url = new URL(location.href); url.search = '';
-  if (view !== 'all') url.searchParams.set('run', view);
+  url.searchParams.set('run', view);
   url.searchParams.set('group', c.group);
   link.href = url.pathname + url.search;
   link.addEventListener('click', e => {if (!e.metaKey && !e.ctrlKey && !e.shiftKey) {e.preventDefault(); openGroup(c.group);}});
@@ -156,24 +156,74 @@ function renderResearch() {
 }
 function renderProgress() {
   const s = state.summary, total = state.cases.length;
+  $('elapsedTracker').hidden = view === 'all';
+  const elapsed = s.elapsed?.seconds;
+  const minutes = Math.floor((elapsed ?? 0) / 60);
+  $('elapsedTime').textContent = elapsed == null ? 'Not started' : `${Math.floor(minutes / 1440)}d ${Math.floor(minutes / 60) % 24}h ${minutes % 60}m`;
   const counts = {complete:0, active:0, attention:0, waiting:0};
   for (const c of state.cases) {
     if (c.status === 'complete') counts.complete++;
     else if (active.has(c.status)) counts.active++;
     else if (failed.has(c.status)) counts.attention++;
+    else if (c.status === 'extracted' || c.status === 'reviewed') continue;
     else counts.waiting++;
   }
   $('population').textContent = view === 'all' ? `${number(total)} archive groups · Most recent planned run shown for each group` : `${number(total)} groups planned in ${view}`;
   $('progressTitle').textContent = view === 'all' ? 'Archive processing coverage' : s.running ? 'Pipeline running' : counts.complete === total && total ? 'Run complete' : 'Pipeline idle';
-  $('progressContext').textContent = view === 'all' ? `${number(s.planned || 0)} groups have been planned. Select a run to monitor its progress.` : 'Completed groups include scope exclusions. Research review flags are separate from processing failures.';
-  $('progressCount').textContent = `${number(counts.complete)} / ${number(total)}`;
-  $('progress').max = total || 1; $('progress').value = counts.complete;
+  $('progressContext').textContent = view === 'all' ? `${number(s.planned || 0)} groups have been planned. Coverage uses the latest run for each group.` : 'The first pass runs across the planned groups before review begins. Saved drafts are progress; research results appear when finalized.';
+  const p = s.progress;
+  const firstCounts={retained:0,excluded:0,active:0,issues:0,waiting:0};
+  for(const c of state.cases) firstCounts[c.first_pass_status || 'waiting']++;
+  const processed=firstCounts.retained+firstCounts.excluded;
+  $('progressCount').textContent=`${number(processed)} / ${number(total)} groups processed · ${number(total?Math.floor(1000*processed/total)/10:0)}%`;
+  $('progress').replaceChildren(); $('firstPassLegend').replaceChildren();
+  const firstLabels=[['retained','Retained'],['excluded','Excluded'],['issues','Issues'],['waiting','Queued']];
+  for(const [key,label] of firstLabels) {
+    const count=firstCounts[key];
+    if(!count)continue;
+    const segment=node('span',null,`first-pass-segment ${key}`);
+    segment.style.width=`${100*count/total}%`;segment.title=`${label}: ${number(count)} groups`;
+    segment.setAttribute('aria-hidden','true');$('progress').append(segment);
+    const item=node('span',null,`first-pass-key ${key}`);
+    item.append(node('i'),node('span',label),node('b',number(count)));
+    if(key==='excluded')item.title='Screened out in the first pass; still subject to review.';
+    $('firstPassLegend').append(item);
+  }
+  $('progress').setAttribute('aria-label',`${total} groups: ${firstLabels.map(([k,label])=>`${firstCounts[k]} ${label.toLowerCase()}`).join(', ')}, ${firstCounts.active} processing (unfilled). Segment widths represent groups.`);
+  $('progress').title='Segment widths represent groups. Unfilled space represents groups currently processing.';
+  for (const [id,key] of [['firstPassEstimate','first_pass'],['finalEstimate','finalized']]) {
+    const target=$(id), estimate=s.estimates?.[key];
+    target.hidden=view==='all';
+    const duration=seconds=>{const m=Math.ceil(seconds/60);return m<60?`${m}m`:`${Math.floor(m/60)}h ${m%60}m`;};
+    if (!estimate || estimate.status==='learning') target.textContent='Estimated completion · Gathering timing samples';
+    else if (estimate.status==='complete') target.textContent='Complete';
+    else if (estimate.status==='finished') target.textContent='Processing finished';
+    else {
+      const finish=estimate.finish_at?new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(estimate.finish_at)):null;
+      target.textContent=`Estimated remaining · ${duration(estimate.remaining_seconds)}${finish?` · Finish around ${finish}`:' after resuming'}${estimate.historical?' · Uses prior-run timings':''}`;
+    }
+    target.title='Estimate based on observed processing speed. Assumes similar work, with no further pauses or retries. Finalized results include remaining first-pass, review, and duration work.';
+  }
+  for (const [bar,count,groups,documents,groupCount] of [
+    ['finalProgress','finalProgressCount','finalGroups',p.complete_documents,p.complete_groups],
+  ]) {
+    const percent = p.documents ? Math.floor(1000 * documents / p.documents) / 10 : 0;
+    $(count).textContent = `${number(documents)} / ${number(p.documents)} documents · ${number(percent)}%`;
+    $(groups).textContent = `${number(groupCount)} / ${number(p.groups)} groups`;
+    $(bar).max = p.documents || 1; $(bar).value = documents;
+    $(bar).setAttribute('aria-valuetext',`${documents} of ${p.documents} source documents, across ${groupCount} of ${p.groups} groups`);
+  }
   $('stageCounts').replaceChildren();
-  for (const [key,label] of [['complete','complete'],['active','processing'],['waiting',view==='all'?'waiting / unplanned':'waiting'],['attention','processing issues']]) {
+  for (const [key,label] of [['complete','complete'],['active','processing'],['waiting',view==='all'?'queued / unplanned':'queued'],['attention','processing issues']]) {
     const item = node('span'); item.append(node('b', number(counts[key])), node('span', label)); $('stageCounts').append(item);
   }
   const reviewCount=state.cases.filter(c=>c.review_required).length;
   if (reviewCount) {const item=node('span');item.append(node('b',number(reviewCount)),node('span','research review flags'));$('stageCounts').append(item);}
+  const awaitingReview=state.cases.filter(c=>c.status==='extracted').length;
+  const awaitingDuration=state.cases.filter(c=>c.status==='reviewed').length;
+  for (const [count,label] of [[awaitingReview,'awaiting review'],[awaitingDuration,'awaiting duration']]) {
+    if (count) {const item=node('span');item.append(node('b',number(count)),node('span',label));$('stageCounts').append(item);}
+  }
   $('cost').textContent = '';
   const u=s.usage || {}, money=v=>`$${(v||0).toFixed(2)}`;
   $('usageMetrics').replaceChildren();
@@ -347,7 +397,7 @@ function renderDetail(force = false) {
   const signature=JSON.stringify([c,records,notes(c.group),docket]);
   if (!force && signature===detailSignature) return;
   detailSignature=signature; root.replaceChildren();
-  const back=node('a','← Back to groups','back-link'); back.href=view==='all'?'/':`/?run=${encodeURIComponent(view)}`; back.addEventListener('click',goHome); root.append(back);
+  const back=node('a','← Back to groups','back-link'); back.href=`/?run=${encodeURIComponent(view)}`; back.addEventListener('click',goHome); root.append(back);
   const heading=node('div',null,'group-heading'), identity=node('div'); identity.append(node('h1',c.title));
   identity.append(node('p',c.dockets.join(' · ') || c.group,'muted'));
   const meta=node('div',null,'group-meta'); if (municipalName(c)!=='—') meta.append(node('span',municipalName(c),'muted')); meta.append(node('span',`${c.documents} source ${c.documents===1?'document':'documents'}`,'muted')); identity.append(meta); heading.append(identity,statusChip(c)); root.append(heading);
@@ -435,6 +485,7 @@ async function load(force = false) {
 async function loadRuns() {
   const runs=await get('/api/runs'), existing=new Set([...$('run').options].map(o=>o.value));
   for (const run of runs) {if (!existing.has(run.name)) {const option=node('option',run.name);option.value=run.name;$('run').append(option);}}
+  return runs;
 }
 $('brand').addEventListener('click',goHome);
 $('run').addEventListener('change',()=>{view=$('run').value;selected=null;docket=null;page=1;closeEvidence();updateURL(true);load(true);});
@@ -455,6 +506,14 @@ document.addEventListener('keydown',e=>{
 window.addEventListener('popstate',()=>{const q=new URLSearchParams(location.search);view=q.get('run') || 'all';selected=q.get('group');docket=q.get('docket');$('run').value=view;$('run').dispatchEvent(new Event('selection-sync'));closeEvidence();detailSignature='';load(true);});
 enhanceSelects();
 (async()=>{
-  try {await loadRuns();const q=new URLSearchParams(location.search);view=q.get('run') || 'all';if (![...$('run').options].some(o=>o.value===view)) view='all';$('run').value=view;$('run').dispatchEvent(new Event('selection-sync'));selected=q.get('group');docket=q.get('docket');await load(true);setInterval(()=>{if (!document.hidden) load();},5000);setInterval(()=>{if (!document.hidden) loadRuns().catch(()=>{});},15000);}
+  try {
+    const runs=await loadRuns(), q=new URLSearchParams(location.search);
+    view=q.has('run') ? q.get('run') : runs.length===1 ? runs[0].name : 'all';
+    if (![...$('run').options].some(o=>o.value===view)) view='all';
+    $('run').value=view;$('run').dispatchEvent(new Event('selection-sync'));
+    selected=q.get('group');docket=q.get('docket');updateURL();await load(true);
+    setInterval(()=>{if (!document.hidden) load();},5000);
+    setInterval(()=>{if (!document.hidden) loadRuns().catch(()=>{});},15000);
+  }
   catch(error){$('error').hidden=false;$('error').textContent=error.message;}
 })();
