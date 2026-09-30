@@ -55,7 +55,7 @@ def plan(args):
     manifest = {'schema_version':'appeals-1','name':args.name,
                 'created_at':datetime.now(timezone.utc).isoformat(),
                 'model':args.model,'reasoning':'high','max_output_tokens':65536,
-                'max_chars':args.max_chars,'review_batch_size':6,'review_batch_chars':200000,
+                'max_chars':args.max_chars,'review_batch_size':2,'review_batch_chars':200000,
                 'prompt_sha256':digest(json.dumps(prompts,sort_keys=True)), 'groups':groups}
     save(folder/'manifest.json',manifest)
     print(f'Planned {len(groups)} groups; {sum(not g["eligible"] for g in groups)} oversized; {folder}')
@@ -145,11 +145,127 @@ def recover_extract(value, pages):
     return normalized, notes
 
 
+def duration_followup(request, reviews, targets, prompt):
+    """Continue the exact review prefix; sources already appear in that history."""
+    followup = copy.deepcopy(request)
+    followup['messages'] += [
+        {'role':'assistant','content':json.dumps(reviews,ensure_ascii=False)},
+        {'role':'user','content':json.dumps({'instructions':prompt+'\n\nUse the source documents in the preceding review request. '
+         'Assess only the targets below; omit other groups from the earlier batch. '
+         'The corrected records below supersede the earlier drafts.',
+         'cases':targets},ensure_ascii=False)}]
+    return followup
+
+
+def finish(folder, manifest, prompts, client, outputs, workers):
+    """Finish independent two-group batches, each with a focused duration follow-up."""
+    def checkpoint(gid, stage=None):
+        save(folder/'results'/f'{gid}.json',outputs[gid])
+        save(folder/'activity'/f'{gid}.json',{
+            'stage':stage or 'idle','updated_at':datetime.now(timezone.utc).isoformat()})
+    retained = []
+    for group in manifest['groups']:
+        result = outputs[group['group_id']]
+        if result['status'] != 'extracted':
+            checkpoint(group['group_id'])
+        elif result['candidate'] is None:
+            result['status'] = 'complete'
+            checkpoint(group['group_id'])
+        else:
+            retained.append({**group,**result})
+    prefix = prompts['primer']+'\n\nEXTRACTION CONTRACT\n'+prompts['extract']
+    prefix += '\n\nSCOPE CONTRACT\n'+prompts['triage']+'\n\nEDITING CONTRACT\n'+prompts['review']
+    joint = '''Review this batch as one research editor. Apply the same definitions consistently,
+but never transfer facts, dates, people or citations between groups. Doc/page numbering
+is local to each group. Return JSON {"reviews":[{"group":"exact group id","review":{...}}]}.
+Include every supplied group exactly once, with a complete v6-review-1 patch.'''
+
+    def batch_finish(batch):
+        identity = digest('|'.join(c['group'] for c in batch))[:16]
+        name = 'review-'+identity
+        data = {'cases':[{'group':c['group'],'source_documents':c['source'],
+                         'triage':c['triage'],'candidate':c['candidate']} for c in batch]}
+        request = payload(manifest['model'],prefix+'\n\nBATCH EDITING\n'+joint,data)
+        print(f'{name}: reviewing {len(batch)} groups',flush=True)
+        for c in batch:checkpoint(c['group'],'reviewing')
+        try:
+            response = client.call(name,request)
+            reviews = response['reviews']
+            exact_members(reviews,'group',[c['group'] for c in batch])
+            by_group = {r['group']:r['review'] for r in reviews}
+        except Exception as exc:
+            client.reject(name,exc)
+            for c in batch:
+                outputs[c['group']].update(status='review_failed',error=str(exc))
+                checkpoint(c['group'])
+            print(f'{name}: failed: {exc}',flush=True)
+            return
+        successful = []
+        for c in batch:
+            result = outputs[c['group']]
+            try:
+                review = by_group[c['group']]
+                candidate,warnings = apply_review(c['candidate'],review,source_pages(c['source']))
+                result['review'] = review
+                result['warnings'].extend(warnings)
+                if review['scope']['verdict'] == 'flag':
+                    result['status'] = 'scope_flagged'
+                else:
+                    result.update(candidate=candidate,status='reviewed')
+                    successful.append(c)
+            except Exception as exc:
+                client.reject(name,exc)
+                result.update(status='review_failed',error=str(exc))
+            checkpoint(c['group'])
+        if not successful:
+            print(f'{name}: no groups eligible for duration',flush=True)
+            return
+        name = 'duration-'+identity
+        targets = [{'group':c['group'],'candidate':outputs[c['group']]['candidate']} for c in successful]
+        request = duration_followup(request,response,targets,prompts['duration'])
+        print(f'{name}: measuring {len(successful)} groups',flush=True)
+        for c in successful:checkpoint(c['group'],'measuring')
+        try:
+            durations = client.call(name,request)['groups']
+            exact_members(durations,'group',[c['group'] for c in successful])
+            by_group = {r['group']:r for r in durations}
+        except Exception as exc:
+            client.reject(name,exc)
+            for c in successful:
+                outputs[c['group']].update(status='duration_failed',error=str(exc))
+                checkpoint(c['group'])
+            print(f'{name}: failed: {exc}',flush=True)
+            return
+        for c in successful:
+            result = outputs[c['group']]
+            try:
+                records = by_group[c['group']]['dockets']
+                exact_members(records,'docket',[d['docket'] for d in result['candidate']['dockets']])
+                bounds = []
+                for record in records:
+                    validated,warnings = interval(record,source_pages(c['source']))
+                    bounds.append(validated)
+                    result['warnings'].extend(warnings)
+                result.update(duration_bounds=bounds,status='complete')
+            except Exception as exc:
+                client.reject(name,exc)
+                result.update(status='duration_failed',error=str(exc))
+            checkpoint(c['group'])
+        print(f'{name}: '+', '.join(f'{c["group"]} {outputs[c["group"]]["status"]}' for c in batch),flush=True)
+
+    batches = list(packs(retained,2,manifest['review_batch_chars']))
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        list(pool.map(batch_finish,batches))
+
+
 def run(args):
     folder = args.root/args.name
     with locked(folder):
         manifest,prompts = prepare(folder)
         raise_char_cap(folder, manifest, args.max_chars)
+        manifest.update(review_batch_size=2,workers=args.workers,finishing='review-duration-followup')
+        save(folder/'manifest.json',{**manifest,'groups':[
+            {k:v for k,v in group.items() if k != 'source'} for group in manifest['groups']]})
         endpoint,key = api_config(args.api_base_url,args.api_url)
         client = Client(folder/'calls',endpoint,key,args.max_spend,args.price_multiplier,args.retry_failed,args.retry_max_output_tokens)
         model = manifest['model']
@@ -187,7 +303,7 @@ def run(args):
                     candidate.pop('scouting',None)
                     result['candidate'] = candidate
                     result['warnings'].extend(warnings)
-                result['status'] = 'extracted'
+                result['status'] = 'complete' if result['candidate'] is None else 'extracted'
             except Exception as exc:
                 client.reject(call_name,exc)
                 result['error'] = str(exc)
@@ -214,90 +330,7 @@ def run(args):
             print('First pass incomplete; later batches not scheduled. Inspect results and resume.'
                   if incomplete else 'First pass finished; stopped before review (--first-pass-only).',flush=True)
             return
-        cases = []
-        for group in manifest['groups']:
-            result = outputs[group['group_id']]
-            if result['status'] == 'extracted':
-                cases.append({**group,**result})
-        prefix = prompts['primer']+'\n\nEXTRACTION CONTRACT\n'+prompts['extract']
-        prefix += '\n\nSCOPE CONTRACT\n'+prompts['triage']+'\n\nEDITING CONTRACT\n'+prompts['review']
-        joint = '''Review this batch as one research editor so that the same research definitions
-are applied consistently across cases. Compare how facts map to fields, but never
-transfer facts, people, dates or citations between groups. Each group's doc/page
-numbering is local. Return JSON {"reviews":[{"group":"exact group id","review":{...}}]}.
-Every review is a complete v6-review-1 patch. Include every group exactly once.
-Each correction must be supported by that group's own sources.'''
-        retained = [c for c in cases if c['candidate'] is not None]
-        excluded = [c for c in cases if c['candidate'] is None]
-        batches = list(packs(retained,manifest['review_batch_size'],manifest['review_batch_chars']))+[[c] for c in excluded]
-        for batch in batches:
-            name = 'review-'+digest('|'.join(c['group'] for c in batch))[:16]
-            for c in batch:activity(c['group'],'reviewing')
-            try:
-                data = {'cases':[{'group':c['group'],'source_documents':c['source'],
-                                  'triage':c['triage'],'candidate':c['candidate']} for c in batch]}
-                reviews = client.call(name,payload(model,prefix+'\n\nBATCH EDITING\n'+joint,data))['reviews']
-                exact_members(reviews,'group',[c['group'] for c in batch])
-                by_group = {r['group']:r['review'] for r in reviews}
-                for c in batch:
-                    r = outputs[c['group']]
-                    try:
-                        review = by_group[c['group']]
-                        candidate,warnings = apply_review(c['candidate'],review,source_pages(c['source']))
-                        r.update(review=review)
-                        if review['scope']['verdict'] == 'flag':
-                            r['status'] = 'scope_flagged'
-                        else:
-                            r.update(candidate=candidate,status='reviewed')
-                        r['warnings'].extend(warnings)
-                    except Exception as exc:
-                        client.reject(name,exc)
-                        r.update(status='review_failed',error=str(exc))
-            except Exception as exc:
-                client.reject(name,exc)
-                for c in batch:
-                    outputs[c['group']].update(status='review_failed',error=str(exc))
-            for c in batch:
-                save(folder/'results'/f'{c["group"]}.json',outputs[c['group']])
-                activity(c['group'],'idle')
-        duration_cases = []
-        for c in cases:
-            r = outputs[c['group']]
-            if c['candidate'] is not None:
-                # Pack against original case sizes, independent of completion state.
-                duration_cases.append(c)
-            elif r['status'] == 'reviewed':
-                r['status'] = 'complete'
-                save(folder/'results'/f'{c["group"]}.json',r)
-        for batch in packs(duration_cases,manifest['review_batch_size'],manifest['review_batch_chars']):
-            if any(outputs[c['group']]['status']!='reviewed' for c in batch):continue
-            name = 'duration-'+digest('|'.join(c['group'] for c in batch))[:16]
-            for c in batch:activity(c['group'],'measuring')
-            try:
-                data = {'cases':[{'group':c['group'],'source_documents':c['source'],'candidate':outputs[c['group']]['candidate']} for c in batch]}
-                durations = client.call(name,payload(model,prompts['duration'],data))['groups']
-                exact_members(durations,'group',[c['group'] for c in batch])
-                for group in durations:
-                    r = outputs[group['group']]
-                    try:
-                        exact_members(group['dockets'],'docket',[d['docket'] for d in r['candidate']['dockets']])
-                        c = next(c for c in batch if c['group']==group['group'])
-                        bounds = []
-                        for record in group['dockets']:
-                            validated,warnings = interval(record,source_pages(c['source']))
-                            bounds.append(validated)
-                            r['warnings'].extend(warnings)
-                        r.update(duration_bounds=bounds,status='complete')
-                    except Exception as exc:
-                        client.reject(name,exc)
-                        r.update(status='duration_failed',error=str(exc))
-            except Exception as exc:
-                client.reject(name,exc)
-                for c in batch:
-                    outputs[c['group']].update(status='duration_failed',error=str(exc))
-            for c in batch:
-                save(folder/'results'/f'{c["group"]}.json',outputs[c['group']])
-                activity(c['group'],'idle')
+        finish(folder,manifest,prompts,client,outputs,args.workers)
         for gid,result in outputs.items():
             save(folder/'results'/f'{gid}.json',result)
         export(folder)
@@ -369,7 +402,7 @@ def main():
     running.add_argument('--name',required=True)
     running.add_argument('--max-spend',type=float,required=True)
     running.add_argument('--price-multiplier',type=float,default=1)
-    running.add_argument('--workers',type=int,default=3)
+    running.add_argument('--workers',type=int,default=3,help='Concurrent first-pass groups or finishing batches (default: 3)')
     running.add_argument('--max-chars',type=int,help='Explicitly raise this run\'s frozen source eligibility cap')
     running.add_argument('--first-pass-only',action='store_true',help='Export first-pass checkpoints and stop before review')
     endpoint=running.add_mutually_exclusive_group()

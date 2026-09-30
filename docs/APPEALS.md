@@ -127,9 +127,19 @@ on the supplied record; these opinions are not guaranteed complete case historie
 The six selected prompts live in `prompts/appeals/`; plan snapshots them with
 source hashes into `data/appeals/<name>/`. Source and prompt edits require a new run.
 Triage and extraction share a conversation. The separately primed editor reviews
-up to six retained groups together, bounded by source size; exclusions receive
-individual review. A focused batch pass produces duration bounds independently of
-the draft's possibly incorrect closure label. Dates are subtracted in Python.
+at most two retained groups together, bounded by source size. Explicit triage
+exclusions finish immediately without another model call; uncertain scope continues
+to extraction. Each successful review is followed immediately by a focused duration
+question in the same conversation. The follow-up preserves the entire review
+request as its exact prefix, appends the review answer and corrected target records,
+and refers to sources already in that history. This enables provider prefix caching
+without embedding another source copy in the follow-up message. Dates are subtracted
+in Python. A flagged or invalid group does not block successful neighbors.
+
+`--workers` controls concurrent first-pass groups and finishing batches (default
+three). Each finishing worker performs review then duration for its own batch.
+Completed groups appear immediately, without an archive-wide review barrier.
+Terminal messages identify batch starts, failures and completion.
 
 | Path within a run | Content |
 |---|---|
@@ -153,6 +163,10 @@ Repeat the same run command to reuse completed identical calls without spending.
 for uncertain deliveries. Increase it to resume after a budget stop. Use
 `--price-multiplier 2` for peak pricing; the default is non-peak 1×. Only one process
 can operate on a run at a time. Inputs, prompts and batch membership are frozen.
+For a run begun with the former six-group finishing structure, restore a backup
+from before finishing before using this scheduler, or start a new run. There is no
+migration path for old review/duration results; first-pass requests remain reusable.
+Do not edit frozen prompts or sources.
 
 Malformed JSON gets deterministic repair and at most one syntax-only model repair,
 both logged; there is no repeated substantive self-review. Unknown network delivery
@@ -202,6 +216,17 @@ Schema and quote checks do not
 prove semantic correctness; consequential review flags still require attention.
 
 Run `make appeals-test`; the broader suite is `python -m unittest discover -s tests`.
+For a fresh finishing-only sanity check on saved first-pass data:
+
+```sh
+uv run --env-file .env python appeal_sanity.py --from-run release-check --max-spend 1 --workers 3
+```
+
+This creates a separate run, preserves the baseline, makes new review/duration calls,
+and writes `sanity-report.json` with stage token usage, cache hits, reasoning tokens,
+cost, wall time, corrections, evidence warnings and fixture duration comparisons.
+The cap includes inherited first-pass charges. Fixture agreement is a regression
+check, not proof of semantic correctness; inspect the saved corrections and bounds.
 For the saved release batch, `python appeals.py check --name release-check`
 compares scope and durations with the source-reviewed regression fixture without
 making API calls.

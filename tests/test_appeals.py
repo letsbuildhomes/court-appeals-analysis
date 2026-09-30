@@ -1,5 +1,6 @@
 import copy
 import json
+import threading
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
@@ -8,7 +9,7 @@ from unittest.mock import Mock, patch
 
 from appeal_evidence import interval, apply_review
 from appeal_runtime import Client, api_config, digest, payload, read, save
-from appeals import exact_members, export, packs, normalize_extract, recover_extract, raise_char_cap, run
+from appeals import exact_members, export, packs, normalize_extract, recover_extract, raise_char_cap, run, finish, duration_followup
 import group_scout as gs
 from appeal_viewer import run_folder
 
@@ -87,6 +88,58 @@ class PipelineTests(unittest.TestCase):
             'timeline':[],
             'observed_status':{'litigation':'unclear','permission':'unclear','description':None,'evidence':[]},
             'restrictions':[],'housing_changes':[]}]}
+
+    def test_concurrent_finishing_isolates_flags_and_errors_and_keeps_prefix(self):
+        groups=[{'group_id':gid,'source':f'SOURCE-{gid}'} for gid in ('flag','good-a','bad','good-b')]
+        outputs={g['group_id']:{'group':g['group_id'],'status':'extracted','warnings':[],
+                 'triage':{},'candidate':self.extract_fixture()} for g in groups}
+        outputs['excluded']={'group':'excluded','status':'extracted','candidate':None,'warnings':[]}
+        groups.append({'group_id':'excluded','source':'EXCLUDED SOURCE'})
+        manifest={'model':'model','groups':groups,'review_batch_chars':200000}
+        prompts={k:k for k in ('primer','extract','triage','review','duration')}
+        barrier=threading.Barrier(2)
+        requests={}
+        responses={}
+        def call(name,request):
+            requests[name]=copy.deepcopy(request)
+            cases=json.loads(request['messages'][-1]['content'])['cases']
+            if name.startswith('review-'):
+                self.assertEqual(len(cases),2)
+                barrier.wait(timeout=5)
+                response={'reviews':[{'group':c['group'],'review':{
+                    'schema_version':'invalid' if c['group']=='bad' else 'v6-review-1',
+                    'scope':{'verdict':'flag' if c['group']=='flag' else 'agree'},
+                    'changes':[],'flags':[]}} for c in cases]}
+                responses[name]=response
+                return response
+            self.assertEqual(len(cases),1)
+            self.assertNotIn('source_documents',cases[0])
+            return {'groups':[{'group':c['group'],'dockets':[
+                {'docket':'A','start':None,'end':None,'note':'No supported bounds'}]} for c in cases]}
+        client=Mock()
+        client.call.side_effect=call
+        finish(self.root,manifest,prompts,client,outputs,2)
+        self.assertEqual(outputs['flag']['status'],'scope_flagged')
+        self.assertEqual(outputs['bad']['status'],'review_failed')
+        for gid in ('good-a','good-b','excluded'):
+            self.assertEqual(outputs[gid]['status'],'complete')
+            self.assertEqual(read(self.root/f'results/{gid}.json')['status'],'complete')
+        self.assertEqual(len(requests),4)
+        for name,request in requests.items():
+            if name.startswith('duration-'):
+                review_name=name.replace('duration-','review-',1)
+                self.assertEqual(request['messages'][:2],requests[review_name]['messages'])
+                self.assertEqual(json.loads(request['messages'][2]['content']),responses[review_name])
+                self.assertEqual(len(request['messages']),4)
+
+    def test_all_exclusions_finish_without_model_calls(self):
+        result={'group':'excluded','status':'extracted','candidate':None,'warnings':[]}
+        client=Mock()
+        prompts={k:k for k in ('primer','extract','triage','review','duration')}
+        finish(self.root,{'model':'model','review_batch_chars':200000,
+               'groups':[{'group_id':'excluded'}]},prompts,client,{'excluded':result},3)
+        self.assertEqual(result['status'],'complete')
+        client.call.assert_not_called()
 
     def test_recovery_is_validated_free_and_preserves_original(self):
         malformed=self.extract_fixture()
@@ -186,7 +239,7 @@ class PipelineTests(unittest.TestCase):
             run(args)
             transport.assert_not_called()
         self.assertEqual(read(folder/'results/cached.json')['status'],'complete')
-        self.assertEqual(read(folder/'results/oversized.json')['status'],'extracted')
+        self.assertEqual(read(folder/'results/oversized.json')['status'],'complete')
         self.assertFalse(list((folder/'calls').glob('review-*')))
         self.assertEqual(len(list((folder/'calls/attempts').rglob('*.result.json'))),1)
 

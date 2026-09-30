@@ -121,7 +121,7 @@ def completion_estimates(folder, manifest, cases, running, now=None):
         for previous in sorted(folder.parent.glob('*/manifest.json')):
             if previous.parent == folder:continue
             old = read(previous)
-            if any(old.get(k) != manifest.get(k) for k in ('model','prompt_sha256','review_batch_size','review_batch_chars')):continue
+            if any(old.get(k) != manifest.get(k) for k in ('model','prompt_sha256','review_batch_size','review_batch_chars','finishing')):continue
             current = {s:list(v) for s,v in samples.items()}
             collect(previous.parent)
             for stage in samples:
@@ -150,7 +150,7 @@ def completion_estimates(folder, manifest, cases, running, now=None):
     for stage, count in [('review',review_remaining),('duration',duration_remaining)]:
         if count:
             if not samples[stage] or final_seconds is None:final_seconds = None
-            else:final_seconds += sum(samples[stage])/len(samples[stage])*count
+            else:final_seconds += sum(samples[stage])/len(samples[stage])*count/max(1,manifest.get('workers',1))
     if remaining_first and retained_share is None:final_seconds = None
 
     def estimate(seconds, complete, finished, history=False):
@@ -253,6 +253,9 @@ def overview(folder):
         scope=result.get('triage',{})
         reasons=list(dict.fromkeys(result.get('warnings',[])))
         reasons.extend(f['issue'] for f in result.get('review',{}).get('flags',[]))
+        scope_review = result.get('review',{}).get('scope',{})
+        if scope_review.get('verdict') == 'flag' and scope_review.get('reason'):
+            reasons.append(scope_review['reason'])
         if 'unclear' in [scope.get('housing'),scope.get('municipal_appeal')]:reasons.append('Housing or municipal scope needs confirmation')
         if result.get('error'):reasons.append(result['error'])
         if reasons:review.append({'group':gid,'reasons':reasons})
