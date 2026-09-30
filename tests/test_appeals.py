@@ -2,12 +2,14 @@ import copy
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 
 from appeal_evidence import interval, apply_review
-from appeal_runtime import Client, api_config, payload, read, save
-from appeals import exact_members, export, packs
+from appeal_runtime import Client, api_config, digest, payload, read, save
+from appeals import exact_members, export, packs, normalize_extract, recover_extract, raise_char_cap, run
+import group_scout as gs
 from appeal_viewer import run_folder
 
 
@@ -74,6 +76,119 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual([len(b) for b in packs(items,6,20)],[1]*7)
         with self.assertRaises(ValueError):exact_members([{'group':'a'},{'group':'a'}],'group',['a','b'])
         with self.assertRaises(ValueError):exact_members([{'docket':None},{'docket':None}],'docket',[None,None])
+
+    def extract_fixture(self):
+        return {'schema_version':'v6','dockets':[{
+            'docket':'A','related_dockets':[],
+            'project':{'description':None,'municipality':None,'proposed_units':None,'proposed_lots':None,'evidence':[]},
+            'municipal_decision':{'description':None,'date':None,'outcome':'unclear','evidence':[]},
+            'appellants':[],
+            'discretion':{'description':None,'evidence':[],'involved':'unclear','central':'unclear','central_evidence':[]},
+            'timeline':[],
+            'observed_status':{'litigation':'unclear','permission':'unclear','description':None,'evidence':[]},
+            'restrictions':[],'housing_changes':[]}]}
+
+    def test_recovery_is_validated_free_and_preserves_original(self):
+        malformed=self.extract_fixture()
+        docket=malformed['dockets'][0]
+        for field in ('timeline','observed_status','restrictions','housing_changes'):
+            malformed[field]=docket.pop(field)
+        docket['central']=docket['discretion'].pop('central')
+        original=copy.deepcopy(malformed)
+        req=payload('model','JSON',{})
+        state={'status':'failed','error_type':'validation','error':'misplaced fields','charged_or_reserved_usd':0.03}
+        save(self.root/'case.request.json',req)
+        save(self.root/'case.result.json',state)
+        save(self.root/'case.parsed.json',malformed)
+        save(self.root/'case.response.json',{'original':malformed})
+        client=Client(self.root,'http://localhost','unused',0,retry_failed=True)
+        with patch('appeal_runtime.httpx.Client') as transport:
+            self.assertFalse(client.recover_validation('case',{**req,'model':'other'},lambda v:recover_extract(v,{})))
+            self.assertTrue(client.recover_validation('case',req,lambda v:recover_extract(v,{})))
+            self.assertEqual(client.call('case',req),self.extract_fixture())
+            transport.assert_not_called()
+        self.assertEqual(read(self.root/'case.original-parsed.json'),original)
+        self.assertEqual(read(self.root/'case.response.json'),{'original':original})
+        self.assertEqual(read(self.root/'case.recovery.json')['previous_result'],state)
+        self.assertEqual(len(read(self.root/'case.recovery.json')['corrections']),5)
+        self.assertEqual(client.spent(),0.03)
+
+    def test_relocation_refuses_ambiguous_or_conflicting_ownership(self):
+        value=self.extract_fixture()
+        value['housing_changes']=[{'description':'Root observation','evidence':[]}]
+        normalized,notes=normalize_extract(value)
+        self.assertEqual(normalized,value)
+        self.assertFalse(notes)
+        with self.assertRaises(ValueError):recover_extract(value,{})
+        value['dockets'][0].pop('housing_changes')
+        value['dockets'].append(copy.deepcopy(value['dockets'][0]))
+        self.assertEqual(normalize_extract(value),(value,[]))
+        with self.assertRaises(ValueError):recover_extract(value,{})
+
+    def test_relocation_does_not_invent_evidence_or_enum_values(self):
+        for damage in ('evidence','kind'):
+            value=self.extract_fixture()
+            if damage=='evidence':
+                value['dockets'][0]['observed_status'].pop('evidence')
+            else:
+                value['dockets'][0]['timeline']=[{'kind':'unsupported'}]
+            with self.assertRaises(ValueError):recover_extract(value,{})
+
+    def test_char_cap_raise_is_audited_and_keeps_sources_out_of_manifest(self):
+        manifest={'max_chars':4,'groups':[{'group_id':'a','source':'abc','eligible':True},
+                                         {'group_id':'b','source':'abcdef','eligible':False}]}
+        raise_char_cap(self.root,manifest,6)
+        stored=read(self.root/'manifest.json')
+        self.assertTrue(stored['groups'][1]['eligible'])
+        self.assertNotIn('source',stored['groups'][0])
+        self.assertEqual(stored['cap_changes'][0]['previous'],4)
+        raise_char_cap(self.root,manifest,6)
+        self.assertEqual(len(manifest['cap_changes']),1)
+        with self.assertRaises(ValueError):raise_char_cap(self.root,manifest,5)
+
+    def test_first_pass_resume_only_sends_failed_and_newly_eligible_calls(self):
+        folder=self.root/'resume'
+        prompts={'system':'System','triage':'Triage'}
+        save(folder/'prompts.json',prompts)
+        groups=[]
+        for gid in ('cached','failed','oversized'):
+            groups.append({'group_id':gid,'source_sha256':digest('abc'),
+                           'eligible':gid!='oversized','documents':[],'dockets':[]})
+            source=folder/'sources'/f'{gid}.txt'
+            source.parent.mkdir(exist_ok=True)
+            source.write_text('abc')
+        save(folder/'manifest.json',{'name':'resume','model':'model','max_chars':2,
+             'max_output_tokens':65536,'prompt_sha256':digest(json.dumps(prompts,sort_keys=True)),
+             'groups':groups})
+        triage={'schema_version':'v5-triage','documents':[{'doc':1,'belongs':'yes','caption_dockets':[]}],
+                'municipal_appeal':'yes','housing':'no','matter':'Not housing','reason':'Not housing','evidence':[]}
+        req=gs.triage_payload('model',prompts,'abc','high')
+        req['max_tokens']=65536
+        for gid,status in [('cached','ok'),('failed','failed')]:
+            save(folder/f'calls/{gid}.triage.request.json',req)
+            save(folder/f'calls/{gid}.triage.result.json',{'status':status,'error_type':'validation','charged_or_reserved_usd':0.01})
+            save(folder/f'calls/{gid}.triage.parsed.json',triage)
+        response=Mock(status_code=200,text='response')
+        response.json.return_value={'choices':[{'finish_reason':'stop','message':{'content':json.dumps(triage)}}],
+                                    'usage':{'prompt_tokens':10,'completion_tokens':10}}
+        args=SimpleNamespace(root=self.root,name='resume',max_chars=600000,first_pass_only=True,
+                             max_spend=1,price_multiplier=1,retry_failed=True,retry_max_output_tokens=None,
+                             api_base_url=None,api_url=None,workers=1)
+        with patch('appeals.api_config',return_value=('http://localhost','unused')), \
+             patch('appeals.source_pages',return_value={1:{1:'abc'}}), \
+             patch('appeal_runtime.httpx.Client') as transport:
+            transport.return_value.__enter__.return_value.post.return_value=response
+            run(args)
+            self.assertEqual(transport.return_value.__enter__.return_value.post.call_count,2)
+            transport.reset_mock()
+            # Preserve already finalized exclusions when inspecting the first pass again.
+            save(folder/'results/cached.json',{'status':'complete','candidate':None})
+            run(args)
+            transport.assert_not_called()
+        self.assertEqual(read(folder/'results/cached.json')['status'],'complete')
+        self.assertEqual(read(folder/'results/oversized.json')['status'],'extracted')
+        self.assertFalse(list((folder/'calls').glob('review-*')))
+        self.assertEqual(len(list((folder/'calls/attempts').rglob('*.result.json'))),1)
 
     def test_output_limit_retry_preserves_cost_and_success_cache(self):
         req=payload('model','JSON',{})

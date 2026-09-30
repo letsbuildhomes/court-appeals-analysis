@@ -15,6 +15,19 @@ from appeal_viewer import archive_overview, overview, live_usage, elapsed_time, 
 
 
 class LiveViewerTests(unittest.TestCase):
+    def test_legacy_and_new_failure_categories(self):
+        path=self.folder/'first_pass/g-a.json'
+        save(path,{'status':'incomplete','error':'schema failed'})
+        save(self.folder/'calls/g-a.extract.result.json',{'status':'failed','error_type':'validation'})
+        self.assertEqual(overview(self.folder)['cases'][0]['failure_category'],'validation')
+        save(path,{'status':'incomplete','error':'Run spending cap reached; raise --max-spend to resume'})
+        self.assertEqual(overview(self.folder)['cases'][0]['failure_category'],'budget')
+        save(path,{'status':'incomplete','error_type':'ReadTimeout','error':'timeout'})
+        self.assertEqual(overview(self.folder)['cases'][0]['failure_category'],'api')
+        (self.folder/'calls/g-a.extract.result.json').unlink()
+        save(path,{'status':'incomplete','error':'unknown'})
+        self.assertEqual(overview(self.folder)['cases'][0]['failure_category'],'unknown')
+
     def test_first_pass_categories(self):
         for route,expected in [('extract','retained'),('out_of_scope','excluded'),('no_members','excluded')]:
             for later in ['reviewing','measuring','interrupted','review_failed','complete']:

@@ -1,5 +1,6 @@
 """Plan, run, export and browse the municipal housing appeal pipeline."""
 import argparse
+import copy
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -90,10 +91,65 @@ def prepare(folder):
     return manifest,prompts
 
 
+def raise_char_cap(folder, manifest, max_chars):
+    """Explicitly increase eligibility without changing frozen model inputs."""
+    if max_chars is None:
+        return
+    previous = manifest['max_chars']
+    if max_chars < previous:
+        raise ValueError('The existing run character cap may only be increased')
+    if max_chars == previous:
+        return
+    manifest.setdefault('cap_changes', []).append({
+        'previous': previous, 'max_chars': max_chars,
+        'changed_at': datetime.now(timezone.utc).isoformat()})
+    manifest['max_chars'] = max_chars
+    for group in manifest['groups']:
+        group['eligible'] = len(group['source']) <= max_chars
+    # Loaded source text is runtime-only; keep the manifest compact.
+    save(folder/'manifest.json', {**manifest, 'groups':[
+        {k:v for k,v in group.items() if k != 'source'} for group in manifest['groups']]})
+
+
+def normalize_extract(value):
+    """Relocate fields only when ownership and destination are unambiguous."""
+    value = copy.deepcopy(value)
+    notes = []
+    dockets = value.get('dockets') if isinstance(value, dict) else None
+    if not isinstance(dockets, list) or not all(isinstance(d, dict) for d in dockets):
+        return value, notes
+    def move(source, destination, field, origin, target):
+        if field in source and field not in destination:
+            destination[field] = source.pop(field)
+            notes.append(f'Moved {origin}.{field} to {target}.{field}')
+    if len(dockets) == 1:
+        for field in ('timeline', 'observed_status', 'restrictions', 'housing_changes'):
+            move(value, dockets[0], field, 'extract', 'extract.dockets[0]')
+    for index, docket in enumerate(dockets):
+        discretion = docket.get('discretion')
+        if not isinstance(discretion, dict):
+            continue
+        target = f'extract.dockets[{index}].discretion'
+        for field in ('involved', 'central', 'central_evidence'):
+            move(docket, discretion, field, f'extract.dockets[{index}]', target)
+            if len(dockets) == 1:
+                move(value, discretion, field, 'extract', target)
+    return value, notes
+
+
+def recover_extract(value, pages):
+    normalized, notes = normalize_extract(value)
+    candidate, errors = gs.validate_extract(json.dumps(normalized), pages, version='v6')
+    if candidate is None:
+        raise ValueError(str(errors))
+    return normalized, notes
+
+
 def run(args):
     folder = args.root/args.name
     with locked(folder):
         manifest,prompts = prepare(folder)
+        raise_char_cap(folder, manifest, args.max_chars)
         endpoint,key = api_config(args.api_base_url,args.api_url)
         client = Client(folder/'calls',endpoint,key,args.max_spend,args.price_multiplier,args.retry_failed,args.retry_max_output_tokens)
         model = manifest['model']
@@ -121,7 +177,10 @@ def run(args):
                 if result['route']['route'] == 'extract':
                     activity(gid,'extracting')
                     call_name = f'{gid}.extract'
-                    extracted = client.call(f'{gid}.extract',gs.extract_payload(request,json.dumps(triage),prompts,'high'))
+                    extract_request = gs.extract_payload(request,json.dumps(triage),prompts,'high')
+                    client.recover_validation(call_name, extract_request,
+                                              lambda value: recover_extract(value, pages))
+                    extracted = client.call(call_name,extract_request)
                     candidate,warnings = gs.validate_extract(json.dumps(extracted),pages,version='v6')
                     if candidate is None:
                         raise ValueError(str(warnings))
@@ -132,6 +191,11 @@ def run(args):
             except Exception as exc:
                 client.reject(call_name,exc)
                 result['error'] = str(exc)
+                state_path = folder/'calls'/f'{call_name}.result.json'
+                state = read(state_path) if state_path.exists() else {}
+                result['error_type'] = ('budget' if 'Run spending cap reached' in str(exc)
+                                        else state.get('error_type', 'unknown'))
+                result['failed_call'] = call_name
             finally:
                 save(folder/'first_pass'/f'{gid}.json',result)
                 activity(gid,'idle')
@@ -140,10 +204,15 @@ def run(args):
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
             for result in pool.map(first,manifest['groups']):
                 outputs[result['group']] = result
-        if any(r['status']=='incomplete' for r in outputs.values()):
-            for gid,result in outputs.items():save(folder/'results'/f'{gid}.json',result)
+        incomplete = any(r['status']=='incomplete' for r in outputs.values())
+        if args.first_pass_only or incomplete:
+            for gid,result in outputs.items():
+                path = folder/'results'/f'{gid}.json'
+                if not path.exists() or read(path)['status'] in {'incomplete','too_large','extracted'}:
+                    save(path,result)
             export(folder)
-            print('First pass incomplete; later batches not scheduled. Inspect results and resume.',flush=True)
+            print('First pass incomplete; later batches not scheduled. Inspect results and resume.'
+                  if incomplete else 'First pass finished; stopped before review (--first-pass-only).',flush=True)
             return
         cases = []
         for group in manifest['groups']:
@@ -301,6 +370,8 @@ def main():
     running.add_argument('--max-spend',type=float,required=True)
     running.add_argument('--price-multiplier',type=float,default=1)
     running.add_argument('--workers',type=int,default=3)
+    running.add_argument('--max-chars',type=int,help='Explicitly raise this run\'s frozen source eligibility cap')
+    running.add_argument('--first-pass-only',action='store_true',help='Export first-pass checkpoints and stop before review')
     endpoint=running.add_mutually_exclusive_group()
     endpoint.add_argument('--api-base-url')
     endpoint.add_argument('--api-url')
@@ -317,6 +388,7 @@ def main():
     if args.command=='plan':plan(args)
     elif args.command=='run':
         if args.max_spend<=0 or args.price_multiplier<=0 or args.workers<1:p.error('Positive budget, multiplier and worker count required')
+        if args.max_chars is not None and args.max_chars < 1:p.error('Positive --max-chars required')
         if args.retry_max_output_tokens is not None and (not args.retry_failed or args.retry_max_output_tokens<1):p.error('Positive --retry-max-output-tokens requires --retry-failed')
         run(args)
     elif args.command=='export':

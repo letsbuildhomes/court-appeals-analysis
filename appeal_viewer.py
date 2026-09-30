@@ -207,6 +207,24 @@ def processing_progress(cases):
             'complete_documents':len(complete)}
 
 
+def failure_category(folder, gid, result):
+    """Classify new checkpoints and legacy runs without changing their status."""
+    if result.get('status') != 'incomplete':
+        return None
+    if 'Run spending cap reached' in result.get('error', ''):
+        return 'budget'
+    category = result.get('error_type')
+    if category and category != 'unknown':
+        return 'validation' if category == 'validation' else 'budget' if category == 'budget' else 'api'
+    for stage in ('extract', 'triage'):
+        path = folder/'calls'/f'{gid}.{stage}.result.json'
+        if path.exists():
+            call = read(path)
+            if call.get('status') == 'failed':
+                return 'validation' if call.get('error_type') == 'validation' else 'api'
+    return 'unknown'
+
+
 def overview(folder):
     manifest = read(folder/'manifest.json')
     running=False
@@ -242,7 +260,8 @@ def overview(folder):
         title=next((d.get('title') for d in reversed(docs) if d.get('title')),gid)
         cases.append({'group':gid,'run':manifest['name'],'dockets':group['dockets'],
                       'title':title,'description':scope.get('matter'),
-                      'status':status,'route':result.get('route',{}),'scope':scope,
+                      'status':status,'failure_category':failure_category(folder,gid,result),
+                      'route':result.get('route',{}),'scope':scope,
                       'first_pass_complete':first_pass_complete,
                       'first_pass_status':first_pass_status(first_record,status),
                       'scope_review':result.get('review',{}).get('scope',{}),

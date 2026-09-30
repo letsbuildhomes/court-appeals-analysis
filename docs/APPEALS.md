@@ -165,6 +165,31 @@ make appeals-run APPEALS_ARGS='--name my-run --max-spend 1.00 --retry-failed --r
 ```
 
 Each failed call gets at most one retry per invocation. Successful calls are reused.
+Before retrying a saved extraction schema failure, the runner tries deterministic
+field relocation and full validation. Root timeline, status, restriction and housing
+change fields can move into a sole docket; misplaced discretion fields can move
+into that docket's existing discretion object. Destinations must be absent, and
+ambiguous or conflicting values are not overwritten. No evidence or classifications
+are invented. Original responses remain unchanged; `*.original-parsed.json` and
+`*.recovery.json` preserve the original parsed output, failed state and corrections.
+Recovered calls retain their existing charge and make no new API request.
+
+To raise an existing run's source eligibility cap and inspect its first pass before
+review, use (with your chosen cumulative spending cap):
+
+```sh
+make appeals-run APPEALS_ARGS='--name full-run --max-chars 600000 --retry-failed --first-pass-only --max-spend 10.00'
+```
+
+`run --max-chars` may only increase the saved cap. Under the run lock it updates
+eligibility from frozen source text and records the change in `manifest.json`;
+sources, prompts and successful requests remain unchanged. This allows larger
+groups to be attempted, subject to the provider's input limits. `--first-pass-only`
+exports checkpoints and stops before review, preserving existing later-stage
+results. Resume without that flag to start review once no first-pass failures
+remain. The dashboard distinguishes validation, API and spending-cap failures,
+including saved call metadata from older runs.
+
 Prior attempts move into `calls/attempts/` and remain included in cost/token totals.
 Output-limit failures record `finish_reason: length` and `error_type: output_limit`;
 partial output is retained, never treated as completed JSON. HTTP, transport,

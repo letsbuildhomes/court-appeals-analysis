@@ -79,6 +79,35 @@ class Client:
     def spent(self):
         return sum(read(p)['charged_or_reserved_usd'] for p in self.root.rglob('*.result.json'))
 
+    def recover_validation(self, name, request, recover):
+        """Revalidate a saved schema failure before considering a paid retry."""
+        prefix = self.root/name
+        req, result, parsed = [Path(str(prefix)+suffix) for suffix in
+                               ('.request.json','.result.json','.parsed.json')]
+        with self.lock:
+            if not all(p.exists() for p in (req, result, parsed)):
+                return False
+            state = read(result)
+            if read(req) != request or state.get('error_type') != 'validation' or state.get('status') != 'failed':
+                return False
+            try:
+                value, notes = recover(read(parsed))
+            except ValueError:
+                return False
+            # Preserve both the original parsed output and the failed state.
+            original = Path(str(prefix)+'.original-parsed.json')
+            if not original.exists():
+                save(original, read(parsed))
+            save(Path(str(prefix)+'.recovery.json'), {
+                'recovered_at': datetime.now(timezone.utc).isoformat(),
+                'previous_result': state, 'corrections': notes})
+            save(parsed, value)
+            state.update(status='ok', validation_recovered=True)
+            state.pop('error', None)
+            state.pop('error_type', None)
+            save(result, state)
+            return True
+
     def fix_json(self, name, request, raw):
         repair = copy.deepcopy(request)
         repair['messages'] += [{'role':'assistant','content':raw},
@@ -103,7 +132,7 @@ class Client:
                     # Keep every prior attempt, including its charge or uncertain-delivery reservation.
                     archive = self.root/'attempts'/uuid.uuid4().hex
                     archive.mkdir(parents=True)
-                    for suffix in ('.request.json','.result.json','.parsed.json','.response.json','.response.txt','.sent.json','.format-repair-note.json'):
+                    for suffix in ('.request.json','.result.json','.parsed.json','.response.json','.response.txt','.sent.json','.format-repair-note.json','.original-parsed.json','.recovery.json'):
                         old = Path(str(prefix)+suffix)
                         if old.exists():old.rename(archive/old.name)
                     self.retried.add(name)

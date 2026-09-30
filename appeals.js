@@ -52,7 +52,11 @@ function scopeChip(c) {
   return {confirmed:()=>chip('Housing appeal', 'yes'), uncertain:()=>chip('Uncertain', 'unclear'), excluded:()=>chip('Outside scope', 'no'), unassessed:()=>chip('Not assessed')}[scopeClass(c)]();
 }
 function statusChip(c) {
-  return chip(statusNames[c.status] || human(c.status), active.has(c.status) ? 'active' : failed.has(c.status) ? 'failed' : c.status === 'complete' ? 'yes' : '');
+  return chip(statusLabel(c), active.has(c.status) ? 'active' : failed.has(c.status) ? 'failed' : c.status === 'complete' ? 'yes' : '');
+}
+function statusLabel(c) {
+  if(c.status==='incomplete') return {validation:'Validation failed',api:'API failed',budget:'Spending cap reached'}[c.failure_category] || 'First pass failed';
+  return statusNames[c.status] || human(c.status);
 }
 function municipalName(c) {
   return [...new Set(rows(c.group).map(r => r.record.project?.municipality).filter(Boolean))].join(', ') || '—';
@@ -410,7 +414,7 @@ function renderDetail(force = false) {
   if (scopeClass(c)==='uncertain') root.append(node('p','Housing or municipal scope is uncertain. Keep this group separate from confirmed housing appeals.','alert'));
   }
   if (!records.length) {
-    if(!excluded) root.append(node('p',c.status==='not_planned'?'This archive group has not been added to a pipeline run.':c.status==='complete'?'No extracted docket records are available.':`Current stage: ${statusNames[c.status] || human(c.status)}. Research answers appear after extraction, review, and duration measurement are complete.`,'research-card'));
+    if(!excluded) root.append(node('p',c.status==='not_planned'?'This archive group has not been added to a pipeline run.':c.status==='complete'?'No extracted docket records are available.':`Current stage: ${statusLabel(c)}. Research answers appear after extraction, review, and duration measurement are complete.`,'research-card'));
     const reasons=notes(c.group); if (reasons.length) {const list=node('ul',null,'review-notes'); for (const reason of reasons) list.append(node('li',reason)); root.append(list);}
     const support=node('section',null,'support'); documentLinks(supportSection(support,`Source documents (${c.documents})`),c); root.append(support); return;
   }
