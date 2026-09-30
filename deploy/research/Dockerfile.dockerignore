@@ -1,0 +1,10 @@
+# This whitelist replaces the repository .dockerignore for this Dockerfile.
+**
+!pyproject.toml
+!uv.lock
+!research_mcp.py
+!research_snapshot.py
+!deploy/
+!deploy/research/
+!deploy/research/Dockerfile
+!deploy/research/Dockerfile.dockerignore

@@ -84,3 +84,11 @@ results. Earlier experimental files have been removed;
 The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted research
 artifacts. Source PDFs, production databases, and supported appeal run logs are
 preserved.
+
+For a quick plain HTTP/Docker experiment with a coworker's CLI, see
+[docs/MCP-CLOUD.md](docs/MCP-CLOUD.md).
+For local SQL research through Claude or another MCP client, see
+[docs/MCP.md](docs/MCP.md). `make research-setup` installs the optional server SDK;
+`make research-build MCP_RUN=final-smoke-20260929-190157` freezes an explicitly
+selected run's structured facts in a separate immutable snapshot. Source prose
+and quotations are unavailable through this research interface.

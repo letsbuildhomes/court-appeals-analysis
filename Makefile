@@ -129,3 +129,24 @@ appeals-view:
 	uv run python appeals.py serve --port $(APPEALS_PORT)
 appeals-test:
 	uv run python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
+
+# Local research snapshot selection is explicit; MCP runs without pipeline/API credentials.
+MCP_RUN ?=
+MCP_SNAPSHOT ?= data/research/$(MCP_RUN)
+MCP_ARGS ?=
+.PHONY: research-setup research-list research-build research-describe research-query research-serve research-test
+research-setup:
+	uv sync --inexact --extra research-mcp
+research-list:
+	uv run --inexact python research_mcp.py list $(MCP_ARGS)
+research-build:
+	@test -n "$(MCP_RUN)" || { echo 'Set MCP_RUN to an explicitly selected run'; exit 2; }
+	uv run --inexact python research_mcp.py build --run "$(MCP_RUN)" --output "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+research-describe:
+	uv run --inexact python research_mcp.py describe --snapshot "$(MCP_SNAPSHOT)"
+research-query:
+	uv run --inexact python research_mcp.py query --snapshot "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+research-serve:
+	uv run --inexact --extra research-mcp python research_mcp.py serve --snapshot "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+research-test:
+	uv run --inexact --extra research-mcp python -m unittest tests.test_research_mcp tests.test_research_cloud -v
