@@ -179,6 +179,21 @@ make appeals-run APPEALS_ARGS='--name my-run --max-spend 1.00 --retry-failed --r
 ```
 
 Each failed call gets at most one retry per invocation. Successful calls are reused.
+Completed group checkpoints are authoritative on resume: their records are neither
+re-reviewed nor re-measured, even if their batch neighbor needs a review retry.
+Successful first-pass checkpoints are reused without rewriting them. Review batches
+are still packed from the entire frozen first pass, preserving request membership
+and source prefixes. Only unfinished members are validated and targeted for duration.
+Review validation operates on a copy; the original answer used in the follow-up
+conversation remains unchanged.
+
+Duration calls are named `duration-<batch-id>-<request-sha256>`. The hash includes
+the complete request: review conversation, answer, corrected records and target
+membership. Identical inputs reuse their call; changed inputs create a separately
+logged and charged call. Earlier duration requests and responses remain intact and
+included in spending totals. Existing completed results with older call names need
+no migration. Unfinished groups receive calls using the new request identity.
+
 Before retrying a saved extraction schema failure, the runner tries deterministic
 field relocation and full validation. Root timeline, status, restriction and housing
 change fields can move into a sole docket; misplaced discretion fields can move
@@ -210,8 +225,8 @@ partial output is retained, never treated as completed JSON. HTTP, transport,
 invalid-response and schema-validation errors are also saved. Retrying an uncertain
 network delivery can incur a second provider charge; its original reservation stays
 in the budget. Increasing the output allowance does not change successful calls.
-If a changed upstream answer conflicts with a previously frozen downstream request,
-the pipeline stops rather than silently mixing versions; use a new run in that case.
+Changed upstream review answers produce distinct duration request identities.
+Other conflicts with frozen requests still stop rather than silently mixing versions.
 Schema and quote checks do not
 prove semantic correctness; consequential review flags still require attention.
 

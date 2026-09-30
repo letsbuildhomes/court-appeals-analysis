@@ -29,6 +29,7 @@ def source_pages(source):
 
 def apply_review(original, review, pages):
     """Validate a complete patch transaction; reject it atomically on failure."""
+    review = copy.deepcopy(review)
     if review.get("schema_version") != "v6-review-1":
         raise ValueError("Wrong review schema")
     scope = review.get("scope", {})

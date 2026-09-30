@@ -165,14 +165,21 @@ def finish(folder, manifest, prompts, client, outputs, workers):
             'stage':stage or 'idle','updated_at':datetime.now(timezone.utc).isoformat()})
     retained = []
     for group in manifest['groups']:
-        result = outputs[group['group_id']]
+        gid = group['group_id']
+        result = outputs[gid]
+        # Pack from frozen first-pass drafts, including completed members, so
+        # unfinished neighbors retain their identical review request and batch.
+        if result['status'] == 'extracted' and result['candidate'] is not None:
+            retained.append({**group,**result})
+        path = folder/'results'/f'{gid}.json'
+        if path.exists() and (saved := read(path))['status'] == 'complete':
+            outputs[gid] = saved
+            continue
         if result['status'] != 'extracted':
-            checkpoint(group['group_id'])
+            checkpoint(gid)
         elif result['candidate'] is None:
             result['status'] = 'complete'
-            checkpoint(group['group_id'])
-        else:
-            retained.append({**group,**result})
+            checkpoint(gid)
     prefix = prompts['primer']+'\n\nEXTRACTION CONTRACT\n'+prompts['extract']
     prefix += '\n\nSCOPE CONTRACT\n'+prompts['triage']+'\n\nEDITING CONTRACT\n'+prompts['review']
     joint = '''Review this batch as one research editor. Apply the same definitions consistently,
@@ -181,13 +188,16 @@ is local to each group. Return JSON {"reviews":[{"group":"exact group id","revie
 Include every supplied group exactly once, with a complete v6-review-1 patch.'''
 
     def batch_finish(batch):
+        active = [c for c in batch if outputs[c['group']]['status'] != 'complete']
+        if not active:
+            return
         identity = digest('|'.join(c['group'] for c in batch))[:16]
         name = 'review-'+identity
         data = {'cases':[{'group':c['group'],'source_documents':c['source'],
                          'triage':c['triage'],'candidate':c['candidate']} for c in batch]}
         request = payload(manifest['model'],prefix+'\n\nBATCH EDITING\n'+joint,data)
-        print(f'{name}: reviewing {len(batch)} groups',flush=True)
-        for c in batch:checkpoint(c['group'],'reviewing')
+        print(f'{name}: reviewing {len(active)} unfinished groups ({len(batch)} in context)',flush=True)
+        for c in active:checkpoint(c['group'],'reviewing')
         try:
             response = client.call(name,request)
             reviews = response['reviews']
@@ -195,13 +205,13 @@ Include every supplied group exactly once, with a complete v6-review-1 patch.'''
             by_group = {r['group']:r['review'] for r in reviews}
         except Exception as exc:
             client.reject(name,exc)
-            for c in batch:
+            for c in active:
                 outputs[c['group']].update(status='review_failed',error=str(exc))
                 checkpoint(c['group'])
             print(f'{name}: failed: {exc}',flush=True)
             return
         successful = []
-        for c in batch:
+        for c in active:
             result = outputs[c['group']]
             try:
                 review = by_group[c['group']]
@@ -220,9 +230,11 @@ Include every supplied group exactly once, with a complete v6-review-1 patch.'''
         if not successful:
             print(f'{name}: no groups eligible for duration',flush=True)
             return
-        name = 'duration-'+identity
         targets = [{'group':c['group'],'candidate':outputs[c['group']]['candidate']} for c in successful]
         request = duration_followup(request,response,targets,prompts['duration'])
+        # A changed review answer or target set is a distinct, billable request.
+        # Keep prior calls intact rather than relaxing frozen-request checks.
+        name = 'duration-'+identity+'-'+digest(json.dumps(request,sort_keys=True,ensure_ascii=False))
         print(f'{name}: measuring {len(successful)} groups',flush=True)
         for c in successful:checkpoint(c['group'],'measuring')
         try:
@@ -274,6 +286,9 @@ def run(args):
             save(folder/'activity'/f'{gid}.json',{'stage':stage,'updated_at':datetime.now(timezone.utc).isoformat()})
         def first(group):
             gid = group['group_id']
+            path = folder/'first_pass'/f'{gid}.json'
+            if path.exists() and (cached := read(path))['status'] in {'extracted','complete'}:
+                return cached
             result = {'group':gid,'status':'incomplete','warnings':[]}
             call_name = f'{gid}.triage'
             try:
@@ -332,7 +347,9 @@ def run(args):
             return
         finish(folder,manifest,prompts,client,outputs,args.workers)
         for gid,result in outputs.items():
-            save(folder/'results'/f'{gid}.json',result)
+            path = folder/'results'/f'{gid}.json'
+            if not path.exists() or read(path) != result:
+                save(path,result)
         export(folder)
         print(f'Spent/reserved ${client.spent():.6f}; {sum(r["status"]=="complete" for r in outputs.values())}/{len(outputs)} complete')
 

@@ -148,7 +148,7 @@ function renderResearch() {
   const discretionCategories={primary:s.centrality.yes,peripheral:s.centrality.no,primary_unknown:s.centrality.unclear,no:s.discretion.no,unclear:s.discretion.unclear};
   compositionChart(discretion.body,discretionCategories,[['primary','Yes · primary','green-dark'],['peripheral','Yes · peripheral','green-medium'],['primary_unknown','Yes · primary status not established','green-light'],['no','No','blue'],['unclear','Basis not established','amber']],total);
   const outcomes=panel('Observed permission','Latest permission in the supplied records; construction is not established.');
-  compositionChart(outcomes.body,s.permission,[['allowed','Allowed','blue'],['allowed_with_conditions','With conditions','teal'],['denied','Denied','rose'],['unclear','Not established','amber']],total);
+  compositionChart(outcomes.body,s.permission,[['allowed','Allowed','teal'],['allowed_with_conditions','With conditions','blue'],['denied','Denied','rose'],['unclear','Not established','amber']],total);
   const findings=node('div',null,'impact-summary');
   for(const [field,label] of [['housing_changes','Housing changes / conditions'],['restrictions','Stop / suspension orders']]) {
     const line=node('div',null,'impact-line');line.append(node('strong',label));
@@ -160,7 +160,8 @@ function renderResearch() {
 }
 function renderProgress() {
   const s = state.summary, total = state.cases.length;
-  $('elapsedTracker').hidden = view === 'all';
+  const processingFinished = total > 0 && ['complete','finished'].includes(s.estimates?.finalized?.status);
+  $('elapsedTracker').hidden = view === 'all' || processingFinished;
   const elapsed = s.elapsed?.seconds;
   const minutes = Math.floor((elapsed ?? 0) / 60);
   $('elapsedTime').textContent = elapsed == null ? 'Not started' : `${Math.floor(minutes / 1440)}d ${Math.floor(minutes / 60) % 24}h ${minutes % 60}m`;

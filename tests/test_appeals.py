@@ -127,10 +127,87 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(requests),4)
         for name,request in requests.items():
             if name.startswith('duration-'):
-                review_name=name.replace('duration-','review-',1)
+                review_name='review-'+name.split('-')[1]
                 self.assertEqual(request['messages'][:2],requests[review_name]['messages'])
                 self.assertEqual(json.loads(request['messages'][2]['content']),responses[review_name])
                 self.assertEqual(len(request['messages']),4)
+
+    def test_partial_review_retry_preserves_completed_neighbors_and_versions_duration(self):
+        groups=[{'group_id':gid,'source':'Source'} for gid in ('bad','good','done-a','done-b')]
+        drafts={g['group_id']:{'group':g['group_id'],'status':'extracted','warnings':[],
+                'triage':{},'candidate':self.extract_fixture()} for g in groups}
+        manifest={'model':'model','groups':groups,'review_batch_chars':200000}
+        prompts={k:k for k in ('primer','extract','triage','review','duration')}
+        legacy='duration-'+digest('bad|good')[:16]
+        save(self.root/f'calls/{legacy}.request.json',{'messages':[]})
+        save(self.root/f'calls/{legacy}.result.json',{'status':'ok','charged_or_reserved_usd':0.05})
+        revision=1
+        def response_for_request(*args,**kwargs):
+            request=kwargs['json']
+            cases=json.loads(request['messages'][-1]['content'])['cases']
+            if len(request['messages'])==2:
+                body={'reviews':[{'group':c['group'],'review':{
+                    'schema_version':'invalid' if c['group']=='bad' and revision==1 else 'v6-review-1',
+                    'scope':{'verdict':'agree','reason':f'Revision {revision}'},
+                    'changes':[],'flags':[]}} for c in cases]}
+            else:
+                body={'groups':[{'group':c['group'],'dockets':[
+                    {'docket':'A','start':None,'end':None,'note':'No supported bounds'}]} for c in cases]}
+            response=Mock(status_code=200,text=json.dumps(body))
+            response.json.return_value={'choices':[{'finish_reason':'stop','message':{'content':json.dumps(body)}}],
+                                        'usage':{'prompt_tokens':10,'completion_tokens':10}}
+            return response
+        with patch('appeal_runtime.httpx.Client') as transport:
+            post=transport.return_value.__enter__.return_value.post
+            post.side_effect=response_for_request
+            client=Client(self.root/'calls','http://localhost','unused',1)
+            outputs=copy.deepcopy(drafts)
+            finish(self.root,manifest,prompts,client,outputs,1)
+            self.assertEqual(outputs['bad']['status'],'review_failed')
+            preserved={gid:((self.root/f'results/{gid}.json').read_bytes(),
+                           (self.root/f'results/{gid}.json').stat().st_mtime_ns)
+                       for gid in ('good','done-a','done-b')}
+            old_duration={p.name:p.read_bytes() for p in (self.root/'calls').glob('duration-*.request.json')}
+            first_cost=client.spent()
+            self.assertEqual(post.call_count,4)
+            revision=2
+            retry=Client(self.root/'calls','http://localhost','unused',1,retry_failed=True)
+            outputs=copy.deepcopy(drafts)
+            finish(self.root,manifest,prompts,retry,outputs,1)
+            self.assertTrue(all(r['status']=='complete' for r in outputs.values()))
+            self.assertEqual(post.call_count,6)
+            # Only the failed member is a duration target; the full original
+            # review batch remains the prefix for cache reuse.
+            followup=post.call_args.kwargs['json']
+            self.assertEqual([c['group'] for c in json.loads(followup['messages'][-1]['content'])['cases']],['bad'])
+            for gid,(content,mtime) in preserved.items():
+                path=self.root/f'results/{gid}.json'
+                self.assertEqual(path.read_bytes(),content)
+                self.assertEqual(path.stat().st_mtime_ns,mtime)
+            for name,content in old_duration.items():
+                self.assertEqual((self.root/'calls'/name).read_bytes(),content)
+            self.assertEqual(len(list((self.root/'calls').glob('duration-*.request.json'))),4)
+            self.assertGreater(retry.spent(),first_cost)
+            self.assertEqual(len(list((self.root/'calls/attempts').rglob('*.result.json'))),1)
+            finish(self.root,manifest,prompts,retry,copy.deepcopy(drafts),1)
+            self.assertEqual(post.call_count,6)
+            # A crash after saving a call but before its group checkpoint must
+            # reuse the identical hashed duration call without spending again.
+            (self.root/'results/bad.json').unlink()
+            restored=copy.deepcopy(drafts)
+            finish(self.root,manifest,prompts,retry,restored,1)
+            self.assertEqual(restored['bad']['status'],'complete')
+            self.assertEqual(post.call_count,6)
+
+    def test_review_validation_does_not_mutate_raw_answer_on_failure(self):
+        review={'schema_version':'v6-review-1','scope':{'verdict':'agree'},'flags':[],
+                'changes':[{'docket':'A','field':'project','severity':'minor',
+                            'evidence':[{'doc':1,'page':1,'quote':'A source fact'}],
+                            'replacement':{}}]}
+        before=copy.deepcopy(review)
+        with self.assertRaisesRegex(ValueError,'citation corrected'):
+            apply_review(self.extract_fixture(),review,{1:{1:'Other text',2:'A source fact'}})
+        self.assertEqual(review,before)
 
     def test_all_exclusions_finish_without_model_calls(self):
         result={'group':'excluded','status':'extracted','candidate':None,'warnings':[]}
@@ -233,11 +310,13 @@ class PipelineTests(unittest.TestCase):
             transport.return_value.__enter__.return_value.post.return_value=response
             run(args)
             self.assertEqual(transport.return_value.__enter__.return_value.post.call_count,2)
+            first_pass_times={p:p.stat().st_mtime_ns for p in (folder/'first_pass').glob('*.json')}
             transport.reset_mock()
             # Preserve already finalized exclusions when inspecting the first pass again.
             save(folder/'results/cached.json',{'status':'complete','candidate':None})
             run(args)
             transport.assert_not_called()
+            self.assertEqual({p:p.stat().st_mtime_ns for p in first_pass_times},first_pass_times)
         self.assertEqual(read(folder/'results/cached.json')['status'],'complete')
         self.assertEqual(read(folder/'results/oversized.json')['status'],'complete')
         self.assertFalse(list((folder/'calls').glob('review-*')))
