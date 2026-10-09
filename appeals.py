@@ -15,6 +15,7 @@ import group_scout as gs
 from groups import GROUPS_DB_PATH
 from config import ROOT
 from appeal_evidence import apply_review, interval, source_pages
+from appeal_assembly import finalized_dockets
 from appeal_runtime import Client, api_config, digest, payload, read, save
 
 RUNS = ROOT/'data/appeals'
@@ -375,12 +376,8 @@ def export(folder):
             sources.append({'group':gid,**doc})
         # Partial drafts stay inspectable in results/, never masquerade as final records.
         if result['status']!='complete': continue
-        bounds = {d['docket']:d for d in result.get('duration_bounds',[])}
-        for record in (result.get('candidate') or {}).get('dockets',[]):
-            duration = bounds[record['docket']]
-            clean = {k:v for k,v in record.items() if k not in ('scouting','uncertainties','suggestions')}
-            clean['duration_bounds'] = {k:v for k,v in duration.items() if k not in ('docket','duration')}
-            clean['duration'] = duration['duration']
+        for clean in finalized_dockets((result.get('candidate') or {}).get('dockets',[]),
+                                       result.get('duration_bounds',[])):
             records.append({'schema_version':'appeals-1','group':gid,'scope_confirmed':scope,
                             'review_required':bool(reasons),'record':clean})
     out = folder/'export'

@@ -4,6 +4,7 @@
 !uv.lock
 !research_mcp.py
 !research_snapshot.py
+!appeal_assembly.py
 !deploy/
 !deploy/research/
 !deploy/research/Dockerfile

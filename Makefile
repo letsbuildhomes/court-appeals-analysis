@@ -7,6 +7,8 @@ REVIEW_PORT ?= 8766
 CLAIMS_PORT ?= 8767
 APPEALS_ARGS ?=
 APPEALS_PORT ?= 8769
+DASHBOARD_PORT ?= 8771
+DASHBOARD_ARGS ?=
 TEXT_IMAGE ?= data-court-review-text:local
 TEXT_IMAGE_STAMP = .docker-text-image.stamp
 TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
@@ -129,6 +131,13 @@ appeals-view:
 	uv run python appeals.py serve --port $(APPEALS_PORT)
 appeals-test:
 	uv run python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
+
+# Read-only experiment inspection; no extraction or model calls.
+.PHONY: experiments-view experiments-test
+experiments-view:
+	python3 appeal_dashboard.py --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
+experiments-test:
+	python3 -m unittest tests.test_appeal_dashboard -v
 
 # Local research snapshot selection is explicit; MCP runs without pipeline/API credentials.
 MCP_RUN ?=

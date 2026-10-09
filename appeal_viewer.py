@@ -11,6 +11,7 @@ from urllib.parse import parse_qs, urlparse
 from claims_server import ClaimsHandler as Handler, ClaimsServer
 from appeal_runtime import read
 from appeal_evidence import source_pages
+from appeal_assembly import latest_checkpoint, effective_status, finalized_dockets, first_pass_status
 from config import ROOT
 from appeals import SAFE
 import duckdb
@@ -178,18 +179,6 @@ def run_folder(root, name):
     return folder
 
 
-def first_pass_status(record, status):
-    """Keep first-pass outcomes independent of subsequent review and duration work."""
-    if record.get('status') in {'extracted','reviewed','complete','review_failed','duration_failed','scope_flagged'}:
-        route = record.get('route',{}).get('route')
-        if route == 'extract':return 'retained'
-        if route in {'out_of_scope','no_members'}:return 'excluded'
-        return 'issues'
-    if status in {'triaging','extracting'}:return 'active'
-    if status in {'incomplete','interrupted','too_large'}:return 'issues'
-    return 'waiting'
-
-
 def processing_progress(cases):
     """Count saved milestones, with source PDFs deduplicated by checksum."""
     documents, first_pass, complete = set(), set(), set()
@@ -236,18 +225,18 @@ def overview(folder):
     for group in manifest['groups']:
         gid=group['group_id']
         paths=[p for p in [folder/'results'/f'{gid}.json',folder/'first_pass'/f'{gid}.json'] if p.exists()]
-        path=max(paths,key=lambda p:p.stat().st_mtime_ns) if paths else folder/'results'/f'{gid}.json'
+        path=latest_checkpoint(paths,{p:p.stat().st_mtime_ns for p in paths}) or folder/'results'/f'{gid}.json'
         result=read(path) if path.exists() else {'status':'pending'}
         status=result['status']
         # Later review failures or interruption do not erase a successful first pass.
         first_pass_complete=status in {'extracted','reviewed','complete',
                                       'review_failed','duration_failed','scope_flagged'}
         activity=folder/'activity'/f'{gid}.json'
-        if activity.exists() and (not path.exists() or activity.stat().st_mtime_ns>path.stat().st_mtime_ns):
-            stage=read(activity)['stage']
-            if stage in ('triaging','extracting','reviewing','measuring'):
-                status=stage if running else 'interrupted'
-        if not group.get('eligible',True):status='too_large'
+        newer_activity=activity.exists() and (not path.exists() or activity.stat().st_mtime_ns>path.stat().st_mtime_ns)
+        status=effective_status(status, checkpoint_time=path.stat().st_mtime_ns if path.exists() else None,
+                                activity_time=activity.stat().st_mtime_ns if newer_activity else None,
+                                activity_stage=read(activity)['stage'] if newer_activity else None,
+                                running=running, eligible=group.get('eligible',True))
         first_path=folder/'first_pass'/f'{gid}.json'
         first_record=read(first_path) if first_path.exists() else result
         scope=result.get('triage',{})
@@ -271,12 +260,8 @@ def overview(folder):
                       'documents':len(docs),'source_documents':docs,'review_required':bool(reasons)})
         # Read completed checkpoints directly so the dashboard need not wait for end-of-run export.
         if result['status']=='complete':
-            bounds={b['docket']:b for b in result.get('duration_bounds',[])}
-            for r in (result.get('candidate') or {}).get('dockets',[]):
-                b=bounds.get(r['docket'])
-                if b is None:continue
-                clean={k:v for k,v in r.items() if k not in ('scouting','uncertainties','suggestions')}
-                clean.update(duration=b['duration'],duration_bounds={k:v for k,v in b.items() if k not in ('docket','duration')})
+            for clean in finalized_dockets((result.get('candidate') or {}).get('dockets',[]),
+                                           result.get('duration_bounds',[]), missing='skip'):
                 records.append({'group':gid,'run':manifest['name'],'scope_confirmed':all(scope.get(k)=='yes' for k in ('municipal_appeal','housing')),'review_required':bool(reasons),'record':clean})
     calls=[read(p) for p in (folder/'calls').rglob('*.result.json')]
     summary={'name':manifest['name'],'groups':len(cases),'complete':sum(c['status']=='complete' for c in cases),

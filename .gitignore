@@ -1,4 +1,5 @@
 .venv/
+.env
 .uv-cache/
 .docker-text-image.stamp
 __pycache__/

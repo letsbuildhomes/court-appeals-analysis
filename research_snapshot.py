@@ -12,6 +12,7 @@ import shutil
 import sqlite3
 import tempfile
 import time
+from appeal_assembly import latest_checkpoint, effective_status, finalized_dockets
 
 VERSION = 'appeals-research-1'
 SAFE_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*\Z')
@@ -321,16 +322,15 @@ def load_run(folder):
             raise ValueError('Duplicate group in manifest')
         seen.add(gid)
         candidates = [folder/sub/(gid+'.json') for sub in ('results', 'first_pass')]
-        available = [p for p in candidates if p in raw]
-        p = max(available, key=lambda path: times[path]) if available else None
+        p = latest_checkpoint(candidates, times)
         result = json.loads(raw[p]) if p else {'status': 'not_run'}
         status = enum(result.get('status'), 'status', 'not_run')
         activity = folder/'activity'/(gid+'.json')
-        if activity in raw and (p is None or times[activity] > times[p]):
-            if json.loads(raw[activity]).get('stage') in ('triaging', 'extracting', 'reviewing', 'measuring'):
-                status = 'interrupted'
-        if not group.get('eligible', True):
-            status = 'too_large'
+        newer_activity = activity in raw and (p is None or times[activity] > times[p])
+        status = effective_status(status, checkpoint_time=times[p] if p else None,
+            activity_time=times[activity] if newer_activity else None,
+            activity_stage=json.loads(raw[activity]).get('stage') if newer_activity else None,
+            eligible=group.get('eligible', True))
         scope = result.get('triage') or {}
         route = enum((result.get('route') or {}).get('route'), 'route')
         category = scope_category(scope, route)
@@ -348,21 +348,15 @@ def load_run(folder):
         if records and candidate.get('schema_version') != 'v6':
             raise ValueError('Only finalized v6 extraction records are supported')
         bounds = result.get('duration_bounds') or []
-        by_docket = {b.get('docket'): b for b in bounds}
-        if len(by_docket) != len(bounds):
-            raise ValueError('Duplicate duration docket')
-        docket_ids = [r.get('docket') for r in records]
-        if len(set(docket_ids)) != len(docket_ids):
-            raise ValueError('Duplicate docket in completed group')
-        if records and set(by_docket) != set(docket_ids):
-            raise ValueError('Completed dockets require exactly matching finalized duration bounds')
+        records = finalized_dockets(records, bounds, strict=True)
         data['coverage'].append([gid, status, route, enum(scope.get('municipal_appeal'), 'scope'),
             enum(scope.get('housing'), 'scope'), category, required, len(set(warnings)), len(flags),
             verdict, error, len(group.get('documents', [])), len(records)])
         for n, flag in enumerate(flags, 1):
             data['review_flags'].append([gid, n, identity(flag.get('docket'))])
         for record in records:
-            row, children = structured_appeal(gid, record, by_docket[record.get('docket')], category, required, flags)
+            bound = {**record['duration_bounds'], 'duration': record['duration']}
+            row, children = structured_appeal(gid, record, bound, category, required, flags)
             data['all_appeals'].append(row)
             for name, rows in children.items():
                 data[name].extend(rows)

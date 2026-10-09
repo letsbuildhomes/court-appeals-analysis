@@ -1,5 +1,8 @@
 # Vermont Environmental Division PDF archive
 
+For the in-progress extraction feedback loop and moving this working environment
+to another host, see the [development and migration handoff](docs/FEEDBACK-LOOP-HANDOFF.md).
+
 This project begins with the Vermont Judiciary's [Environmental opinions listing](https://www.vtcourts.gov/opinions-decisions?f%5B0%5D=court_division_opinions_library_%3A3). The listing supplies PDF links and audit metadata. The court PDFs are the only research data input. See [proposal.html](proposal.html) for the full pipeline design and limits of inference, and [docs/INGEST.md](docs/INGEST.md) for the implemented extractor, current archive status, and next handoff.
 
 ## Run the first ingest step
@@ -84,6 +87,14 @@ results. Earlier experimental files have been removed;
 The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted research
 artifacts. Source PDFs, production databases, and supported appeal run logs are
 preserved.
+
+The read-only [experiment dashboard](docs/EXPERIMENT-DASHBOARD.md) opens with
+`make experiments-view` at <http://127.0.0.1:8771/>. Its default is a prominently
+labeled synthetic software fixture; the available production baseline is
+browsable separately without reference labels or research accuracy claims.
+Design, Cases, Runs, and Results inspect frozen artifacts, configuration and
+prompt differences, execution coverage, and evidence. This viewer launches no
+extraction or reference-generation work.
 
 For a quick plain HTTP/Docker experiment with a coworker's CLI, see
 [docs/MCP-CLOUD.md](docs/MCP-CLOUD.md).

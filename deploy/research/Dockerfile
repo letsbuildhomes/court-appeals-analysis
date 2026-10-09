@@ -12,7 +12,7 @@ FROM python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e6
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PATH="/opt/research-venv/bin:${PATH}"
 COPY --from=dependencies /opt/research-venv /opt/research-venv
 WORKDIR /app
-COPY research_mcp.py research_snapshot.py ./
+COPY research_mcp.py research_snapshot.py appeal_assembly.py ./
 USER 10001:10001
 EXPOSE 8770
 ENTRYPOINT ["python", "research_mcp.py", "serve", "--snapshot", "/snapshot", "--transport", "streamable-http"]

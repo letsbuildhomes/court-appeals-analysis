@@ -1,9 +1,15 @@
 'use strict';
 
 // Keep native select values/events as the shared state, with an accessible menu.
-function enhanceSelects() {
-  let closeActive = () => {};
-  for (const select of document.querySelectorAll('select')) {
+let activeSelect = null;
+let selectSequence = 0;
+document.addEventListener('click', event => {
+  if (activeSelect && !activeSelect.wrapper.contains(event.target)) activeSelect.close();
+});
+function enhanceSelects(root = document) {
+  for (const select of root.querySelectorAll('select:not([data-enhanced])')) {
+    select.dataset.enhanced = 'true';
+    if (!select.id) select.id = 'select-' + (++selectSequence);
     const wrapper=document.createElement('div'), button=document.createElement('button'), menu=document.createElement('div');
     wrapper.className='select-control';button.className='select-trigger';menu.className='select-menu';menu.hidden=true;
     button.type='button';button.id=select.id+'Control';menu.id=select.id+'Menu';
@@ -15,7 +21,7 @@ function enhanceSelects() {
     if(label) label.htmlFor=button.id;
     select.before(wrapper);wrapper.append(select,button,menu);select.hidden=true;
     let cursor=0, options=[], typeahead='', typedAt=0;
-    const close=()=>{menu.hidden=true;button.setAttribute('aria-expanded','false');button.removeAttribute('aria-activedescendant');};
+    const close=()=>{menu.hidden=true;button.setAttribute('aria-expanded','false');button.removeAttribute('aria-activedescendant');if(activeSelect?.wrapper===wrapper)activeSelect=null;};
     const highlight=()=>{
       [...menu.children].forEach((item,i)=>item.classList.toggle('highlighted',i===cursor));
       if(menu.children[cursor]) {button.setAttribute('aria-activedescendant',menu.children[cursor].id);menu.children[cursor].scrollIntoView({block:'nearest'});}
@@ -36,7 +42,7 @@ function enhanceSelects() {
       select.value=options[i].value;sync();close();button.focus();
       select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));
     };
-    const open=()=>{closeActive();sync();menu.hidden=false;button.setAttribute('aria-expanded','true');highlight();closeActive=close;};
+    const open=()=>{activeSelect?.close();sync();menu.hidden=false;button.setAttribute('aria-expanded','true');highlight();activeSelect={wrapper,close};};
     button.addEventListener('click',()=>menu.hidden?open():close());
     button.addEventListener('keydown',event=>{
       if(['ArrowDown','ArrowUp','Home','End'].includes(event.key)) {
@@ -54,7 +60,6 @@ function enhanceSelects() {
         if(match>=0) {cursor=match;highlight();}
       }
     });
-    document.addEventListener('click',event=>{if(!wrapper.contains(event.target)) close();});
     select.addEventListener('change',sync);select.addEventListener('input',sync);
     new MutationObserver(sync).observe(select,{childList:true,subtree:true,characterData:true});
     // Scripted run selection (initial URL/back navigation) doesn't fire change.

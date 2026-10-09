@@ -58,7 +58,7 @@ only research code and locked dependency files, excluding `.env`, source documen
 and call logs before Docker receives the context. The pipeline image is separate.
 
 For a server, transfer only that published pair plus `research_mcp.py`,
-`research_snapshot.py`, `pyproject.toml`, `uv.lock`, and
+`research_snapshot.py`, `appeal_assembly.py`, `pyproject.toml`, `uv.lock`, and
 `deploy/research/Dockerfile` and `Dockerfile.dockerignore`. Preserve this layout
 and build on the server to match its CPU architecture. Mount the pair by its
 absolute path.

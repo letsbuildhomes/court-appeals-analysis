@@ -1,9 +1,13 @@
 """Portable snapshots and plain HTTP access."""
 import asyncio
+import os
 from pathlib import Path
 import stat
+import shlex
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 
 from research_mcp import allowed_host, http_app, make_server, publish_snapshot
@@ -15,6 +19,19 @@ class PublishTests(unittest.TestCase):
     setUp = fixtures.SnapshotTests.setUp
     build = fixtures.SnapshotTests.build
     write_run = fixtures.SnapshotTests.write_run
+
+    def test_container_code_imports_without_the_repository(self):
+        root = Path(__file__).resolve().parents[1]
+        dockerfile = (root/'deploy/research/Dockerfile').read_text()
+        files = next(shlex.split(line)[1:-1] for line in dockerfile.splitlines()
+                     if line.startswith('COPY research_mcp.py '))
+        with tempfile.TemporaryDirectory() as temp:
+            for name in files:
+                shutil.copyfile(root/name, Path(temp)/name)
+            result = subprocess.run([sys.executable, str(Path(temp)/'research_mcp.py'), '--help'],
+                                    cwd=temp, capture_output=True, timeout=10,
+                                    env={**os.environ, 'PYTHONPATH': temp})
+        self.assertEqual(result.returncode, 0, result.stderr.decode())
 
     def test_publish_only_verified_pair_with_portable_permissions(self):
         original = self.build()

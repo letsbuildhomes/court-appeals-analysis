@@ -1,0 +1,232 @@
+{
+  "schema_version": "appeal-cases-1",
+  "notice": "SYNTHETIC SOFTWARE TEST ONLY; simulated execution and costs, no real spend.",
+  "run": {
+    "name": "synthetic-baseline",
+    "simulated": true,
+    "progress_note": "Static software fixture; no extraction is running."
+  },
+  "recipe": {
+    "components": [
+      {
+        "id": "extract",
+        "label": "Extract",
+        "config": {
+          "model": "synthetic-no-model",
+          "simulation_only": true
+        },
+        "prompt_sha256": "9f3489aeaa75e2bcde03fa9187c23166d70a8781c4c38a16c70d118163dec8ba",
+        "prompt_dependencies": {
+          "extract": "9f3489aeaa75e2bcde03fa9187c23166d70a8781c4c38a16c70d118163dec8ba"
+        },
+        "effective_prompt_sha256": "d8a3a041b17aa2f43389b01a0e434716aac45a67e4ffae6c0d16627ad72dccac"
+      },
+      {
+        "id": "finalize",
+        "label": "Finalize",
+        "config": {
+          "model": "synthetic-no-model",
+          "simulation_only": true
+        },
+        "prompt_sha256": "6ff42a96d3a1cfc43131da4f1ac4a429b794dcc057d3a77ec4c69a8166e66e72",
+        "prompt_dependencies": {
+          "extract": "9f3489aeaa75e2bcde03fa9187c23166d70a8781c4c38a16c70d118163dec8ba",
+          "finalize": "6ff42a96d3a1cfc43131da4f1ac4a429b794dcc057d3a77ec4c69a8166e66e72"
+        },
+        "effective_prompt_sha256": "e234610c07b88d329d331410c9cbeeaf495ae535b4d43767d7b02cb0a8424231"
+      }
+    ],
+    "edges": [
+      {
+        "from": "extract",
+        "to": "finalize"
+      }
+    ],
+    "config": {
+      "model": "synthetic-no-model",
+      "variant": "baseline"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "synthetic-transition",
+      "source": {
+        "sha256": "2616b3768a6711d66dd463b97a1ac38bb11a65214d5755004ca6b52efc216c77",
+        "path": "synthetic-transition.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "excluded",
+      "records": [
+        {
+          "docket": "SYNTHETIC-A",
+          "duration": 10,
+          "outcome": "wrong",
+          "facts": [
+            "beta",
+            "alpha"
+          ],
+          "prose": "Unscored prose",
+          "insufficient": null
+        },
+        {
+          "docket": "SYNTHETIC-B",
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-missing",
+      "source": {
+        "sha256": "b308d3d894e5214cf94921eec4f615ead1f3e34c23c1c9a60f45a47d7bdc707a",
+        "path": "synthetic-missing.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": [
+        {
+          "docket": "SYNTHETIC-M",
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-null",
+      "source": {
+        "sha256": "283696538495622d2b05bca8c1cd81f6889ab6858104a676f41cad6e043c0f47",
+        "path": "synthetic-null.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": [
+        {
+          "docket": null,
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-ambiguous",
+      "source": {
+        "sha256": "aa66778ebc76a3b49854ea61b0c0128975aa18a0d2d7acff9e2bee786dc16cb2",
+        "path": "synthetic-ambiguous.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": [
+        {
+          "docket": "SYNTHETIC-D",
+          "duration": 10
+        },
+        {
+          "docket": "SYNTHETIC-D",
+          "duration": 20
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-hash",
+      "source": {
+        "sha256": "6753d39ad7ee14d0d738552e31547e8678c2b22f14a6c9efcd39ee79ddd22df1",
+        "path": "synthetic-hash.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": []
+    },
+    {
+      "case_id": "synthetic-failure",
+      "source": {
+        "sha256": "515270a68e72095b699c6ca776470e564b97ef0541a77977f511b6f0df0a4ae5",
+        "path": "synthetic-failure.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": [
+        {
+          "docket": "SYNTHETIC-F",
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-interrupted",
+      "source": {
+        "sha256": "515270a68e72095b699c6ca776470e564b97ef0541a77977f511b6f0df0a4ae5",
+        "path": "synthetic-interrupted.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true
+      },
+      "scope_category": "confirmed",
+      "records": [
+        {
+          "docket": "SYNTHETIC-F",
+          "duration": 10
+        }
+      ]
+    },
+    {
+      "case_id": "synthetic-running",
+      "source": {
+        "sha256": "1abd7bda05bb5998450cc40a62473ad1f792b84310e6c607957f0ad69e5fee74",
+        "path": "synthetic-running.txt"
+      },
+      "execution": {
+        "status": "complete",
+        "synthetic": true,
+        "activity": {
+          "stage": "finalize",
+          "simulated": true
+        }
+      },
+      "scope_category": "uncertain",
+      "records": []
+    }
+  ],
+  "provenance": {
+    "synthetic": true,
+    "cost": {
+      "kind": "simulated",
+      "simulated": true,
+      "recorded_usd": 0.02,
+      "completeness": "reported",
+      "inherited_usd": 0.02,
+      "new_usd": 0,
+      "reserved_usd": 0,
+      "estimated_usd": null
+    }
+  },
+  "sources": {
+    "synthetic-transition": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. The synthetic case is confirmed in scope. SYNTHETIC-A has a duration of 10 days. SYNTHETIC-A has the outcome affirmed. SYNTHETIC-A has exactly the invented facts alpha and beta. SYNTHETIC-A has insufficient source evidence for this field; the expected answer is null. SYNTHETIC-B has a duration of 10 days.",
+    "synthetic-missing": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-M has a duration of 10 days.",
+    "synthetic-null": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. the sole unidentified synthetic record has a duration of 10 days.",
+    "synthetic-ambiguous": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-D has a duration of 10 days.",
+    "synthetic-hash": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. The synthetic case is confirmed in scope.",
+    "synthetic-failure": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-F has a duration of 10 days.",
+    "synthetic-interrupted": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-F has a duration of 10 days.",
+    "synthetic-running": "SYNTHETIC SOFTWARE TEST ONLY. This invented source demonstrates an unfinished run. No reference answer has been adjudicated."
+  },
+  "prompts": {
+    "extract": "SIMULATED prompt for interface tests: extract the explicitly stated invented facts.",
+    "finalize": "SIMULATED prompt for interface tests: preserve uncertainty in the final record."
+  }
+}

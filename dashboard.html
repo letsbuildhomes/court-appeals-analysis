@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Experiments · Court review</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/appeal_controls.js" defer></script><script src="/dashboard.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/dashboard"><span class="brand-mark">M</span><span>Court review <small>Experiments</small></span></a>
+    <div class="workspace-picker"><label for="dataset">Workspace</label><select id="dataset" aria-label="Workspace"></select></div>
+  </header>
+  <div class="workspace-bar"><div id="context"></div><span id="notice" role="status">Loading workspace…</span></div>
+  <nav aria-label="Dashboard views" id="tabs">
+    <button data-view="Results">Review</button><button data-view="Design">Pipeline</button><button data-view="Cases">Inputs</button><button data-view="Runs">Runs &amp; costs</button>
+  </nav>
+  <main><section id="content" aria-live="polite"></section></main>
+  <div id="source-scrim" hidden></div>
+  <aside id="source" hidden role="dialog" aria-modal="true" aria-labelledby="source-title">
+    <div class="source-head"><div><span class="eyebrow">Source evidence</span><h2 id="source-title">Frozen source</h2></div><button id="close-source" aria-label="Close source">✕</button></div>
+    <p id="source-status"></p><div id="source-text" tabindex="0"></div>
+  </aside>
+</body>
+</html>
