@@ -8,13 +8,9 @@
 </head>
 <body>
   <header class="app-header">
-    <a class="brand" href="/dashboard"><span class="brand-mark">M</span><span>Court review <small>Experiments</small></span></a>
-    <div class="workspace-picker"><label for="dataset">Workspace</label><select id="dataset" aria-label="Workspace"></select></div>
+    <a class="brand" href="#/"><span class="brand-mark">M</span><span>Court review <small>Data-quality experiments</small></span></a>
+    <nav aria-label="Breadcrumb" id="crumbs"></nav>
   </header>
-  <div class="workspace-bar"><div id="context"></div><span id="notice" role="status">Loading workspace…</span></div>
-  <nav aria-label="Dashboard views" id="tabs">
-    <button data-view="Results">Review</button><button data-view="Design">Pipeline</button><button data-view="Cases">Inputs</button><button data-view="Runs">Runs &amp; costs</button>
-  </nav>
   <main><section id="content" aria-live="polite"></section></main>
   <div id="source-scrim" hidden></div>
   <aside id="source" hidden role="dialog" aria-modal="true" aria-labelledby="source-title">

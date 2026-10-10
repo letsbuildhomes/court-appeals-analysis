@@ -1,6 +1,24 @@
 """Pure checkpoint selection and finalized-record assembly primitives."""
+from collections import Counter
 import hashlib
 import json
+
+
+def run_progress(run_dir):
+    """Checkpoint status counts and recorded charges for a run directory."""
+    counts = Counter()
+    manifest = run_dir/'manifest.json'
+    for group in json.loads(manifest.read_text())['groups'] if manifest.exists() else []:
+        for sub in ('results', 'first_pass'):
+            path = run_dir/sub/f'{group["group_id"]}.json'
+            if path.exists():
+                counts[json.loads(path.read_text())['status']] += 1
+                break
+        else:
+            counts['not_run'] += 1
+    charges = sum(json.loads(p.read_text()).get('charged_or_reserved_usd') or 0
+                  for p in (run_dir/'calls').rglob('*.result.json')) if (run_dir/'calls').is_dir() else 0
+    return {'statuses': dict(counts), 'charged_usd': charges}
 
 
 def latest_checkpoint(candidates, times):
@@ -76,8 +94,11 @@ def execution_recipe(manifest):
     def component(stage):
         selected = {name: hashes.get(name) for name in dependencies[stage]}
         fingerprint = hashlib.sha256(json.dumps(selected, sort_keys=True).encode()).hexdigest() if all(selected.values()) else None
+        config = {'model': manifest.get('model'), **settings}
+        if stage in ('review', 'duration') and manifest.get('review_max_output_tokens') is not None:
+            config['max_output_tokens'] = manifest['review_max_output_tokens']
         return {'id': stage, 'label': stage.title(),
-                'config': {'model': manifest.get('model'), **settings},
+                'config': config,
                 'prompt_sha256': hashes.get(stage),
                 'prompt_dependencies': selected,
                 'effective_prompt_sha256': fingerprint}

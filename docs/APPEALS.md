@@ -29,7 +29,8 @@ The model is required at planning time through `APPEALS_MODEL` or `--model` and
 is frozen in the manifest. Current cost estimates use DeepSeek Flash rates;
 they are not a provider-independent billing guarantee.
 
-Open <http://127.0.0.1:8769>. The homepage is a searchable, paginated table of all
+Run `make appeals-view` and open the printed address, `http://SERVER:8769/` on
+the server's private-network address. The homepage is a searchable, paginated table of all
 archive groups. Each row shows docket identifiers, a source-document title,
 document count, processing status, scope, and municipality when extracted. Select
 a run to see its planned population and completion progress. All-archive mode
@@ -83,7 +84,7 @@ reason, not a separate extraction field. Evidence buttons open quotations in a
 modal with frozen page text and original PDF links. Outcome explanations remain
 visible; timelines, source documents, review notes and raw records are expandable.
 The dashboard is read-only and listens on
-loopback; viewing or refreshing it makes no model calls.
+`LISTEN_HOST` (all interfaces by default); viewing or refreshing it makes no model calls.
 
 For the whole archive, explicitly plan with `--all` instead of `--group` and set
 the run's spending cap before executing. Nothing in planning makes API calls.

@@ -1,9 +1,18 @@
 # Vermont Environmental Division PDF archive
 
-For the in-progress extraction feedback loop and moving this working environment
-to another host, see the [development and migration handoff](docs/FEEDBACK-LOOP-HANDOFF.md).
+To measure how pipeline changes affect data quality, start with
+[extraction experiments](docs/EXPERIMENTS.md).
 
 This project begins with the Vermont Judiciary's [Environmental opinions listing](https://www.vtcourts.gov/opinions-decisions?f%5B0%5D=court_division_opinions_library_%3A3). The listing supplies PDF links and audit metadata. The court PDFs are the only research data input. See [proposal.html](proposal.html) for the full pipeline design and limits of inference, and [docs/INGEST.md](docs/INGEST.md) for the implemented extractor, current archive status, and next handoff.
+
+## Browser tools on the server
+
+This checkout runs on a remote server reached over a private network. The
+browser tools (`make experiments-view`, `appeals-view`, `review`, `claims`)
+listen on all interfaces and print their URL at startup; `SERVER` below means
+the server's private-network address. Set `LISTEN_HOST=127.0.0.1` to keep a
+tool on this machine. The research MCP keeps its own explicit host policy; see
+[docs/MCP.md](docs/MCP.md).
 
 ## Run the first ingest step
 
@@ -62,7 +71,7 @@ change the production text choice. See
 and results.
 
 For a quick visual check, run `make review` and open
-<http://127.0.0.1:8766/>. The read-only split-screen tool shows one PDF page
+`http://SERVER:8766/`. The read-only split-screen tool shows one PDF page
 beside its production-selected, native, or available OCR text, with random sampling of
 `native_ok` or flagged pages. See [docs/REVIEW-TOOL.md](docs/REVIEW-TOOL.md).
 The [image inventory](docs/IMAGE-INVENTORY.md) counts embedded raster images
@@ -73,7 +82,7 @@ and records why visual-exhibit descriptions are deferred.
 The finalized extraction, review, duration and visualizer workflow is documented
 in [docs/APPEALS.md](docs/APPEALS.md). Start with `make appeals-plan`, execute or
 resume with `make appeals-run`, and browse completed records and their evidence
-with `make appeals-view` at <http://127.0.0.1:8769/>.
+with `make appeals-view` at `http://SERVER:8769/`.
 
 Configure `APPEALS_API_BASE_URL` (or the complete `APPEALS_API_URL`),
 `APPEALS_API_KEY`, and `APPEALS_MODEL` directly; no proxy is required.
@@ -89,12 +98,20 @@ artifacts. Source PDFs, production databases, and supported appeal run logs are
 preserved.
 
 The read-only [experiment dashboard](docs/EXPERIMENT-DASHBOARD.md) opens with
-`make experiments-view` at <http://127.0.0.1:8771/>. Its default is a prominently
-labeled synthetic software fixture; the available production baseline is
-browsable separately without reference labels or research accuracy claims.
-Design, Cases, Runs, and Results inspect frozen artifacts, configuration and
-prompt differences, execution coverage, and evidence. This viewer launches no
+`make experiments-view` at `http://SERVER:8771/dashboard`. It lists experiments
+and shows how each moved its cases' research facts: an outcome per case
+(improved, worsened, mixed, needs judgment, unchanged), a quality scorecard,
+which facts changed, prompt diffs, cost and verified source evidence. Results
+stay unverified until reference labels exist. The production baseline has a
+quality profile showing where answers are missing. The viewer launches no
 extraction or reference-generation work.
+
+The [experiment guide](docs/EXPERIMENTS.md) describes the workflow, the
+production baseline and the open design decisions. The
+[experiment runner](docs/EXPERIMENT-RUNNER.md) tests a prompt or setting change
+on a frozen cohort: `make experiments-cohort`, `experiments-plan` (no model calls),
+`experiments-run` (paid, under a cap on new spending), and `experiments-finalize`,
+whose baseline and candidate artifacts open in the dashboard.
 
 For a quick plain HTTP/Docker experiment with a coworker's CLI, see
 [docs/MCP-CLOUD.md](docs/MCP-CLOUD.md).
@@ -103,3 +120,10 @@ For local SQL research through Claude or another MCP client, see
 `make research-build MCP_RUN=final-smoke-20260929-190157` freezes an explicitly
 selected run's structured facts in a separate immutable snapshot. Source prose
 and quotations are unavailable through this research interface.
+
+## Moving saved data
+
+`scripts/sync-pipeline-data.sh` copies `in/`, `data/` and `out/` to a checkout of
+the same commit on another host over SSH, verifying contents by checksum and
+preserving modification times. Run it without `--apply` to preview; see
+`--help`. It never copies `.env` or deletes destination files.

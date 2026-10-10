@@ -26,24 +26,39 @@ def _hash(raw):
 
 
 def create_experiment(run_dir, output, *, name=None, code_revision=None,
-                      verify_sources=True):
-    """Publish a new immutable baseline artifact directory; never replace one.
+                      verify_sources=True, case_ids=None, kind='historical_baseline',
+                      execution=None, cost=None, experiment=None):
+    """Publish a new immutable artifact directory; never replace one.
 
     ``code_revision`` describes the adapter invocation, not the historical model
     run. Its default is unknown rather than attributing current code to old work.
+    ``case_ids`` restricts the artifact to a cohort, in run order. Experiment
+    runners supply ``kind``, ``execution``, ``cost`` and ``experiment`` metadata.
     """
+    if kind not in ('historical_baseline', 'experiment_candidate'):
+        raise ValueError('Unknown experiment artifact kind')
     run_dir, output = Path(run_dir).resolve(), Path(output).resolve()
     if output == run_dir or run_dir in output.parents:
         raise ValueError('Experiment output must be outside the source run')
     if output.exists():
         raise ValueError('Experiment output already exists')
     canonical = adapt_run(run_dir, verify_sources=verify_sources)
+    if case_ids is not None:
+        wanted = set(case_ids)
+        if len(wanted) != len(case_ids):
+            raise ValueError('Duplicate selected case')
+        missing = wanted - {case['case_id'] for case in canonical['cases']}
+        if missing:
+            raise ValueError('Selected cases absent from run: '+', '.join(sorted(missing)))
+        canonical['cases'] = [case for case in canonical['cases'] if case['case_id'] in wanted]
+    if cost is not None:
+        canonical['provenance']['cost'] = cost
     raw = _bytes(canonical)
     manifest = {
         'schema_version': EXPERIMENT_VERSION,
         'name': name or output.name,
         'created_at': datetime.now(timezone.utc).isoformat(),
-        'kind': 'historical_baseline',
+        'kind': kind,
         'input_boundary': 'frozen_extracted_text',
         'adapter_revision': code_revision,
         'source_run': str(run_dir),
@@ -51,10 +66,14 @@ def create_experiment(run_dir, output, *, name=None, code_revision=None,
         'artifacts': {'cases': {'path': 'cases.json', 'sha256': _hash(raw),
                                 'schema_version': canonical['schema_version']}},
         'case_count': len(canonical['cases']),
-        'execution': {'performed': False, 'new_model_calls': 0,
-                      'new_model_cost_usd': 0},
+        'execution': execution or {'performed': False, 'new_model_calls': 0,
+                                   'new_model_cost_usd': 0},
         'reference': None,
     }
+    if case_ids is not None:
+        manifest['case_selection'] = sorted(case_ids)
+    if experiment is not None:
+        manifest['experiment'] = experiment
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix='.'+output.name+'-', dir=output.parent))
     try:

@@ -16,25 +16,35 @@ class DashboardTests(unittest.TestCase):
         self.dashboard = Dashboard()
 
     def test_demo_filters_and_detail(self):
-        rows = self.dashboard.cases('demo', classification='corrected')
+        rows = self.dashboard.cases('demo', verdict='mixed')
         self.assertGreater(rows['total'], 0)
-        self.assertTrue(all(r['classifications']['corrected'] for r in rows['cases']))
-        self.assertGreater(self.dashboard.cases('demo', classification='failures')['total'], 0)
-        self.assertGreater(self.dashboard.cases('demo', status='running')['total'], 0)
+        self.assertTrue(all(r['impact']['verdict'] == 'mixed' for r in rows['cases']))
+        everything = self.dashboard.cases('demo')['cases']
+        order = ('worsened', 'mixed', 'changed', 'improved', 'unchanged')
+        self.assertEqual([r['impact']['verdict'] for r in everything],
+                         sorted((r['impact']['verdict'] for r in everything), key=order.index))
         self.assertIn('synthetic-running', [r['case_id'] for r in self.dashboard.cases('demo', status='running')['cases']])
-        self.assertNotIn('synthetic-interrupted', [r['case_id'] for r in self.dashboard.cases('demo', status='failed')['cases']])
+        failed = [r['case_id'] for r in self.dashboard.cases('demo', status='failed')['cases']]
+        self.assertIn('synthetic-failure', failed)
         self.assertGreater(self.dashboard.cases('demo', q='SYNTHETIC-A')['total'], 0)
         self.assertEqual(len(self.dashboard.cases('demo', limit='1')['cases']), 1)
         detail = self.dashboard.detail('demo', rows['cases'][0]['case_id'])
         self.assertIsNotNone(detail['evaluation'])
         self.assertIsNotNone(detail['reference'])
-        unclear = self.dashboard.cases('demo', classification='ambiguous')
-        self.assertIn('synthetic-null', [r['case_id'] for r in unclear['cases']])
+        self.assertEqual(detail['impact']['verdict'], 'mixed')
         with self.assertRaises(KeyError):
             self.dashboard.detail('demo', '../secret')
-        for args in ({'offset': '-1'}, {'limit': '201'}, {'classification': 'fake'}):
+        for args in ({'offset': '-1'}, {'limit': '201'}, {'verdict': 'fake'}, {'role': 'other'}, {'gap': 'fake'}):
             with self.assertRaises(ValueError):
                 self.dashboard.cases('demo', **args)
+
+    def test_catalog_and_overview_shape(self):
+        datasets = {d['id']: d for d in self.dashboard.catalog()['datasets']}
+        self.assertEqual(datasets['demo']['kind'], 'synthetic')
+        self.assertEqual(datasets['demo']['impact']['cases'], 8)
+        overview = self.dashboard.overview('demo')
+        self.assertTrue(overview['impact']['reference'])
+        self.assertNotIn('cases', overview['impact'])  # Case detail is fetched separately.
 
     def test_source_verified_and_mismatch_withheld(self):
         source = self.dashboard.source('demo', 'synthetic-transition')
@@ -100,7 +110,7 @@ class DashboardTests(unittest.TestCase):
                 dashboard.source('production', case['case_id'])
 
     def test_http_guards_and_errors(self):
-        server = ThreadingHTTPServer(('127.0.0.1', 0), handler_for(self.dashboard))
+        server = ThreadingHTTPServer(('127.0.0.1', 0), handler_for(self.dashboard, ['lab.internal']))
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
         port = server.server_address[1]
@@ -114,7 +124,15 @@ class DashboardTests(unittest.TestCase):
         try:
             self.assertEqual(request('/api/catalog')[0], 200)
             self.assertEqual(request('/api/catalog', {'Host': 'evil.example'})[0], 403)
+            self.assertEqual(request('/api/catalog', {'Host': f'evil.example:{port}'})[0], 403)
+            self.assertEqual(request('/api/catalog', {'Host': f'192.168.88.3:{port}'})[0], 200)
+            self.assertEqual(request('/api/catalog', {'Host': f'[::1]:{port}'})[0], 200)
+            self.assertEqual(request('/api/catalog', {'Host': f'Lab.Internal:{port}'})[0], 200)
+            self.assertEqual(request('/api/catalog', {'Host': '192.168.88.3:1'})[0], 403)
             self.assertEqual(request('/api/catalog', {'Origin': 'http://evil.example'})[0], 403)
+            lan = {'Host': f'192.168.88.3:{port}'}
+            self.assertEqual(request('/api/catalog', {**lan, 'Origin': f'http://192.168.88.3:{port}'})[0], 200)
+            self.assertEqual(request('/api/catalog', {**lan, 'Origin': f'http://127.0.0.1:{port}'})[0], 403)
             self.assertEqual(request('/api/catalog', {'Sec-Fetch-Site': 'cross-site'})[0], 403)
             self.assertEqual(request('/api/case?id=absent')[0], 404)
             self.assertEqual(request('/api/cases?dataset=demo&dataset=production')[0], 400)

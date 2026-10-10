@@ -14,6 +14,7 @@ import duckdb
 import group_scout as gs
 from groups import GROUPS_DB_PATH
 from config import ROOT
+from listen import DEFAULT_HOST
 from appeal_evidence import apply_review, interval, source_pages
 from appeal_assembly import finalized_dockets
 from appeal_runtime import Client, api_config, digest, payload, read, save
@@ -197,6 +198,9 @@ Include every supplied group exactly once, with a complete v6-review-1 patch.'''
         data = {'cases':[{'group':c['group'],'source_documents':c['source'],
                          'triage':c['triage'],'candidate':c['candidate']} for c in batch]}
         request = payload(manifest['model'],prefix+'\n\nBATCH EDITING\n'+joint,data)
+        # Saved runs record these values; experiments may vary them.
+        request.update(reasoning_effort=manifest.get('reasoning','high'),
+                       max_tokens=manifest.get('review_max_output_tokens',manifest.get('max_output_tokens',65536)))
         print(f'{name}: reviewing {len(active)} unfinished groups ({len(batch)} in context)',flush=True)
         for c in active:checkpoint(c['group'],'reviewing')
         try:
@@ -298,7 +302,7 @@ def run(args):
                     return result
                 pages = source_pages(group['source'])
                 activity(gid,'triaging')
-                request = gs.triage_payload(model,prompts,group['source'],'high')
+                request = gs.triage_payload(model,prompts,group['source'],manifest.get('reasoning','high'))
                 request['max_tokens'] = manifest['max_output_tokens']
                 triage = client.call(f'{gid}.triage',request)
                 triage,warnings = gs.validate_triage(json.dumps(triage),pages,version='v5-triage')
@@ -309,7 +313,7 @@ def run(args):
                 if result['route']['route'] == 'extract':
                     activity(gid,'extracting')
                     call_name = f'{gid}.extract'
-                    extract_request = gs.extract_payload(request,json.dumps(triage),prompts,'high')
+                    extract_request = gs.extract_payload(request,json.dumps(triage),prompts,manifest.get('reasoning','high'))
                     client.recover_validation(call_name, extract_request,
                                               lambda value: recover_extract(value, pages))
                     extracted = client.call(call_name,extract_request)
@@ -430,6 +434,7 @@ def main():
     checking.add_argument('--name',required=True)
     checking.add_argument('--expectations',type=Path,default=ROOT/'tests/fixtures/appeals/release-expectations.json')
     serving=sub.add_parser('serve');serving.add_argument('--port',type=int,default=8769)
+    serving.add_argument('--host',default=DEFAULT_HOST)
     args=p.parse_args()
     if hasattr(args,'name') and not SAFE.fullmatch(args.name):p.error('Invalid run name')
     if args.command=='plan':plan(args)
@@ -457,7 +462,7 @@ def main():
         if failures:raise SystemExit(1)
     else:
         from appeal_viewer import serve
-        serve(args.root,args.port)
+        serve(args.root,args.port,args.host)
 
 
 if __name__=='__main__':

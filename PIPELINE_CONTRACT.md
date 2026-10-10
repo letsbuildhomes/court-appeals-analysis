@@ -68,8 +68,10 @@ file preserves the recipe, inputs, drafts, final results, and provenance;
 evaluations and reference labels should be separate artifacts.
 
 The current runner remains `appeals.py`; this entry point imports saved output
-only. An experiment execution orchestrator, alternate strategy, case selection,
-and reference generation are intentionally not implemented. Future producers
+only. The [experiment runner](docs/EXPERIMENT-RUNNER.md) selects cohorts, runs
+targeted variants through `appeals.py`, and publishes `experiment_candidate`
+artifacts with cohort-restricted baselines (`create_experiment(case_ids=...)`).
+Alternate strategies and reference generation are not implemented. Future producers
 can emit the versioned canonical contract and matching experiment manifest
 without reproducing the historical checkpoint topology. Source paths in a
 canonical artifact are relative to its source run; the artifact stores hashes

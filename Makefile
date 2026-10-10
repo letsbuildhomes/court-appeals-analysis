@@ -9,6 +9,8 @@ APPEALS_ARGS ?=
 APPEALS_PORT ?= 8769
 DASHBOARD_PORT ?= 8771
 DASHBOARD_ARGS ?=
+# This checkout lives on a remote server; listen on the private network.
+LISTEN_HOST ?= 0.0.0.0
 TEXT_IMAGE ?= data-court-review-text:local
 TEXT_IMAGE_STAMP = .docker-text-image.stamp
 TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
@@ -18,9 +20,13 @@ TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
 	--mount type=bind,source="$(CURDIR)/data/archive.duckdb",target=/workspace/data/archive.duckdb,readonly \
 	$(TEXT_IMAGE)
 
-.PHONY: all extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review claims serve group-build group-status
+.PHONY: all test extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review claims serve group-build group-status
 
 all: extract
+
+# Offline suite: mocked transports only, no credentials or model calls.
+test:
+	uv run --inexact python -m unittest discover -s tests
 
 extract:
 	uv run python extract.py --limit $(LIMIT)
@@ -98,17 +104,17 @@ text-qa: text-image
 review: text-image
 	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
 		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
-		--publish "127.0.0.1:$(REVIEW_PORT):8766" $(TEXT_IMAGE) \
+		--publish "$(LISTEN_HOST):$(REVIEW_PORT):8766" $(TEXT_IMAGE) \
 		python review_server.py --host 0.0.0.0 --port 8766
 
 claims: text-image
 	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
 		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
-		--publish "127.0.0.1:$(CLAIMS_PORT):8767" $(TEXT_IMAGE) \
+		--publish "$(LISTEN_HOST):$(CLAIMS_PORT):8767" $(TEXT_IMAGE) \
 		python claims_server.py --host 0.0.0.0 --port 8767
 
 serve:
-	python3 -m http.server 8765
+	python3 -m http.server --bind $(LISTEN_HOST) 8765
 
 # Build the upstream docket groups.
 group-build:
@@ -128,16 +134,37 @@ appeals-export:
 appeals-status:
 	uv run python appeals.py status $(APPEALS_ARGS)
 appeals-view:
-	uv run python appeals.py serve --port $(APPEALS_PORT)
+	uv run python appeals.py serve --host $(LISTEN_HOST) --port $(APPEALS_PORT)
 appeals-test:
 	uv run python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
 
 # Read-only experiment inspection; no extraction or model calls.
 .PHONY: experiments-view experiments-test
 experiments-view:
-	python3 appeal_dashboard.py --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
+	python3 appeal_dashboard.py --host $(LISTEN_HOST) --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
 experiments-test:
-	python3 -m unittest tests.test_appeal_dashboard -v
+	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_appeal_experiments -v
+
+# Targeted experiments on frozen cohorts. Only experiments-run reads .env and
+# makes paid model calls; set its cap with EXPERIMENT_ARGS='--max-spend 1.00'.
+EXPERIMENT ?=
+EXPERIMENT_ARGS ?=
+COHORT_ARGS ?=
+.PHONY: experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiment-name
+experiments-cohort:
+	uv run --inexact python appeal_cohorts.py select $(COHORT_ARGS)
+experiment-name:
+	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT to an experiment name'; exit 2; }
+experiments-plan: experiment-name
+	uv run --inexact python appeal_runner.py plan $(EXPERIMENT) $(EXPERIMENT_ARGS)
+experiments-status: experiment-name
+	uv run --inexact python appeal_runner.py status $(EXPERIMENT)
+experiments-run: experiment-name
+	uv run --inexact --env-file .env python appeal_runner.py run $(EXPERIMENT) $(EXPERIMENT_ARGS)
+experiments-finalize: experiment-name
+	uv run --inexact python appeal_runner.py finalize $(EXPERIMENT)
+experiments-compare: experiment-name
+	uv run --inexact python appeal_runner.py compare $(EXPERIMENT) $(EXPERIMENT_ARGS)
 
 # Local research snapshot selection is explicit; MCP runs without pipeline/API credentials.
 MCP_RUN ?=

@@ -1,7 +1,8 @@
 # Claims explorer
 
-Run `make claims` and open <http://127.0.0.1:8767/>. It uses the existing
-Docker image with Poppler, serves only on localhost, and opens the archive,
+Run `make claims` and open `http://SERVER:8767/` on the server's private-network
+address. It uses the existing Docker image with Poppler, publishes on
+`LISTEN_HOST` (all interfaces by default), and opens the archive,
 text, and scouting DuckDB databases read-only. No API key is needed. Stop it
 with Ctrl-C.
 

@@ -1,6 +1,7 @@
 # Local PDF text review
 
-Run `make review`, then open <http://127.0.0.1:8766/>. The tool runs in the
+Run `make review`, then open `http://SERVER:8766/` on the server's
+private-network address. The tool runs in the
 project's Poppler-enabled Docker image and reads the PDF archive,
 `data/text.duckdb`, and `data/triage_qa.duckdb` without writing to them. Stop
 it with Ctrl-C. Set `REVIEW_PORT=8767` if the default host port is in use.
@@ -30,7 +31,7 @@ reopened. Neither clicking nor changing text sources records a judgment.
 
 For example, the known zoning-map omission can be opened at:
 
-<http://127.0.0.1:8766/?sha=4c63de1d5d2e4d5704952bb9f56e7cefb51e0d81e7d473cc2e3693234152ba78&page=5>
+<http://SERVER:8766/?sha=4c63de1d5d2e4d5704952bb9f56e7cefb51e0d81e7d473cc2e3693234152ba78&page=5>
 
-The tool is intentionally read-only and local. It is for fast visual
+The tool is intentionally read-only and limited to the private network. It is for fast visual
 inspection, not a source of validated labels or an annotation system.

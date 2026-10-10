@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, urlparse
 import duckdb
 
 from config import DB_PATH, ROOT, TEXT_DB_PATH
+from listen import DEFAULT_HOST, display_url
 from group_scout import cost_usd, extraction_counts
 from review_server import source_pdf
 from scout import SCOUT_DB_PATH, reasoning_from_request, reasoning_tokens, usage_counts
@@ -441,13 +442,13 @@ class ClaimsServer(ThreadingHTTPServer):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default=DEFAULT_HOST)
     parser.add_argument("--port", type=int, default=8767)
     args = parser.parse_args()
     if not TEXT_DB_PATH.is_file() or not DB_PATH.is_file():
         parser.error("The archive and text databases must exist before starting the explorer")
     server = ClaimsServer((args.host, args.port), ClaimsHandler)
-    print(f"Claims explorer listening on http://{args.host}:{args.port}", flush=True)
+    print(f"Claims explorer listening on {display_url(args.host, args.port)}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

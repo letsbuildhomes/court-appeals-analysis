@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from claims_server import ClaimsHandler as Handler, ClaimsServer
+from listen import DEFAULT_HOST, display_url
 from appeal_runtime import read
 from appeal_evidence import source_pages
 from appeal_assembly import latest_checkpoint, effective_status, finalized_dockets, first_pass_status
@@ -317,7 +318,7 @@ def archive_overview(root):
             'updated_at':datetime.now(timezone.utc).isoformat()}
 
 
-def serve(root, port):
+def serve(root, port, host=DEFAULT_HOST):
     root=Path(root)
     class Viewer(Handler):
         def log_message(self,*args):pass
@@ -349,5 +350,5 @@ def serve(root, port):
                 self.send_json(HTTPStatus.NOT_FOUND,{'error':'Not found'})
             except (ValueError,KeyError,OSError) as exc:
                 self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(exc)})
-    print(f'Appeal explorer: http://127.0.0.1:{port}',flush=True)
-    ClaimsServer(('127.0.0.1',port),Viewer).serve_forever()
+    print(f'Appeal explorer: {display_url(host,port)}',flush=True)
+    ClaimsServer((host,port),Viewer).serve_forever()

@@ -15,6 +15,7 @@ from urllib.parse import parse_qs, urlparse
 import duckdb
 
 from config import ROOT, TEXT_DB_PATH
+from listen import DEFAULT_HOST, display_url
 
 
 QA_DB_PATH = ROOT / "data" / "triage_qa.duckdb"
@@ -226,13 +227,13 @@ class ReviewServer(ThreadingHTTPServer):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--host", default=DEFAULT_HOST)
     parser.add_argument("--port", type=int, default=8766)
     args = parser.parse_args()
     if not TEXT_DB_PATH.is_file():
         parser.error(f"Missing text database: {TEXT_DB_PATH}")
     server = ReviewServer((args.host, args.port), ReviewHandler)
-    print(f"Review tool listening on http://{args.host}:{args.port}", flush=True)
+    print(f"Review tool listening on {display_url(args.host, args.port)}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
