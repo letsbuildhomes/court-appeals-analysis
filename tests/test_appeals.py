@@ -8,19 +8,51 @@ import unittest
 from unittest.mock import Mock, patch
 
 from appeal_evidence import interval, apply_review
-from appeal_runtime import Client, api_config, digest, payload, read, save
-from appeals import exact_members, export, packs, normalize_extract, recover_extract, raise_char_cap, run, finish, duration_followup
+from appeal_runtime import Client, digest, read, save
+from appeals import export, raise_char_cap, run
 import group_scout as gs
 from appeal_viewer import run_folder
+from pipeline import recipe as recipes
+from pipeline.batching import sequential
+from pipeline.components import exact_members
+from pipeline.components.extract import normalize_extract, recover_extract
+from pipeline.engine import Engine
+from pipeline.providers import ChatCompletionsProvider, Pricing
+
+PRICING = Pricing(input=0.15, output=0.6, cached_input=0.003)
+PROMPTS = {k: k for k in ('system', 'triage', 'extract', 'primer', 'review', 'duration')}
+
+
+def chat(root, limit, endpoint='http://localhost', **options):
+    return Client(root, ChatCompletionsProvider('default', 'model', PRICING, endpoint, 'unused'), limit, **options)
+
+
+def payload(model, prompt, data):
+    return {'model': model, 'stream': False, 'reasoning_effort': 'high', 'max_tokens': 65536,
+            'response_format': {'type': 'json_object'},
+            'messages': [{'role': 'system', 'content': prompt}, {'role': 'user', 'content': json.dumps(data, ensure_ascii=False)}]}
+
+
+def finish(root, manifest, prompts, client, outputs, workers):
+    """Run the batched phase of the legacy recipe with a test client."""
+    prompts = {**PROMPTS, **prompts}
+    recipe = recipes.legacy_recipe({'model': 'deepseek-flash', 'review_batch_chars': manifest.get('review_batch_chars', 200000)}, prompts)
+    if isinstance(client, Mock):
+        client.provider = ChatCompletionsProvider('default', 'model', PRICING)
+    Engine(root, recipe, prompts, manifest, {'default': client}, workers).finish(outputs)
 
 
 class PipelineTests(unittest.TestCase):
     def test_direct_api_configuration(self):
+        spec={'model':'deepseek-flash','env':'APPEALS'}
+        build=lambda **kw:ChatCompletionsProvider.from_spec('default',spec,**kw)
         with patch.dict('os.environ',{},clear=True):
-            self.assertEqual(api_config('https://provider.example/v1/',key='secret'),('https://provider.example/v1/chat/completions','secret'))
-            self.assertEqual(api_config(api_url='https://provider.example/chat/completions',key='secret')[0],'https://provider.example/chat/completions')
-            with self.assertRaises(ValueError):api_config()
-            with self.assertRaises(ValueError):api_config('https://x',api_url='https://y',key='k')
+            self.assertEqual(build(base_url='https://provider.example/v1/',key='secret').endpoint,'https://provider.example/v1/chat/completions')
+            self.assertEqual(build(api_url='https://provider.example/chat/completions',key='secret').endpoint,'https://provider.example/chat/completions')
+            with self.assertRaises(ValueError):build()
+            with self.assertRaises(ValueError):build(base_url='https://x',api_url='https://y',key='k')
+            with self.assertRaises(ValueError):build(api_url='https://user:pass@x/chat',key='k')
+            with self.assertRaisesRegex(ValueError,'No price'):ChatCompletionsProvider.from_spec('default',{'model':'unpriced'},key='k',base_url='https://x')
 
     def setUp(self):
         self.temp=TemporaryDirectory()
@@ -28,7 +60,7 @@ class PipelineTests(unittest.TestCase):
         self.root=Path(self.temp.name)
 
     def test_resume_is_free_and_refuses_changed_requests(self):
-        client=Client(self.root,'http://localhost','unused',1)
+        client=chat(self.root,1)
         req=payload('model','Return JSON',{})
         response=Mock(status_code=200)
         response.json.return_value={'choices':[{'finish_reason':'stop','message':{'content':'{"ok":true}'}}],
@@ -45,7 +77,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_budget_and_uncertain_delivery_do_not_send(self):
         req=payload('model','JSON',{})
-        client=Client(self.root,'http://localhost','unused',0)
+        client=chat(self.root,0)
         with patch('appeal_runtime.httpx.Client') as transport:
             with self.assertRaisesRegex(ValueError,'cap'):client.call('case',req)
             transport.assert_not_called()
@@ -62,7 +94,7 @@ class PipelineTests(unittest.TestCase):
         response=Mock(status_code=200)
         response.json.return_value={'choices':[{'finish_reason':'stop','message':{'content':'{"fixed":true}'}}],
                                     'usage':{'prompt_tokens':10,'completion_tokens':10,'total_tokens':20}}
-        client=Client(self.root,'http://localhost','unused',1)
+        client=chat(self.root,1)
         with patch('appeal_runtime.httpx.Client') as transport:
             transport.return_value.__enter__.return_value.post.return_value=response
             self.assertEqual(client.call('case',req),{'fixed':True})
@@ -73,8 +105,8 @@ class PipelineTests(unittest.TestCase):
 
     def test_batch_boundaries_and_membership(self):
         items=[{'source':'x'*10,'candidate':None} for _ in range(7)]
-        self.assertEqual([len(b) for b in packs(items,6,10000)],[6,1])
-        self.assertEqual([len(b) for b in packs(items,6,20)],[1]*7)
+        self.assertEqual([len(b) for b in sequential(items,6,10000)],[6,1])
+        self.assertEqual([len(b) for b in sequential(items,6,20)],[1]*7)
         with self.assertRaises(ValueError):exact_members([{'group':'a'},{'group':'a'}],'group',['a','b'])
         with self.assertRaises(ValueError):exact_members([{'docket':None},{'docket':None}],'docket',[None,None])
 
@@ -100,7 +132,7 @@ class PipelineTests(unittest.TestCase):
         barrier=threading.Barrier(2)
         requests={}
         responses={}
-        def call(name,request):
+        def call(name,request,**options):
             requests[name]=copy.deepcopy(request)
             cases=json.loads(request['messages'][-1]['content'])['cases']
             if name.startswith('review-'):
@@ -160,7 +192,7 @@ class PipelineTests(unittest.TestCase):
         with patch('appeal_runtime.httpx.Client') as transport:
             post=transport.return_value.__enter__.return_value.post
             post.side_effect=response_for_request
-            client=Client(self.root/'calls','http://localhost','unused',1)
+            client=chat(self.root/'calls',1)
             outputs=copy.deepcopy(drafts)
             finish(self.root,manifest,prompts,client,outputs,1)
             self.assertEqual(outputs['bad']['status'],'review_failed')
@@ -171,7 +203,7 @@ class PipelineTests(unittest.TestCase):
             first_cost=client.spent()
             self.assertEqual(post.call_count,4)
             revision=2
-            retry=Client(self.root/'calls','http://localhost','unused',1,retry_failed=True)
+            retry=chat(self.root/'calls',1,retry_failed=True)
             outputs=copy.deepcopy(drafts)
             finish(self.root,manifest,prompts,retry,outputs,1)
             self.assertTrue(all(r['status']=='complete' for r in outputs.values()))
@@ -231,7 +263,7 @@ class PipelineTests(unittest.TestCase):
         save(self.root/'case.result.json',state)
         save(self.root/'case.parsed.json',malformed)
         save(self.root/'case.response.json',{'original':malformed})
-        client=Client(self.root,'http://localhost','unused',0,retry_failed=True)
+        client=chat(self.root,0,retry_failed=True)
         with patch('appeal_runtime.httpx.Client') as transport:
             self.assertFalse(client.recover_validation('case',{**req,'model':'other'},lambda v:recover_extract(v,{})))
             self.assertTrue(client.recover_validation('case',req,lambda v:recover_extract(v,{})))
@@ -278,7 +310,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_first_pass_resume_only_sends_failed_and_newly_eligible_calls(self):
         folder=self.root/'resume'
-        prompts={'system':'System','triage':'Triage'}
+        prompts={**PROMPTS,'system':'System','triage':'Triage'}
         save(folder/'prompts.json',prompts)
         groups=[]
         for gid in ('cached','failed','oversized'):
@@ -287,12 +319,12 @@ class PipelineTests(unittest.TestCase):
             source=folder/'sources'/f'{gid}.txt'
             source.parent.mkdir(exist_ok=True)
             source.write_text('abc')
-        save(folder/'manifest.json',{'name':'resume','model':'model','max_chars':2,
+        save(folder/'manifest.json',{'name':'resume','model':'deepseek-flash','max_chars':2,
              'max_output_tokens':65536,'prompt_sha256':digest(json.dumps(prompts,sort_keys=True)),
              'groups':groups})
         triage={'schema_version':'v5-triage','documents':[{'doc':1,'belongs':'yes','caption_dockets':[]}],
                 'municipal_appeal':'yes','housing':'no','matter':'Not housing','reason':'Not housing','evidence':[]}
-        req=gs.triage_payload('model',prompts,'abc','high')
+        req=gs.triage_payload('deepseek-flash',prompts,'abc','high')
         req['max_tokens']=65536
         for gid,status in [('cached','ok'),('failed','failed')]:
             save(folder/f'calls/{gid}.triage.request.json',req)
@@ -304,8 +336,8 @@ class PipelineTests(unittest.TestCase):
         args=SimpleNamespace(root=self.root,name='resume',max_chars=600000,first_pass_only=True,
                              max_spend=1,price_multiplier=1,retry_failed=True,retry_max_output_tokens=None,
                              api_base_url=None,api_url=None,workers=1)
-        with patch('appeals.api_config',return_value=('http://localhost','unused')), \
-             patch('appeals.source_pages',return_value={1:{1:'abc'}}), \
+        with patch.dict('os.environ',{'APPEALS_API_BASE_URL':'http://localhost','APPEALS_API_KEY':'unused'}), \
+             patch('appeal_evidence.source_pages',return_value={1:{1:'abc'}}), \
              patch('appeal_runtime.httpx.Client') as transport:
             transport.return_value.__enter__.return_value.post.return_value=response
             run(args)
@@ -331,12 +363,12 @@ class PipelineTests(unittest.TestCase):
         with patch('appeal_runtime.httpx.Client') as transport:
             post=transport.return_value.__enter__.return_value.post
             post.side_effect=[limited,complete]
-            client=Client(self.root,'https://provider','secret',1)
+            client=chat(self.root,1,endpoint='https://provider')
             with self.assertRaisesRegex(ValueError,'Incomplete'):client.call('case',req)
             state=read(self.root/'case.result.json')
             self.assertEqual(state['error_type'],'output_limit')
             self.assertEqual(state['finish_reason'],'length')
-            retry=Client(self.root,'https://provider','secret',1,retry_failed=True,retry_max_tokens=131072)
+            retry=chat(self.root,1,endpoint='https://provider',retry_failed=True,retry_max_tokens=131072)
             self.assertEqual(retry.call('case',req),{'ok':True})
             self.assertEqual(post.call_args.kwargs['json']['max_tokens'],131072)
             self.assertEqual(retry.call('case',req),{'ok':True})
@@ -346,7 +378,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_schema_failure_and_non_json_http_are_recorded(self):
         req=payload('model','JSON',{})
-        client=Client(self.root,'https://provider','secret',1)
+        client=chat(self.root,1,endpoint='https://provider')
         save(self.root/'case.result.json',{'status':'ok','charged_or_reserved_usd':0.01})
         client.reject('case','Missing required dockets')
         self.assertEqual(read(self.root/'case.result.json')['error_type'],'validation')

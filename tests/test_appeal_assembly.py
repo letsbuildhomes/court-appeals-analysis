@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from appeal_assembly import effective_status, execution_recipe, finalized_dockets, latest_checkpoint
+from appeal_assembly import effective_status, finalized_dockets, latest_checkpoint
 
 
 class AssemblyTests(unittest.TestCase):
@@ -31,19 +31,3 @@ class AssemblyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'exactly matching'):finalized_dockets(records, [], strict=True)
         with self.assertRaisesRegex(ValueError, 'Duplicate duration'):finalized_dockets([], bounds * 2, strict=True)
         with self.assertRaisesRegex(ValueError, 'Duplicate docket'):finalized_dockets(records * 2, bounds, strict=True)
-
-    def test_recipe_metadata_and_graph(self):
-        manifest = {'model': 'test', 'prompt_sha256': 'hash', 'workers': 2}
-        recipe = execution_recipe(manifest)
-        self.assertEqual([c['id'] for c in recipe['components']], ['triage', 'extract', 'review', 'duration'])
-        self.assertEqual(recipe['edges'][2], {'from': 'review', 'to': 'duration'})
-        self.assertTrue(all(c['prompt_sha256'] is None for c in recipe['components']))
-        self.assertEqual(manifest, {'model': 'test', 'prompt_sha256': 'hash', 'workers': 2})
-
-    def test_prompt_change_only_marks_dependent_components(self):
-        hashes = {name: name for name in ('system', 'primer', 'triage', 'extract', 'review', 'duration')}
-        before = execution_recipe({'prompt_hashes': hashes})['components']
-        after = execution_recipe({'prompt_hashes': {**hashes, 'duration': 'changed'}})['components']
-        changed = [a['id'] for a, b in zip(before, after)
-                   if a['effective_prompt_sha256'] != b['effective_prompt_sha256']]
-        self.assertEqual(changed, ['duration'])

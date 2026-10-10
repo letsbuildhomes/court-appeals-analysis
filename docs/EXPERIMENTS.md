@@ -8,40 +8,66 @@ and designing experiments.
 
 ## How an experiment works
 
+The pipeline is a recipe of steps, prompts, providers and batching
+([pipeline](PIPELINE.md)). An experiment is a directory of files composed over
+the base run's recipe: a recipe fragment, replacement prompts, or new step
+components. It never edits the base files.
+
 ```text
-production artifact ─select─▶ cohort ─plan─▶ experiment run ─run─▶ ─finalize─▶ dashboard
-                       query + IDs     free     paid, capped        baseline vs candidate
+experiments/NAME/ (definition, in git) ─plan─▶ frozen run ─run─▶ ─finalize─▶ dashboard
+  hypothesis, cohort, overrides          free; dry-run estimate  paid, capped   baseline vs candidate
 ```
 
-1. **Cohort.** `make experiments-cohort` saves a query and the case IDs and
-   source hashes it selects. The dashboard's baseline case browser shows the
-   command for its filters.
-2. **Plan.** `make experiments-plan` records a hypothesis and the changed
-   prompts or settings, copies frozen sources, reuses byte-identical saved
-   work, adds review-batch companions, and estimates spending. It reads no
-   credentials and makes no model calls.
+1. **Define.** `make experiments-init` creates `experiments/NAME/`; add a cohort
+   with `make experiments-cohort` (the dashboard's baseline case browser shows
+   the command for its filters), then any `recipe.json`, `prompts/` or
+   `components/` overrides.
+2. **Plan.** `make experiments-plan` composes and validates the recipe, freezes
+   the run, adds review-batch companions, and estimates spending with a dry run.
+   It reads no credentials and makes no model calls.
 3. **Run.** `make experiments-run` is the only paid step and the only target
-   that loads `.env`. `--max-spend` caps new spending; each call is refused
-   before sending if it could exceed the cap. Repeating the command resumes.
+   that loads `.env`. Identical saved calls are inherited for free;
+   `--max-spend` caps new spending, and a call is refused before sending if it
+   could exceed the cap. Repeating the command resumes.
 4. **Finalize.** `make experiments-finalize` publishes baseline and candidate
    artifacts for the same cases and `comparison.json`.
 5. **Review.** `make experiments-view` shows each experiment's impact on
-   research facts, case by case, with verified source evidence.
+   research facts, case by case, with verified source evidence, and what it
+   changed in the pipeline.
 
 `make experiments-compare` records two existing runs as a retrospective
 comparison, with no model calls. Details: [runner](EXPERIMENT-RUNNER.md),
-[dashboard](EXPERIMENT-DASHBOARD.md), [evaluation](evaluation-framework.md),
-[frozen-text contract](../PIPELINE_CONTRACT.md).
+[pipeline](PIPELINE.md), [dashboard](EXPERIMENT-DASHBOARD.md),
+[evaluation](evaluation-framework.md), [frozen-text contract](../PIPELINE_CONTRACT.md).
+
+## Designing an experiment
+
+1. **Pick a question and the facts it should move.** The baseline's quality
+   profile shows where answers are missing. [The pipeline guide](PIPELINE.md)
+   maps each research fact to the step and prompts that produce it.
+2. **Choose a cohort and save its query.** Small cohorts are cheap but noisy.
+   Keep batch companions unless batching is the variable.
+3. **Change one thing.** Write the override files and state the expected effect
+   in the hypothesis and README. Plan it and check the estimate and the
+   *What changed* view before spending.
+4. **Measure the noise floor on the same cohort.** Identical prompts change
+   some answers from run to run. A second definition with no overrides and
+   `"rerun"` listing the changed steps measures that variation on the same
+   cases; an experiment's effect should clearly exceed it.
+5. **Judge against evidence.** Verdicts are unverified without reference
+   labels. Read the worsened and needs-judgment cases against their sources.
 
 ## Components
 
 | Module | Role |
 | --- | --- |
-| `appeals.py`, `appeal_runtime.py` | The supported pipeline: triage, extraction, paired review, duration; spending caps and call reuse |
+| `recipes/appeals/recipe.json`, `prompts/appeals/` | The production recipe and its prompts |
+| `pipeline/` | Recipe composition and validation, engine, step components, batchers, conversations, providers and model prices |
+| `appeals.py`, `appeal_runtime.py` | Plan and run pipeline runs; the call layer with spending caps, reuse and read-through |
 | `appeal_contracts.py`, `appeal_assembly.py` | Read a saved run as canonical cases; checkpoint and record assembly |
 | `appeal_experiments.py` | Immutable baseline and candidate artifacts, optionally restricted to a cohort |
 | `appeal_cohorts.py` | Saved case selections |
-| `appeal_runner.py` | Plan, run, finalize and compare experiments |
+| `appeal_runner.py` | Initialize, plan, run, finalize and compare experiments |
 | `appeal_impact.py` | Fact-level comparison, case verdicts, quality measures, baseline profile |
 | `appeal_evaluation.py`, `appeal_reference.py` | Scoring against reference labels |
 | `appeal_dashboard.py`, `dashboard.*` | Read-only experiment dashboard |
@@ -54,7 +80,8 @@ comparison, with no model calls. Details: [runner](EXPERIMENT-RUNNER.md),
 | `data/production-import-UazDoN/data/appeals/full-run` | Production run: frozen prompts, sources, calls, checkpoints, exports |
 | `data/experiments/production-baseline-relocated` | Its canonical artifact; the dashboard's production baseline and the source for cohorts |
 | `data/experiments/production-baseline` | The same artifact as created on the laptop; its source paths point there, so it cannot show evidence |
-| `data/experiments/NAME/` | Experiments: plan, executions, run, finalized artifacts |
+| `experiments/NAME/` (in git) | Experiment definitions |
+| `data/experiments/NAME/` | Experiment runs: plan, executions, run, finalized artifacts |
 | `data/research/` and the nested `research/shared-v1` | Research MCP snapshots |
 | `data/appeals/` | Earlier test runs: `release-check`, `sanity-two-group-*`, `final-smoke-*` |
 
@@ -121,9 +148,11 @@ make experiments-compare EXPERIMENT=smoke-replication EXPERIMENT_ARGS='--base-ru
    source hashes, code revision, prompt, configuration and model identity,
    selected cases, cost and explicit result selection. The research snapshot
    builder still selects a single run.
-4. **Alternative strategies.** The runner varies prompts and settings of the
-   current four-stage pipeline. A different topology needs a producer that
-   emits the canonical contract (`appeal-cases-1`).
+4. **Alternative models and steps.** Recipes can swap providers, prompts,
+   conversation modes, batching and step components. Other models need a price
+   in `pipeline/models.json`; a decision model such as Jev needs a component
+   that asks it typed questions ([pipeline](PIPELINE.md)). A recipe still runs
+   one per-case phase then one batched phase.
 5. **Research MCP audience.** Wider access needs decisions on isolation, rate
    limits, access policy and which fields suit bulk download.
 6. **Shared validation.** The pipeline still uses helpers in `group_scout.py`;
@@ -132,7 +161,11 @@ make experiments-compare EXPERIMENT=smoke-replication EXPERIMENT_ARGS='--base-ru
 ## Operating notes
 
 - `.env` holds `APPEALS_API_BASE_URL`, `APPEALS_API_KEY` and `APPEALS_MODEL`.
-  Only `make experiments-run` and direct `appeals.py run` need it.
+  Only `make experiments-run` and direct `appeals.py run` need it. A recipe
+  provider with another `env` prefix reads that prefix's variables instead.
+- `make test` includes a replay of the production run through the recipe
+  engine (sampled; `REPLAY_ALL=1` for every case) that requires every model
+  request to match the saved one. It makes no model calls.
 - `make test` runs the offline suite with mocked transports. Seven text-pipeline
   tests skip without Poppler, which runs in the container image instead.
 - To check a plan against real data without spending, run it against an

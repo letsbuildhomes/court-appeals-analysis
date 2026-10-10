@@ -33,16 +33,14 @@ draft annotations and include finalized duration and its evidence bounds.
 Scope classification and processing completion are separate: complete uncertain
 cases stay uncertain. Failed cases retain their drafts but have no final records.
 
-The top-level `recipe` describes components, edges, configuration, and prompt
-identities. It records the current implementation; its shape does not require
-future implementations to use the same component topology. Frozen prompt text
-is retained for inspection and comparison. Component `prompt_sha256` hashes
-its direct prompt file; `prompt_dependencies` lists shared and inherited prompt
-hashes, and `effective_prompt_sha256` fingerprints that dependency map. This is
-a prompt-content fingerprint, not a complete request hash: source text, model
-responses, and instructions embedded in runner code also affect actual calls.
-Unknown individual hashes are null rather than copied from the aggregate hash.
-`provenance` records input hashes,
+The top-level `recipe` is the run's recipe description (`appeal-recipe-1`, see
+[docs/PIPELINE.md](docs/PIPELINE.md)): its phases in order, each with its batching,
+and each step with its component, what it reads, writes and affects, provider and
+model with prices, effective settings, conversation mode, and prompt names with
+hashes. Runs made before recipes are described from their manifest settings.
+Frozen prompt text is retained for inspection and comparison. Prompt hashes are
+not complete request hashes: source text, model responses and instructions in
+component code also affect actual calls. `provenance` records input hashes,
 verification, and inherited recorded costs. Unknown historical costs remain
 unknown; inherited charges are not new experiment spending. Historical code
 revision must not be inferred from the current checkout.

@@ -1,0 +1,10 @@
+{
+  "schema_version": "appeal-models-1",
+  "models": {
+    "deepseek-flash": {
+      "provider": "chat-completions",
+      "pricing_usd_per_million": {"input": 0.15, "cached_input": 0.003, "output": 0.6},
+      "note": "DeepSeek Flash list prices used since the first production run."
+    }
+  }
+}

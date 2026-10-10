@@ -125,8 +125,10 @@ on the supplied record; these opinions are not guaranteed complete case historie
 
 ## Stages and outputs
 
-The six selected prompts live in `prompts/appeals/`; plan snapshots them with
-source hashes into `data/appeals/<name>/`. Source and prompt edits require a new run.
+The steps, prompts, providers and batching come from the recipe
+`recipes/appeals/recipe.json` ([pipeline](PIPELINE.md)); the six prompts live in
+`prompts/appeals/`. Plan freezes the recipe, prompts and source hashes into
+`data/appeals/<name>/`. Source and prompt edits require a new run.
 Triage and extraction share a conversation. The separately primed editor reviews
 at most two retained groups together, bounded by source size. Explicit triage
 exclusions finish immediately without another model call; uncertain scope continues

@@ -1,0 +1,39 @@
+{
+  "schema_version": "appeal-recipe-1",
+  "name": "appeals",
+  "description": "Municipal housing appeal extraction: per-case triage and extraction, then batched review and duration.",
+  "providers": {
+    "default": {
+      "model": "deepseek-flash",
+      "env": "APPEALS",
+      "settings": {"reasoning": "high", "max_output_tokens": 65536}
+    }
+  },
+  "prompts": {
+    "system": "../../prompts/appeals/system.md",
+    "triage": "../../prompts/appeals/triage.md",
+    "extract": "../../prompts/appeals/extract.md",
+    "primer": "../../prompts/appeals/primer.md",
+    "review": "../../prompts/appeals/review.md",
+    "duration": "../../prompts/appeals/duration.md"
+  },
+  "phases": {
+    "first_pass": {"kind": "per_case", "steps": ["triage", "extract"]},
+    "finishing": {
+      "kind": "batched",
+      "batch": {"kind": "sequential", "max_cases": 2, "max_chars": 200000},
+      "steps": ["review", "duration"]
+    }
+  },
+  "order": ["first_pass", "finishing"],
+  "steps": {
+    "triage": {"component": "triage", "provider": "default", "context": "fresh",
+               "prompts": {"system": "system", "instructions": "triage"}},
+    "extract": {"component": "extract", "provider": "default", "context": "continue",
+                "prompts": {"system": "system", "instructions": "extract"}},
+    "review": {"component": "review", "provider": "default", "context": "fresh",
+               "prompts": {"primer": "primer", "extract": "extract", "triage": "triage", "review": "review"}},
+    "duration": {"component": "duration", "provider": "default", "context": "continue",
+                 "prompts": {"instructions": "duration"}}
+  }
+}

@@ -18,8 +18,9 @@ from appeal_assembly import run_progress
 from appeal_demo import build_demo
 from appeal_evaluation import evaluate
 from appeal_experiments import read_experiment
-from appeal_impact import compare_case, impact, processing, profile
+from appeal_impact import CASE_FACTS, RECORD_FACTS, compare_case, impact, processing, profile
 from appeal_reference import read_reference
+from pipeline import recipe as recipes
 from listen import DEFAULT_HOST, display_url
 
 ROOT = Path(__file__).resolve().parent
@@ -33,12 +34,19 @@ def variables(value, retrospective=False):
     """Short descriptions of what an experiment changed."""
     if not value:
         return []
+    def number(v):
+        return f'{v:,}' if isinstance(v, int) and not isinstance(v, bool) else v
     result = [f'{name} prompt' for name in value.get('prompts', {})]
-    number = lambda v: f'{v:,}' if isinstance(v, int) and not isinstance(v, bool) else v
-    result += [f'{key.replace("_", " ")}: {number(change["base"])} → {number(change["value"])}'
-               for key, change in value.get('settings', {}).items()]
-    if value.get('rerun_from'):
-        result.append(f'rerun from {value["rerun_from"]}')
+    def label(path):
+        parts = path.split('.')
+        if parts[0] == 'steps' and len(parts) > 2:
+            return ' '.join([parts[1], *(p.replace('_', ' ') for p in parts[2 + (parts[2] == 'settings'):])])
+        return path.replace('_', ' ')
+    result += [f'{label(change["path"])}: {number(change["base"])} → {number(change["value"])}'
+               for change in value.get('recipe', []) if not change['path'].startswith('phases.')]
+    result += [f'{name} component' for name in value.get('components', [])]
+    if value.get('rerun'):
+        result.append('rerun: '+', '.join(value['rerun']))
     if value.get('batching') == 'changed':
         result.append('review batching')
     return result or ['Same prompts and settings' if retrospective else 'No changes: identical retry']
@@ -177,18 +185,27 @@ class Dashboard:
         """An experiment that has not been finalized: plan, progress and spending only."""
         progress = run_progress(folder / 'run')
         statuses = progress['statuses']
+        designs = {}
+        for side, run in (('baseline', Path(record['base']['run'])), ('candidate', folder / 'run')):
+            try:
+                manifest, prompts = (json.loads((run / name).read_text()) for name in ('manifest.json', 'prompts.json'))
+                designs[side] = {'recipe': recipes.describe(recipes.for_run(run, manifest, prompts)), 'prompts': prompts}
+            except (OSError, ValueError, KeyError):
+                designs[side] = None
         return {'kind': 'experiment', 'status': 'running' if executions else 'planned', 'experiment': record,
+                'designs': designs,
                 'executions': executions, 'baseline': None, 'candidate': None, 'evaluation': None, 'reference': None,
                 'progress': {'statuses': statuses, 'cases': sum(statuses.values()), 'complete': statuses.get('complete', 0)},
-                'cost_summary': {'new_usd': progress['charged_usd'] - record['reuse']['inherited_usd'],
+                'cost_summary': {'new_usd': progress['new_usd'], 'inherited_usd': progress['inherited_usd'],
                                  'estimate': record.get('estimate')}}
 
     def overview(self, dataset):
         value = self.load(dataset)
-        runs, designs = [], {}
+        runs, designs = [], dict(value.get('designs') or {})
         for side in ('baseline', 'candidate'):
             run = value.get(side)
-            designs[side] = {'recipe': run.get('recipe', {}), 'prompts': run.get('prompts', {})} if run else None
+            if run or side not in designs:
+                designs[side] = {'recipe': run.get('recipe', {}), 'prompts': run.get('prompts', {})} if run else None
             if run:
                 runs.append({'side': side, 'name': run.get('run', {}).get('name', side),
                              'status_counts': dict(Counter(c.get('execution', {}).get('status', 'unknown') for c in run['cases'])),
@@ -203,6 +220,7 @@ class Dashboard:
                 'impact': {k: v for k, v in result.items() if k != 'cases'} if result else None,
                 'profile': value.get('profile'), 'artifact_path': value.get('artifact_path'),
                 'runs': runs, 'designs': designs,
+                'fact_labels': {f['key']: f['label'] for f in CASE_FACTS + RECORD_FACTS},
                 'reference': {k: v for k, v in value['reference'].items() if k != 'cases'} if value.get('reference') else None}
 
     def detail(self, dataset, case_id):

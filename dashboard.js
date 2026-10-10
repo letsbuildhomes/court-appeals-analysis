@@ -141,7 +141,7 @@ function experimentCard(d) {
   } else if (d.status === 'planned' || d.status === 'running') {
     const estimate = d.cost?.estimate;
     right.append(node('p', d.status === 'planned' ? 'Not run yet' : `${fmt(d.progress?.complete)} of ${fmt(d.progress?.cases)} cases complete`, 'card-headline'));
-    if (estimate) right.append(node('p', `Estimated new spending up to ${money(estimate.upper_bound_usd)} · base run spent ${money(estimate.historical_usd)} on this work`, 'muted small'));
+    if (estimate) right.append(node('p', `Estimated new spending up to ${money(estimate.upper_bound_usd)} · ${money(estimate.inherited_usd)} of identical work reused`, 'muted small'));
   }
   card.append(left, right);
   return card;
@@ -555,29 +555,109 @@ function diffView(before, after) {
   if (!first) flush(true); else view.append(node('p', 'No difference.', 'muted'));
   return view;
 }
+function stepsById(recipe) {
+  return Object.fromEntries((recipe?.phases || []).flatMap(phase => phase.steps.map(step => [step.id, step])));
+}
+function stepChanges(b, c) {
+  if (!b || !c) return [[b ? 'Step' : 'Step', b ? 'present' : 'absent', c ? 'present' : 'removed']];
+  const rows = [], add = (label, x, y) => { if (JSON.stringify(x) !== JSON.stringify(y)) rows.push([label, x, y]); };
+  add('Component', b.component, c.component);
+  add('Model', b.provider?.model, c.provider?.model);
+  add('Provider', b.provider?.name, c.provider?.name);
+  add('Conversation', b.context, c.context);
+  for (const key of new Set([...Object.keys(b.settings || {}), ...Object.keys(c.settings || {})])) add(plain(key), b.settings?.[key], c.settings?.[key]);
+  for (const role of new Set([...Object.keys(b.prompts || {}), ...Object.keys(c.prompts || {})]))
+    if (b.prompts?.[role]?.sha256 !== c.prompts?.[role]?.sha256) rows.push(['Prompt: ' + role, b.prompts?.[role]?.name || '—', (c.prompts?.[role]?.name || '—') + ' (edited)']);
+  return rows;
+}
+const describeValue = v => v == null ? '—' : typeof v === 'number' ? fmt(v) : String(v).replaceAll('_', ' ');
+function recipeView(o, comparing = true) {
+  const b = o.designs?.baseline?.recipe, c = o.designs?.candidate?.recipe;
+  if (!c?.phases) return null;
+  const base = stepsById(b), labels = o.fact_labels || {};
+  const basePhases = Object.fromEntries((b?.phases || []).map(p => [p.id, p]));
+  const graph = el('div', 'recipe-graph'), details = el('div', 'step-details');
+  let selected = null;
+  const cards = [];
+  c.phases.forEach((phase, index) => {
+    const batchChanged = comparing && JSON.stringify(basePhases[phase.id]?.batch || null) !== JSON.stringify(phase.batch || null);
+    const panel = el('div', 'phase' + (batchChanged ? ' changed' : ''),
+      el('div', 'phase-head', node('strong', plain(phase.id)), node('span', phase.kind === 'batched' ? 'Batched' : 'One case at a time', 'muted small'),
+        phase.batch ? node('span', phase.batch.text + (batchChanged ? ' · changed' : ''), 'batch-tag') : null));
+    const row = el('div', 'step-row');
+    phase.steps.forEach((step, i) => {
+      const changes = comparing ? stepChanges(base[step.id], step) : [];
+      if (i) row.append(node('span', '→', 'step-arrow' + (step.context === 'continue' ? ' continues' : '')));
+      const card = button('', () => show(step.id), 'step-card' + (changes.length ? ' changed' : '') + (step.context === 'continue' ? ' continues' : ''));
+      card.dataset.step = step.id;
+      card.append(el('span', 'step-top', node('strong', plain(step.id)), changes.length ? node('span', base[step.id] ? 'changed' : 'added', 'change-flag') : null),
+        node('span', step.provider?.model || '—', 'step-model'),
+        step.context === 'continue' ? node('span', '↳ continues the previous conversation', 'step-context') : node('span', 'Fresh conversation', 'step-context'),
+        el('span', 'step-facts', (step.facts || []).slice(0, 3).map(f => node('span', labels[f] || plain(f), 'fact-chip')),
+          (step.facts || []).length > 3 ? node('span', '+' + (step.facts.length - 3), 'fact-chip more') : null));
+      cards.push(card); row.append(card);
+    });
+    panel.append(row); graph.append(panel);
+    if (index < c.phases.length - 1) graph.append(node('div', '⟶', 'phase-arrow'));
+  });
+  const removed = Object.keys(base).filter(id => !stepsById(c)[id]);
+  if (comparing && removed.length) graph.append(node('p', 'Removed steps: ' + removed.join(', '), 'muted small'));
+  function show(id) {
+    selected = id;
+    for (const card of cards) { card.classList.toggle('selected', card.dataset.step === id); card.setAttribute('aria-pressed', String(card.dataset.step === id)); }
+    const step = stepsById(c)[id], previous = base[id], changes = comparing ? stepChanges(previous, step) : [];
+    details.replaceChildren(el('div', 'step-detail-head', node('h3', plain(id)), node('span', step.component + ' component', 'muted small')),
+      node('p', step.summary || 'No description recorded.', 'step-summary'),
+      el('dl', 'step-facts-list',
+        el('div', null, node('dt', 'Reads'), node('dd', (step.reads || []).map(plain).join(', ') || '—')),
+        el('div', null, node('dt', 'Writes'), node('dd', (step.writes || []).map(plain).join(', ') || '—')),
+        el('div', null, node('dt', 'Affects'), node('dd', (step.facts || []).map(f => labels[f] || plain(f)).join(', ') || '—')),
+        el('div', null, node('dt', 'Model'), node('dd', `${step.provider?.model || '—'}` + (step.provider?.pricing ? ` · $${step.provider.pricing.input}/M input, $${step.provider.pricing.output ?? 0}/M output` : ''))),
+        el('div', null, node('dt', 'Settings'), node('dd', Object.entries(step.settings || {}).map(([k, v]) => plain(k) + ' ' + describeValue(v)).join(' · ') || '—'))));
+    if (comparing) {
+      if (!changes.length) details.append(node('p', 'Unchanged from the baseline.', 'muted'));
+      else {
+        const table = el('table', 'settings-table', el('thead', null, el('tr', null, node('th', 'Changed'), node('th', 'Baseline'), node('th', 'Candidate'))));
+        const body = node('tbody');
+        for (const [label, x, y] of changes) body.append(el('tr', null, node('th', label), node('td', describeValue(x)), node('td', describeValue(y))));
+        table.append(body); details.append(el('div', 'table-wrap flat', table));
+      }
+      for (const [role, prompt] of Object.entries(step.prompts || {})) {
+        if (previous?.prompts?.[role]?.sha256 === prompt.sha256) continue;
+        details.append(node('h4', `Prompt for ${role}: ${prompt.name}`),
+          diffView(o.designs.baseline?.prompts?.[previous?.prompts?.[role]?.name], o.designs.candidate?.prompts?.[prompt.name]));
+      }
+    }
+  }
+  const first = cards.find(card => card.classList.contains('changed')) || cards[0];
+  if (first) show(first.dataset.step);
+  return {graph, details};
+}
 function changesView(o) {
-  const e = o.experiment, designs = o.designs, blocks = [];
+  const e = o.experiment, designs = o.designs, v = e?.variables || {}, blocks = [];
   if (o.kind === 'retrospective') blocks.push(el('p', 'context-note', node('strong', 'Retrospective comparison. '),
     'These runs were not produced as a controlled experiment. Differences can come from any change between them, including code, model behavior and the variables recorded below.'));
+  const recipe = recipeView(o);
+  if (recipe) blocks.push(section('Pipeline', 'Phases run left to right; steps within a phase run in order. Changed steps are highlighted; select a step to see what it does and what changed.',
+    recipe.graph, recipe.details));
+  const overrides = v.recipe || [];
+  const notes = [...overrides.map(c => [c.path, describeValue(c.base), describeValue(c.value)]),
+    ...(v.components || []).map(name => ['component file', '—', name]),
+    ...(v.rerun?.length ? [['rerun', '—', v.rerun.join(', ')]] : [])];
+  if (notes.length) {
+    const table = el('table', 'settings-table', el('thead', null, el('tr', null, node('th', 'Override'), node('th', 'Baseline'), node('th', 'Candidate'))));
+    const body = node('tbody'); for (const [path, x, y] of notes) body.append(el('tr', null, node('th', path), node('td', x), node('td', y)));
+    table.append(body); blocks.push(o.kind === 'retrospective'
+      ? section('Recorded differences', 'How the two runs\u2019 recipes differ.', el('div', 'table-wrap flat', table))
+      : section('Recorded overrides', 'Exactly what the experiment definition changed in the recipe.', el('div', 'table-wrap flat', table)));
+  }
   const prompts = Object.keys({...designs.baseline?.prompts, ...designs.candidate?.prompts}).sort();
   const changedPrompts = prompts.filter(k => designs.baseline?.prompts?.[k] !== designs.candidate?.prompts?.[k]);
-  const settings = Object.entries(e?.variables?.settings || {});
-  if (!changedPrompts.length && !settings.length) blocks.push(section('No variables changed', null,
-    node('p', 'Both runs used the same prompts and settings. Differences between them measure run-to-run variation, including retries of failed calls.', 'muted')));
-  if (settings.length) {
-    const table = el('table', 'settings-table', el('thead', null, el('tr', null, node('th', 'Setting'), node('th', 'Baseline'), node('th', 'Candidate'))));
-    const body = node('tbody'); for (const [key, change] of settings) body.append(el('tr', null, node('th', plain(key)), node('td', fmt(change.base)), node('td', fmt(change.value))));
-    table.append(body); blocks.push(section('Settings', null, el('div', 'table-wrap flat', table)));
-  }
-  for (const key of changedPrompts) blocks.push(section(`Prompt: ${key}`, 'Removed text is struck through; added text is highlighted.',
+  if (!changedPrompts.length && !notes.length && !(recipe && [...recipe.graph.querySelectorAll('.changed')].length))
+    blocks.push(section('No variables changed', null, node('p', 'Both runs used the same recipe and prompts. Differences between them measure run-to-run variation.', 'muted')));
+  if (!recipe) for (const key of changedPrompts) blocks.push(section(`Prompt: ${key}`, 'Removed text is struck through; added text is highlighted.',
     diffView(designs.baseline?.prompts?.[key], designs.candidate?.prompts?.[key])));
-  const stages = e?.reuse?.stages;
-  if (stages && Object.keys(stages).length) {
-    const strip = el('div', 'stage-strip');
-    for (const [stage, reused] of Object.entries(stages)) strip.append(el('div', 'stage ' + (reused ? 'reused' : 'rerun'), node('strong', plain(stage)), node('span', reused ? 'Reused saved work' : 'New model calls')));
-    blocks.push(section('Pipeline stages', `Stages before the first change reuse byte-identical saved requests. Review batching: ${plain(e.batching?.status)}.`, strip));
-  }
-  if (changedPrompts.length < prompts.length) blocks.push(node('p', 'Unchanged prompts: ' + prompts.filter(k => !changedPrompts.includes(k)).join(', ') + '.', 'muted small'));
+  else if (changedPrompts.length) blocks.push(node('p', 'Changed prompts: ' + changedPrompts.join(', ') + '. Select a step that uses one to see its diff.', 'muted small'));
   return blocks;
 }
 
@@ -594,15 +674,15 @@ function costView(o) {
     tile('New spending', money(0), 'A retrospective comparison makes no model calls');
   } else {
     tile('New spending', money(cand.new_usd), 'Charged by this experiment');
-    tile('Estimate', e?.estimate ? '≤ ' + money(e.estimate.upper_bound_usd) : '—', e?.estimate ? 'Base run spent ' + money(e.estimate.historical_usd) + ' on this work' : null);
-    tile('Inherited', money(cand.inherited_usd), 'Reused saved calls; not new spending');
+    tile('Estimate', e?.estimate ? '≤ ' + money(e.estimate.upper_bound_usd) : '—', 'Worst case planned for new calls');
+    tile('Inherited', money(cand.inherited_usd), 'Identical saved calls reused from the base run');
     tile('Per improved case', improved && typeof cand.new_usd === 'number' ? money(cand.new_usd / improved) : '—', `${improved} improved selected cases`);
   }
   const blocks = [section('Spending', o.synthetic ? 'Simulated amounts.' : null, tiles)];
   if (e?.estimate && typeof cand.new_usd === 'number') {
-    const max = Math.max(e.estimate.upper_bound_usd, e.estimate.historical_usd, cand.new_usd) || 1;
+    const max = Math.max(e.estimate.upper_bound_usd, cand.new_usd) || 1;
     const bars = el('div', 'cost-bars');
-    for (const [label, value, cls] of [['Actual new spending', cand.new_usd, 'actual'], ['Base run, same work', e.estimate.historical_usd, 'historical'], ['Planned upper bound', e.estimate.upper_bound_usd, 'bound']]) {
+    for (const [label, value, cls] of [['Actual new spending', cand.new_usd, 'actual'], ['Planned upper bound', e.estimate.upper_bound_usd, 'bound']]) {
       const fill = node('span', null, 'fill ' + cls); fill.style.width = (100 * value / max) + '%';
       bars.append(el('div', 'cost-bar', node('span', label), el('div', 'track', fill), node('strong', money(value))));
     }
@@ -617,8 +697,7 @@ function costView(o) {
       node('td', Object.entries(x.status_counts || {}).map(([k, v]) => v + ' ' + plain(k)).join(', '))));
     table.append(body); blocks.push(section('Executions', 'Each run invocation, with its cumulative cap on new spending.', el('div', 'table-wrap flat', table)));
   }
-  const raw = el('details', 'technical', node('summary', 'Accounting metadata'), node('pre', pretty({baseline: base, candidate: cand})));
-  blocks.push(raw);
+  blocks.push(el('details', 'technical', node('summary', 'Accounting metadata'), node('pre', pretty({baseline: base, candidate: cand}))));
   return blocks;
 }
 
@@ -626,20 +705,19 @@ function costView(o) {
 function plannedView(o) {
   const e = o.experiment, progress = o.progress || {}, estimate = e.estimate || {};
   const blocks = [];
-  const stage = {extracted: 'first pass reused, awaiting review', not_run: 'not started'};
+  const stage = {extracted: 'first pass done, awaiting review', not_run: 'not started'};
   const statuses = el('div', 'status-chips', Object.entries(progress.statuses || {}).map(([k, v]) => pill(v + ' ' + (stage[k] || plain(k)), 'status')));
-  blocks.push(section(o.status === 'planned' ? 'Ready to run' : 'In progress',
-    'Results appear here after the experiment is finalized.', statuses));
+  blocks.push(section(o.status === 'planned' ? 'Ready to run' : 'In progress', 'Results appear here after the experiment is finalized.', statuses));
   const tiles = el('div', 'tiles');
   for (const [label, value, note] of [['Upper bound', money(estimate.upper_bound_usd), 'Worst case for all new calls'],
-    ['Base run, same work', money(estimate.historical_usd), 'What these calls cost before'],
+    ['Inherited', money(estimate.inherited_usd), 'Identical saved calls the dry run reused'],
     ['New spending so far', money(o.cost_summary?.new_usd), 'Charged by this experiment'],
-    ['New calls planned', Object.entries(estimate.new_calls || {}).map(([k, v]) => v + ' ' + k).join(', ') || 'None', null]])
+    ['New calls planned', fmt(Object.values(estimate.new_calls || {}).reduce((a, b) => a + b, 0)),
+      Object.entries(estimate.new_calls || {}).map(([k, v]) => v + ' ' + k).join(', ') || 'None']])
     tiles.append(el('div', 'tile', node('span', label), node('strong', value), note ? node('small', note) : null));
-  blocks.push(section('Estimate', 'Planning makes no model calls. Running enforces a cap on new spending before every call.', tiles));
-  const stages = el('div', 'stage-strip');
-  for (const [stage, reused] of Object.entries(e.reuse?.stages || {})) stages.append(el('div', 'stage ' + (reused ? 'reused' : 'rerun'), node('strong', plain(stage)), node('span', reused ? 'Reuses saved work' : 'New model calls')));
-  blocks.push(section('Pipeline stages', `${e.reuse?.calls?.length || 0} saved calls reused · batching ${plain(e.batching?.status)}`, stages));
+  blocks.push(section('Estimate', 'From a dry run of the composed recipe: no model calls. Running enforces a cap on new spending before every call.', tiles));
+  const recipe = recipeView(o);
+  if (recipe) blocks.push(section('Pipeline', `Changed steps are highlighted. Review batching: ${plain(e.batching?.status)}.`, recipe.graph, recipe.details));
   blocks.push(section('Commands', 'Run with a cap on new spending, then finalize to compare.',
     node('pre', `make experiments-run EXPERIMENT=${e.name} EXPERIMENT_ARGS='--max-spend ${Math.max(0.5, Math.ceil((estimate.upper_bound_usd || 0.5) * 2) / 2).toFixed(2)}'\nmake experiments-finalize EXPERIMENT=${e.name}`)));
   return blocks;

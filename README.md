@@ -92,7 +92,8 @@ See the operating guide for retry allowances and preserved attempt logs.
 The [research summary](docs/APPEALS-RESEARCH.md) explains the selected approach and
 its limits. The [release check](docs/APPEALS-RELEASE-CHECK.md) records regression
 results. Earlier experimental files have been removed;
-`appeals.py` and `prompts/appeals/` are the supported entry points for new runs.
+`appeals.py` with the recipe in `recipes/appeals/` ([pipeline](docs/PIPELINE.md)) and the
+prompts in `prompts/appeals/` are the supported entry points for new runs.
 The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted research
 artifacts. Source PDFs, production databases, and supported appeal run logs are
 preserved.

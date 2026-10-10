@@ -1,6 +1,5 @@
 """Pure checkpoint selection and finalized-record assembly primitives."""
 from collections import Counter
-import hashlib
 import json
 
 
@@ -16,9 +15,15 @@ def run_progress(run_dir):
                 break
         else:
             counts['not_run'] += 1
-    charges = sum(json.loads(p.read_text()).get('charged_or_reserved_usd') or 0
-                  for p in (run_dir/'calls').rglob('*.result.json')) if (run_dir/'calls').is_dir() else 0
-    return {'statuses': dict(counts), 'charged_usd': charges}
+    new = inherited = 0
+    for path in (run_dir/'calls').rglob('*.result.json') if (run_dir/'calls').is_dir() else []:
+        state = json.loads(path.read_text())
+        amount = state.get('charged_or_reserved_usd') or 0
+        if state.get('inherited_from'):
+            inherited += amount
+        else:
+            new += amount
+    return {'statuses': dict(counts), 'new_usd': new, 'inherited_usd': inherited}
 
 
 def latest_checkpoint(candidates, times):
@@ -31,7 +36,7 @@ def effective_status(status, *, checkpoint_time=None, activity_time=None,
                      activity_stage=None, running=False, eligible=True):
     """Overlay newer active work and source eligibility on checkpoint status."""
     if activity_time is not None and (checkpoint_time is None or activity_time > checkpoint_time):
-        if activity_stage in ('triaging', 'extracting', 'reviewing', 'measuring'):
+        if activity_stage not in (None, 'idle'):  # Any step's activity name.
             status = activity_stage if running else 'interrupted'
     return status if eligible else 'too_large'
 
@@ -76,36 +81,3 @@ def finalized_dockets(records, bounds, *, missing='raise', strict=False):
         clean['duration'] = bound.get('duration') if strict else bound['duration']
         assembled.append(clean)
     return assembled
-
-
-def execution_recipe(manifest):
-    """Describe the current fixed execution topology without driving execution."""
-    settings = {key: manifest.get(key) for key in
-                ('reasoning', 'max_output_tokens', 'max_chars',
-                 'review_batch_size', 'review_batch_chars', 'workers')}
-    stages = ['triage', 'extract', 'review', 'duration']
-    hashes = manifest.get('prompt_hashes') or {}
-    dependencies = {
-        'triage': ['system', 'triage'],
-        'extract': ['system', 'triage', 'extract'],
-        'review': ['primer', 'extract', 'triage', 'review'],
-        'duration': ['primer', 'extract', 'triage', 'review', 'duration'],
-    }
-    def component(stage):
-        selected = {name: hashes.get(name) for name in dependencies[stage]}
-        fingerprint = hashlib.sha256(json.dumps(selected, sort_keys=True).encode()).hexdigest() if all(selected.values()) else None
-        config = {'model': manifest.get('model'), **settings}
-        if stage in ('review', 'duration') and manifest.get('review_max_output_tokens') is not None:
-            config['max_output_tokens'] = manifest['review_max_output_tokens']
-        return {'id': stage, 'label': stage.title(),
-                'config': config,
-                'prompt_sha256': hashes.get(stage),
-                'prompt_dependencies': selected,
-                'effective_prompt_sha256': fingerprint}
-    return {'components': [component(stage) for stage in stages],
-            'edges': [{'from': start, 'to': end} for start, end in zip(stages, stages[1:])],
-            'stages': stages,
-            'finishing': manifest.get('finishing', 'review-duration-followup'),
-            'model': manifest.get('model'),
-            'prompt_sha256': manifest.get('prompt_sha256'),
-            'settings': settings}

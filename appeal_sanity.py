@@ -6,8 +6,10 @@ import json
 from pathlib import Path
 import shutil
 
-from appeal_runtime import Client, api_config, read, save
-from appeals import RUNS, SAFE, export, finish, locked, prepare
+from appeal_runtime import read, save
+from appeals import RUNS, SAFE, export, locked, prepare
+from pipeline import recipe as recipes
+from pipeline.engine import Engine, clients_for
 from scout import usage_counts, reasoning_tokens
 
 
@@ -65,15 +67,16 @@ def main():
     for path in (original/'calls').glob('*'):
         if path.is_file() and any(path.name.startswith(gid+'.') for gid in outputs):
             shutil.copyfile(path,folder/'calls'/path.name)
-    manifest.update(name=args.name,review_batch_size=2,workers=args.workers,
-                    finishing='review-duration-followup')
+    # The copy keeps the original recipe, so its finishing requests are comparable.
+    recipe = recipes.validate(recipes.for_run(original, manifest, prompts))
+    recipes.freeze(folder, recipe)
+    manifest.update(name=args.name,workers=args.workers)
     save(folder/'manifest.json',{**manifest,'groups':[
         {k:v for k,v in g.items() if k!='source'} for g in manifest['groups']]})
-    endpoint,key = api_config()
-    client = Client(folder/'calls',endpoint,key,args.max_spend)
+    clients = clients_for(folder, recipe, args.max_spend)
     started = datetime.now(timezone.utc)
     with locked(folder):
-        finish(folder,manifest,prompts,client,outputs,args.workers)
+        Engine(folder, recipe, prompts, manifest, clients, args.workers).finish(outputs)
         summary = export(folder)
     expected = read(Path(__file__).parent/'tests/fixtures/appeals/release-expectations.json')
     mismatches = []

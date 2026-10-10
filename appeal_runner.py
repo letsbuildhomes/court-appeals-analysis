@@ -1,15 +1,26 @@
-"""Plan, run and finalize targeted extraction experiments on frozen cases.
+"""Plan, run and finalize experiments defined as override directories.
 
-An experiment is a new appeals-1 run over a frozen cohort from a base run, with
-explicit changes to prompts or settings. ``plan`` copies frozen sources and
-reusable saved work and estimates spending; it reads no credentials and makes
-no model calls. ``run`` executes the existing pipeline under a cap on new
-spending. ``finalize`` publishes cohort-restricted baseline and candidate
-artifacts with an unscored comparison. The base run is only read.
+An experiment definition lives in ``experiments/NAME/``:
+
+    experiment.json   hypothesis, base run, cohort file, and options
+    cohort.json       the frozen case selection (``appeal_cohorts.py select``)
+    recipe.json       optional recipe fragment composed over the base run's recipe
+    prompts/*.md      optional replacement or added prompts, by name
+    components/*.py   optional new step components
+
+``plan`` composes the definition over the base run's recipe, freezes the result
+into a new run under ``data/experiments/NAME/run``, and estimates spending with a
+dry run; it reads no credentials and makes no model calls. ``run`` executes it
+under a cap on new spending, reusing any base-run call whose request is
+identical. ``finalize`` publishes cohort-restricted baseline and candidate
+artifacts with a comparison. ``compare`` records two existing runs as a
+retrospective experiment. The base run is only read.
 """
 import argparse
 from collections import Counter
+import contextlib
 from datetime import datetime, timezone
+import io
 import json
 from pathlib import Path
 import re
@@ -19,29 +30,20 @@ import tempfile
 from types import SimpleNamespace
 
 import appeals
-import group_scout as gs
 from appeal_assembly import run_progress
-from appeal_experiments import create_experiment, read_experiment
 from appeal_cohorts import read_cohort
 from appeal_evaluation import evaluate
+from appeal_experiments import create_experiment, read_experiment
 from appeal_impact import impact
 from appeal_runtime import digest, read, save
 from config import ROOT
+from pipeline import batching, recipe as recipes
+from pipeline.engine import Engine, clients_for
 
-PLAN_VERSION = 'appeal-run-experiment-1'
+PLAN_VERSION = 'appeal-run-experiment-2'
+DEFINITION_VERSION = 'appeal-experiment-definition-1'
 EXPERIMENTS = ROOT/'data/experiments'
-STAGES = ('triage', 'extract', 'review', 'duration')
-# Prompt files each stage's requests contain (see appeal_assembly.execution_recipe).
-STAGE_PROMPTS = {'triage': {'system', 'triage'}, 'extract': {'system', 'triage', 'extract'},
-                 'review': {'primer', 'extract', 'triage', 'review'},
-                 'duration': {'primer', 'extract', 'triage', 'review', 'duration'}}
-# Request settings and the stages whose requests carry them.
-SETTINGS = ('model', 'reasoning', 'max_output_tokens', 'review_max_output_tokens')
-STAGE_SETTINGS = {'triage': {'model', 'reasoning', 'max_output_tokens'},
-                  'extract': {'model', 'reasoning', 'max_output_tokens'},
-                  'review': {'model', 'reasoning', 'review_max_output_tokens'},
-                  'duration': {'model', 'reasoning', 'review_max_output_tokens'}}
-REASONING = ('low', 'medium', 'high')
+DEFINITIONS = ROOT/'experiments'
 REVIEW_CALL = re.compile(r'review-[0-9a-f]{16}\Z')
 
 
@@ -55,18 +57,14 @@ def code_revision():
         return {'commit': None, 'dirty': None}
 
 
-def charges(paths):
-    return sum(read(p).get('charged_or_reserved_usd') or 0 for p in paths)
-
-
-def call_files(calls, name):
-    """A saved call's files, including any JSON-repair subcall; attempts excluded."""
-    return sorted(p for p in calls.iterdir() if p.is_file() and p.name.startswith(name+'.'))
-
-
-def call_ok(calls, name):
-    path = calls/f'{name}.result.json'
-    return path.exists() and read(path).get('status') == 'ok'
+def charges(paths, inherited=None):
+    """Sum recorded charges; ``inherited`` selects only inherited (True) or new (False) calls."""
+    total = 0
+    for path in paths:
+        state = read(path)
+        if inherited is None or bool(state.get('inherited_from')) == inherited:
+            total += state.get('charged_or_reserved_usd') or 0
+    return total
 
 
 def review_batches(calls, recursive=False):
@@ -96,13 +94,6 @@ def case_charges(calls, groups):
     return total
 
 
-def run_settings(manifest):
-    """A run's request settings; review inherits the first-pass output allowance."""
-    value = {'model': manifest.get('model'), 'reasoning': manifest.get('reasoning', 'high'),
-             'max_output_tokens': manifest.get('max_output_tokens', 65536)}
-    return {**value, 'review_max_output_tokens': manifest.get('review_max_output_tokens', value['max_output_tokens'])}
-
-
 def new_folder(root, name):
     if not appeals.SAFE.fullmatch(name) or (root/name).exists():
         raise ValueError('Choose a new experiment name using letters, numbers, dots, dashes or underscores')
@@ -121,210 +112,214 @@ def publish(folder, build):
         raise
 
 
-def triage_request(settings, prompts, source):
-    request = gs.triage_payload(settings['model'], prompts, source, settings['reasoning'])
-    request['max_tokens'] = settings['max_output_tokens']
-    return request
+def load_run(folder):
+    manifest, prompts = read(folder/'manifest.json'), read(folder/'prompts.json')
+    return manifest, prompts, recipes.for_run(folder, manifest, prompts)
 
 
-def bound_usd(known_bytes, messages, unknown_tokens, max_tokens, multiplier):
-    """Mirror request_cost_bound; unknown model-written content counts as max_tokens."""
-    tokens = known_bytes + 256*messages + 1024 + unknown_tokens
-    return multiplier*(tokens*gs.PRICES_PER_M['cache_miss'] + max_tokens*gs.PRICES_PER_M['output'])/1_000_000
+def variables(base_recipe, base_prompts, recipe, prompts, components=()):
+    """What a recipe changes relative to its base, for records and the dashboard."""
+    def strip(value):
+        return {k: v for k, v in value.items() if k not in ('prompts', 'legacy')}
+    changed_prompts = {name: {'base_sha256': digest(base_prompts[name]) if name in base_prompts else None,
+                              'sha256': digest(prompts[name]) if name in prompts else None}
+                       for name in sorted(set(base_prompts) | set(prompts)) if base_prompts.get(name) != prompts.get(name)}
+    return {'recipe': recipes.diff(strip(recipes.resolved(base_recipe)), strip(recipes.resolved(recipe))),
+            'prompts': changed_prompts,
+            'components': [Path(p).name for p in components]}
+
+
+def batch_of(recipe):
+    return recipe['phases'][recipe['order'][1]].get('batch', {})
+
+
+# Definitions ---------------------------------------------------------------
+def init(args):
+    """Scaffold a definition directory for a new experiment."""
+    folder = args.definitions/args.name
+    if not appeals.SAFE.fullmatch(args.name) or folder.exists():
+        raise ValueError('Choose a new experiment name using letters, numbers, dots, dashes or underscores')
+    base = args.base_run.resolve()
+    read(base/'manifest.json')
+    try:
+        base_ref = str(base.relative_to(ROOT))
+    except ValueError:
+        base_ref = str(base)
+    folder.mkdir(parents=True)
+    save(folder/'experiment.json', {'schema_version': DEFINITION_VERSION, 'hypothesis': args.hypothesis,
+                                    'base_run': base_ref, 'cohort': 'cohort.json', 'companions': True,
+                                    'rerun': [], 'allow_batch_change': False})
+    (folder/'README.md').write_text(f'# {args.name}\n\n{args.hypothesis}\n\n'
+                                    '## Why\n\n## What changes\n\n## How to judge it\n')
+    return folder
+
+
+def read_definition(folder):
+    definition = read(Path(folder)/'experiment.json')
+    if definition.get('schema_version') != DEFINITION_VERSION:
+        raise ValueError('Unsupported experiment definition version')
+    for key in ('hypothesis', 'base_run', 'cohort'):
+        if not definition.get(key):
+            raise ValueError(f'experiment.json needs {key}')
+    unknown = set(definition) - {'schema_version', 'hypothesis', 'base_run', 'cohort', 'companions', 'rerun',
+                                 'allow_batch_change', 'notes'}
+    if unknown:
+        raise ValueError('Unknown experiment.json keys: '+', '.join(sorted(unknown)))
+    return definition
+
+
+def definition_files(folder):
+    """Every file in a definition directory with its hash, for provenance."""
+    folder = Path(folder)
+    return {str(p.relative_to(folder)): digest(p.read_text()) for p in sorted(folder.rglob('*'))
+            if p.is_file() and '__pycache__' not in p.parts}
+
+
+# Planning -------------------------------------------------------------------
+def dry_run(run_dir, recipe, prompts, manifest, inherit, rerun, multiplier):
+    """Run the recipe without sending; return the call ledger and checkpoints."""
+    scratch = Path(tempfile.mkdtemp(prefix='dry-run-'))
+    try:
+        groups = [{**g, 'source': (run_dir/'sources'/f'{g["group_id"]}.txt').read_text()} for g in manifest['groups']]
+        clients = clients_for(scratch, recipe, float('inf'), multiplier, inherit=inherit, dry_run=True)
+        engine = Engine(scratch, recipe, prompts, {**manifest, 'groups': groups}, clients, workers=4, rerun=rerun)
+        with contextlib.redirect_stdout(io.StringIO()):
+            outputs = engine.run_first_pass()
+            engine.finish(outputs)
+        ledger = [entry for client in engine.all_clients() for entry in client.ledger]
+        first = {gid: read(scratch/'first_pass'/f'{gid}.json') for gid in outputs}
+        results = {p.stem: read(p) for p in (scratch/'results').glob('*.json')}
+        return ledger, first, results, groups, clients
+    finally:
+        shutil.rmtree(scratch)
+
+
+def estimate(recipe, prompts, groups, ledger, first, results, clients, multiplier):
+    """New calls from the dry run, plus conservative bounds for work it could not reach."""
+    first_steps, batch_steps = (recipe['phases'][p]['steps'] for p in recipe['order'])
+    counts, upper, inherited = Counter(), 0.0, 0.0
+    for entry in ledger:
+        step = next((s for s in first_steps if entry['name'].endswith('.'+s)), None) or \
+            next((s for s in batch_steps if entry['name'].startswith(s+'-')), entry['name'])
+        if entry['kind'] == 'new':
+            counts[step] += 1
+            upper += entry['usd']
+        else:
+            inherited += entry['usd']
+    sizes = {g['group_id']: len(g['source'].encode()) for g in groups}
+
+    def unreached(step_id, known):
+        spec = recipes.step_spec(recipe, step_id)
+        tokens = spec['settings'].get('max_output_tokens', 0)
+        size = known + sum(len(prompts[n].encode()) for n in spec.get('prompts', {}).values())
+        counts[step_id+' (unreached)'] += 1
+        return clients[spec['provider']].provider.estimate(size, 4, 2*tokens, tokens)*multiplier
+    # A case stopped by a new first-pass call cannot show the requests after it.
+    for gid, checkpoint in first.items():
+        failed = checkpoint.get('failed_call') if checkpoint.get('status') == 'incomplete' else None
+        if failed:
+            for step_id in first_steps[first_steps.index(failed.split('.')[-1])+1:]+batch_steps:
+                upper += unreached(step_id, sizes[gid])
+    # A batch stopped at one step cannot show the later steps' requests.
+    stopped = {}
+    for gid, result in results.items():
+        if result.get('status', '').endswith('_failed'):
+            stopped.setdefault(result.get('error') or '', []).append(gid)
+    for call, members in stopped.items():
+        step = next((s for s in batch_steps if call.startswith(s+'-')), None)
+        if step:
+            for step_id in batch_steps[batch_steps.index(step)+1:]:
+                upper += unreached(step_id, sum(sizes[gid] for gid in members))
+    return {'new_calls': dict(counts), 'upper_bound_usd': round(upper, 6), 'inherited_usd': round(inherited, 6),
+            'price_multiplier': multiplier,
+            'notes': ['The bound prices calls the dry run reached at their exact requests, and later steps it could '
+                      'not reach as if every unknown answer used its full output allowance. It excludes JSON-repair '
+                      'calls and retries, which the spending cap still governs.']}
 
 
 def plan(args):
     folder = new_folder(args.root, args.name)
-    base = args.base_run.resolve()
-    base_manifest, base_prompts = read(base/'manifest.json'), read(base/'prompts.json')
-    if base_manifest.get('schema_version') != 'appeals-1':
-        raise ValueError('The base run must be an appeals-1 run')
-    if digest(json.dumps(base_prompts, sort_keys=True)) != base_manifest['prompt_sha256']:
-        raise ValueError('Base run prompts changed')
-    cohort = read_cohort(args.cohort)
+    definition_dir = args.definitions/args.name
+    definition = read_definition(definition_dir)
+    base = (ROOT/definition['base_run']).resolve()
+    base_manifest, base_prompts, base_recipe = load_run(base)
+    composed, prompts, components, sources = recipes.compose(base_recipe, base_prompts, definition_dir)
+    composed.pop('legacy', None)
+    recipes.validate(composed)
+    rerun = list(definition.get('rerun', []))
+    if set(rerun) - set(composed['steps']):
+        raise ValueError('rerun names unknown steps: '+', '.join(sorted(set(rerun) - set(composed['steps']))))
+    cohort = read_cohort(definition_dir/definition['cohort'])
     base_groups = {g['group_id']: g for g in base_manifest['groups']}
     for case in cohort['cases']:
         group = base_groups.get(case['case_id'])
         if group is None or group['source_sha256'] != case['source_sha256']:
             raise ValueError(f'Cohort case {case["case_id"]} is absent from the base run or has a different source')
 
-    # Review batches pair groups; a pair's companion supplies the same request context.
-    calls = base/'calls'
-    batches = dict(review_batches(calls))
-    membership = {gid: members for members in batches.values() for gid in members}
+    # Batched steps see their whole batch; keep a cohort case's base companions
+    # unless the experiment changes batching on purpose.
     selected = [case['case_id'] for case in cohort['cases']]
+    membership = {gid: members for _, members in review_batches(base/'calls') for gid in members}
+    same_batching = batch_of(composed) == batch_of(base_recipe)
     wanted = set(selected)
-    if not args.no_companions:
+    if definition.get('companions', True) and same_batching:
         wanted |= {gid for s in selected for gid in membership.get(s, [])}
     order = [g['group_id'] for g in base_manifest['groups'] if g['group_id'] in wanted]
     companions = [gid for gid in order if gid not in selected]
-    sources = {}
     for gid in order:
-        text = (base/'sources'/f'{gid}.txt').read_text()
-        if digest(text) != base_groups[gid]['source_sha256']:
+        if digest((base/'sources'/f'{gid}.txt').read_text()) != base_groups[gid]['source_sha256']:
             raise ValueError('Base frozen source changed: '+gid)
-        sources[gid] = text
-
-    prompts, prompt_changes = dict(base_prompts), {}
-    for spec in args.prompt or []:
-        key, _, path = spec.partition('=')
-        if key not in prompts or not path:
-            raise ValueError(f'Use --prompt NAME=FILE with NAME one of: {", ".join(sorted(prompts))}')
-        text = Path(path).read_text()
-        if text != prompts[key]:
-            prompts[key] = text
-            prompt_changes[key] = {'base_sha256': digest(base_prompts[key]), 'sha256': digest(text),
-                                   'file': str(Path(path).resolve())}
-    base_settings = run_settings(base_manifest)
-    requested = {'model': args.model, 'reasoning': args.reasoning, 'max_output_tokens': args.max_output_tokens,
-                 'review_max_output_tokens': args.review_max_output_tokens}
-    settings = {k: requested[k] if requested[k] is not None else base_settings[k] for k in SETTINGS}
-    if args.max_output_tokens is not None and args.review_max_output_tokens is None:
-        settings['review_max_output_tokens'] = settings['max_output_tokens']
-    setting_changes = {k: {'base': base_settings[k], 'value': settings[k]} for k in SETTINGS if settings[k] != base_settings[k]}
-
-    reuse, upstream = {}, True
-    for stage in STAGES:
-        unchanged = not (STAGE_SETTINGS[stage] & set(setting_changes)) and not (STAGE_PROMPTS[stage] & set(prompt_changes))
-        forced = args.rerun_from is not None and STAGES.index(stage) >= STAGES.index(args.rerun_from)
-        upstream = reuse[stage] = upstream and unchanged and not forced
-
-    copy_calls, first_pass, mismatched = [], {}, []
-    for gid in order:
-        triage_name = f'{gid}.triage'
-        if reuse['triage'] and call_ok(calls, triage_name):
-            # Reuse only a byte-identical request; anything else is a new call.
-            if read(calls/f'{triage_name}.request.json') == triage_request(settings, prompts, sources[gid]):
-                copy_calls.append(triage_name)
-            else:
-                mismatched.append(triage_name)
-        if reuse['extract'] and triage_name in copy_calls:
-            checkpoint = base/'first_pass'/f'{gid}.json'
-            if checkpoint.exists() and read(checkpoint)['status'] in ('extracted', 'complete'):
-                first_pass[gid] = read(checkpoint)
-                if call_ok(calls, f'{gid}.extract'):
-                    copy_calls.append(f'{gid}.extract')
-    if mismatched:
-        raise ValueError('Saved triage requests differ although no triage input changed: '+', '.join(mismatched))
-
-    # Predict review batches when every first pass is reused; otherwise verify after running.
-    review_chars = base_manifest['review_batch_chars']
-    if all(gid in first_pass or not base_groups[gid]['eligible'] for gid in order):
-        retained = [{'group': gid, 'source': sources[gid], 'candidate': first_pass[gid]['candidate']}
-                    for gid in order if gid in first_pass and first_pass[gid]['status'] == 'extracted'
-                    and first_pass[gid].get('candidate') is not None]
-        predicted = [[c['group'] for c in batch] for batch in appeals.packs(retained, 2, review_chars)]
-        changed = [batch for batch in predicted if any(set(membership.get(g, [])) != set(batch) for g in batch)]
-        batching = {'status': 'changed' if changed else 'preserved', 'predicted': predicted, 'changed': changed}
-    else:
-        predicted, batching = None, {'status': 'verify_after_first_pass'}
-    if args.no_companions:
-        batching['status'] = 'changed'
-    if batching['status'] == 'changed' and not args.allow_batch_change:
-        raise ValueError('Review batch membership would differ from the base run; '
-                         'pass --allow-batch-change to record batching as a changed variable')
-    if reuse['review'] and predicted is not None:
-        for batch in predicted:
-            name = 'review-'+digest('|'.join(batch))[:16]
-            if call_ok(calls, name):
-                copy_calls.append(name)
-                if reuse['duration']:
-                    for path in sorted(calls.glob(f'duration-{name[7:]}-*.request.json')):
-                        if call_ok(calls, path.name[:-len('.request.json')]):
-                            copy_calls.append(path.name[:-len('.request.json')])
-
-    # Historical spending on the same work, and a conservative bound for new calls.
-    max_tokens, multiplier = settings['max_output_tokens'], args.price_multiplier
-    review_tokens = settings['review_max_output_tokens']
-    eligible = [gid for gid in order if base_groups[gid]['eligible']]
-    copied = set(copy_calls)
-    counts, upper, historical = Counter(), 0.0, 0.0
-    for gid in eligible:
-        triage = triage_request(settings, prompts, sources[gid])
-        triage_bytes = sum(len(m['content'].encode()) for m in triage['messages'])
-        if f'{gid}.triage' not in copied:
-            counts['triage'] += 1
-            upper += bound_usd(triage_bytes, 2, 0, max_tokens, multiplier)
-        if gid not in first_pass:
-            counts['extract'] += 1  # Upper bound: assume every group routes to extraction.
-            upper += bound_usd(triage_bytes+len(prompts['extract'].encode()), 4, max_tokens, max_tokens, multiplier)
-        for stage in ('triage', 'extract'):
-            if f'{gid}.{stage}' not in copied:
-                historical += charges(calls.glob(f'{gid}.{stage}.*result.json'))
-    prefix = sum(len(prompts[k].encode()) for k in ('primer', 'extract', 'triage', 'review')) + 2048
-    estimated_batches = predicted if predicted is not None else [[gid] for gid in eligible]
-    for batch in estimated_batches:
-        known, unknown = prefix + sum(len(sources[g].encode()) for g in batch), 0
-        for g in batch:
-            if g in first_pass:
-                known += sum(len(json.dumps(first_pass[g].get(k), ensure_ascii=False).encode())
-                             for k in ('triage', 'candidate'))
-            else:
-                unknown += 2*max_tokens  # Triage and extraction output in the review request.
-        name = 'review-'+digest('|'.join(batch))[:16]
-        if name not in copied:
-            counts['review'] += 1
-            upper += bound_usd(known, 2, unknown, review_tokens, multiplier)
-        if not any(c.startswith(f'duration-{name[7:]}-') for c in copied):
-            # The follow-up repeats the review request, its answer and corrected records.
-            counts['duration'] += 1
-            upper += bound_usd(known+len(prompts['duration'].encode()), 4, unknown+2*review_tokens, review_tokens, multiplier)
-    for name, members in batches.items():
-        if set(members) & set(order):
-            if name not in copied:
-                historical += charges(calls.glob(f'{name}.*result.json'))
-            historical += charges(p for p in calls.glob(f'duration-{name[7:]}-*result.json')
-                                  if p.name[:-len('.result.json')].split('.')[0] not in copied)
-    estimate = {'new_calls': dict(counts), 'upper_bound_usd': round(upper, 6),
-                'historical_usd': round(historical, 6), 'price_multiplier': multiplier,
-                'notes': ['The upper bound assumes every uncached response uses the full output allowance '
-                          'and every eligible group needs extraction. It excludes optional JSON-repair calls '
-                          'and retries, which the spending cap still governs.',
-                          'Historical spending is what the base run recorded for the same groups and stages.']}
-
-    record = {'schema_version': PLAN_VERSION, 'name': args.name,
-              'created_at': datetime.now(timezone.utc).isoformat(),
-              'hypothesis': args.hypothesis, 'code_revision': code_revision(),
-              'base': {'run': str(base), 'name': base_manifest['name'],
-                       'manifest_sha256': digest((base/'manifest.json').read_text()),
-                       'prompt_sha256': base_manifest['prompt_sha256']},
-              'cohort': {'path': str(args.cohort.resolve()), 'sha256': cohort['sha256'], 'name': cohort['name'],
-                         'description': cohort['description'], 'query': cohort['query']},
-              'cases': {'selected': [gid for gid in order if gid in selected], 'companions': companions},
-              'variables': {'prompts': prompt_changes, 'settings': setting_changes, 'rerun_from': args.rerun_from,
-                            'batching': batching['status'], 'companions_included': not args.no_companions},
-              'batching': batching, 'reuse': {'stages': reuse}, 'estimate': estimate}
+    changes = variables(base_recipe, base_prompts, composed, prompts, components)
+    manifest = {'schema_version': 'appeals-1', 'name': args.name, 'created_at': datetime.now(timezone.utc).isoformat(),
+                'model': composed['providers'].get('default', {}).get('model'),
+                'max_chars': base_manifest['max_chars'],
+                **({'cap_changes': base_manifest['cap_changes']} if 'cap_changes' in base_manifest else {}),
+                'prompt_sha256': digest(json.dumps(prompts, sort_keys=True)),
+                'recipe_sha256': recipes.sha256(composed), 'groups': [base_groups[gid] for gid in order]}
 
     def build(temporary):
         run_dir = temporary/'run'
-        (run_dir/'calls').mkdir(parents=True)
+        (run_dir/'sources').mkdir(parents=True)
         (run_dir/'.lock').touch()
         for gid in order:
-            (run_dir/'sources').mkdir(exist_ok=True)
-            (run_dir/'sources'/f'{gid}.txt').write_text(sources[gid])
-        for gid, checkpoint in first_pass.items():
-            save(run_dir/'first_pass'/f'{gid}.json', checkpoint)
-        copied_files = [p for name in copy_calls for p in call_files(calls, name)]
-        for path in copied_files:
-            shutil.copy2(path, run_dir/'calls'/path.name)
-        record['reuse'].update(calls=copy_calls, first_pass=sorted(first_pass),
-                               inherited_usd=charges(p for p in copied_files if p.name.endswith('.result.json')))
+            shutil.copy2(base/'sources'/f'{gid}.txt', run_dir/'sources'/f'{gid}.txt')
         save(run_dir/'prompts.json', prompts)
-        save(run_dir/'manifest.json', {
-            'schema_version': 'appeals-1', 'name': args.name, 'created_at': record['created_at'],
-            **{k: v for k, v in settings.items() if k != 'review_max_output_tokens'},
-            # Recorded only when review and duration differ from the first pass.
-            **({'review_max_output_tokens': settings['review_max_output_tokens']}
-               if settings['review_max_output_tokens'] != settings['max_output_tokens'] else {}),
-            'max_chars': base_manifest['max_chars'], 'review_batch_size': 2,
-            'review_batch_chars': review_chars, 'prompt_sha256': digest(json.dumps(prompts, sort_keys=True)),
-            # Inherited eligibility keeps the base run's cap history.
-            **({'cap_changes': base_manifest['cap_changes']} if 'cap_changes' in base_manifest else {}),
-            'groups': [base_groups[gid] for gid in order]})
+        save(run_dir/'manifest.json', manifest)
+        recipes.freeze(run_dir, composed, components)
+        shutil.copytree(definition_dir, temporary/'definition', ignore=shutil.ignore_patterns('__pycache__'))
+        ledger, first, results, groups, clients = dry_run(run_dir, composed, prompts, manifest, base/'calls', rerun,
+                                                          args.price_multiplier)
+        # Compare the batches the dry run formed with the base run's.
+        retained = [{**g, **first[g['group_id']]} for g in groups if first[g['group_id']].get('status') == 'extracted'
+                    and first[g['group_id']].get('candidate') is not None]
+        reached = all(first[gid].get('status') in ('extracted', 'complete', 'too_large') for gid in order)
+        formed = [[c['group'] for c in batch] for batch in batching.batches(retained, batch_of(composed))] if reached else None
+        if not same_batching or not definition.get('companions', True):
+            status = 'changed'
+        elif formed is None:
+            status = 'verify_after_run'
+        else:
+            status = 'changed' if any(set(membership.get(g, [])) != set(b) for b in formed for g in b) else 'preserved'
+        if status == 'changed' and same_batching and not definition.get('allow_batch_change'):
+            raise ValueError('Review batch membership would differ from the base run; keep companions, or set '
+                             '"allow_batch_change": true to record batching as a changed variable')
+        record = {'schema_version': PLAN_VERSION, 'kind': 'experiment', 'name': args.name,
+                  'created_at': manifest['created_at'], 'hypothesis': definition['hypothesis'],
+                  'code_revision': code_revision(),
+                  'definition': {'path': str(definition_dir), 'files': definition_files(definition_dir), 'sources': sources},
+                  'base': {'run': str(base), 'name': base_manifest['name'],
+                           'manifest_sha256': digest((base/'manifest.json').read_text()),
+                           'recipe_sha256': recipes.sha256(base_recipe)},
+                  'cohort': {'path': str((definition_dir/definition['cohort']).resolve()), 'sha256': cohort['sha256'],
+                             'name': cohort['name'], 'description': cohort['description'], 'query': cohort['query']},
+                  'cases': {'selected': [gid for gid in order if gid in selected], 'companions': companions},
+                  'variables': {**changes, 'rerun': rerun, 'batching': status},
+                  'batching': {'status': status, 'formed': formed}, 'rerun': rerun,
+                  'estimate': estimate(composed, prompts, groups, ledger, first, results, clients, args.price_multiplier)}
         save(temporary/'experiment.json', record)
         save(temporary/'executions.json', [])
     publish(folder, build)
-    return record
+    return read(folder/'experiment.json')
 
 
 def load(folder, controlled=False):
@@ -333,53 +328,43 @@ def load(folder, controlled=False):
         raise ValueError(f'No experiment plan at {folder}')
     record = read(path)
     if record.get('schema_version') != PLAN_VERSION:
-        raise ValueError('Unsupported experiment plan version')
+        raise ValueError('Unsupported experiment plan version; plan the experiment again')
     if controlled and record.get('kind') == 'retrospective':
         raise ValueError('A retrospective comparison is already finalized and has nothing to run')
     return record
 
 
-def spent(run_dir):
-    return run_progress(run_dir)['charged_usd']
-
-
-def statuses(run_dir):
-    return run_progress(run_dir)['statuses']
-
-
+# Running and finalizing -----------------------------------------------------
 def execute(args):
     folder = args.root/args.name
     record, run_dir = load(folder, controlled=True), folder/'run'
     if (folder/'candidate').exists():
         raise ValueError('This experiment is finalized; plan a new experiment for further work')
-    inherited = record['reuse']['inherited_usd']
-    before = spent(run_dir)
-    print(f'Estimated new spending: historical ${record["estimate"]["historical_usd"]:.4f}, '
-          f'upper bound ${record["estimate"]["upper_bound_usd"]:.4f}. '
-          f'New spending so far ${before-inherited:.4f}; cap ${args.max_spend:.6g}.', flush=True)
+    before = charges((run_dir/'calls').rglob('*.result.json'), inherited=False) if (run_dir/'calls').exists() else 0
+    print(f'Estimated new spending up to ${record["estimate"]["upper_bound_usd"]:.4f}. '
+          f'New spending so far ${before:.4f}; cap ${args.max_spend:.6g}.', flush=True)
     execution = {'started_at': datetime.now(timezone.utc).isoformat(), 'max_new_spend_usd': args.max_spend,
                  'price_multiplier': args.price_multiplier, 'workers': args.workers,
                  'retry_failed': args.retry_failed, 'retry_max_output_tokens': args.retry_max_output_tokens,
                  'first_pass_only': args.first_pass_only, 'code_revision': code_revision()}
-    # The pipeline cap covers every saved call, so inherited charges are added to it.
-    options = SimpleNamespace(root=folder, name='run', max_spend=inherited+args.max_spend,
+    # Inherited calls do not count toward the cap, which covers new spending only.
+    options = SimpleNamespace(root=folder, name='run', max_spend=args.max_spend,
                               price_multiplier=args.price_multiplier, workers=args.workers, max_chars=None,
                               first_pass_only=args.first_pass_only, api_base_url=args.api_base_url,
                               api_url=args.api_url, retry_failed=args.retry_failed,
                               retry_max_output_tokens=args.retry_max_output_tokens)
     try:
-        appeals.run(options)
+        appeals.run(options, inherit=Path(record['base']['run'])/'calls', rerun=record.get('rerun', []))
         execution['outcome'] = 'finished'
     except BaseException as exc:
         execution.update(outcome='stopped', error=str(exc) or type(exc).__name__)
         raise
     finally:
-        after = spent(run_dir)
-        execution.update(finished_at=datetime.now(timezone.utc).isoformat(),
-                         new_spend_usd=after-before, cumulative_new_spend_usd=after-inherited,
-                         status_counts=statuses(run_dir))
+        after = charges((run_dir/'calls').rglob('*.result.json'), inherited=False)
+        execution.update(finished_at=datetime.now(timezone.utc).isoformat(), new_spend_usd=after-before,
+                         cumulative_new_spend_usd=after, status_counts=run_progress(run_dir)['statuses'])
         save(folder/'executions.json', [*read(folder/'executions.json'), execution])
-        print(f'New spending this execution ${after-before:.4f}; experiment total ${after-inherited:.4f}.', flush=True)
+        print(f'New spending this execution ${after-before:.4f}; experiment total ${after:.4f}.', flush=True)
     return execution
 
 
@@ -392,20 +377,15 @@ def finalize(args):
     executions = read(folder/'executions.json')
     if not executions:
         raise ValueError('Run the experiment before finalizing it')
-    copied = set(record['reuse']['calls'])
-    results = list((run_dir/'calls').rglob('*.result.json'))
-    def inherited(path):
-        name = path.name[:-len('.result.json')]
-        return path.parent == run_dir/'calls' and any(name == c or name.startswith(c+'.') for c in copied)
-    new = [p for p in results if not inherited(p)]
-    states = [read(p) for p in new]
-    new_cost = sum(s.get('charged_or_reserved_usd') or 0 for s in states)
-    cost = {'kind': 'experiment', 'inherited_usd': record['reuse']['inherited_usd'], 'new_usd': new_cost,
-            'recorded_usd': record['reuse']['inherited_usd']+new_cost,
-            'reserved_usd': sum(s.get('charged_or_reserved_usd') or 0 for s in states if s.get('status') == 'pending'),
+    states = [read(p) for p in (run_dir/'calls').rglob('*.result.json')]
+    new = [s for s in states if not s.get('inherited_from')]
+    new_cost = sum(s.get('charged_or_reserved_usd') or 0 for s in new)
+    inherited = sum(s.get('charged_or_reserved_usd') or 0 for s in states if s.get('inherited_from'))
+    cost = {'kind': 'experiment', 'inherited_usd': inherited, 'new_usd': new_cost, 'recorded_usd': inherited+new_cost,
+            'reserved_usd': sum(s.get('charged_or_reserved_usd') or 0 for s in new if s.get('status') == 'pending'),
             'estimated_usd': record['estimate']['upper_bound_usd'],
             'completeness': 'reported' if all(s.get('usage') or s.get('status') == 'ok' or
-                                              s.get('charged_or_reserved_usd') == 0 for s in states) else 'partial'}
+                                              s.get('charged_or_reserved_usd') == 0 for s in new) else 'partial'}
     revision = code_revision()
     cases = record['cases']['selected']+record['cases']['companions']
     summary = {k: record[k] for k in ('name', 'hypothesis', 'cohort', 'variables')}
@@ -419,15 +399,15 @@ def finalize(args):
                       kind='experiment_candidate', cost=cost, experiment=summary,
                       execution={'performed': True, 'new_model_calls': len(new), 'new_model_cost_usd': new_cost,
                                  'executions': len(executions)})
-    base_batches = {frozenset(m) for _, m in review_batches(Path(record['base']['run'])/'calls')}
+    base_batches = {frozenset(m) for _, m in review_batches(base_calls)}
     run_batches = {frozenset(m) for _, m in review_batches(run_dir/'calls', recursive=True)}
-    batching = {'planned': record['batching']['status'],
+    observed = {'planned': record['batching']['status'],
                 'observed': 'none_sent' if not run_batches else 'preserved' if run_batches <= base_batches else 'changed',
                 'batches': sorted(sorted(b) for b in run_batches)}
-    return write_comparison(folder, record, cost, batching, revision)
+    return write_comparison(folder, record, cost, observed, revision)
 
 
-def write_comparison(folder, record, cost, batching, revision):
+def write_comparison(folder, record, cost, batching_state, revision):
     """Summarize finalized baseline and candidate artifacts in comparison.json."""
     baseline, candidate = read_experiment(folder/'baseline'), read_experiment(folder/'candidate')
     roles = {gid: 'companion' for gid in record['cases']['companions']}
@@ -437,7 +417,8 @@ def write_comparison(folder, record, cost, batching, revision):
              'baseline_records': c['records']['baseline'], 'candidate_records': c['records']['candidate']}
             for c in result['cases']]
     comparison = {'schema_version': 'appeal-run-comparison-1', 'created_at': datetime.now(timezone.utc).isoformat(),
-                  'experiment': record['name'], 'reference': None, 'code_revision': revision, 'batching': batching,
+                  'experiment': record['name'], 'reference': None, 'code_revision': revision,
+                  'batching': batching_state,
                   'impact': {role: {k: group[k] for k in ('cases', 'verdicts', 'flows', 'headline', 'stability', 'records')}
                              for role, group in result['groups'].items()},
                   'transitions': dict(Counter(f'{r["baseline_status"]} -> {r["candidate_status"]}' for r in rows)),
@@ -452,8 +433,8 @@ def retrospective(args):
     """Record two existing runs of the same frozen cases as an experiment; no model calls."""
     folder = new_folder(args.root, args.name)
     runs = {side: path.resolve() for side, path in (('baseline', args.base_run), ('candidate', args.candidate_run))}
-    manifests = {side: read(path/'manifest.json') for side, path in runs.items()}
-    prompts = {side: read(path/'prompts.json') for side, path in runs.items()}
+    loaded = {side: load_run(path) for side, path in runs.items()}
+    manifests = {side: value[0] for side, value in loaded.items()}
     hashes = {side: {g['group_id']: g['source_sha256'] for g in m['groups']} for side, m in manifests.items()}
     shared = [gid for gid in hashes['baseline'] if hashes['candidate'].get(gid) == hashes['baseline'][gid]]
     if args.cohort:
@@ -471,26 +452,21 @@ def retrospective(args):
                          'query': {'shared_sources': True}}
     if not selected:
         raise ValueError('The runs share no cases with identical frozen sources')
-    before, after = run_settings(manifests['baseline']), run_settings(manifests['candidate'])
-    variables = {'prompts': {k: {'base_sha256': digest(prompts['baseline'][k]) if k in prompts['baseline'] else None,
-                                 'sha256': digest(prompts['candidate'][k]) if k in prompts['candidate'] else None}
-                             for k in sorted(set(prompts['baseline']) | set(prompts['candidate']))
-                             if prompts['baseline'].get(k) != prompts['candidate'].get(k)},
-                 'settings': {k: {'base': before[k], 'value': after[k]} for k in SETTINGS if before[k] != after[k]},
-                 'rerun_from': None, 'batching': 'not_controlled', 'companions_included': False}
+    (_, base_prompts, base_recipe), (_, prompts, recipe) = loaded['baseline'], loaded['candidate']
     revision = code_revision()
     record = {'schema_version': PLAN_VERSION, 'kind': 'retrospective', 'name': args.name,
               'created_at': datetime.now(timezone.utc).isoformat(), 'hypothesis': args.hypothesis,
               'code_revision': revision,
               'base': {'run': str(runs['baseline']), 'name': manifests['baseline']['name'],
                        'manifest_sha256': digest((runs['baseline']/'manifest.json').read_text()),
-                       'prompt_sha256': manifests['baseline']['prompt_sha256']},
+                       'recipe_sha256': recipes.sha256(base_recipe)},
               'candidate_run': {'run': str(runs['candidate']), 'name': manifests['candidate']['name'],
                                 'manifest_sha256': digest((runs['candidate']/'manifest.json').read_text()),
-                                'prompt_sha256': manifests['candidate']['prompt_sha256']},
+                                'recipe_sha256': recipes.sha256(recipe)},
               'cohort': cohort_record, 'cases': {'selected': selected, 'companions': []},
-              'variables': variables, 'batching': {'status': 'not_controlled'},
-              'reuse': {'stages': {}, 'calls': [], 'inherited_usd': 0}, 'estimate': None}
+              'variables': {**variables(base_recipe, base_prompts, recipe, prompts), 'rerun': [],
+                            'batching': 'not_controlled'},
+              'batching': {'status': 'not_controlled'}, 'rerun': [], 'estimate': None}
     costs = {side: {'kind': 'inherited', 'recorded_usd': case_charges(path/'calls', selected),
                     'scope': 'Recorded calls for the selected cases, including retried attempts',
                     'run_recorded_usd': charges((path/'calls').rglob('*.result.json')), 'completeness': 'reported'}
@@ -514,40 +490,31 @@ def retrospective(args):
 
 def describe(folder):
     record = load(folder)
-    run_dir = folder/'run'
-    executions = read(folder/'executions.json')
-    inherited = record['reuse']['inherited_usd']
     if record.get('kind') == 'retrospective':
         return {k: record[k] for k in ('name', 'kind', 'hypothesis', 'variables')} | {
             'base': record['base']['name'], 'candidate': record['candidate_run']['name'],
             'cases': len(record['cases']['selected']), 'impact': read(folder/'comparison.json')['impact']}
-    return {'name': record['name'], 'hypothesis': record['hypothesis'],
-            'base': record['base']['name'], 'cohort': record['cohort']['name'],
-            'cases': {k: len(v) for k, v in record['cases'].items()},
-            'variables': record['variables'], 'reuse': {**record['reuse']['stages'],
-            'calls': len(record['reuse']['calls']), 'inherited_usd': inherited},
+    run_dir = folder/'run'
+    spent = charges((run_dir/'calls').rglob('*.result.json'), inherited=False) if (run_dir/'calls').exists() else 0
+    return {'name': record['name'], 'hypothesis': record['hypothesis'], 'base': record['base']['name'],
+            'cohort': record['cohort']['name'], 'cases': {k: len(v) for k, v in record['cases'].items()},
+            'variables': record['variables'], 'rerun': record['rerun'], 'batching': record['batching']['status'],
             'estimate': {k: v for k, v in record['estimate'].items() if k != 'notes'},
-            'executions': len(executions), 'new_spend_usd': spent(run_dir)-inherited,
-            'status_counts': statuses(run_dir), 'finalized': (folder/'comparison.json').exists()}
+            'executions': len(read(folder/'executions.json')), 'new_spend_usd': spent,
+            'status_counts': run_progress(run_dir)['statuses'], 'finalized': (folder/'comparison.json').exists()}
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--root', type=Path, default=EXPERIMENTS, help='Experiment directory (default: data/experiments)')
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('--root', type=Path, default=EXPERIMENTS, help='Experiment runs (default: data/experiments)')
+    parser.add_argument('--definitions', type=Path, default=DEFINITIONS, help='Experiment definitions (default: experiments)')
     sub = parser.add_subparsers(dest='command', required=True)
-    planning = sub.add_parser('plan', help='Freeze an experiment; no credentials or model calls')
+    starting = sub.add_parser('init', help='Create a definition directory to fill in')
+    starting.add_argument('name')
+    starting.add_argument('--base-run', type=Path, required=True)
+    starting.add_argument('--hypothesis', required=True)
+    planning = sub.add_parser('plan', help='Compose and freeze a definition; no credentials or model calls')
     planning.add_argument('name')
-    planning.add_argument('--base-run', type=Path, required=True, help='appeals-1 run the cohort was selected from')
-    planning.add_argument('--cohort', type=Path, required=True)
-    planning.add_argument('--hypothesis', required=True, help='What the change is expected to do')
-    planning.add_argument('--prompt', action='append', metavar='NAME=FILE', help='Replace one frozen prompt (repeatable)')
-    planning.add_argument('--model')
-    planning.add_argument('--reasoning', choices=REASONING)
-    planning.add_argument('--max-output-tokens', type=int, help='Output allowance for every stage')
-    planning.add_argument('--review-max-output-tokens', type=int, help='Output allowance for review and duration only')
-    planning.add_argument('--rerun-from', choices=STAGES, help='Make new calls from this stage even if inputs are unchanged')
-    planning.add_argument('--no-companions', action='store_true', help='Omit review-batch companions (changes batching)')
-    planning.add_argument('--allow-batch-change', action='store_true', help='Record changed review batching instead of refusing')
     planning.add_argument('--price-multiplier', type=float, default=1, help='For the estimate; use 2 for peak pricing')
     status = sub.add_parser('status', help='Summarize a plan, its executions and progress')
     status.add_argument('name')
@@ -574,9 +541,12 @@ def main():
     if not appeals.SAFE.fullmatch(args.name):
         parser.error('Invalid experiment name')
     try:
-        if args.command == 'plan':
-            if any(v is not None and v < 1 for v in (args.max_output_tokens, args.review_max_output_tokens)) or args.price_multiplier <= 0:
-                parser.error('Positive output allowance and price multiplier required')
+        if args.command == 'init':
+            folder = init(args)
+            print(f'Created {folder}. Add a cohort, then any recipe.json, prompts/ or components/ overrides.')
+        elif args.command == 'plan':
+            if args.price_multiplier <= 0:
+                parser.error('Positive price multiplier required')
             plan(args)
             print(json.dumps(describe(args.root/args.name), indent=2, ensure_ascii=False))
             print(f'Planned {args.root/args.name}. No model calls were made.')

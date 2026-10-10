@@ -72,9 +72,11 @@ regressions, and those override the unverified direction.
 - **Case detail** explains the verdict, compares processing on both sides,
   and lists each record's facts (changed facts first) with evidence buttons
   for each side. Records found on only one side are listed separately.
-- **What changed** shows changed settings and a line diff of each changed
-  prompt, with changed words highlighted, plus which pipeline stages reused
-  saved work.
+- **What changed** draws the recipe: phases, steps, batching and conversation
+  continuations, with overridden steps highlighted. Selecting a step shows what
+  it does, which research facts it affects, its model and settings, a
+  baseline-versus-candidate table of its changes, and a line diff of each changed
+  prompt it uses. A table lists the recorded overrides.
 - **Cost** separates new spending, the planned estimate, the base run's cost
   for the same work, inherited calls and cost per improved case, and lists each
   execution.

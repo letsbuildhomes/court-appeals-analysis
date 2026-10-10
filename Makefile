@@ -136,25 +136,28 @@ appeals-status:
 appeals-view:
 	uv run python appeals.py serve --host $(LISTEN_HOST) --port $(APPEALS_PORT)
 appeals-test:
-	uv run python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
+	uv run --inexact python -m unittest tests.test_appeals tests.test_pipeline tests.test_pipeline_replay tests.test_appeal_viewer tests.test_appeal_stats -v
 
 # Read-only experiment inspection; no extraction or model calls.
 .PHONY: experiments-view experiments-test
 experiments-view:
 	python3 appeal_dashboard.py --host $(LISTEN_HOST) --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
 experiments-test:
-	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_appeal_experiments -v
+	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_appeal_experiments tests.test_pipeline tests.test_pipeline_replay -v
 
-# Targeted experiments on frozen cohorts. Only experiments-run reads .env and
-# makes paid model calls; set its cap with EXPERIMENT_ARGS='--max-spend 1.00'.
+# Experiments are definition directories in experiments/NAME (see docs/EXPERIMENTS.md).
+# Only experiments-run reads .env and makes paid model calls; cap it with
+# EXPERIMENT_ARGS='--max-spend 1.00'.
 EXPERIMENT ?=
 EXPERIMENT_ARGS ?=
 COHORT_ARGS ?=
-.PHONY: experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiment-name
-experiments-cohort:
-	uv run --inexact python appeal_cohorts.py select $(COHORT_ARGS)
+.PHONY: experiments-init experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiment-name
 experiment-name:
 	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT to an experiment name'; exit 2; }
+experiments-init: experiment-name
+	uv run --inexact python appeal_runner.py init $(EXPERIMENT) $(EXPERIMENT_ARGS)
+experiments-cohort:
+	uv run --inexact python appeal_cohorts.py select $(COHORT_ARGS)
 experiments-plan: experiment-name
 	uv run --inexact python appeal_runner.py plan $(EXPERIMENT) $(EXPERIMENT_ARGS)
 experiments-status: experiment-name

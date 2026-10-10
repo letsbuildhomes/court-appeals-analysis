@@ -9,7 +9,9 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from appeal_assembly import effective_status, execution_recipe, finalized_dockets, latest_checkpoint
+from pipeline import recipe as recipes
+from pipeline.components import load_file
+from appeal_assembly import effective_status, finalized_dockets, latest_checkpoint
 
 CONTRACT_VERSION = 'appeal-cases-1'
 _SAFE = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*\Z')
@@ -28,8 +30,10 @@ def scope_category(scope, route):
 
 def _paths(folder, manifest):
     paths = [folder/'manifest.json']
-    if (folder/'prompts.json').exists():
-        paths.append(folder/'prompts.json')
+    for name in ('prompts.json', 'recipe.json'):
+        if (folder/name).exists():
+            paths.append(folder/name)
+    paths.extend(sorted((folder/'components').glob('*.py')))
     paths.extend(sorted((folder/'calls').rglob('*.result.json')))
     seen = set()
     for group in manifest['groups']:
@@ -124,11 +128,15 @@ def _adapt_locked(folder, verify_sources):
     cost = {'kind': 'inherited', 'recorded_usd': sum(charges) if charges else None,
             'completeness': 'reported' if calls and len(charges) == len(calls) else 'partial' if charges else 'unknown'}
     prompts = json.loads(raw[prompts_path]) if prompts_path in raw else None
-    recipe_manifest = {**manifest, 'prompt_hashes': {
-        stage: _sha(text.encode()) for stage, text in (prompts or {}).items()}}
+    # Runs made before recipes are described from their manifest settings.
+    for path in paths:
+        if path.parent == folder/'components':
+            load_file(path)
+    recipe = (json.loads(raw[folder/'recipe.json']) if folder/'recipe.json' in raw
+              else recipes.legacy_recipe(manifest, prompts or {}))
     return {'schema_version': CONTRACT_VERSION,
         'run': {'name': manifest.get('name'), 'created_at': manifest.get('created_at'), 'pipeline_schema': 'appeals-1'},
-        'recipe': {**{k: copy.deepcopy(v) for k, v in manifest.items() if k not in ('name', 'created_at', 'schema_version', 'groups')}, **execution_recipe(recipe_manifest)},
+        'recipe': recipes.describe(recipe),
         'prompts': prompts,
         'cases': cases,
         'provenance': {'adapter_version': CONTRACT_VERSION, 'historical_code_revision': None, 'sources_verified': bool(verify_sources), 'frozen_prompts': {'path': 'prompts.json', 'sha256': _sha(raw[prompts_path])} if prompts_path in raw else None, 'cost': cost, 'input_hashes': [{'file': str(p.relative_to(folder)), 'sha256': _sha(raw[p]), 'mtime_ns': times[p]} for p in paths]}}

@@ -243,13 +243,36 @@ td.evidence { overflow-wrap:normal; }
 .diff-line ins { background:#bfe5cc; text-decoration:none; border-radius:2px; }
 .diff-line del { background:#f3c4bd; border-radius:2px; }
 .diff-gap { color:var(--muted); background:#f6f8f7; padding:3px 12px; font-size:11px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-.stage-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
-.stage { padding:13px 16px; border-radius:8px; border:1px solid var(--line); display:flex; flex-direction:column; gap:3px; font-size:12px; }
-.stage strong { font-size:13px; text-transform:capitalize; }
-.stage.reused { background:#f7f9f8; color:var(--muted); }
-.stage.rerun { background:var(--judge-bg); border-color:#c9cfeb; color:var(--judge); }
-.stage.rerun strong { color:var(--ink); }
 .settings-table th { width:40%; }
+.recipe-graph { display:flex; align-items:stretch; gap:12px; overflow-x:auto; padding-bottom:6px; }
+.phase { flex:1; min-width:340px; border:1px solid var(--line); border-radius:10px; padding:14px; background:#fafbfa; }
+.phase.changed { border-color:#d9b98a; background:#fdf8f0; }
+.phase-head { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px; }
+.phase-head strong { font-size:13px; text-transform:capitalize; }
+.batch-tag { font-size:11px; color:var(--judge); background:var(--judge-bg); padding:2px 8px; border-radius:10px; }
+.phase.changed .batch-tag { color:var(--mixed); background:var(--mixed-bg); }
+.phase-arrow { align-self:center; font-size:22px; color:#a9b5af; }
+.step-row { display:flex; align-items:stretch; gap:6px; }
+.step-arrow { align-self:center; color:#a9b5af; font-size:16px; }
+.step-arrow.continues { color:var(--accent); font-weight:700; }
+.step-card { flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:4px; text-align:left; padding:11px 13px; border-radius:8px; background:white; }
+.step-card.continues { border-left:3px solid var(--accent); }
+.step-card.changed { border-color:#d9b98a; box-shadow:inset 0 0 0 1px #d9b98a; }
+.step-card.selected { outline:2px solid var(--accent); outline-offset:1px; }
+.step-top { display:flex; justify-content:space-between; align-items:center; gap:8px; width:100%; }
+.step-top strong { font-size:13px; text-transform:capitalize; }
+.change-flag { font-size:10px; font-weight:650; color:var(--mixed); background:var(--mixed-bg); padding:1px 7px; border-radius:8px; }
+.step-model { font-size:11px; color:var(--ink); font-family:ui-monospace,SFMono-Regular,monospace; }
+.step-context { font-size:11px; color:var(--muted); }
+.step-facts { display:flex; flex-wrap:wrap; gap:4px; margin-top:3px; }
+.fact-chip { font-size:10px; background:var(--same-bg); color:#4d5b56; padding:1px 6px; border-radius:6px; }
+.step-details { margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+.step-detail-head { display:flex; align-items:baseline; gap:10px; }
+.step-detail-head h3 { text-transform:capitalize; }
+.step-summary { margin:6px 0 12px; max-width:820px; }
+.step-facts-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:8px 24px; font-size:12px; margin-bottom:14px; }
+.step-facts-list dt { color:var(--muted); font-size:11px; }
+.step-details h4 { margin-top:18px; }
 
 /* Tiles, cost, profile */
 .tiles { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
@@ -298,7 +321,8 @@ mark { background:#fff0a6; color:inherit; }
   .verdict-legend { grid-template-columns:repeat(3,minmax(0,1fr)); } .tiles { grid-template-columns:1fr 1fr; }
   .fact-row { grid-template-columns:150px 1fr; } .fact-summary { grid-column:1/-1; }
   .completeness-row { grid-template-columns:150px 1fr 46px; } .completeness-row>.small,.completeness-row .more-link { grid-column:1/-1; }
-  .companions,.side-summary,.two-col,.reference-grid { grid-template-columns:1fr; } .stage-strip { grid-template-columns:1fr 1fr; }
+  .companions,.side-summary,.two-col,.reference-grid { grid-template-columns:1fr; }
+  .recipe-graph { flex-direction:column; } .phase { min-width:0; } .phase-arrow { transform:rotate(90deg); }
   .brand small { display:none; }
 }
 @media(max-width:560px) {
