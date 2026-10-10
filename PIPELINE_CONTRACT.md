@@ -1,80 +1,127 @@
-# Frozen-text pipeline boundary
+# Output contract: one result per case
 
-`appeal_contracts.adapt_run(run_dir)` reads an existing `appeals-1` run under
-its shared lock and returns an `appeal-cases-1` JSON value. It does not run
-OCR, select cases, contact a model, or modify the run. Source text and frozen
-prompt hashes are verified by default. The adapter rejects concurrent writers
-and inputs that change during the read.
+Every pipeline, whatever its steps, produces one result per case under
+`appeal-result-1` (`appeal_schema.py`). Comparisons are always `case ID →
+result`, across pipelines. The input boundary is the frozen, page-addressable
+source text of each case (`pipeline/corpus.py`); text extraction and OCR are
+not part of a pipeline.
 
-The contract separates research results from the steps used to produce them:
+```jsonc
+{
+  "schema": "appeal-result-1",
+  "case": "g-225-10-05-vtec",
+  "disposition": {                       // null only when processing failed before scope was known
+    "value": "in_scope | excluded | uncertain",
+    "reason": "text; required when excluded",
+    "municipal_appeal": "yes | no | unknown",
+    "housing": "yes | no | unknown",
+    "evidence": [Evidence]
+  },
+  "records": [Record]                    // zero or more; an excluded case has none
+}
 
-```python
-from appeal_contracts import adapt_run
+Evidence = {"doc": 1, "page": 5, "quote": "exact continuous text"}
+Date     = "YYYY-MM-DD" | "YYYY-MM" | "YYYY" | "unknown"
 
-artifact = adapt_run(run_dir)
-for case in artifact['cases']:
-    status = case['execution']['status']
-    category = case['scope_category']  # confirmed / uncertain / excluded
-    for record in case['records']:    # finalized docket records only
-        print(case['case_id'], record['docket'], record['duration'])
+Record = {
+  "docket": text | "unknown",
+  "project": {"description": text | "unknown", "municipality": text | "unknown",
+              "proposed_units": int | "unknown", "proposed_lots": int | "unknown", "evidence": [Evidence]},
+  "municipal_decision": {"description": text | "unknown", "date": Date,
+                         "outcome": "approved | approved_with_conditions | denied | other | unknown",
+                         "evidence": [Evidence]},
+  "appellants": [{"name": text | "unknown",
+                  "relationship": "developer | neighbor | organization | other | unknown",
+                  "seeks": "overturn_approval | overturn_denial | change_conditions | other | unknown",
+                  "representation": "represented | pro_se | unknown", "evidence": [Evidence]}],   // empty = unknown
+  "discretion": {"description": text | "unknown", "involved": "yes | no | unknown", "evidence": [Evidence],
+                 "central": "yes | no | not_applicable | unknown", "central_evidence": [Evidence]},
+  "observed_status": {"litigation": "ongoing | resolved | unknown",
+                      "permission": "allowed | allowed_with_conditions | denied | unknown",
+                      "description": text | "unknown", "evidence": [Evidence]},
+  "timeline": [{"kind": "filing | judgment | further_appeal | reopening | remand | resolution",
+                "date": Date, "court_or_body": text, "dockets": [text], "description": text,
+                "evidence": [Evidence]}],
+  "duration": {
+    "start": {"date": "YYYY-MM-DD", "relation": "exact | on_or_before", "description": text,
+              "evidence": [Evidence]} | "unknown",
+    "end":   {"date": "YYYY-MM-DD", "relation": "exact | on_or_after", "description": text,
+              "evidence": [Evidence]} | "unknown",
+    "note": text,
+    "kind": "exact | at_least | unknown",   // calculated from start and end
+    "days": int | "unknown"                 // calculated from start and end
+  },
+  "restrictions": [{"description": text, "start": Date, "end": Date, "evidence": [Evidence]}],   // empty = none observed
+  "housing_changes": [{"description": text, "evidence": [Evidence]}],                              // empty = none observed
+  "related_dockets": [{"docket": text | "unknown", "relationship": text, "evidence": [Evidence]}] // empty = none observed
+}
 ```
 
-Every manifest group has a case, including excluded, failed, unfinished, and
-uncertain groups. `case_id` and `group_id` are the same run-local identity;
-cross-run comparisons must also check `source.sha256`. A docket may be null.
-Do not join different groups merely because their docket strings match.
+- **Unknown.** Every field has one explicit `unknown`. Any field, including
+  duration, may be unknown when a pipeline does not establish it.
+- **Duration.** A pipeline supplies the evidenced start and end bounds; the day
+  count is calculated (`appeal_schema.measure`). Both endpoints exact gives an
+  exact duration; otherwise a minimum (`at_least`). A zero-day minimum, a
+  reversed interval or a missing endpoint establishes nothing (`unknown`).
+- **Uncertain cases keep their records.** An uncertain disposition marks a case
+  whose scope is not established; reducing uncertain dispositions is an
+  experiment goal.
+- **Evidence.** Citations are verified against the frozen source text; the
+  number checked and the paths of any not found on their page are recorded in
+  the case's processing status. An unverified quotation is a warning, not a
+  failure.
 
-Each case contains `source` (frozen text path/hash, documents and source docket
-identities), `execution` (effective status and checkpoint diagnostics), `scope`,
-`scope_category`, `route`, and `records`. Only `records` is finalized output.
-`candidate`, `review`, and `duration_bounds` preserve implementation diagnostics
-and drafts, which must not be counted as finalized facts. Final records remove
-draft annotations and include finalized duration and its evidence bounds.
-Scope classification and processing completion are separate: complete uncertain
-cases stay uncertain. Failed cases retain their drafts but have no final records.
+`appeal_schema.validate(result)` lists contract violations. A result that
+violates the contract fails its case.
 
-The top-level `recipe` is the run's recipe description (`appeal-recipe-1`, see
-[docs/PIPELINE.md](docs/PIPELINE.md)): its phases in order, each with its batching,
-and each step with its component, what it reads, writes and affects, provider and
-model with prices, effective settings, conversation mode, and prompt names with
-hashes. Runs made before recipes are described from their manifest settings.
-Frozen prompt text is retained for inspection and comparison. Prompt hashes are
-not complete request hashes: source text, model responses and instructions in
-component code also affect actual calls. `provenance` records input hashes,
-verification, and inherited recorded costs. Unknown historical costs remain
-unknown; inherited charges are not new experiment spending. Historical code
-revision must not be inferred from the current checkout.
+## Processing status
 
-# Experiment artifacts
+Status is run metadata stored beside each result, not research output:
 
-```sh
-python appeal_experiments.py import-run /path/to/existing/run /path/to/new/experiment
-python appeal_experiments.py inspect /path/to/new/experiment
+```json
+{"state": "complete | failed | in_progress",
+ "errors": [{"step": "finishing/review", "error": "...", "type": "validation", "retryable": true}],
+ "warnings": ["..."],
+ "quotes": {"checked": 12, "unverified": ["records[0].timeline[2].evidence[0]"]}}
 ```
 
-This creates a new directory containing `manifest.json` (`appeal-experiment-1`)
-and `cases.json` (`appeal-cases-1`). Existing outputs are never overwritten and
-output inside the source run is rejected. `read_experiment(folder)` validates
-the artifact digest, version, count, and unique case identities and returns
-`{'manifest': ..., 'canonical': ..., 'cases': [...]}`. Evaluators and dashboards
-can use this read API without understanding pipeline checkpoint layout.
+A failed case keeps the disposition it had reached and has no records. Its
+draft records remain in the run's diagnostics only.
 
-The manifest identifies this as a `historical_baseline`, records zero new model
-calls/cost, and leaves `reference` null. `--code-revision` is the adapter's code
-revision, not evidence of the historical run's code revision. The canonical
-file preserves the recipe, inputs, drafts, final results, and provenance;
-evaluations and reference labels should be separate artifacts.
+## Run directories
 
-The current runner remains `appeals.py`; this entry point imports saved output
-only. The [experiment runner](docs/EXPERIMENT-RUNNER.md) selects cohorts, runs
-targeted variants through `appeals.py`, and publishes `experiment_candidate`
-artifacts with cohort-restricted baselines (`create_experiment(case_ids=...)`).
-Alternate strategies and reference generation are not implemented. Future producers
-can emit the versioned canonical contract and matching experiment manifest
-without reproducing the historical checkpoint topology. Source paths in a
-canonical artifact are relative to its source run; the artifact stores hashes
-and results, not copies of the frozen source text.
+```text
+data/runs/NAME/                    standalone runs (data/experiments/NAME/run for experiments)
+  run.json                         pipeline ID, corpus, cases with source hashes, samples, sealed
+  ledger.jsonl                     calls made or reused, by content key
+  results/<case>.json              appeal-result-1
+  status/<case>.json               processing status
+  traces/<case>.json               how the case moved through the steps
+  executions.json                  each execution's options, spending and outcome
+```
 
-These artifacts may contain source prose and evidence and are internal research
-artifacts. The public research MCP continues using its existing restricted
-SQLite projection and does not expose this canonical envelope.
+`pipeline.runs.load(folder, case_ids)` returns the run record and its cases
+with status, disposition, records and source reference. Evaluators, cohorts and
+the dashboard read runs only through it.
+
+## Baselines
+
+- `data/runs/production` is the production run rebuilt by the ported pipeline
+  from its saved calls, with sending disabled. `acceptance.json` records that it
+  matches `data/runs/production-converted`, production's own outputs converted
+  to this contract, case for case.
+- `appeal_runner.py import-legacy` converts any other legacy `appeals-1` run.
+  Converted runs have no traces. In production's conversion, scope categories
+  became dispositions (confirmed → in scope; a scope flag → uncertain with the
+  review's reason), `unclear` and `null` became `unknown`, and failed groups
+  became failed cases without records.
+
+## Fact catalog and schema versions
+
+`appeal_schema.RECORD_FACTS` and `CASE_FACTS` name the research facts that
+comparisons and the dashboard measure, each with how to read its value and
+evidence from a result. Each fact records the schema version that introduced
+it. Adding a field means a new schema version that declares it (with its
+allowed values and `unknown`) and a fact for it; results made under the older
+version remain valid, and comparisons show the fact as *newly measured* rather
+than more specific.

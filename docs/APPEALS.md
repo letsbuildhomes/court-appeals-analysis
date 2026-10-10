@@ -1,6 +1,13 @@
 # Municipal housing appeal extraction
 
-The supported pipeline is `appeals.py`. It reads the existing docket groups and
+> **Historical guide.** This describes how the production run was made with the
+> former `appeals.py` runner. That pipeline now lives as steps in
+> `pipeline/legacy/` and new runs go through `appeal_runner.py`
+> ([pipeline](PIPELINE.md), [runner](EXPERIMENT-RUNNER.md)). `appeals.py` keeps
+> only `export`, `status`, `check` and `serve` for legacy run directories; the
+> `plan` and `run` commands and `appeal_sanity.py` below no longer exist.
+
+The production pipeline was `appeals.py`. It reads the existing docket groups and
 selected PDF text, classifies scope, extracts compact records, reviews them in
 small batches, and establishes evidence-backed duration bounds. It uses DeepSeek
 Flash with high reasoning and a 65,536-token output allowance. No agent loop or
@@ -125,10 +132,8 @@ on the supplied record; these opinions are not guaranteed complete case historie
 
 ## Stages and outputs
 
-The steps, prompts, providers and batching come from the recipe
-`recipes/appeals/recipe.json` ([pipeline](PIPELINE.md)); the six prompts live in
-`prompts/appeals/`. Plan freezes the recipe, prompts and source hashes into
-`data/appeals/<name>/`. Source and prompt edits require a new run.
+The steps and their prompts now live in `pipeline/legacy/` ([pipeline](PIPELINE.md)).
+Plan froze the prompts and source hashes into `data/appeals/<name>/`. Source and prompt edits require a new run.
 Triage and extraction share a conversation. The separately primed editor reviews
 at most two retained groups together, bounded by source size. Explicit triage
 exclusions finish immediately without another model call; uncertain scope continues

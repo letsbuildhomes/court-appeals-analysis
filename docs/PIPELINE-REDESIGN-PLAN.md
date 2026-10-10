@@ -1,9 +1,12 @@
 # Pipeline redesign plan: steps as code, one result per case
 
-Status: agreed design, not yet implemented. Written October 10, 2026 at the end
-of a long design thread, for a fresh agent to build from. Read this whole file,
-then `AGENTS.md`, `docs/EXPERIMENTS.md` and `docs/PIPELINE.md` (which describes
-the interim recipe design this plan replaces).
+Status: implemented on October 10, 2026 (see `docs/PIPELINE.md`,
+`PIPELINE_CONTRACT.md` and `docs/EXPERIMENT-RUNNER.md`). Kept as the design
+record. Decisions made while building: the ported pipeline lives in
+`pipeline/legacy/`; experiments are `experiments/NAME/experiment.py` with one
+file per added step; uncertain cases keep their records; tags are an
+append-only log in `pipeline/tags.jsonl`; a full run is an experiment over
+`"cohort": "all"`.
 
 ## Hard constraints
 

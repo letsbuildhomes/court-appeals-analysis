@@ -79,24 +79,26 @@ and records why visual-exhibit descriptions are deferred.
 
 ## Municipal housing appeal extraction
 
-The finalized extraction, review, duration and visualizer workflow is documented
-in [docs/APPEALS.md](docs/APPEALS.md). Start with `make appeals-plan`, execute or
-resume with `make appeals-run`, and browse completed records and their evidence
-with `make appeals-view` at `http://SERVER:8769/`.
+Extraction runs as a pipeline of steps built by Python modules
+([docs/PIPELINE.md](docs/PIPELINE.md)), producing one result per case under the
+output contract ([PIPELINE_CONTRACT.md](PIPELINE_CONTRACT.md)). The first
+production run's pipeline is ported in `pipeline/legacy/` with its prompts and
+reproduces that run from its saved calls. New runs, experiments and a final
+full run go through `appeal_runner.py` ([runner](docs/EXPERIMENT-RUNNER.md)).
 
-Configure `APPEALS_API_BASE_URL` (or the complete `APPEALS_API_URL`),
-`APPEALS_API_KEY`, and `APPEALS_MODEL` directly; no proxy is required.
-Failed calls can be resumed with `--retry-failed`, including output-limit failures.
-See the operating guide for retry allowances and preserved attempt logs.
+Configure `APPEALS_API_BASE_URL` (or the complete `APPEALS_API_URL`) and
+`APPEALS_API_KEY` in `.env`; only `make experiments-run` reads it. Spending is
+capped per run, failed calls are never resent automatically, and identical
+calls are reused for free.
 
-The [research summary](docs/APPEALS-RESEARCH.md) explains the selected approach and
+[docs/APPEALS.md](docs/APPEALS.md) records how the production run was made
+with the former `appeals.py` runner; `appeals.py` and `make appeals-view` still
+export and browse legacy run directories at `http://SERVER:8769/`. The
+[research summary](docs/APPEALS-RESEARCH.md) explains the selected approach and
 its limits. The [release check](docs/APPEALS-RELEASE-CHECK.md) records regression
-results. Earlier experimental files have been removed;
-`appeals.py` with the recipe in `recipes/appeals/` ([pipeline](docs/PIPELINE.md)) and the
-prompts in `prompts/appeals/` are the supported entry points for new runs.
-The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted research
-artifacts. Source PDFs, production databases, and supported appeal run logs are
-preserved.
+results. The [cleanup record](docs/APPEALS-DELETION-PLAN.md) lists the deleted
+research artifacts. Source PDFs, production databases, and supported appeal run
+logs are preserved.
 
 The read-only [experiment dashboard](docs/EXPERIMENT-DASHBOARD.md) opens with
 `make experiments-view` at `http://SERVER:8771/dashboard`. It lists experiments

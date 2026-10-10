@@ -1,154 +1,96 @@
-"""Plan, run and finalize experiments defined as override directories.
+"""Plan, run and finalize experiments; name pipelines with tags.
 
 An experiment definition lives in ``experiments/NAME/``:
 
-    experiment.json   hypothesis, base run, cohort file, and options
+    experiment.json   hypothesis, baseline (a tag or pipeline ID), cohort file and options
+    experiment.py     build(base) returns the experiment's pipeline from the baseline's tree
+    *.py              step classes the experiment adds, one per file
+    prompts/*.md      prompts those steps load
     cohort.json       the frozen case selection (``appeal_cohorts.py select``)
-    recipe.json       optional recipe fragment composed over the base run's recipe
-    prompts/*.md      optional replacement or added prompts, by name
-    components/*.py   optional new step components
+    README.md         why, what changes, how to judge it
 
-``plan`` composes the definition over the base run's recipe, freezes the result
-into a new run under ``data/experiments/NAME/run``, and estimates spending with a
-dry run; it reads no credentials and makes no model calls. ``run`` executes it
-under a cap on new spending, reusing any base-run call whose request is
-identical. ``finalize`` publishes cohort-restricted baseline and candidate
-artifacts with a comparison. ``compare`` records two existing runs as a
-retrospective experiment. The base run is only read.
+``plan`` builds the baseline and experiment trees, freezes the experiment's
+pipeline, adds batch companions, and estimates new spending with a dry run; it
+reads no credentials and makes no model calls. ``run`` executes the
+experiment's run under a cap on new spending; identical calls, including the
+production run's, are reused for free. ``finalize`` seals the run and compares
+it with the baseline run on the same cases. ``compare`` records two existing
+runs as a retrospective comparison.
+
+``tag`` points a name such as ``production`` at a pipeline; ``tags`` shows each
+tag's history. ``replay-production`` rebuilds the production run with the
+ported legacy pipeline and its saved calls, with sending disabled, and checks
+it against production's converted outputs.
 """
 import argparse
 from collections import Counter
-import contextlib
 from datetime import datetime, timezone
-import io
 import json
 from pathlib import Path
 import re
 import shutil
-import subprocess
 import tempfile
-from types import SimpleNamespace
 
-import appeals
-from appeal_assembly import run_progress
 from appeal_cohorts import read_cohort
 from appeal_evaluation import evaluate
-from appeal_experiments import create_experiment, read_experiment
 from appeal_impact import impact
 from appeal_runtime import digest, read, save
 from config import ROOT
-from pipeline import batching, recipe as recipes
-from pipeline.engine import Engine, clients_for
+from pipeline import providers, registry, runs
+from pipeline.corpus import Corpus
+from pipeline.steps import ModelStep
+from pipeline.store import CallStore, build_index
 
-PLAN_VERSION = 'appeal-run-experiment-2'
-DEFINITION_VERSION = 'appeal-experiment-definition-1'
+PLAN_VERSION = 'appeal-experiment-3'
+DEFINITION_VERSION = 'appeal-experiment-definition-2'
+COMPARISON_VERSION = 'appeal-run-comparison-2'
 EXPERIMENTS = ROOT/'data/experiments'
 DEFINITIONS = ROOT/'experiments'
-REVIEW_CALL = re.compile(r'review-[0-9a-f]{16}\Z')
+SAFE = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*\Z')
+DEFINITION_KEYS = {'schema_version', 'hypothesis', 'baseline', 'cohort', 'companions', 'allow_batch_change',
+                   'samples', 'notes'}
+TEMPLATE = '''"""{hypothesis}
+
+``build(base)`` receives the baseline pipeline's tree and returns this
+experiment's tree. Trees are values: ``replace``, ``remove``, ``insert`` and
+``update`` return new trees. Put each new step class in its own file beside
+this one and import it relatively, e.g. ``from .strict_review import StrictReview``.
+"""
 
 
-def code_revision():
-    def git(*command):
-        return subprocess.run(['git', *command], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
-    try:
-        return {'commit': git('rev-parse', 'HEAD'),
-                'dirty': bool(git('status', '--porcelain', '--untracked-files=no'))}
-    except (OSError, subprocess.CalledProcessError):
-        return {'commit': None, 'dirty': None}
-
-
-def charges(paths, inherited=None):
-    """Sum recorded charges; ``inherited`` selects only inherited (True) or new (False) calls."""
-    total = 0
-    for path in paths:
-        state = read(path)
-        if inherited is None or bool(state.get('inherited_from')) == inherited:
-            total += state.get('charged_or_reserved_usd') or 0
-    return total
-
-
-def review_batches(calls, recursive=False):
-    """Review membership, read from the requests actually sent (not JSON repairs)."""
-    batches = []
-    for path in sorted(calls.rglob('*.request.json') if recursive else calls.glob('*.request.json')):
-        name = path.name[:-len('.request.json')]
-        if REVIEW_CALL.fullmatch(name):
-            cases = json.loads(read(path)['messages'][1]['content'])['cases']
-            batches.append((name, [case['group'] for case in cases]))
-    return batches
-
-
-def case_charges(calls, groups):
-    """Recorded charges for these groups' calls, including retried attempts."""
-    groups = set(groups)
-    batches = {name[len('review-'):] for name, members in review_batches(calls, recursive=True) if groups & set(members)}
-    total = 0
-    for path in calls.rglob('*.result.json'):
-        name = path.name[:-len('.result.json')]
-        if name.startswith(('review-', 'duration-')):
-            owned = name.split('-')[1].split('.')[0] in batches
-        else:
-            owned = name.split('.')[0] in groups
-        if owned:
-            total += read(path).get('charged_or_reserved_usd') or 0
-    return total
+def build(base):
+    return base
+'''
 
 
 def new_folder(root, name):
-    if not appeals.SAFE.fullmatch(name) or (root/name).exists():
-        raise ValueError('Choose a new experiment name using letters, numbers, dots, dashes or underscores')
+    if not SAFE.fullmatch(name) or (root/name).exists():
+        raise ValueError('Choose a new name using letters, numbers, dots, dashes or underscores')
     return root/name
 
 
 def publish(folder, build):
-    """Assemble an experiment beside its destination, then publish it in one rename."""
+    """Assemble a directory beside its destination, then publish it in one rename."""
     folder.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix='.'+folder.name+'-', dir=folder.parent))
     try:
         build(temporary)
         temporary.rename(folder)
     except BaseException:
-        shutil.rmtree(temporary)
+        shutil.rmtree(temporary, ignore_errors=True)
         raise
-
-
-def load_run(folder):
-    manifest, prompts = read(folder/'manifest.json'), read(folder/'prompts.json')
-    return manifest, prompts, recipes.for_run(folder, manifest, prompts)
-
-
-def variables(base_recipe, base_prompts, recipe, prompts, components=()):
-    """What a recipe changes relative to its base, for records and the dashboard."""
-    def strip(value):
-        return {k: v for k, v in value.items() if k not in ('prompts', 'legacy')}
-    changed_prompts = {name: {'base_sha256': digest(base_prompts[name]) if name in base_prompts else None,
-                              'sha256': digest(prompts[name]) if name in prompts else None}
-                       for name in sorted(set(base_prompts) | set(prompts)) if base_prompts.get(name) != prompts.get(name)}
-    return {'recipe': recipes.diff(strip(recipes.resolved(base_recipe)), strip(recipes.resolved(recipe))),
-            'prompts': changed_prompts,
-            'components': [Path(p).name for p in components]}
-
-
-def batch_of(recipe):
-    return recipe['phases'][recipe['order'][1]].get('batch', {})
 
 
 # Definitions ---------------------------------------------------------------
 def init(args):
     """Scaffold a definition directory for a new experiment."""
-    folder = args.definitions/args.name
-    if not appeals.SAFE.fullmatch(args.name) or folder.exists():
-        raise ValueError('Choose a new experiment name using letters, numbers, dots, dashes or underscores')
-    base = args.base_run.resolve()
-    read(base/'manifest.json')
-    try:
-        base_ref = str(base.relative_to(ROOT))
-    except ValueError:
-        base_ref = str(base)
+    folder = new_folder(args.definitions, args.name)
+    registry.resolve(args.baseline)
     folder.mkdir(parents=True)
     save(folder/'experiment.json', {'schema_version': DEFINITION_VERSION, 'hypothesis': args.hypothesis,
-                                    'base_run': base_ref, 'cohort': 'cohort.json', 'companions': True,
-                                    'rerun': [], 'allow_batch_change': False})
+                                    'baseline': args.baseline, 'cohort': 'cohort.json', 'companions': True,
+                                    'allow_batch_change': False, 'samples': {}})
+    (folder/'experiment.py').write_text(TEMPLATE.format(hypothesis=args.hypothesis))
     (folder/'README.md').write_text(f'# {args.name}\n\n{args.hypothesis}\n\n'
                                     '## Why\n\n## What changes\n\n## How to judge it\n')
     return folder
@@ -158,13 +100,14 @@ def read_definition(folder):
     definition = read(Path(folder)/'experiment.json')
     if definition.get('schema_version') != DEFINITION_VERSION:
         raise ValueError('Unsupported experiment definition version')
-    for key in ('hypothesis', 'base_run', 'cohort'):
+    for key in ('hypothesis', 'baseline', 'cohort'):
         if not definition.get(key):
             raise ValueError(f'experiment.json needs {key}')
-    unknown = set(definition) - {'schema_version', 'hypothesis', 'base_run', 'cohort', 'companions', 'rerun',
-                                 'allow_batch_change', 'notes'}
+    unknown = set(definition) - DEFINITION_KEYS
     if unknown:
         raise ValueError('Unknown experiment.json keys: '+', '.join(sorted(unknown)))
+    if not (Path(folder)/'experiment.py').exists():
+        raise ValueError('The experiment needs experiment.py with build(base)')
     return definition
 
 
@@ -175,250 +118,196 @@ def definition_files(folder):
             if p.is_file() and '__pycache__' not in p.parts}
 
 
-# Planning -------------------------------------------------------------------
-def dry_run(run_dir, recipe, prompts, manifest, inherit, rerun, multiplier):
-    """Run the recipe without sending; return the call ledger and checkpoints."""
-    scratch = Path(tempfile.mkdtemp(prefix='dry-run-'))
-    try:
-        groups = [{**g, 'source': (run_dir/'sources'/f'{g["group_id"]}.txt').read_text()} for g in manifest['groups']]
-        clients = clients_for(scratch, recipe, float('inf'), multiplier, inherit=inherit, dry_run=True)
-        engine = Engine(scratch, recipe, prompts, {**manifest, 'groups': groups}, clients, workers=4, rerun=rerun)
-        with contextlib.redirect_stdout(io.StringIO()):
-            outputs = engine.run_first_pass()
-            engine.finish(outputs)
-        ledger = [entry for client in engine.all_clients() for entry in client.ledger]
-        first = {gid: read(scratch/'first_pass'/f'{gid}.json') for gid in outputs}
-        results = {p.stem: read(p) for p in (scratch/'results').glob('*.json')}
-        return ledger, first, results, groups, clients
-    finally:
-        shutil.rmtree(scratch)
+# Batches and estimates -----------------------------------------------------
+def shared_groups(traces, cases=None):
+    """Groups of two or more cases that shared a call, from traces."""
+    found = {frozenset(e['members']) for trace in traces for e in trace or []
+             if e.get('event') == 'call' and e.get('members')}
+    return {g for g in found if cases is None or g <= set(cases)}
 
 
-def estimate(recipe, prompts, groups, ledger, first, results, clients, multiplier):
-    """New calls from the dry run, plus conservative bounds for work it could not reach."""
-    first_steps, batch_steps = (recipe['phases'][p]['steps'] for p in recipe['order'])
-    counts, upper, inherited = Counter(), 0.0, 0.0
-    for entry in ledger:
-        step = next((s for s in first_steps if entry['name'].endswith('.'+s)), None) or \
-            next((s for s in batch_steps if entry['name'].startswith(s+'-')), entry['name'])
-        if entry['kind'] == 'new':
-            counts[step] += 1
-            upper += entry['usd']
-        else:
-            inherited += entry['usd']
-    sizes = {g['group_id']: len(g['source'].encode()) for g in groups}
-
-    def unreached(step_id, known):
-        spec = recipes.step_spec(recipe, step_id)
-        tokens = spec['settings'].get('max_output_tokens', 0)
-        size = known + sum(len(prompts[n].encode()) for n in spec.get('prompts', {}).values())
-        counts[step_id+' (unreached)'] += 1
-        return clients[spec['provider']].provider.estimate(size, 4, 2*tokens, tokens)*multiplier
-    # A case stopped by a new first-pass call cannot show the requests after it.
-    for gid, checkpoint in first.items():
-        failed = checkpoint.get('failed_call') if checkpoint.get('status') == 'incomplete' else None
-        if failed:
-            for step_id in first_steps[first_steps.index(failed.split('.')[-1])+1:]+batch_steps:
-                upper += unreached(step_id, sizes[gid])
-    # A batch stopped at one step cannot show the later steps' requests.
-    stopped = {}
-    for gid, result in results.items():
-        if result.get('status', '').endswith('_failed'):
-            stopped.setdefault(result.get('error') or '', []).append(gid)
-    for call, members in stopped.items():
-        step = next((s for s in batch_steps if call.startswith(s+'-')), None)
-        if step:
-            for step_id in batch_steps[batch_steps.index(step)+1:]:
-                upper += unreached(step_id, sum(sizes[gid] for gid in members))
-    return {'new_calls': dict(counts), 'upper_bound_usd': round(upper, 6), 'inherited_usd': round(inherited, 6),
-            'price_multiplier': multiplier,
-            'notes': ['The bound prices calls the dry run reached at their exact requests, and later steps it could '
-                      'not reach as if every unknown answer used its full output allowance. It excludes JSON-repair '
-                      'calls and retries, which the spending cap still governs.']}
+def companions(baseline, selected):
+    """Cases that shared a call with a selected case in the baseline run."""
+    loaded = runs.load(baseline, selected, traces=True)
+    wanted = set(selected)
+    for case in loaded['cases']:
+        for entry in case['trace'] or []:
+            if entry.get('event') == 'call' and entry.get('members'):
+                wanted |= set(entry['members'])
+    return [i for i in [c['case_id'] for c in runs.record(baseline)['cases']] if i in wanted and i not in selected]
 
 
+def estimate(tree, outputs, calls, cases, multiplier):
+    """New calls the dry run reached, plus conservative bounds for steps it could not reach."""
+    walk = [path for path, _ in tree.walk()]
+    models = [(path, step) for path, step in tree.walk() if isinstance(step, ModelStep)]
+    counts, reached = Counter(), {}
+    for case_id, (_, _, trace) in outputs.items():
+        for entry in trace:
+            if entry.get('event') == 'call' and entry.get('outcome') == 'dry_run':
+                reached.setdefault(entry['step'], set()).add(entry['key'])
+    for step, keys in reached.items():
+        counts[step] = len(keys)
+    upper, sizes = calls.would_spend(), {c.id: len(c.source.encode()) for c in cases}
+    built = {}
+    for case_id, (_, status, trace) in outputs.items():
+        if status['state'] != 'in_progress':
+            continue
+        stopped = next((e['step'] for e in reversed(trace) if e.get('event') == 'pending'), None)
+        if stopped is None:
+            continue
+        for path, step in models:
+            if walk.index(path) <= walk.index(stopped):
+                continue
+            if step.model.name not in built:
+                built[step.model.name] = providers.build(step.model.name, step.model.spec(), offline=True)
+            tokens = step.model.settings.get('max_output_tokens', 0)
+            size = sizes[case_id] + sum(len(p.text.encode()) for p in step.prompts.values())
+            upper += built[step.model.name].estimate(size, 4, 2*tokens, tokens)*multiplier
+            counts[path+' (unreached)'] += 1
+    reused = {e['key']: e['usd'] for e in calls.entries if e['event'] == 'reused'}
+    return {'new_calls': dict(counts), 'upper_bound_usd': round(upper, 6), 'reused_usd': round(sum(reused.values()), 6),
+            'reused_calls': len(reused), 'price_multiplier': multiplier,
+            'notes': ['The bound prices the calls the dry run reached at their exact requests, and later steps it '
+                      'could not reach as if every unknown answer used its full output allowance, even for cases an '
+                      'earlier step might exclude. It excludes JSON-repair calls and retries, which the spending cap '
+                      'still governs.']}
+
+
+# Planning ------------------------------------------------------------------
 def plan(args):
     folder = new_folder(args.root, args.name)
     definition_dir = args.definitions/args.name
     definition = read_definition(definition_dir)
-    base = (ROOT/definition['base_run']).resolve()
-    base_manifest, base_prompts, base_recipe = load_run(base)
-    composed, prompts, components, sources = recipes.compose(base_recipe, base_prompts, definition_dir)
-    composed.pop('legacy', None)
-    recipes.validate(composed)
-    rerun = list(definition.get('rerun', []))
-    if set(rerun) - set(composed['steps']):
-        raise ValueError('rerun names unknown steps: '+', '.join(sorted(set(rerun) - set(composed['steps']))))
-    cohort = read_cohort(definition_dir/definition['cohort'])
-    base_groups = {g['group_id']: g for g in base_manifest['groups']}
+    baseline_id = registry.resolve(definition['baseline'])
+    baseline_record = registry.load(baseline_id)
+    base_tree = registry.build(baseline_record['source'], args.definitions)
+    rebuilt_id, _ = registry.identify(base_tree)
+    corpus = Corpus()
+    if definition['cohort'] == 'all':
+        cohort = {'name': 'all', 'description': 'Every corpus case', 'query': {'all': True}, 'sha256': None,
+                  'cases': [{'case_id': i, 'source_sha256': corpus.entries[i]['source_sha256']} for i in corpus.ids()]}
+        cohort_path = None
+    else:
+        cohort_path = (definition_dir/definition['cohort']).resolve()
+        cohort = read_cohort(cohort_path)
+    selected = [c['case_id'] for c in cohort['cases']]
     for case in cohort['cases']:
-        group = base_groups.get(case['case_id'])
-        if group is None or group['source_sha256'] != case['source_sha256']:
-            raise ValueError(f'Cohort case {case["case_id"]} is absent from the base run or has a different source')
-
-    # Batched steps see their whole batch; keep a cohort case's base companions
-    # unless the experiment changes batching on purpose.
-    selected = [case['case_id'] for case in cohort['cases']]
-    membership = {gid: members for _, members in review_batches(base/'calls') for gid in members}
-    same_batching = batch_of(composed) == batch_of(base_recipe)
-    wanted = set(selected)
-    if definition.get('companions', True) and same_batching:
-        wanted |= {gid for s in selected for gid in membership.get(s, [])}
-    order = [g['group_id'] for g in base_manifest['groups'] if g['group_id'] in wanted]
-    companions = [gid for gid in order if gid not in selected]
-    for gid in order:
-        if digest((base/'sources'/f'{gid}.txt').read_text()) != base_groups[gid]['source_sha256']:
-            raise ValueError('Base frozen source changed: '+gid)
-    changes = variables(base_recipe, base_prompts, composed, prompts, components)
-    manifest = {'schema_version': 'appeals-1', 'name': args.name, 'created_at': datetime.now(timezone.utc).isoformat(),
-                'model': composed['providers'].get('default', {}).get('model'),
-                'max_chars': base_manifest['max_chars'],
-                **({'cap_changes': base_manifest['cap_changes']} if 'cap_changes' in base_manifest else {}),
-                'prompt_sha256': digest(json.dumps(prompts, sort_keys=True)),
-                'recipe_sha256': recipes.sha256(composed), 'groups': [base_groups[gid] for gid in order]}
+        entry = corpus.entries.get(case['case_id'])
+        if entry is None or entry['source_sha256'] != case['source_sha256']:
+            raise ValueError(f'Cohort case {case["case_id"]} is absent from the corpus or has a different source')
+    baseline_run = runs.find(baseline_id, selected)
+    keep = definition.get('companions', True)
+    extra = companions(baseline_run, selected) if keep else []
+    cases = [i for i in corpus.ids() if i in set(selected) | set(extra)]
+    source = {'experiment': args.name, 'base': baseline_record['source']}
+    tree = registry.build(source, args.definitions)
+    candidate_id = registry.freeze(tree, source)
+    samples = definition.get('samples', {})
+    unknown = set(samples) - {p for p, _ in tree.walk()}
+    if unknown:
+        raise ValueError('samples names unknown steps: '+', '.join(sorted(unknown)))
+    now = datetime.now(timezone.utc).isoformat()
 
     def build(temporary):
-        run_dir = temporary/'run'
-        (run_dir/'sources').mkdir(parents=True)
-        (run_dir/'.lock').touch()
-        for gid in order:
-            shutil.copy2(base/'sources'/f'{gid}.txt', run_dir/'sources'/f'{gid}.txt')
-        save(run_dir/'prompts.json', prompts)
-        save(run_dir/'manifest.json', manifest)
-        recipes.freeze(run_dir, composed, components)
-        shutil.copytree(definition_dir, temporary/'definition', ignore=shutil.ignore_patterns('__pycache__'))
-        ledger, first, results, groups, clients = dry_run(run_dir, composed, prompts, manifest, base/'calls', rerun,
-                                                          args.price_multiplier)
-        # Compare the batches the dry run formed with the base run's.
-        retained = [{**g, **first[g['group_id']]} for g in groups if first[g['group_id']].get('status') == 'extracted'
-                    and first[g['group_id']].get('candidate') is not None]
-        reached = all(first[gid].get('status') in ('extracted', 'complete', 'too_large') for gid in order)
-        formed = [[c['group'] for c in batch] for batch in batching.batches(retained, batch_of(composed))] if reached else None
-        if not same_batching or not definition.get('companions', True):
+        meta = runs.create(temporary/'run', name=args.name, pipeline_id=candidate_id, case_ids=cases, corpus=corpus,
+                           samples=samples)
+        outputs, calls, loaded = runs.dry_run(meta, tree, CallStore(args.store), args.price_multiplier)
+        traces = [t for _, _, t in outputs.values()]
+        waiting = any(e.get('event') == 'pending' and e.get('reason', '').startswith('Waiting')
+                      for t in traces for e in t)
+        before = shared_groups([c['trace'] for c in runs.load(baseline_run, cases, traces=True)['cases']], cases)
+        after = shared_groups(traces, cases)
+        if not keep:
             status = 'changed'
-        elif formed is None:
+        elif waiting:
             status = 'verify_after_run'
         else:
-            status = 'changed' if any(set(membership.get(g, [])) != set(b) for b in formed for g in b) else 'preserved'
-        if status == 'changed' and same_batching and not definition.get('allow_batch_change'):
-            raise ValueError('Review batch membership would differ from the base run; keep companions, or set '
+            status = 'preserved' if before == after else 'changed'
+        if status == 'changed' and not definition.get('allow_batch_change'):
+            raise ValueError('Batch membership would differ from the baseline run; keep companions, or set '
                              '"allow_batch_change": true to record batching as a changed variable')
-        record = {'schema_version': PLAN_VERSION, 'kind': 'experiment', 'name': args.name,
-                  'created_at': manifest['created_at'], 'hypothesis': definition['hypothesis'],
-                  'code_revision': code_revision(),
-                  'definition': {'path': str(definition_dir), 'files': definition_files(definition_dir), 'sources': sources},
-                  'base': {'run': str(base), 'name': base_manifest['name'],
-                           'manifest_sha256': digest((base/'manifest.json').read_text()),
-                           'recipe_sha256': recipes.sha256(base_recipe)},
-                  'cohort': {'path': str((definition_dir/definition['cohort']).resolve()), 'sha256': cohort['sha256'],
+        shutil.copytree(definition_dir, temporary/'definition', ignore=shutil.ignore_patterns('__pycache__'))
+        record = {'schema_version': PLAN_VERSION, 'kind': 'experiment', 'name': args.name, 'created_at': now,
+                  'hypothesis': definition['hypothesis'], 'code_revision': registry.git_commit(),
+                  'definition': {'path': str(definition_dir), 'files': definition_files(definition_dir)},
+                  'baseline': {'ref': definition['baseline'], 'pipeline': baseline_id, 'run': str(baseline_run),
+                               'rebuilt': rebuilt_id},
+                  'candidate': {'pipeline': candidate_id, 'run': str(folder/'run')},
+                  'cohort': {'path': str(cohort_path) if cohort_path else None, 'sha256': cohort['sha256'],
                              'name': cohort['name'], 'description': cohort['description'], 'query': cohort['query']},
-                  'cases': {'selected': [gid for gid in order if gid in selected], 'companions': companions},
-                  'variables': {**changes, 'rerun': rerun, 'batching': status},
-                  'batching': {'status': status, 'formed': formed}, 'rerun': rerun,
-                  'estimate': estimate(composed, prompts, groups, ledger, first, results, clients, args.price_multiplier)}
+                  'cases': {'selected': [i for i in cases if i in set(selected)], 'companions': extra},
+                  'samples': samples, 'batching': {'status': status, 'groups': sorted(sorted(g) for g in after)},
+                  'estimate': estimate(tree, outputs, calls, loaded, args.price_multiplier)}
         save(temporary/'experiment.json', record)
-        save(temporary/'executions.json', [])
     publish(folder, build)
-    return read(folder/'experiment.json')
+    return load(folder)
 
 
-def load(folder, controlled=False):
-    path = folder/'experiment.json'
+def load(folder):
+    path = Path(folder)/'experiment.json'
     if not path.exists():
-        raise ValueError(f'No experiment plan at {folder}')
+        raise ValueError(f'No experiment at {folder}')
     record = read(path)
     if record.get('schema_version') != PLAN_VERSION:
-        raise ValueError('Unsupported experiment plan version; plan the experiment again')
-    if controlled and record.get('kind') == 'retrospective':
-        raise ValueError('A retrospective comparison is already finalized and has nothing to run')
+        raise ValueError('Unsupported experiment record version')
     return record
 
 
-# Running and finalizing -----------------------------------------------------
+# Running and finalizing ----------------------------------------------------
 def execute(args):
     folder = args.root/args.name
-    record, run_dir = load(folder, controlled=True), folder/'run'
-    if (folder/'candidate').exists():
+    record = load(folder)
+    if record['kind'] == 'retrospective':
+        raise ValueError('A retrospective comparison has nothing to run')
+    if (folder/'comparison.json').exists():
         raise ValueError('This experiment is finalized; plan a new experiment for further work')
-    before = charges((run_dir/'calls').rglob('*.result.json'), inherited=False) if (run_dir/'calls').exists() else 0
-    print(f'Estimated new spending up to ${record["estimate"]["upper_bound_usd"]:.4f}. '
-          f'New spending so far ${before:.4f}; cap ${args.max_spend:.6g}.', flush=True)
-    execution = {'started_at': datetime.now(timezone.utc).isoformat(), 'max_new_spend_usd': args.max_spend,
-                 'price_multiplier': args.price_multiplier, 'workers': args.workers,
-                 'retry_failed': args.retry_failed, 'retry_max_output_tokens': args.retry_max_output_tokens,
-                 'first_pass_only': args.first_pass_only, 'code_revision': code_revision()}
-    # Inherited calls do not count toward the cap, which covers new spending only.
-    options = SimpleNamespace(root=folder, name='run', max_spend=args.max_spend,
-                              price_multiplier=args.price_multiplier, workers=args.workers, max_chars=None,
-                              first_pass_only=args.first_pass_only, api_base_url=args.api_base_url,
-                              api_url=args.api_url, retry_failed=args.retry_failed,
-                              retry_max_output_tokens=args.retry_max_output_tokens)
-    try:
-        appeals.run(options, inherit=Path(record['base']['run'])/'calls', rerun=record.get('rerun', []))
-        execution['outcome'] = 'finished'
-    except BaseException as exc:
-        execution.update(outcome='stopped', error=str(exc) or type(exc).__name__)
-        raise
-    finally:
-        after = charges((run_dir/'calls').rglob('*.result.json'), inherited=False)
-        execution.update(finished_at=datetime.now(timezone.utc).isoformat(), new_spend_usd=after-before,
-                         cumulative_new_spend_usd=after, status_counts=run_progress(run_dir)['statuses'])
-        save(folder/'executions.json', [*read(folder/'executions.json'), execution])
-        print(f'New spending this execution ${after-before:.4f}; experiment total ${after:.4f}.', flush=True)
+    print(f'Estimated new spending up to ${record["estimate"]["upper_bound_usd"]:.4f}; cap ${args.max_spend:.6g}.',
+          flush=True)
+    execution = runs.run(folder/'run', store=CallStore(args.store), limit=args.max_spend,
+                         multiplier=args.price_multiplier, workers=args.workers, retry_failed=args.retry_failed,
+                         retry_max_tokens=args.retry_max_output_tokens,
+                         endpoint={'base_url': args.api_base_url, 'api_url': args.api_url},
+                         experiments=args.definitions)
+    print(f'New spending this execution ${execution["new_spend_usd"]:.4f}; '
+          f'experiment total ${execution["cumulative_new_spend_usd"]:.4f}. {execution["statuses"]}', flush=True)
     return execution
 
 
 def finalize(args):
     folder = args.root/args.name
-    record, run_dir = load(folder, controlled=True), folder/'run'
-    for name in ('baseline', 'candidate', 'comparison.json'):
-        if (folder/name).exists():
-            raise ValueError(f'{name} already exists; finalized artifacts are never replaced')
-    executions = read(folder/'executions.json')
-    if not executions:
+    record = load(folder)
+    if record['kind'] == 'retrospective' or (folder/'comparison.json').exists():
+        raise ValueError('Already finalized; comparisons are never replaced')
+    run_dir = folder/'run'
+    if not read(run_dir/'executions.json'):
         raise ValueError('Run the experiment before finalizing it')
-    states = [read(p) for p in (run_dir/'calls').rglob('*.result.json')]
-    new = [s for s in states if not s.get('inherited_from')]
-    new_cost = sum(s.get('charged_or_reserved_usd') or 0 for s in new)
-    inherited = sum(s.get('charged_or_reserved_usd') or 0 for s in states if s.get('inherited_from'))
-    cost = {'kind': 'experiment', 'inherited_usd': inherited, 'new_usd': new_cost, 'recorded_usd': inherited+new_cost,
-            'reserved_usd': sum(s.get('charged_or_reserved_usd') or 0 for s in new if s.get('status') == 'pending'),
-            'estimated_usd': record['estimate']['upper_bound_usd'],
-            'completeness': 'reported' if all(s.get('usage') or s.get('status') == 'ok' or
-                                              s.get('charged_or_reserved_usd') == 0 for s in new) else 'partial'}
-    revision = code_revision()
+    runs.seal(run_dir)
     cases = record['cases']['selected']+record['cases']['companions']
-    summary = {k: record[k] for k in ('name', 'hypothesis', 'cohort', 'variables')}
-    base_calls = Path(record['base']['run'])/'calls'
-    create_experiment(record['base']['run'], folder/'baseline', name=args.name+'-baseline',
-                      code_revision=revision['commit'], case_ids=cases,
-                      cost={'kind': 'inherited', 'recorded_usd': case_charges(base_calls, cases),
-                            'scope': 'Base run calls for the selected cases, including retried attempts',
-                            'run_recorded_usd': charges(base_calls.rglob('*.result.json')), 'completeness': 'reported'})
-    create_experiment(run_dir, folder/'candidate', name=args.name+'-candidate', code_revision=revision['commit'],
-                      kind='experiment_candidate', cost=cost, experiment=summary,
-                      execution={'performed': True, 'new_model_calls': len(new), 'new_model_cost_usd': new_cost,
-                                 'executions': len(executions)})
-    base_batches = {frozenset(m) for _, m in review_batches(base_calls)}
-    run_batches = {frozenset(m) for _, m in review_batches(run_dir/'calls', recursive=True)}
-    observed = {'planned': record['batching']['status'],
-                'observed': 'none_sent' if not run_batches else 'preserved' if run_batches <= base_batches else 'changed',
-                'batches': sorted(sorted(b) for b in run_batches)}
-    return write_comparison(folder, record, cost, observed, revision)
+    traces = [c['trace'] for c in runs.load(run_dir, traces=True)['cases']]
+    observed = shared_groups(traces, cases)
+    planned = {frozenset(g) for g in record['batching']['groups']}
+    batching = {'planned': record['batching']['status'],
+                'observed': 'none_formed' if not observed else 'preserved' if observed == planned or
+                record['batching']['status'] == 'preserved' and observed <= planned else 'changed',
+                'groups': sorted(sorted(g) for g in observed)}
+    return write_comparison(folder, record, Path(record['baseline']['run']), run_dir, cases,
+                            {gid: 'companion' for gid in record['cases']['companions']}, batching,
+                            runs.cost(run_dir, CallStore(args.store)))
 
 
-def write_comparison(folder, record, cost, batching_state, revision):
-    """Summarize finalized baseline and candidate artifacts in comparison.json."""
-    baseline, candidate = read_experiment(folder/'baseline'), read_experiment(folder/'candidate')
-    roles = {gid: 'companion' for gid in record['cases']['companions']}
-    result = impact(baseline['canonical'], candidate['canonical'], evaluate(baseline, candidate), roles=roles)
+def write_comparison(folder, record, baseline_dir, candidate_dir, cases, roles, batching, cost):
+    baseline, candidate = runs.load(baseline_dir, cases), runs.load(candidate_dir, cases)
+    result = impact(baseline, candidate, evaluate(baseline, candidate), roles=roles)
     rows = [{'case_id': c['case_id'], 'role': c['role'], 'verdict': c['verdict'], 'changes': c['chips'],
              'baseline_status': c['processing']['baseline'], 'candidate_status': c['processing']['candidate'],
              'baseline_records': c['records']['baseline'], 'candidate_records': c['records']['candidate']}
             for c in result['cases']]
-    comparison = {'schema_version': 'appeal-run-comparison-1', 'created_at': datetime.now(timezone.utc).isoformat(),
-                  'experiment': record['name'], 'reference': None, 'code_revision': revision,
-                  'batching': batching_state,
+    comparison = {'schema_version': COMPARISON_VERSION, 'created_at': datetime.now(timezone.utc).isoformat(),
+                  'experiment': record['name'], 'reference': None, 'code_revision': registry.git_commit(),
+                  'baseline': {'run': str(baseline_dir), 'pipeline': baseline['run']['pipeline']},
+                  'candidate': {'run': str(candidate_dir), 'pipeline': candidate['run']['pipeline']},
+                  'batching': batching,
                   'impact': {role: {k: group[k] for k in ('cases', 'verdicts', 'flows', 'headline', 'stability', 'records')}
                              for role, group in result['groups'].items()},
                   'transitions': dict(Counter(f'{r["baseline_status"]} -> {r["candidate_status"]}' for r in rows)),
@@ -430,17 +319,16 @@ def write_comparison(folder, record, cost, batching_state, revision):
 
 
 def retrospective(args):
-    """Record two existing runs of the same frozen cases as an experiment; no model calls."""
+    """Record two existing runs of the same frozen cases as a comparison; no model calls."""
     folder = new_folder(args.root, args.name)
-    runs = {side: path.resolve() for side, path in (('baseline', args.base_run), ('candidate', args.candidate_run))}
-    loaded = {side: load_run(path) for side, path in runs.items()}
-    manifests = {side: value[0] for side, value in loaded.items()}
-    hashes = {side: {g['group_id']: g['source_sha256'] for g in m['groups']} for side, m in manifests.items()}
-    shared = [gid for gid in hashes['baseline'] if hashes['candidate'].get(gid) == hashes['baseline'][gid]]
+    sides = {'baseline': args.base_run.resolve(), 'candidate': args.candidate_run.resolve()}
+    metas = {side: runs.record(path) for side, path in sides.items()}
+    hashes = {side: {c['case_id']: c['source_sha256'] for c in m['cases']} for side, m in metas.items()}
+    shared = [i for i in hashes['baseline'] if hashes['candidate'].get(i) == hashes['baseline'][i]]
     if args.cohort:
         cohort = read_cohort(args.cohort)
         selected = [c['case_id'] for c in cohort['cases']]
-        absent = [gid for gid in selected if gid not in shared]
+        absent = [i for i in selected if i not in shared]
         if absent:
             raise ValueError('Cohort cases absent from either run or with different sources: '+', '.join(absent))
         cohort_record = {'path': str(args.cohort.resolve()), 'sha256': cohort['sha256'], 'name': cohort['name'],
@@ -452,121 +340,216 @@ def retrospective(args):
                          'query': {'shared_sources': True}}
     if not selected:
         raise ValueError('The runs share no cases with identical frozen sources')
-    (_, base_prompts, base_recipe), (_, prompts, recipe) = loaded['baseline'], loaded['candidate']
-    revision = code_revision()
     record = {'schema_version': PLAN_VERSION, 'kind': 'retrospective', 'name': args.name,
               'created_at': datetime.now(timezone.utc).isoformat(), 'hypothesis': args.hypothesis,
-              'code_revision': revision,
-              'base': {'run': str(runs['baseline']), 'name': manifests['baseline']['name'],
-                       'manifest_sha256': digest((runs['baseline']/'manifest.json').read_text()),
-                       'recipe_sha256': recipes.sha256(base_recipe)},
-              'candidate_run': {'run': str(runs['candidate']), 'name': manifests['candidate']['name'],
-                                'manifest_sha256': digest((runs['candidate']/'manifest.json').read_text()),
-                                'recipe_sha256': recipes.sha256(recipe)},
-              'cohort': cohort_record, 'cases': {'selected': selected, 'companions': []},
-              'variables': {**variables(base_recipe, base_prompts, recipe, prompts), 'rerun': [],
-                            'batching': 'not_controlled'},
-              'batching': {'status': 'not_controlled'}, 'rerun': [], 'estimate': None}
-    costs = {side: {'kind': 'inherited', 'recorded_usd': case_charges(path/'calls', selected),
-                    'scope': 'Recorded calls for the selected cases, including retried attempts',
-                    'run_recorded_usd': charges((path/'calls').rglob('*.result.json')), 'completeness': 'reported'}
-             for side, path in runs.items()}
+              'code_revision': registry.git_commit(),
+              'baseline': {'ref': None, 'pipeline': metas['baseline']['pipeline'], 'run': str(sides['baseline'])},
+              'candidate': {'pipeline': metas['candidate']['pipeline'], 'run': str(sides['candidate'])},
+              'cohort': cohort_record, 'cases': {'selected': selected, 'companions': []}, 'samples': {},
+              'batching': {'status': 'not_controlled'}, 'estimate': None}
 
     def build(temporary):
-        create_experiment(runs['baseline'], temporary/'baseline', name=args.name+'-baseline',
-                          code_revision=revision['commit'], case_ids=selected, cost=costs['baseline'])
-        create_experiment(runs['candidate'], temporary/'candidate', name=args.name+'-candidate',
-                          code_revision=revision['commit'], case_ids=selected, cost=costs['candidate'],
-                          kind='experiment_candidate',
-                          experiment={k: record[k] for k in ('name', 'hypothesis', 'cohort', 'variables')},
-                          execution={'performed': False, 'new_model_calls': 0, 'new_model_cost_usd': 0,
-                                     'retrospective': True})
         save(temporary/'experiment.json', record)
-        save(temporary/'executions.json', [])
-        write_comparison(temporary, record, costs['candidate'], {'planned': 'not_controlled', 'observed': None}, revision)
+        cost = runs.cost(sides['candidate'], CallStore(args.store))
+        write_comparison(temporary, record, sides['baseline'], sides['candidate'], selected, {},
+                         {'planned': 'not_controlled', 'observed': None}, cost)
     publish(folder, build)
     return read(folder/'comparison.json')
 
 
 def describe(folder):
     record = load(folder)
-    if record.get('kind') == 'retrospective':
-        return {k: record[k] for k in ('name', 'kind', 'hypothesis', 'variables')} | {
-            'base': record['base']['name'], 'candidate': record['candidate_run']['name'],
-            'cases': len(record['cases']['selected']), 'impact': read(folder/'comparison.json')['impact']}
-    run_dir = folder/'run'
-    spent = charges((run_dir/'calls').rglob('*.result.json'), inherited=False) if (run_dir/'calls').exists() else 0
-    return {'name': record['name'], 'hypothesis': record['hypothesis'], 'base': record['base']['name'],
-            'cohort': record['cohort']['name'], 'cases': {k: len(v) for k, v in record['cases'].items()},
-            'variables': record['variables'], 'rerun': record['rerun'], 'batching': record['batching']['status'],
-            'estimate': {k: v for k, v in record['estimate'].items() if k != 'notes'},
-            'executions': len(read(folder/'executions.json')), 'new_spend_usd': spent,
-            'status_counts': run_progress(run_dir)['statuses'], 'finalized': (folder/'comparison.json').exists()}
+    summary = {k: record[k] for k in ('name', 'kind', 'hypothesis')}
+    summary.update(baseline=record['baseline'], candidate=record['candidate'],
+                   cases={k: len(v) for k, v in record['cases'].items()},
+                   changes=registry.summary(registry.diff(registry.load(record['baseline']['pipeline'])['descriptor'],
+                                                          registry.load(record['candidate']['pipeline'])['descriptor'])),
+                   finalized=(Path(folder)/'comparison.json').exists())
+    if record['kind'] == 'experiment':
+        run_dir = Path(record['candidate']['run'])
+        summary.update(samples=record['samples'], batching=record['batching']['status'],
+                       estimate={k: v for k, v in record['estimate'].items() if k != 'notes'},
+                       executions=len(read(run_dir/'executions.json')), statuses=dict(runs.progress(run_dir)['statuses']))
+    if summary['finalized']:
+        summary['impact'] = read(Path(folder)/'comparison.json')['impact']
+    return summary
+
+
+# Pipelines and tags --------------------------------------------------------
+def tag(args):
+    pipeline_id = registry.resolve(args.pipeline)
+    evidence = {}
+    if args.experiment:
+        folder = args.root/args.experiment
+        record = load(folder)
+        if record['candidate']['pipeline'] != pipeline_id:
+            raise ValueError(f'{args.experiment} tested {record["candidate"]["pipeline"]}, not {pipeline_id}')
+        comparison = read(folder/'comparison.json')
+        evidence = {'experiment': args.experiment, 'comparison': str(folder/'comparison.json'),
+                    'headline': comparison['impact'].get('selected', {}).get('headline'),
+                    'baseline': record['baseline']['pipeline']}
+    return registry.set_tag(args.tag, pipeline_id, args.note, evidence)
+
+
+def show_tags(args):
+    log = registry.tag_log()
+    chosen = [e for e in log if not args.tag or e['tag'] == args.tag]
+    return {'current': registry.tags(), 'history': chosen}
+
+
+def show_pipelines(args):
+    current = {}
+    for name, pipeline_id in registry.tags().items():
+        current.setdefault(pipeline_id, []).append(name)
+    return [{'id': p['id'], 'name': p['name'], 'created_at': p['created_at'], 'source': p['source'],
+             'tags': current.get(p['id'], [])} for p in registry.stored()]
+
+
+def show_diff(args):
+    a, b = (registry.load(registry.resolve(ref))['descriptor'] for ref in (args.base, args.candidate))
+    return registry.summary(registry.diff(a, b)) or ['No differences']
+
+
+# Production and legacy runs ------------------------------------------------
+def index_calls(args):
+    provider = providers.build(args.model, {'model': args.model, 'env': 'APPEALS'}, offline=True)
+    return build_index(args.store, args.name, args.run.resolve()/'calls', provider)
+
+
+def import_legacy(args):
+    from pipeline.legacy.convert import convert
+    folder = new_folder(args.runs, args.name)
+    return convert(args.run, folder, args.name)
+
+
+def replay_production(args):
+    """Rebuild production from its saved calls with sending disabled; check it matches."""
+    from pipeline import legacy
+    from pipeline.corpus import PRODUCTION
+    from pipeline.legacy.convert import convert
+    store_root = Path(args.store)
+    if not (store_root/'index'/'production.json').exists():
+        provider = providers.build('deepseek-flash', {'model': 'deepseek-flash', 'env': 'APPEALS'}, offline=True)
+        build_index(store_root, 'production', PRODUCTION/'calls', provider)
+    converted = args.runs/f'{args.name}-converted'
+    if not converted.exists():
+        convert(PRODUCTION, converted, f'{args.name}-converted')
+    folder = new_folder(args.runs, args.name)
+    source = {'module': 'pipeline.legacy', 'options': {}}
+    tree = legacy.build()
+    pipeline_id = registry.freeze(tree, source)
+    corpus = Corpus(PRODUCTION)
+    runs.create(folder, name=args.name, pipeline_id=pipeline_id, case_ids=corpus.ids(), corpus=corpus)
+    runs.run(folder, tree=tree, store=CallStore(store_root), limit=0.0, workers=args.workers, offline=True)
+    report = acceptance(folder, converted)
+    save(folder/'acceptance.json', report)
+    runs.seal(folder)
+    return report
+
+
+def acceptance(replayed, converted):
+    """Compare a replay with converted outputs case by case."""
+    a, b = runs.load(replayed), runs.load(converted)
+    by_id = {c['case_id']: c for c in b['cases']}
+    differences = []
+    for case in a['cases']:
+        other = by_id[case['case_id']]
+        if case['status']['state'] != other['status']['state']:
+            differences.append({'case_id': case['case_id'], 'difference': 'status',
+                                'replayed': case['status']['state'], 'converted': other['status']['state'],
+                                'errors': [e['error'] for e in case['status']['errors']][:2]})
+        elif (case['disposition'], case['records']) != (other['disposition'], other['records']):
+            differences.append({'case_id': case['case_id'], 'difference': 'result'})
+    failed = [c['case_id'] for c in a['cases'] if c['status']['state'] == 'failed']
+    return {'created_at': datetime.now(timezone.utc).isoformat(), 'replayed': str(replayed),
+            'converted': str(converted), 'pipeline': a['run']['pipeline'], 'cases': len(a['cases']),
+            'statuses': dict(Counter(c['status']['state'] for c in a['cases'])), 'failed': failed,
+            'matches': not differences, 'differences': differences}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--root', type=Path, default=EXPERIMENTS, help='Experiment runs (default: data/experiments)')
+    parser.add_argument('--root', type=Path, default=EXPERIMENTS, help='Experiment records (default: data/experiments)')
     parser.add_argument('--definitions', type=Path, default=DEFINITIONS, help='Experiment definitions (default: experiments)')
+    parser.add_argument('--runs', type=Path, default=runs.RUNS, help='Standalone runs (default: data/runs)')
+    parser.add_argument('--store', type=Path, default=runs.STORE, help='Call store (default: data/calls)')
     sub = parser.add_subparsers(dest='command', required=True)
     starting = sub.add_parser('init', help='Create a definition directory to fill in')
     starting.add_argument('name')
-    starting.add_argument('--base-run', type=Path, required=True)
     starting.add_argument('--hypothesis', required=True)
-    planning = sub.add_parser('plan', help='Compose and freeze a definition; no credentials or model calls')
+    starting.add_argument('--baseline', default='production', help='Tag or pipeline ID (default: production)')
+    planning = sub.add_parser('plan', help='Build and freeze an experiment; no credentials or model calls')
     planning.add_argument('name')
     planning.add_argument('--price-multiplier', type=float, default=1, help='For the estimate; use 2 for peak pricing')
-    status = sub.add_parser('status', help='Summarize a plan, its executions and progress')
+    status = sub.add_parser('status', help='Summarize an experiment')
     status.add_argument('name')
     running = sub.add_parser('run', help='Execute or resume; makes paid model calls')
     running.add_argument('name')
-    running.add_argument('--max-spend', type=float, required=True, help='Cumulative cap on new spending for this experiment, in USD')
+    running.add_argument('--max-spend', type=float, required=True, help='Cumulative cap on new spending, in USD')
     running.add_argument('--price-multiplier', type=float, default=1)
     running.add_argument('--workers', type=int, default=3)
-    running.add_argument('--first-pass-only', action='store_true')
     running.add_argument('--retry-failed', action='store_true')
     running.add_argument('--retry-max-output-tokens', type=int)
     endpoint = running.add_mutually_exclusive_group()
     endpoint.add_argument('--api-base-url')
     endpoint.add_argument('--api-url')
-    finishing = sub.add_parser('finalize', help='Publish baseline/candidate artifacts and a comparison')
+    finishing = sub.add_parser('finalize', help='Seal the run and compare it with the baseline')
     finishing.add_argument('name')
-    comparing = sub.add_parser('compare', help='Record two existing runs as a retrospective experiment; no model calls')
+    comparing = sub.add_parser('compare', help='Record two existing runs as a retrospective comparison; no model calls')
     comparing.add_argument('name')
     comparing.add_argument('--base-run', type=Path, required=True)
     comparing.add_argument('--candidate-run', type=Path, required=True)
     comparing.add_argument('--cohort', type=Path, help='Default: every case both runs share with identical sources')
     comparing.add_argument('--hypothesis', required=True, help='What differs between the runs and what it should change')
+    tagging = sub.add_parser('tag', help='Point a tag at a pipeline; the tag log keeps every earlier target')
+    tagging.add_argument('tag')
+    tagging.add_argument('pipeline', help='Pipeline ID or another tag')
+    tagging.add_argument('--note', required=True, help='Why the tag moves')
+    tagging.add_argument('--experiment', help='The finalized experiment that tested this pipeline')
+    listing = sub.add_parser('tags', help='Current tags and their history')
+    listing.add_argument('tag', nargs='?')
+    sub.add_parser('pipelines', help='Stored pipelines and their tags')
+    diffing = sub.add_parser('diff', help='What changed between two pipelines')
+    diffing.add_argument('base')
+    diffing.add_argument('candidate')
+    indexing = sub.add_parser('index-calls', help='Index a legacy run\'s delivered calls for reuse')
+    indexing.add_argument('run', type=Path)
+    indexing.add_argument('--name', required=True)
+    indexing.add_argument('--model', default='deepseek-flash')
+    importing = sub.add_parser('import-legacy', help='Convert a legacy run\'s outputs into a run; no model calls')
+    importing.add_argument('run', type=Path)
+    importing.add_argument('--name', required=True)
+    replaying = sub.add_parser('replay-production', help='Rebuild production from saved calls; no sending')
+    replaying.add_argument('--name', default='production')
+    replaying.add_argument('--workers', type=int, default=16)
     args = parser.parse_args()
-    if not appeals.SAFE.fullmatch(args.name):
-        parser.error('Invalid experiment name')
+    if getattr(args, 'name', None) is not None and not SAFE.fullmatch(args.name):
+        parser.error('Invalid name')
+    commands = {'init': init, 'plan': plan, 'status': lambda a: describe(a.root/a.name), 'run': execute,
+                'finalize': finalize, 'compare': retrospective, 'tag': tag, 'tags': show_tags,
+                'pipelines': show_pipelines, 'diff': show_diff, 'index-calls': index_calls,
+                'import-legacy': import_legacy, 'replay-production': replay_production}
     try:
-        if args.command == 'init':
-            folder = init(args)
-            print(f'Created {folder}. Add a cohort, then any recipe.json, prompts/ or components/ overrides.')
-        elif args.command == 'plan':
-            if args.price_multiplier <= 0:
-                parser.error('Positive price multiplier required')
-            plan(args)
-            print(json.dumps(describe(args.root/args.name), indent=2, ensure_ascii=False))
-            print(f'Planned {args.root/args.name}. No model calls were made.')
-        elif args.command == 'status':
-            print(json.dumps(describe(args.root/args.name), indent=2, ensure_ascii=False))
-        elif args.command == 'run':
+        if args.command == 'plan' and args.price_multiplier <= 0:
+            parser.error('Positive price multiplier required')
+        if args.command == 'run':
             if args.max_spend <= 0 or args.price_multiplier <= 0 or args.workers < 1:
                 parser.error('Positive budget, multiplier and worker count required')
             if args.retry_max_output_tokens is not None and (not args.retry_failed or args.retry_max_output_tokens < 1):
                 parser.error('Positive --retry-max-output-tokens requires --retry-failed')
-            execute(args)
-        elif args.command == 'compare':
-            comparison = retrospective(args)
-            print(json.dumps({k: comparison[k] for k in ('impact', 'records', 'cost')}, indent=2))
+        value = commands[args.command](args)
+        if args.command == 'plan':
+            value = describe(args.root/args.name)
+        if args.command == 'init':
+            print(f'Created {value}. Add a cohort and edit experiment.py.')
+        elif args.command in ('finalize', 'compare'):
+            print(json.dumps({k: value[k] for k in ('impact', 'transitions', 'records', 'batching', 'cost')}, indent=2))
             print('Open it in the experiment dashboard: make experiments-view')
         else:
-            comparison = finalize(args)
-            print(json.dumps({k: comparison[k] for k in ('impact', 'transitions', 'records', 'batching', 'cost')}, indent=2))
-            print('Open it in the experiment dashboard: make experiments-view')
-    except (ValueError, FileNotFoundError) as exc:
+            print(json.dumps(value, indent=2, ensure_ascii=False, default=str))
+        if args.command == 'plan':
+            print(f'Planned {args.root/args.name}. No model calls were made.')
+    except (ValueError, KeyError, FileNotFoundError) as exc:
         parser.error(str(exc))
 
 

@@ -1,82 +1,171 @@
 # Pipeline architecture
 
-The extraction pipeline is a **recipe**: configuration naming providers,
-prompts, steps and phases. The engine (`pipeline/engine.py`) runs any valid
-recipe, and an experiment is a set of files composed over a base recipe. The
-production recipe is `recipes/appeals/recipe.json`.
+A pipeline is a Python module that builds a **tree of steps**. Every step owns
+its behavior and configuration: a plain-text description, an optional model
+and prompts, an optional selector, parameters and, for composite steps,
+children. There is no central configuration and no fixed phases. Whatever the
+tree looks like, it produces **one result per case** under the output contract
+([PIPELINE_CONTRACT.md](../PIPELINE_CONTRACT.md)).
+
+The first pipeline is the production pipeline, ported as steps in
+`pipeline/legacy/`:
 
 ```text
-first_pass (one case at a time)                 finishing (batched: up to 2 cases per call)
-  triage ──continues──▶ extract        ⟶          review ──continues──▶ duration
+appeals                        Sequence
+├── size-limit                 stop sources over 600,000 characters (code)
+├── first-pass                 per case
+│   ├── triage                 scope; a "no" excludes the case
+│   └── extract                draft records; continues triage's conversation
+├── finishing                  batches of up to 2 drafted cases within 200,000 characters
+│   ├── review                 correct drafts, or flag scope (uncertain)
+│   └── duration               evidenced bounds; continues review's conversation
+└── assemble                   contract records from drafts and bounds (code)
 ```
+
+It builds the same requests as the legacy run, so that run's saved calls are
+reused for free: replaying all 1,395 production cases with sending disabled
+reproduces every result in about 25 seconds (`tests/test_pipeline_replay.py`,
+`REPLAY_ALL=1`).
 
 ## Concepts
 
 | Concept | Where | What it is |
 | --- | --- | --- |
-| Recipe | `recipes/appeals/recipe.json`, `pipeline/recipe.py` | Providers, prompts, steps, phases and their order |
-| Step | `recipe.steps.NAME` | A component with a provider, settings, prompts and a conversation mode |
-| Component | `pipeline/components/*.py` | The code a step runs: request building, validation, how the answer updates a case |
-| Phase | `recipe.phases.NAME` | Steps run in order, either per case or per batch |
-| Batcher | `pipeline/batching.py` | How a batched phase groups cases into calls |
-| Conversation | `pipeline/conversation.py` | An immutable transcript a step can continue |
-| Provider | `pipeline/providers.py`, `pipeline/models.json` | How requests are sent and priced |
+| Step | `pipeline/steps.py` | `describe()` returns a diffable descriptor; `run(cases, ctx)` does the work |
+| Model step | `ModelStep` | One call per group: `request` builds it, `accept` validates the answer and updates the targets |
+| Code step | `CodeStep` | Updates cases with code; no model |
+| Composite step | `Sequence`, `Grouped`, `per_case` | Runs children in order; `Grouped` runs them within each group its selector forms |
+| Selector | `pipeline/selectors.py` | Which cases a step works on and how they are grouped into calls |
+| Case and group | `pipeline/cases.py` | A case's state while it runs; a group's members (in context) and targets (updated) |
+| Conversation | `pipeline/conversation.py` | An immutable transcript bound to a group |
+| Provider | `pipeline/providers.py`, `pipeline/models.json` | How requests are rendered, sent, priced and bounded |
+| Call store | `pipeline/store.py` | Content-addressed calls, the spending cap, retries, indexes of earlier runs |
+| Engine | `pipeline/engine.py` | Runs a tree; the context through which steps reach models; turns each case into a result |
+| Registry | `pipeline/registry.py` | Pipeline IDs, frozen snapshots, tags, diffs |
+| Runs | `pipeline/runs.py` | Run directories: results, statuses, traces, ledger |
+| Corpus | `pipeline/corpus.py` | The frozen source text every pipeline reads |
 
-A recipe has one **per-case** phase followed by one **batched** phase. The
-per-case phase writes `first_pass/<case>.json`; a case it finishes without a
-draft record is complete (for example, an excluded appeal). Cases with drafts
-go to the batched phase, which writes `results/<case>.json`. Finalized records
-need the duration bounds the batched phase produces.
+### Steps
 
-### Steps and what they affect
+```python
+from pipeline.legacy.review import Review
 
-| Step | Prompts (role = name) | Conversation | Research facts it affects |
-| --- | --- | --- | --- |
-| triage | system = system, instructions = triage | fresh | Scope category, municipal appeal, housing |
-| extract | system = system, instructions = extract | continues triage | Municipal decision and date, litigation and permission status, discretion, appellants and representation, municipality, proposed units and lots, restrictions, housing changes, related dockets |
-| review | primer, extract, triage, review | fresh | Scope (by flagging) and every extracted fact (by correcting) |
-| duration | instructions = duration | continues review | Appeal duration, start date, end date |
+class StrictReview(Review):
+    description = 'Reviews drafts and rejects any change without a verbatim quotation.'
 
-Review's system prompt concatenates the primer with the extraction, scope and
-editing contracts, so editing the extract or triage prompts also changes review
-requests. The dashboard's *What changed* view draws this table from each run's
-recipe and highlights what an experiment overrides.
+    def accept(self, group, value):
+        outcomes = super().accept(group, value)
+        ...  # replace an outcome with an exception to fail that case
+        return outcomes
+```
 
-### Conversations
+Class attributes describe a step: `description`, `reads` and `writes` (case
+values), `fields` (the research facts it affects, keys from the fact catalog),
+`max_group` (the largest group it can handle), `prompt_names`, `defaults`
+(parameters) and `code` (other files its behavior depends on, hashed into its
+descriptor). A model step's `request(group, conversation, provider)` returns
+the request and the conversation it extends; `accept(group, value)` validates
+without changing anything and returns, per target case, an update or an
+exception. Raising rejects the whole answer.
 
-A step's `context` is `fresh` or `continue`. Continuing appends to the previous
-step's conversation in the same phase and unit, so the earlier messages stay a
-byte-identical prefix that providers can serve from cache. Extraction sees the
-validated triage answer; duration sees the review answer and refers back to the
-sources already in the review request. A fresh extraction restates the source
-and scope decision; a fresh duration call carries its own sources. A
-conversation belongs to one provider, so a continuing step must use the same
-provider as the step before it.
+A step's prompts are files next to the step, loaded as `Prompt` objects; its
+model is a `Model(name, env, **settings)`. `describe()` includes the full prompt
+texts, the model and its prices, the selector, parameters, and the hash of
+every file that implements the step.
 
-### Batching
+### Selectors, groups and conversations
 
-A batched phase's `batch` setting chooses a batcher: `sequential` packs cases
-in run order up to `max_cases` and `max_chars` (production: 2 cases, 200,000
-characters), and `single` gives each case its own call. Batch members share one
-request, so a case's batch companions affect its answer; the experiment runner
-keeps companions unless batching is changed on purpose.
+A selector takes the active cases in run order and returns groups:
+`selectors.each()` gives one case per call; `selectors.sequential(max_cases,
+max_chars, measure, requires)` packs cases in order within a size budget, as
+production's review did. Validation refuses a selector whose groups exceed a
+step's `max_group`.
 
-### Calls, reuse and spending
+Members are the cases in a call's context; targets are the cases it updates.
+Review includes every member of its batch, and duration targets only the cases
+review accepted, while still continuing review's conversation with all members.
 
-Every model call goes through `appeal_runtime.Client`, which saves the request,
-response, usage and charge under a stable name: `<case>.<step>` for per-case
-steps and `<step>-<batch id>` for batched steps, plus a request hash for steps
-whose requests depend on earlier answers (duration). An identical saved request
-is reused for free; a changed one under the same name is refused. Before each
-call the client reserves the provider's worst-case cost and refuses the call if
-the run's cap would be exceeded, so nothing is sent. Failed or uncertain
-deliveries are never resent automatically.
+A conversation belongs to a group. A step continues its predecessor's
+conversation (`continues=True`) only within a `Grouped` step, with the same
+model, and only if the provider supports conversations.
 
-With `inherit`, a client reads through to another run's calls and copies an
-identical, successful call instead of making it; inherited calls are free and
-do not count toward the cap. This is how experiments reuse unchanged work.
-`tests/test_pipeline_replay.py` rebuilds the production run's requests through
-this path and requires every one to match.
+`Grouped(..., wait=True)` runs nothing while any case stopped earlier for a
+reason a retry could change, so retried cases rejoin the same batches.
+
+### Case state
+
+A case is active until a step **excludes** it (a disposition with a reason),
+**finishes** it early (complete, no further processing), or **fails** it.
+Selectors only pick active cases, so any step can exclude cases progressively.
+In a dry run, a case whose next call would be new is left **pending**.
+
+At the end the engine turns each case into a result (disposition and records)
+and a processing status (complete, failed or in progress, errors, warnings,
+quote verification). A complete case must have a disposition, and every result
+is validated against the contract.
+
+## Calls, reuse and spending
+
+A call's key is the hash of the provider identity, the full request and a
+sample number. Identical work is reused whatever the tree's shape or step
+names. A run re-executes its whole tree; saved calls make that cheap and
+deterministic, so there are no step checkpoints to resume from.
+
+The store (`data/calls/`) keeps every call once. It reads through to indexes of
+earlier runs' saved calls: `data/calls/index/production.json` maps the
+production run's delivered calls to their files, which are never modified. A
+call that validation rejected is still a delivered answer and is reused; an
+incomplete or failed delivery is not.
+
+Each run's `Calls` view keeps the guarantees of the earlier client:
+
+- Before each new call it reserves the worst-case cost and refuses the call if
+  the run's cap on new spending would be exceeded. Nothing is sent.
+- A failed or uncertain delivery is never resent automatically. With
+  `--retry-failed`, each failed call, or call whose answer validation rejected,
+  is resent at most once per execution; earlier attempts are archived with
+  their charges.
+- Reused calls are free and do not count toward the cap.
+- A dry run records what each new call could cost and does not send.
+
+Sample 0 is the default. Asking for another sample of a step's requests
+(an experiment's `samples`) measures run-to-run variation; later steps pay only
+when that sample's answer differs.
+
+## Pipeline IDs, tags and diffs
+
+A pipeline's ID (`p-` and 12 hex digits) is the hash of its descriptor, so it
+covers configuration, prompt texts and code. `registry.freeze` stores the
+descriptor and copies of the source files once in `data/pipelines/<id>/`, with
+how to rebuild the tree: a module and options, or an experiment applied to a
+base.
+
+Tags name pipelines. `pipeline/tags.jsonl` (in git) is an append-only log; a
+tag's current target is its latest entry, and earlier entries are its history.
+Experiments and comparisons record resolved IDs, so moving `production` never
+changes what an earlier comparison measured.
+
+```sh
+uv run --inexact python appeal_runner.py tags
+uv run --inexact python appeal_runner.py pipelines
+uv run --inexact python appeal_runner.py diff production p-…
+uv run --inexact python appeal_runner.py tag production p-… --note "Adopted X" --experiment NAME
+```
+
+`registry.diff` compares two descriptors step by step: added, removed and
+changed steps, changed configuration fields, prompt changes with both texts,
+changed source files and reordered children. The dashboard draws it as a tree.
+
+A code change gives a pipeline a new ID even when its requests are identical;
+its calls are still reused, and the diff shows "code changed".
+
+## Traces
+
+Each case's trace (`traces/<case>.json`) lists what happened to it in order:
+each call with its step path, content key, whether it was new or reused, the
+other cases in its group, and a hash of the answer; rejected answers;
+disposition changes; failures; code steps. Comparing two runs' traces finds the
+first step whose requests diverged.
 
 ## Providers
 
@@ -89,59 +178,27 @@ its provider type and prices; a model without a price cannot make paid calls.
 | `chat-completions` | `ChatCompletionsProvider` | OpenAI-compatible messages with JSON output | yes | input, cached input, output tokens |
 | `decision` | `DecisionProvider` | `{"model", "state", "questions"}` with typed questions | no | input tokens (output priced if listed) |
 
-A recipe's provider entry names a model and the environment prefix for its
-endpoint and key (`APPEALS` reads `APPEALS_API_BASE_URL` or `APPEALS_API_URL`
-and `APPEALS_API_KEY`). Components declare the provider kinds they accept;
-validation refuses a step whose provider cannot serve it.
+A model's `env` prefix names its credentials (`APPEALS` reads
+`APPEALS_API_BASE_URL` or `APPEALS_API_URL`, and `APPEALS_API_KEY`).
+
+A decision model such as TypeSafe's Jev answers typed questions about one state
+and returns probabilities and confidence. A step that uses one builds a compact
+state and questions in `request` and maps the answers in `accept`; it cannot
+continue a conversation. `tests/test_pipeline.py` exercises this with a test
+double. No decision model is configured.
 
 ### Adding a model
 
 1. Add it to `pipeline/models.json` with its provider type and prices.
-2. Reference it from a recipe provider, with an `env` prefix for credentials.
+2. Give a step `Model('name', 'PREFIX', ...)`, with credentials under that prefix.
 3. If its API differs from both provider types, add a `Provider` subclass
    implementing `render`, `post`, `usage`, `price`, `outcome`, `decode`,
    `bound` and `estimate`, and register it in `PROVIDERS`.
 
-A decision model such as TypeSafe's Jev answers typed questions about one state
-and returns probabilities and confidence instead of generated text. It fits the
-`decision` type: stateless, priced on input tokens, and limited in state size,
-so a step must build a compact state. Using one needs a component that turns a
-case into a state and questions and maps the answers to the step's outputs;
-its results then compare through the same research facts. No decision model is
-configured yet.
+## Legacy runs
 
-## Components
-
-A component subclasses `pipeline.components.Component` and registers itself:
-
-```python
-from pipeline.components import register
-from pipeline.components.review import Review
-
-@register
-class StrictReview(Review):
-    name = 'strict-review'
-    summary = 'Reviews drafts and rejects any change without a verbatim quotation.'
-
-    def apply(self, unit, case, result, value):
-        ...  # validate more strictly, then call super().apply(...)
-```
-
-Class attributes describe it for validation and the dashboard: `scope`
-(`case` or `batch`), `activity`, `provider_kinds`, `prompt_roles`,
-`fresh_roles`, `reads`, `writes`, `facts` (keys from `appeal_impact.py`),
-`failure_status`, and naming flags. Per-case components implement `request`
-and `accept`; batched components implement `request`, `check` and `apply`.
-`transcript` sets what a continuing step sees as this step's answer.
-
-An experiment can add components in its `components/` directory; they are
-loaded when the experiment is planned and copied into its run.
-
-## Runs and recipes
-
-`appeals.py plan` freezes the composed base recipe into each new run
-(`recipe.json`, `prompts.json`, `components/`). Runs made before recipes have
-no `recipe.json`; `recipe.legacy_recipe` rebuilds theirs from the manifest, and
-the replay test confirms it reproduces their requests. Canonical artifacts
-(`appeal_contracts.adapt_run`) carry `recipe.describe()` output, which the
-dashboard draws.
+`pipeline/legacy/convert.py` converts a legacy `appeals-1` run's saved outputs
+into a converted run, described by the ported pipeline built with that run's
+frozen prompts and settings (`appeal_runner.py import-legacy`). `appeals.py`
+still exports, checks and browses legacy run directories; new runs go through
+`appeal_runner.py`.

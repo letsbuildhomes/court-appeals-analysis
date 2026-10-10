@@ -1,82 +1,36 @@
 {
-  "schema_version": "appeal-cases-1",
   "notice": "SYNTHETIC SOFTWARE TEST ONLY; simulated execution and costs, no real spend.",
   "run": {
     "name": "synthetic-candidate",
+    "kind": "synthetic",
+    "pipeline": null,
+    "corpus": null,
     "simulated": true,
     "progress_note": "Static software fixture; no extraction is running."
-  },
-  "recipe": {
-    "components": [
-      {
-        "id": "extract",
-        "label": "Extract",
-        "config": {
-          "model": "synthetic-no-model",
-          "simulation_only": true
-        },
-        "prompt_sha256": "580813c1a55b907fb88b3ae6336d809060d1041a20e7caadb55396b8c9751129",
-        "prompt_dependencies": {
-          "extract": "580813c1a55b907fb88b3ae6336d809060d1041a20e7caadb55396b8c9751129"
-        },
-        "effective_prompt_sha256": "3643e39f5af5492c3791abc9b2f1d5f376b64f221fdd36deb1ea606ca4973050"
-      },
-      {
-        "id": "check",
-        "label": "Simulated check",
-        "config": {
-          "model": "synthetic-no-model",
-          "simulation_only": true
-        },
-        "prompt_sha256": "a30dc40d7072ac06c2ac777123485f1b5cb6b5a44b49b5e3b11763ce81426c10",
-        "prompt_dependencies": {
-          "extract": "580813c1a55b907fb88b3ae6336d809060d1041a20e7caadb55396b8c9751129",
-          "check": "a30dc40d7072ac06c2ac777123485f1b5cb6b5a44b49b5e3b11763ce81426c10"
-        },
-        "effective_prompt_sha256": "dcbf2f390665f0e30fb63183b89afa6c66b701e4d559954657d3d33bad8381c7"
-      },
-      {
-        "id": "finalize",
-        "label": "Finalize",
-        "config": {
-          "model": "synthetic-no-model",
-          "simulation_only": true
-        },
-        "prompt_sha256": "6ff42a96d3a1cfc43131da4f1ac4a429b794dcc057d3a77ec4c69a8166e66e72",
-        "prompt_dependencies": {
-          "extract": "580813c1a55b907fb88b3ae6336d809060d1041a20e7caadb55396b8c9751129",
-          "finalize": "6ff42a96d3a1cfc43131da4f1ac4a429b794dcc057d3a77ec4c69a8166e66e72"
-        },
-        "effective_prompt_sha256": "3efdbdbb57c0ece69cb388b583a6a5148207068b936cec3ecd16d3e2a8a2c0e8"
-      }
-    ],
-    "edges": [
-      {
-        "from": "extract",
-        "to": "check"
-      },
-      {
-        "from": "check",
-        "to": "finalize"
-      }
-    ],
-    "config": {
-      "model": "synthetic-no-model",
-      "variant": "candidate"
-    }
   },
   "cases": [
     {
       "case_id": "synthetic-transition",
       "source": {
         "sha256": "2616b3768a6711d66dd463b97a1ac38bb11a65214d5755004ca6b52efc216c77",
-        "path": "synthetic-transition.txt"
+        "path": "synthetic-transition.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "complete",
+      "status": {
+        "state": "complete",
+        "errors": [],
+        "warnings": [],
         "synthetic": true
       },
-      "scope_category": "confirmed",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": [
         {
           "docket": "SYNTHETIC-A",
@@ -99,13 +53,24 @@
       "case_id": "synthetic-missing",
       "source": {
         "sha256": "b308d3d894e5214cf94921eec4f615ead1f3e34c23c1c9a60f45a47d7bdc707a",
-        "path": "synthetic-missing.txt"
+        "path": "synthetic-missing.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "complete",
+      "status": {
+        "state": "complete",
+        "errors": [],
+        "warnings": [],
         "synthetic": true
       },
-      "scope_category": "confirmed",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": [
         {
           "docket": "SYNTHETIC-EXTRA",
@@ -117,13 +82,24 @@
       "case_id": "synthetic-null",
       "source": {
         "sha256": "283696538495622d2b05bca8c1cd81f6889ab6858104a676f41cad6e043c0f47",
-        "path": "synthetic-null.txt"
+        "path": "synthetic-null.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "complete",
+      "status": {
+        "state": "complete",
+        "errors": [],
+        "warnings": [],
         "synthetic": true
       },
-      "scope_category": "confirmed",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": [
         {
           "docket": null,
@@ -135,13 +111,24 @@
       "case_id": "synthetic-ambiguous",
       "source": {
         "sha256": "aa66778ebc76a3b49854ea61b0c0128975aa18a0d2d7acff9e2bee786dc16cb2",
-        "path": "synthetic-ambiguous.txt"
+        "path": "synthetic-ambiguous.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "complete",
+      "status": {
+        "state": "complete",
+        "errors": [],
+        "warnings": [],
         "synthetic": true
       },
-      "scope_category": "confirmed",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": [
         {
           "docket": "SYNTHETIC-D",
@@ -157,97 +144,111 @@
       "case_id": "synthetic-hash",
       "source": {
         "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-        "path": "synthetic-hash.txt"
+        "path": "synthetic-hash.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "complete",
+      "status": {
+        "state": "complete",
+        "errors": [],
+        "warnings": [],
         "synthetic": true
       },
-      "scope_category": "confirmed",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": []
     },
     {
       "case_id": "synthetic-failure",
       "source": {
         "sha256": "515270a68e72095b699c6ca776470e564b97ef0541a77977f511b6f0df0a4ae5",
-        "path": "synthetic-failure.txt"
+        "path": "synthetic-failure.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "error",
-        "synthetic": true,
-        "error": "Simulated failure"
+      "status": {
+        "state": "failed",
+        "errors": [
+          {
+            "step": "synthetic",
+            "error": "Simulated failure",
+            "type": "error",
+            "retryable": true
+          }
+        ],
+        "warnings": [],
+        "synthetic": true
       },
-      "scope_category": "confirmed",
-      "records": [],
-      "progress": {
-        "completed_stages": 1,
-        "total_stages": 2,
-        "simulated": true
-      }
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
+      "records": []
     },
     {
       "case_id": "synthetic-interrupted",
       "source": {
         "sha256": "515270a68e72095b699c6ca776470e564b97ef0541a77977f511b6f0df0a4ae5",
-        "path": "synthetic-interrupted.txt"
+        "path": "synthetic-interrupted.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "interrupted",
-        "synthetic": true,
-        "error": "Simulated interrupted"
+      "status": {
+        "state": "failed",
+        "errors": [
+          {
+            "step": "synthetic",
+            "error": "Simulated interrupted",
+            "type": "interrupted",
+            "retryable": true
+          }
+        ],
+        "warnings": [],
+        "synthetic": true
       },
-      "scope_category": "confirmed",
-      "records": [],
-      "progress": {
-        "completed_stages": 1,
-        "total_stages": 2,
-        "simulated": true
-      }
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "in_scope",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
+      "records": []
     },
     {
       "case_id": "synthetic-running",
       "source": {
         "sha256": "1abd7bda05bb5998450cc40a62473ad1f792b84310e6c607957f0ad69e5fee74",
-        "path": "synthetic-running.txt"
+        "path": "synthetic-running.txt",
+        "documents": [],
+        "dockets": []
       },
-      "execution": {
-        "status": "reviewing",
-        "synthetic": true,
-        "activity": {
-          "stage": "check",
-          "simulated": true
-        }
+      "status": {
+        "state": "in_progress",
+        "errors": [],
+        "warnings": [],
+        "synthetic": true
       },
-      "scope_category": "uncertain",
+      "schema": "appeal-result-1",
+      "disposition": {
+        "value": "uncertain",
+        "reason": "Synthetic software test",
+        "municipal_appeal": "unknown",
+        "housing": "unknown",
+        "evidence": []
+      },
       "records": []
     }
-  ],
-  "provenance": {
-    "synthetic": true,
-    "cost": {
-      "kind": "simulated",
-      "simulated": true,
-      "recorded_usd": 0.03,
-      "completeness": "partial",
-      "inherited_usd": 0.02,
-      "new_usd": 0.01,
-      "reserved_usd": 0.005,
-      "estimated_usd": null
-    }
-  },
-  "sources": {
-    "synthetic-transition": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. The synthetic case is confirmed in scope. SYNTHETIC-A has a duration of 10 days. SYNTHETIC-A has the outcome affirmed. SYNTHETIC-A has exactly the invented facts alpha and beta. SYNTHETIC-A has insufficient source evidence for this field; the expected answer is null. SYNTHETIC-B has a duration of 10 days.",
-    "synthetic-missing": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-M has a duration of 10 days.",
-    "synthetic-null": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. the sole unidentified synthetic record has a duration of 10 days.",
-    "synthetic-ambiguous": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-D has a duration of 10 days.",
-    "synthetic-hash": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. The synthetic case is confirmed in scope.",
-    "synthetic-failure": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-F has a duration of 10 days.",
-    "synthetic-interrupted": "SYNTHETIC SOFTWARE TEST ONLY. All cases, identifiers, and facts are invented. SYNTHETIC-F has a duration of 10 days.",
-    "synthetic-running": "SYNTHETIC SOFTWARE TEST ONLY. This invented source demonstrates an unfinished run. No reference answer has been adjudicated."
-  },
-  "prompts": {
-    "extract": "SIMULATED prompt for interface tests: extract the explicitly stated invented facts. Keep each invented docket separate.",
-    "finalize": "SIMULATED prompt for interface tests: preserve uncertainty in the final record.",
-    "check": "SIMULATED graph node only; no implementation or model is executed."
-  }
+  ]
 }

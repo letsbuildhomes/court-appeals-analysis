@@ -1,4 +1,4 @@
-"""Freeze reproducible case selections from an experiment artifact.
+"""Freeze reproducible case selections from a run.
 
 A cohort records both its selection query and the resulting case identities,
 with each case's frozen source hash. Re-running the query later may select
@@ -11,22 +11,22 @@ import json
 from pathlib import Path
 import random
 
-from appeal_experiments import read_experiment
+from pipeline import runs
 
-COHORT_VERSION = 'appeal-cohort-1'
+COHORT_VERSION = 'appeal-cohort-2'
 QUERY_FIELDS = {'case': 'Explicit case identities',
-                'status': 'Effective execution status, e.g. review_failed',
-                'scope': 'Scope category: confirmed, uncertain or excluded',
-                'duration_kind': 'Any finalized record with this duration kind, e.g. unknown'}
+                'status': 'Processing status: complete, failed or in_progress',
+                'disposition': 'Disposition: in_scope, uncertain or excluded',
+                'duration_kind': 'Any record with this duration kind, e.g. unknown'}
 
 
 def matches(case, query):
     """All supplied query fields must match; values within a field are alternatives."""
     tests = {'case': lambda: case['case_id'] in query['case'],
-             'status': lambda: case['execution']['status'] in query['status'],
-             'scope': lambda: case['scope_category'] in query['scope'],
+             'status': lambda: case['status']['state'] in query['status'],
+             'disposition': lambda: (case.get('disposition') or {}).get('value') in query['disposition'],
              'duration_kind': lambda: any((r.get('duration') or {}).get('kind') in query['duration_kind']
-                                          for r in case['records'])}
+                                          for r in case.get('records') or [])}
     return all(tests[field]() for field in QUERY_FIELDS if query.get(field))
 
 
@@ -48,7 +48,7 @@ def validate_query(query):
 
 
 def select_cases(cases, query):
-    """Return matching case identities in artifact order; sampling is seeded."""
+    """Return matching case identities in run order; sampling is seeded."""
     validate_query(query)
     known = {case['case_id'] for case in cases}
     absent = set(query.get('case') or []) - known
@@ -61,19 +61,17 @@ def select_cases(cases, query):
     return selected
 
 
-def create_cohort(artifact, output, query, *, name, description):
+def create_cohort(run, output, query, *, name, description):
     """Write a new cohort file; an existing file is never replaced."""
-    artifact, output = Path(artifact).resolve(), Path(output)
-    experiment = read_experiment(artifact)
-    selected = select_cases(experiment['cases'], query)
+    run, output = Path(run).resolve(), Path(output)
+    loaded = runs.load(run)
+    selected = select_cases(loaded['cases'], query)
     if not selected:
         raise ValueError('The query selected no cases')
-    by_id = {case['case_id']: case for case in experiment['cases']}
+    by_id = {case['case_id']: case for case in loaded['cases']}
     cohort = {'schema_version': COHORT_VERSION, 'name': name, 'description': description,
               'created_at': datetime.now(timezone.utc).isoformat(),
-              'base': {'artifact': str(artifact), 'source_run': experiment['manifest']['source_run'],
-                       'cases_sha256': experiment['manifest']['artifacts']['cases']['sha256'],
-                       'case_count': len(experiment['cases'])},
+              'base': {'run': str(run), 'pipeline': loaded['run']['pipeline'], 'case_count': len(loaded['cases'])},
               'query': query, 'count': len(selected),
               'cases': [{'case_id': case_id, 'source_sha256': by_id[case_id]['source']['sha256']}
                         for case_id in selected]}
@@ -101,9 +99,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
     select = sub.add_parser('select', help='Freeze a query and its selected case identities')
-    select.add_argument('output', type=Path, help='New cohort file, e.g. data/experiments/cohorts/NAME.json')
-    select.add_argument('--from', dest='artifact', type=Path, required=True,
-                        help='Experiment artifact to select from, e.g. data/experiments/production-baseline-relocated')
+    select.add_argument('output', type=Path, help='New cohort file, e.g. experiments/NAME/cohort.json')
+    select.add_argument('--from', dest='run', type=Path, default=runs.RUNS/'production',
+                        help='Run to select from (default: data/runs/production)')
     select.add_argument('--name', required=True)
     select.add_argument('--description', required=True, help='Why these cases were selected')
     for field, text in QUERY_FIELDS.items():
@@ -118,7 +116,7 @@ def main():
             query = {field: getattr(args, field) for field in QUERY_FIELDS if getattr(args, field)}
             if args.sample is not None or args.seed is not None:
                 query.update(sample=args.sample, seed=args.seed)
-            value = create_cohort(args.artifact, args.output, query, name=args.name, description=args.description)
+            value = create_cohort(args.run, args.output, query, name=args.name, description=args.description)
         else:
             value = read_cohort(args.cohort)
     except (ValueError, FileExistsError, FileNotFoundError) as exc:

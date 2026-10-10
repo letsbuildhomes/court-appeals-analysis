@@ -4,8 +4,8 @@ A provider renders a step's request, sends it, reads usage, prices it, and
 bounds its worst-case cost before sending. Chat models take conversations and
 return generated JSON. Decision models, such as stateless typed-question
 models, take a state plus questions and return structured answers; they have
-no conversation to continue. The spending cap, call log and retries live above
-providers in ``appeal_runtime.Client``, so every provider is governed alike.
+no conversation to continue. The spending cap, call store and retries live
+above providers in ``pipeline/store.py``, so every provider is governed alike.
 
 Prices come from ``pipeline/models.json``. A model without a price cannot make
 paid calls, because its spending could not be capped.
@@ -81,7 +81,7 @@ class Provider:
 
     @classmethod
     def from_spec(cls, name, spec, base_url=None, api_url=None, key=None, offline=False):
-        """Build from a recipe provider spec; ``offline`` skips credentials for planning."""
+        """Build from a model spec (``model`` and ``env``); ``offline`` skips credentials for planning."""
         pricing = pricing_for(spec['model'])
         if offline:
             return cls(name, spec['model'], pricing)
@@ -97,7 +97,7 @@ class Provider:
         return {'provider': self.name, 'kind': self.kind, 'model': self.model}
 
     def post(self, request):
-        import httpx  # Only sending needs it; describing recipes stays standard-library.
+        import httpx  # Only sending needs it; describing pipelines stays standard-library.
         with httpx.Client(timeout=httpx.Timeout(650, connect=30)) as connection:
             return connection.post(self.endpoint, headers={'Authorization': f'Bearer {self.key}'}, json=request)
 
@@ -222,7 +222,7 @@ PROVIDERS = {'chat-completions': ChatCompletionsProvider, 'decision': DecisionPr
 
 
 def build(name, spec, offline=False, **endpoint):
-    """Build a provider from a recipe's provider spec."""
+    """Build a provider for a step's model spec."""
     kind = catalog().get(spec['model'], {}).get('provider', spec.get('type'))
     if spec.get('type') and kind != spec['type']:
         raise ValueError(f'Model {spec["model"]!r} is a {kind} model, not {spec["type"]}')

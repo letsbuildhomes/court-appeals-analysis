@@ -8,20 +8,31 @@ and two different answers need judgment. Reference labels, when present,
 verify correctness; without them every direction is an unverified signal, and
 a more specific answer can still be wrong.
 
-The catalog covers the appeals record schema. Other top-level scalar fields
-become generic facts, so different extraction strategies remain comparable.
+The fact catalog comes from the output contract (``appeal_schema``). A fact a
+result's schema version does not include is *newly measured* when the other
+side has it, rather than more specific. Other top-level scalar fields become
+generic facts, so different extraction strategies remain comparable.
 """
 from collections import Counter
 import json
-import re
 
-UNKNOWN = (None, '', 'unclear', 'unknown')
-SPECIFICITY = {'unknown': 0, 'at_least': 1, 'exact': 2}
-CHANGES = ('less_specific', 'different', 'more_specific', 'unchanged')
+from appeal_schema import CASE_FACTS, QUESTIONS, RECORD_FACTS, UNKNOWN, fact, measures  # noqa: F401  (re-exported)
+
+UNKNOWN_VALUES = (None, '', 'unclear', UNKNOWN)
+CHANGES = ('less_specific', 'different', 'more_specific', 'newly_measured', 'unchanged')
 # Top-level record keys the catalog interprets, and keys that only hold wording.
-CATALOGED = {'docket', 'duration', 'duration_bounds', 'municipal_decision', 'observed_status', 'discretion',
-             'appellants', 'project', 'restrictions', 'housing_changes', 'related_dockets', 'timeline'}
+CATALOGED = {'docket', 'duration', 'municipal_decision', 'observed_status', 'discretion', 'appellants', 'project',
+             'restrictions', 'housing_changes', 'related_dockets', 'timeline'}
 WORDING = {'prose', 'description', 'descriptions', 'note', 'notes', 'evidence', 'rationale'}
+# Reference label paths that address a cataloged fact.
+REFERENCE_PATHS = {('duration',): 'duration', ('duration', 'days'): 'duration', ('duration', 'kind'): 'duration',
+                   ('municipal_decision', 'outcome'): 'decision_outcome', ('municipal_decision', 'date'): 'decision_date',
+                   ('observed_status', 'litigation'): 'litigation', ('observed_status', 'permission'): 'permission',
+                   ('discretion', 'involved'): 'discretion_involved', ('discretion', 'central'): 'discretion_central',
+                   ('project', 'municipality'): 'municipality', ('project', 'proposed_units'): 'units',
+                   ('project', 'proposed_lots'): 'lots', ('disposition', 'municipal_appeal'): 'municipal_appeal',
+                   ('disposition', 'housing'): 'housing', ('disposition', 'value'): 'disposition',
+                   ('disposition',): 'disposition'}
 
 
 def _get(obj, *path):
@@ -32,126 +43,6 @@ def _get(obj, *path):
     return obj
 
 
-def _evidence(*values):
-    quotes = []
-    for value in values:
-        for item in value if isinstance(value, list) else [value]:
-            if isinstance(item, dict) and isinstance(item.get('quote'), str):
-                quotes.append({'doc': item.get('doc'), 'page': item.get('page'), 'quote': item['quote']})
-    return quotes[:6]
-
-
-def _items_evidence(key):
-    return lambda r: _evidence(*[i.get('evidence') for i in r.get(key) or [] if isinstance(i, dict)])
-
-
-def _object_evidence(*path):
-    return lambda r: _evidence(_get(r, *path))
-
-
-def _duration(record):
-    duration = record.get('duration')
-    if isinstance(duration, (int, float)) and not isinstance(duration, bool):
-        return f'{duration} days'
-    kind, days = _get(record, 'duration', 'kind'), _get(record, 'duration', 'days')
-    if kind not in ('exact', 'at_least') or days is None:
-        return None
-    return f'{days} days' if kind == 'exact' else f'≥ {days} days'
-
-
-def _endpoint(side):
-    def value(record):
-        point = _get(record, 'duration_bounds', side) or {}
-        if not isinstance(point, dict) or not point.get('date'):
-            return None
-        relation = {'on_or_before': 'on or before ', 'on_or_after': 'on or after '}.get(point.get('relation'), '')
-        return relation+point['date']
-    return value
-
-
-def _count(key, empty_known=True):
-    def value(record):
-        items = record.get(key)
-        if not isinstance(items, list) or (not items and not empty_known):
-            return None
-        return len(items)
-    return value
-
-
-def _representation(record):
-    values = sorted(str(a.get('representation') or 'unknown') for a in record.get('appellants') or [] if isinstance(a, dict))
-    if not values or all(v in UNKNOWN for v in values):
-        return None
-    return ', '.join(f'{n} {v}' for v, n in sorted(Counter(values).items()))
-
-
-def _related(record):
-    dockets = sorted({' '.join(str(d.get('docket')).split()) for d in record.get('related_dockets') or []
-                      if isinstance(d, dict) and d.get('docket')})
-    return ', '.join(dockets) if dockets else None
-
-
-def _municipality(value):
-    """'Town of Jericho' and 'Jericho, Vermont' name the same place."""
-    text = re.sub(r'^(town|city|village) of\s+', '', str(value).strip().casefold())
-    return re.sub(r',?\s*(vermont|vt\.?)$', '', text).strip()
-
-
-def _field(*path):
-    return lambda record: _get(record, *path)
-
-
-def fact(key, question, label, value, evidence, rank=None, normalize=None):
-    return {'key': key, 'question': question, 'label': label, 'value': value, 'evidence': evidence,
-            'rank': rank, 'normalize': normalize}
-
-
-RECORD_FACTS = [
-    fact('duration', 'Duration', 'Appeal duration', _duration,
-         lambda r: _evidence(_get(r, 'duration_bounds', 'start', 'evidence'), _get(r, 'duration_bounds', 'end', 'evidence')),
-         rank=lambda r: SPECIFICITY.get(_get(r, 'duration', 'kind'), 0)),
-    fact('start', 'Duration', 'Start date', _endpoint('start'), _object_evidence('duration_bounds', 'start', 'evidence'),
-         rank=lambda r: 2 if _get(r, 'duration_bounds', 'start', 'relation') == 'exact' else 1),
-    fact('end', 'Duration', 'End date', _endpoint('end'), _object_evidence('duration_bounds', 'end', 'evidence'),
-         rank=lambda r: 2 if _get(r, 'duration_bounds', 'end', 'relation') == 'exact' else 1),
-    fact('decision_outcome', 'Decision & status', 'Municipal decision', _field('municipal_decision', 'outcome'),
-         _object_evidence('municipal_decision', 'evidence')),
-    fact('decision_date', 'Decision & status', 'Decision date', _field('municipal_decision', 'date'),
-         _object_evidence('municipal_decision', 'evidence')),
-    fact('litigation', 'Decision & status', 'Litigation status', _field('observed_status', 'litigation'),
-         _object_evidence('observed_status', 'evidence')),
-    fact('permission', 'Decision & status', 'Permission status', _field('observed_status', 'permission'),
-         _object_evidence('observed_status', 'evidence')),
-    fact('discretion_involved', 'Discretion', 'Discretion involved', _field('discretion', 'involved'),
-         _object_evidence('discretion', 'evidence')),
-    fact('discretion_central', 'Discretion', 'Discretion central', _field('discretion', 'central'),
-         _object_evidence('discretion', 'central_evidence')),
-    fact('appellants', 'Appellants', 'Appellants', _count('appellants', empty_known=False), _items_evidence('appellants')),
-    fact('representation', 'Appellants', 'Representation', _representation, _items_evidence('appellants')),
-    fact('municipality', 'Project', 'Municipality', _field('project', 'municipality'), _object_evidence('project', 'evidence'),
-         normalize=_municipality),
-    fact('units', 'Project', 'Proposed units', _field('project', 'proposed_units'), _object_evidence('project', 'evidence')),
-    fact('lots', 'Project', 'Proposed lots', _field('project', 'proposed_lots'), _object_evidence('project', 'evidence')),
-    fact('restrictions', 'Effects', 'Restrictions', _count('restrictions'), _items_evidence('restrictions')),
-    fact('housing_changes', 'Effects', 'Housing changes', _count('housing_changes'), _items_evidence('housing_changes')),
-    fact('related', 'Links', 'Related dockets', _related, _items_evidence('related_dockets')),
-]
-CASE_FACTS = [
-    fact('scope_category', 'Scope', 'Scope category', lambda c: c.get('scope_category'), _object_evidence('scope', 'evidence')),
-    fact('municipal_appeal', 'Scope', 'Municipal appeal', _field('scope', 'municipal_appeal'), _object_evidence('scope', 'evidence')),
-    fact('housing', 'Scope', 'Housing', _field('scope', 'housing'), _object_evidence('scope', 'evidence')),
-]
-QUESTIONS = ['Scope', 'Duration', 'Decision & status', 'Discretion', 'Appellants', 'Project', 'Effects', 'Links', 'Other fields']
-# Reference label paths that address a cataloged fact.
-REFERENCE_PATHS = {('duration',): 'duration', ('duration', 'days'): 'duration', ('duration', 'kind'): 'duration',
-                   ('municipal_decision', 'outcome'): 'decision_outcome', ('municipal_decision', 'date'): 'decision_date',
-                   ('observed_status', 'litigation'): 'litigation', ('observed_status', 'permission'): 'permission',
-                   ('discretion', 'involved'): 'discretion_involved', ('discretion', 'central'): 'discretion_central',
-                   ('project', 'municipality'): 'municipality', ('project', 'proposed_units'): 'units',
-                   ('project', 'proposed_lots'): 'lots', ('scope', 'municipal_appeal'): 'municipal_appeal',
-                   ('scope', 'housing'): 'housing', ('scope_category',): 'scope_category'}
-
-
 def _scalar(value):
     if isinstance(value, list) and all(not isinstance(v, (dict, list)) for v in value):
         return ', '.join(sorted(str(v) for v in value)) if value else None
@@ -160,14 +51,15 @@ def _scalar(value):
 
 def generic_facts(records):
     """Facts for uncataloged top-level scalar fields, e.g. from another producer."""
-    keys = sorted({k for r in records for k in r if k not in CATALOGED and k not in WORDING
+    cataloged = CATALOGED | {spec['key'] for spec in RECORD_FACTS}
+    keys = sorted({k for r in records for k in r if k not in cataloged and k not in WORDING
                    and not isinstance(r[k], dict)})
     return [fact('field:'+key, 'Other fields', key.replace('_', ' ').capitalize(),
                  lambda r, key=key: _scalar(r.get(key)), lambda r: []) for key in keys]
 
 
 def known(value):
-    return value not in UNKNOWN
+    return value not in UNKNOWN_VALUES
 
 
 def display(value):
@@ -194,15 +86,15 @@ def transition(spec, before, after, b_obj=None, c_obj=None):
 
 
 def identity(docket):
-    return ' '.join(docket.strip().casefold().split()) if isinstance(docket, str) else None
+    return ' '.join(docket.strip().casefold().split()) if isinstance(docket, str) and docket != UNKNOWN else None
 
 
 def processing(status):
-    if status is None:
+    if status in (None, 'not_run'):
         return 'absent'
     if status == 'complete':
         return 'complete'
-    return 'running' if status in ('running', 'reviewing', 'triaging', 'extracting', 'measuring') else 'failed'
+    return 'running' if status == 'in_progress' else 'failed'
 
 
 def _verified(evaluation_case, reference_case):
@@ -231,14 +123,14 @@ def _plural(n, word):
 def compare_case(baseline, candidate, evaluation_case=None, reference_case=None, role='selected'):
     """Fact-level comparison of one case's two outputs, with a verdict."""
     b, c = baseline or {}, candidate or {}
-    status = {'baseline': _get(b, 'execution', 'status'), 'candidate': _get(c, 'execution', 'status')}
+    status = {'baseline': _get(b, 'status', 'state'), 'candidate': _get(c, 'status', 'state')}
     states = {side: processing(value) for side, value in status.items()}
     flow = ('recovered' if states['baseline'] == 'failed' and states['candidate'] == 'complete'
             else 'broke' if states['baseline'] == 'complete' and states['candidate'] == 'failed'
             else 'still_failing' if states['baseline'] == states['candidate'] == 'failed'
             else 'in_progress' if 'running' in states.values()
             else 'missing' if 'absent' in states.values() else 'ok')
-    scope = {'baseline': b.get('scope_category'), 'candidate': c.get('scope_category')}
+    scope = {'baseline': _get(b, 'disposition', 'value'), 'candidate': _get(c, 'disposition', 'value')}
     scope_changed = bool(baseline and candidate and scope['baseline'] != scope['candidate'])
     verified = _verified(evaluation_case, reference_case)
     records = {side: {} for side in ('baseline', 'candidate')}
@@ -248,13 +140,16 @@ def compare_case(baseline, candidate, evaluation_case=None, reference_case=None,
     specs = RECORD_FACTS + generic_facts([*records['baseline'].values(), *records['candidate'].values()])
     facts = []
 
+    schemas = {'baseline': b.get('schema'), 'candidate': c.get('schema')}
+
     def add(record_key, docket, spec, b_obj, c_obj):
         before = spec['value'](b_obj) if b_obj is not None else None
         after = spec['value'](c_obj) if c_obj is not None else None
         scored = verified.get((record_key, spec['key']))
+        newly = spec.get('since') and not measures(spec, schemas['baseline']) and measures(spec, schemas['candidate'])
         facts.append({'key': spec['key'], 'question': spec['question'], 'label': spec['label'], 'record': docket,
                       'baseline': display(before), 'candidate': display(after),
-                      'change': transition(spec, before, after, b_obj, c_obj),
+                      'change': 'newly_measured' if newly else transition(spec, before, after, b_obj, c_obj),
                       'verified': scored if scored in ('corrected', 'regressed', 'unchanged_error', 'unchanged_correct') else None,
                       'evidence': {'baseline': spec['evidence'](b_obj) if b_obj is not None else [],
                                    'candidate': spec['evidence'](c_obj) if c_obj is not None else []}})
@@ -283,7 +178,7 @@ def compare_case(baseline, candidate, evaluation_case=None, reference_case=None,
                  'evidence': s['evidence'](record)} for s in specs]})
 
     scored = Counter(f['verified'] for f in facts if f['verified'])
-    unverified = [f for f in facts if not f['verified'] and f['key'] != 'scope_category']
+    unverified = [f for f in facts if not f['verified'] and f['key'] != 'disposition' and f['change'] != 'newly_measured']
     more = sum(f['change'] == 'more_specific' for f in unverified)
     less = sum(f['change'] == 'less_specific' for f in unverified)
     different = sum(f['change'] == 'different' for f in unverified)
@@ -299,8 +194,8 @@ def compare_case(baseline, candidate, evaluation_case=None, reference_case=None,
     if flow == 'missing':
         notes.append('Only in '+('candidate' if baseline is None else 'baseline'))
     if scope_changed:
-        judgment.append(f'Scope {_plain(scope["baseline"])} → {_plain(scope["candidate"])}')
-    # Records follow scope; a scope change needs judgment before counting them.
+        judgment.append(f'Disposition {_plain(scope["baseline"])} → {_plain(scope["candidate"])}')
+    # Records follow the disposition; a disposition change needs judgment before counting them.
     if gained:
         (judgment if scope_changed else better).append('+'+_plural(len(gained), 'record'))
     if lost:
@@ -340,13 +235,15 @@ def record_metrics(cases):
     records = [r for c in cases for r in c.get('records', []) or []]
     slots = [spec['value'](r) for r in records for spec in RECORD_FACTS]
     return {'cases': len(cases),
-            'processed': sum(_get(c, 'execution', 'status') == 'complete' for c in cases),
-            'failed': sum(processing(_get(c, 'execution', 'status')) == 'failed' for c in cases),
+            'processed': sum(_get(c, 'status', 'state') == 'complete' for c in cases),
+            'failed': sum(processing(_get(c, 'status', 'state')) == 'failed' for c in cases),
+            'uncertain': sum(_get(c, 'disposition', 'value') == 'uncertain' for c in cases),
             'records': len(records),
-            'duration_known': sum(_duration(r) is not None for r in records),
+            'duration_known': sum(_get(r, 'duration', 'kind') in ('exact', 'at_least') for r in records),
             'duration_exact': sum(_get(r, 'duration', 'kind') == 'exact' for r in records),
             'facts_known': sum(known(v) for v in slots), 'fact_slots': len(slots),
-            'warnings': sum(len(_get(c, 'execution', 'warnings') or []) for c in cases)}
+            'warnings': sum(len(_get(c, 'status', 'warnings') or []) for c in cases),
+            'unverified_quotes': sum(len(_get(c, 'status', 'quotes', 'unverified') or []) for c in cases)}
 
 
 def profile(cases):
@@ -359,8 +256,8 @@ def profile(cases):
                      'known': sum(known(v) for v in values), 'total': len(values),
                      'top': Counter(str(display(v)) for v in values if known(v)).most_common(3)})
     return {'metrics': record_metrics(cases), 'facts': rows,
-            'statuses': dict(Counter(_get(c, 'execution', 'status') or 'unknown' for c in cases)),
-            'scopes': dict(Counter(c.get('scope_category') or 'unknown' for c in cases))}
+            'statuses': dict(Counter(_get(c, 'status', 'state') or 'unknown' for c in cases)),
+            'dispositions': dict(Counter(_get(c, 'disposition', 'value') or 'none' for c in cases))}
 
 
 def headline(cases):
@@ -383,7 +280,7 @@ def headline(cases):
 
 
 def impact(baseline, candidate, evaluation=None, reference=None, roles=None):
-    """Compare two canonical runs over their case identities, grouped by role."""
+    """Compare two loaded runs (``pipeline.runs.load``) over their case identities, grouped by role."""
     roles = roles or {}
     sides = {side: {c['case_id']: c for c in run['cases']} for side, run in (('baseline', baseline), ('candidate', candidate))}
     evaluated = {c['case_id']: c for c in (evaluation or {}).get('cases', [])}

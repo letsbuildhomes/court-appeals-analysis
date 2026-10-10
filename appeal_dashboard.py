@@ -14,42 +14,31 @@ import re
 import threading
 from urllib.parse import parse_qs, urlsplit
 
-from appeal_assembly import run_progress
 from appeal_demo import build_demo
 from appeal_evaluation import evaluate
-from appeal_experiments import read_experiment
 from appeal_impact import CASE_FACTS, RECORD_FACTS, compare_case, impact, processing, profile
 from appeal_reference import read_reference
-from pipeline import recipe as recipes
+from pipeline import registry, runs
 from listen import DEFAULT_HOST, display_url
 
 ROOT = Path(__file__).resolve().parent
-BASELINE_DESCRIPTION = ('The preserved first production run. Its quality profile shows where answers are missing, '
-                        'which is where experiments can look for improvements.')
+BASELINE_DESCRIPTION = ('The first production run, rebuilt by the ported legacy pipeline from its saved calls. Its '
+                        'quality profile shows where answers are missing, which is where experiments can look for '
+                        'improvements.')
 VERDICTS = ('worsened', 'mixed', 'changed', 'improved', 'unchanged')
 SAFE_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*\Z')
+EXPERIMENT_VERSION = 'appeal-experiment-3'
 
 
-def variables(value, retrospective=False):
+def variables(record, rows):
     """Short descriptions of what an experiment changed."""
-    if not value:
-        return []
-    def number(v):
-        return f'{v:,}' if isinstance(v, int) and not isinstance(v, bool) else v
-    result = [f'{name} prompt' for name in value.get('prompts', {})]
-    def label(path):
-        parts = path.split('.')
-        if parts[0] == 'steps' and len(parts) > 2:
-            return ' '.join([parts[1], *(p.replace('_', ' ') for p in parts[2 + (parts[2] == 'settings'):])])
-        return path.replace('_', ' ')
-    result += [f'{label(change["path"])}: {number(change["base"])} → {number(change["value"])}'
-               for change in value.get('recipe', []) if not change['path'].startswith('phases.')]
-    result += [f'{name} component' for name in value.get('components', [])]
-    if value.get('rerun'):
-        result.append('rerun: '+', '.join(value['rerun']))
-    if value.get('batching') == 'changed':
-        result.append('review batching')
-    return result or ['Same prompts and settings' if retrospective else 'No changes: identical retry']
+    result = registry.summary(rows) if rows is not None else []
+    if (record or {}).get('samples'):
+        result += [f'{path}: sample {n}' for path, n in record['samples'].items()]
+    if ((record or {}).get('batching') or {}).get('status') == 'changed':
+        result.append('batching')
+    retrospective = (record or {}).get('kind') == 'retrospective'
+    return result or ['Same pipeline' if retrospective else 'No changes: identical rerun']
 
 
 def signature(path):
@@ -57,12 +46,30 @@ def signature(path):
     return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
 
 
+def tracked(folder):
+    """Files whose change means a run must be read again."""
+    folder = Path(folder)
+    return [folder/'run.json'] + [p for p in (folder/'executions.json', folder/'ledger.jsonl') if p.exists()]
+
+
+def pipelines(record):
+    """Both sides' descriptors and their step-by-step diff."""
+    designs = {}
+    for side in ('baseline', 'candidate'):
+        try:
+            designs[side] = registry.load(record[side]['pipeline'])
+        except (KeyError, ValueError, TypeError):
+            designs[side] = None
+    descriptors = {side: (d or {}).get('descriptor') for side, d in designs.items()}
+    rows = registry.diff(descriptors['baseline'], descriptors['candidate']) \
+        if descriptors['baseline'] and descriptors['candidate'] else None
+    return {'baseline': designs['baseline'], 'candidate': designs['candidate'], 'diff': rows}
+
+
 class Dashboard:
     def __init__(self, production=None, baseline=None, candidate=None, reference=None, experiments=None):
-        relocated = ROOT / 'data/experiments/production-baseline-relocated'
-        default = relocated if (relocated / 'manifest.json').is_file() else ROOT / 'data/experiments/production-baseline'
-        self.production = Path(production or default)
-        self.experiments = Path(experiments or ROOT / 'data/experiments')
+        self.production = Path(production or runs.RUNS/'production')
+        self.experiments = Path(experiments or ROOT/'data/experiments')
         self.configured = [Path(p) if p else None for p in (baseline, candidate, reference)]
         if candidate and not baseline or reference and not candidate:
             raise ValueError('A candidate requires a baseline; a reference requires both runs')
@@ -70,15 +77,24 @@ class Dashboard:
         self.lock = threading.RLock()
 
     def experiment_dirs(self):
+        """Experiment records in the current format; earlier records stay on disk, unlisted."""
         if not self.experiments.is_dir():
             return []
-        return sorted(p for p in self.experiments.iterdir()
-                      if p.is_dir() and not p.name.startswith('.') and (p / 'experiment.json').is_file())
+        found = []
+        for p in sorted(self.experiments.iterdir()):
+            if p.is_dir() and not p.name.startswith('.') and (p/'experiment.json').is_file():
+                try:
+                    current = json.loads((p/'experiment.json').read_text()).get('schema_version') == EXPERIMENT_VERSION
+                except (OSError, json.JSONDecodeError):
+                    current = True  # Listed, so the error is visible.
+                if current:
+                    found.append(p)
+        return found
 
     def experiment_folder(self, dataset):
         name = dataset.partition(':')[2]
-        folder = self.experiments / name
-        if not SAFE_NAME.fullmatch(name) or not (folder / 'experiment.json').is_file():
+        folder = self.experiments/name
+        if not SAFE_NAME.fullmatch(name) or not (folder/'experiment.json').is_file():
             raise ValueError('Unknown dataset')
         return folder
 
@@ -86,18 +102,18 @@ class Dashboard:
         datasets = []
         for folder in self.experiment_dirs():
             try:
-                datasets.append(self.card('experiment:' + folder.name))
+                datasets.append(self.card('experiment:'+folder.name))
             except (ValueError, KeyError, OSError, json.JSONDecodeError) as exc:
-                datasets.append({'id': 'experiment:' + folder.name, 'label': folder.name, 'kind': 'experiment',
+                datasets.append({'id': 'experiment:'+folder.name, 'label': folder.name, 'kind': 'experiment',
                                  'available': False, 'error': str(exc)})
         datasets.sort(key=lambda d: d.get('created_at') or '', reverse=True)
         if self.configured[0]:
             datasets.append(self.card('configured'))
         datasets.append(self.card('demo'))
         datasets.append({'id': 'production', 'label': 'Production baseline', 'kind': 'baseline',
-                         'available': (self.production / 'manifest.json').is_file(),
-                         'description': BASELINE_DESCRIPTION})
-        return {'datasets': datasets, 'default': None}
+                         'available': (self.production/'run.json').is_file(), 'description': BASELINE_DESCRIPTION})
+        return {'datasets': datasets, 'default': None, 'tags': registry.tags(),
+                'history': {tag: registry.history(tag) for tag in registry.tags()}}
 
     def card(self, dataset):
         """Index summary: hypothesis, variables, status, impact and cost."""
@@ -105,13 +121,16 @@ class Dashboard:
         record = value.get('experiment') or {}
         result = value.get('impact')
         selected = (result or {}).get('groups', {}).get('selected')
+        rows = (value.get('pipelines') or {}).get('diff')
         return {'id': dataset, 'label': record.get('name') or {'demo': 'Synthetic software test',
                 'configured': 'Supplied comparison', 'production': 'Production baseline'}.get(dataset, dataset),
                 'kind': value['kind'], 'available': True, 'status': value['status'],
                 'hypothesis': record.get('hypothesis') or value.get('description'),
                 'created_at': record.get('created_at'),
-                'variables': variables(record.get('variables'), record.get('kind') == 'retrospective'),
+                'variables': variables(record, rows) if record or rows else [],
                 'cohort': (record.get('cohort') or {}).get('name'),
+                'pipelines': {side: (record.get(side) or {}).get('pipeline') for side in ('baseline', 'candidate')}
+                if record else None,
                 'cases': {'selected': len((record.get('cases') or {}).get('selected', [])) or (selected or {}).get('cases'),
                           'companions': len((record.get('cases') or {}).get('companions', []))},
                 'impact': {k: selected[k] for k in ('verdicts', 'headline', 'flows', 'cases')} if selected else None,
@@ -123,13 +142,13 @@ class Dashboard:
             if dataset == 'demo':
                 if dataset not in self.cache:
                     demo = build_demo()
-                    demo.update(kind='synthetic', status='finalized', description='Invented cases with reference labels that exercise every comparison outcome. '
-                                            'Not research results.')
+                    demo.update(kind='synthetic', status='finalized', description='Invented cases with reference '
+                                'labels that exercise every comparison outcome. Not research results.')
                     demo['impact'] = impact(demo['baseline'], demo['candidate'], demo['evaluation'], demo['reference'])
                     demo['cost_summary'] = {'new_usd': None, 'simulated': True}
                     self.cache[dataset] = (None, demo)
                 return self.cache[dataset][1]
-            record, executions, roles, kind, status = None, [], {}, 'comparison', 'finalized'
+            record, roles, kind, status, cases, folder = None, {}, 'comparison', 'finalized', None, None
             if dataset == 'production':
                 paths = [self.production, None, None]
                 kind = 'baseline'
@@ -138,40 +157,55 @@ class Dashboard:
                 kind = 'comparison' if self.configured[1] else 'baseline'
             elif dataset.startswith('experiment:'):
                 folder = self.experiment_folder(dataset)
-                record = json.loads((folder / 'experiment.json').read_text())
-                executions = json.loads((folder / 'executions.json').read_text()) if (folder / 'executions.json').exists() else []
+                record = json.loads((folder/'experiment.json').read_text())
+                if record.get('schema_version') != EXPERIMENT_VERSION:
+                    raise ValueError('Unsupported experiment record; plan it again')
                 roles = {gid: 'companion' for gid in record['cases']['companions']}
                 kind = 'retrospective' if record.get('kind') == 'retrospective' else 'experiment'
-                if not (folder / 'candidate' / 'manifest.json').is_file():
-                    return self.planned(dataset, folder, record, executions)
-                paths = [folder / 'baseline', folder / 'candidate', None]
+                if not (folder/'comparison.json').is_file():
+                    return self.planned(dataset, folder, record)
+                paths = [Path(record['baseline']['run']), Path(record['candidate']['run']), None]
+                cases = record['cases']['selected']+record['cases']['companions']
             else:
                 raise ValueError('Unknown dataset')
-            files = [p / name for p in paths[:2] if p for name in ('manifest.json', 'cases.json')]
+            files = [f for p in paths[:2] if p for f in tracked(p)]
             if paths[2]:
                 files.append(paths[2])
-            if record is not None:
-                files += [folder / 'experiment.json'] + ([folder / 'executions.json'] if (folder / 'executions.json').exists() else [])
+            if folder is not None:
+                files += [folder/'experiment.json', folder/'comparison.json']
             before = tuple(signature(p) for p in files)
             if dataset in self.cache and self.cache[dataset][0] == before:
                 return self.cache[dataset][1]
-            runs = [read_experiment(p) if p else None for p in paths[:2]]
+            loaded = [runs.load(p, cases) if p else None for p in paths[:2]]
             reference = read_reference(paths[2]) if paths[2] else None
-            evaluation = evaluate(*runs, reference) if runs[1] else None
-            value = {'baseline': runs[0]['canonical'], 'candidate': runs[1]['canonical'] if runs[1] else None,
-                     'reference': reference, 'evaluation': evaluation, 'kind': kind, 'status': status,
-                     'experiment': record, 'executions': executions,
-                     'roots': {side: Path(run['manifest']['source_run']).resolve()
-                               for side, run in zip(('baseline', 'candidate'), runs) if run},
-                     'manifests': {side: run['manifest'] for side, run in zip(('baseline', 'candidate'), runs) if run}}
-            if runs[1]:
+            evaluation = evaluate(*loaded, reference) if loaded[1] else None
+            value = {'baseline': loaded[0], 'candidate': loaded[1], 'reference': reference, 'evaluation': evaluation,
+                     'kind': kind, 'status': status, 'experiment': record,
+                     'roots': {side: Path(run['run']['corpus']).resolve()
+                               for side, run in zip(('baseline', 'candidate'), loaded) if run},
+                     'runs': {side: run['run'] for side, run in zip(('baseline', 'candidate'), loaded) if run}}
+            if record is not None:
+                value['pipelines'] = pipelines(record)
+                value['comparison'] = json.loads((folder/'comparison.json').read_text())
+                executions = Path(record['candidate']['run'])/'executions.json'
+                value['executions'] = json.loads(executions.read_text()) \
+                    if record['kind'] == 'experiment' and executions.exists() else []
+            elif loaded[1]:
+                value['pipelines'] = pipelines({side: {'pipeline': run['run']['pipeline']}
+                                                for side, run in zip(('baseline', 'candidate'), loaded)})
+            else:
+                value['pipelines'] = pipelines({'baseline': {'pipeline': loaded[0]['run']['pipeline']},
+                                                'candidate': {'pipeline': None}})
+            if loaded[1]:
                 value['impact'] = impact(value['baseline'], value['candidate'], evaluation, reference, roles)
-                cost = value['candidate'].get('provenance', {}).get('cost') or {}
-                value['cost_summary'] = {'new_usd': cost.get('new_usd'), 'recorded_usd': cost.get('recorded_usd'),
+                cost = (value.get('comparison') or {}).get('cost') or runs.cost(paths[1])
+                value['cost_summary'] = {'new_usd': cost.get('new_usd'), 'reused_usd': cost.get('reused_usd'),
+                                         'recorded_usd': cost.get('recorded_usd'),
                                          'retrospective': kind == 'retrospective'}
             else:
                 value['profile'] = profile(value['baseline']['cases'])
                 value['description'] = BASELINE_DESCRIPTION
+                value['cost_summary'] = runs.cost(paths[0])
                 try:
                     value['artifact_path'] = str(paths[0].resolve().relative_to(ROOT))
                 except ValueError:
@@ -181,45 +215,45 @@ class Dashboard:
             self.cache[dataset] = (before, value)
             return value
 
-    def planned(self, dataset, folder, record, executions):
+    def planned(self, dataset, folder, record):
         """An experiment that has not been finalized: plan, progress and spending only."""
-        progress = run_progress(folder / 'run')
-        statuses = progress['statuses']
-        designs = {}
-        for side, run in (('baseline', Path(record['base']['run'])), ('candidate', folder / 'run')):
-            try:
-                manifest, prompts = (json.loads((run / name).read_text()) for name in ('manifest.json', 'prompts.json'))
-                designs[side] = {'recipe': recipes.describe(recipes.for_run(run, manifest, prompts)), 'prompts': prompts}
-            except (OSError, ValueError, KeyError):
-                designs[side] = None
+        run_dir = Path(record['candidate']['run'])
+        statuses = runs.progress(run_dir)['statuses']
+        executions = json.loads((run_dir/'executions.json').read_text())
+        cost = runs.cost(run_dir)
         return {'kind': 'experiment', 'status': 'running' if executions else 'planned', 'experiment': record,
-                'designs': designs,
-                'executions': executions, 'baseline': None, 'candidate': None, 'evaluation': None, 'reference': None,
-                'progress': {'statuses': statuses, 'cases': sum(statuses.values()), 'complete': statuses.get('complete', 0)},
-                'cost_summary': {'new_usd': progress['new_usd'], 'inherited_usd': progress['inherited_usd'],
+                'pipelines': pipelines(record), 'executions': executions,
+                'baseline': None, 'candidate': None, 'evaluation': None, 'reference': None,
+                'progress': {'statuses': dict(statuses), 'cases': sum(statuses.values()),
+                             'complete': statuses.get('complete', 0)},
+                'cost_summary': {'new_usd': cost['new_usd'], 'reused_usd': cost['reused_usd'],
                                  'estimate': record.get('estimate')}}
 
     def overview(self, dataset):
         value = self.load(dataset)
-        runs, designs = [], dict(value.get('designs') or {})
+        sides = []
         for side in ('baseline', 'candidate'):
             run = value.get(side)
-            if run or side not in designs:
-                designs[side] = {'recipe': run.get('recipe', {}), 'prompts': run.get('prompts', {})} if run else None
             if run:
-                runs.append({'side': side, 'name': run.get('run', {}).get('name', side),
-                             'status_counts': dict(Counter(c.get('execution', {}).get('status', 'unknown') for c in run['cases'])),
-                             'case_count': len(run['cases']), 'record_count': sum(len(c.get('records', [])) for c in run['cases']),
-                             'cost': run.get('provenance', {}).get('cost'),
-                             'execution': value.get('manifests', {}).get(side, {}).get('execution', value.get('execution'))})
+                sides.append({'side': side, 'name': run['run']['name'], 'pipeline': run['run']['pipeline'],
+                              'kind': run['run']['kind'],
+                              'status_counts': dict(Counter(c['status']['state'] for c in run['cases'])),
+                              'case_count': len(run['cases']),
+                              'record_count': sum(len(c.get('records') or []) for c in run['cases'])})
         result = value.get('impact')
+        designs = value.get('pipelines') or {}
         return {'dataset': dataset, 'synthetic': dataset == 'demo',
                 'kind': value['kind'], 'status': value['status'], 'card': self.card(dataset),
                 'experiment': value.get('experiment'), 'executions': value.get('executions', []),
                 'progress': value.get('progress'), 'cost_summary': value.get('cost_summary'),
                 'impact': {k: v for k, v in result.items() if k != 'cases'} if result else None,
                 'profile': value.get('profile'), 'artifact_path': value.get('artifact_path'),
-                'runs': runs, 'designs': designs,
+                'runs': sides,
+                'pipelines': {'baseline': (designs.get('baseline') or {}).get('descriptor'),
+                              'candidate': (designs.get('candidate') or {}).get('descriptor'),
+                              'ids': {side: (designs.get(side) or {}).get('id') for side in ('baseline', 'candidate')},
+                              'diff': designs.get('diff')},
+                'tags': registry.tags(),
                 'fact_labels': {f['key']: f['label'] for f in CASE_FACTS + RECORD_FACTS},
                 'reference': {k: v for k, v in value['reference'].items() if k != 'cases'} if value.get('reference') else None}
 
@@ -253,24 +287,25 @@ class Dashboard:
         for case_id in sorted(set(sides['baseline']) | set(sides['candidate'])):
             b, c = sides['baseline'].get(case_id), sides['candidate'].get(case_id)
             chosen, effect = b or c, impacts.get(case_id)
-            statuses = {side: run.get('execution', {}).get('status', 'unknown') if run else None
-                        for side, run in (('baseline', b), ('candidate', c))}
+            statuses = {side: run['status']['state'] if run else None for side, run in (('baseline', b), ('candidate', c))}
             dockets = sorted({str(d) for run in (b, c) if run
-                              for d in run.get('source', {}).get('dockets', []) + [r.get('docket') for r in run.get('records', [])] if d})
+                              for d in run['source'].get('dockets', []) + [r.get('docket') for r in run.get('records') or []]
+                              if d and d != 'unknown'})
             unknown = sum(isinstance(r.get('duration'), dict) and r['duration'].get('kind') == 'unknown'
-                          for r in chosen.get('records', []))
+                          for r in chosen.get('records') or [])
+            disposition = (chosen.get('disposition') or {}).get('value') or 'none'
             if q.casefold() not in ' '.join([case_id] + dockets).casefold():
                 continue
             if status and not (any(processing(s) == status for s in statuses.values() if s)
                                or status in statuses.values()):
                 continue
-            if scope and scope != chosen.get('scope_category') or gap and not unknown:
+            if scope and scope != disposition or gap and not unknown:
                 continue
             if verdict and (not effect or effect['verdict'] != verdict) or role and (not effect or effect['role'] != role):
                 continue
-            rows.append({'case_id': case_id, 'dockets': dockets, 'scope_category': chosen.get('scope_category', 'unknown'),
+            rows.append({'case_id': case_id, 'dockets': dockets, 'disposition': disposition,
                          'status': statuses, 'gaps': {'duration_unknown': unknown},
-                         'record_count': {side: len(run.get('records', [])) if run else None
+                         'record_count': {side: len(run.get('records') or []) if run else None
                                           for side, run in (('baseline', b), ('candidate', c))},
                          'impact': {k: effect[k] for k in ('verdict', 'verified', 'chips', 'highlights', 'role', 'processing')}
                          if effect else None})
@@ -292,18 +327,14 @@ class Dashboard:
         if dataset == 'demo':
             raw = value['sources'][case_id].encode('utf-8')
         else:
-            root = value['roots'][side]
-            relative = Path(case['source']['path'])
-            if relative.is_absolute() or '..' in relative.parts or not relative.parts or relative.parts[0] != 'sources':
+            root = value['roots'][side]/'sources'
+            path = root/f'{case_id}.txt'
+            if not SAFE_NAME.fullmatch(case_id) or Path(case['source']['path']).resolve() != path.resolve():
                 raise ValueError('Unsafe source path')
-            path = root / relative
-            current = root
-            for part in relative.parts:
-                current = current / part
-                if current.is_symlink():
-                    raise ValueError('Source symlinks are forbidden')
+            if path.is_symlink():
+                raise ValueError('Source symlinks are forbidden')
             resolved = path.resolve(strict=True)
-            if not resolved.is_relative_to(root / 'sources'):
+            if not resolved.is_relative_to(root.resolve()):
                 raise ValueError('Source outside approved root')
             before = signature(resolved)
             raw = resolved.read_bytes()
@@ -392,8 +423,8 @@ def main():
     parser.add_argument('--port', type=int, default=8771)
     parser.add_argument('--allowed-host', action='append', default=[],
                         help='Additional hostname accepted in Host headers; IP addresses need no entry')
-    parser.add_argument('--baseline', type=Path)
-    parser.add_argument('--candidate', type=Path)
+    parser.add_argument('--baseline', type=Path, help='A run directory')
+    parser.add_argument('--candidate', type=Path, help='A run directory')
     parser.add_argument('--reference', type=Path)
     parser.add_argument('--experiments', type=Path, help='Experiment directory to list (default: data/experiments)')
     args = parser.parse_args()

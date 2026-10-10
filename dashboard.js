@@ -30,7 +30,7 @@ const VERDICTS = [
   ['improved', 'Improved', 'Recovered, gained records or more specific'],
 ];
 const VERDICT = Object.fromEntries(VERDICTS.map(([key, label, text]) => [key, {label, text}]));
-const CHANGES = {less_specific: 'Less specific', different: 'Different answer', more_specific: 'More specific', unchanged: 'Unchanged'};
+const CHANGES = {less_specific: 'Less specific', different: 'Different answer', more_specific: 'More specific', newly_measured: 'Newly measured', unchanged: 'Unchanged'};
 const KINDS = {experiment: 'Controlled experiment', retrospective: 'Retrospective comparison', synthetic: 'Synthetic software test',
   comparison: 'Supplied comparison', baseline: 'Baseline'};
 const state = {seq: 0, overviews: {}, source: 0, returnFocus: null, last: null};
@@ -115,7 +115,20 @@ async function renderIndex(seq) {
   for (const d of experiments) list.append(experimentCard(d));
   const references = el('div', 'reference-grid');
   for (const d of catalog.datasets.filter(d => ['baseline', 'synthetic'].includes(d.kind))) references.append(referenceCard(d));
-  page(head, legendStrip(), list, el('div', 'section-heading spaced', node('h2', 'Baseline and fixtures')), references);
+  page(head, legendStrip(), list, el('div', 'section-heading spaced', node('h2', 'Baseline and fixtures')), references, tagHistory(catalog));
+}
+function tagHistory(catalog) {
+  const tags = Object.keys(catalog.tags || {});
+  if (!tags.length) return null;
+  const table = el('table', 'executions', el('thead', null, el('tr', null, ...['Tag', 'Pipeline', 'Since', 'Why', 'Evidence'].map(t => node('th', t)))));
+  const body = node('tbody');
+  for (const tag of tags) for (const entry of [...catalog.history[tag]].reverse())
+    body.append(el('tr', entry.pipeline === catalog.tags[tag] ? 'current' : 'past', node('td', tag), node('td', entry.pipeline, 'mono'),
+      node('td', new Date(entry.at).toLocaleDateString()), node('td', entry.note),
+      el('td', null, entry.evidence?.experiment ? link(entry.evidence.experiment, href('experiment:' + entry.evidence.experiment)) : node('span', '—', 'muted'))));
+  table.append(body);
+  return el('div', null, el('div', 'section-heading spaced', node('h2', 'Pipeline tags'),
+    node('p', 'Each tag names a pipeline; moving it keeps the earlier entries, so comparisons stay tied to the pipelines they measured.', 'muted')), el('div', 'table-wrap', table));
 }
 function legendStrip() {
   const strip = el('div', 'legend-strip');
@@ -141,7 +154,7 @@ function experimentCard(d) {
   } else if (d.status === 'planned' || d.status === 'running') {
     const estimate = d.cost?.estimate;
     right.append(node('p', d.status === 'planned' ? 'Not run yet' : `${fmt(d.progress?.complete)} of ${fmt(d.progress?.cases)} cases complete`, 'card-headline'));
-    if (estimate) right.append(node('p', `Estimated new spending up to ${money(estimate.upper_bound_usd)} · ${money(estimate.inherited_usd)} of identical work reused`, 'muted small'));
+    if (estimate) right.append(node('p', `Estimated new spending up to ${money(estimate.upper_bound_usd)} · ${money(estimate.reused_usd)} of identical work reused`, 'muted small'));
   }
   card.append(left, right);
   return card;
@@ -168,6 +181,7 @@ function header(o, r) {
   const meta = el('dl', 'meta-row');
   const add = (label, value) => { if (value) meta.append(el('div', null, node('dt', label), node('dd', value))); };
   if (o.runs?.length === 2) add('Compared', o.runs[0].name + ' → ' + o.runs[1].name);
+  if (o.pipelines?.ids?.baseline) add('Pipelines', pipelineLine(o));
   if (e.cohort) add('Cohort', e.cohort.name + (e.cohort.query ? ' · ' + queryText(e.cohort.query) : ''));
   if (e.cases) add('Cases', fmt(e.cases.selected.length) + ' selected' + (e.cases.companions.length ? ` + ${e.cases.companions.length} batch companions` : ''));
   if (e.created_at) add('Created', new Date(e.created_at).toLocaleString());
@@ -209,11 +223,13 @@ async function renderDataset(seq, r) {
 // ---------------------------------------------------------------- impact
 const MEASURES = [
   ['Cases fully processed', m => m.processed, m => 'of ' + fmt(m.cases), 1],
-  ['Finalized docket records', m => m.records, null, 1],
+  ['Uncertain dispositions', m => m.uncertain, null, -1],
+  ['Docket records', m => m.records, null, 1],
   ['Records with a known duration', m => m.duration_known, m => m.records ? pct(m.duration_known, m.records) + '% of records' : 'no records', 1],
   ['Exact durations', m => m.duration_exact, null, 1],
   ['Research facts answered', m => m.facts_known, m => m.fact_slots ? pct(m.facts_known, m.fact_slots) + '% of ' + fmt(m.fact_slots) : 'no records', 1],
   ['Evidence warnings', m => m.warnings, null, -1],
+  ['Unverified quotations', m => m.unverified_quotes, null, -1],
 ];
 function scorecard(g, accuracy, reference) {
   const table = el('table', 'scorecard');
@@ -253,12 +269,12 @@ function factMap(rows, questions) {
     const block = el('div', 'fact-group', node('h3', question));
     for (const r of moved) {
       const bar = el('div', 'change-bar');
-      for (const key of ['regressed', 'less_specific', 'different', 'more_specific', 'corrected', 'unchanged']) {
+      for (const key of ['regressed', 'less_specific', 'different', 'more_specific', 'newly_measured', 'corrected', 'unchanged']) {
         if (!r[key]) continue;
         const segment = node('span', null, 'segment ' + key); segment.style.flexGrow = r[key];
         segment.title = r[key] + ' ' + (CHANGES[key] || 'verified ' + key).toLowerCase(); bar.append(segment);
       }
-      const parts = ['less_specific', 'different', 'more_specific'].filter(k => r[k]).map(k => r[k] + ' ' + CHANGES[k].toLowerCase() + (k === 'different' && r[k] > 1 ? 's' : ''));
+      const parts = ['less_specific', 'different', 'more_specific', 'newly_measured'].filter(k => r[k]).map(k => r[k] + ' ' + CHANGES[k].toLowerCase() + (k === 'different' && r[k] > 1 ? 's' : ''));
       if (r.corrected) parts.unshift(r.corrected + ' verified correct');
       if (r.regressed) parts.unshift(r.regressed + ' verified regression');
       block.append(el('div', 'fact-row', node('span', r.label, 'fact-label'), bar,
@@ -287,7 +303,7 @@ async function impactView(seq, o, r, head) {
     outcome.append(el('div', 'companions', el('div', null, node('strong', 'Batch companions'), node('p', `${comp.cases} cases reviewed alongside the cohort for identical batch context. Their changes are side effects, not the experiment's target.`, 'muted small')),
       el('div', null, verdictBar(comp.verdicts, comp.cases, target('companion'), 'small'), node('p', comp.headline, 'small muted'))));
   }
-  const measures = section('Quality measures', 'Selected cases, baseline versus candidate. Higher is better except warnings.', scorecard(g, o.impact.accuracy, o.impact.reference));
+  const measures = section('Quality measures', 'Selected cases, baseline versus candidate. Higher is better except uncertain dispositions, warnings and unverified quotations.', scorecard(g, o.impact.accuracy, o.impact.reference));
   const moved = section('Where answers moved', 'Each research fact across compared records. Quotations and wording are excluded; records present on one side only are counted as gained or lost records instead.',
     factMap(g.fact_map, o.impact.questions));
   const attention = section('Needs attention', 'Worsened, mixed and changed cases first.');
@@ -321,7 +337,7 @@ function caseTable(rows, dataset, o) {
   for (const c of rows) {
     const im = c.impact;
     const name = el('td', null, link(caseName(c), href(dataset, 'case', c.case_id), 'case-link'),
-      node('span', [c.case_id !== caseName(c) ? c.case_id : null, plain(c.scope_category) + ' scope'].filter(Boolean).join(' · '), 'cell-sub'),
+      node('span', [c.case_id !== caseName(c) ? c.case_id : null, plain(c.disposition)].filter(Boolean).join(' · '), 'cell-sub'),
       im?.role === 'companion' ? pill('batch companion', 'companion') : null);
     const what = el('td', 'what');
     if (im) {
@@ -363,7 +379,7 @@ async function casesView(seq, o, r, head) {
   } else {
     const statuses = Object.keys(o.profile.statuses).sort();
     toolbar.append(selectControl('Processing', 'status', [['', 'Any status'], ...statuses.map(s => [s, plain(s)])], p.status || '', v => go({status: v})));
-    toolbar.append(selectControl('Scope', 'scope', [['', 'Any scope'], ['confirmed', 'Confirmed'], ['uncertain', 'Uncertain'], ['excluded', 'Excluded']], p.scope || '', v => go({scope: v})));
+    toolbar.append(selectControl('Disposition', 'scope', [['', 'Any disposition'], ['in_scope', 'In scope'], ['uncertain', 'Uncertain'], ['excluded', 'Excluded'], ['none', 'None (not processed)']], p.scope || '', v => go({scope: v})));
     toolbar.append(selectControl('Gaps', 'gap', [['', 'Any'], ['duration_unknown', 'Unknown duration']], p.gap || '', v => go({gap: v})));
   }
   const search = node('input'); search.type = 'search'; search.placeholder = 'Find a case or docket…'; search.value = p.q || '';
@@ -398,10 +414,10 @@ function selectControl(label, key, options, value, onchange) {
   wrap.append(lab, select); return wrap;
 }
 function cohortHint(o, p) {
-  const flags = [p.status ? '--status ' + p.status : null, p.scope ? '--scope ' + p.scope : null,
+  const flags = [p.status ? '--status ' + p.status : null, p.scope ? '--disposition ' + p.scope : null,
     p.gap === 'duration_unknown' ? '--duration-kind unknown' : null].filter(Boolean);
   if (!flags.length || !o.artifact_path) return null;
-  const command = `make experiments-cohort COHORT_ARGS='data/experiments/cohorts/NAME.json --from ${o.artifact_path} --name NAME --description "WHY" ${flags.join(' ')}'`;
+  const command = `make experiments-cohort COHORT_ARGS='experiments/NAME/cohort.json --from ${o.artifact_path} --name NAME --description "WHY" ${flags.join(' ')}'`;
   return el('details', 'cohort-hint', node('summary', 'Turn these filters into an experiment cohort'), node('p', 'The cohort freezes this query and the cases it selects:', 'muted small'), node('pre', command));
 }
 
@@ -425,9 +441,12 @@ async function caseView(seq, o, r, head) {
   const sides = el('div', 'side-summary');
   for (const s of ['baseline', 'candidate']) {
     const c = d[s]; if (!c) continue;
+    const unverified = c.status?.quotes?.unverified?.length;
     sides.append(el('div', 'side ' + s, node('span', s === 'baseline' ? 'Baseline' : 'Candidate', 'eyebrow'),
-      node('strong', plain(c.execution?.status)), node('span', `${c.records?.length || 0} records · ${plain(c.scope_category)} scope`, 'muted small'),
-      c.execution?.error ? node('p', c.execution.error, 'error-text') : null,
+      node('strong', plain(c.status?.state)), node('span', `${c.records?.length || 0} records · ${plain(c.disposition?.value || 'no disposition')}` +
+        (unverified ? ` · ${unverified} unverified quotation${unverified > 1 ? 's' : ''}` : ''), 'muted small'),
+      c.disposition?.reason && c.disposition.reason !== 'unknown' ? node('p', c.disposition.reason, 'muted small') : null,
+      c.status?.errors?.length ? node('p', c.status.errors.map(x => x.error).join('; '), 'error-text') : null,
       button('Read source ↗', () => source(id, s, []), 'text-button')));
   }
   blocks.push(sides);
@@ -436,7 +455,7 @@ async function caseView(seq, o, r, head) {
     for (const f of im.facts) { const key = f.record ?? '__case'; if (!byRecord.has(key)) byRecord.set(key, []); byRecord.get(key).push(f); }
     const quiet = [];
     for (const [record, facts] of byRecord) {
-      const name = record === '__case' ? 'Case scope' : record;
+      const name = record === '__case' ? 'Disposition' : record;
       if (facts.some(f => f.change !== 'unchanged' || f.verified)) blocks.push(factTable(name, facts, id));
       else quiet.push([name, facts]);
     }
@@ -448,9 +467,9 @@ async function caseView(seq, o, r, head) {
     for (const one of im.one_sided) blocks.push(oneSided(one, id));
   } else if (d.facts) {
     for (const one of d.facts) blocks.push(oneSided(one, id, true));
-    if (!d.facts.length) blocks.push(node('p', d.baseline?.execution?.error || 'No finalized docket records in this group.', 'empty'));
+    if (!d.facts.length) blocks.push(node('p', d.baseline?.status?.errors?.[0]?.error || 'No docket records for this case.', 'empty'));
   }
-  const raw = el('details', 'technical', node('summary', 'Raw saved outputs'));
+  const raw = el('details', 'technical', node('summary', 'Raw results and processing status'));
   for (const s of ['baseline', 'candidate', 'reference']) if (d[s]) raw.append(node('h4', plain(s)), node('pre', pretty(d[s])));
   blocks.push(raw);
   page(head, blocks);
@@ -555,169 +574,169 @@ function diffView(before, after) {
   if (!first) flush(true); else view.append(node('p', 'No difference.', 'muted'));
   return view;
 }
-function stepsById(recipe) {
-  return Object.fromEntries((recipe?.phases || []).flatMap(phase => phase.steps.map(step => [step.id, step])));
+const describeValue = v => v == null ? '—' : typeof v === 'number' ? fmt(v) : typeof v === 'object' ? (v.text || JSON.stringify(v)) : String(v).replaceAll('_', ' ');
+const shortType = type => String(type || '').split('.').pop();
+function stepIndex(descriptor) {
+  const found = {};
+  const walk = d => { found[d.path] = d; (d.children || []).forEach(walk); };
+  if (descriptor) walk(descriptor);
+  return found;
 }
-function stepChanges(b, c) {
-  if (!b || !c) return [[b ? 'Step' : 'Step', b ? 'present' : 'absent', c ? 'present' : 'removed']];
-  const rows = [], add = (label, x, y) => { if (JSON.stringify(x) !== JSON.stringify(y)) rows.push([label, x, y]); };
-  add('Component', b.component, c.component);
-  add('Model', b.provider?.model, c.provider?.model);
-  add('Provider', b.provider?.name, c.provider?.name);
-  add('Conversation', b.context, c.context);
-  for (const key of new Set([...Object.keys(b.settings || {}), ...Object.keys(c.settings || {})])) add(plain(key), b.settings?.[key], c.settings?.[key]);
-  for (const role of new Set([...Object.keys(b.prompts || {}), ...Object.keys(c.prompts || {})]))
-    if (b.prompts?.[role]?.sha256 !== c.prompts?.[role]?.sha256) rows.push(['Prompt: ' + role, b.prompts?.[role]?.name || '—', (c.prompts?.[role]?.name || '—') + ' (edited)']);
-  return rows;
-}
-const describeValue = v => v == null ? '—' : typeof v === 'number' ? fmt(v) : String(v).replaceAll('_', ' ');
-function recipeView(o, comparing = true) {
-  const b = o.designs?.baseline?.recipe, c = o.designs?.candidate?.recipe;
-  if (!c?.phases) return null;
-  const base = stepsById(b), labels = o.fact_labels || {};
-  const basePhases = Object.fromEntries((b?.phases || []).map(p => [p.id, p]));
-  const graph = el('div', 'recipe-graph'), details = el('div', 'step-details');
-  let selected = null;
-  const cards = [];
-  c.phases.forEach((phase, index) => {
-    const batchChanged = comparing && JSON.stringify(basePhases[phase.id]?.batch || null) !== JSON.stringify(phase.batch || null);
-    const panel = el('div', 'phase' + (batchChanged ? ' changed' : ''),
-      el('div', 'phase-head', node('strong', plain(phase.id)), node('span', phase.kind === 'batched' ? 'Batched' : 'One case at a time', 'muted small'),
-        phase.batch ? node('span', phase.batch.text + (batchChanged ? ' · changed' : ''), 'batch-tag') : null));
-    const row = el('div', 'step-row');
-    phase.steps.forEach((step, i) => {
-      const changes = comparing ? stepChanges(base[step.id], step) : [];
-      if (i) row.append(node('span', '→', 'step-arrow' + (step.context === 'continue' ? ' continues' : '')));
-      const card = button('', () => show(step.id), 'step-card' + (changes.length ? ' changed' : '') + (step.context === 'continue' ? ' continues' : ''));
-      card.dataset.step = step.id;
-      card.append(el('span', 'step-top', node('strong', plain(step.id)), changes.length ? node('span', base[step.id] ? 'changed' : 'added', 'change-flag') : null),
-        node('span', step.provider?.model || '—', 'step-model'),
-        step.context === 'continue' ? node('span', '↳ continues the previous conversation', 'step-context') : node('span', 'Fresh conversation', 'step-context'),
-        el('span', 'step-facts', (step.facts || []).slice(0, 3).map(f => node('span', labels[f] || plain(f), 'fact-chip')),
-          (step.facts || []).length > 3 ? node('span', '+' + (step.facts.length - 3), 'fact-chip more') : null));
-      cards.push(card); row.append(card);
-    });
-    panel.append(row); graph.append(panel);
-    if (index < c.phases.length - 1) graph.append(node('div', '⟶', 'phase-arrow'));
-  });
-  const removed = Object.keys(base).filter(id => !stepsById(c)[id]);
-  if (comparing && removed.length) graph.append(node('p', 'Removed steps: ' + removed.join(', '), 'muted small'));
-  function show(id) {
-    selected = id;
-    for (const card of cards) { card.classList.toggle('selected', card.dataset.step === id); card.setAttribute('aria-pressed', String(card.dataset.step === id)); }
-    const step = stepsById(c)[id], previous = base[id], changes = comparing ? stepChanges(previous, step) : [];
-    details.replaceChildren(el('div', 'step-detail-head', node('h3', plain(id)), node('span', step.component + ' component', 'muted small')),
-      node('p', step.summary || 'No description recorded.', 'step-summary'),
-      el('dl', 'step-facts-list',
-        el('div', null, node('dt', 'Reads'), node('dd', (step.reads || []).map(plain).join(', ') || '—')),
-        el('div', null, node('dt', 'Writes'), node('dd', (step.writes || []).map(plain).join(', ') || '—')),
-        el('div', null, node('dt', 'Affects'), node('dd', (step.facts || []).map(f => labels[f] || plain(f)).join(', ') || '—')),
-        el('div', null, node('dt', 'Model'), node('dd', `${step.provider?.model || '—'}` + (step.provider?.pricing ? ` · $${step.provider.pricing.input}/M input, $${step.provider.pricing.output ?? 0}/M output` : ''))),
-        el('div', null, node('dt', 'Settings'), node('dd', Object.entries(step.settings || {}).map(([k, v]) => plain(k) + ' ' + describeValue(v)).join(' · ') || '—'))));
-    if (comparing) {
-      if (!changes.length) details.append(node('p', 'Unchanged from the baseline.', 'muted'));
-      else {
+// The pipeline as a tree of steps: composite steps hold their children, and
+// steps an experiment added, removed or changed are highlighted.
+function treeView(o, comparing = true) {
+  const pipes = o.pipelines || {}, c = pipes.candidate || pipes.baseline, b = pipes.candidate ? pipes.baseline : null;
+  if (!c) return null;
+  const rows = Object.fromEntries((comparing && pipes.diff || []).map(r => [r.path, r]));
+  const base = stepIndex(b), labels = o.fact_labels || {};
+  const tree = el('div', 'step-tree'), details = el('div', 'step-details'), cards = [];
+  function changedBelow(d) { return (d.children || []).some(k => ['added', 'changed'].includes(rows[k.path]?.status) || changedBelow(k)); }
+  function card(d, status) {
+    const flag = status && status !== 'unchanged' ? node('span', status, 'change-flag ' + status) : null;
+    const item = button('', () => show(d.path, status === 'removed' ? b : c), 'step-card ' + (status || '') + (d.conversation === 'continue' ? ' continues' : ''));
+    item.dataset.path = d.path;
+    item.append(...[el('span', 'step-top', node('strong', d.path ? d.name : d.name + ' (pipeline)'), node('span', shortType(d.type), 'step-type'), flag),
+      d.model ? node('span', d.model.model + (d.conversation === 'continue' ? ' · continues the previous conversation' : ''), 'step-model') : null,
+      d.selector ? node('span', d.selector.text, 'step-context') : null,
+      node('span', d.description || 'No description.', 'step-description'),
+      d.fields?.length ? el('span', 'step-facts', d.fields.slice(0, 4).map(f => node('span', labels[f] || plain(f), 'fact-chip')),
+        d.fields.length > 4 ? node('span', '+' + (d.fields.length - 4), 'fact-chip more') : null) : null].filter(Boolean));
+    cards.push(item);
+    return item;
+  }
+  function branch(d) {
+    const status = rows[d.path]?.status || (comparing && b && !base[d.path] ? 'added' : null);
+    const wrap = el('div', 'tree-node' + (d.children?.length ? ' composite' : '') + (changedBelow(d) ? ' changed-below' : ''), card(d, status));
+    if (d.children?.length) {
+      const kids = el('div', 'tree-children');
+      for (const k of d.children) kids.append(branch(k));
+      // Removed steps stay visible where they were.
+      for (const row of Object.values(rows)) if (row.status === 'removed' && row.path.split('/').slice(0, -1).join('/') === d.path && base[row.path])
+        kids.append(el('div', 'tree-node removed', card(base[row.path], 'removed')));
+      wrap.append(kids);
+    }
+    return wrap;
+  }
+  tree.append(branch(c));
+  function show(path, side) {
+    for (const item of cards) { item.classList.toggle('selected', item.dataset.path === path); item.setAttribute('aria-pressed', String(item.dataset.path === path)); }
+    const d = stepIndex(side)[path], row = rows[path], previous = base[path];
+    const facts = el('dl', 'step-facts-list');
+    const add = (label, value) => { if (value) facts.append(el('div', null, node('dt', label), node('dd', value))); };
+    add('Path', path || '(root)');
+    add('Type', d.type);
+    add('Model', d.model ? d.model.model + (d.model.pricing ? ` · $${d.model.pricing.input}/M input, $${d.model.pricing.output ?? 0}/M output` : '') : 'No model call');
+    if (d.model) add('Settings', Object.entries(d.model.settings || {}).map(([k, v]) => plain(k) + ' ' + describeValue(v)).join(' · '));
+    add('Conversation', d.conversation === 'continue' ? 'Continues the previous step’s conversation in the same group' : d.conversation === 'fresh' ? 'Starts a fresh conversation' : null);
+    add('Selector', d.selector?.text);
+    add('Parameters', Object.entries(d.params || {}).map(([k, v]) => plain(k) + ' ' + describeValue(v)).join(' · '));
+    add('Largest group', d.max_group != null ? fmt(d.max_group) : null);
+    add('Reads', (d.reads || []).map(plain).join(', '));
+    add('Writes', (d.writes || []).map(plain).join(', '));
+    add('Affects', (d.fields || []).map(f => labels[f] || plain(f)).join(', '));
+    add('Code', Object.entries(d.code || {}).map(([f, h]) => f + ' ' + h.slice(0, 8)).join(' · '));
+    details.replaceChildren(el('div', 'step-detail-head', node('h3', d.name), node('span', shortType(d.type), 'muted small'),
+      row && row.status !== 'unchanged' ? node('span', row.status, 'change-flag ' + row.status) : null),
+      node('p', d.description || 'No description recorded.', 'step-summary'), facts);
+    if (comparing && row?.status === 'changed') {
+      if (row.fields?.length) {
         const table = el('table', 'settings-table', el('thead', null, el('tr', null, node('th', 'Changed'), node('th', 'Baseline'), node('th', 'Candidate'))));
         const body = node('tbody');
-        for (const [label, x, y] of changes) body.append(el('tr', null, node('th', label), node('td', describeValue(x)), node('td', describeValue(y))));
+        for (const f of row.fields) body.append(el('tr', null, node('th', plain(f.field)), node('td', describeValue(f.base)), node('td', describeValue(f.value))));
         table.append(body); details.append(el('div', 'table-wrap flat', table));
       }
-      for (const [role, prompt] of Object.entries(step.prompts || {})) {
-        if (previous?.prompts?.[role]?.sha256 === prompt.sha256) continue;
-        details.append(node('h4', `Prompt for ${role}: ${prompt.name}`),
-          diffView(o.designs.baseline?.prompts?.[previous?.prompts?.[role]?.name], o.designs.candidate?.prompts?.[prompt.name]));
-      }
+      if (row.code?.length) details.append(el('p', 'context-note', node('strong', 'Code changed. '), row.code.join(', ')));
+      if (row.reordered) details.append(node('p', 'The order of its steps changed.', 'context-note'));
     }
+    for (const [name, prompt] of Object.entries(d.prompts || {})) {
+      const change = row?.prompts?.find(x => x.name === name);
+      if (comparing && change) details.append(node('h4', `Prompt: ${name} (${change.status})`), diffView(change.base, change.value));
+      else details.append(el('details', 'prompt-text', node('summary', `Prompt: ${name}` + (prompt.file ? ' · ' + prompt.file : '')), node('pre', prompt.text)));
+    }
+    if (comparing && row?.status === 'unchanged' && !previous?.children?.length) details.append(node('p', 'Unchanged from the baseline.', 'muted'));
   }
-  const first = cards.find(card => card.classList.contains('changed')) || cards[0];
-  if (first) show(first.dataset.step);
-  return {graph, details};
+  const first = cards.find(item => /\b(added|changed|removed)\b/.test(item.className) && item.dataset.path) || cards[0];
+  if (first) first.click();
+  return {graph: tree, details};
+}
+function pipelineLine(o) {
+  const ids = o.pipelines?.ids || {}, tags = o.tags || {};
+  const named = id => { const t = Object.entries(tags).filter(([, v]) => v === id).map(([k]) => k); return id ? id + (t.length ? ' (' + t.join(', ') + ')' : '') : '—'; };
+  return ids.candidate ? named(ids.baseline) + ' → ' + named(ids.candidate) : named(ids.baseline);
 }
 function changesView(o) {
-  const e = o.experiment, designs = o.designs, v = e?.variables || {}, blocks = [];
+  const e = o.experiment || {}, blocks = [];
   if (o.kind === 'retrospective') blocks.push(el('p', 'context-note', node('strong', 'Retrospective comparison. '),
-    'These runs were not produced as a controlled experiment. Differences can come from any change between them, including code, model behavior and the variables recorded below.'));
-  const recipe = recipeView(o);
-  if (recipe) blocks.push(section('Pipeline', 'Phases run left to right; steps within a phase run in order. Changed steps are highlighted; select a step to see what it does and what changed.',
-    recipe.graph, recipe.details));
-  const overrides = v.recipe || [];
-  const notes = [...overrides.map(c => [c.path, describeValue(c.base), describeValue(c.value)]),
-    ...(v.components || []).map(name => ['component file', '—', name]),
-    ...(v.rerun?.length ? [['rerun', '—', v.rerun.join(', ')]] : [])];
-  if (notes.length) {
-    const table = el('table', 'settings-table', el('thead', null, el('tr', null, node('th', 'Override'), node('th', 'Baseline'), node('th', 'Candidate'))));
-    const body = node('tbody'); for (const [path, x, y] of notes) body.append(el('tr', null, node('th', path), node('td', x), node('td', y)));
-    table.append(body); blocks.push(o.kind === 'retrospective'
-      ? section('Recorded differences', 'How the two runs\u2019 recipes differ.', el('div', 'table-wrap flat', table))
-      : section('Recorded overrides', 'Exactly what the experiment definition changed in the recipe.', el('div', 'table-wrap flat', table)));
-  }
-  const prompts = Object.keys({...designs.baseline?.prompts, ...designs.candidate?.prompts}).sort();
-  const changedPrompts = prompts.filter(k => designs.baseline?.prompts?.[k] !== designs.candidate?.prompts?.[k]);
-  if (!changedPrompts.length && !notes.length && !(recipe && [...recipe.graph.querySelectorAll('.changed')].length))
-    blocks.push(section('No variables changed', null, node('p', 'Both runs used the same recipe and prompts. Differences between them measure run-to-run variation.', 'muted')));
-  if (!recipe) for (const key of changedPrompts) blocks.push(section(`Prompt: ${key}`, 'Removed text is struck through; added text is highlighted.',
-    diffView(designs.baseline?.prompts?.[key], designs.candidate?.prompts?.[key])));
-  else if (changedPrompts.length) blocks.push(node('p', 'Changed prompts: ' + changedPrompts.join(', ') + '. Select a step that uses one to see its diff.', 'muted small'));
+    'These runs were not produced as a controlled experiment. Differences can come from any change between them, including code, model behavior and the steps shown below.'));
+  const view = treeView(o);
+  const changed = (o.pipelines?.diff || []).filter(r => r.status !== 'unchanged');
+  const notes = [...Object.entries(e.samples || {}).map(([path, n]) => `${path}: sample ${n} of each request, measuring run-to-run variation`),
+    e.batching?.status && e.batching.status !== 'not_controlled' ? `Batching: ${plain(e.batching.status)}` : null].filter(Boolean);
+  if (view) blocks.push(section('Pipeline', `${pipelineLine(o)}. Steps run top to bottom; a composite step runs its children within each group its selector forms. Added, changed and removed steps are highlighted; select a step for its description, configuration, prompts and diffs.`,
+    view.graph, view.details));
+  if (notes.length) blocks.push(section('Run options', null, el('ul', 'plain-list', notes.map(t => node('li', t)))));
+  if (!changed.length) blocks.push(section('No step changed', null, node('p', 'Both sides used the same pipeline. Differences between them measure run-to-run variation' + (Object.keys(e.samples || {}).length ? ' across samples.' : '.'), 'muted')));
   return blocks;
 }
 
 // ---------------------------------------------------------------- cost
 function costView(o) {
-  const e = o.experiment, cand = o.runs[1]?.cost || {}, base = o.runs[0]?.cost || {};
+  const e = o.experiment, cost = o.cost_summary || {};
   const g = o.impact.groups.selected || o.impact.groups.companion;
   const improved = g.verdicts.improved || 0;
   const tiles = el('div', 'tiles');
   const tile = (label, value, note) => tiles.append(el('div', 'tile', node('span', label), node('strong', value), note ? node('small', note) : null));
   if (o.kind === 'retrospective') {
-    tile('Baseline run, these cases', money(base.recorded_usd), 'Recorded charges, including retries');
-    tile('Candidate run, these cases', money(cand.recorded_usd), 'Recorded charges, including retries');
     tile('New spending', money(0), 'A retrospective comparison makes no model calls');
+    tile('Candidate run', money(cost.recorded_usd ?? cost.reused_usd), 'Charges its calls recorded');
   } else {
-    tile('New spending', money(cand.new_usd), 'Charged by this experiment');
+    tile('New spending', money(cost.new_usd), 'Charged by this experiment');
     tile('Estimate', e?.estimate ? '≤ ' + money(e.estimate.upper_bound_usd) : '—', 'Worst case planned for new calls');
-    tile('Inherited', money(cand.inherited_usd), 'Identical saved calls reused from the base run');
-    tile('Per improved case', improved && typeof cand.new_usd === 'number' ? money(cand.new_usd / improved) : '—', `${improved} improved selected cases`);
+    tile('Reused', money(cost.reused_usd), 'Identical saved calls reused for free');
+    tile('Per improved case', improved && typeof cost.new_usd === 'number' ? money(cost.new_usd / improved) : '—', `${improved} improved selected cases`);
   }
   const blocks = [section('Spending', o.synthetic ? 'Simulated amounts.' : null, tiles)];
-  if (e?.estimate && typeof cand.new_usd === 'number') {
-    const max = Math.max(e.estimate.upper_bound_usd, cand.new_usd) || 1;
+  if (e?.estimate && typeof cost.new_usd === 'number') {
+    const max = Math.max(e.estimate.upper_bound_usd, cost.new_usd) || 1;
     const bars = el('div', 'cost-bars');
-    for (const [label, value, cls] of [['Actual new spending', cand.new_usd, 'actual'], ['Planned upper bound', e.estimate.upper_bound_usd, 'bound']]) {
+    for (const [label, value, cls] of [['Actual new spending', cost.new_usd, 'actual'], ['Planned upper bound', e.estimate.upper_bound_usd, 'bound']]) {
       const fill = node('span', null, 'fill ' + cls); fill.style.width = (100 * value / max) + '%';
       bars.append(el('div', 'cost-bar', node('span', label), el('div', 'track', fill), node('strong', money(value))));
     }
     blocks[0].append(bars);
   }
   const executions = o.executions || [];
-  if (executions.length) {
-    const table = el('table', 'executions', el('thead', null, el('tr', null, ...['Started', 'Cap', 'New spending', 'Outcome', 'Statuses after'].map(t => node('th', t)))));
-    const body = node('tbody');
-    for (const x of executions) body.append(el('tr', null, node('td', new Date(x.started_at).toLocaleString()), node('td', money(x.max_new_spend_usd)),
-      node('td', money(x.new_spend_usd)), node('td', plain(x.outcome) + (x.error ? ': ' + x.error : '')),
-      node('td', Object.entries(x.status_counts || {}).map(([k, v]) => v + ' ' + plain(k)).join(', '))));
-    table.append(body); blocks.push(section('Executions', 'Each run invocation, with its cumulative cap on new spending.', el('div', 'table-wrap flat', table)));
-  }
-  blocks.push(el('details', 'technical', node('summary', 'Accounting metadata'), node('pre', pretty({baseline: base, candidate: cand}))));
+  if (executions.length) blocks.push(section('Executions', 'Each run invocation, with its cumulative cap on new spending.', executionTable(executions)));
+  blocks.push(el('details', 'technical', node('summary', 'Accounting metadata'), node('pre', pretty(cost))));
   return blocks;
+}
+function executionTable(executions) {
+  const table = el('table', 'executions', el('thead', null, el('tr', null, ...['Started', 'Cap', 'New spending', 'Outcome', 'Statuses after'].map(t => node('th', t)))));
+  const body = node('tbody');
+  for (const x of executions) body.append(el('tr', null, node('td', new Date(x.started_at).toLocaleString()), node('td', money(x.max_new_spend_usd)),
+    node('td', money(x.new_spend_usd)), node('td', plain(x.outcome) + (x.error ? ': ' + x.error : '')),
+    node('td', Object.entries(x.statuses || {}).map(([k, v]) => v + ' ' + plain(k)).join(', '))));
+  table.append(body);
+  return el('div', 'table-wrap flat', table);
 }
 
 // ---------------------------------------------------------------- planned
 function plannedView(o) {
   const e = o.experiment, progress = o.progress || {}, estimate = e.estimate || {};
   const blocks = [];
-  const stage = {extracted: 'first pass done, awaiting review', not_run: 'not started'};
-  const statuses = el('div', 'status-chips', Object.entries(progress.statuses || {}).map(([k, v]) => pill(v + ' ' + (stage[k] || plain(k)), 'status')));
+  const statuses = el('div', 'status-chips', Object.entries(progress.statuses || {}).map(([k, v]) => pill(v + ' ' + plain(k === 'not_run' ? 'not started' : k), 'status')));
   blocks.push(section(o.status === 'planned' ? 'Ready to run' : 'In progress', 'Results appear here after the experiment is finalized.', statuses));
   const tiles = el('div', 'tiles');
   for (const [label, value, note] of [['Upper bound', money(estimate.upper_bound_usd), 'Worst case for all new calls'],
-    ['Inherited', money(estimate.inherited_usd), 'Identical saved calls the dry run reused'],
+    ['Reused', money(estimate.reused_usd), `${fmt(estimate.reused_calls)} identical saved calls the dry run reused`],
     ['New spending so far', money(o.cost_summary?.new_usd), 'Charged by this experiment'],
     ['New calls planned', fmt(Object.values(estimate.new_calls || {}).reduce((a, b) => a + b, 0)),
       Object.entries(estimate.new_calls || {}).map(([k, v]) => v + ' ' + k).join(', ') || 'None']])
     tiles.append(el('div', 'tile', node('span', label), node('strong', value), note ? node('small', note) : null));
-  blocks.push(section('Estimate', 'From a dry run of the composed recipe: no model calls. Running enforces a cap on new spending before every call.', tiles));
-  const recipe = recipeView(o);
-  if (recipe) blocks.push(section('Pipeline', `Changed steps are highlighted. Review batching: ${plain(e.batching?.status)}.`, recipe.graph, recipe.details));
+  blocks.push(section('Estimate', 'From a dry run of the experiment’s pipeline: no model calls. Running enforces a cap on new spending before every call.', tiles));
+  const view = treeView(o);
+  if (view) blocks.push(section('Pipeline', `${pipelineLine(o)}. Changed steps are highlighted. Batching: ${plain(e.batching?.status)}.`, view.graph, view.details));
+  if (o.executions?.length) blocks.push(section('Executions', null, executionTable(o.executions)));
   blocks.push(section('Commands', 'Run with a cap on new spending, then finalize to compare.',
     node('pre', `make experiments-run EXPERIMENT=${e.name} EXPERIMENT_ARGS='--max-spend ${Math.max(0.5, Math.ceil((estimate.upper_bound_usd || 0.5) * 2) / 2).toFixed(2)}'\nmake experiments-finalize EXPERIMENT=${e.name}`)));
   return blocks;
@@ -729,9 +748,10 @@ function profileView(o, r) {
   const tiles = el('div', 'tiles');
   for (const [label, value, note] of [
     ['Source groups', fmt(m.cases), `${fmt(m.processed)} fully processed`],
-    ['Finalized records', fmt(m.records), 'Docket records with every stage complete'],
+    ['Docket records', fmt(m.records), `${fmt(m.uncertain)} cases with an uncertain disposition`],
     ['Known durations', (pct(m.duration_known, m.records) ?? '—') + '%', `${fmt(m.duration_known)} of ${fmt(m.records)} records · ${fmt(m.duration_exact)} exact`],
-    ['Facts answered', (pct(m.facts_known, m.fact_slots) ?? '—') + '%', `${fmt(m.facts_known)} of ${fmt(m.fact_slots)} fact slots`]])
+    ['Facts answered', (pct(m.facts_known, m.fact_slots) ?? '—') + '%', `${fmt(m.facts_known)} of ${fmt(m.fact_slots)} fact slots`],
+    ['Unverified quotations', fmt(m.unverified_quotes), 'Cited text not found on its page']])
     tiles.append(el('div', 'tile', node('span', label), node('strong', value), node('small', note)));
   const rows = [...p.facts].sort((a, b) => a.known / (a.total || 1) - b.known / (b.total || 1));
   const bars = el('div', 'completeness');
@@ -746,10 +766,11 @@ function profileView(o, r) {
   for (const [status, count] of Object.entries(p.statuses).sort((a, b) => b[1] - a[1]))
     statuses.append(link(`${fmt(count)} ${plain(status)}`, href(r.dataset, 'cases', '', {status}), 'pill status' + (status === 'complete' ? '' : ' attention')));
   const scopes = el('div', 'status-chips');
-  for (const [scope, count] of Object.entries(p.scopes)) scopes.append(link(`${fmt(count)} ${plain(scope)}`, href(r.dataset, 'cases', '', {scope}), 'pill status'));
+  for (const [scope, count] of Object.entries(p.dispositions)) scopes.append(link(`${fmt(count)} ${plain(scope)}`, href(r.dataset, 'cases', '', {scope}), 'pill status'));
   return [section('At a glance', null, tiles),
-    section('Where answers are missing', 'Share of finalized records with a known answer for each research fact, least complete first. Unknown can be correct; low completeness marks where an experiment could test whether answers are recoverable.', bars),
-    section('Processing and scope', 'Select a group to list its cases.', el('div', 'two-col', el('div', null, node('h3', 'Processing'), statuses), el('div', null, node('h3', 'Scope'), scopes)))];
+    section('Where answers are missing', 'Share of docket records with a known answer for each research fact, least complete first. Unknown can be correct; low completeness marks where an experiment could test whether answers are recoverable.', bars),
+    section('Processing and disposition', 'Select a group to list its cases.', el('div', 'two-col', el('div', null, node('h3', 'Processing'), statuses), el('div', null, node('h3', 'Disposition'), scopes))),
+    o.pipelines?.baseline ? section('Pipeline', `${pipelineLine(o)}. Select a step for its description, configuration and prompts.`, ...Object.values(treeView(o, false))) : null];
 }
 
 // ---------------------------------------------------------------- source drawer

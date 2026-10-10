@@ -8,7 +8,8 @@ import unittest
 from unittest.mock import patch
 
 from appeal_dashboard import Dashboard, handler_for, ThreadingHTTPServer
-from appeal_demo import build_demo
+from pipeline import runs
+from pipeline.corpus import Corpus
 
 
 class DashboardTests(unittest.TestCase):
@@ -57,57 +58,68 @@ class DashboardTests(unittest.TestCase):
             self.dashboard.source('demo', 'synthetic-transition')
 
     def make_production(self, temp):
+        """A one-case corpus and a run over it, as the production run is laid out."""
         root = Path(temp)
-        experiment = root / 'experiment'
-        experiment.mkdir()
-        source_run = root / 'source-run'
-        (source_run / 'sources').mkdir(parents=True)
-        canonical = build_demo()['baseline']
-        canonical['cases'] = canonical['cases'][:1]
-        case = canonical['cases'][0]
-        case['source']['path'] = 'sources/case.txt'
+        corpus = root/'corpus'
+        (corpus/'sources').mkdir(parents=True)
         raw_source = b'frozen test text'
-        case['source']['sha256'] = hashlib.sha256(raw_source).hexdigest()
-        (source_run / 'sources/case.txt').write_bytes(raw_source)
-        raw = json.dumps(canonical).encode()
-        (experiment / 'cases.json').write_bytes(raw)
-        manifest = {'schema_version': 'appeal-experiment-1', 'case_count': 1,
-                    'source_run': str(source_run), 'artifacts': {'cases': {'path': 'cases.json',
-                    'sha256': hashlib.sha256(raw).hexdigest(), 'schema_version': 'appeal-cases-1'}}}
-        (experiment / 'manifest.json').write_text(json.dumps(manifest))
-        return Dashboard(production=experiment), experiment, source_run
+        (corpus/'sources/case.txt').write_bytes(raw_source)
+        sha = hashlib.sha256(raw_source).hexdigest()
+        (corpus/'manifest.json').write_text(json.dumps({'schema_version': 'appeals-1', 'groups': [
+            {'group_id': 'case', 'dockets': ['1-1-01 Vtec'], 'documents': [], 'source_sha256': sha}]}))
+        folder = root/'run'
+        runs.create(folder, name='production', pipeline_id='p-000000000000', case_ids=['case'],
+                    corpus=Corpus(corpus), kind='converted')
+        result = {'schema': 'appeal-result-1', 'case': 'case', 'records': [],
+                  'disposition': {'value': 'excluded', 'reason': 'Not housing', 'municipal_appeal': 'yes',
+                                  'housing': 'no', 'evidence': []}}
+        runs.write(folder, {'case': (result, {'state': 'complete', 'errors': [], 'warnings': []}, None)})
+        return Dashboard(production=folder, experiments=root/'experiments'), folder, corpus
 
     def test_cache_validates_changed_artifact(self):
         with tempfile.TemporaryDirectory() as temp:
-            dashboard, folder, source_run = self.make_production(temp)
-            with patch('appeal_dashboard.read_experiment', wraps=__import__('appeal_experiments').read_experiment) as reader:
+            dashboard, folder, _ = self.make_production(temp)
+            with patch('appeal_dashboard.runs.load', wraps=runs.load) as reader:
                 a = dashboard.load('production')
                 self.assertIs(a, dashboard.load('production'))
                 self.assertEqual(reader.call_count, 1)
-                (folder / 'cases.json').write_bytes(b'changed')
-                with self.assertRaisesRegex(ValueError, 'artifact changed'):
-                    dashboard.load('production')
+                (folder/'executions.json').write_text('[{"started_at": "later"}]')
+                self.assertIsNot(a, dashboard.load('production'))
+                self.assertEqual(reader.call_count, 2)
             self.assertEqual(a['reference'], None)
             self.assertEqual(a['evaluation'], None)
+            self.assertEqual(a['profile']['dispositions'], {'excluded': 1})
 
     def test_source_path_and_symlink_rejection(self):
         with tempfile.TemporaryDirectory() as temp:
-            dashboard, _, source_run = self.make_production(temp)
+            dashboard, _, corpus = self.make_production(temp)
             value = dashboard.load('production')
             case = value['baseline']['cases'][0]
             self.assertEqual(dashboard.source('production', case['case_id'])['text'], 'frozen test text')
-            for unsafe in ('../private.txt', '/etc/passwd', 'sources/../../private.txt'):
+            original = case['source']['path']
+            for unsafe in ('../private.txt', '/etc/passwd', str(corpus/'sources/../../private.txt')):
                 case['source']['path'] = unsafe
                 with self.assertRaisesRegex(ValueError, 'Unsafe'):
                     dashboard.source('production', case['case_id'])
-            case['source']['path'] = 'sources/link.txt'
-            (source_run / 'sources/link.txt').symlink_to(source_run / 'sources/case.txt')
-            with self.assertRaisesRegex(ValueError, 'symlink'):
-                dashboard.source('production', case['case_id'])
-            case['source']['path'] = 'sources/case.txt'
-            (source_run / 'sources/case.txt').write_text('tampered')
+            case['source']['path'] = original
+            (corpus/'sources/case.txt').write_text('tampered')
             with self.assertRaisesRegex(ValueError, 'hash mismatch'):
                 dashboard.source('production', case['case_id'])
+            (corpus/'real.txt').write_bytes(b'frozen test text')
+            (corpus/'sources/case.txt').unlink()
+            (corpus/'sources/case.txt').symlink_to(corpus/'real.txt')
+            with self.assertRaisesRegex(ValueError, 'symlink'):
+                dashboard.source('production', case['case_id'])
+
+    def test_pipeline_tree_and_diff_in_overview(self):
+        overview = self.dashboard.overview('demo')
+        pipes = overview['pipelines']
+        self.assertEqual(pipes['candidate']['children'][0]['children'][1]['name'], 'check')
+        status = {row['path']: row['status'] for row in pipes['diff']}
+        self.assertEqual((status['first-pass/extract'], status['first-pass/check']), ('changed', 'added'))
+        prompt = next(r for r in pipes['diff'] if r['path'] == 'first-pass/extract')['prompts'][0]
+        self.assertIn('citing a quotation', prompt['value'])
+        self.assertIn('first-pass/check: added', overview['card']['variables'])
 
     def test_http_guards_and_errors(self):
         server = ThreadingHTTPServer(('127.0.0.1', 0), handler_for(self.dashboard, ['lab.internal']))

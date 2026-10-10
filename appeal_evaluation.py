@@ -4,18 +4,16 @@ from collections import Counter, defaultdict
 
 
 def _cases(value):
-    value = value.get('canonical', value)
-    if value.get('schema_version') != 'appeal-cases-1':
-        raise ValueError('Unsupported canonical cases version')
-    cases = value['cases']
+    """Cases of a loaded run (``pipeline.runs.load``) or a list of such cases, by identity."""
+    cases = value['cases'] if isinstance(value, dict) else value
     ids = [c['case_id'] for c in cases]
     if len(ids) != len(set(ids)):
-        raise ValueError('Duplicate canonical case_id')
+        raise ValueError('Duplicate case_id')
     return {c['case_id']: c for c in cases}
 
 
 def _identity(docket):
-    return ' '.join(docket.strip().casefold().split()) if isinstance(docket, str) else None
+    return ' '.join(docket.strip().casefold().split()) if isinstance(docket, str) and docket != 'unknown' else None
 
 
 def _lookup(obj, path):
@@ -86,8 +84,8 @@ def _summary(fields):
 def evaluate(baseline, candidate, reference=None):
     """Return transparent paired accuracy and unscored change diagnostics.
 
-    Case paths address canonical case objects; record paths address finalized
-    records. Execution errors and missing records are reported separately.
+    Case paths address a case's fields (``disposition``); record paths address
+    its records. Processing errors and missing records are reported separately.
     """
     runs = {'baseline': _cases(baseline), 'candidate': _cases(candidate)}
     if reference is not None:
@@ -107,7 +105,7 @@ def evaluate(baseline, candidate, reference=None):
                             'fields': [_unknown([key]) for key in keys]})
         reference['cases'].append({'case_id': case_id, 'source_sha256': b.get('source', {}).get('sha256') or c.get('source', {}).get('sha256'),
                                    'adjudication': {'state': 'unknown'}, 'records_complete': False,
-                                   'fields': [_unknown(['scope']), _unknown(['scope_category'])], 'records': records})
+                                   'fields': [_unknown(['disposition'])], 'records': records})
     output = []
     for ref in reference['cases']:
         cases = {side: run.get(ref['case_id']) for side, run in runs.items()}
@@ -132,7 +130,7 @@ def evaluate(baseline, candidate, reference=None):
         expanded = []
         for scope, record_id, labels, objects in groups:
             paths = {tuple(label['path']) for label in labels}
-            keys = {'scope', 'scope_category'} if scope == 'case' else set().union(*(obj.keys() for obj in objects.values() if obj is not None))
+            keys = {'disposition'} if scope == 'case' else set().union(*(obj.keys() for obj in objects.values() if obj is not None))
             expanded.append((scope, record_id, labels + [_unknown([key]) for key in sorted(keys) if (key,) not in paths], objects))
         groups = expanded
         expected_ids = {_identity(r['identity']['docket']) for r in ref['records']}
@@ -171,7 +169,7 @@ def evaluate(baseline, candidate, reference=None):
                                'comparison': label['comparison'], 'case_adjudicated': ref['adjudication']['state'] == 'adjudicated',
                                'evidence': label.get('evidence', []), 'rationale': label.get('rationale'), 'label_version': label.get('version'),
                                **values, 'scored': scored, 'classification': classification, 'unscored_reason': reason})
-        output.append({'case_id': ref['case_id'], 'execution': {s: c.get('execution') if c else None for s, c in cases.items()},
+        output.append({'case_id': ref['case_id'], 'execution': {s: c.get('status') if c else None for s, c in cases.items()},
                        'records_comparison_basis': 'reference' if ref['case_id'] in referenced else 'observed_union_unscored',
                        'records_complete': ref['records_complete'],
                        'source_hashes': {**{s: c.get('source', {}).get('sha256') if c else None for s, c in cases.items()}, 'reference': ref['source_sha256']},

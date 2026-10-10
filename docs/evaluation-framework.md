@@ -1,15 +1,16 @@
 # Paired evaluation framework
 
-The framework reads finalized canonical records, never draft candidates or
-reviews. It executes no extraction or reference-generation strategy.
+The framework reads results under the output contract
+([PIPELINE_CONTRACT.md](../PIPELINE_CONTRACT.md)), never draft records. It
+executes no extraction or reference-generation strategy.
 
 ```python
-from appeal_experiments import read_experiment
+from pipeline import runs
 from appeal_reference import read_reference
 from appeal_evaluation import evaluate
 
-baseline = read_experiment('/path/to/baseline')
-candidate = read_experiment('/path/to/candidate')
+baseline = runs.load('data/runs/production', case_ids)
+candidate = runs.load('data/experiments/NAME/run', case_ids)
 reference = read_reference('/path/to/reference.json')
 result = evaluate(baseline, candidate, reference)
 ```

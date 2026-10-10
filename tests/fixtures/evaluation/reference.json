@@ -16,7 +16,8 @@
       "fields": [
         {
           "path": [
-            "scope_category"
+            "disposition",
+            "value"
           ],
           "state": "adjudicated",
           "comparison": "exact",
@@ -28,7 +29,7 @@
           ],
           "rationale": "Synthetic test expectation.",
           "version": "synthetic-1",
-          "value": "confirmed"
+          "value": "in_scope"
         }
       ],
       "records": [
@@ -262,7 +263,8 @@
       "fields": [
         {
           "path": [
-            "scope_category"
+            "disposition",
+            "value"
           ],
           "state": "adjudicated",
           "comparison": "exact",
@@ -274,7 +276,7 @@
           ],
           "rationale": "Synthetic test expectation.",
           "version": "synthetic-1",
-          "value": "confirmed"
+          "value": "in_scope"
         }
       ],
       "records": []

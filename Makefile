@@ -123,12 +123,8 @@ group-build:
 group-status:
 	uv run python groups.py status
 
-# Supported municipal housing appeal pipeline.
-.PHONY: appeals-plan appeals-run appeals-export appeals-status appeals-view appeals-test
-appeals-plan:
-	uv run python appeals.py plan $(APPEALS_ARGS)
-appeals-run:
-	uv run python appeals.py run $(APPEALS_ARGS)
+# Legacy appeals-1 run directories: export, status and browsing only.
+.PHONY: appeals-export appeals-status appeals-view appeals-test
 appeals-export:
 	uv run python appeals.py export $(APPEALS_ARGS)
 appeals-status:
@@ -136,22 +132,22 @@ appeals-status:
 appeals-view:
 	uv run python appeals.py serve --host $(LISTEN_HOST) --port $(APPEALS_PORT)
 appeals-test:
-	uv run --inexact python -m unittest tests.test_appeals tests.test_pipeline tests.test_pipeline_replay tests.test_appeal_viewer tests.test_appeal_stats -v
+	uv run --inexact python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
 
 # Read-only experiment inspection; no extraction or model calls.
 .PHONY: experiments-view experiments-test
 experiments-view:
 	python3 appeal_dashboard.py --host $(LISTEN_HOST) --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
 experiments-test:
-	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_appeal_experiments tests.test_pipeline tests.test_pipeline_replay -v
+	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_pipeline tests.test_store tests.test_pipeline_replay -v
 
-# Experiments are definition directories in experiments/NAME (see docs/EXPERIMENTS.md).
+# Experiments are Python modules in experiments/NAME (see docs/EXPERIMENTS.md).
 # Only experiments-run reads .env and makes paid model calls; cap it with
 # EXPERIMENT_ARGS='--max-spend 1.00'.
 EXPERIMENT ?=
 EXPERIMENT_ARGS ?=
 COHORT_ARGS ?=
-.PHONY: experiments-init experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiment-name
+.PHONY: experiments-init experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiments-replay experiment-name
 experiment-name:
 	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT to an experiment name'; exit 2; }
 experiments-init: experiment-name
@@ -168,6 +164,9 @@ experiments-finalize: experiment-name
 	uv run --inexact python appeal_runner.py finalize $(EXPERIMENT)
 experiments-compare: experiment-name
 	uv run --inexact python appeal_runner.py compare $(EXPERIMENT) $(EXPERIMENT_ARGS)
+# Rebuild the production baseline from its saved calls; sending disabled.
+experiments-replay:
+	uv run --inexact python appeal_runner.py replay-production
 
 # Local research snapshot selection is explicit; MCP runs without pipeline/API credentials.
 MCP_RUN ?=

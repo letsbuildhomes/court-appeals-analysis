@@ -1,0 +1,1 @@
+{"tag": "production", "pipeline": "p-2140c5b5e05d", "at": "2026-10-10T22:03:57.140050+00:00", "note": "The first production run (full-run, September 2026), ported as pipeline/legacy; its replay from saved calls matches all 1,395 cases", "evidence": {}, "commit": "f05c45e09d0983138b80ee38f40417638a91cf92"}

@@ -3,7 +3,7 @@
 A conversation is an immutable transcript bound to one provider. A step can
 start a fresh one or continue its predecessor's. Continuing keeps the earlier
 messages as a byte-identical prefix, so providers can reuse cached input;
-whether a step continues is recipe configuration, not pipeline structure.
+whether a step continues is that step's configuration.
 """
 from dataclasses import dataclass
 import hashlib

@@ -14,18 +14,14 @@ class DemoTests(unittest.TestCase):
         self.assertEqual(demo['reference']['purpose'], 'synthetic_software_test')
         self.assertEqual(demo['evaluation']['schema_version'], 'appeal-evaluation-1')
 
-    def test_recipe_and_progress_exercise_dashboard_without_execution(self):
+    def test_pipelines_and_progress_exercise_dashboard_without_execution(self):
         demo = build_demo()
-        baseline, candidate = demo['baseline'], demo['candidate']
-        before = {c['id']: c for c in baseline['recipe']['components']}
-        after = {c['id']: c for c in candidate['recipe']['components']}
-        self.assertIn('check', after.keys() - before.keys())
-        self.assertNotEqual(before['extract']['prompt_sha256'], after['extract']['prompt_sha256'])
-        self.assertEqual(before['finalize']['prompt_sha256'], after['finalize']['prompt_sha256'])
-        self.assertNotEqual(before['finalize']['effective_prompt_sha256'], after['finalize']['effective_prompt_sha256'])
-        self.assertTrue(any(c['execution']['status'] == 'reviewing' for c in candidate['cases']))
-        self.assertTrue(candidate['provenance']['cost']['simulated'])
-        self.assertIsNone(candidate['provenance']['cost']['estimated_usd'])
+        rows = {r['path']: r for r in demo['pipelines']['diff']}
+        self.assertEqual(rows['first-pass/check']['status'], 'added')
+        self.assertEqual(rows['first-pass/extract']['prompts'][0]['status'], 'changed')
+        self.assertEqual(rows['finalize']['status'], 'unchanged')
+        self.assertNotEqual(demo['pipelines']['baseline']['id'], demo['pipelines']['candidate']['id'])
+        self.assertTrue(any(c['status']['state'] == 'in_progress' for c in demo['candidate']['cases']))
         self.assertEqual(demo['execution']['new_model_cost_usd'], 0)
 
 
