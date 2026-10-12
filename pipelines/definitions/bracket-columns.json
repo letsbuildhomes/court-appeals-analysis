@@ -1,0 +1,11 @@
+{
+  "name": "bracket-columns",
+  "description": "Reading docket numbers through the bracket columns of older captions groups documents into cases more accurately",
+  "base": "p-a2cede8df35f",
+  "changes": [
+    {
+      "at": "cases/group",
+      "step": "cases/group:caption-dockets-bracket-columns"
+    }
+  ]
+}

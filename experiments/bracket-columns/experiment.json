@@ -1,0 +1,14 @@
+{
+  "name": "bracket-columns",
+  "hypothesis": "Reading docket numbers through the bracket columns of older captions groups documents into cases more accurately",
+  "baseline": "p-a2cede8df35f",
+  "baseline_tag": "production",
+  "pipeline": "bracket-columns",
+  "start": "",
+  "inputs": {},
+  "focus": "extract",
+  "probe": "changed",
+  "confirm": "all",
+  "reference": null,
+  "created_at": "2026-10-12T18:57:14.668934+00:00"
+}
