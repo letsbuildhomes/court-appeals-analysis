@@ -81,8 +81,11 @@ lab-adopt:
 
 # The web app: live runs, the lab, data viewers and pipelines (read-only).
 # Its password comes from COURT_WEB_PASSWORD or .web-password (docs/WEB.md).
+# Behind a reverse proxy: make web ARGS='--public-url https://reviews.example.org/app/'
+# deploy/web/court-web.service keeps it running as a systemd user service.
+WEB_PORT ?= 8771
 web:
-	$(COURT) web --host $(LISTEN_HOST)
+	$(COURT) web --host $(LISTEN_HOST) --port $(WEB_PORT) $(ARGS)
 grouping-report:
 	$(COURT) report grouping $(or $(CASES),september-cases)
 text-audit:

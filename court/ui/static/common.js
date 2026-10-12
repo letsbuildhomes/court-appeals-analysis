@@ -25,7 +25,7 @@ const money = v => typeof v === 'number' ? '$' + (Math.abs(v) < 0.1 && v !== 0 ?
 async function api(path, params = {}) {
   params = Object.fromEntries(Object.entries(params).filter(([, v]) => v !== undefined && v !== null));
   const query = Object.keys(params).length ? '?' + new URLSearchParams(params) : '';
-  const response = await fetch('/api/' + path + query);
+  const response = await fetch('api/' + path + query);
   if (response.status === 401) { location.reload(); throw Error('Sign in required'); }
   const value = await response.json();
   if (!response.ok || value.error) throw Error(value.error || 'Unable to load this view.');

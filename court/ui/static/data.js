@@ -105,7 +105,7 @@ async function renderDataset(seq, r) {
 
 // A PDF page beside its text, with page-by-page navigation.
 function pageViewer(doc, pageNumber, pageCount, text, meta, go) {
-  const image = node('img'); image.alt = `Page ${pageNumber} of the PDF`; image.src = `/api/page-image?doc=${doc}&page=${pageNumber}`;
+  const image = node('img'); image.alt = `Page ${pageNumber} of the PDF`; image.src = `api/page-image?doc=${doc}&page=${pageNumber}`;
   const message = node('p', 'Rendering page…', 'muted');
   image.onload = () => message.remove(); image.onerror = () => { message.textContent = 'Could not render this page.'; };
   const nav = el('div', 'viewer-nav', button('← Page', () => go(pageNumber - 1)), node('span', `Page ${pageNumber} of ${pageCount}`, 'small'), button('Page →', () => go(pageNumber + 1)));

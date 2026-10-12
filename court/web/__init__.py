@@ -9,6 +9,12 @@ the password is entered. Signing in sets a session cookie: an expiry signed
 with a key derived from the password, so changing the password signs everyone
 out, and restarting the server does not. The cookie is HttpOnly and
 SameSite=Strict; failed attempts are slowed down.
+
+Behind a reverse proxy that terminates HTTPS, a ``PublicUrl`` names the
+address browsers use. Requests for that host must come from that origin, and
+their cookie is Secure and scoped to its path. Pages use relative URLs, so the
+proxy may serve the site under a path by removing that prefix before passing
+requests on.
 """
 from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -70,6 +76,27 @@ class Password:
             self.failures.pop(client, None)
 
 
+class PublicUrl:
+    """The address browsers use when a reverse proxy serves the site, such as ``https://reviews.example.org/app/``."""
+
+    def __init__(self, url):
+        parts = urlsplit(url.strip())
+        if parts.scheme not in ('http', 'https') or not parts.hostname:
+            raise ValueError(f'The public URL needs http:// or https:// and a host: {url}')
+        if parts.username or parts.password or parts.query or parts.fragment:
+            raise ValueError(f'The public URL takes only a scheme, host, port and path: {url}')
+        default = 443 if parts.scheme == 'https' else 80
+        self.scheme, self.hostname, self.port = parts.scheme, parts.hostname, parts.port or default
+        self.path = parts.path.rstrip('/') + '/'
+        name = f'[{self.hostname}]' if ':' in self.hostname else self.hostname
+        self.origin = f'{self.scheme}://{name}' + ('' if self.port == default else f':{self.port}')
+        self.url = self.origin + self.path
+
+    def serves(self, hostname, port):
+        """True when a request's Host names this address."""
+        return hostname == self.hostname and (port or (443 if self.scheme == 'https' else 80)) == self.port
+
+
 def login_page(error=''):
     page = (HERE/'login.html').read_text()
     if error:
@@ -100,10 +127,11 @@ def trusted_hostname(hostname, allowed_hosts=()):
     return True
 
 
-def handler(routes, static, allowed_hosts=(), password=None):
+def handler(routes, static, allowed_hosts=(), password=None, public=None):
     """A read-only handler: ``routes`` maps paths to functions of query arguments; ``static`` maps paths to files.
 
-    With ``password`` (a ``Password``), everything but the sign-in form needs a session cookie.
+    With ``password`` (a ``Password``), everything but the sign-in form needs a session cookie. With
+    ``public`` (a ``PublicUrl``), requests may also arrive through a reverse proxy at that address.
     """
     allowed = {name.lower() for name in allowed_hosts}
 
@@ -112,17 +140,28 @@ def handler(routes, static, allowed_hosts=(), password=None):
             """Refuse requests for another host or from another site; True when the request may proceed."""
             authority = self.headers.get('Host', '').lower()
             host = urlsplit('http://' + authority)
-            if not trusted_hostname(host.hostname, allowed) or host.port != self.server.server_address[1] or host.path:
+            self.public = bool(public and not host.path and public.serves(host.hostname, host.port))
+            if self.public:
+                expected = public.origin
+            elif trusted_hostname(host.hostname, allowed) and host.port == self.server.server_address[1] and not host.path:
+                expected = f'http://{authority}'
+            else:
                 self.respond(403, {'error': 'Invalid Host'})
                 return False
             origin = self.headers.get('Origin')
-            if origin and origin.lower() != f'http://{authority}':
+            if origin and origin.lower() != expected:
                 self.respond(403, {'error': 'Invalid Origin'})
                 return False
             if self.headers.get('Sec-Fetch-Site') == 'cross-site':
                 self.respond(403, {'error': 'Cross-site request forbidden'})
                 return False
             return True
+
+        def cookie(self, value, seconds):
+            """A session cookie; through the public address it is scoped to its path, and Secure over HTTPS."""
+            path = public.path if self.public else '/'
+            secure = '; Secure' if self.public and public.scheme == 'https' else ''
+            return f'{COOKIE}={value}; Path={path}; HttpOnly; SameSite=Strict; Max-Age={seconds}{secure}'
 
         def do_POST(self):
             if not self.checked():
@@ -139,8 +178,7 @@ def handler(routes, static, allowed_hosts=(), password=None):
                 password.failed(client)
                 return self.respond(401, login_page('That password is not right.'), 'text/html')
             password.succeeded(client)
-            cookie = f'{COOKIE}={password.session()}; Path=/; HttpOnly; SameSite=Strict; Max-Age={SESSION_SECONDS}'
-            self.respond(303, b'', 'text/plain', {'Location': '/', 'Set-Cookie': cookie})
+            self.respond(303, b'', 'text/plain', {'Location': './', 'Set-Cookie': self.cookie(password.session(), SESSION_SECONDS)})
 
         def do_GET(self):
             try:
@@ -148,8 +186,7 @@ def handler(routes, static, allowed_hosts=(), password=None):
                     return
                 url = urlsplit(self.path)
                 if url.path == '/logout':
-                    return self.respond(303, b'', 'text/plain', {'Location': '/',
-                                        'Set-Cookie': f'{COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0'})
+                    return self.respond(303, b'', 'text/plain', {'Location': './', 'Set-Cookie': self.cookie('', 0)})
                 if password:
                     if url.path == '/login.css':
                         return self.respond(200, (HERE/'login.css').read_bytes(), 'text/css')
@@ -194,11 +231,12 @@ def handler(routes, static, allowed_hosts=(), password=None):
     return Handler
 
 
-def serve(name, routes, static, host=DEFAULT_HOST, port=8771, path='/', allowed_hosts=(), password=None):
+def serve(name, routes, static, host=DEFAULT_HOST, port=8771, path='/', allowed_hosts=(), password=None, public=None):
     if not 1 <= port <= 65535:
         raise ValueError('Port must be between 1 and 65535')
-    server = ThreadingHTTPServer((host, port), handler(routes, static, allowed_hosts, password))
-    print(f'{name}: {display_url(host, port, path)}' + ('' if password else ' (no password)'), flush=True)
+    server = ThreadingHTTPServer((host, port), handler(routes, static, allowed_hosts, password, public))
+    print(f'{name}: {display_url(host, port, path)}' + (f' and {public.url}' if public else '')
+          + ('' if password else ' (no password)'), flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

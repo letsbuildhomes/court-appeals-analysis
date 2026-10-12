@@ -7,3 +7,4 @@ in/
 data/
 out/
 .web-password
+.web-env

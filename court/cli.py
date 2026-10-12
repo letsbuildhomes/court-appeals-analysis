@@ -162,7 +162,7 @@ def web(args):
     import os
     from court.config import ROOT
     from court.ui.server import serve
-    from court.web import Password
+    from court.web import Password, PublicUrl
     secret = os.getenv('COURT_WEB_PASSWORD')
     path = Path(args.password_file) if args.password_file else ROOT/'.web-password'
     if not secret and path.exists():
@@ -170,7 +170,12 @@ def web(args):
     if not secret and not args.no_password:
         raise SystemExit('Set a password: COURT_WEB_PASSWORD, or one line in .web-password (or --password-file); '
                          '--no-password serves the app to anyone who can reach it')
-    serve(args.host, args.port, args.allowed_host or (), Password(secret) if secret else None)
+    url = args.public_url or os.getenv('COURT_WEB_PUBLIC_URL')
+    try:
+        public = PublicUrl(url) if url else None
+    except ValueError as exc:
+        raise SystemExit(str(exc))
+    serve(args.host, args.port, args.allowed_host or (), Password(secret) if secret else None, public)
 
 
 def reports(args):
@@ -295,6 +300,8 @@ def parser():
     p.add_argument('--allowed-host', action='append', help='A hostname to accept besides IP addresses and localhost')
     p.add_argument('--password-file', help='A file whose first line is the password (default .web-password)')
     p.add_argument('--no-password', action='store_true', help='Serve without a password')
+    p.add_argument('--public-url', help='The address a reverse proxy serves the app at, e.g. https://reviews.example.org/app/ '
+                                        '(default COURT_WEB_PUBLIC_URL)')
     p.set_defaults(func=web)
 
     p = sub.add_parser('report', help='Reports on saved datasets')

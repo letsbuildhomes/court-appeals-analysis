@@ -44,10 +44,10 @@ class StaticTests(unittest.TestCase):
     def test_the_page_loads_only_files_the_server_has(self):
         files = server.static()
         html = files['/'].read_text()
-        assets = re.findall(r'src="(/[^"]+)"', html) + re.findall(r'rel="stylesheet" href="(/[^"]+)"', html)
+        assets = re.findall(r'src="([^"]+)"', html) + re.findall(r'rel="stylesheet" href="([^"]+)"', html)
         self.assertGreater(len(assets), 5)
         for name in assets:
-            self.assertIn(name, files)
+            self.assertIn('/' + name, files)
         routes = server.routes.__code__.co_consts
         self.assertTrue(any('/api/run' == c for c in routes))
 

@@ -1,0 +1,17 @@
+# The web app as a systemd user service: started at boot, restarted if it stops.
+# It runs `make web` in the checkout, with the password from .web-password and
+# this deployment's settings from .web-env (both ignored by git). Install and
+# manage it as described in docs/WEB.md ("Keeping it running").
+[Unit]
+Description=Court review web app
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/src/court-appeals-analysis
+EnvironmentFile=-%h/src/court-appeals-analysis/.web-env
+ExecStart=/usr/bin/make web
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

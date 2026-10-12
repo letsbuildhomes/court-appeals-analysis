@@ -1,17 +1,21 @@
 """The web layer: host checks and the site-wide password."""
 import http.client
 from http.server import ThreadingHTTPServer
+from pathlib import Path
+import re
 import threading
 import time
 import unittest
 
-from court.web import COOKIE, Password, handler
+from court.web import COOKIE, Password, PublicUrl, handler
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class Served:
-    def __init__(self, password=None):
+    def __init__(self, password=None, public=None):
         routes = {'/api/ping': lambda: {'ok': True}}
-        self.server = ThreadingHTTPServer(('127.0.0.1', 0), handler(routes, {}, (), password))
+        self.server = ThreadingHTTPServer(('127.0.0.1', 0), handler(routes, {}, (), password, public))
         self.port = self.server.server_address[1]
         threading.Thread(target=self.server.serve_forever, daemon=True).start()
 
@@ -50,10 +54,12 @@ class PasswordTests(unittest.TestCase):
         self.assertEqual(status, 401)
         self.assertIn(b'not right', body)
         status, headers, _ = self.sign_in('correct%20horse')
-        self.assertEqual((status, headers['Location']), (303, '/'))
+        self.assertEqual((status, headers['Location']), (303, './'))
         cookie = headers['Set-Cookie']
         self.assertIn('HttpOnly', cookie)
         self.assertIn('SameSite=Strict', cookie)
+        self.assertIn('Path=/;', cookie)
+        self.assertNotIn('Secure', cookie)
         session = cookie.split(';')[0]
         status, _, body = self.site.request('GET', '/api/ping', headers={'Cookie': session})
         self.assertEqual((status, body), (200, b'{"ok": true}'))
@@ -87,6 +93,58 @@ class OpenTests(unittest.TestCase):
             self.assertEqual(site.request('GET', '/api/ping', headers={'Host': 'evil.example:80'})[0], 403)
         finally:
             site.close()
+
+
+class PublicUrlTests(unittest.TestCase):
+    FORM = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+    def setUp(self):
+        self.site = Served(Password('correct horse'), PublicUrl('https://Reviews.example.org/app'))
+
+    def tearDown(self):
+        self.site.close()
+
+    def sign_in(self, host, origin):
+        return self.site.request('POST', '/login', 'password=correct%20horse', {**self.FORM, 'Host': host, 'Origin': origin})
+
+    def test_the_public_address_is_normalized(self):
+        url = PublicUrl('https://Reviews.example.org:443/app')
+        self.assertEqual((url.origin, url.path, url.url), ('https://reviews.example.org', '/app/', 'https://reviews.example.org/app/'))
+        self.assertEqual(PublicUrl('http://reviews.example.org:8080').url, 'http://reviews.example.org:8080/')
+        for bad in ('reviews.example.org', 'ftp://reviews.example.org/', 'https:///app', 'https://reviews.example.org/?a=1',
+                    'https://user@reviews.example.org/'):
+            with self.assertRaises(ValueError):
+                PublicUrl(bad)
+
+    def test_signing_in_through_the_proxy_scopes_a_secure_cookie_to_the_path(self):
+        status, headers, _ = self.sign_in('reviews.example.org', 'https://reviews.example.org')
+        self.assertEqual((status, headers['Location']), (303, './'))
+        self.assertIn('Path=/app/;', headers['Set-Cookie'])
+        self.assertIn('Secure', headers['Set-Cookie'])
+        session = headers['Set-Cookie'].split(';')[0]
+        self.assertEqual(self.site.request('GET', '/api/ping', headers={'Host': 'reviews.example.org', 'Cookie': session})[0], 200)
+        _, headers, _ = self.site.request('GET', '/logout', headers={'Host': 'reviews.example.org:443', 'Cookie': session})
+        self.assertIn('Path=/app/;', headers['Set-Cookie'])
+
+    def test_the_public_host_needs_its_own_origin_and_port(self):
+        self.assertEqual(self.sign_in('reviews.example.org', 'http://reviews.example.org')[0], 403)
+        self.assertEqual(self.sign_in('reviews.example.org', f'http://127.0.0.1:{self.site.port}')[0], 403)
+        for host in ('reviews.example.org:8443', 'reviews.example.org.evil.example', 'evil.example', 'reviews.example.org/x'):
+            self.assertEqual(self.site.request('GET', '/api/ping', headers={'Host': host})[0], 403, host)
+
+    def test_direct_requests_work_as_before(self):
+        status, headers, _ = self.sign_in(f'127.0.0.1:{self.site.port}', f'http://127.0.0.1:{self.site.port}')
+        self.assertEqual(status, 303)
+        self.assertIn('Path=/;', headers['Set-Cookie'])
+        self.assertNotIn('Secure', headers['Set-Cookie'])
+        self.assertEqual(self.sign_in(f'127.0.0.1:{self.site.port}', 'https://reviews.example.org')[0], 403)
+
+    def test_pages_use_relative_urls_so_the_site_can_live_under_a_path(self):
+        pages = [*(ROOT/'court/ui/static').glob('*.html'), *(ROOT/'court/ui/static').glob('*.js'), ROOT/'court/web/login.html']
+        rooted = re.compile(r'''(?:href|src|action)\s*=\s*["'`]/|["'`]/(?:api|login|logout)\b|["'`]/[\w-]+\.(?:js|css)''')
+        for page in pages:
+            for number, line in enumerate(page.read_text().splitlines(), 1):
+                self.assertIsNone(rooted.search(line), f'{page.name}:{number} uses a root-relative URL')
 
 
 if __name__ == '__main__':

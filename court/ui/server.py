@@ -33,8 +33,11 @@ def warm(api):
         pass
 
 
-def serve(host='0.0.0.0', port=8771, allowed_hosts=(), password=None):
-    """Serve the app; with ``password`` (a ``court.web.Password``) every page needs it."""
+def serve(host='0.0.0.0', port=8771, allowed_hosts=(), password=None, public=None):
+    """Serve the app; with ``password`` (a ``court.web.Password``) every page needs it.
+
+    ``public`` (a ``court.web.PublicUrl``) is the address a reverse proxy serves it at, if any.
+    """
     api = Api()
     threading.Thread(target=warm, args=(api,), daemon=True).start()
-    serve_web('Court review', routes(api), static(), host, port, '/', allowed_hosts, password)
+    serve_web('Court review', routes(api), static(), host, port, '/', allowed_hosts, password, public)

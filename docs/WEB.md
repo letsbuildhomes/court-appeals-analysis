@@ -23,8 +23,109 @@ from the password, so changing the password signs everyone out while
 restarting the app does not. Repeated wrong passwords from one address are
 answered more and more slowly. **Sign out** is in the header.
 
-The app is plain HTTP on the private network; the password keeps casual
-visitors out, but anyone who can watch that network's traffic could read it.
+The app itself speaks plain HTTP. On the private network the password keeps
+casual visitors out, but anyone who can watch that network's traffic could
+read it; to reach the app from anywhere else, put it behind a reverse proxy
+that serves HTTPS.
+
+## Behind a reverse proxy
+
+A web server elsewhere, such as a gateway reached over a VPN, can serve the
+app at a public address with its own TLS certificate. Tell the app that
+address with `--public-url` (or `COURT_WEB_PUBLIC_URL`), and bind it to the
+address the proxy reaches it on:
+
+```sh
+make web LISTEN_HOST=10.0.0.2 ARGS='--public-url https://reviews.example.org/'
+```
+
+Requests for the public host must then come from pages on that site, and the
+session cookie they get is marked Secure and limited to the public path.
+Requests made straight to the app's own address work as before. The proxy
+must pass the browser's `Host` header through unchanged; Caddy does by
+default, and nginx needs `proxy_set_header Host $http_host`.
+
+The app can have a subdomain to itself or live under a path. Its pages use
+relative links, so under a path the proxy removes the prefix before passing
+requests on, and redirects the bare prefix to the same path with a trailing
+slash.
+
+**A subdomain of its own** (`--public-url https://reviews.example.org/`):
+
+```caddy
+reviews.example.org {
+	reverse_proxy 10.0.0.2:8771
+}
+```
+
+```nginx
+server {
+    listen 443 ssl;
+    server_name reviews.example.org;
+    # ssl_certificate and ssl_certificate_key as for the server's other sites
+    location / {
+        proxy_pass http://10.0.0.2:8771;
+        proxy_set_header Host $http_host;
+    }
+}
+```
+
+**Under a path** (`--public-url https://example.org/review/`):
+
+```caddy
+example.org {
+	redir /review /review/
+	handle_path /review/* {
+		reverse_proxy 10.0.0.2:8771
+	}
+}
+```
+
+```nginx
+location = /review { return 301 /review/; }
+location /review/ {
+    proxy_pass http://10.0.0.2:8771/;   # the trailing slash removes the prefix
+    proxy_set_header Host $http_host;
+}
+```
+
+Sign in once through the public address; a session from the app's own
+address doesn't carry over, since the browser treats them as different sites.
+
+## Keeping it running
+
+`deploy/web/court-web.service` runs `make web` as a systemd user service, so
+the app starts at boot and comes back within seconds if it stops. The
+password still comes from `.web-password`, and this deployment's settings come
+from `.web-env` in the checkout, which git ignores too:
+
+```sh
+LISTEN_HOST=10.0.0.2
+WEB_PORT=8771
+COURT_WEB_PUBLIC_URL=https://reviews.example.org/
+```
+
+`LISTEN_HOST` is the address the proxy reaches the app on, `WEB_PORT` its port
+(`make web` takes it too) and `COURT_WEB_PUBLIC_URL` the public address from
+above. Comments go on lines of their own; systemd keeps anything after a
+value as part of it. Without `.web-env`, the service serves like a plain
+`make web`: every address, port 8771, no public URL. After editing it,
+restart the service.
+
+```sh
+systemctl --user enable --now "$PWD/deploy/web/court-web.service"   # from the checkout; once
+systemctl --user status court-web
+journalctl --user -u court-web -f            # its output
+systemctl --user restart court-web           # after pulling or switching branches
+systemctl --user disable --now court-web     # stop serving
+```
+
+Enabling links the unit to the file in the checkout; after editing the unit file,
+run `systemctl --user daemon-reload` and restart. The service serves whatever
+is checked out when it starts, and keeps running after you log out only if
+lingering is on for your account (`loginctl enable-linger`). If you change the
+port, change the reverse proxy to match, and stop any `make web` already using
+it.
 
 ## Sections
 
