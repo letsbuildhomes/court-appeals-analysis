@@ -9,6 +9,7 @@
 - [MCP.md](MCP.md) and [MCP-CLOUD.md](MCP-CLOUD.md): research access through MCP
 - [../PIPELINE_CONTRACT.md](../PIPELINE_CONTRACT.md): the results contract
 - [reference-selection-proposal.md](reference-selection-proposal.md): choosing reference cases (a proposal)
+- [issues/](issues/README.md): open questions, known problems and planned work, one file each
 
 ## Historical records
 

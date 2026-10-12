@@ -2,7 +2,8 @@
 
 A step reaches the outside world only through its context:
 
-    ctx.run(child, inputs)       run a child step; saves its output if its node says so
+    ctx.run(child, inputs)       run a child step; saves its output if its node says so, and
+                                 limits its inputs if it is the run's focus (see ``Focus``)
     ctx.map(function, items)     run a function over items in parallel
     ctx.ask(keys, settings, request, accept)
                                  call a model for the items ``keys`` (see ``models.Models.ask``)
@@ -18,7 +19,7 @@ from pathlib import Path
 import threading
 
 from court.config import paths
-from court.core.datasets import Failure, is_failure
+from court.core.datasets import Failure, is_failure, item_hash
 from court.core.hashing import read_json, save_json, value_hash
 from court.core.models import Rejected, Unavailable
 
@@ -52,12 +53,38 @@ class Cache:
         save_json(self.path(value_hash(parts)), {'parts': parts, 'value': value})
 
 
+class Focus:
+    """Limits the inputs of the step at one position to chosen keys.
+
+    Steps before that position run on everything. The chosen keys are ``keys``
+    plus, with ``changed_from`` (input name to an index ``{key: item hash}`` of
+    another run's input at the same position), every key whose item differs from
+    or is missing in that index. ``removed`` lists the index's keys that are no
+    longer in the input.
+    """
+
+    def __init__(self, path, keys=None, changed_from=None):
+        self.path, self.keys, self.changed_from = path, set(keys or ()), changed_from
+        self.chosen, self.removed = set(), set()
+
+    def limit(self, inputs):
+        present = set().union(*[set(values) for values in inputs.values()]) if inputs else set()
+        chosen = self.keys & present
+        for name, index in (self.changed_from or {}).items():
+            values = inputs.get(name, {})
+            chosen |= {k for k, v in values.items() if index.get(k) != item_hash(v)}
+            self.removed |= set(index) - set(values)
+        self.chosen |= chosen
+        return {name: {k: v for k, v in values.items() if k in chosen} for name, values in inputs.items()}
+
+
 class Services:
-    def __init__(self, models, trace=None, cache=None, save=None, workers=4, raw=None, save_all=False, progress=None):
+    def __init__(self, models, trace=None, cache=None, save=None, workers=4, raw=None, save_all=False, progress=None,
+                 focus=None):
         from court.core.raw import Raw
         self.models, self.trace, self.cache = models, trace or Trace(), cache or Cache()
         self.save, self.workers, self.raw, self.save_all = save, workers, raw or Raw(), save_all
-        self.progress = progress
+        self.progress, self.focus = progress, focus
 
 
 class Context:
@@ -74,6 +101,8 @@ class Context:
     def run(self, step, inputs):
         """Run a child step on input maps and return its output map."""
         ctx = self.at(step)
+        if self.services.focus and self.services.focus.path == ctx.path:
+            inputs = self.services.focus.limit(inputs)
         if self.services.progress:
             self.services.progress.start(ctx.path, inputs)
         output = step.run(inputs, ctx)
@@ -128,4 +157,4 @@ def fail_all(keys, failure):
     return {key: failure for key in keys}
 
 
-__all__ = ['Context', 'Services', 'Trace', 'Cache', 'Failure', 'is_failure', 'fail_all']
+__all__ = ['Context', 'Services', 'Focus', 'Trace', 'Cache', 'Failure', 'is_failure', 'fail_all']

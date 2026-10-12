@@ -81,12 +81,15 @@ def identity(docket):
     return ' '.join(docket.strip().casefold().split()) if isinstance(docket, str) and docket != UNKNOWN else None
 
 
-def state(value):
-    """complete, failed, not_run (a call this run did not send), or None when a map has no item."""
+def state(value, settled=False):
+    """complete, failed, not_run (a call this run did not send), or None when a map has no item.
+
+    In a settled map, such as a finished production run, an unsent call is final: the item failed.
+    """
     if value is None:
         return None
     if is_failure(value):
-        return 'not_run' if value.kind == 'not_sent' else 'failed'
+        return 'not_run' if value.kind == 'not_sent' and not settled else 'failed'
     return 'complete'
 
 
@@ -97,8 +100,9 @@ def processing(status):
 def scored_facts(reference, baseline, candidate):
     """Reference classifications keyed by (docket identity or None, fact key).
 
-    A reference item is ``{"result": a result, "labeled": {"case": [...], "records": {docket: [...]}}}``;
-    a fact not listed is not labeled and is not scored. ``"all"`` labels every fact.
+    A reference item is ``{"result": a result, "labeled": {"case": [...], "records": {docket: [...]}}}``.
+    ``"all"`` labels every fact of the case, of every record, or of one record. A fact not listed is
+    not labeled and is not scored, so an item without ``labeled`` scores nothing.
     """
     if not reference:
         return {}
@@ -119,17 +123,16 @@ def scored_facts(reference, baseline, candidate):
         found[(record_key, spec['key'])] = ('corrected' if after and not before else 'regressed' if before and not after
                                             else 'unchanged_correct' if after else 'unchanged_error')
     for spec in CASE_FACTS:
-        if chosen(labeled.get('case', 'all'), spec['key']):
+        if chosen(labeled.get('case'), spec['key']):
             score(None, spec, truth, baseline or None, candidate or None)
     sides = {name: {identity(r.get('docket')): r for r in (obj or {}).get('records') or []}
              for name, obj in (('baseline', baseline), ('candidate', candidate))}
+    records = labeled.get('records') or {}
     for record in truth.get('records') or []:
         key = identity(record.get('docket'))
-        listing = (labeled.get('records') or {}).get(record.get('docket'), labeled.get('records', 'all'))
-        if isinstance(labeled.get('records'), dict) and record.get('docket') not in labeled['records']:
-            continue
+        listing = records if records == 'all' else records.get(record.get('docket'))
         for spec in RECORD_FACTS:
-            if chosen(listing if not isinstance(listing, dict) else 'all', spec['key']):
+            if chosen(listing, spec['key']):
                 score(key, spec, record, sides['baseline'].get(key), sides['candidate'].get(key))
     return found
 
@@ -142,12 +145,19 @@ def _plural(n, word):
     return f'{n} {word}{"s" * (n != 1)}'
 
 
-def compare_case(case_id, baseline, candidate, reference=None):
+INPUT_NOTES = {'removed': 'Not in the candidate\'s input: merged into another case or removed before this step',
+               'added': 'New in the candidate\'s input', 'changed': 'Input changed before this step'}
+
+
+def compare_case(case_id, baseline, candidate, reference=None, settled=False, input_change=None):
     """Fact-level comparison of one case's two results, with a verdict.
 
-    ``baseline`` and ``candidate`` are results, failures or None (absent).
+    ``baseline`` and ``candidate`` are results, failures or None (absent); ``settled`` marks the
+    baseline as a finished run (see ``state``). ``input_change`` is how the case's input to the
+    compared step differs (changed, added, removed), ``same`` when the change being tested
+    reached other cases' inputs but not this one's, or None when no input changed.
     """
-    status = {'baseline': state(baseline), 'candidate': state(candidate)}
+    status = {'baseline': state(baseline, settled), 'candidate': state(candidate)}
     failures = {side: value.to_json() for side, value in (('baseline', baseline), ('candidate', candidate))
                 if is_failure(value)}
     baseline = None if is_failure(baseline) else baseline
@@ -226,11 +236,13 @@ def compare_case(case_id, baseline, candidate, reference=None):
                      else 'Only in '+('candidate' if status['baseline'] is None else 'baseline'))
     if scope_changed:
         judgment.append(f'Disposition {_plain(scope["baseline"])} → {_plain(scope["candidate"])}')
-    # Records follow the disposition; a disposition change needs judgment before counting them.
+    # Records follow the disposition, and move with documents when cases merge or split: either needs
+    # judgment before counting them.
+    moved = scope_changed or input_change in ('added', 'removed')
     if gained:
-        (judgment if scope_changed else better).append('+'+_plural(len(gained), 'record'))
+        (judgment if moved else better).append('+'+_plural(len(gained), 'record'))
     if lost:
-        (judgment if scope_changed else worse).append('−'+_plural(len(lost), 'record'))
+        (judgment if moved else worse).append('−'+_plural(len(lost), 'record'))
     if scored['corrected']:
         better.append(_plural(scored['corrected'], 'verified correction'))
     if scored['regressed']:
@@ -243,13 +255,17 @@ def compare_case(case_id, baseline, candidate, reference=None):
         judgment.append(_plural(different, 'different answer'))
     verdict = ('mixed' if better and worse else 'worsened' if worse else 'improved' if better
                else 'changed' if judgment else 'unchanged')
+    if input_change in INPUT_NOTES:
+        notes.append(INPUT_NOTES[input_change])
+    elif input_change == 'same' and verdict != 'unchanged':
+        notes.append('Same input as the baseline: changed by chance or by how cases were batched')
     chips = [*worse, *better, *judgment, *notes]
     if wording_only and not chips:
         chips.append('Wording or citations only')
     rank = {'regressed': 0, 'corrected': 1}
     highlights = sorted((f for f in facts if f['change'] != 'unchanged' or f['verified'] in rank),
                         key=lambda f: (rank.get(f['verified'], 2), CHANGES.index(f['change'])))
-    return {'case_id': case_id, 'verdict': verdict, 'failures': failures,
+    return {'case_id': case_id, 'verdict': verdict, 'failures': failures, 'input': input_change,
             'verified': bool(scored['corrected'] or scored['regressed']),
             'processing': {'flow': flow, **status},
             'records': {'baseline': len(records['baseline']), 'candidate': len(records['candidate']),
@@ -311,14 +327,18 @@ def headline(cases):
     return text[0].upper()+text[1:]
 
 
-def compare(baseline, candidate, reference=None, keys=None):
+def compare(baseline, candidate, reference=None, keys=None, settled=False, inputs=None):
     """Compare two results maps over their shared or chosen case IDs.
 
-    ``reference`` is an optional map of reference items (see ``scored_facts``).
+    ``reference`` is an optional map of reference items (see ``scored_facts``); ``settled`` marks
+    the baseline as a finished run (see ``state``). ``inputs`` maps case IDs whose input to the
+    compared step differs to how (see ``compare_case``); when it has any, every other case is
+    ``same``.
     """
-    reference = reference or {}
+    reference, inputs = reference or {}, inputs or {}
     ids = sorted(keys if keys is not None else set(baseline) | set(candidate))
-    cases = [compare_case(i, baseline.get(i), candidate.get(i), reference.get(i)) for i in ids]
+    cases = [compare_case(i, baseline.get(i), candidate.get(i), reference.get(i), settled,
+                          inputs.get(i, 'same') if inputs else None) for i in ids]
     facts = [f for c in cases for f in c['facts']]
     compared = [f for f in facts if f['baseline'] is not None or f['candidate'] is not None]
     fact_map = []
@@ -334,6 +354,7 @@ def compare(baseline, candidate, reference=None, keys=None):
     summary = {
         'cases': len(cases), 'verdicts': dict(Counter(c['verdict'] for c in cases)),
         'flows': dict(Counter(c['processing']['flow'] for c in cases)),
+        'inputs': dict(Counter(c['input'] for c in cases if c['input'])),
         'baseline': record_metrics([baseline.get(i) for i in ids]),
         'candidate': record_metrics([candidate.get(i) for i in ids]),
         'stability': {'unchanged': sum(f['change'] == 'unchanged' for f in compared), 'compared': len(compared)},

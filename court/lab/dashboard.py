@@ -25,6 +25,12 @@ PRODUCTION = ('The pipeline the production tag names, with the results of its la
               'quality profile shows where answers are missing: where experiments can look for improvements.')
 
 
+def selected(record):
+    """An experiment's listed probe keys; none when its probe chooses them when it runs."""
+    probe = record.get('probe', [])
+    return [] if isinstance(probe, str) else probe
+
+
 class Dashboard:
     def __init__(self, lab=None):
         self.lab = lab or Lab()
@@ -60,11 +66,15 @@ class Dashboard:
         baseline = self.datasets.open(result['baseline']['output']).load(result['keys'])
         candidate = self.datasets.open(result['candidate']['output']).load(result['keys'])
         reference = self.datasets.open(record['reference']).load(result['keys']) if record.get('reference') else None
-        comparison = compare.compare(baseline, candidate, reference, result['keys'])
+        # Rounds saved before ``settled`` was recorded: an existing baseline run is one besides the trace run.
+        settled = result['baseline'].get('settled', result['baseline']['run'] != result['baseline']['trace_run'])
+        comparison = compare.compare(baseline, candidate, reference, result['keys'], settled=settled,
+                                     inputs=result.get('inputs'))
         runs = {'baseline': self.runner.load(result['baseline']['run']),
                 'candidate': self.runner.load(result['candidate']['run'])}
         return {'kind': 'experiment', 'status': 'finalized', 'experiment': record, 'round': round_name,
                 'result': result, 'sides': {'baseline': baseline, 'candidate': candidate}, 'reference': reference,
+                'settled': settled,
                 'comparison': comparison, 'runs': runs, 'cases': self.case_set(runs['candidate']),
                 'pipelines': self.trees(result['baseline']['pipeline'], result['candidate']['pipeline'])}
 
@@ -78,6 +88,7 @@ class Dashboard:
         output = next(d for d in run['outputs'].values() if self.datasets.open(d).kind == 'results')
         values = self.datasets.open(output).load()
         return {'kind': 'baseline', 'status': 'finalized', 'sides': {'baseline': values}, 'runs': {'baseline': run},
+                'settled': True,
                 'cases': self.case_set(run), 'pipelines': self.trees(resolved['id'], None), 'output': output}
 
     def case_set(self, run):
@@ -182,7 +193,7 @@ class Dashboard:
                 'hypothesis': record.get('hypothesis') or PRODUCTION, 'created_at': record.get('created_at'),
                 'variables': variables or (['No changes: identical rerun'] if record else []),
                 'round': value.get('round'),
-                'cases': {'selected': len(result.get('keys', [])) or len(record.get('probe', [])), 'companions': 0},
+                'cases': {'selected': len(result.get('keys', [])) or len(selected(record)), 'companions': 0},
                 'impact': {k: summary[k] for k in ('verdicts', 'headline', 'flows', 'cases')} if summary else None,
                 'reference': bool((value.get('comparison') or {}).get('accuracy')),
                 'cost': self.cost(value)}
@@ -214,7 +225,8 @@ class Dashboard:
         for side, run in (value.get('runs') or {}).items():
             values = value['sides'][side]
             sides.append({'side': side, 'name': run['name'], 'pipeline': run['pipeline'], 'kind': 'run',
-                          'status_counts': dict(Counter(compare.state(v) for v in values.values())),
+                          'status_counts': dict(Counter(compare.state(v, side == 'baseline' and value.get('settled', False))
+                                                        for v in values.values())),
                           'case_count': len(values),
                           'record_count': sum(len(v.get('records') or []) for v in values.values() if not is_failure(v))})
         impact = None
@@ -234,8 +246,9 @@ class Dashboard:
             profile['metrics'].update(self.extras(value, 'baseline'))
         record, result = value.get('experiment') or {}, value.get('result') or {}
         return {'dataset': dataset, 'kind': value['kind'], 'status': value['status'], 'card': self.card(dataset),
-                'experiment': {**record, 'round': value.get('round'),
-                               'cases': {'selected': result.get('keys', record.get('probe', [])), 'companions': []}}
+                'experiment': {**record, 'round': value.get('round'), 'focus': record.get('focus'),
+                               'selection': result.get('selection', record.get('probe')),
+                               'cases': {'selected': result.get('keys', selected(record)), 'companions': []}}
                 if record else None,
                 'round': {k: result[k] for k in ('steps', 'regressions', 'status', 'finished_at', 'cost')} if result else None,
                 'cost_summary': self.cost(value), 'impact': impact, 'profile': profile,
@@ -270,7 +283,7 @@ class Dashboard:
         unknown = sum(r['duration']['kind'] == contract.UNKNOWN for r in (chosen or {}).get('records', []))
         return {'case_id': key, 'dockets': dockets,
                 'disposition': ((chosen or {}).get('disposition') or {}).get('value') or 'none',
-                'status': {'baseline': compare.state(b), 'candidate': compare.state(c) if 'candidate' in value['sides'] else None},
+                'status': {'baseline': compare.state(b, value.get('settled', False)), 'candidate': compare.state(c) if 'candidate' in value['sides'] else None},
                 'gaps': {'duration_unknown': unknown},
                 'record_count': {side: (len(v['records']) if v is not None and not is_failure(v) else 0)
                                  if side in value['sides'] else None for side, v in (('baseline', b), ('candidate', c))},

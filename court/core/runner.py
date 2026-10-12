@@ -3,12 +3,18 @@
 A run is ``data/runs/<name>/``:
 
     run.json      the pipeline ID, the position it starts at, input dataset IDs,
-                  the keys it was limited to, options, status, every saved
+                  the keys it was limited to and where, options, status, every saved
                   output by position, the final output, item counts and cost
     ledger.jsonl  every model call it reused, sent, was charged for or would send
 
-Running a run name again continues it: the same pipeline, position, inputs
-and keys are required, and the ledger, and so the spending cap, carry on.
+Keys normally limit the starting step's inputs. With a ``focus`` position
+inside the subtree, everything before that position runs on all its items
+and only the focused step is limited (see ``context.Focus``): a grouping
+change, for example, regroups every document while extraction runs only for
+chosen cases.
+
+Running a run name again continues it: the same pipeline, position, inputs,
+keys and focus are required, and the ledger, and so the spending cap, carry on.
 Finished work comes back from the caches for free.
 
 The final output and every node marked ``save`` are written as datasets;
@@ -24,7 +30,7 @@ import re
 
 from court import contracts
 from court.config import paths
-from court.core.context import Context, Services, Trace
+from court.core.context import Context, Focus, Services, Trace
 from court.core.datasets import Datasets, Failure, is_failure
 from court.core.hashing import read_json, save_json
 from court.core.models import Models, ledger_summary
@@ -67,8 +73,13 @@ class Runner:
 
     def run(self, name, pipeline, inputs=None, at='', keys=None, mode='cached', limit=0.0, resend_failed=False,
             resend_max_tokens=None, resamples=0, workers=4, transport=None, note='', save_all=False, labels=None,
-            clock=None):
+            clock=None, focus=None, changed_from=None):
         """Run and return the run record. ``mode`` is send, dry or cached (never send).
+
+        ``focus`` is a position inside the subtree where ``keys`` apply instead of the
+        starting step; ``changed_from`` (input name to dataset ID) adds every key whose
+        input item at the focus differs from that dataset's. The record's ``focused``
+        lists the keys chosen and those no longer in the input.
 
         ``save_all`` saves every step's output, not only the positions marked ``save``,
         so two runs can be compared step by step. ``labels`` (such as an experiment and
@@ -88,22 +99,34 @@ class Runner:
             wanted = (type(step).inputs or {}).get(input_name)
             if wanted and dataset.kind != wanted:
                 raise RunError(f'Input {input_name} must be a {wanted} dataset; {dataset.id} is {dataset.kind}')
-        keys = sorted(set(keys)) if keys else None
-        if keys:
+        focus = focus if focus not in (None, at) else None
+        if focus is not None:
+            if at and not focus.startswith(at+'/'):
+                raise RunError(f'Focus {focus} is not inside {at or "the pipeline"}')
+            find(resolved['root'], focus)
+            # A focus with no keys and nothing to compare against runs only the steps before it.
+            keys = sorted(set(keys or ()))
+        elif changed_from:
+            raise RunError('Choosing changed keys needs a focus inside the subtree')
+        else:
+            keys = sorted(set(keys)) if keys else None
+        if keys and focus is None:
             missing = [k for k in keys if not any(k in d for d in opened.values())]
             if missing:
                 raise RunError(f'{len(missing)} keys are in no input, e.g. {missing[:3]}')
         folder = self.root/name
         record = {'name': name, 'pipeline': resolved['id'], 'at': at, 'step': node['step'],
                   'inputs': {n: d.id for n, d in sorted(opened.items())}, 'keys': keys,
+                  'focus': {'at': focus, 'changed_from': dict(sorted((changed_from or {}).items()))} if focus is not None
+                  else None,
                   'options': {'mode': mode, 'limit_usd': limit, 'resend_failed': resend_failed,
                               'resend_max_tokens': resend_max_tokens, 'resamples': resamples, 'save_all': save_all},
                   'note': note, 'labels': dict(labels or {})}
         with locked(folder):
             previous = read_json(folder/'run.json') if (folder/'run.json').exists() else None
             if previous:
-                for field in ('pipeline', 'at', 'inputs', 'keys'):
-                    if previous[field] != record[field]:
+                for field in ('pipeline', 'at', 'inputs', 'keys', 'focus'):
+                    if previous.get(field) != record[field]:
                         raise RunError(f'Run {name} exists with a different {field}; choose a new name')
                 record['started_at'] = previous['started_at']
                 record['executions'] = previous.get('executions', 0)+1
@@ -142,9 +165,12 @@ class Runner:
             saved[id(output)] = dataset.id
             return output
 
-        maps = {n: d.load(keys) for n, d in opened.items()}
+        spec = record['focus']
+        focus = Focus(spec['at'], keys, {n: self.datasets.open(d).index for n, d in spec['changed_from'].items()}) \
+            if spec else None
+        maps = {n: d.load(None if focus else keys) for n, d in opened.items()}
         progress = Progress(folder/'progress.json', trace, max([len(m) for m in maps.values()] or [0]))
-        services = Services(models, trace, self.cache, save, workers, self.raw, save_all, progress)
+        services = Services(models, trace, self.cache, save, workers, self.raw, save_all, progress, focus)
         at = record['at']
         progress.begin()
         try:
@@ -169,6 +195,7 @@ class Runner:
                 failures[value.kind] = failures.get(value.kind, 0)+1
         record.update(finished_at=datetime.now(timezone.utc).isoformat(), outputs=outputs, output=final.id,
                       traces=traces.id, items={'total': len(output), 'failed': failures},
+                      focused={'keys': sorted(focus.chosen), 'removed': sorted(focus.removed)} if focus else None,
                       status='stopped' if any(k in failures for k in ('not_sent', 'budget', 'delivery'))
                       else 'complete', cost=models.summary(), error=None)
         save_json(folder/'run.json', record)
@@ -236,11 +263,13 @@ class Runner:
         have batched them differently.
         """
         for record in sorted(self.all(), key=lambda r: (r['keys'] is None, r.get('finished_at') or ''), reverse=True):
-            if record['pipeline'] != pipeline or position not in record.get('outputs', {}):
+            # A run's final output stands for its starting position even when that position isn't saved.
+            output = record.get('outputs', {}).get(position) or (record.get('output') if position == record['at'] else None)
+            if record['pipeline'] != pipeline or output is None:
                 continue
             if self.inputs_at(record, position) != inputs:
                 continue
-            dataset = self.datasets.open(record['outputs'][position])
+            dataset = self.datasets.open(output)
             if all(k in dataset for k in keys):
                 return record, dataset
         return None, None

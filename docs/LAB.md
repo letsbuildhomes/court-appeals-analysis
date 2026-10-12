@@ -51,6 +51,30 @@ step's datasets. The probe keys (`--keys`) are the cases the change targets.
 The confirm round runs on the reference set (once one exists; `--reference`
 names it), or on the `--confirm` keys.
 
+### Changes before extraction
+
+A change to grouping or text has to run from earlier in the pipeline, but
+its cases are still compared at extraction. `--focus` names the position the
+keys apply to: every step before it runs on everything, and only the focused
+step is limited. Earlier steps make no model calls and come from the caches,
+so the whole pipeline from the top takes under a minute. `--keys changed`
+chooses, when the round runs, every case whose input at the focus differs
+from the baseline's, plus the cases no longer there (merged or removed);
+`--confirm all` runs every case.
+
+```sh
+python -m court lab new bracket-columns \
+  --hypothesis 'Reading docket numbers through bracket columns groups documents more accurately' \
+  --focus extract --keys changed --confirm all \
+  --changes '[{"at": "cases/group", "step": "cases/group:caption-dockets-bracket-columns"}]'
+```
+
+Without `--at`, runs start at the top of the pipeline, from the listing
+snapshot. Each compared case is marked by its input: changed, merged away or
+removed, new, or the same as the baseline's. A case with the same input that
+still changed did so by chance or because review pairs cases; it doesn't
+measure the change.
+
 ## 3. Plan, then run the probe
 
 ```sh
@@ -76,8 +100,10 @@ make lab-adopt EXPERIMENT=strict-review
 ```
 
 Adopting appends a `production` entry to `pipelines/tags.jsonl` with the
-confirm round's evidence. It refuses when cases regressed or did not finish;
-`ARGS='--accept-regressions --note "why"'` adopts anyway, on the record.
+confirm round's evidence. It refuses when the confirm round did not finish
+every case. When cases got worse, it lists them and asks whether to adopt
+anyway; the tag log records them. `ARGS='--accept-regressions --note "why"'`
+answers yes without asking.
 
 ## Batching
 

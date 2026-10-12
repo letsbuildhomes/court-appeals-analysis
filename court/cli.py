@@ -122,14 +122,16 @@ def dataset(args):
 
 
 def lab(args):
-    from court.lab.experiments import Lab
+    from court.lab.experiments import Lab, Regressions
     lab = Lab()
     if args.action == 'new':
         changes = json.loads(args.changes) if args.changes else []
+        probe = key_list(args) or []
         show(lab.new(args.name, args.hypothesis, baseline=args.baseline, start=args.at or '',
-                     inputs=pairs(args.input), probe=key_list(args) or [], confirm=args.confirm and
-                     (args.confirm if args.confirm == 'reference' else args.confirm.split(',')),
-                     reference=args.reference, changes=changes))
+                     inputs=pairs(args.input), probe='changed' if probe == ['changed'] else probe,
+                     confirm=args.confirm and (args.confirm if args.confirm in ('reference', 'all')
+                                               else args.confirm.split(',')),
+                     reference=args.reference, changes=changes, focus=args.focus))
     elif args.action == 'plan':
         show(lab.plan(args.name, args.round))
     elif args.action == 'run':
@@ -138,7 +140,18 @@ def lab(args):
         show({k: result[k] for k in ('round', 'status', 'regressions', 'accuracy', 'cost')}
              | {'headline': result['summary']['headline'], 'verdicts': result['summary']['verdicts']})
     elif args.action == 'adopt':
-        show(lab.adopt(args.name, args.tag, note=args.note or '', accept_regressions=args.accept_regressions))
+        try:
+            entry = lab.adopt(args.name, args.tag, note=args.note or '', accept_regressions=args.accept_regressions)
+        except Regressions as worse:
+            print(f'{worse}:', file=sys.stderr)
+            for case in worse.cases:
+                print(f'  {case["case_id"]}: {"; ".join(case["chips"])}', file=sys.stderr)
+            if not sys.stdin.isatty():
+                raise SystemExit('Pass --accept-regressions to adopt anyway')
+            if input(f'Adopt anyway? The {args.tag} tag log records these cases. [y/N] ').strip().lower() != 'y':
+                raise SystemExit('Not adopted')
+            entry = lab.adopt(args.name, args.tag, note=args.note or '', accept_regressions=True)
+        show(entry)
     elif args.action == 'list':
         for record in lab.all():
             rounds = lab.rounds(record['name'])
@@ -263,8 +276,9 @@ def parser():
     p.add_argument('--hypothesis')
     p.add_argument('--baseline', default='production')
     p.add_argument('--at', help='Position the experiment\'s runs start at')
+    p.add_argument('--focus', help='Position the keys apply to, when later than --at; steps before it run on everything')
     p.add_argument('--input', action='append', help='NAME=DATASET for the starting step')
-    p.add_argument('--confirm', help='Comma-separated confirm keys, or "reference"')
+    p.add_argument('--confirm', help='Comma-separated confirm keys, "reference" or "all"')
     p.add_argument('--reference', help='Reference dataset')
     p.add_argument('--changes', help='JSON list of changes to the baseline')
     p.add_argument('--round', default='probe', choices=('probe', 'confirm'))

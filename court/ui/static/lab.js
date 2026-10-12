@@ -130,8 +130,9 @@ function header(o, r) {
   const add = (label, value) => { if (value) meta.append(el('div', null, node('dt', label), node('dd', value))); };
   if (o.runs?.length === 2) add('Compared', o.runs[0].name + ' → ' + o.runs[1].name);
   if (o.pipelines?.ids?.baseline) add('Pipelines', pipelineLine(o));
-  if (e.round) add('Round', plain(e.round) + (e.start ? ' · runs start at ' + e.start : ''));
-  if (e.cases) add('Cases', fmt(e.cases.selected.length));
+  if (e.round) add('Round', plain(e.round) + ' · runs start at ' + (e.start || 'the top') + (e.focus ? ' · cases chosen at ' + e.focus : ''));
+  if (e.cases) add('Cases', e.cases.selected.length ? fmt(e.cases.selected.length)
+    : e.selection === 'changed' ? 'Those whose input at ' + e.focus + ' changes' : e.selection === 'all' ? 'Every case' : '0');
   if (o.output) add('Results', o.output);
   if (e.created_at) add('Created', new Date(e.created_at).toLocaleString());
   if (meta.children.length && !compact) head.append(meta);
@@ -244,7 +245,9 @@ async function impactView(seq, o, r, head) {
     verdictLegend(g.verdicts, target(groups.selected ? 'selected' : 'companion')));
   if (!o.impact.reference) outcome.append(el('p', 'context-note', node('strong', 'Unverified. '),
     '“Improved” means recovered processing, more records or more specific answers, and “worsened” the reverse. Without reference answers neither establishes correctness: a more specific answer can be wrong, and an unknown can be right.'));
-  if (o.round?.regressions?.length) outcome.append(el('p', 'context-note', node('strong', `${o.round.regressions.length} regressed. `), 'Adopting this candidate needs a confirm round without regressions, or an explicit note accepting them.'));
+  if (o.round?.regressions?.length) outcome.append(el('p', 'context-note', node('strong', `${o.round.regressions.length} regressed. `), 'Adopting this candidate lists them and asks for confirmation; the tag history records them.'));
+  if (o.impact.groups.selected?.inputs?.same) outcome.append(el('p', 'context-note', node('strong', 'Inputs. '),
+    `${fmt(o.impact.groups.selected.inputs.same)} of these cases had the same input as the baseline at ${o.experiment?.focus || 'the focus'}; any change in them came from chance or from how cases were batched, not from the change being tested.`));
   const measures = section('Quality measures', 'The round\'s cases, baseline versus candidate. Higher is better except uncertain dispositions, warnings and unverified quotations.', scorecard(g, o.impact.accuracy, o.impact.reference));
   const moved = section('Where answers moved', 'Each research fact across compared records. Quotations and wording are excluded; records present on one side only are counted as gained or lost records instead.',
     factMap(g.fact_map, o.impact.questions));
@@ -652,8 +655,9 @@ function plannedView(o) {
   const e = o.experiment, blocks = [];
   const view = treeView(o);
   if (view) blocks.push(section('Pipeline', `${pipelineLine(o)}. Changed steps are highlighted.`, view.graph, view.details));
-  blocks.push(section('Commands', 'Plan for a cost estimate (no model calls), then run the round with a cap on new spending.',
-    node('pre', `make lab-plan EXPERIMENT=${e.name} ROUND=${o.round || 'probe'}\nmake lab-run EXPERIMENT=${e.name} ROUND=${o.round || 'probe'} MAX_SPEND=1.00`)));
+  const round = o.round || 'probe';
+  blocks.push(section('Commands', 'Plan for a cost estimate (no model calls), then run the round with a cap on new spending. The round appears under Runs while it runs and here when it finishes.',
+    node('pre', `make lab-plan EXPERIMENT=${e.name} ROUND=${round}\nmake lab-run-send EXPERIMENT=${e.name} ROUND=${round} MAX_SPEND=1.00`)));
   return blocks;
 }
 
