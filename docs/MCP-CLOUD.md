@@ -11,21 +11,21 @@ Choose a snapshot explicitly. If it has not been built yet:
 
 ```sh
 make research-setup
-.venv/bin/python research_mcp.py build \
-  --run final-smoke-20260929-190157 --output data/research/experiment-v1
+.venv/bin/python -m court research build \
+  --results september-results --cases september-cases --output data/research/experiment-v1
 ```
 
 Serve it:
 
 ```sh
-.venv/bin/python research_mcp.py serve --snapshot data/research/experiment-v1 \
+.venv/bin/python -m court research serve --snapshot data/research/experiment-v1 \
   --transport streamable-http --port 8770
 ```
 
 In another terminal:
 
 ```sh
-.venv/bin/python research_mcp_smoke.py http://127.0.0.1:8770/mcp
+.venv/bin/python -m court research smoke --url http://127.0.0.1:8770/mcp
 claude mcp add --transport http housing-appeals http://127.0.0.1:8770/mcp
 ```
 
@@ -41,7 +41,7 @@ Publish exactly the curated pair with permissions readable by the non-root
 container, build the lean image and run it:
 
 ```sh
-.venv/bin/python research_mcp.py publish --snapshot data/research/experiment-v1 \
+.venv/bin/python -m court research publish --snapshot data/research/experiment-v1 \
   --output data/research/shared-experiment-v1
 docker build -f deploy/research/Dockerfile -t housing-research:experiment .
 docker run --rm --name housing-research --read-only --cap-drop ALL \
@@ -57,11 +57,10 @@ contains no pipeline/source data. Its Dockerfile-specific deny-all context allow
 only research code and locked dependency files, excluding `.env`, source documents
 and call logs before Docker receives the context. The pipeline image is separate.
 
-For a server, transfer only that published pair plus `research_mcp.py`,
-`research_snapshot.py`, `appeal_assembly.py`, `pyproject.toml`, `uv.lock`, and
-`deploy/research/Dockerfile` and `Dockerfile.dockerignore`. Preserve this layout
-and build on the server to match its CPU architecture. Mount the pair by its
-absolute path.
+For a server, transfer only that published pair plus `court/__init__.py`,
+`court/research/__init__.py`, `court/research/snapshot.py`, `court/research/mcp.py`,
+`pyproject.toml`, `uv.lock`, and `deploy/research/Dockerfile` and `Dockerfile.dockerignore`,
+keeping their paths.
 
 For an existing proxy on the same host, keep loopback publication and allow its
 exact forwarded Host:
@@ -85,14 +84,14 @@ claude mcp add --transport http housing-appeals https://research.example.org/mcp
 For direct plain HTTP access, publish `-p 8770:8770` instead of loopback and pass
 `--host 0.0.0.0 --allowed-host SERVER_NAME:8770`; the coworker's URL is
 `http://SERVER_NAME:8770/mcp`. Without Docker, use the same options on
-`research_mcp.py serve --transport streamable-http`. Allow the port in the
+`python -m court research serve --transport streamable-http`. Allow the port in the
 existing network setup if needed.
 
 ## Check the experiment
 
 ```sh
 curl --fail http://127.0.0.1:8770/healthz
-.venv/bin/python research_mcp_smoke.py http://SERVER_NAME:8770/mcp \
+.venv/bin/python -m court research smoke --url http://SERVER_NAME:8770/mcp \
   --expected-snapshot YOUR_RECORDED_SNAPSHOT_ID
 ```
 

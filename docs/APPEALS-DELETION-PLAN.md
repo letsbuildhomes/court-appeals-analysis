@@ -1,5 +1,7 @@
 # Completed research cleanup
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 **Deleted on September 29, 2026, following the user's authorization.**
 All 1,496 candidates matched their recorded size and SHA-256 before deletion.
 The dependency check found no retained Python imports of the deleted modules.

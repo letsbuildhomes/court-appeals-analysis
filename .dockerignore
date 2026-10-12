@@ -7,3 +7,5 @@ __pycache__
 data
 in
 out
+.env
+.web-password

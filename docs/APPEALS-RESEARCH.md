@@ -1,5 +1,7 @@
 # Research and design summary
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The report asks how municipal appeals slow, shrink or stop housing; whether the
 appeals rely on discretionary municipal review; and who appeals. Developer appeals
 of denials are a secondary question. The extraction must record evidence without

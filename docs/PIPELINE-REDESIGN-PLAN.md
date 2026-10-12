@@ -1,5 +1,7 @@
 # Pipeline redesign plan: steps as code, one result per case
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 Status: implemented on October 10, 2026 (see `docs/PIPELINE.md`,
 `PIPELINE_CONTRACT.md` and `docs/EXPERIMENT-RUNNER.md`). Kept as the design
 record. Decisions made while building: the ported pipeline lives in

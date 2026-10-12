@@ -1,5 +1,7 @@
 # Phase 0–1 ingest: operator guide and handoff
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 This document describes **implemented behavior** as of September 23, 2026. The [proposal](../proposal.html) covers the intended later pipeline. The court PDFs are the only research data input; the court listing is used to discover those PDFs and preserve provenance.
 
 ## Current checkpoint

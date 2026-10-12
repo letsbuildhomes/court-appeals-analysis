@@ -1,5 +1,7 @@
 # Research MCP acceptance checks
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The interface supports new queries over existing structured measurements. It does
 not support new extraction or classification of source material. Protocol tests
 verify the interface; these conversation checks separately assess whether a

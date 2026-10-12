@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Court review</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/common.js" defer></script>
+  <script src="/controls.js" defer></script>
+  <script src="/lab.js" defer></script>
+  <script src="/runs.js" defer></script>
+  <script src="/data.js" defer></script>
+  <script src="/pipelines.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="#/"><span class="brand-mark">§</span><span>Court review <small>Housing appeals pipeline</small></span></a>
+    <nav id="nav" class="main-nav" aria-label="Sections"></nav>
+    <nav aria-label="Breadcrumb" id="crumbs"></nav>
+    <a class="sign-out" href="/logout">Sign out</a>
+  </header>
+  <main><section id="content" aria-live="polite"></section></main>
+  <div id="source-scrim" hidden></div>
+  <aside id="source" hidden role="dialog" aria-modal="true" aria-labelledby="source-title">
+    <div class="source-head"><div><span class="eyebrow">Case text</span><h2 id="source-title">Evidence</h2></div><button id="close-source" aria-label="Close">✕</button></div>
+    <p id="source-status"></p><div id="source-text" tabindex="0"></div>
+  </aside>
+</body>
+</html>

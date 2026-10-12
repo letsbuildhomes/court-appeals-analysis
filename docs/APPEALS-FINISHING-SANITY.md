@@ -1,5 +1,7 @@
 # Two-group finishing sanity check — September 30, 2026
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The new scheduler reviews at most two retained groups per batch, with three
 concurrent workers. Each worker asks the duration question immediately after its
 review, preserving the exact review request prefix. Explicit exclusions complete

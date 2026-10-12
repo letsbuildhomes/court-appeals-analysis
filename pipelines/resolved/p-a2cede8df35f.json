@@ -1,0 +1,449 @@
+{
+  "id": "p-a2cede8df35f",
+  "schema": "pipeline-1",
+  "root": {
+    "name": "september",
+    "step": "flow:sequence",
+    "settings": {
+      "inputs": []
+    },
+    "children": [
+      {
+        "name": "fetch",
+        "step": "fetch:vtec-environmental",
+        "save": "documents",
+        "settings": {
+          "snapshot": "20260922T204351Z-76e9f5ca"
+        }
+      },
+      {
+        "name": "text",
+        "step": "flow:sequence",
+        "settings": {
+          "inputs": [
+            "documents"
+          ]
+        },
+        "save": "pages",
+        "inputs": {
+          "documents": "fetch"
+        },
+        "children": [
+          {
+            "name": "native",
+            "step": "text/native:pdftotext-layout",
+            "inputs": {
+              "documents": "input:documents"
+            }
+          },
+          {
+            "name": "usability",
+            "step": "text/usability:ink-check",
+            "inputs": {
+              "documents": "input:documents",
+              "native": "native"
+            }
+          },
+          {
+            "name": "ocr",
+            "step": "text/ocr:tesseract",
+            "inputs": {
+              "documents": "input:documents",
+              "usability": "usability"
+            }
+          },
+          {
+            "name": "select",
+            "step": "text/select:prefer-native",
+            "inputs": {
+              "native": "native",
+              "usability": "usability",
+              "ocr": "ocr"
+            }
+          }
+        ]
+      },
+      {
+        "name": "cases",
+        "step": "flow:sequence",
+        "settings": {
+          "inputs": [
+            "documents",
+            "pages"
+          ]
+        },
+        "save": "cases",
+        "children": [
+          {
+            "name": "group",
+            "step": "cases/group:caption-dockets",
+            "inputs": {
+              "documents": "input:documents",
+              "pages": "input:pages"
+            }
+          },
+          {
+            "name": "render",
+            "step": "cases/render:page-tagged",
+            "inputs": {
+              "groups": "group",
+              "pages": "input:pages"
+            }
+          }
+        ],
+        "inputs": {
+          "documents": "fetch",
+          "pages": "text"
+        }
+      },
+      {
+        "name": "extract",
+        "step": "extract:legacy",
+        "inputs": {
+          "cases": "cases"
+        },
+        "save": "results",
+        "children": [
+          {
+            "name": "size-limit",
+            "step": "size-limit:refuse-long",
+            "settings": {
+              "max_chars": 600000
+            }
+          },
+          {
+            "name": "triage",
+            "step": "triage:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536
+            },
+            "prompts": {
+              "system": "system:legacy",
+              "instructions": "triage:legacy"
+            }
+          },
+          {
+            "name": "draft",
+            "step": "draft:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "continue": true
+            },
+            "prompts": {
+              "system": "system:legacy",
+              "instructions": "draft:legacy"
+            }
+          },
+          {
+            "name": "review",
+            "step": "review:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "batch_cases": 2,
+              "batch_chars": 200000
+            },
+            "prompts": {
+              "primer": "review/primer:legacy",
+              "extract": "draft:legacy",
+              "triage": "triage:legacy",
+              "review": "review:legacy"
+            }
+          },
+          {
+            "name": "duration",
+            "step": "duration:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "continue": true
+            },
+            "prompts": {
+              "instructions": "duration:legacy"
+            }
+          },
+          {
+            "name": "assemble",
+            "step": "assemble:legacy"
+          }
+        ]
+      }
+    ]
+  },
+  "library": {
+    "assemble:legacy": {
+      "hash": "e5b5e12ddcc6966dbf4ee0e46f8bb36e0b9d10068add04d39273e3cf99b9431c",
+      "interface": 1
+    },
+    "cases/group:caption-dockets": {
+      "hash": "47e1fe44ad702a860b846965165e94c5f8190e6c37fee47eb4c1093551878af8",
+      "interface": 1
+    },
+    "cases/render:page-tagged": {
+      "hash": "82ac14ba5312f573580999f6ac913e98e492999458c9b6e06d06182a75735558",
+      "interface": 1
+    },
+    "draft:legacy": {
+      "hash": "2997d964adad58ea40bef8c7a4a875893c0f77c14a289f17f3068d08c9948e5a",
+      "interface": 1
+    },
+    "duration:legacy": {
+      "hash": "e671ef214349352731f48a455a872ab41f0f9de0f900529bb4a566273868038b",
+      "interface": 1
+    },
+    "extract:legacy": {
+      "hash": "71f6f506b8a0e8452329a8185b4f6e8b362a600a03a6bc8c281ce032e0cdeea7",
+      "interface": 1
+    },
+    "fetch:vtec-environmental": {
+      "hash": "c1491fe372c1645f99d87ab794caa9d78093897c34aa8b4d40d733b7e575f708",
+      "interface": 1
+    },
+    "flow:sequence": {
+      "hash": "530bf1516267e092b30d869db4398ddde4c8d3689560ce92478022c0b9e3ee55",
+      "interface": 1
+    },
+    "legacy/v6:conversion": {
+      "hash": "da3d4526f2ff71732104cd86a65801e8dc26f7e53e9dde7721dbabcaca37d198",
+      "interface": null
+    },
+    "legacy/v6:review-patch": {
+      "hash": "6db7f961060fdd74778a8e5a1b885de771cde3e57f911dc82c9d49611e39a09e",
+      "interface": null
+    },
+    "legacy/v6:validation": {
+      "hash": "60ce01da8b5d428bc65146fff382c5fbf2c0ec4b1aac68443ea74ec1240ce278",
+      "interface": null
+    },
+    "review:legacy": {
+      "hash": "e6b1553d34bbd155217acd1bf378fba4341fe8878ad4769718275bea6ead7bf6",
+      "interface": 1
+    },
+    "size-limit:refuse-long": {
+      "hash": "802387c8a3d74f0752640d5a347f477996ca0b3339394807c2d0ad9a632740af",
+      "interface": 1
+    },
+    "text/native:pdftotext-layout": {
+      "hash": "43a2e0780e032864b34de68e511617ec77d1a9eb68b6031f5aa0445418ed5785",
+      "interface": 1
+    },
+    "text/ocr:tesseract": {
+      "hash": "ce04e48dcb66e0082ef28b4d249723d65890eadb225d4cae42ab070ab4aec4fc",
+      "interface": 1
+    },
+    "text/select:prefer-native": {
+      "hash": "fd23342716ae05605ec7a3fb17b4e701210b2ec7c5265b80efb1c6a86e9990d7",
+      "interface": 1
+    },
+    "text/shared:tools": {
+      "hash": "b08e3166c074ea70ee69f6e7cc5540977f38846dd323fa0cb4632681ed5236d5",
+      "interface": null
+    },
+    "text/usability:ink-check": {
+      "hash": "c62dc5f17d1f324c71fede303756caa9563ac6943f9352b1b7d22ce228134f73",
+      "interface": 1
+    },
+    "triage:legacy": {
+      "hash": "3490771cdec28a18876e396dc415a6836a23dfcef38493deac7f00f93dcab305",
+      "interface": 1
+    }
+  },
+  "prompts": {
+    "draft:legacy": "7c1f5b297a368b4354c831c54b474663ac5b7eff0869810370e5f381726b6153",
+    "duration:legacy": "4cb7855210dc969e668eae8bd3f773fe564be1134a47cc4ea210f7976c66f80c",
+    "review/primer:legacy": "b560ac077a561171cd3b1db3af13b1d839f7f94b25b569d4554649f2addd71d7",
+    "review:legacy": "4692646ae88e0bbd176d7ce6d86f38030257f6f4d8a6fb486e59f58d51d47594",
+    "system:legacy": "6d8fd07f78383653b7a4152a5708a562120f5d6536335f8350d87ca1cb043a40",
+    "triage:legacy": "62aa9a29c104a58d2ae065d75e6ce39646994cb38677f7ec2023f357dcd1f395"
+  },
+  "name": "september",
+  "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+  "definition": {
+    "name": "september",
+    "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+    "root": {
+      "name": "september",
+      "step": "flow:sequence",
+      "settings": {
+        "inputs": []
+      },
+      "children": [
+        {
+          "name": "fetch",
+          "step": "fetch:vtec-environmental",
+          "save": "documents",
+          "settings": {
+            "snapshot": "20260922T204351Z-76e9f5ca"
+          }
+        },
+        {
+          "name": "text",
+          "step": "flow:sequence",
+          "settings": {
+            "inputs": [
+              "documents"
+            ]
+          },
+          "save": "pages",
+          "inputs": {
+            "documents": "fetch"
+          },
+          "children": [
+            {
+              "name": "native",
+              "step": "text/native:pdftotext-layout",
+              "inputs": {
+                "documents": "input:documents"
+              }
+            },
+            {
+              "name": "usability",
+              "step": "text/usability:ink-check",
+              "inputs": {
+                "documents": "input:documents",
+                "native": "native"
+              }
+            },
+            {
+              "name": "ocr",
+              "step": "text/ocr:tesseract",
+              "inputs": {
+                "documents": "input:documents",
+                "usability": "usability"
+              }
+            },
+            {
+              "name": "select",
+              "step": "text/select:prefer-native",
+              "inputs": {
+                "native": "native",
+                "usability": "usability",
+                "ocr": "ocr"
+              }
+            }
+          ]
+        },
+        {
+          "name": "cases",
+          "step": "flow:sequence",
+          "settings": {
+            "inputs": [
+              "documents",
+              "pages"
+            ]
+          },
+          "save": "cases",
+          "children": [
+            {
+              "name": "group",
+              "step": "cases/group:caption-dockets",
+              "inputs": {
+                "documents": "input:documents",
+                "pages": "input:pages"
+              }
+            },
+            {
+              "name": "render",
+              "step": "cases/render:page-tagged",
+              "inputs": {
+                "groups": "group",
+                "pages": "input:pages"
+              }
+            }
+          ],
+          "inputs": {
+            "documents": "fetch",
+            "pages": "text"
+          }
+        },
+        {
+          "name": "extract",
+          "step": "extract:legacy",
+          "inputs": {
+            "cases": "cases"
+          },
+          "save": "results",
+          "children": [
+            {
+              "name": "size-limit",
+              "step": "size-limit:refuse-long",
+              "settings": {
+                "max_chars": 600000
+              }
+            },
+            {
+              "name": "triage",
+              "step": "triage:legacy",
+              "settings": {
+                "model": "deepseek-flash",
+                "reasoning": "high",
+                "max_output_tokens": 65536
+              },
+              "prompts": {
+                "system": "system:legacy",
+                "instructions": "triage:legacy"
+              }
+            },
+            {
+              "name": "draft",
+              "step": "draft:legacy",
+              "settings": {
+                "model": "deepseek-flash",
+                "reasoning": "high",
+                "max_output_tokens": 65536,
+                "continue": true
+              },
+              "prompts": {
+                "system": "system:legacy",
+                "instructions": "draft:legacy"
+              }
+            },
+            {
+              "name": "review",
+              "step": "review:legacy",
+              "settings": {
+                "model": "deepseek-flash",
+                "reasoning": "high",
+                "max_output_tokens": 65536,
+                "batch_cases": 2,
+                "batch_chars": 200000
+              },
+              "prompts": {
+                "primer": "review/primer:legacy",
+                "extract": "draft:legacy",
+                "triage": "triage:legacy",
+                "review": "review:legacy"
+              }
+            },
+            {
+              "name": "duration",
+              "step": "duration:legacy",
+              "settings": {
+                "model": "deepseek-flash",
+                "reasoning": "high",
+                "max_output_tokens": 65536,
+                "continue": true
+              },
+              "prompts": {
+                "instructions": "duration:legacy"
+              }
+            },
+            {
+              "name": "assemble",
+              "step": "assemble:legacy"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "created_at": "2026-10-12T04:48:46.843794+00:00",
+  "commit": "42bbed086087a53742814a703aede790bae94914",
+  "lockfile": "4dc4c67f2eb06fbab0150ea79dd2f26bcd48770a850f50770a6b6baf7be0f6e6"
+}

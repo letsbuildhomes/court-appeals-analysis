@@ -1,9 +1,9 @@
 .venv/
 .env
 .uv-cache/
-.docker-text-image.stamp
 __pycache__/
 *.pyc
 in/
 data/
 out/
+.web-password

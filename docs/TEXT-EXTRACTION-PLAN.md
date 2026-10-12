@@ -1,5 +1,7 @@
 # Text extraction and OCR plan
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 Status: historical design record. Inventory, native extraction, triage, OCR, page-text selection, and automated audit are implemented; see [TEXT-PIPELINE.md](TEXT-PIPELINE.md). A separate 1,000-page `native_ok` QA comparison is documented in [TRIAGE-QA-EXPERIMENT.md](TRIAGE-QA-EXPERIMENT.md).
 
 ## Evidence from a small local probe

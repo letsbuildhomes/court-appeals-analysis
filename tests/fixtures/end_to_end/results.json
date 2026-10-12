@@ -1,0 +1,117 @@
+{
+  "g-12-3-20-vtec": {
+    "schema": "appeal-result-1",
+    "case": "g-12-3-20-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "From the caption and decision",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "the neighbors appealed"
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "12-3-20 Vtec",
+        "project": {
+          "description": "Twelve dwelling units on Maple Street",
+          "municipality": "Hartford",
+          "proposed_units": 12,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "approved twelve dwelling units"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "Approval",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "approved twelve dwelling units"
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "The neighbors",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "unknown",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "the neighbors appealed"
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "unknown",
+          "involved": "unknown",
+          "evidence": [],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "unknown",
+          "permission": "unknown",
+          "description": "unknown",
+          "evidence": []
+        },
+        "timeline": [],
+        "duration": {
+          "start": {
+            "date": "2020-03-02",
+            "relation": "on_or_before",
+            "description": "Appeal filed",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "the neighbors appealed"
+              }
+            ]
+          },
+          "end": "unknown",
+          "note": "Filed; end unknown",
+          "kind": "unknown",
+          "days": "unknown"
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": []
+      }
+    ]
+  },
+  "g-7-1-21-vtec": {
+    "schema": "appeal-result-1",
+    "case": "g-7-1-21-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "From the caption and decision",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "the neighbors appealed"
+        }
+      ]
+    },
+    "records": []
+  }
+}

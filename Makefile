@@ -1,190 +1,104 @@
+# Shortcuts for python -m court; see docs/ARCHITECTURE.md and `python -m court --help`.
+# Only targets ending in -send read .env and may make paid model calls; each needs MAX_SPEND.
 UV_CACHE_DIR ?= .uv-cache
 export UV_CACHE_DIR
-LIMIT ?= 5
-TEXT_ARGS ?=
-QA_ARGS ?=
-REVIEW_PORT ?= 8766
-CLAIMS_PORT ?= 8767
-APPEALS_ARGS ?=
-APPEALS_PORT ?= 8769
-DASHBOARD_PORT ?= 8771
-DASHBOARD_ARGS ?=
-# This checkout lives on a remote server; listen on the private network.
+COURT = uv run --inexact python -m court
+SEND = uv run --inexact --env-file .env python -m court
+# This checkout lives on a remote server; tools listen on the private network.
 LISTEN_HOST ?= 0.0.0.0
-TEXT_IMAGE ?= data-court-review-text:local
-TEXT_IMAGE_STAMP = .docker-text-image.stamp
-TEXT_DOCKER = docker run --rm --user "$(shell id -u):$(shell id -g)" \
-	--network none \
-	--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
-	--mount type=bind,source="$(CURDIR)/data",target=/workspace/data \
-	--mount type=bind,source="$(CURDIR)/data/archive.duckdb",target=/workspace/data/archive.duckdb,readonly \
-	$(TEXT_IMAGE)
+IMAGE ?= court-appeals:local
 
-.PHONY: all test extract extract-all refresh-listings verify text-image text-test text-inventory text-native text-triage text-all text-ocr text-select text-audit text-finish text-complete text-status text-check text-qa-screen text-qa-compare text-qa-recompare text-qa-status text-qa review claims serve group-build group-status
+RUN ?=
+PIPELINE ?= production
+ARGS ?=
+EXPERIMENT ?=
+ROUND ?= probe
+MAX_SPEND ?=
+RESULTS ?=
+SNAPSHOT ?=
 
-all: extract
+.PHONY: help test test-all image docker import-september run run-send runs pipelines tags datasets \
+	lab-list lab-plan lab-run lab-run-send lab-adopt web grouping-report text-audit \
+	research-setup research-build research-describe research-query research-serve research-test
 
-# Offline suite: mocked transports only, no credentials or model calls.
+help:
+	@$(COURT) --help
+
+# Offline suite: no credentials, no network, no model calls.
 test:
 	uv run --inexact python -m unittest discover -s tests
 
-extract:
-	uv run python extract.py --limit $(LIMIT)
+# Also replays all 1,395 September cases from the call cache (about 20 seconds).
+test-all:
+	REPLAY_ALL=1 uv run --inexact python -m unittest discover -s tests
 
-extract-all:
-	uv run python extract.py --all
+# The whole system with Poppler and Tesseract; run any command inside it:
+#   make docker ARGS='run september production'
+# Rootless engines (Podman) map the container's root to you; others run as your user.
+# Files the container writes in the repository are then yours either way.
+DOCKER_USER = $(if $(shell docker info 2>/dev/null | grep -i rootless),,--user "$$(id -u):$$(id -g)")
+image:
+	docker build --load -t $(IMAGE) .
+docker: image
+	docker run --rm --pids-limit=-1 $(DOCKER_USER) --mount type=bind,source="$(CURDIR)",target=/workspace \
+		--publish "$(LISTEN_HOST):8771:8771" $(IMAGE) python -m court $(ARGS)
 
-refresh-listings:
-	uv run python extract.py --refresh-listings --limit $(LIMIT)
+# Wrap the September 2026 data as datasets and seed the caches (once; changes nothing it reads).
+import-september:
+	$(COURT) import-september
 
-verify:
-	uv run python extract.py --verify-only
+# Runs: make run RUN=name PIPELINE=production ARGS='--at extract --input cases=september-cases'
+run:
+	@test -n "$(RUN)" || { echo 'Set RUN to a run name'; exit 2; }
+	$(COURT) run $(RUN) $(PIPELINE) $(ARGS)
+run-send:
+	@test -n "$(RUN)" -a -n "$(MAX_SPEND)" || { echo 'Set RUN and MAX_SPEND (USD)'; exit 2; }
+	$(SEND) run $(RUN) $(PIPELINE) --send --max-spend $(MAX_SPEND) $(ARGS)
+runs:
+	$(COURT) runs
+pipelines:
+	$(COURT) pipelines
+tags:
+	$(COURT) tags
+datasets:
+	$(COURT) datasets
 
-$(TEXT_IMAGE_STAMP): Dockerfile pyproject.toml uv.lock
-	docker build -t $(TEXT_IMAGE) -f Dockerfile .
-	@touch $(TEXT_IMAGE_STAMP)
+# Experiments: create one with `python -m court lab new` (docs/LAB.md).
+lab-list:
+	$(COURT) lab list
+lab-plan:
+	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT'; exit 2; }
+	$(COURT) lab plan $(EXPERIMENT) --round $(ROUND)
+lab-run:
+	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT'; exit 2; }
+	$(COURT) lab run $(EXPERIMENT) --round $(ROUND) $(ARGS)
+lab-run-send:
+	@test -n "$(EXPERIMENT)" -a -n "$(MAX_SPEND)" || { echo 'Set EXPERIMENT and MAX_SPEND (USD)'; exit 2; }
+	$(SEND) lab run $(EXPERIMENT) --round $(ROUND) --send --max-spend $(MAX_SPEND) $(ARGS)
+lab-adopt:
+	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT'; exit 2; }
+	$(COURT) lab adopt $(EXPERIMENT) $(ARGS)
 
-text-image: $(TEXT_IMAGE_STAMP)
-	@docker image inspect $(TEXT_IMAGE) >/dev/null 2>&1 || { \
-		docker build -t $(TEXT_IMAGE) -f Dockerfile . && touch $(TEXT_IMAGE_STAMP); \
-	}
+# The web app: live runs, the lab, data viewers and pipelines (read-only).
+# Its password comes from COURT_WEB_PASSWORD or .web-password (docs/WEB.md).
+web:
+	$(COURT) web --host $(LISTEN_HOST)
+grouping-report:
+	$(COURT) report grouping $(or $(CASES),september-cases)
+text-audit:
+	$(COURT) report text-audit $(or $(PAGES),september-pages)
 
-text-test: text-image
-	$(TEXT_DOCKER) python -m unittest discover -s tests -v
-
-text-inventory: text-image
-	$(TEXT_DOCKER) python text_pipeline.py inventory $(TEXT_ARGS)
-
-text-native: text-image
-	$(TEXT_DOCKER) python text_pipeline.py native $(TEXT_ARGS)
-
-text-triage: text-image
-	$(TEXT_DOCKER) python text_pipeline.py triage $(TEXT_ARGS)
-
-text-all: text-image
-	$(TEXT_DOCKER) python text_pipeline.py all $(TEXT_ARGS)
-
-text-ocr: text-image
-	$(TEXT_DOCKER) python text_finish.py ocr $(TEXT_ARGS)
-
-text-select: text-image
-	$(TEXT_DOCKER) python text_finish.py select $(TEXT_ARGS)
-
-text-audit: text-image
-	$(TEXT_DOCKER) python text_finish.py audit $(TEXT_ARGS)
-
-text-finish: text-image
-	$(TEXT_DOCKER) python text_finish.py all $(TEXT_ARGS)
-
-text-complete: text-all
-	$(TEXT_DOCKER) python text_finish.py all $(TEXT_ARGS)
-
-text-status: text-image
-	$(TEXT_DOCKER) python text_finish.py status
-
-text-check: text-image
-	$(TEXT_DOCKER) python text_check.py
-
-# Exploratory native-text QA. Results stay in data/triage_qa.duckdb.
-text-qa-screen: text-image
-	$(TEXT_DOCKER) python qa_triage.py screen $(QA_ARGS)
-
-text-qa-compare: text-image
-	$(TEXT_DOCKER) python qa_triage.py compare $(QA_ARGS)
-
-text-qa-recompare: text-image
-	$(TEXT_DOCKER) python qa_triage.py recompare $(QA_ARGS)
-
-text-qa-status: text-image
-	$(TEXT_DOCKER) python qa_triage.py status
-
-text-qa: text-image
-	$(TEXT_DOCKER) python qa_triage.py all $(QA_ARGS)
-
-review: text-image
-	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
-		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
-		--publish "$(LISTEN_HOST):$(REVIEW_PORT):8766" $(TEXT_IMAGE) \
-		python review_server.py --host 0.0.0.0 --port 8766
-
-claims: text-image
-	docker run --rm --user "$(shell id -u):$(shell id -g)" --read-only --tmpfs /tmp \
-		--mount type=bind,source="$(CURDIR)",target=/workspace,readonly \
-		--publish "$(LISTEN_HOST):$(CLAIMS_PORT):8767" $(TEXT_IMAGE) \
-		python claims_server.py --host 0.0.0.0 --port 8767
-
-serve:
-	python3 -m http.server --bind $(LISTEN_HOST) 8765
-
-# Build the upstream docket groups.
-group-build:
-	uv run python groups.py build
-
-group-status:
-	uv run python groups.py status
-
-# Legacy appeals-1 run directories: export, status and browsing only.
-.PHONY: appeals-export appeals-status appeals-view appeals-test
-appeals-export:
-	uv run python appeals.py export $(APPEALS_ARGS)
-appeals-status:
-	uv run python appeals.py status $(APPEALS_ARGS)
-appeals-view:
-	uv run python appeals.py serve --host $(LISTEN_HOST) --port $(APPEALS_PORT)
-appeals-test:
-	uv run --inexact python -m unittest tests.test_appeals tests.test_appeal_viewer tests.test_appeal_stats -v
-
-# Read-only experiment inspection; no extraction or model calls.
-.PHONY: experiments-view experiments-test
-experiments-view:
-	python3 appeal_dashboard.py --host $(LISTEN_HOST) --port $(DASHBOARD_PORT) $(DASHBOARD_ARGS)
-experiments-test:
-	uv run --inexact python -m unittest tests.test_appeal_dashboard tests.test_appeal_impact tests.test_appeal_runner tests.test_pipeline tests.test_store tests.test_pipeline_replay -v
-
-# Experiments are Python modules in experiments/NAME (see docs/EXPERIMENTS.md).
-# Only experiments-run reads .env and makes paid model calls; cap it with
-# EXPERIMENT_ARGS='--max-spend 1.00'.
-EXPERIMENT ?=
-EXPERIMENT_ARGS ?=
-COHORT_ARGS ?=
-.PHONY: experiments-init experiments-cohort experiments-plan experiments-status experiments-run experiments-finalize experiments-compare experiments-replay experiment-name
-experiment-name:
-	@test -n "$(EXPERIMENT)" || { echo 'Set EXPERIMENT to an experiment name'; exit 2; }
-experiments-init: experiment-name
-	uv run --inexact python appeal_runner.py init $(EXPERIMENT) $(EXPERIMENT_ARGS)
-experiments-cohort:
-	uv run --inexact python appeal_cohorts.py select $(COHORT_ARGS)
-experiments-plan: experiment-name
-	uv run --inexact python appeal_runner.py plan $(EXPERIMENT) $(EXPERIMENT_ARGS)
-experiments-status: experiment-name
-	uv run --inexact python appeal_runner.py status $(EXPERIMENT)
-experiments-run: experiment-name
-	uv run --inexact --env-file .env python appeal_runner.py run $(EXPERIMENT) $(EXPERIMENT_ARGS)
-experiments-finalize: experiment-name
-	uv run --inexact python appeal_runner.py finalize $(EXPERIMENT)
-experiments-compare: experiment-name
-	uv run --inexact python appeal_runner.py compare $(EXPERIMENT) $(EXPERIMENT_ARGS)
-# Rebuild the production baseline from its saved calls; sending disabled.
-experiments-replay:
-	uv run --inexact python appeal_runner.py replay-production
-
-# Local research snapshot selection is explicit; MCP runs without pipeline/API credentials.
-MCP_RUN ?=
-MCP_SNAPSHOT ?= data/research/$(MCP_RUN)
-MCP_ARGS ?=
-.PHONY: research-setup research-list research-build research-describe research-query research-serve research-test
+# Research snapshots and the MCP server; no pipeline data or credentials reach the server.
 research-setup:
 	uv sync --inexact --extra research-mcp
-research-list:
-	uv run --inexact python research_mcp.py list $(MCP_ARGS)
 research-build:
-	@test -n "$(MCP_RUN)" || { echo 'Set MCP_RUN to an explicitly selected run'; exit 2; }
-	uv run --inexact python research_mcp.py build --run "$(MCP_RUN)" --output "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+	@test -n "$(RESULTS)" || { echo 'Set RESULTS to a results dataset'; exit 2; }
+	$(COURT) research build --results $(RESULTS) $(ARGS)
 research-describe:
-	uv run --inexact python research_mcp.py describe --snapshot "$(MCP_SNAPSHOT)"
+	$(COURT) research describe --snapshot $(SNAPSHOT)
 research-query:
-	uv run --inexact python research_mcp.py query --snapshot "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+	$(COURT) research query --snapshot $(SNAPSHOT) $(ARGS)
 research-serve:
-	uv run --inexact --extra research-mcp python research_mcp.py serve --snapshot "$(MCP_SNAPSHOT)" $(MCP_ARGS)
+	uv run --inexact --extra research-mcp python -m court research serve --snapshot $(SNAPSHOT) $(ARGS)
 research-test:
-	uv run --inexact --extra research-mcp python -m unittest tests.test_research_mcp tests.test_research_cloud -v
+	uv run --inexact --extra research-mcp python -m unittest tests.test_research -v

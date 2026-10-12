@@ -2,9 +2,10 @@
 **
 !pyproject.toml
 !uv.lock
-!research_mcp.py
-!research_snapshot.py
-!appeal_assembly.py
+!court/__init__.py
+!court/research/__init__.py
+!court/research/snapshot.py
+!court/research/mcp.py
 !deploy/
 !deploy/research/
 !deploy/research/Dockerfile

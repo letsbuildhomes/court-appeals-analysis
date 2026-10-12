@@ -1,5 +1,7 @@
 # Municipal housing appeal extraction
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 > **Historical guide.** This describes how the production run was made with the
 > former `appeals.py` runner. That pipeline now lives as steps in
 > `pipeline/legacy/` and new runs go through `appeal_runner.py`

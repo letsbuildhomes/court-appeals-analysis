@@ -1,10 +1,11 @@
 # Output contract: one result per case
 
-Every pipeline, whatever its steps, produces one result per case under
-`appeal-result-1` (`appeal_schema.py`). Comparisons are always `case ID →
-result`, across pipelines. The input boundary is the frozen, page-addressable
-source text of each case (`pipeline/corpus.py`); text extraction and OCR are
-not part of a pipeline.
+Every pipeline, whatever its steps, produces a results map: one result per
+case under `appeal-result-1` (`court/contracts/results.py`). Comparisons are
+always `case ID → result`, across pipelines. Citations point into the case
+text of the case set the results came from (`court/contracts/cases.py`). A
+case the pipeline could not process is a failure item in the map, with its
+kind and reason, not a result.
 
 ```jsonc
 {
@@ -60,65 +61,42 @@ Record = {
 - **Unknown.** Every field has one explicit `unknown`. Any field, including
   duration, may be unknown when a pipeline does not establish it.
 - **Duration.** A pipeline supplies the evidenced start and end bounds; the day
-  count is calculated (`appeal_schema.measure`). Both endpoints exact gives an
+  count is calculated (`results.measure`). Both endpoints exact gives an
   exact duration; otherwise a minimum (`at_least`). A zero-day minimum, a
   reversed interval or a missing endpoint establishes nothing (`unknown`).
 - **Uncertain cases keep their records.** An uncertain disposition marks a case
   whose scope is not established; reducing uncertain dispositions is an
   experiment goal.
-- **Evidence.** Citations are verified against the frozen source text; the
-  number checked and the paths of any not found on their page are recorded in
-  the case's processing status. An unverified quotation is a warning, not a
-  failure.
+- **Evidence.** Citations are verified against the case text
+  (`results.verify_quotes`); a step records the number checked and any not
+  found on their page in the case's trace. An unverified quotation is a
+  warning, not a failure.
 
-`appeal_schema.validate(result)` lists contract violations. A result that
-violates the contract fails its case.
+`results.validate(result)` lists contract violations. When a run saves a
+results map, a result that violates the contract becomes a failure.
 
-## Processing status
+## Failures and traces
 
-Status is run metadata stored beside each result, not research output:
+A case the pipeline could not process is a failure item in the results map
+instead of a result: `{"kind": "validation", "reason": "...", "step": "extract/review"}`.
+Kinds include `validation` (a rejected answer), `delivery` (a failed or
+uncertain model call), `not_sent` (a call the run did not send), `budget`,
+`too_large` and `contract`. How each case moved through the steps (calls,
+reused or new, warnings, rejections, quotation checks) is in the run's
+`traces` dataset, not in the results.
 
-```json
-{"state": "complete | failed | in_progress",
- "errors": [{"step": "finishing/review", "error": "...", "type": "validation", "retryable": true}],
- "warnings": ["..."],
- "quotes": {"checked": 12, "unverified": ["records[0].timeline[2].evidence[0]"]}}
-```
+## The September results
 
-A failed case keeps the disposition it had reached and has no records. Its
-draft records remain in the run's diagnostics only.
-
-## Run directories
-
-```text
-data/runs/NAME/                    standalone runs (data/experiments/NAME/run for experiments)
-  run.json                         pipeline ID, corpus, cases with source hashes, samples, sealed
-  ledger.jsonl                     calls made or reused, by content key
-  results/<case>.json              appeal-result-1
-  status/<case>.json               processing status
-  traces/<case>.json               how the case moved through the steps
-  executions.json                  each execution's options, spending and outcome
-```
-
-`pipeline.runs.load(folder, case_ids)` returns the run record and its cases
-with status, disposition, records and source reference. Evaluators, cohorts and
-the dashboard read runs only through it.
-
-## Baselines
-
-- `data/runs/production` is the production run rebuilt by the ported pipeline
-  from its saved calls, with sending disabled. `acceptance.json` records that it
-  matches `data/runs/production-converted`, production's own outputs converted
-  to this contract, case for case.
-- `appeal_runner.py import-legacy` converts any other legacy `appeals-1` run.
-  Converted runs have no traces. In production's conversion, scope categories
-  became dispositions (confirmed → in scope; a scope flag → uncertain with the
-  review's reason), `unclear` and `null` became `unknown`, and failed groups
-  became failed cases without records.
+`september-results` is the September 2026 production run's outputs converted
+to this contract once: scope categories became dispositions (confirmed → in
+scope; a review's scope flag → uncertain with the review's reason), `unclear`
+and `null` became `unknown`, and its 10 failed cases became failures. The
+`production` pipeline reproduces its 1,385 results exactly from the saved
+calls.
 
 ## Fact catalog and schema versions
 
-`appeal_schema.RECORD_FACTS` and `CASE_FACTS` name the research facts that
+`results.RECORD_FACTS` and `CASE_FACTS` name the research facts that
 comparisons and the dashboard measure, each with how to read its value and
 evidence from a result. Each fact records the schema version that introduced
 it. Adding a field means a new schema version that declares it (with its

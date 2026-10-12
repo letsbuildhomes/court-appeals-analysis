@@ -1,5 +1,7 @@
 # Native-text triage QA experiment
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 This is validation and tuning work, not a production text-selection stage. The
 script reads the local PDF archive and `data/text.duckdb` and writes only
 `data/triage_qa.duckdb`. It does not change native text, triage, selected text,

@@ -1,5 +1,7 @@
 # PDF image inventory and deferred visual-content work
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The September 24, 2026 QA screen ran Poppler `pdfimages -list` on every one of
 the 2,560 archived PDFs. Its page-level results are in `data/triage_qa.duckdb`
 (`qa_pages.image_count` and `qa_pages.max_image_area`). `make text-qa-status`

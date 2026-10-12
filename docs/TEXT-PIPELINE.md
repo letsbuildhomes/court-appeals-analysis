@@ -1,5 +1,7 @@
 # PDF text pipeline
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 Implemented September 23–24, 2026. This local, resumable pipeline reads `data/archive.duckdb` and `in/pdfs/` without modifying either. All production text, decisions, and checkpoints go to `data/text.duckdb`. The court PDFs are the only research-data input. All text stages run in a network-disabled Docker container with Poppler and Tesseract; Python dependencies are installed from `uv.lock` inside the image.
 
 ## Run it

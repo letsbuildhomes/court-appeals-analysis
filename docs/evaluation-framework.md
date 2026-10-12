@@ -1,5 +1,7 @@
 # Paired evaluation framework
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The framework reads results under the output contract
 ([PIPELINE_CONTRACT.md](../PIPELINE_CONTRACT.md)), never draft records. It
 executes no extraction or reference-generation strategy.

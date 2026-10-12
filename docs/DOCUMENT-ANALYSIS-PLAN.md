@@ -1,5 +1,7 @@
 # Document analysis: scouting to full corpus
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 Use the court PDFs to build **PDF-observed housing project histories**:
 projects linked to cases, issues, events, and documents. Focus on municipal
 appeals while retaining related Act 250 and later court activity. The opinion

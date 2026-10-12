@@ -1,5 +1,7 @@
 # Release cleanup and regression check
 
+> Historical record. The code this describes has been replaced and its commands no longer run; see [ARCHITECTURE.md](ARCHITECTURE.md) for the current system.
+
 The supported path is now `appeals.py`: frozen whole-group inputs → triage and
 extraction → separately primed review → duration bounds → validated export.
 The six selected prompts are in `prompts/appeals/`. Experiment runners are not

@@ -1,0 +1,112 @@
+"""The stages' rules: grouping, case text, page usability, OCR parsing and text selection."""
+import unittest
+
+from court.config import ROOT
+from court.core.library import Library
+
+LIBRARY = Library()
+GROUP = LIBRARY.module('cases/group:caption-dockets')
+RENDER = LIBRARY.module('cases/render:page-tagged')
+USABILITY = LIBRARY.module('text/usability:ink-check')
+OCR = LIBRARY.module('text/ocr:tesseract')
+SELECT = LIBRARY.module('text/select:prefer-native')
+
+
+def doc(sha, listing, caption, posted='2020-05-01T12:00:00Z'):
+    basis, key = GROUP.classify(listing, caption)
+    return {'sha256': sha, 'title': sha, 'posted': posted, 'listing_dockets': listing, 'caption_dockets': caption,
+            'key_dockets': key, 'basis': basis, 'flags': GROUP.flags(listing, caption, key, posted),
+            'pages': 1, 'chars': 100}
+
+
+class GroupingTests(unittest.TestCase):
+    def test_normalizes_docket_formats(self):
+        self.assertEqual(GROUP.normalize_dockets('154-07-07 Vtec; 22ENV00012 & 23-ENV-000131 eo10-70 25-AP-060 99-7-15Vfec'),
+                         ['154-7-07 Vtec', '22-ENV-00012', '23-ENV-00131', 'eo10-070', '25-AP-00060', '99-7-15 Vtec'])
+
+    def test_caption_ignores_citations_and_keeps_continuation_lines(self):
+        page = ('VERMONT SUPERIOR COURT\nEnvironmental Division      Docket No. 25-ENV-00071\n'
+                '32 Cherry St, 2nd Floor,       Docket No. 25-ENV-00078\nBurlington\n'
+                'In re Saman ROW Approval, No. 176-10-10 Vtec, slip op. at 1 (Vt. Super. Ct.)')
+        self.assertEqual(GROUP.caption_dockets(page), ['25-ENV-00071', '25-ENV-00078'])
+        stacked = 'Docket Nos. 3-1-19 Vtec\n            4-1-19 Vtec\n  In re Something Appeal'
+        self.assertEqual(GROUP.caption_dockets(stacked), ['3-1-19 Vtec', '4-1-19 Vtec'])
+        self.assertEqual(GROUP.caption_dockets('See No. 1-1-11 Vtec, slip op.'), [])
+
+    def test_classify_and_flags_in_a_stable_order(self):
+        self.assertEqual(GROUP.classify(['1-1-20 Vtec'], ['1-1-20 Vtec']), ('agree', ['1-1-20 Vtec']))
+        self.assertEqual(GROUP.classify(['1-1-20 Vtec'], ['1-1-20 Vtec', '2-1-20 Vtec'])[0], 'caption_extra')
+        self.assertEqual(GROUP.classify([], ['2-1-20 Vtec'])[0], 'caption_only')
+        self.assertEqual(GROUP.classify(['1-1-20 Vtec'], []), ('listing_only', ['1-1-20 Vtec']))
+        mistyped = doc('a', ['169-12-17 Vtec'], ['169-12-16 Vtec'], '2017-03-17T12:00:00Z')
+        self.assertEqual(mistyped['basis'], 'disagree')
+        self.assertIn('typo_like:169-12-16 Vtec', mistyped['flags'])
+        self.assertIn('filed_after_posting:169-12-17 Vtec',
+                      doc('b', ['169-12-17 Vtec'], [], '2017-03-17T12:00:00Z')['flags'])
+        # Several near misses are flagged in caption order, never set order.
+        for _ in range(5):
+            self.assertEqual(GROUP.flags(['2-6-09 Vtec'], ['101-6-09 Vtec', '102-6-09 Vtec', '6-1-11 Vtec'], [], None),
+                             ['typo_like:101-6-09 Vtec', 'typo_like:102-6-09 Vtec'])
+
+    def test_groups_join_only_through_key_dockets(self):
+        docs = [doc('a', ['1-1-20 Vtec'], ['1-1-20 Vtec'], '2020-02-01T12:00:00Z'),
+                doc('b', ['2-1-20 Vtec'], ['1-1-20 Vtec', '2-1-20 Vtec'], '2020-03-01T12:00:00Z'),
+                doc('c', ['2-1-20 Vtec'], ['2-1-20 Vtec'], '2020-01-01T12:00:00Z'),
+                doc('d', ['1-1-20 Vtec'], ['9-9-20 Vtec']),  # The caption decides over the listing.
+                doc('e', [], [])]
+        built = GROUP.join(docs)
+        linked = built['g-1-1-20-vtec']
+        self.assertEqual([d['sha256'] for d in linked['documents']], ['c', 'a', 'b'])
+        self.assertEqual(linked['composition'], 'linked')
+        self.assertEqual(built['g-9-9-20-vtec']['composition'], 'single')
+        self.assertIn('g-pdf-e', built)
+
+    def test_case_text_marks_documents_and_pages(self):
+        documents = [{'doc': 1, 'sha256': 'x', 'basis': 'agree', 'caption_dockets': ['1-1-20 Vtec'],
+                      'listing_dockets': ['1-1-20 Vtec'], 'flags': []}]
+        pages = {'x': [{'page': 1, 'status': 'usable', 'source': 'native', 'text': 'A & B'},
+                       {'page': 2, 'status': 'blank', 'source': None, 'text': None}]}
+        text = RENDER.render(documents, pages)
+        self.assertIn('<document doc="1" basis="agree" caption_dockets="1-1-20 Vtec"', text)
+        self.assertIn('<page number="1" status="usable" source="native">\nA &amp; B\n</page>', text)
+        self.assertIn('[No selected text: blank]', text)
+
+
+class TextTests(unittest.TestCase):
+    def test_blank_and_scan_decisions_remain_distinct(self):
+        decide = lambda alnum, bad, ink, sizes: USABILITY.decide(alnum, bad, ink, sizes, None, 80, 20, 0.0005)[0]
+        self.assertEqual(decide(0, 0, 0.0, []), 'blank')
+        self.assertEqual(decide(0, 0, 0.15, [(2550, 3300)]), 'ocr_needed')
+        self.assertEqual(decide(5, 0, 0.03, []), 'ocr_candidate')
+        self.assertEqual(decide(200, 0, None, []), 'native_ok')
+
+    def test_pgm_dark_pixel_ratio(self):
+        self.assertEqual(USABILITY.pgm_ink_ratio(b'P5\n2 2\n255\n\xff\x00\xff\xff'), 0.25)
+
+    def test_tesseract_tsv_lines_and_confidence(self):
+        header = 'level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n'
+        self.assertEqual(OCR.tesseract_text(header), ('', []))
+        text, scores = OCR.tesseract_text(header + '5\t1\t1\t1\t1\t1\t10\t20\t30\t12\t91.5\tVermont\n'
+                                          + '5\t1\t1\t1\t1\t2\t45\t20\t30\t12\t72\tCourt\n')
+        self.assertEqual((text, scores), ('Vermont Court', [0.915, 0.72]))
+        text, _ = OCR.tesseract_text(header + '5\t1\t1\t1\t1\t1\t10\t20\t30\t12\t91\t"quoted\n'
+                                     + '5\t1\t1\t1\t1\t2\t45\t20\t30\t12\t92\tfollowing\n')
+        self.assertEqual(text, '"quoted following')
+        self.assertEqual(OCR.mean_confidence([0.9, 0.3]), 60.0)
+
+    def test_text_selection_is_conservative(self):
+        native = lambda text, alnum: {'text': text, 'alnum': alnum, 'bad': 0}
+        ocr = lambda text, alnum, words, confidence: {'status': 'complete', 'text': text, 'alnum': alnum,
+                                                      'words': words, 'bad': 0, 'mean_confidence': confidence}
+        self.assertEqual(SELECT.choose('native_ok', native('Court order', 10), None)[:2], ('usable', 'native'))
+        self.assertEqual(SELECT.choose('blank', native('', 0), None)[0], 'blank')
+        self.assertEqual(SELECT.choose('ocr_needed', native('', 0), ocr('The court issues a decision.', 23, 5, 90))[:2],
+                         ('usable', 'ocr'))
+        self.assertEqual(SELECT.choose('ocr_candidate', native('Judge', 5), {'status': 'failed'})[0], 'unresolved')
+        self.assertEqual(SELECT.choose('ocr_candidate', native('Court order', 10), ocr('x', 1, 1, 95))[0], 'unresolved')
+        self.assertEqual(SELECT.choose('ocr_candidate', native('Environmental Judge', 20),
+                                       ocr('Environmental Judge', 20, 2, 90))[:2], ('usable', 'native'))
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,0 +1,179 @@
+{
+  "name": "september",
+  "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+  "root": {
+    "name": "september",
+    "step": "flow:sequence",
+    "settings": {
+      "inputs": []
+    },
+    "children": [
+      {
+        "name": "fetch",
+        "step": "fetch:vtec-environmental",
+        "save": "documents",
+        "settings": {
+          "snapshot": "20260922T204351Z-76e9f5ca"
+        }
+      },
+      {
+        "name": "text",
+        "step": "flow:sequence",
+        "settings": {
+          "inputs": [
+            "documents"
+          ]
+        },
+        "save": "pages",
+        "inputs": {
+          "documents": "fetch"
+        },
+        "children": [
+          {
+            "name": "native",
+            "step": "text/native:pdftotext-layout",
+            "inputs": {
+              "documents": "input:documents"
+            }
+          },
+          {
+            "name": "usability",
+            "step": "text/usability:ink-check",
+            "inputs": {
+              "documents": "input:documents",
+              "native": "native"
+            }
+          },
+          {
+            "name": "ocr",
+            "step": "text/ocr:tesseract",
+            "inputs": {
+              "documents": "input:documents",
+              "usability": "usability"
+            }
+          },
+          {
+            "name": "select",
+            "step": "text/select:prefer-native",
+            "inputs": {
+              "native": "native",
+              "usability": "usability",
+              "ocr": "ocr"
+            }
+          }
+        ]
+      },
+      {
+        "name": "cases",
+        "step": "flow:sequence",
+        "settings": {
+          "inputs": [
+            "documents",
+            "pages"
+          ]
+        },
+        "save": "cases",
+        "children": [
+          {
+            "name": "group",
+            "step": "cases/group:caption-dockets",
+            "inputs": {
+              "documents": "input:documents",
+              "pages": "input:pages"
+            }
+          },
+          {
+            "name": "render",
+            "step": "cases/render:page-tagged",
+            "inputs": {
+              "groups": "group",
+              "pages": "input:pages"
+            }
+          }
+        ],
+        "inputs": {
+          "documents": "fetch",
+          "pages": "text"
+        }
+      },
+      {
+        "name": "extract",
+        "step": "extract:legacy",
+        "inputs": {
+          "cases": "cases"
+        },
+        "save": "results",
+        "children": [
+          {
+            "name": "size-limit",
+            "step": "size-limit:refuse-long",
+            "settings": {
+              "max_chars": 600000
+            }
+          },
+          {
+            "name": "triage",
+            "step": "triage:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536
+            },
+            "prompts": {
+              "system": "system:legacy",
+              "instructions": "triage:legacy"
+            }
+          },
+          {
+            "name": "draft",
+            "step": "draft:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "continue": true
+            },
+            "prompts": {
+              "system": "system:legacy",
+              "instructions": "draft:legacy"
+            }
+          },
+          {
+            "name": "review",
+            "step": "review:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "batch_cases": 2,
+              "batch_chars": 200000
+            },
+            "prompts": {
+              "primer": "review/primer:legacy",
+              "extract": "draft:legacy",
+              "triage": "triage:legacy",
+              "review": "review:legacy"
+            }
+          },
+          {
+            "name": "duration",
+            "step": "duration:legacy",
+            "settings": {
+              "model": "deepseek-flash",
+              "reasoning": "high",
+              "max_output_tokens": 65536,
+              "continue": true
+            },
+            "prompts": {
+              "instructions": "duration:legacy"
+            }
+          },
+          {
+            "name": "assemble",
+            "step": "assemble:legacy"
+          }
+        ]
+      }
+    ]
+  }
+}
