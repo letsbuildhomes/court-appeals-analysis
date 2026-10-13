@@ -28,3 +28,11 @@ example, merging two drafted cases in the bracket caption fix re-pairs about
 **Recommendation:** Option 1, adopted through an experiment, when it's
 convenient. Until then, read experiment results knowing that re-paired cases
 can change for reasons unrelated to the change being tested.
+
+## Progress
+
+- 2026-10-13: One-docket grouping ([015](015-grouping-quality.md)) adds about
+  340 case IDs. Pairs are formed in case order, so nearly every pair after the
+  first new case changes, and most reviews will be sent again whether pairs
+  stay or not. Pairs also double the damage of a review that runs out of
+  output ([017](017-review-output-limit.md)): the failed call breaks both cases.

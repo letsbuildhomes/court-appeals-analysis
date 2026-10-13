@@ -1,6 +1,6 @@
 # Docket numbers missed in captions with bracket columns
 
-- Status: open
+- Status: dropped
 - Opened: 2026-10-12
 - Needed: before the reference set is labeled
 
@@ -47,3 +47,20 @@ through the lab. It's a good first experiment, but the lab needs
   (`--resend-max-tokens`) before the verdicts are complete. The confirm
   round's plan picks every case; 67 need new calls, estimated at up to $1.83
   for the first calls.
+- 2026-10-13: One of the three merges is wrong. `g-31-2-03-vtec` (Ghia, Ludlow)
+  did not join a consolidated appeal: its caption names only 31-2-03. The
+  other two dockets in that group, 116-5-02 (Lussier & Noe) and 100-5-02
+  (Doyle), are precedents the Ghia and Leikert decisions cite in their body
+  text, which the caption rule read because it takes any "Docket No." in the
+  first 3,000 characters. The two cases that broke had the same kind of
+  group: `g-58-4-99-vtec` joins Daniels, Gulli and Stanak through Stanak
+  citing the other two, and review looped on whether a group mixing housing
+  and nonhousing matters is in scope. The resend failed the same way, so a
+  larger output limit wasn't tried.
+
+## Outcome
+
+Replaced by one case per docket ([015](015-grouping-quality.md)), whose
+grouping step also reads through bracket columns. The `bracket-columns`
+experiment won't be adopted; its probe is kept as the first experiment's
+record.

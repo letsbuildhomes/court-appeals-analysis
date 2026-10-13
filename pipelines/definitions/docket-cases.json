@@ -1,0 +1,23 @@
+{
+  "name": "docket-cases",
+  "description": "One case per docket, with each decision shared by every docket its heading names, gives each appeal its own documents and facts",
+  "base": "p-a2cede8df35f",
+  "changes": [
+    {
+      "at": "cases/group",
+      "step": "cases/group:docket-cases"
+    },
+    {
+      "at": "extract/triage",
+      "step": "triage:docket-target"
+    },
+    {
+      "at": "extract/draft",
+      "step": "draft:docket-target"
+    },
+    {
+      "at": "extract/review",
+      "step": "review:docket-target"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "experiment": "docket-cases",
+  "round": "confirm",
+  "focus": "extract",
+  "keys": 1731,
+  "removed": [],
+  "candidate": "p-3b9131902714",
+  "baseline": "p-a2cede8df35f",
+  "changes": [
+    {
+      "path": "cases/group",
+      "change": "changed",
+      "step": [
+        "cases/group:caption-dockets",
+        "cases/group:docket-cases"
+      ]
+    },
+    {
+      "path": "extract/draft",
+      "change": "changed",
+      "step": [
+        "draft:legacy",
+        "draft:docket-target"
+      ]
+    },
+    {
+      "path": "extract/review",
+      "change": "changed",
+      "step": [
+        "review:legacy",
+        "review:docket-target"
+      ]
+    },
+    {
+      "path": "extract/triage",
+      "change": "changed",
+      "step": [
+        "triage:legacy",
+        "triage:docket-target"
+      ]
+    }
+  ],
+  "estimate": {
+    "spent_usd": 0,
+    "execution_spent_usd": 0,
+    "reused_value_usd": 6.064891,
+    "would_spend_usd": 73.901353,
+    "events": {
+      "would_send": 767,
+      "reused": 1528
+    }
+  },
+  "not_sent": 860,
+  "planned_at": "2026-10-13T02:10:16.841068+00:00"
+}

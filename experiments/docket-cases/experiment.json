@@ -1,0 +1,14 @@
+{
+  "name": "docket-cases",
+  "hypothesis": "One case per docket, with each decision shared by every docket its heading names, gives each appeal its own documents and facts",
+  "baseline": "p-a2cede8df35f",
+  "baseline_tag": "production",
+  "pipeline": "docket-cases",
+  "start": "",
+  "inputs": {},
+  "focus": "extract",
+  "probe": "changed",
+  "confirm": "all",
+  "reference": null,
+  "created_at": "2026-10-13T02:07:44.779429+00:00"
+}

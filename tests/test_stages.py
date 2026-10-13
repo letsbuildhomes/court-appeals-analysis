@@ -10,6 +10,9 @@ RENDER = LIBRARY.module('cases/render:page-tagged')
 USABILITY = LIBRARY.module('text/usability:ink-check')
 OCR = LIBRARY.module('text/ocr:tesseract')
 SELECT = LIBRARY.module('text/select:prefer-native')
+DOCKETS = LIBRARY.module('cases/group:docket-cases')
+TRIAGE = LIBRARY.module('triage:docket-target')
+DRAFT = LIBRARY.module('draft:docket-target')
 
 
 def doc(sha, listing, caption, posted='2020-05-01T12:00:00Z'):
@@ -60,6 +63,63 @@ class GroupingTests(unittest.TestCase):
         self.assertEqual(linked['composition'], 'linked')
         self.assertEqual(built['g-9-9-20-vtec']['composition'], 'single')
         self.assertIn('g-pdf-e', built)
+
+    def test_headings_name_dockets_and_body_mentions_dont(self):
+        bracket = ('In re: Tenney Notices of Violation         }       Docket Nos. 169-9-03 Vtec,\n'
+                   '        (Appeals of Tenney)                }       186\u20109\u201007 Vtec, and 70-4-08 Vtec\n'
+                   '                                           }\n'
+                   'Town of Lincoln,           }         Docket Nos. 226-12-03 Vtec and 261-11-07 Vtec\n'
+                   '       Two other cases related to this property: Docket Nos. 170-9-03 Vtec and 217-11-04\n'
+                   'Vtec were resolved, as was Appeal of Doyle, Docket No. 100-5-02 Vtec (Vt. Envtl. Ct. 2003).')
+        self.assertEqual(DOCKETS.heading_dockets(bracket),
+                         ['169-9-03 Vtec', '186-9-07 Vtec', '70-4-08 Vtec', '226-12-03 Vtec', '261-11-07 Vtec'])
+        stacked = ('Environmental Division                       Docket Nos. 25-ENV-00030\n'
+                   '32 Cherry St, 2nd Floor, Suite 303,                     25-ENV-OOO31\n'
+                   'Burlington, VT 05401                                     25-ENV-00032\n'
+                   'Bellows Falls Hydroelectric Project')
+        self.assertEqual(DOCKETS.heading_dockets(stacked), ['25-ENV-00030', '25-ENV-00031', '25-ENV-00032'])
+        supreme = ('ENTRY ORDER\n        SUPREME COURT DOCKET NO. 2005-020\n'
+                   'APPEALED FROM:\n   Environmental Court\n   DOCKET NO. 54-4-03 Vtec\n')
+        self.assertEqual(DOCKETS.heading_dockets(supreme), ['54-4-03 Vtec'])
+        self.assertEqual(DOCKETS.heading_dockets('Appeal of X     }   Docket No. 147-10-13 Vtec147-10-13 Vtec1'),
+                         ['147-10-13 Vtec'])
+
+    def test_one_case_per_docket_with_shared_documents(self):
+        def described(sha, listing, heading, posted='2020-05-01T12:00:00Z'):
+            key = heading or listing
+            return {'sha256': sha, 'title': sha, 'posted': posted, 'listing_dockets': listing,
+                    'caption_dockets': heading, 'key_dockets': key, 'basis': DOCKETS.classify(listing, heading),
+                    'flags': DOCKETS.flags(listing, heading, key, posted),
+                    'checks': DOCKETS.checks(listing, heading), 'pages': 1, 'chars': 100}
+        docs = [described('a', ['1-1-20 Vtec'], ['1-1-20 Vtec'], '2020-02-01T12:00:00Z'),
+                described('b', ['2-1-20 Vtec'], ['1-1-20 Vtec', '2-1-20 Vtec'], '2020-03-01T12:00:00Z'),
+                described('c', ['3-1-20 Vtec'], []),
+                described('d', [], [])]
+        built = DOCKETS.cases(docs)
+        self.assertEqual(sorted(built), ['g-1-1-20-vtec', 'g-2-1-20-vtec', 'g-3-1-20-vtec', 'g-pdf-d'])
+        self.assertEqual([d['sha256'] for d in built['g-1-1-20-vtec']['documents']], ['a', 'b'])
+        self.assertEqual([d['sha256'] for d in built['g-2-1-20-vtec']['documents']], ['b'])
+        self.assertEqual(built['g-1-1-20-vtec']['composition'], 'shared')
+        self.assertEqual(built['g-3-1-20-vtec']['composition'], 'single')
+        # A listing docket the heading doesn't name is flagged, never made into a case.
+        self.assertEqual(DOCKETS.checks(['9-9-20 Vtec', 'eo20-001'], ['1-1-20 Vtec']), ['listing_only:9-9-20 Vtec'])
+        self.assertEqual(DOCKETS.checks(['3-1-20 Vtec'], []), ['no_heading_docket'])
+        self.assertEqual(DOCKETS.checks(['eo20-001'], []), ['no_docket'])
+        # Checks stay out of the flags, which the case text shows.
+        self.assertEqual(DOCKETS.flags(['9-9-20 Vtec'], ['1-1-20 Vtec'], ['1-1-20 Vtec'], None), [])
+        self.assertFalse(DOCKETS.trial_court('22-AP-00296'))
+
+    def test_extraction_is_told_a_shared_cases_docket_and_keeps_only_its_records(self):
+        shared = {'dockets': ['1-1-20 Vtec'], 'composition': 'shared',
+                  'documents': [{'caption_dockets': ['1-1-20 Vtec', '2-1-20 Vtec'], 'listing_dockets': []}]}
+        self.assertIn('This case is docket 1-1-20 Vtec', TRIAGE.target_note(shared))
+        self.assertIn('2-1-20 Vtec', TRIAGE.target_note(shared))
+        self.assertIsNone(TRIAGE.target_note({**shared, 'composition': 'uniform'}))
+        draft = {'dockets': [{'docket': '1-1-20 Vtec'}, {'docket': 'Docket No. 2-1-20 Vtec'}]}
+        self.assertEqual(DRAFT.own_records(draft, ['1-1-20 Vtec']), ({'dockets': [{'docket': '1-1-20 Vtec'}]},
+                                                                     ['Docket No. 2-1-20 Vtec']))
+        self.assertEqual(DRAFT.own_records(draft, ['7-7-20 Vtec']), (draft, None))
+        self.assertEqual(DRAFT.docket_identity('23-ENV-00039'), DRAFT.docket_identity('23-ENV-39'))
 
     def test_case_text_marks_documents_and_pages(self):
         documents = [{'doc': 1, 'sha256': 'x', 'basis': 'agree', 'caption_dockets': ['1-1-20 Vtec'],
