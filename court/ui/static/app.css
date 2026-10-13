@@ -136,7 +136,7 @@ a.legend-item:hover { border-color:#b6c7be; background:#fafcfb; }
 .table-wrap.flat { border-radius:7px; }
 table { width:100%; border-collapse:collapse; }
 th,td { padding:12px 16px; border-bottom:1px solid #e8ede9; vertical-align:top; text-align:left; font-size:13px; }
-thead th { font-size:11px; font-weight:560; color:var(--muted); background:#fafbfa; vertical-align:middle; }
+thead th { font-size:11px; font-weight:560; color:var(--muted); background:#fafbfa; vertical-align:middle; white-space:nowrap; }
 tr:last-child>th,tr:last-child>td { border-bottom:0; }
 tbody th { font-weight:550; }
 .scorecard td strong { font-size:16px; font-weight:600; font-variant-numeric:tabular-nums; }
@@ -223,6 +223,7 @@ td.what>*+* { margin-top:5px; }
 .record-panel.one-sided.candidate { border-left:3px solid var(--better); }
 .record-panel.one-sided.baseline { border-left:3px solid var(--worse); }
 .facts-table { table-layout:fixed; }
+.facts-table thead th { white-space:normal; }
 .facts-table th:nth-child(1) { width:20%; } .facts-table th:nth-child(2),.facts-table th:nth-child(3) { width:23%; }
 .facts-table th:nth-child(4) { width:13%; } .facts-table th:nth-child(5) { width:21%; }
 .facts-table tbody th span:last-child { display:block; }
