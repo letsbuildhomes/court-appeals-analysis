@@ -11,3 +11,8 @@ is fine when needed to answer a question.
 Open questions, known problems and planned work live in `docs/issues/`, one
 file per issue; `docs/issues/README.md` has the format. Check them before
 starting work, and record new issues and outcomes there.
+
+The issue files are the agent's working notes, not something the user keeps
+up with. When talking to the user, never refer to an issue by its number or
+file name, and don't assume they know what it says: describe the problem
+itself in a sentence, as if raising it for the first time.

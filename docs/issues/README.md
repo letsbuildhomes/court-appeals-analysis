@@ -1,8 +1,13 @@
 # Issues
 
 Open questions, known problems and planned work for this project, one
-Markdown file per issue. Anyone working on the project, person or agent,
-reads and updates these files directly.
+Markdown file per issue. Agents keep these files up to date as working notes;
+the user doesn't follow them.
+
+When talking to the user, never refer to an issue by number or file name, and
+don't assume they know its contents. Describe the problem itself in plain
+words, as if raising it for the first time. Numbers are for links between
+issue files and for finding them.
 
 ## Format
 
