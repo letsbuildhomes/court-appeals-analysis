@@ -49,7 +49,9 @@ swap the `step`, `replace`, `insert` or `remove` a node.
 `--at` is where the experiment's runs start, with `--input` giving that
 step's datasets. The probe keys (`--keys`) are the cases the change targets.
 The confirm round runs on the reference set (once one exists; `--reference`
-names it), or on the `--confirm` keys.
+names it), or on the `--confirm` keys. A confirm round over every case
+(`--confirm all`) leaves the complete run the next experiment compares with
+once this one is adopted.
 
 ### Changes before extraction
 
@@ -83,10 +85,16 @@ make lab-run-send EXPERIMENT=strict-review MAX_SPEND=0.50  # the probe round, ca
 ```
 
 A round runs the candidate on its keys and compares its results with the
-baseline's: production's own results when an existing run covers those
-cases, otherwise the baseline run from the cache. It saves the comparison in
+baseline's, read from the baseline's complete run: one over every case with
+every step saved, such as `september` or a confirm round's run. Nothing is
+run for the baseline side. The round saves the comparison in
 `experiments/NAME/rounds/ROUND.json` and every step's output, so the web app
-shows where the change took effect.
+shows where the change took effect. When the baseline has no complete run,
+the round says so and gives the command for one; from the cache it is free.
+
+A plan saves its estimate in `experiments/NAME/plans/ROUND.json`, which the
+web app shows before the round runs. Its dry run is kept in `data/estimates`,
+out of the runs list.
 
 Rerunning a round continues it: finished work comes from the cache, and
 `--resend-failed` resends failed deliveries once. `--resamples N` lets a step

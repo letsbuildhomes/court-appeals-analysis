@@ -6,6 +6,7 @@ An experiment is a directory ``experiments/NAME/``:
                          the candidate's definition name, the position runs start at, the input
                          datasets for that position, the focus (the position the keys apply to),
                          the probe keys, the confirm keys and an optional reference dataset
+    plans/ROUND.json     the latest plan for a round: its cases and a dry-run cost estimate
     rounds/ROUND.json    one record per round run: the keys, both pipelines and runs, the definition
                          diff, which cases' inputs at the focus changed, the comparison summary and
                          every case's verdict, step-by-step data diffs, regressions and cost
@@ -24,11 +25,14 @@ at the focus differs from the baseline's, plus cases no longer there) or
 ``all``. Cases whose input at the focus is unchanged can still change, by
 chance or because a step batches cases; the comparison marks them.
 
-The baseline's results come from an existing run of the baseline pipeline
-that covers those keys with the same inputs (production's run, for example);
-otherwise the baseline is run on the keys from the cache, without sending.
-The baseline is also run on the keys with every step saved, from the cache,
-so the two pipelines can be compared step by step.
+The baseline side is read, never run: from the baseline's complete run, one
+over everything from the same start on the same inputs with every step saved.
+Its final results give the comparison and its step outputs the step-by-step
+diff. A confirm round over every case leaves such a run for its candidate, so
+each adopted pipeline has one; otherwise the round asks for one.
+
+A plan's dry run is kept under ``data/estimates``, apart from the runs that
+process data.
 
 Rounds are ``probe`` (the cases the change targets; cheap) and ``confirm``
 (the whole reference set, the confirm keys, or every case). Adopting moves a tag to the
@@ -142,26 +146,34 @@ class Lab:
             raise ExperimentError(f'The {round_name} round has no cases')
         return sorted(keys)
 
-    def baseline_inputs(self, record, base, workers=4):
-        """The datasets the baseline pipeline feeds to the focus, from an existing run when there is one.
+    def baseline_run(self, record, base):
+        """The baseline's complete run: over everything from the experiment's start, every step saved.
 
-        Otherwise the baseline runs from the cache on nothing at the focus, which runs only the steps
-        before it.
+        A round reads the baseline side from it rather than running the baseline again. Each
+        confirm round over every case leaves one for its candidate, which adopting makes production.
         """
+        start = record['start']
+        for run in sorted(self.runner.all(), key=lambda r: r.get('finished_at') or '', reverse=True):
+            if run['pipeline'] == base['id'] and run['keys'] is None and not run.get('focus') \
+                    and run['options'].get('save_all') and run.get('status') in ('complete', 'stopped') \
+                    and self.runner.inputs_at(run, start) == record['inputs']:
+                return run
+        command = ' '.join(['python -m court run NAME', base['id'], '--save-all',
+                            *([f'--at {start}'] if start else []),
+                            *(f'--input {n}={d}' for n, d in sorted(record['inputs'].items()))])
+        raise ExperimentError(f'The baseline {base["id"]} has no complete run with every step saved to compare '
+                              f'with. Run it once over everything (free from the cache when its calls are saved): '
+                              f'{command}')
+
+    def baseline_inputs(self, record, full):
+        """The datasets the baseline's complete run fed to the focus."""
         focus, start = self.focus(record), record['start']
         if focus == start:
             return dict(record['inputs'])
-        for run in sorted(self.runner.all(), key=lambda r: r.get('finished_at') or '', reverse=True):
-            if run['pipeline'] == base['id'] and run.get('outputs') \
-                    and self.runner.inputs_at(run, start) == record['inputs']:
-                found = self.runner.inputs_at(run, focus)
-                if found:
-                    return found
-        run = self.runner.run(f'{record["name"]}-baseline-{base["id"][2:10]}-before-focus', base['id'],
-                              record['inputs'], at=start, focus=focus, save_all=True, mode='cached', workers=workers,
-                              note=f'Baseline of experiment {record["name"]}: the steps before {focus}',
-                              labels={'experiment': record['name'], 'side': 'baseline'})
-        return self.runner.inputs_at(run, focus)
+        found = self.runner.inputs_at(full, focus)
+        if not found:
+            raise ExperimentError(f'Run {full["name"]} did not save what it fed to {focus}')
+        return found
 
     def limits(self, record, keys, base_inputs):
         """Runner arguments for a round's keys: keys, focus and the datasets to find changes against."""
@@ -189,23 +201,33 @@ class Lab:
         record = self.load(name)
         candidate, base = self.candidate(record), self.pipelines.load(record['baseline'])
         keys = self.keys(record, round_name)
-        base_inputs = self.baseline_inputs(record, base)
-        dry = self.runner.run(f'{name}-{round_name}-plan-{candidate["id"][2:10]}', candidate['id'], record['inputs'], at=record['start'],
-                              mode='dry', labels={'experiment': name, 'round': round_name, 'side': 'plan'},
-                              **self.limits(record, keys, base_inputs))
+        base_inputs = self.baseline_inputs(record, self.baseline_run(record, base))
+        # The dry run is working material, kept apart from the runs that process data.
+        estimates = Runner(self.pipelines, self.datasets, self.runner.root.parent/'estimates', self.runner.store,
+                           self.runner.cache, self.runner.raw)
+        dry = estimates.run(f'{name}-{round_name}-{candidate["id"][2:10]}', candidate['id'], record['inputs'],
+                            at=record['start'], mode='dry', **self.limits(record, keys, base_inputs))
         focused = dry.get('focused') or {}
         cases = focused.get('keys', keys if isinstance(keys, list) else None)
-        return {'experiment': name, 'round': round_name, 'focus': self.focus(record) or '(root)',
+        plan = {'experiment': name, 'round': round_name, 'focus': self.focus(record) or '(root)',
                 'keys': len(cases) if cases is not None else dry['items']['total'], 'removed': focused.get('removed', []),
                 'candidate': candidate['id'], 'baseline': base['id'], 'changes': pipeline_diff(base, candidate),
-                'estimate': dry['cost'], 'not_sent': dry['items']['failed'].get('not_sent', 0)}
+                'estimate': dry['cost'], 'not_sent': dry['items']['failed'].get('not_sent', 0),
+                'planned_at': datetime.now(timezone.utc).isoformat()}
+        save_json(self.folder(name)/'plans'/f'{round_name}.json', plan)
+        return plan
+
+    def plans(self, name):
+        folder = self.folder(name)/'plans'
+        return {r: read_json(folder/f'{r}.json') for r in ROUNDS if (folder/f'{r}.json').exists()}
 
     def run(self, name, round_name='probe', mode='send', limit=0.0, resamples=0, resend_failed=False, workers=4,
             transport=None):
         record = self.load(name)
         candidate, base = self.candidate(record), self.pipelines.load(record['baseline'])
         keys, focus = self.keys(record, round_name), self.focus(record)
-        base_inputs = self.baseline_inputs(record, base, workers)
+        full = self.baseline_run(record, base)
+        base_inputs = self.baseline_inputs(record, full)
         options = {'mode': mode, 'limit': limit, 'resamples': resamples, 'resend_failed': resend_failed,
                    'workers': workers, 'transport': transport}
         run = self.runner.run(f'{name}-{round_name}-{candidate["id"][2:10]}', candidate['id'], record['inputs'], at=record['start'],
@@ -218,29 +240,30 @@ class Lab:
         chosen = (run.get('focused') or {}).get('keys') if keys != 'all' else output.keys()
         cases = sorted(set(chosen if chosen is not None else keys) | set(removed))
         changes = {k: changes[k] for k in cases if k in changes}
-        trace = self.runner.run(f'{name}-{round_name}-baseline-{base["id"][2:10]}-{candidate["id"][2:10]}', base['id'],
-                                record['inputs'], at=record['start'], save_all=True, mode='cached', workers=workers,
-                                note=f'Baseline of experiment {name}, {round_name} round, from the cache',
-                                labels={'experiment': name, 'round': round_name, 'side': 'baseline'},
-                                **({} if keys == 'all' else {'keys': cases, 'focus': focus}))
         # Keys new in the candidate's input have no baseline result to find.
         known = [k for k in cases if changes.get(k) != 'added']
-        found, results = self.runner.find_output(base['id'], record['start'], record['inputs'], known)
-        baseline_results = results.load(known) if results else self.datasets.open(trace['output']).load()
+        results = self.datasets.open(full['outputs'].get(record['start']) or full['output'])
+        baseline_results = results.load([k for k in known if k in results])
         reference = self.datasets.open(record['reference']).load(cases) if record.get('reference') else None
-        # An existing run of the baseline is finished: its unsent calls are failures, not work left to do.
-        comparison = compare.compare(baseline_results, output.load(), reference, cases, settled=bool(results),
-                                     inputs=changes)
-        steps = {}
-        for path in sorted(set(run['outputs']) & set(trace['outputs'])):
-            counts = dataset_diff(self.datasets.open(trace['outputs'][path]), self.datasets.open(run['outputs'][path]))
+        # The baseline's run is finished: its unsent calls are failures, not work left to do.
+        comparison = compare.compare(baseline_results, output.load(), reference, cases, settled=True, inputs=changes)
+
+        def limited(path):
+            # Positions where only the round's cases ran: the focus, inside it, and the steps holding it.
+            return keys != 'all' and (focus == '' or path == '' or path == focus or path.startswith(focus+'/')
+                                      or focus.startswith(path+'/'))
+        steps, wanted = {}, set(cases)
+        for path in sorted(set(run['outputs']) & set(full['outputs'])):
+            before, after = self.datasets.open(full['outputs'][path]).index, self.datasets.open(run['outputs'][path]).index
+            if limited(path):
+                before = {k: v for k, v in before.items() if k in wanted}
+                after = {k: v for k, v in after.items() if k in wanted}
+            counts = dataset_diff(before, after)
             steps[path or '(root)'] = {k: len(v) for k, v in counts.items()} | {'changed_keys': counts['changed'][:50]}
         result = {'experiment': name, 'round': round_name, 'keys': cases, 'selection': keys, 'focus': focus,
                   'inputs': changes,
                   'candidate': {'pipeline': candidate['id'], 'run': run['name'], 'output': run['output']},
-                  'baseline': {'pipeline': base['id'], 'run': found['name'] if found else trace['name'],
-                               'output': results.id if results else trace['output'], 'trace_run': trace['name'],
-                               'settled': bool(results)},
+                  'baseline': {'pipeline': base['id'], 'run': full['name'], 'output': results.id, 'settled': True},
                   'changes': pipeline_diff(base, candidate), 'summary': comparison['summary'],
                   'accuracy': comparison['accuracy'], 'regressions': compare.regressions(comparison),
                   'unfinished': compare.unfinished(comparison),

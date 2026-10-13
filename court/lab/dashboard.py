@@ -46,7 +46,7 @@ class Dashboard:
             return self.cache[key]
 
     def signature(self):
-        files = [*self.lab.root.glob('*/experiment.json'), *self.lab.root.glob('*/rounds/*.json'),
+        files = [*self.lab.root.glob('*/experiment.json'), *self.lab.root.glob('*/rounds/*.json'), *self.lab.root.glob('*/plans/*.json'),
                  *self.runner.root.glob('*/run.json'), self.pipelines.root/'tags.jsonl']
         return tuple(sorted((str(p), p.stat().st_mtime_ns) for p in files if p.exists()))
 
@@ -61,13 +61,13 @@ class Dashboard:
         rounds = self.lab.rounds(name)
         if round_name not in rounds:
             return {'kind': 'experiment', 'status': 'planned', 'experiment': record, 'round': round_name or 'probe',
+                    'plan': self.lab.plans(name).get(round_name or 'probe'),
                     'pipelines': self.trees(record['baseline'], self.lab.candidate(record)['id'])}
         result = rounds[round_name]
         baseline = self.datasets.open(result['baseline']['output']).load(result['keys'])
         candidate = self.datasets.open(result['candidate']['output']).load(result['keys'])
         reference = self.datasets.open(record['reference']).load(result['keys']) if record.get('reference') else None
-        # Rounds saved before ``settled`` was recorded: an existing baseline run is one besides the trace run.
-        settled = result['baseline'].get('settled', result['baseline']['run'] != result['baseline']['trace_run'])
+        settled = result['baseline'].get('settled', True)
         comparison = compare.compare(baseline, candidate, reference, result['keys'], settled=settled,
                                      inputs=result.get('inputs'))
         runs = {'baseline': self.runner.load(result['baseline']['run']),
@@ -129,7 +129,8 @@ class Dashboard:
                     'prompts': {slot: {'file': name, 'text': prompt(name)} for slot, name in n.get('prompts', {}).items()},
                     'code': {n['step']: resolved['library'][n['step']]['hash']},
                     'children': [node(c, f'{path}/{c["name"]}' if path else c['name']) for c in n.get('children', [])]}
-        return node(resolved['root'], '')
+        # The top of the tree is the pipeline itself, named as the pipeline rather than as the step it inherited.
+        return {**node(resolved['root'], ''), 'name': resolved.get('name') or resolved['root']['name']}
 
     def diff_row(self, row, designs):
         result = {'path': row['path'], 'status': row['change']}
@@ -255,7 +256,7 @@ class Dashboard:
                 'output': value.get('output'), 'runs': sides, 'pipelines': value['pipelines'],
                 'tags': {tag: entry['pipeline'] for tag, entry in self.pipelines.tags().items()},
                 'fact_labels': {f['key']: f['label'] for f in contract.CASE_FACTS + contract.RECORD_FACTS},
-                'reference': None}
+                'reference': None, 'plan': value.get('plan')}
 
     def extras(self, value, side):
         """Warnings from the run's trace and unverified quotations, for one side's cases."""

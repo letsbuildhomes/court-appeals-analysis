@@ -156,7 +156,12 @@ class Runner:
         trace, outputs, saved = Trace(), {}, {}
 
         def save(path, saved_step, output):
-            kind = saved_step.node.get('save') if isinstance(saved_step.node.get('save'), str) else 'output'
+            explicit = isinstance(saved_step.node.get('save'), str)
+            if not explicit and id(output) in saved:
+                # A composite returning a saved child's output, such as a sequence's last step, keeps its kind.
+                outputs[path] = saved[id(output)]
+                return output
+            kind = saved_step.node.get('save') if explicit else 'output'
             output = check_items(kind, output, path)
             dataset = self.datasets.write(kind, output, producer={
                 'pipeline': resolved['id'], 'position': path, 'run': name,

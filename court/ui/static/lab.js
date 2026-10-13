@@ -633,7 +633,7 @@ function changesView(o) {
     for (const [path, d] of steps) body.append(el('tr', d.changed ? 'current' : 'past', node('td', path, 'mono'), node('td', fmt(d.changed)),
       node('td', fmt(d.identical)), node('td', fmt(d.removed)), node('td', fmt(d.added))));
     table.append(body);
-    blocks.push(section('Where the change took effect', 'Each step\'s output in this round, candidate against the baseline run from the cache: how many cases\' outputs changed at that step. A case whose baseline call was not cached shows as changed.', el('div', 'table-wrap flat', table)));
+    blocks.push(section('Where the change took effect', 'Each step\'s output in this round, candidate against the baseline\'s complete run: how many cases\' outputs changed at that step.', el('div', 'table-wrap flat', table)));
   }
   return blocks;
 }
@@ -655,7 +655,16 @@ function plannedView(o) {
   const e = o.experiment, blocks = [];
   const view = treeView(o);
   if (view) blocks.push(section('Pipeline', `${pipelineLine(o)}. Changed steps are highlighted.`, view.graph, view.details));
-  const round = o.round || 'probe';
+  const round = e.round || 'probe', plan = o.plan;
+  if (plan) {
+    const cost = plan.estimate || {}, removed = plan.removed.length;
+    blocks.push(section('Plan', `From make lab-plan, ${new Date(plan.planned_at).toLocaleString()}. Estimated from a dry run: nothing was sent.`,
+      el('div', 'tiles', ...[
+        ['Cases', fmt(plan.keys), removed ? `plus ${fmt(removed)} merged away or removed` : `chosen at ${plan.focus}`],
+        ['First calls to send', fmt(cost.events?.would_send || 0), plan.not_sent ? `${fmt(plan.not_sent)} cases need calls not in the cache` : 'everything is in the cache'],
+        ['Estimated cost', money(cost.would_spend_usd ?? 0), 'an upper bound for the first calls only; later steps depend on their answers']]
+        .map(([label, value, note]) => el('div', 'tile', node('span', label), node('strong', value), node('small', note))))));
+  }
   blocks.push(section('Commands', 'Plan for a cost estimate (no model calls), then run the round with a cap on new spending. The round appears under Runs while it runs and here when it finishes.',
     node('pre', `make lab-plan EXPERIMENT=${e.name} ROUND=${round}\nmake lab-run-send EXPERIMENT=${e.name} ROUND=${round} MAX_SPEND=1.00`)));
   return blocks;

@@ -132,7 +132,7 @@ class LabTests(unittest.TestCase):
                                                                 'save': 'results'}})
         self.pipelines.set_tag('production', base['id'])
         self.words = self.datasets.write('words', {'a': 'hi', 'b': 'hello', 'c': 'hey', 'd': 'howdy'})
-        self.full = runner.run('full', base['id'], {'cases': self.words.id})
+        self.full = runner.run('full', base['id'], {'cases': self.words.id}, save_all=True)
         self.runner = runner
 
     def two_steps(self):
@@ -142,7 +142,7 @@ class LabTests(unittest.TestCase):
                 {'name': 'prep', 'step': 'toy:prep', 'save': 'output', 'inputs': {'words': 'input:words'}},
                 {'name': 'judge', 'step': 'toy:judge', 'save': 'results', 'inputs': {'cases': 'prep'}}]}})
         self.pipelines.set_tag('production', tree['id'])
-        self.runner.run('two-full', tree['id'], {'words': self.words.id})
+        self.runner.run('two-full', tree['id'], {'words': self.words.id}, save_all=True)
         return tree
 
     def tearDown(self):
@@ -153,8 +153,11 @@ class LabTests(unittest.TestCase):
                      confirm=['a', 'b', 'c', 'd'], changes=[{'at': '', 'settings': {'longer_than': 2}}])
         plan = self.lab.plan('looser', 'probe')
         self.assertEqual(plan['changes'][0]['settings'], [None, {'longer_than': 2}])
+        self.assertEqual(self.lab.plans('looser')['probe']['keys'], 1)
         probe = self.lab.run('looser', 'probe', mode='cached')
         self.assertEqual(probe['baseline']['run'], 'full')
+        # The baseline side is read from its complete run; only the candidate's round is a run, and no plan.
+        self.assertEqual(sorted(r['name'] for r in self.runner.all()), ['full', probe['candidate']['run']])
         self.assertEqual(probe['summary']['verdicts'], {'unchanged': 1})
         with self.assertRaises(ExperimentError):
             self.lab.adopt('looser')
@@ -196,11 +199,24 @@ class LabTests(unittest.TestCase):
         self.assertEqual(confirm['summary']['inputs'], {'changed': 1, 'removed': 1, 'same': 2})
         self.lab.adopt('longer')
 
+    def test_a_round_needs_the_baselines_complete_run(self):
+        base = self.pipelines.load('production')
+        self.runner.run('partial', base['id'], {'cases': self.words.id}, keys=['a'], save_all=True)
+        (self.runner.root/'full/run.json').unlink()
+        self.lab.new('looser', 'Shorter words count', inputs={'cases': self.words.id}, probe=['a'],
+                     changes=[{'at': '', 'settings': {'longer_than': 2}}])
+        with self.assertRaisesRegex(ExperimentError, 'no complete run'):
+            self.lab.run('looser', 'probe', mode='cached')
+
     def test_a_focus_limits_only_the_focused_step(self):
         tree = self.two_steps()
         record = self.runner.run('focused', tree['id'], {'words': self.words.id}, focus='judge', keys=['b', 'x'])
         self.assertEqual(record['focused'], {'keys': ['b'], 'removed': []})
         self.assertEqual(len(self.datasets.open(record['outputs']['prep'])), 4)
+        # Saving every step, the sequence's output is its last step's results, not a generic copy.
+        full = self.runner.load('two-full')
+        self.assertEqual(full['output'], full['outputs']['judge'])
+        self.assertEqual(self.datasets.open(full['output']).kind, 'results')
         self.assertEqual(self.datasets.open(record['output']).keys(), ['b'])
 
 
