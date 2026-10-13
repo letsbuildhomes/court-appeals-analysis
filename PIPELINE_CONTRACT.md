@@ -1,7 +1,8 @@
 # Output contract: one result per case
 
 Every pipeline, whatever its steps, produces a results map: one result per
-case under `appeal-result-1` (`court/contracts/results.py`). Comparisons are
+case under `appeal-result-2`, or the September pipeline's `appeal-result-1`
+(`court/contracts/results.py`). Comparisons are
 always `case ID → result`, across pipelines. Citations point into the case
 text of the case set the results came from (`court/contracts/cases.py`). A
 case the pipeline could not process is a failure item in the map, with its
@@ -9,7 +10,7 @@ kind and reason, not a result.
 
 ```jsonc
 {
-  "schema": "appeal-result-1",
+  "schema": "appeal-result-2",          // or appeal-result-1, which has no appeal_review
   "case": "g-225-10-05-vtec",
   "disposition": {                       // null only when processing failed before scope was known
     "value": "in_scope | excluded | uncertain",
@@ -54,9 +55,17 @@ Record = {
   },
   "restrictions": [{"description": text, "start": Date, "end": Date, "evidence": [Evidence]}],   // empty = none observed
   "housing_changes": [{"description": text, "evidence": [Evidence]}],                              // empty = none observed
-  "related_dockets": [{"docket": text | "unknown", "relationship": text, "evidence": [Evidence]}] // empty = none observed
+  "related_dockets": [{"docket": text | "unknown", "relationship": text, "evidence": [Evidence]}], // empty = none observed
+  "appeal_review": {"standard": "on_the_record | de_novo | unknown", "evidence": [Evidence]}       // appeal-result-2
 }
 ```
+
+- **Review standard** (`appeal-result-2`). Whether the court heard this
+  docket's appeal on the record of the municipal proceeding (the town adopted
+  on-the-record review, so the court reviews the board's record and findings)
+  or de novo (the court hears the matter anew, taking its own evidence). It
+  is `unknown` when the documents don't establish it, and it describes the
+  appeal to the court, not later Supreme Court review.
 
 - **Unknown.** Every field has one explicit `unknown`. Any field, including
   duration, may be unknown when a pipeline does not establish it.

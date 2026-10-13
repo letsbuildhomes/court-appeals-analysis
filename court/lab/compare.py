@@ -29,7 +29,7 @@ UNKNOWN_VALUES = (None, '', 'unclear', UNKNOWN)
 CHANGES = ('less_specific', 'different', 'more_specific', 'newly_measured', 'unchanged')
 # Top-level record keys the catalog interprets, and keys that only hold wording.
 CATALOGED = {'docket', 'duration', 'municipal_decision', 'observed_status', 'discretion', 'appellants', 'project',
-             'restrictions', 'housing_changes', 'related_dockets', 'timeline'}
+             'restrictions', 'housing_changes', 'related_dockets', 'timeline', 'appeal_review'}
 WORDING = {'prose', 'description', 'descriptions', 'note', 'notes', 'evidence', 'rationale'}
 
 
@@ -302,7 +302,9 @@ def compare_case(case_id, baseline, candidate, reference=None, settled=False, in
             'records': {'baseline': len(records['baseline']), 'candidate': len(records['candidate']),
                         'gained': gained, 'lost': lost, 'matched': len(matched), 'wording_only': wording_only,
                         'moved_in': moved_in, 'moved_out': moved_out},
-            'pairs': [(records['baseline'][k], records['candidate'][k]) for k in matched],
+            'pairs': [(records['baseline'][k], records['candidate'][k],
+                       [spec for spec in RECORD_FACTS if measures(spec, schemas['baseline'])
+                        and measures(spec, schemas['candidate'])]) for k in matched],
             'chips': chips,
             'signals': {'better': better, 'worse': worse, 'judgment': judgment, 'notes': notes},
             'highlights': [{k: f[k] for k in ('label', 'record', 'baseline', 'candidate', 'change', 'verified')}
@@ -318,7 +320,9 @@ def record_metrics(values):
     """
     results = [v for v in values if v is not None and not is_failure(v)]
     records = [r for c in results for r in c.get('records', []) or []]
-    slots = [spec['value'](r) for r in records for spec in RECORD_FACTS]
+    # A fact counts only for results whose schema asks it.
+    slots = [spec['value'](r) for c in results for r in c.get('records', []) or [] for spec in RECORD_FACTS
+             if measures(spec, c.get('schema'))]
     dockets = Counter(identity(r.get('docket')) for r in records if identity(r.get('docket')))
     return {'cases': len(values), 'processed': len(results),
             'failed': sum(is_failure(v) for v in values if v is not None),
@@ -334,10 +338,10 @@ def profile(values):
     """Per-fact completeness for one results map, to show where answers are missing."""
     values = list(values)
     results = [v for v in values if not is_failure(v)]
-    records = [r for c in results for r in c.get('records', []) or []]
     rows = []
     for spec in RECORD_FACTS:
-        answers = [spec['value'](r) for r in records]
+        answers = [spec['value'](r) for c in results if measures(spec, c.get('schema'))
+                   for r in c.get('records', []) or []]
         rows.append({'key': spec['key'], 'question': spec['question'], 'label': spec['label'],
                      'known': sum(known(v) for v in answers), 'total': len(answers),
                      'top': Counter(str(display(v)) for v in answers if known(v)).most_common(3)})
@@ -397,8 +401,8 @@ def compare(baseline, candidate, reference=None, keys=None, settled=False, input
     # Completeness on the records both sides have, so failures and missing cases can't move it.
     pairs = [pair for c in cases for pair in c['pairs']]
     for index, side in enumerate(('baseline', 'candidate')):
-        sides[side].update(matched_known=sum(known(spec['value'](pair[index])) for pair in pairs for spec in RECORD_FACTS),
-                           matched_slots=len(pairs)*len(RECORD_FACTS))
+        sides[side].update(matched_known=sum(known(spec['value'](pair[index])) for pair in pairs for spec in pair[2]),
+                           matched_slots=sum(len(pair[2]) for pair in pairs))
     # A docket lost from two cases (a duplicate) is one lost docket, with the first case's reason.
     lost = {}
     for c in cases:

@@ -1,4 +1,4 @@
-"""Results: case ID → one research result under ``appeal-result-1``.
+"""Results: case ID → one research result under ``appeal-result-1`` or ``appeal-result-2``.
 
 A result has a disposition (in scope, excluded with a reason, or uncertain)
 and zero or more docket records. Every field declares its allowed values and
@@ -10,16 +10,23 @@ The fact catalog at the end names the research facts that comparisons and the
 dashboard measure. Each fact records the schema version that introduced it,
 so a result made under an older version shows the fact as not measured rather
 than unknown.
+
+``appeal-result-2`` adds one record field, ``appeal_review``: whether the
+court heard the appeal on the record of the municipal proceeding or de novo,
+with the evidence. Version 1 results remain valid, and ``result`` makes them
+by default, because the September steps that call it can't change; a
+producer that answers the new question passes ``schema=SCHEMA``.
 """
 from collections import Counter
 import re
 
 KIND = 'results'
-SCHEMA = 'appeal-result-1'
+FIRST = 'appeal-result-1'
+SCHEMA = 'appeal-result-2'
 VERSION = SCHEMA
 # Schema versions in order; a fact introduced by a later version is not
 # measured by results made under an earlier one.
-VERSIONS = ('appeal-result-1',)
+VERSIONS = (FIRST, SCHEMA)
 UNKNOWN = 'unknown'
 
 DISPOSITIONS = ('in_scope', 'excluded', 'uncertain')
@@ -37,6 +44,8 @@ ENUMS = {
     'start_relation': ('exact', 'on_or_before'),
     'end_relation': ('exact', 'on_or_after'),
     'duration_kind': ('exact', 'at_least', UNKNOWN),
+    # How the court heard the appeal: on the record of the municipal proceeding, or anew.
+    'review_standard': ('on_the_record', 'de_novo', UNKNOWN),
 }
 DATE = re.compile(r'\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?\Z')
 FULL_DATE = re.compile(r'\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\Z')
@@ -101,11 +110,18 @@ class _Check:
             check(item, f'{path}[{i}]')
 
 
-def _record(c, r, path):
+def _record(c, r, path, schema=SCHEMA):
     fields = ('docket', 'project', 'municipal_decision', 'appellants', 'discretion', 'observed_status', 'timeline',
               'duration', 'restrictions', 'housing_changes', 'related_dockets')
+    if schema != FIRST:
+        fields += ('appeal_review',)
     if not c.keys(r, path, fields):
         return
+    if schema != FIRST:
+        a = r['appeal_review']
+        if c.keys(a, path+'.appeal_review', ('standard', 'evidence')):
+            c.enum(a['standard'], path+'.appeal_review.standard', ENUMS['review_standard'])
+            c.evidence(a['evidence'], path+'.appeal_review.evidence')
     c.text(r['docket'], path+'.docket')
     p = r['project']
     if c.keys(p, path+'.project', ('description', 'municipality', 'proposed_units', 'proposed_lots', 'evidence')):
@@ -202,8 +218,8 @@ def validate(result):
     c = _Check()
     if not c.keys(result, 'result', ('schema', 'case', 'disposition', 'records')):
         return c.errors
-    if result['schema'] != SCHEMA:
-        c.fail('result.schema', f'must be {SCHEMA}')
+    if result['schema'] not in VERSIONS:
+        c.fail('result.schema', f'must be one of {", ".join(VERSIONS)}')
     c.text(result['case'], 'result.case')
     d = result['disposition']
     if d is not None and c.keys(d, 'disposition', ('value', 'reason', 'municipal_appeal', 'housing', 'evidence')):
@@ -214,7 +230,7 @@ def validate(result):
         c.enum(d['municipal_appeal'], 'disposition.municipal_appeal', SCOPE)
         c.enum(d['housing'], 'disposition.housing', SCOPE)
         c.evidence(d['evidence'], 'disposition.evidence')
-    c.items(result['records'], 'records', lambda r, where: _record(c, r, where))
+    c.items(result['records'], 'records', lambda r, where: _record(c, r, where, result['schema']))
     if d is None and result['records']:
         c.fail('records', 'records need a disposition')
     if d is not None and d['value'] == 'excluded' and result['records']:
@@ -222,8 +238,8 @@ def validate(result):
     return c.errors
 
 
-def result(case_id, disposition, records=()):
-    return {'schema': SCHEMA, 'case': case_id, 'disposition': disposition, 'records': list(records)}
+def result(case_id, disposition, records=(), schema=FIRST):
+    return {'schema': schema, 'case': case_id, 'disposition': disposition, 'records': list(records)}
 
 
 # Duration arithmetic -------------------------------------------------------
@@ -348,7 +364,7 @@ def _field(*path):
 SPECIFICITY = {UNKNOWN: 0, 'at_least': 1, 'exact': 2}
 
 
-def fact(key, question, label, value, evidence, rank=None, normalize=None, since=SCHEMA):
+def fact(key, question, label, value, evidence, rank=None, normalize=None, since=FIRST):
     return {'key': key, 'question': question, 'label': label, 'value': value, 'evidence': evidence,
             'rank': rank, 'normalize': normalize, 'since': since}
 
@@ -369,6 +385,8 @@ RECORD_FACTS = [
          _object_evidence('observed_status', 'evidence')),
     fact('permission', 'Decision & status', 'Permission status', _field('observed_status', 'permission'),
          _object_evidence('observed_status', 'evidence')),
+    fact('review_standard', 'Decision & status', 'Review standard', _field('appeal_review', 'standard'),
+         _object_evidence('appeal_review', 'evidence'), since=SCHEMA),
     fact('discretion_involved', 'Discretion', 'Discretion involved', _field('discretion', 'involved'),
          _object_evidence('discretion', 'evidence')),
     fact('discretion_central', 'Discretion', 'Discretion central', _field('discretion', 'central'),

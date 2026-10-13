@@ -131,6 +131,22 @@ class CompareTests(unittest.TestCase):
         # A case that broke still counts; a finished one with the same documents changed only by chance.
         self.assertEqual(compare.regressions(comparison), ['a'])
 
+    def test_the_review_standard_is_asked_from_schema_two_on(self):
+        old = results.result('a', disposition(), [record()])
+        self.assertEqual(results.validate(old), [])
+        self.assertTrue(results.validate(results.result('a', disposition(), [record()], schema=results.SCHEMA)))
+        review = {'standard': 'on_the_record', 'evidence': [{'doc': 1, 'page': 1, 'quote': 'on-the-record appeal'}]}
+        new = results.result('a', disposition(), [record() | {'appeal_review': review}], schema=results.SCHEMA)
+        self.assertEqual(results.validate(new), [])
+        self.assertTrue(results.validate(results.result('a', disposition(), [record() | {'appeal_review': {
+            'standard': 'appellate', 'evidence': []}}], schema=results.SCHEMA)))
+        # A version 1 result isn't counted as missing the newer answer; a version 2 one gains it.
+        comparison = compare.compare({'a': old}, {'a': new})
+        fact = next(f for f in comparison['cases'][0]['facts'] if f['key'] == 'review_standard')
+        self.assertEqual((fact['candidate'], fact['change']), ('on the record', 'newly_measured'))
+        self.assertEqual(comparison['summary']['baseline']['fact_slots'] + 1,
+                         comparison['summary']['candidate']['fact_slots'])
+
     def test_only_listed_facts_are_scored(self):
         truth = results.result('c', disposition(), [record(outcome='approved')])
         baseline = {'c': results.result('c', disposition(), [record(outcome='denied')])}
