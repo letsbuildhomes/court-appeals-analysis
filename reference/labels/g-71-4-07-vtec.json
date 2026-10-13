@@ -119,7 +119,17 @@
       {
        "doc": 1,
        "page": 11,
-       "quote": "Question 15 asks whether the proposal to improve Old Center Fayston Road will result in significantly and unreasonably increased flows of storm water and sedimentation onto Appellants\u2019 property."
+       "quote": "Question 15 asks whether the proposal to improve Old Center Fayston Road will"
+      },
+      {
+       "doc": 1,
+       "page": 11,
+       "quote": "result in significantly and unreasonably increased flows of storm water and sedimentation"
+      },
+      {
+       "doc": 1,
+       "page": 11,
+       "quote": "additional provisions should be included in the approved permit under § 16.5 of the Land Use Regulations to prevent such adverse"
       }
      ],
      "central": "unknown",
@@ -265,12 +275,12 @@
   {
    "field": "discretion_involved",
    "confidence": "medium",
-   "note": "Question 15 contends the project would cause significantly and unreasonably increased stormwater and sedimentation, an evaluative test; most other questions turn on fixed road-width, design and slope rules."
+   "note": "Settled on reread: Questions 15 and 16 contest whether the road upgrade causes 'significantly and unreasonably' increased stormwater and sedimentation, an evaluative standard. The second reader's 'fixed rules' covers the other questions."
   },
   {
    "field": "discretion_central",
-   "confidence": "low",
-   "note": "The stormwater contention is one of many questions (most about fixed road and slope standards); nothing shows whether it was principal or peripheral."
+   "confidence": "medium",
+   "note": "Stormwater is one of about 18 questions and the only one decided was the fixed road-width rule, so whether the discretionary contention was principal is not shown."
   },
   {
    "field": "permission",
@@ -288,10 +298,7 @@
    "note": "Remaining questions were set for a December 3, 2007 telephone motion hearing; no conclusion observed."
   }
  ],
- "disputed": [
-  "discretion_central",
-  "discretion_involved"
- ],
+ "disputed": [],
  "questions": [],
  "history": [
   {
@@ -305,6 +312,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Discretion disputed: labeler yes (stormwater \"significantly and unreasonably\"), verifier no (fixed road-width rules)"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Disputed discretion settled: involved yes, central unknown"
   }
  ]
 }

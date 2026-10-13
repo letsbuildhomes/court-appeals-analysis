@@ -12,7 +12,7 @@
     {
      "doc": 1,
      "page": 2,
-     "quote": "The issues before the Planning Commission flow from Appellee-Applicants\u2019 application for an amendment to the final subdivision plat for a revised location of the septic system and house."
+     "quote": "The issues before the Planning Commission flow from Appellee-Applicants’ application for an amendment to the final subdivision plat for a revised location of the septic system and house."
     },
     {
      "doc": 1,
@@ -139,7 +139,7 @@
        {
         "doc": 1,
         "page": 2,
-        "quote": "Kibbe\u2019s motion to be relieved from the order to mediate in Docket No 198-9-08 Vtec is DENIED"
+        "quote": "Kibbe’s motion to be relieved from the order to mediate in Docket No 198-9-08 Vtec is DENIED"
        }
       ]
      }
@@ -210,7 +210,7 @@
       {
        "doc": 1,
        "page": 2,
-       "quote": "because this appeal is de novo, Restated Question 1, involving whether the Planning Commission\u2019s decision was consistent with its regulations and past practices, is not before the Court"
+       "quote": "because this appeal is de novo, Restated Question 1, involving whether the Planning Commission’s decision was consistent with its regulations and past practices, is not before the Court"
       }
      ]
     }
@@ -260,8 +260,8 @@
   },
   {
    "field": "discretion_involved",
-   "confidence": "low",
-   "note": "Remaining Questions 2-5 are not described; 'final plat approval standards' are not shown to be evaluative."
+   "confidence": "medium",
+   "note": "Unknown is the answer: the remaining questions are never described, and 'final plat approval standards' aren't shown to be evaluative."
   },
   {
    "field": "litigation",

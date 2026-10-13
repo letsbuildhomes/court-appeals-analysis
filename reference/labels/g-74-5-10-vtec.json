@@ -9,8 +9,16 @@
       "municipal_appeal": "yes",
       "housing": "yes",
       "evidence": [
-        {"doc": 2, "page": 1, "quote": "Appellant Stephen Durkee (“Appellant”) appeals to this Court a decision by the Town of Killington (“Town”) Planning Commission (“Commission”) granting"},
-        {"doc": 2, "page": 1, "quote": "conceptual overview of the future development of up to 328 independently occupied residential dwelling units and 32,600 square feet of commercial and club facilities"}
+        {
+          "doc": 2,
+          "page": 1,
+          "quote": "Appellant Stephen Durkee (“Appellant”) appeals to this Court a decision by the Town of Killington (“Town”) Planning Commission (“Commission”) granting"
+        },
+        {
+          "doc": 2,
+          "page": 1,
+          "quote": "conceptual overview of the future development of up to 328 independently occupied residential dwelling units and 32,600 square feet of commercial and club facilities"
+        }
       ]
     },
     "records": [
@@ -22,8 +30,16 @@
           "proposed_units": 328,
           "proposed_lots": "unknown",
           "evidence": [
-            {"doc": 2, "page": 3, "quote": "suggested that the development would include up to 328 independently occupied residential dwelling units and 32,600 square feet of commercial and club facilities"},
-            {"doc": 2, "page": 1, "quote": "for a proposed residential and commercial development on 229± acres in the Killington Basin Section of the Ski Village Zoning District of the Town"}
+            {
+              "doc": 2,
+              "page": 3,
+              "quote": "suggested that the development would include up to 328 independently occupied residential dwelling units and 32,600 square feet of commercial and club facilities"
+            },
+            {
+              "doc": 2,
+              "page": 1,
+              "quote": "for a proposed residential and commercial development on 229± acres in the Killington Basin Section of the Ski Village Zoning District of the Town"
+            }
           ]
         },
         "municipal_decision": {
@@ -31,8 +47,16 @@
           "date": "2010-04-07",
           "outcome": "approved",
           "evidence": [
-            {"doc": 2, "page": 4, "quote": "“Commission grants conceptual Master Plan Approval, with partial affirmative findings under the PUD criteria set forth in [Regulations] Section 505 for the Golf Course PUD.”"},
-            {"doc": 2, "page": 4, "quote": "The document is signed by five Commission members with signatures dated April 7, 2010."}
+            {
+              "doc": 2,
+              "page": 4,
+              "quote": "“Commission grants conceptual Master Plan Approval, with partial affirmative findings under the PUD criteria set forth in [Regulations] Section 505 for the Golf Course PUD.”"
+            },
+            {
+              "doc": 2,
+              "page": 4,
+              "quote": "The document is signed by five Commission members with signatures dated April 7, 2010."
+            }
           ]
         },
         "appellants": [
@@ -42,15 +66,39 @@
             "seeks": "overturn_approval",
             "representation": "represented",
             "evidence": [
-              {"doc": 2, "page": 6, "quote": "Appellant represents that he owns three commercial and rental properties that are approximately a half- mile “as the crow flies” from the Golf Course PUD"},
-              {"doc": 2, "page": 1, "quote": "Appellant is represented by Daniel C. Hershenson, Esq."}
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "Appellant represents that he owns three commercial and rental properties that are approximately a half- mile “as the crow flies” from the Golf Course PUD"
+              },
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Appellant is represented by Daniel C. Hershenson, Esq."
+              }
             ]
           }
         ],
         "discretion": {
           "description": "The appeal challenged the Commission's authority to grant conceptual master plan approval, the Regulations' compliance with the enabling statutes, and whether the proposal complies with the Regulations (findings on privacy, roadways and parking, water and sewer, natural features, landscaping and screening); the court decided only the authority questions, and the documents do not show whether the compliance contentions turned on evaluative standards.",
-          "involved": "unknown",
-          "evidence": [],
+          "involved": "yes",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 8,
+              "quote": "These factual findings and legal conclusions include determinations, appealed by"
+            },
+            {
+              "doc": 2,
+              "page": 8,
+              "quote": "provision of privacy for residents, roadways and parking, water and"
+            },
+            {
+              "doc": 2,
+              "page": 8,
+              "quote": "landscaping and screening."
+            }
+          ],
           "central": "unknown",
           "central_evidence": []
         },
@@ -59,8 +107,16 @@
           "permission": "denied",
           "description": "The court held the Commission had no authority to grant conceptual master plan approval, declared the Commission Order null and void, and dismissed the remainder of the appeal; no further proceedings are shown.",
           "evidence": [
-            {"doc": 2, "page": 19, "quote": "Findings of Fact, Conclusions of Law and Order of April 7, 2010 is NULL and VOID and of no further force or effect."},
-            {"doc": 2, "page": 19, "quote": "This completes the current proceedings before this Court concerning the pending application."}
+            {
+              "doc": 2,
+              "page": 19,
+              "quote": "Findings of Fact, Conclusions of Law and Order of April 7, 2010 is NULL and VOID and of no further force or effect."
+            },
+            {
+              "doc": 2,
+              "page": 19,
+              "quote": "This completes the current proceedings before this Court concerning the pending application."
+            }
           ]
         },
         "timeline": [
@@ -68,27 +124,53 @@
             "kind": "filing",
             "date": "2010-05-10",
             "court_or_body": "Vermont Superior Court, Environmental Division",
-            "dockets": ["74-5-10 Vtec"],
+            "dockets": [
+              "74-5-10 Vtec"
+            ],
             "description": "Durkee filed a timely appeal of the Commission Order.",
-            "evidence": [{"doc": 2, "page": 4, "quote": "On May 10, 2010, Appellant filed a timely appeal with this Court."}]
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 4,
+                "quote": "On May 10, 2010, Appellant filed a timely appeal with this Court."
+              }
+            ]
           },
           {
             "kind": "judgment",
             "date": "2010-11-30",
             "court_or_body": "Vermont Superior Court, Environmental Division",
-            "dockets": ["74-5-10 Vtec"],
+            "dockets": [
+              "74-5-10 Vtec"
+            ],
             "description": "Entry order deferring the standing motion and requesting supplemental memoranda on the authority for the Commission decision.",
-            "evidence": [{"doc": 1, "page": 2, "quote": "For the time being, Applicant’s motion on Appellant’s standing is neither granted nor denied."}]
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 2,
+                "quote": "For the time being, Applicant’s motion on Appellant’s standing is neither granted nor denied."
+              }
+            ]
           },
           {
             "kind": "resolution",
             "date": "2011-01-27",
             "court_or_body": "Vermont Superior Court, Environmental Division",
-            "dockets": ["74-5-10 Vtec"],
+            "dockets": [
+              "74-5-10 Vtec"
+            ],
             "description": "Decision on cross-motions for summary judgment: standing upheld, Commission Order declared null and void, remainder of appeal dismissed.",
             "evidence": [
-              {"doc": 2, "page": 19, "quote": "The remainder of this appeal is DIMISSED for lack of a justiciable issue."},
-              {"doc": 2, "page": 19, "quote": "Done at Newfane, Vermont, this 27th day of January 2011."}
+              {
+                "doc": 2,
+                "page": 19,
+                "quote": "The remainder of this appeal is DIMISSED for lack of a justiciable issue."
+              },
+              {
+                "doc": 2,
+                "page": 19,
+                "quote": "Done at Newfane, Vermont, this 27th day of January 2011."
+              }
             ]
           }
         ],
@@ -97,15 +179,29 @@
             "date": "2010-05-10",
             "relation": "exact",
             "description": "Appeal filed in the Environmental Division",
-            "evidence": [{"doc": 2, "page": 4, "quote": "On May 10, 2010, Appellant filed a timely appeal with this Court."}]
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 4,
+                "quote": "On May 10, 2010, Appellant filed a timely appeal with this Court."
+              }
+            ]
           },
           "end": {
             "date": "2011-01-27",
             "relation": "exact",
             "description": "Decision voiding the Commission Order and dismissing the remainder of the appeal, completing the proceedings",
             "evidence": [
-              {"doc": 2, "page": 19, "quote": "This completes the current proceedings before this Court concerning the pending application."},
-              {"doc": 2, "page": 19, "quote": "Done at Newfane, Vermont, this 27th day of January 2011."}
+              {
+                "doc": 2,
+                "page": 19,
+                "quote": "This completes the current proceedings before this Court concerning the pending application."
+              },
+              {
+                "doc": 2,
+                "page": 19,
+                "quote": "Done at Newfane, Vermont, this 27th day of January 2011."
+              }
             ]
           },
           "note": "From the court filing to the decision that completed the proceedings; no further appeal is shown.",
@@ -117,24 +213,88 @@
         "related_dockets": [],
         "appeal_review": {
           "standard": "de_novo",
-          "evidence": [{"doc": 2, "page": 4, "quote": "This de novo appeal arises from the Commission’s issuance of its April 7, 2010 Findings of Fact, Conclusions of Law and Order"}]
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 4,
+              "quote": "This de novo appeal arises from the Commission’s issuance of its April 7, 2010 Findings of Fact, Conclusions of Law and Order"
+            }
+          ]
         }
       }
     ]
   },
-  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"74-5-10 Vtec": "all"}},
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "74-5-10 Vtec": "all"
+    }
+  },
   "judgments": [
-    {"field": "disposition", "confidence": "high", "note": "Appeal of a Planning Commission decision (municipal) granting conceptual PUD master plan approval for up to 328 residential units; the approval did not itself authorize construction, but it is permission-stage review of new housing, so in scope."},
-    {"field": "housing", "confidence": "medium", "note": "The proposal is new residential and commercial development; the approval was conceptual with partial findings and no construction authorized, which is a weaker form of permission but still concerns new housing."},
-    {"field": "units", "confidence": "medium", "note": "The application proposes 'up to 328' dwelling units, a ceiling in a conceptual plan rather than a firm count."},
-    {"field": "decision_outcome", "confidence": "medium", "note": "Conceptual master plan approval with partial affirmative findings; treated as approved since no conditions imposed on the project are described."},
-    {"field": "permission", "confidence": "medium", "note": "The court voided the only authorization (the conceptual approval); no remaining authorization exists in this docket, so denied, though the court did not deny the project on its merits."},
-    {"field": "discretion_involved", "confidence": "low", "note": "Question 3 challenged compliance with PUD criteria (privacy, landscaping and screening, etc.), but the passages do not show an evaluative test was contested; the decided issues were purely legal authority questions."},
-    {"field": "discretion_central", "confidence": "low", "note": "Follows from discretion_involved being unknown."},
-    {"field": "review_standard", "confidence": "high", "note": "The decision expressly calls it a de novo appeal, though it was resolved on summary judgment."},
-    {"field": "duration", "confidence": "high", "note": "Filing date stated (May 10, 2010, deemed timely after furlough closure); the January 27, 2011 decision completed the proceedings; no Supreme Court appeal observed."}
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "Appeal of a Planning Commission decision (municipal) granting conceptual PUD master plan approval for up to 328 residential units; the approval did not itself authorize construction, but it is permission-stage review of new housing, so in scope."
+    },
+    {
+      "field": "housing",
+      "confidence": "medium",
+      "note": "The proposal is new residential and commercial development; the approval was conceptual with partial findings and no construction authorized, which is a weaker form of permission but still concerns new housing."
+    },
+    {
+      "field": "units",
+      "confidence": "medium",
+      "note": "The application proposes 'up to 328' dwelling units, a ceiling in a conceptual plan rather than a firm count."
+    },
+    {
+      "field": "decision_outcome",
+      "confidence": "medium",
+      "note": "Conceptual master plan approval with partial affirmative findings; treated as approved since no conditions imposed on the project are described."
+    },
+    {
+      "field": "permission",
+      "confidence": "medium",
+      "note": "The court voided the only authorization (the conceptual approval); no remaining authorization exists in this docket, so denied, though the court did not deny the project on its merits."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "Reread: the appellant appealed the Commission's findings on privacy for residents and landscaping and screening, which are evaluative standards; the second reader's 'no' looked only at the authority questions the court decided."
+    },
+    {
+      "field": "discretion_central",
+      "confidence": "medium",
+      "note": "Compliance with the PUD criteria is one of three principal issues, but it mixes fixed and evaluative requirements and was not decided, so whether the discretionary part was principal is not shown."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "high",
+      "note": "The decision expressly calls it a de novo appeal, though it was resolved on summary judgment."
+    },
+    {
+      "field": "duration",
+      "confidence": "high",
+      "note": "Filing date stated (May 10, 2010, deemed timely after furlough closure); the January 27, 2011 decision completed the proceedings; no Supreme Court appeal observed."
+    }
   ],
   "disputed": [],
   "questions": [],
-  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:29Z", "note": "Neighbor appeal of Killington conceptual PUD master plan approval; order voided and appeal dismissed on summary judgment."}]
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T05:47:29Z",
+      "note": "Neighbor appeal of Killington conceptual PUD master plan approval; order voided and appeal dismissed on summary judgment."
+    },
+    {
+      "step": "rechecked",
+      "by": "claude-opus-5.5",
+      "at": "2026-10-13T15:26:25+00:00",
+      "note": "Discretion involved set to yes on reread"
+    }
+  ]
 }

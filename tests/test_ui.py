@@ -3,8 +3,11 @@ from pathlib import Path
 import re
 import unittest
 
+import json
+
+from court.config import ROOT
 from court.ui import server
-from court.ui.api import Api
+from court.ui.api import Api, reference_row
 from court.lab.dashboard import Dashboard
 from tests.test_lab import LabTests
 
@@ -38,6 +41,19 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(len(pipelines), 2)
         compared = api.pipeline(pipelines[0]['id'], pipelines[1]['id'])
         self.assertTrue(any(row['status'] == 'changed' for row in compared['pipelines']['diff']))
+
+
+class ReferenceTests(unittest.TestCase):
+    def test_a_label_becomes_one_row_of_what_it_says(self):
+        manifest = {r['case']: r for r in json.loads((ROOT/'reference/manifest.json').read_text())['cases']}
+        label = lambda case: json.loads((ROOT/f'reference/labels/{case}.json').read_text())
+        row = reference_row(manifest['g-126-6-07-vtec'], label('g-126-6-07-vtec'))
+        self.assertEqual((row['disposition'], row['record']['units'], row['record']['appellant_kinds']),
+                         ('in_scope', 36, {'neighbor': 5}))
+        self.assertEqual(row['slots'], 18)
+        self.assertTrue(all(f['confidence'] != 'high' for f in row['flags'].values()))
+        excluded = reference_row(manifest['g-150-7-02-vtec'], label('g-150-7-02-vtec'))
+        self.assertEqual((excluded['disposition'], excluded['record'], excluded['known']), ('excluded', None, 0))
 
 
 class StaticTests(unittest.TestCase):

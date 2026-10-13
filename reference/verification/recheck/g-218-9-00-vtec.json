@@ -1,0 +1,29 @@
+{"case": "g-218-9-00-vtec",
+ "decisions": [
+  {"fact": "litigation", "label_value": "resolved", "other_value": "unknown",
+   "decision": "resolved", "confidence": "high",
+   "why": "The August 1, 2003 decision, captioned in both dockets, is a final judgment ('ORDERED and ADJUDGED ... application is GRANTED') after an evidentiary hearing, and it states that any later amendment application would be a new appeal, not a continuation of these appeals. Nothing is shown pending afterwards; under the guide the final judgment ends the appeal, so the absence of an observed Supreme Court outcome does not make it unknown.",
+   "evidence": [
+    {"doc": 2, "page": 7, "quote": "it is hereby ORDERED and ADJUDGED that the project is approved as designed, with the above conditions,"},
+    {"doc": 2, "page": 7, "quote": "amendment application would be a new appeal and not a continuation or reopening of the"},
+    {"doc": 2, "page": 7, "quote": "Done at Barre, Vermont, this 1 day of August, 2003."}]},
+  {"fact": "end", "label_value": {"date": "2003-08-01", "relation": "exact"}, "other_value": null,
+   "decision": {"date": "2003-08-01", "relation": "exact"}, "confidence": "high",
+   "why": "Consistent with resolved litigation: the final judgment of August 1, 2003 ends the duration. Start stays 2002-09-10 on_or_before, so kind at_least, days 325.",
+   "evidence": [
+    {"doc": 2, "page": 7, "quote": "Done at Barre, Vermont, this 1 day of August, 2003."}]},
+  {"fact": "permission", "label_value": "allowed_with_conditions", "other_value": null,
+   "decision": "allowed_with_conditions", "confidence": "high",
+   "why": "The final judgment grants the application with the DRB's conditions plus the court's added basement condition.",
+   "evidence": [
+    {"doc": 2, "page": 7, "quote": "application is GRANTED, with the above conditions."},
+    {"doc": 2, "page": 6, "quote": "approval is hereby conditioned on Appellee-Applicants= either eliminating the basements from the building design,"}]},
+  {"fact": "appellants", "label_value": [{"name": "David Garen", "relationship": "unknown"}, {"name": "June Garen", "relationship": "unknown"}], "other_value": null,
+   "decision": [{"name": "David Garen", "relationship": "unknown", "seeks": "overturn_approval", "representation": "unknown"}, {"name": "June Garen", "relationship": "unknown", "seeks": "overturn_approval", "representation": "unknown"}],
+   "confidence": "high",
+   "why": "David and June Garen brought the appeal of the preliminary plat approval and later withdrew; the documents never say where they live or how they relate to the project, and no counsel is named for them, so relationship and representation stay unknown. Only the Desautels intervenors' home is located (on Venus Avenue), and they are not appellants of this docket.",
+   "evidence": [
+    {"doc": 2, "page": 1, "quote": "Appellants David and June Garen appealed from two decisions of the Development Review"},
+    {"doc": 2, "page": 1, "quote": "The original appellants withdrew"}]}
+ ],
+ "other_errors": []}

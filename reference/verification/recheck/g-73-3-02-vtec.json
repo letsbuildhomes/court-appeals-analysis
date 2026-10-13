@@ -1,0 +1,34 @@
+{"case": "g-73-3-02-vtec",
+ "decisions": [
+  {"fact": "litigation", "label_value": "resolved", "other_value": "ongoing",
+   "decision": "resolved", "confidence": "medium",
+   "why": "The order enters summary judgment for the Town in 73-3-02, disposing of the whole appeal of the house-permit denial; nothing in this docket is left to decide. The 'remaining issues' for the conference are the penalty/injunction timing in 102-5-02 (expressly deferred) and the septic appeal in S145-03 CnC, whose summary judgment was denied on disputed facts. The later correction per motion to alter still shows judgment for the Town in this docket.",
+   "evidence": [
+     {"doc": 1, "page": 3, "quote": "is on appeal in Docket No. 73-3-02 Vtec, Appellant= s motion for summary judgment must be DENIED and Summary Judgment must be GRANTED in favor of the Town."},
+     {"doc": 1, "page": 4, "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"},
+     {"doc": 1, "page": 4, "quote": "we will discuss whether a hearing should be scheduled on the timing of injunctive relief and the appropriateness or components of a monetary penalty"}
+   ]},
+  {"fact": "start", "label_value": {"date": "2003-05-15", "relation": "on_or_before"}, "other_value": {"date": "2003-06-09", "relation": "on_or_before"},
+   "decision": {"date": "2003-06-09", "relation": "on_or_before"}, "confidence": "high",
+   "why": "The Rodjenski affidavit is cited only for site facts and summary judgment was moved in all three cases, so its May 15, 2003 filing is not shown to be in this docket. No filing, DRB decision or other dated event is tied to the 73-3-02 appeal; the earliest dated event proving it existed is the June 9, 2003 decision itself.",
+   "evidence": [
+     {"doc": 1, "page": 1, "quote": "(See Exhibit A to the Rodjenski affidavit filed May 15, 2003.)"},
+     {"doc": 1, "page": 1, "quote": "Appellant has moved for summary judgment in all three cases."},
+     {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 9 day of June, 2003."}
+   ]},
+  {"fact": "end", "label_value": {"date": "2003-06-09", "relation": "exact"}, "other_value": "ongoing (no end)",
+   "decision": {"date": "2003-06-09", "relation": "exact"}, "confidence": "medium",
+   "why": "Consistent with litigation = resolved: the June 9, 2003 summary judgment for the Town is the final judgment in this docket. The later correction on motion to alter does not change the judgment and does not extend the duration.",
+   "evidence": [
+     {"doc": 1, "page": 4, "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"},
+     {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 9 day of June, 2003."}
+   ]},
+  {"fact": "duration", "label_value": {"kind": "at_least", "days": 25}, "other_value": null,
+   "decision": {"kind": "unknown", "days": "unknown"}, "confidence": "high",
+   "why": "With start 2003-06-09 on_or_before and end 2003-06-09 exact, the interval is a zero-day minimum, which the contract says establishes nothing (kind unknown, days unknown).",
+   "evidence": [
+     {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 9 day of June, 2003."}
+   ]}
+ ],
+ "other_errors": []
+}

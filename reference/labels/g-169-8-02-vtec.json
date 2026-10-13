@@ -350,6 +350,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Review standard unknown: not established"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Reread confirms decision date 2002 (which of two decisions this docket appeals is not stated) and review standard unknown."
   }
  ]
 }

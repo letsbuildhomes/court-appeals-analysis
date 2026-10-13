@@ -295,6 +295,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Representation unknown"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Reread confirms in scope (the 1990 PRD permit converts a duplex to three units, and an injunction bars the third until approved), decision in 2002, one added unit, start on or before 2002-08-31."
   }
  ]
 }

@@ -4,20 +4,20 @@
   "schema": "appeal-result-2",
   "case": "g-77-4-05-vtec",
   "disposition": {
-   "value": "in_scope",
-   "reason": "Developer appealed the Norwich DRB's denial of an after-the-fact zoning permit for a single-family dwelling on parcel 2; the dispute decides whether a residential use may lawfully exist on that lot at all, so it concerns permission for new housing.",
+   "value": "excluded",
+   "reason": "Developer appealed the Norwich DRB's denial of an after-the-fact zoning permit for a house built in 1999-2000. Neither decision says the dispute keeps anyone from living there; the consequences discussed are legal (lot merger, one residential use per lot), so under the guide it is not new housing.",
    "municipal_appeal": "yes",
-   "housing": "yes",
+   "housing": "no",
    "evidence": [
     {
      "doc": 1,
      "page": 1,
-     "quote": "Docket No. 77\u20104\u201005 Vtec concerns an appeal filed by Developer from a decision of the Town of Norwich Development Review Board (DRB), denying his application for"
+     "quote": "Docket No. 77‐4‐05 Vtec concerns an appeal filed by Developer from a decision of the Town of Norwich Development Review Board (DRB), denying his application for"
     },
     {
      "doc": 1,
      "page": 2,
-     "quote": "an after\u2010the\u2010fact zoning permit to construct a single\u2010family dwelling at 84 Elm Street."
+     "quote": "an after‐the‐fact zoning permit to construct a single‐family dwelling at 84 Elm Street."
     },
     {
      "doc": 2,
@@ -26,270 +26,7 @@
     }
    ]
   },
-  "records": [
-   {
-    "docket": "77-4-05 Vtec",
-    "project": {
-     "description": "After-the-fact zoning permit for a two-story L-shaped single-family house already built (1999-2000) on parcel 2 at 84 Elm Street, Village Residential district.",
-     "municipality": "Norwich",
-     "proposed_units": 1,
-     "proposed_lots": "unknown",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 4,
-       "quote": "In his 2005 application, Developer seeks permit approval for the previously constructed \u201cL\u2010shaped\u201d single\u2010family residence on parcel 2."
-      },
-      {
-       "doc": 1,
-       "page": 4,
-       "quote": "Developer constructed a single\u2010family dwelling on parcel 2 in 1999\u20102000 without first obtaining a final determination"
-      },
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "the residential development of a parcel of land in the Town of Norwich (Town)."
-      }
-     ]
-    },
-    "municipal_decision": {
-     "description": "The DRB granted Neighbor's appeal of the Zoning Administrator's January 18, 2005 approval and overturned the permit, denying the application.",
-     "date": "2005-04-01",
-     "outcome": "denied",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 5,
-       "quote": "Neighbor appealed that approval to the DRB, which granted his appeal and overturned the permit approval by its Decision on April 1, 2005."
-      }
-     ]
-    },
-    "appellants": [
-     {
-      "name": "Paul Nowicki",
-      "relationship": "developer",
-      "seeks": "overturn_denial",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "Appellant Paul Nowicki (hereinafter Developer) is represented by Gerald R. Tarrant, Esq.;"
-       },
-       {
-        "doc": 1,
-        "page": 5,
-        "quote": "Developer filed his notice of appeal of the DRB\u2019s denial with this Court on April 15, 2005."
-       }
-      ]
-     }
-    ],
-    "discretion": {
-     "description": "The appeal turned on statutory interpretation of the existing-small-lot provision (24 V.S.A. 4412(2)), merger of parcels, which law applies, and the fixed rule allowing one residential use per lot.",
-     "involved": "no",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 3,
-       "quote": "The parties\u2019 disputes center for the most part on the interpretation of the applicable legal standards."
-      },
-      {
-       "doc": 2,
-       "page": 1,
-       "quote": "As the issue is a legal one, we review it de novo on appeal."
-      },
-      {
-       "doc": 1,
-       "page": 15,
-       "quote": "the separate development of parcel 2 is prohibited by \u00a7 10.1.3 of the Zoning Regulations, which forbids more than one residential use per lot."
-      }
-     ],
-     "central": "not_applicable",
-     "central_evidence": []
-    },
-    "observed_status": {
-     "litigation": "resolved",
-     "permission": "denied",
-     "description": "Permit denied; the Environmental Court granted Neighbor summary judgment and the Supreme Court affirmed. A separate enforcement action (another docket) remained pending.",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 17,
-       "quote": "Neighbor\u2019s cross\u2010motion for summary judgment in Docket No. 77\u20104\u201005 Vtec is GRANTED, as Developer\u2019s zoning permit application cannot be granted under any factual scenario"
-      },
-      {
-       "doc": 2,
-       "page": 3,
-       "quote": "Affirmed."
-      }
-     ]
-    },
-    "timeline": [
-     {
-      "kind": "filing",
-      "date": "2005-04-15",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "77-4-05 Vtec"
-      ],
-      "description": "Developer filed notice of appeal of the DRB denial.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 5,
-        "quote": "Developer filed his notice of appeal of the DRB\u2019s denial with this Court on April 15, 2005."
-       }
-      ]
-     },
-     {
-      "kind": "judgment",
-      "date": "2006-06-08",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "77-4-05 Vtec",
-       "156-8-05 Vtec",
-       "220-10-05 Vtec"
-      ],
-      "description": "Summary judgment granted to Neighbor; Developer's cross-motion denied; permit cannot be granted.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 18,
-        "quote": "Developer\u2019s cross\u2010motion for summary judgment in Docket No. 77\u20104\u201005 Vtec is DENIED for the same reasons."
-       },
-       {
-        "doc": 1,
-        "page": 18,
-        "quote": "Done at Berlin, Vermont, this 8th day of June, 2006."
-       }
-      ]
-     },
-     {
-      "kind": "further_appeal",
-      "date": "unknown",
-      "court_or_body": "Vermont Supreme Court",
-      "dockets": [
-       "2006-283"
-      ],
-      "description": "Nowicki appealed the Environmental Court decision to the Supreme Court.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 1,
-        "quote": "Appellant Nowicki appeals the decision of the Environmental Court that two adjoining lots have merged for purposes of development"
-       }
-      ]
-     },
-     {
-      "kind": "resolution",
-      "date": "2007",
-      "court_or_body": "Vermont Supreme Court",
-      "dockets": [
-       "2006-283"
-      ],
-      "description": "Supreme Court affirmed (2007 VT 76, May Term 2007).",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 1,
-        "quote": "MAY TERM, 2007"
-       },
-       {
-        "doc": 2,
-        "page": 3,
-        "quote": "Affirmed."
-       }
-      ]
-     }
-    ],
-    "duration": {
-     "start": {
-      "date": "2005-04-15",
-      "relation": "exact",
-      "description": "Notice of appeal filed in Environmental Court.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 5,
-        "quote": "Developer filed his notice of appeal of the DRB\u2019s denial with this Court on April 15, 2005."
-       }
-      ]
-     },
-     "end": {
-      "date": "2007-05-01",
-      "relation": "on_or_after",
-      "description": "Supreme Court entry order affirming, issued in its May Term 2007; exact date not shown.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 1,
-        "quote": "MAY TERM, 2007"
-       },
-       {
-        "doc": 2,
-        "page": 3,
-        "quote": "Affirmed."
-       }
-      ]
-     },
-     "note": "Review chain concluded with the Supreme Court's affirmance, but its exact date is not in the text; the May Term 2007 heading bounds it from below.",
-     "kind": "at_least",
-     "days": 746
-    },
-    "restrictions": [],
-    "housing_changes": [],
-    "related_dockets": [
-     {
-      "docket": "156-8-05 Vtec",
-      "relationship": "Neighbor's private enforcement action over the same house, decided in the same Environmental Court decision",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "The second matter, Docket No. 156\u20108\u201005 Vtec, is best described as a private enforcement action initiated by Neighbor against Developer"
-       }
-      ]
-     },
-     {
-      "docket": "220-10-05 Vtec",
-      "relationship": "Neighbor's appeal of the DRB's refusal to pursue enforcement, dismissed in the same decision",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 18,
-        "quote": "Lastly, the appeal in Docket No. 220\u201010\u201005 Vtec is hereby DISMISSED for reasons of judicial economy."
-       }
-      ]
-     },
-     {
-      "docket": "2006-283",
-      "relationship": "Supreme Court appeal of this docket's decision",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 1,
-        "quote": "SUPREME COURT DOCKET NO. 2006-283"
-       }
-      ]
-     },
-     {
-      "docket": "unknown",
-      "relationship": "Earlier appeal of Developer's 1999 permit for a house on parcel 2 (Richards I and Richards II)",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 4,
-        "quote": "In September 1999, Developer first applied for a zoning permit to construct another house on parcel 2."
-       }
-      ]
-     }
-    ],
-    "appeal_review": {
-     "standard": "unknown",
-     "evidence": []
-    }
-   }
-  ]
+  "records": []
  },
  "labeled": {
   "case": [
@@ -297,55 +34,18 @@
    "municipal_appeal",
    "housing"
   ],
-  "records": {
-   "77-4-05 Vtec": "all"
-  }
+  "records": {}
  },
  "judgments": [
   {
    "field": "disposition",
-   "confidence": "medium",
-   "note": "Clearly a municipal appeal. Housing rests on the after-the-fact row: the house exists, but the ruling that only one residential use is allowed per lot means its lawful residential use is what is at stake, not a mere paperwork permit. Occupancy is not stated in so many words."
+   "confidence": "high",
+   "note": "Reread: no passage puts occupancy at stake, so an after-the-fact permit is not new housing under the user's rule."
   },
   {
    "field": "housing",
-   "confidence": "medium",
-   "note": "After-the-fact permit for an existing house; treated as occupancy at stake because denial bars the residential use of parcel 2 and an enforcement action over the house followed."
-  },
-  {
-   "field": "duration",
-   "confidence": "medium",
-   "note": "Start exact (April 15, 2005 notice of appeal). The Supreme Court's affirmance is the conclusion but undated beyond 'May Term, 2007', so end is on_or_after 2007-05-01; at_least 746 days."
-  },
-  {
-   "field": "end",
-   "confidence": "medium",
-   "note": "Lower bound taken from the Supreme Court's May Term 2007 heading; the actual order date is not in the text."
-  },
-  {
-   "field": "lots",
-   "confidence": "medium",
-   "note": "No subdivision proposed, but the documents never state that no lots are created; developer sought to treat parcel 2 as a separate lot, so left unknown."
-  },
-  {
-   "field": "units",
    "confidence": "high",
-   "note": "One single-family dwelling; existing physical house is not authorization, so counted as the proposed unit."
-  },
-  {
-   "field": "discretion_involved",
-   "confidence": "high",
-   "note": "All Statement of Questions issues are statutory interpretation and fixed rules (lot merger, one residential use per lot); the takings claim is legal too."
-  },
-  {
-   "field": "related",
-   "confidence": "high",
-   "note": "Shared Environmental Court decision also decides 156-8-05 and 220-10-05; nothing from those dockets is carried into this record beyond naming them."
-  },
-  {
-   "field": "review_standard",
-   "confidence": "medium",
-   "note": "No statement of the Environmental Court's standard; the Supreme Court's de novo concerns its own review"
+   "note": "Reread: no passage puts occupancy at stake, so an after-the-fact permit is not new housing under the user's rule."
   }
  ],
  "disputed": [],
@@ -362,6 +62,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Review standard unknown: not established"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Excluded on reread under the user's housing rules"
   }
  ]
 }

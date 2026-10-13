@@ -2,7 +2,8 @@
 
 About 60 cases with hand-checked answers, which experiments are scored
 against (`lab new --reference`). The code is `court/reference/workspace.py`;
-the commands are `python -m court reference freeze|pools|check|export`.
+the commands are `python -m court reference
+freeze|pools|packets|check|approve|export`.
 
 ## How the cases are chosen
 
@@ -27,20 +28,59 @@ targeted layer finds failure modes.
 
 ## How a case is labeled
 
+The instructions each reader follows are in `process/`: `LABELER.md`,
+`VERIFIER.md` and `RECHECK.md`. Readers work from each case's text,
+written to `data/reference/packets/` by `reference packets`.
+
 1. **Label.** A strong model reads the whole case and writes
-   `labels/CASE.json` following `GUIDE.md`, without seeing any pipeline's
-   answers.
+   `labels/CASE.json` following `GUIDE.md` and `process/LABELER.md`, without
+   seeing any pipeline's answers.
 2. **Check.** `reference check` validates the result against the contract,
    that records are for the case's own docket, the labeled-fact lists, and
    every quotation against the frozen text.
 3. **Verify.** A second, independent reader answers the low-confidence and key
    facts (scope, outcome, dates, units, review standard); a quick reader checks
    the rest.
-4. **Adjudicate.** Disagreements are settled by rereading the source, or left
-   `disputed`, which removes them from scoring.
-5. **Approve.** A person reviews; `reference export` writes approved labels.
+4. **Adjudicate.** Every disagreement is settled by rereading the source
+   (`process/RECHECK.md`; the rereads are kept in `verification/recheck/`).
+   A finished label has no disputed facts and no uncertain scope, and
+   `reference check` rejects either.
+5. **Approve.** A person reviews in the web app's Reference section (each
+   case's answers beside the text they cite); `reference approve` marks the
+   verified labels approved, and `reference export` writes them as datasets.
 
 Statuses in `manifest.json`: chosen → labeled → verified → approved.
+
+## Exporting
+
+```sh
+python -m court reference export                                   # every approved case, named "reference"
+python -m court reference export --split development --name reference
+python -m court reference export --split holdout --name reference
+```
+
+The split exports are named `reference-development` and `reference-holdout`.
+An experiment records the dataset ID it was created with, so exporting again
+moves the names to the new dataset without changing earlier experiments.
+
+## Adding cases
+
+To add, say, ten more in-scope cases:
+
+1. Add a target to `profile.json`, such as `{"split": "development",
+   "layer": "targeted", "category": "more-in-scope", "count": 10}`, and raise
+   `total`.
+2. Choose candidates from `pools/` (for in-scope cases, `random-in-scope` and
+   `high-unknown`), skipping any already in `manifest.json`. Read each before
+   choosing: under the guide's definition many cases the legacy run called in
+   scope are excluded. Held-back and development cases may not share a
+   document; `reference check` enforces it.
+3. Add a row per case to `manifest.json` with status `chosen` (copy an
+   existing row's shape: split, layer, category, reason, hints).
+4. `python -m court reference packets --case A,B,C` writes their texts.
+5. Label, check, verify and adjudicate as above, moving each status along.
+6. Review them in the web app, then `reference approve --case A,B,C` and
+   export again.
 
 ## Source
 

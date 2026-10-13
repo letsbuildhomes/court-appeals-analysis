@@ -4,10 +4,10 @@
   "schema": "appeal-result-2",
   "case": "g-143-7-08-vtec",
   "disposition": {
-   "value": "in_scope",
-   "reason": "Docket 143-7-08 Vtec is the Benoits' appeal of the DRB's denial of permits to convert the main building back to four units and authorize the rear building as a residential unit. That dwelling's residential use had been enjoined, so the after-the-fact permission decides whether it may be occupied.",
+   "value": "excluded",
+   "reason": "The Benoits appealed the DRB's denial of permits to convert the main building back from five to four units and legalize an existing rear dwelling. The net unit count is unchanged and nothing new is built, so it is not new housing.",
    "municipal_appeal": "yes",
-   "housing": "yes",
+   "housing": "no",
    "evidence": [
     {
      "doc": 2,
@@ -31,295 +31,7 @@
     }
    ]
   },
-  "records": [
-   {
-    "docket": "143-7-08 Vtec",
-    "project": {
-     "description": "At 53 High Street, a permit to convert the main apartment building back from five to four units, plus after-the-fact permission to use the rear building (a former nursery school, converted in 1987 without permits and later enjoined from residential use) as one residential unit; the rear unit in effect replaces the fifth main-building unit.",
-     "municipality": "St. Albans (City)",
-     "proposed_units": 1,
-     "proposed_lots": "unknown",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "located at 53 High Street in St. Albans, Vermont"
-      },
-      {
-       "doc": 2,
-       "page": 8,
-       "quote": "a permit to convert the main apartment building back to four units"
-      },
-      {
-       "doc": 2,
-       "page": 8,
-       "quote": "a permit authorizing the use of the rear building as a residential unit"
-      },
-      {
-       "doc": 2,
-       "page": 3,
-       "quote": "in 1987 they converted the rear building from a nursery school into a sixth residential unit"
-      }
-     ]
-    },
-    "municipal_decision": {
-     "description": "The City of St. Albans Development Review Board denied the Benoits' application to convert the main building to four units and use the rear building as a residential unit.",
-     "date": "unknown",
-     "outcome": "denied",
-     "evidence": [
-      {
-       "doc": 2,
-       "page": 8,
-       "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court"
-      }
-     ]
-    },
-    "appellants": [
-     {
-      "name": "Gregory Benoit",
-      "relationship": "developer",
-      "seeks": "overturn_denial",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "Property owners Gregory and Deborah Benoit"
-       },
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court"
-       },
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Appellants are represented by Michael S. Gawne, Esq."
-       }
-      ]
-     },
-     {
-      "name": "Deborah Benoit",
-      "relationship": "developer",
-      "seeks": "overturn_denial",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "Property owners Gregory and Deborah Benoit"
-       },
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court"
-       },
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Appellants are represented by Michael S. Gawne, Esq."
-       }
-      ]
-     }
-    ],
-    "discretion": {
-     "description": "The grounds of the appeal of the DRB denial are not stated; it settled before trial. The 2021 reopening turned on Rule 60(b) and the statute of limitations, which are legal questions, not the merits of the permit.",
-     "involved": "unknown",
-     "evidence": [],
-     "central": "unknown",
-     "central_evidence": []
-    },
-    "observed_status": {
-     "litigation": "resolved",
-     "permission": "allowed_with_conditions",
-     "description": "A stipulated judgment allowed residential use of the rear building with only four units rented in the main building. A 2021 joint motion to allow six units was denied, as was reconsideration, and nothing is shown pending.",
-     "evidence": [
-      {
-       "doc": 2,
-       "page": 8,
-       "quote": "reached a settlement agreement that allowed the Benoits to use the rear building as a residential unit so long as they only rented four"
-      },
-      {
-       "doc": 2,
-       "page": 8,
-       "quote": "That agreement was entered as a stipulated judgment and order by the Environmental Court."
-      },
-      {
-       "doc": 2,
-       "page": 16,
-       "quote": "Therefore, that motion is DENIED."
-      }
-     ]
-    },
-    "timeline": [
-     {
-      "kind": "filing",
-      "date": "unknown",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "143-7-08 Vtec"
-      ],
-      "description": "The Benoits appealed the DRB denial to the Environmental Court.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court"
-       }
-      ]
-     },
-     {
-      "kind": "resolution",
-      "date": "2009-02-05",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "143-7-08 Vtec"
-      ],
-      "description": "Before trial, a settlement between the City and the Benoits was entered as a stipulated judgment and order.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "That agreement was entered as a stipulated judgment and order by the Environmental Court."
-       },
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "No. 143-7-08 Vtec, slip op. (Vt. Envtl. Ct. Feb. 5, 2009)"
-       }
-      ]
-     },
-     {
-      "kind": "reopening",
-      "date": "2020-12-23",
-      "court_or_body": "Vermont Superior Court, Environmental Division",
-      "dockets": [
-       "143-7-08 Vtec",
-       "148-8-04 Vtec",
-       "126-7-04 Vtec"
-      ],
-      "description": "The Benoits and the City filed a proposed joint stipulation seeking to modify the 2007 enforcement order so that six units could be used.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "resulting in a total of 6 dwelling units. See Proposed Stipulation filed on Dec. 23, 2020"
-       }
-      ]
-     },
-     {
-      "kind": "judgment",
-      "date": "2021-04-20",
-      "court_or_body": "Vermont Superior Court, Environmental Division",
-      "dockets": [
-       "143-7-08 Vtec",
-       "148-8-04 Vtec",
-       "126-7-04 Vtec"
-      ],
-      "description": "The court declined to adopt the joint stipulation, denying relief under Rule 60(b)(5).",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 11,
-        "quote": "Thus, as Appellants have not demonstrated a sufficient change in the law or circumstances, we"
-       },
-       {
-        "doc": 1,
-        "page": 12,
-        "quote": "Electronically signed on April 20, 2021 at Newfane, Vermont"
-       }
-      ]
-     },
-     {
-      "kind": "resolution",
-      "date": "2021-10-14",
-      "court_or_body": "Vermont Superior Court, Environmental Division",
-      "dockets": [
-       "143-7-08 Vtec",
-       "148-8-04 Vtec",
-       "126-7-04 Vtec"
-      ],
-      "description": "The court denied the Benoits' motion for reconsideration filed May 12, 2021.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 16,
-        "quote": "Therefore, that motion is DENIED."
-       },
-       {
-        "doc": 2,
-        "page": 17,
-        "quote": "Electronically signed on October 14, 2021, at Newfane, Vermont"
-       }
-      ]
-     }
-    ],
-    "duration": {
-     "start": {
-      "date": "2009-02-05",
-      "relation": "on_or_before",
-      "description": "The filing date is not given; the stipulated judgment of February 5, 2009 proves the appeal existed by then.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 8,
-        "quote": "No. 143-7-08 Vtec, slip op. (Vt. Envtl. Ct. Feb. 5, 2009)"
-       }
-      ]
-     },
-     "end": {
-      "date": "2021-10-14",
-      "relation": "exact",
-      "description": "Denial of the motion for reconsideration of the reopened matter; nothing is shown pending.",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 16,
-        "quote": "Therefore, that motion is DENIED."
-       },
-       {
-        "doc": 2,
-        "page": 17,
-        "quote": "Electronically signed on October 14, 2021, at Newfane, Vermont"
-       }
-      ]
-     },
-     "note": "The start is the earliest dated event, because the filing is undated. The end includes the 2021 reopening captioned under this docket, which was resolved in October 2021.",
-     "kind": "at_least",
-     "days": 4634
-    },
-    "restrictions": [],
-    "housing_changes": [],
-    "related_dockets": [
-     {
-      "docket": "126-7-04 Vtec",
-      "relationship": "City's enforcement action (Hayford I) that enjoined residential use of the rear building; the 2021 decisions shared with this docket also decide it",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 6,
-        "quote": "the Zoning Administrator re-filed the enforcement action with the Environmental Court, Docket No. 126-7-04 Vtec"
-       }
-      ]
-     },
-     {
-      "docket": "148-8-04 Vtec",
-      "relationship": "Benoits' earlier appeal of the DRB denial of after-the-fact approval for the rear unit; the 2021 decisions shared with this docket also decide it",
-      "evidence": [
-       {
-        "doc": 2,
-        "page": 6,
-        "quote": "The DRB denied their application in July 2004, and they appealed to the Environmental Court as Docket No. 148-8-04 Vtec."
-       }
-      ]
-     }
-    ],
-    "appeal_review": {
-     "standard": "unknown",
-     "evidence": []
-    }
-   }
-  ]
+  "records": []
  },
  "labeled": {
   "case": [
@@ -327,82 +39,22 @@
    "municipal_appeal",
    "housing"
   ],
-  "records": {
-   "143-7-08 Vtec": "all"
-  }
+  "records": {}
  },
  "judgments": [
   {
    "field": "disposition",
-   "confidence": "medium",
-   "note": "The appeal of the DRB denial is a municipal appeal. Housing: the rear building's residential use was enjoined, and the permit sought would authorize it. That matches the after-the-fact permit where occupancy is at stake. But no construction is described, and the application swaps one main-building unit for the rear unit, so the net count stays five."
+   "confidence": "high",
+   "note": "Person ruling: no new construction and no net new units is not new housing."
   },
   {
    "field": "housing",
-   "confidence": "medium",
-   "note": "See disposition; the alternative reading is a change of use without construction (no)."
-  },
-  {
-   "field": "units",
-   "confidence": "medium",
-   "note": "One rear-building dwelling is newly authorized, replacing the fifth unit in the main building; counted as 1 (replacement)."
-  },
-  {
-   "field": "lots",
    "confidence": "high",
-   "note": "No subdivision is mentioned, but nothing states that no lots are created, so the answer is unknown."
-  },
-  {
-   "field": "decision_date",
-   "confidence": "high",
-   "note": "The DRB denial is undated in the documents; it came after the February 2007 Hayford I decision."
-  },
-  {
-   "field": "review_standard",
-   "confidence": "high",
-   "note": "The appeal settled before trial. Neither document says whether it would have been heard de novo or on the record."
-  },
-  {
-   "field": "duration",
-   "confidence": "medium",
-   "note": "The filing is undated, so the start is on_or_before the February 5, 2009 stipulated judgment. The end counts the 2021 reopening as part of this docket, because the 2021 decisions are captioned 'In re Benoit Conversion Application, No. 143-7-08 Vtec' and call it 'the reopening of this matter'. Substantively that motion sought relief from the 126-7-04 enforcement judgment. If the reopening is excluded, the end is the exact 2009 resolution, and the zero-day interval makes the duration unknown."
-  },
-  {
-   "field": "end",
-   "confidence": "medium",
-   "note": "See duration."
-  },
-  {
-   "field": "litigation",
-   "confidence": "high",
-   "note": "The 2009 stipulated judgment resolved the appeal. The 2021 reopening ended with reconsideration denied, and nothing is shown pending."
-  },
-  {
-   "field": "representation",
-   "confidence": "medium",
-   "note": "Counsel (Gawne) is named for the Benoits in the 2021 proceeding under this caption. Representation in 2008-2009 is not stated."
-  },
-  {
-   "field": "discretion_involved",
-   "confidence": "high",
-   "note": "The appeal grounds are not described."
-  },
-  {
-   "field": "related",
-   "confidence": "high",
-   "note": "Lists the other two dockets that the shared decisions decide. Older proceedings (161-9-03, 154-9-01, the Supreme Court's 2008 VT 36) are background to those dockets, not to this one."
-  },
-  {
-   "field": "permission",
-   "confidence": "medium",
-   "note": "The stipulated judgment allows the rear unit only with four units in the main building"
+   "note": "Person ruling: no new construction and no net new units is not new housing."
   }
  ],
  "disputed": [],
- "questions": [
-  "Housing definition: the Benoits sought to convert the main building back from five to four units and legalize an existing rear dwelling whose use had been enjoined, so the net unit count is unchanged and no construction is described. Labeled housing=yes under the after-the-fact-permit-preventing-occupancy rule; confirm that this swap counts as new housing.",
-  "Should the 2021 joint motion, filed under all three captions but seeking relief from the 126-7-04 enforcement judgment, count as a reopening of this docket for duration? Counting it gives at least 4634 days; excluding it leaves the duration unknown."
- ],
+ "questions": [],
  "history": [
   {
    "step": "labeled",
@@ -421,6 +73,18 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Permission allowed with conditions"
+  },
+  {
+   "step": "adjudicated",
+   "by": "person",
+   "at": "2026-10-13T14:02:49+00:00",
+   "note": "Duration ends at the 2009 final judgment; post-judgment reopening not counted"
+  },
+  {
+   "step": "adjudicated",
+   "by": "person",
+   "at": "2026-10-13T15:10:18+00:00",
+   "note": "Not new housing; excluded"
   }
  ]
 }

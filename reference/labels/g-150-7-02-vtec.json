@@ -4,142 +4,69 @@
     "schema": "appeal-result-2",
     "case": "g-150-7-02-vtec",
     "disposition": {
-      "value": "in_scope",
-      "reason": "A neighbor appealed the St. Albans ZBA's decision on an application for a right-of-way extension whose stated purpose is to serve a new two-lot subdivision for two single-family dwellings; the court decided that application. The subdivision approval itself was held not to be before the court, so housing rests on the access permit being permission for new house lots.",
+      "value": "excluded",
+      "reason": "A neighbor appealed the St. Albans ZBA's approval of a right-of-way extension meant to serve a future two-lot subdivision. The court says the subdivision itself is not before it, and access work that precedes a subdivision is not new housing.",
       "municipal_appeal": "yes",
-      "housing": "yes",
+      "housing": "no",
       "evidence": [
-        {"doc": 1, "page": 1, "quote": "Appellant Susan M. Coleman appealed from the June 13, 2002 decision of the Zoning Board of Adjustment (ZBA) of the Town of St. Albans"},
-        {"doc": 1, "page": 1, "quote": "request approval of A a 50' ROW extension to serve a 2-lot subdivision per Section 400 &amp; 401."},
-        {"doc": 1, "page": 1, "quote": "which he wishes to divide into two lots, one 2.6 acres in area and the other 1.2 acres in area."},
-        {"doc": 1, "page": 2, "quote": "proposed right-of-way extension will only serve two single-family dwellings"}
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "Appellant Susan M. Coleman appealed from the June 13, 2002 decision of the Zoning Board of Adjustment (ZBA) of the Town of St. Albans"
+        },
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "request approval of A a 50' ROW extension to serve a 2-lot subdivision per Section 400 &amp; 401."
+        },
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "which he wishes to divide into two lots, one 2.6 acres in area and the other 1.2 acres in area."
+        },
+        {
+          "doc": 1,
+          "page": 2,
+          "quote": "proposed right-of-way extension will only serve two single-family dwellings"
+        }
       ]
     },
-    "records": [
-      {
-        "docket": "150-7-02 Vtec",
-        "project": {
-          "description": "Extension of a 50-foot right-of-way past the appellant's driveway to serve a proposed two-lot subdivision (2.6 and 1.2 acres) for two single-family dwellings; the court treated only the right-of-way extension, not the subdivision approval, as before it.",
-          "municipality": "St. Albans (Town)",
-          "proposed_units": 2,
-          "proposed_lots": 2,
-          "evidence": [
-            {"doc": 1, "page": 1, "quote": "which he wishes to divide into two lots, one 2.6 acres in area and the other 1.2 acres in area."},
-            {"doc": 1, "page": 2, "quote": "proposed right-of-way extension will only serve two single-family dwellings"},
-            {"doc": 1, "page": 2, "quote": "any application for approval of the two-lot subdivision itself is not before the Court in the current appeal."}
-          ]
-        },
-        "municipal_decision": {
-          "description": "June 13, 2002 decision of the Town of St. Albans ZBA on Marcel Lebel's application for a 50-foot right-of-way extension; the decision was not provided to the court and its outcome is not stated.",
-          "date": "2002-06-13",
-          "outcome": "unknown",
-          "evidence": [
-            {"doc": 1, "page": 1, "quote": "appealed from the June 13, 2002 decision of the Zoning Board of Adjustment (ZBA) of the Town of St. Albans regarding an application filed by Appellee- Applicant Marcel Lebel."},
-            {"doc": 1, "page": 2, "quote": "did not provide the Court with the decision appealed from"}
-          ]
-        },
-        "appellants": [
-          {
-            "name": "Susan M. Coleman",
-            "relationship": "neighbor",
-            "seeks": "overturn_approval",
-            "representation": "pro_se",
-            "evidence": [
-              {"doc": 1, "page": 1, "quote": "Appellant appeared and represented herself"},
-              {"doc": 1, "page": 1, "quote": "Appellant's lot is one of several on a separate road spur off the main Lebel Drive."},
-              {"doc": 1, "page": 2, "quote": "The Court finds the testimony of Appellant= s engineer to be convincing that runoff from the proposed driveway for Lot 1"}
-            ]
-          }
-        ],
-        "discretion": {
-          "description": "The appellant challenged the right-of-way extension because of its effect on her well (state isolation distance) and runoff from the proposed driveway and snow storage onto her well and property; the court also noted the bylaw right-of-way width rules. The municipal test applied to the runoff concern is not stated.",
-          "involved": "unknown",
-          "evidence": [
-            {"doc": 1, "page": 2, "quote": "the edge of that roadway would be only 202 feet from Appellant= s well, less than the minimum distance required by state well-location regulations."},
-            {"doc": 1, "page": 2, "quote": "runoff from the proposed driveway for Lot 1 and the proposed location for snow storage will potentially affect Appellant= s well."}
-          ],
-          "central": "unknown",
-          "central_evidence": []
-        },
-        "observed_status": {
-          "litigation": "resolved",
-          "permission": "denied",
-          "description": "The court denied the application to extend the right-of-way without prejudice to reapplying to the ZBA with a revised design; no further proceeding is shown pending.",
-          "evidence": [
-            {"doc": 1, "page": 3, "quote": "application to extend a 50-foot right-of-way to serve two additional lots is DENIED, without prejudice to his reapplying to the ZBA"}
-          ]
-        },
-        "timeline": [
-          {
-            "kind": "filing",
-            "date": "unknown",
-            "court_or_body": "Vermont Environmental Court",
-            "dockets": ["150-7-02 Vtec"],
-            "description": "Susan M. Coleman appealed the ZBA's June 13, 2002 decision; filing date not stated.",
-            "evidence": [
-              {"doc": 1, "page": 1, "quote": "Appellant Susan M. Coleman appealed from the June 13, 2002 decision of the Zoning Board of Adjustment (ZBA)"}
-            ]
-          },
-          {
-            "kind": "resolution",
-            "date": "2003-05-12",
-            "court_or_body": "Vermont Environmental Court",
-            "dockets": ["150-7-02 Vtec"],
-            "description": "After an evidentiary hearing, the court denied the right-of-way extension application without prejudice to reapplication.",
-            "evidence": [
-              {"doc": 1, "page": 3, "quote": "application to extend a 50-foot right-of-way to serve two additional lots is DENIED"},
-              {"doc": 1, "page": 3, "quote": "Dated at Barre, Vermont, this 12th day of May, 2003."}
-            ]
-          }
-        ],
-        "duration": {
-          "start": {
-            "date": "2003-05-12",
-            "relation": "on_or_before",
-            "description": "The filing date is not stated; the only dated event proving the appeal existed is the May 12, 2003 decision.",
-            "evidence": [
-              {"doc": 1, "page": 3, "quote": "Dated at Barre, Vermont, this 12th day of May, 2003."}
-            ]
-          },
-          "end": {
-            "date": "2003-05-12",
-            "relation": "exact",
-            "description": "Decision and order denying the application, concluding the appeal.",
-            "evidence": [
-              {"doc": 1, "page": 3, "quote": "Dated at Barre, Vermont, this 12th day of May, 2003."}
-            ]
-          },
-          "note": "No court filing date is given (the docket number is not used to date it), so the start can only be bounded by the decision itself; the zero-day minimum establishes nothing.",
-          "kind": "unknown",
-          "days": "unknown"
-        },
-        "restrictions": [],
-        "housing_changes": [],
-        "related_dockets": [],
-        "appeal_review": {
-          "standard": "de_novo",
-          "evidence": [
-            {"doc": 1, "page": 1, "quote": "An evidentiary hearing was held in this matter before Merideth Wright, Environmental Judge."},
-            {"doc": 1, "page": 1, "quote": "Upon consideration of the evidence and the written memoranda, the Court finds and concludes as follows."},
-            {"doc": 1, "page": 3, "quote": "application to extend a 50-foot right-of-way to serve two additional lots is DENIED"}
-          ]
-        }
-      }
-    ]
+    "records": []
   },
-  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"150-7-02 Vtec": "all"}},
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {}
+  },
   "judgments": [
-    {"field": "disposition", "confidence": "medium", "note": "Municipal appeal is clear. Housing is yes because the application is a right-of-way extension whose stated purpose is to serve a new two-lot subdivision for two single-family dwellings (new house lots); but the court says the subdivision approval itself is not before it, so a reader could treat this as access/road work only."},
-    {"field": "housing", "confidence": "medium", "note": "See disposition: the permit at issue is access for two new house lots, not the subdivision approval itself."},
-    {"field": "review_standard", "confidence": "medium", "note": "The words 'de novo' do not appear, but the court held an evidentiary hearing, made its own findings without having the ZBA decision, and itself denied the application; no on-the-record procedure is mentioned."},
-    {"field": "duration", "confidence": "high", "note": "No filing date is stated; start is bounded only by the May 12, 2003 decision, which is also the end, so the zero-day minimum is unknown."},
-    {"field": "decision_outcome", "confidence": "medium", "note": "The ZBA decision was not provided to the court and its outcome is never stated; a neighbor's appeal suggests approval but this is not established."},
-    {"field": "appellants", "confidence": "medium", "note": "Coleman is the neighbor appellant and represented herself. seeks=overturn_approval is inferred from her opposing the application (her engineer's testimony against it) and appealing; the ZBA outcome itself is not stated."},
-    {"field": "units", "confidence": "medium", "note": "The court states the right-of-way will only serve two single-family dwellings on the two proposed lots; counted as 2, though the subdivision itself was not before the court."},
-    {"field": "lots", "confidence": "medium", "note": "The parcel is to be divided into two new lots (2.6 and 1.2 acres) with no existing housing; subdivision approval not before the court."},
-    {"field": "discretion_involved", "confidence": "low", "note": "Contentions concern well isolation distance (fixed state rule) and runoff affecting her well; the municipal standard applied to runoff is not stated, so unknown."}
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "Person ruling: the subdivision is the earliest decision that counts as new housing; an access approval that precedes it does not."
+    },
+    {
+      "field": "housing",
+      "confidence": "high",
+      "note": "Person ruling: the subdivision is the earliest decision that counts as new housing; an access approval that precedes it does not."
+    }
   ],
   "disputed": [],
-  "questions": ["Should a right-of-way/access approval whose sole stated purpose is to serve a proposed two-lot residential subdivision count as new housing when the court says the subdivision approval itself is not before it?"],
-  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T12:00:00Z", "note": "Labeled from the single decision; in scope with medium confidence on housing."}]
+  "questions": [],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T12:00:00Z",
+      "note": "Labeled from the single decision; in scope with medium confidence on housing."
+    },
+    {
+      "step": "adjudicated",
+      "by": "person",
+      "at": "2026-10-13T14:02:49+00:00",
+      "note": "Access approval preceding a subdivision is not housing; excluded"
+    }
+  ]
 }

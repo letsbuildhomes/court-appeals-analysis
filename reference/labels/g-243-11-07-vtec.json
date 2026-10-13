@@ -4,10 +4,10 @@
   "schema": "appeal-result-2",
   "case": "g-243-11-07-vtec",
   "disposition": {
-   "value": "uncertain",
-   "reason": "The docket appeals a Georgia Planning Commission preliminary plat determination for a 5-lot subdivision, so it is a municipal appeal; but the documents never say the lots are for houses or describe any residential use, so new housing is not established.",
+   "value": "excluded",
+   "reason": "An appeal of the Georgia Planning Commission's preliminary plat for a 5-lot subdivision. The documents never say the lots are for housing, so it is not new housing.",
    "municipal_appeal": "yes",
-   "housing": "unknown",
+   "housing": "no",
    "evidence": [
     {
      "doc": 1,
@@ -26,262 +26,7 @@
     }
    ]
   },
-  "records": [
-   {
-    "docket": "243-11-07 Vtec",
-    "project": {
-     "description": "Perras & Sons Inc. 5-lot subdivision, preliminary plat; the use of the lots is not stated.",
-     "municipality": "Georgia",
-     "proposed_units": "unknown",
-     "proposed_lots": "unknown",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "Perras &amp; Sons Inc. 5-Lot Subdiv. Prelim. Plat"
-      },
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "Project:    Perras &amp; Sons Subdivision Application"
-      },
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "until that application is no longer pending before the Georgia Planning Commission."
-      }
-     ]
-    },
-    "municipal_decision": {
-     "description": "Georgia Planning Commission determination on the preliminary plat; its date and outcome are not stated.",
-     "date": "unknown",
-     "outcome": "unknown",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "(appeal from municipal planning commission determination)"
-      }
-     ]
-    },
-    "appellants": [
-     {
-      "name": "Richard Babcock",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock"
-       }
-      ]
-     },
-     {
-      "name": "Karen Babcock",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock"
-       }
-      ]
-     },
-     {
-      "name": "Rodolphe Vallee",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt"
-       }
-      ]
-     },
-     {
-      "name": "Elizabeth Vallee",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt"
-       }
-      ]
-     },
-     {
-      "name": "Gary Kupperblatt",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt"
-       }
-      ]
-     },
-     {
-      "name": "Sandra Kupperblatt",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt, Sandra Kupperblatt, and Dan &amp; Lisa Jodoin"
-       }
-      ]
-     },
-     {
-      "name": "Dan Jodoin",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt, Sandra Kupperblatt, and Dan &amp; Lisa Jodoin"
-       }
-      ]
-     },
-     {
-      "name": "Lisa Jodoin",
-      "relationship": "unknown",
-      "seeks": "unknown",
-      "representation": "represented",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Attorney Thomas G. Walsh for Appellants Richard &amp; Karen Babcock, Rodolphe Vallee, Elizabeth Vallee, Gary Kupperblatt, Sandra Kupperblatt, and Dan &amp; Lisa Jodoin"
-       }
-      ]
-     }
-    ],
-    "discretion": {
-     "description": "unknown",
-     "involved": "unknown",
-     "evidence": [],
-     "central": "unknown",
-     "central_evidence": []
-    },
-    "observed_status": {
-     "litigation": "ongoing",
-     "permission": "unknown",
-     "description": "The preliminary plat appeal is inactive, pending the outcome of the final plat application before the Georgia Planning Commission; no merits ruling or authorization is observed.",
-     "evidence": [
-      {
-       "doc": 1,
-       "page": 1,
-       "quote": "This case remains inactive, pending the outcome of the application for final plat approval."
-      }
-     ]
-    },
-    "timeline": [
-     {
-      "kind": "filing",
-      "date": "unknown",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "243-11-07 Vtec"
-      ],
-      "description": "Appeal of the Georgia Planning Commission preliminary plat determination filed; date not stated.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "(appeal from municipal planning commission determination)"
-       }
-      ]
-     },
-     {
-      "kind": "judgment",
-      "date": "2008-12-19",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "243-11-07 Vtec"
-      ],
-      "description": "Entry Order placing the preliminary plat appeal on inactive status pending the final plat application.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "This appeal was the subject of a December 19, 2008 Entry Order, in which the Court placed the pending preliminary plat appeal on inactive status"
-       }
-      ]
-     },
-     {
-      "kind": "judgment",
-      "date": "2009-04-14",
-      "court_or_body": "Environmental Court",
-      "dockets": [
-       "243-11-07 Vtec"
-      ],
-      "description": "Entry Order denying the Town's and the Applicant's cross-motions to clarify as requests for an advisory opinion; case remains inactive.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "For these reasons, we DENY both motions."
-       },
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Docket No. 243-11-07 Vtec (Apr. 14, 2009"
-       }
-      ]
-     }
-    ],
-    "duration": {
-     "start": {
-      "date": "2008-12-19",
-      "relation": "on_or_before",
-      "description": "Earliest dated event: the December 19, 2008 Entry Order in the pending appeal.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 1,
-        "quote": "This appeal was the subject of a December 19, 2008 Entry Order"
-       }
-      ]
-     },
-     "end": {
-      "date": "2009-04-14",
-      "relation": "on_or_after",
-      "description": "April 14, 2009 Entry Order leaves the case inactive and pending.",
-      "evidence": [
-       {
-        "doc": 1,
-        "page": 2,
-        "quote": "Docket No. 243-11-07 Vtec (Apr. 14, 2009"
-       }
-      ]
-     },
-     "note": "Filing date not stated (docket number not used). The appeal was pending on 2008-12-19 and still pending (inactive) on 2009-04-14.",
-     "kind": "at_least",
-     "days": 116
-    },
-    "restrictions": [],
-    "housing_changes": [],
-    "related_dockets": [],
-    "appeal_review": {
-     "standard": "unknown",
-     "evidence": []
-    }
-   }
-  ]
+  "records": []
  },
  "labeled": {
   "case": [
@@ -289,61 +34,22 @@
    "municipal_appeal",
    "housing"
   ],
-  "records": {
-   "243-11-07 Vtec": "all"
-  }
+  "records": {}
  },
  "judgments": [
   {
    "field": "disposition",
-   "confidence": "medium",
-   "note": "Municipal appeal is clear (planning commission determination). The 5-lot subdivision is probably residential, but no passage says the lots are house lots or describes any residential use, so housing is unknown and the case uncertain."
+   "confidence": "high",
+   "note": "Person ruling: a subdivision whose lots aren't stated to be for housing is not new housing."
   },
   {
    "field": "housing",
-   "confidence": "medium",
-   "note": "Only '5-Lot Subdiv.' and 'Subdivision Application' are stated; use of lots not established."
-  },
-  {
-   "field": "review_standard",
    "confidence": "high",
-   "note": "The only document is an entry order on motions to clarify; nothing says whether the appeal is on the record or de novo."
-  },
-  {
-   "field": "duration",
-   "confidence": "high",
-   "note": "Filing date not given. Start bound is the Dec 19, 2008 Entry Order (case existed then); end bound is the Apr 14, 2009 order leaving the case inactive. at_least 116 days."
-  },
-  {
-   "field": "start",
-   "confidence": "medium",
-   "note": "The Dec 19, 2008 date is reported in the later order, which is the earliest dated proof the appeal existed."
-  },
-  {
-   "field": "litigation",
-   "confidence": "high",
-   "note": "Case expressly remains inactive pending the final plat application; nothing concludes it."
-  },
-  {
-   "field": "appellants",
-   "confidence": "medium",
-   "note": "Appellants named only in the copies list, represented by Attorney Walsh; applicant is appellee, so appellants are probably neighbors seeking to overturn an approval, but neither relationship nor what they seek is stated."
-  },
-  {
-   "field": "lots",
-   "confidence": "medium",
-   "note": "5 lots is the subdivision's total; new residential lots not distinguished, so unknown."
-  },
-  {
-   "field": "decision_outcome",
-   "confidence": "medium",
-   "note": "The planning commission's determination is not described; date and outcome unknown."
+   "note": "Person ruling: a subdivision whose lots aren't stated to be for housing is not new housing."
   }
  ],
  "disputed": [],
- "questions": [
-  "Should a 5-lot subdivision whose documents never state the lots' use (likely residential, in Georgia) count as new housing? Labeled housing unknown / uncertain."
- ],
+ "questions": [],
  "history": [
   {
    "step": "labeled",
@@ -362,6 +68,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Appellants: one entry per named person or organization"
+  },
+  {
+   "step": "adjudicated",
+   "by": "person",
+   "at": "2026-10-13T15:10:18+00:00",
+   "note": "Not new housing; excluded"
   }
  ]
 }

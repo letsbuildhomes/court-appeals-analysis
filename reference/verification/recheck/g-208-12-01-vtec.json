@@ -1,0 +1,34 @@
+{"case": "g-208-12-01-vtec",
+ "decisions": [
+  {"fact": "units", "label_value": 6, "other_value": 12, "decision": 6, "confidence": "medium",
+   "why": "The only dwelling-unit use in the PUD is the '6-unit Senior Citizen Residence', ruled a multiple family dwelling (or at most assisted living, still a residence). The six 'visitor residences' named in the Neighbors' argument are the dormitory with overnight accommodations for 6 persons, which the court classifies as an 'establishment letting rooms', not dwelling units, so 12 overcounts.",
+   "evidence": [
+    {"doc": 4, "page": 4, "quote": "6-unit Senior Citizen Residence - The October 2001 order ruled that this proposed use"},
+    {"doc": 4, "page": 4, "quote": "Dormitory with overnight accommodations for 6 persons - As described by the Applicant, this"},
+    {"doc": 4, "page": 4, "quote": "use is an A establishment letting rooms@ entitled to be reviewed as a conditional use in the"},
+    {"doc": 2, "page": 5, "quote": "the project proposes residential uses (six senior residences and six visitor residences)"}
+   ]},
+  {"fact": "appellants", "label_value": 3, "other_value": 1, "decision": 3, "confidence": "medium",
+   "why": "Docs 1-3 call all three 'the Applicants' and say the Applicants are appellants in the most recent case (208-12-01; they are appellees in 152-9-01). Docs 4-6, captioned only for 208-12-01 and 152-9-01, expressly name SEVCA and The Community Alliance as 'two additional appellants'. The court's refusal to add them as applicants (they were not applicants below) concerns the application, not their status as appellants, so the documents support three named appellants.",
+   "evidence": [
+    {"doc": 4, "page": 1, "quote": "Applicant Green Meadows Center, LLC, and two additional appellants: Southeast Vermont Community Action, Inc. and The Community Alliance are represented by Richard D. Perra, Esq."},
+    {"doc": 2, "page": 1, "quote": "Because the Applicants are appellants in the most recent case, and are appellees in the two earlier"},
+    {"doc": 2, "page": 1, "quote": "the Applicants Green Meadows Center, LLC, Southeast Vermont Community Action, and The Community Alliance are represented by Richard D. Perra, Esq."}
+   ]},
+  {"fact": "discretion_involved", "label_value": "unknown", "other_value": "yes", "decision": "unknown", "confidence": "medium",
+   "why": "The appellants' statement of questions in 208-12-01 is never described; all its questions 'remain for the hearing on the merits', which never occurred before remand. The contentions actually decided (which uses may be in a PUD, PUD vs PRD review) turn on use categories and ordinance construction, and the Town Plan passage only states what the PUD standard requires and that evidence is expected, not that any party contends it. Neither yes nor no is established.",
+   "evidence": [
+    {"doc": 2, "page": 3, "quote": "the standards applicable to the Planned Unit Development decision at issue in Docket No. 208-12-01 Vtec do require an analysis of the project= s conformance with the Town Plan"},
+    {"doc": 2, "page": 5, "quote": "as well as in Docket No. 208-12-01 Vtec, remain for the hearing on the merits."},
+    {"doc": 4, "page": 2, "quote": "We also do not address whether any particular use should be approved as part of the PUD; we only address whether it can be considered for approval as part of the PUD."}
+   ]}
+ ],
+ "other_errors": [
+  {"fact": "start", "label_value": {"date": "2002-03-25", "relation": "on_or_before"}, "other_value": null,
+   "decision": {"date": "2001-12-31", "relation": "on_or_before"}, "confidence": "medium",
+   "why": "The court's text (not the docket number) says the PUD application resulted in 'the two 2001 appeals', i.e. 208-12-01 and 152-9-01, so this appeal existed by the end of 2001. That is earlier than the first dated order. Duration would then be at_least 353 days (2001-12-31 to 2002-12-19). This tightens the start and is optional if year-only text is not accepted as a dated event.",
+   "evidence": [
+    {"doc": 4, "page": 1, "quote": "the zoning ordinance; that application resulted in the two 2001 appeals."},
+    {"doc": 6, "page": 1, "quote": "zoning ordinance; the PUD application resulted in the two 2001 appeals."}
+   ]}
+ ]}

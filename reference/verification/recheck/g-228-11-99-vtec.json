@@ -1,0 +1,36 @@
+{"case": "g-228-11-99-vtec",
+ "decisions": [
+  {"fact": "housing", "label_value": "yes", "other_value": "no", "decision": "yes", "confidence": "high",
+   "why": "The documents explicitly describe a new 10,000-square-foot office/apartment building 'to be constructed' on the 4.1-acre parcel, and the November 5, 1999 decision appealed in this docket ruled on (approved the uses of, denied the site plans for) that office/apartment building. A new mixed-use building with apartments is housing = yes under the guide; the unit count is unstated but the apartment use is explicit.",
+   "evidence": [
+    {"doc": 2, "page": 4, "quote": "sell the remainder of the 4.1-acre parcel with an office-apartment building5 to be constructed on it."},
+    {"doc": 1, "page": 2, "quote": "Applicants withdrew their plans for the restaurant in favor of a 10,000- square-foot office/apartment building."},
+    {"doc": 1, "page": 4, "quote": "denied the Phase I hotel/conference and office/apartment buildings and parking lot revised site plans"},
+    {"doc": 3, "page": 1, "quote": "for KW Middlebury to develop a hotel/conference center and an office/apartment building on the 4.1-acre portion of the site"}
+   ]},
+  {"fact": "disposition", "label_value": "in_scope", "other_value": "excluded", "decision": "in_scope", "confidence": "high",
+   "why": "Applicants appealed a Planning Commission decision (municipal_appeal yes) concerning permission for a new office/apartment building (housing yes), so both are yes.",
+   "evidence": [
+    {"doc": 1, "page": 1, "quote": "In Docket No. 228-11-99 Vtec Applicants appealed from the November 5, 1999 decision of the Planning Commission of the Town of Middlebury"}
+   ]},
+  {"fact": "start", "label_value": {"date": "2000-03-27", "relation": "on_or_before"}, "other_value": {"date": "2000-05-15", "relation": "on_or_before"},
+   "decision": {"date": "2000-03-27", "relation": "on_or_before"}, "confidence": "medium",
+   "why": "The filing date is never stated. The May 2000 order, captioned in this docket and its consolidated twin, refers to the merits hearing held on March 27, 2000; 103-5-00 did not yet exist and 124-7-99 had been superseded by the November decision appealed here, so that hearing was in this consolidated appeal, proving it existed by then. The May 15, 2000 order date is later and therefore not the earliest proof.",
+   "evidence": [
+    {"doc": 1, "page": 4, "quote": "the exhibits prepared by Applicants for the merits hearing on March 27, 2000"},
+    {"doc": 1, "page": 1, "quote": "The two appeals were consolidated in this Court."}
+   ]},
+  {"fact": "decision_outcome", "label_value": "other", "other_value": null, "decision": "other", "confidence": "high",
+   "why": "The November 5, 1999 decision was mixed: it approved the PUD Master Plan with conditions and the Phase I uses on traffic and downtown impact, but denied the hotel/conference and office/apartment building and parking site plans. No single contract outcome fits, so other.",
+   "evidence": [
+    {"doc": 1, "page": 4, "quote": "The Planning Commission=s decision of November 5, 1999, approved the PUD Master Plan with conditions and provided for future amendments to it"},
+    {"doc": 1, "page": 4, "quote": "denied the Phase I hotel/conference and office/apartment buildings and parking lot revised site plans"}
+   ]},
+  {"fact": "permission", "label_value": "unknown", "other_value": null, "decision": "unknown", "confidence": "medium",
+   "why": "The board's ruling in this docket was mixed (uses approved, building site plans denied), the court made no merits ruling, and the latest order says no claim was finally adjudicated. There is no clear allowed or denied authorization for the proposal in this docket, so unknown.",
+   "evidence": [
+    {"doc": 4, "page": 2, "quote": "none of the claims has been finally adjudicated, and therefore the Court cannot enter final judgment as to any of the claims."}
+   ]}
+ ],
+ "other_errors": []
+}

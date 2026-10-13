@@ -4,10 +4,10 @@
     "schema": "appeal-result-2",
     "case": "g-180-12-13-vtec",
     "disposition": {
-      "value": "uncertain",
-      "reason": "A neighbor appeals the DRB's as-built permit amendment for a house and a garage apartment already constructed; the documents do not say whether the dispute prevents occupancy, so whether this is new housing is not established.",
+      "value": "excluded",
+      "reason": "A neighbor appeals the DRB's as-built permit amendment for a house and garage apartment already constructed. Nothing shows the dispute prevents occupancy, so it is not new housing.",
       "municipal_appeal": "yes",
-      "housing": "unknown",
+      "housing": "no",
       "evidence": [
         {
           "doc": 1,
@@ -31,176 +31,7 @@
         }
       ]
     },
-    "records": [
-      {
-        "docket": "180-12-13 Vtec",
-        "project": {
-          "description": "Permit amendment for the \"as-built\" single-family residence and detached garage with an apartment (originally permitted in 2012 with a side-yard setback waiver and a car-repair home occupation), on Quarry Road; the buildings were not built in compliance with the 2012 permit.",
-          "municipality": "Westminster",
-          "proposed_units": "unknown",
-          "proposed_lots": "unknown",
-          "evidence": [
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "granted Applicant a permit authorizing construction of a single family residence and a detached garage with an apartment"
-            },
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "Construction of the buildings, however, was not in compliance with this permit."
-            },
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "Applicant applied for and received a permit amendment for the “as-built” structures (the 2013 permit)"
-            },
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "located on Quarry Road in the Town of Westminster, Vermont"
-            }
-          ]
-        },
-        "municipal_decision": {
-          "description": "Westminster DRB granted a permit amendment for the as-built structures (the 2013 permit).",
-          "date": "2013-12",
-          "outcome": "approved",
-          "evidence": [
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "In December 2013, Applicant applied for and received a permit amendment for the “as-built” structures (the 2013 permit)."
-            }
-          ]
-        },
-        "appellants": [
-          {
-            "name": "William Lyons",
-            "relationship": "neighbor",
-            "seeks": "overturn_approval",
-            "representation": "represented",
-            "evidence": [
-              {
-                "doc": 1,
-                "page": 1,
-                "quote": "Neighboring property owner William Lyons (Appellant) timely appealed the 2013 permit to this Court."
-              },
-              {
-                "doc": 1,
-                "page": 3,
-                "quote": "Robin L. Stern (ERN 3029), Attorney for Appellant William Lyons"
-              }
-            ]
-          }
-        ],
-        "discretion": {
-          "description": "The appellant's grounds (Statement of Questions) are not described; the decided motion concerned alleged site-plan changes, remand and a continuance.",
-          "involved": "unknown",
-          "evidence": [],
-          "central": "unknown",
-          "central_evidence": []
-        },
-        "observed_status": {
-          "litigation": "ongoing",
-          "permission": "allowed",
-          "description": "The DRB's 2013 as-built permit amendment stands under de novo appeal; remand and continuance were denied and a pretrial conference was to be scheduled.",
-          "evidence": [
-            {
-              "doc": 1,
-              "page": 3,
-              "quote": "This request is GRANTED, see the attached notice for the pretrial telephone conference."
-            },
-            {
-              "doc": 1,
-              "page": 1,
-              "quote": "Applicant applied for and received a permit amendment for the “as-built” structures"
-            }
-          ]
-        },
-        "timeline": [
-          {
-            "kind": "filing",
-            "date": "unknown",
-            "court_or_body": "Superior Court, Environmental Division",
-            "dockets": [
-              "180-12-13 Vtec"
-            ],
-            "description": "Neighbor William Lyons timely appealed the 2013 permit amendment.",
-            "evidence": [
-              {
-                "doc": 1,
-                "page": 1,
-                "quote": "Neighboring property owner William Lyons (Appellant) timely appealed the 2013 permit to this Court."
-              }
-            ]
-          },
-          {
-            "kind": "judgment",
-            "date": "2014-10-02",
-            "court_or_body": "Superior Court, Environmental Division",
-            "dockets": [
-              "180-12-13 Vtec"
-            ],
-            "description": "Entry order denying the appellant's motion for remand or continuance and granting a pretrial conference.",
-            "evidence": [
-              {
-                "doc": 1,
-                "page": 1,
-                "quote": "The motion is DENIED."
-              },
-              {
-                "doc": 1,
-                "page": 3,
-                "quote": "Electronically signed on October 02, 2014 at 03:55 PM"
-              }
-            ]
-          }
-        ],
-        "duration": {
-          "start": {
-            "date": "2014-06-06",
-            "relation": "on_or_before",
-            "description": "Appellant's motion to find a substantial change filed; the appeal existed by then.",
-            "evidence": [
-              {
-                "doc": 1,
-                "page": 1,
-                "quote": "Filed Date: June 6, 2014"
-              }
-            ]
-          },
-          "end": {
-            "date": "2014-10-02",
-            "relation": "on_or_after",
-            "description": "Entry order on the motion, scheduling a pretrial conference; the appeal continued.",
-            "evidence": [
-              {
-                "doc": 1,
-                "page": 3,
-                "quote": "Electronically signed on October 02, 2014 at 03:55 PM"
-              }
-            ]
-          },
-          "note": "Filing date not stated; start is the earliest dated motion filing, end the latest order showing the appeal pending.",
-          "kind": "at_least",
-          "days": 118
-        },
-        "restrictions": [],
-        "housing_changes": [],
-        "related_dockets": [],
-        "appeal_review": {
-          "standard": "de_novo",
-          "evidence": [
-            {
-              "doc": 1,
-              "page": 2,
-              "quote": "the sole issue currently before the Court is a de novo review of the December 2013 permit amendment application"
-            }
-          ]
-        }
-      }
-    ]
+    "records": []
   },
   "labeled": {
     "case": [
@@ -208,87 +39,34 @@
       "municipal_appeal",
       "housing"
     ],
-    "records": {
-      "180-12-13 Vtec": "all"
-    }
+    "records": {}
   },
   "judgments": [
     {
       "field": "disposition",
-      "confidence": "medium",
-      "note": "Municipal appeal is clear. The amendment is an after-the-fact permit for a house and garage apartment already built; the guide's table makes that housing only if the dispute prevents occupancy, which the order never addresses, so housing is unknown and the case uncertain."
+      "confidence": "high",
+      "note": "Person ruling: an as-built permit with no occupancy at stake in the documents is not new housing."
     },
     {
       "field": "housing",
-      "confidence": "medium",
-      "note": "After-the-fact (as-built) permit; occupancy at stake not stated. The remark that contradictory permits 'would affect Applicant's ability to proceed with the project' hints the project is not finished but does not establish it."
-    },
-    {
-      "field": "review_standard",
       "confidence": "high",
-      "note": "Court states the sole issue is a de novo review of the permit amendment application, and the applicant will present his application to the Court."
-    },
-    {
-      "field": "duration",
-      "confidence": "medium",
-      "note": "Court filing date not given; start on_or_before the June 6, 2014 motion filing, end on_or_after the October 2, 2014 order, at_least 118 days."
-    },
-    {
-      "field": "units",
-      "confidence": "low",
-      "note": "The 2012 permit authorized a house plus a garage apartment (two units), but this docket concerns an amendment to as-built structures and no unit count for it is stated; left unknown."
-    },
-    {
-      "field": "lots",
-      "confidence": "medium",
-      "note": "No subdivision or lots mentioned."
-    },
-    {
-      "field": "decision_outcome",
-      "confidence": "medium",
-      "note": "'Applied for and received' the amendment; any conditions not described, so approved."
-    },
-    {
-      "field": "appellants",
-      "confidence": "high",
-      "note": "Neighboring owner William Lyons appealed; represented by Robin L. Stern. Seeks overturn_approval inferred from appealing a granted permit."
-    },
-    {
-      "field": "discretion_involved",
-      "confidence": "low",
-      "note": "Statement of Questions not described; only a procedural motion decided."
-    },
-    {
-      "field": "discretion_central",
-      "confidence": "low",
-      "note": "Follows from involved unknown."
-    },
-    {
-      "field": "litigation",
-      "confidence": "high",
-      "note": "Pretrial conference ordered; no conclusion observed."
-    },
-    {
-      "field": "permission",
-      "confidence": "medium",
-      "note": "Latest observed authorization is the DRB's 2013 amendment, under de novo appeal; conditions unknown."
-    },
-    {
-      "field": "related",
-      "confidence": "medium",
-      "note": "The Act 250 application before District Commission #2 is a separate application, not a named docket; not listed."
+      "note": "Person ruling: an as-built permit with no occupancy at stake in the documents is not new housing."
     }
   ],
   "disputed": [],
-  "questions": [
-    "Should an as-built permit amendment for a house and garage apartment, where the order does not say whether occupancy is at stake, count as new housing (in scope) rather than uncertain?"
-  ],
+  "questions": [],
   "history": [
     {
       "step": "labeled",
       "by": "claude-opus labeler",
       "at": "2026-10-13T05:47:55+00:00",
       "note": "Labeled from the single October 2014 entry order; housing unknown (as-built permit, occupancy not stated)."
+    },
+    {
+      "step": "adjudicated",
+      "by": "person",
+      "at": "2026-10-13T15:10:18+00:00",
+      "note": "Not new housing; excluded"
     }
   ]
 }

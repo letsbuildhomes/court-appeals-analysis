@@ -1,0 +1,27 @@
+{"case": "g-182-8-02-vtec", "decisions": [
+{"fact": "housing", "label_value": "yes", "other_value": "unknown", "decision": "yes", "confidence": "medium",
+ "why": "The docket appeals the ZBA ruling on the validity of the 1990 PRD permit, which the decision describes as incorporating the house as a three-unit dwelling, i.e. converting a duplex to three units (a table 'yes'). The third unit was remodeled without a permit and the companion injunction bars its use until a third unit is approved, so occupancy of the added unit is at stake; the proposal is stated, so 'unknown' is not available and the stated proposal is plainly an added dwelling unit.",
+ "evidence": [
+  {"doc": 1, "page": 1, "quote": "a decision of the Zoning Administrator regarding the validity of the 1990 Planned Residential"},
+  {"doc": 1, "page": 1, "quote": "permit for a Planned Residential Development that would have incorporated the house in"},
+  {"doc": 1, "page": 2, "quote": "convert the house from a duplex with a home occupation office to a three-dwelling-unit house."},
+  {"doc": 1, "page": 3, "quote": "Until such time as"},
+  {"doc": 1, "page": 3, "quote": "a third dwelling unit is approved for this property, whether by itself or together with the"}]},
+{"fact": "disposition", "label_value": "in_scope", "other_value": "uncertain", "decision": "in_scope", "confidence": "medium",
+ "why": "Municipal appeal is explicit (appeal of a ZBA decision to the Environmental Court) and housing is yes as above.",
+ "evidence": [{"doc": 1, "page": 1, "quote": "In Docket No. 182-8-02 Vtec, Defendant appealed the ZBA= s decision in"}]},
+{"fact": "decision_date", "label_value": "2002", "other_value": "unknown", "decision": "2002", "confidence": "medium",
+ "why": "The ZBA heard the appeal after the evidentiary hearing in 77-4-00, which was held April 26, 2002, and its decision was appealed to the court in mid-August 2002, so the decision falls in 2002 (between late April and mid-August); no exact date is given.",
+ "evidence": [
+  {"doc": 1, "page": 1, "quote": "After that evidentiary hearing had taken place, the ZBA heard Defendant= s appeal of a"},
+  {"doc": 1, "page": 3, "quote": "September 25, 1999 to April 26, 2002, the date of hearing in this"},
+  {"doc": 1, "page": 1, "quote": "that matter to the Environmental Court, filed with the Court in mid-August 2002."}]},
+{"fact": "units", "label_value": 1, "other_value": "unknown", "decision": 1, "confidence": "medium",
+ "why": "The permit at issue converts a two-unit house (duplex plus home office) to three dwelling units, explicitly one added unit; the decision states both counts, so the net is not derived from lots or bedrooms.",
+ "evidence": [
+  {"doc": 1, "page": 2, "quote": "The ZBA granted conditional use approval to convert the duplex with home office to three dwelling units,"},
+  {"doc": 1, "page": 2, "quote": "The house historically contained two dwelling units with a total of six bedrooms."}]},
+{"fact": "start", "label_value": {"date": "2002-08-31", "relation": "on_or_before"}, "other_value": {"date": "2002-10-08", "relation": "on_or_before"}, "decision": {"date": "2002-08-31", "relation": "on_or_before"}, "confidence": "high",
+ "why": "The appeal was filed in mid-August 2002; with no exact day, the end of August is the earliest safe bound proving it existed. The October 8, 2002 clerk letter is a later and therefore weaker bound.",
+ "evidence": [{"doc": 1, "page": 1, "quote": "filed with the Court in mid-August 2002"}]}
+], "other_errors": []}

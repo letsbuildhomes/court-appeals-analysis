@@ -449,8 +449,29 @@
               "quote": "Specifically, Appellants challenge the adequacy of the chosen location in two ways."
             }
           ],
-          "central": "unknown",
-          "central_evidence": []
+          "central": "no",
+          "central_evidence": [
+            {
+              "doc": 2,
+              "page": 11,
+              "quote": "The evidence offered at trial centered on the requirement that Applicant post notice of the application and the related public hearing"
+            },
+            {
+              "doc": 2,
+              "page": 14,
+              "quote": "they do not highlight any specific areas of the Regulations that conflict with the Project."
+            },
+            {
+              "doc": 2,
+              "page": 16,
+              "quote": "Appellants suggest that Applicant is not entitled to the density bonus because the development does not meet the definition of elderly housing"
+            },
+            {
+              "doc": 2,
+              "page": 17,
+              "quote": "During trial, the parties provided little evidence on the Project’s compliance with the Town Plan."
+            }
+          ]
         },
         "observed_status": {
           "litigation": "resolved",
@@ -629,8 +650,8 @@
     },
     {
       "field": "appellants",
-      "confidence": "medium",
-      "note": "Names are from the merits decision caption; the motion-entry notification list differs slightly (John Wilson, Marilyn Marshall). Neighbor status inferred from concerns about the adjacent Foothills development and its water supply, not stated outright."
+      "confidence": "high",
+      "note": "Reread confirms 11 named appellants, one entry each, represented by Attorney Lisman; neighbor is strongly implied by their Foothills water-supply and notice arguments."
     },
     {
       "field": "discretion_involved",
@@ -639,8 +660,8 @@
     },
     {
       "field": "discretion_central",
-      "confidence": "low",
-      "note": "The decision does not show which contention was principal; notice posting and the density bonus also figured prominently."
+      "confidence": "medium",
+      "note": "Reread: the trial centered on where notice had to be posted (a fixed rule); on the PUD rules the appellants named no conflicting provision, and the density bonus turned on a definition. The one evaluative point (pedestrian connectivity) was minor."
     },
     {
       "field": "litigation",
@@ -661,6 +682,12 @@
       "by": "claude-opus labeler",
       "at": "2026-10-13T05:49:17+00:00",
       "note": "Labeled from the 2015 motion entry and the 2016 merits decision."
+    },
+    {
+      "step": "rechecked",
+      "by": "claude-opus-5.5 (Opus reread of the full text)",
+      "at": "2026-10-13T15:25:48+00:00",
+      "note": "Discretion central set to no; 11 appellants confirmed"
     }
   ]
 }

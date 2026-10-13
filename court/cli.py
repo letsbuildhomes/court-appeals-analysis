@@ -236,6 +236,10 @@ def reference(args):
             raise SystemExit(1)
     elif args.action == 'export':
         show(space.export(args.name, args.split))
+    elif args.action == 'packets':
+        show(space.packets(args.case.split(',') if args.case else None))
+    elif args.action == 'approve':
+        show(space.approve(args.case.split(',') if args.case else None, by=args.by, note=args.note or ''))
 
 
 def import_legacy(args):
@@ -328,12 +332,14 @@ def parser():
     sending(p)
     p.set_defaults(func=lab)
 
-    p = sub.add_parser('reference', help='The reference set: freeze its cases, build candidate pools, check, export')
-    p.add_argument('action', choices=('freeze', 'pools', 'check', 'export'))
+    p = sub.add_parser('reference', help='The reference set: freeze, pools, packets, check, approve, export')
+    p.add_argument('action', choices=('freeze', 'pools', 'packets', 'check', 'approve', 'export'))
     p.add_argument('--definition', default='docket-cases', help='Pipeline definition whose grouping to freeze')
     p.add_argument('--name', default='reference', help='Dataset name to export under')
     p.add_argument('--split', choices=('development', 'holdout'), help='Export only one split')
-    p.add_argument('--case', help='Check one case\'s label file only')
+    p.add_argument('--case', help='One case (check), or comma-separated cases (packets, approve)')
+    p.add_argument('--by', default='person', help='Who approves')
+    p.add_argument('--note', help='Approval note')
     p.set_defaults(func=reference)
 
     p = sub.add_parser('web', help='Serve the web app: live runs, the lab, data viewers and pipelines (read-only)')

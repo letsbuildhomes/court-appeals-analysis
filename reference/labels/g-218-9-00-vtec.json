@@ -389,6 +389,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Appellants: one entry per named person or organization"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Reread confirms litigation resolved (the August 1, 2003 judgment approves the project with conditions; an amendment would be a new appeal) and appellants David and June Garen, relationship not stated."
   }
  ]
 }

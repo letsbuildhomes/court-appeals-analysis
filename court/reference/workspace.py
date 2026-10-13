@@ -10,7 +10,11 @@ The workspace is ``reference/`` in the repository:
     pools/summaries/     short reader summaries of candidates
     manifest.json        the chosen cases: split, layer, category, why, status and notes
     labels/CASE.json     one case's label: its result, which facts were labeled, judgments,
-                         disputed facts, questions and history
+                         disputed facts (none, once finished), questions and history
+    process/             the instructions labelers, verifiers and rereaders follow
+    verification/        second readings, their disagreements, and the rereads that settled them
+
+Readers work from each case's packet (``packets``), written to ``data/reference/packets/``.
 
 A label's ``result`` is a results-contract result under the current schema;
 ``labeled`` names the facts that were checked (``case``: case facts;
@@ -18,8 +22,9 @@ A label's ``result`` is a results-contract result under the current schema;
 not scored. ``disputed`` facts were left unresolved and are not scored either.
 
 Statuses move candidate → chosen → labeled → verified → approved. ``check``
-finds every problem with the manifest and labels; ``export`` writes the
-approved labels as the dataset experiments name with ``--reference``.
+finds every problem with the manifest and labels; ``approve`` marks verified
+labels approved once they pass; ``export`` writes the approved labels as the
+dataset experiments name with ``--reference``.
 """
 from collections import Counter
 from datetime import datetime, timezone
@@ -250,12 +255,52 @@ class Workspace:
         for judgment in label['judgments']:
             if judgment.get('field') not in FACT_KEYS | CASE_KEYS or judgment.get('confidence') not in CONFIDENCE:
                 problems.append(f'judgment needs a known field and a confidence: {judgment}')
-        if not set(label['disputed']) <= FACT_KEYS | CASE_KEYS:
-            problems.append(f'disputed has unknown facts: {sorted(set(label["disputed"]) - FACT_KEYS - CASE_KEYS)}')
+        if label['disputed']:
+            problems.append(f'disputed facts must be settled: {", ".join(label["disputed"])}')
+        if (result.get('disposition') or {}).get('value') == 'uncertain':
+            problems.append('a label\'s scope is in_scope or excluded, never uncertain')
         if not problems:
             _, unverified = contract.verify_quotes(result, case_contract.pages(case['text']))
             problems += [f'quotation not found on its page: {path}' for path in unverified]
         return problems
+
+    # Labeling --------------------------------------------------------------------
+    def packet(self, case_id, cases=None):
+        """One case as a labeler reads it: its docket and documents, then the text its quotations cite."""
+        case = (cases or self.cases()).get(case_id)
+        listed = [f'doc {n}: {d["title"]} | posted {(d.get("posted") or "")[:10]} | heading dockets: '
+                  f'{", ".join(d["caption_dockets"]) or "none"} | listing: {", ".join(d["listing_dockets"]) or "none"}'
+                  for n, d in enumerate(case['documents'], 1)]
+        return '\n'.join([f'CASE {case_id}', f'DOCKET {case["dockets"][0] if case["dockets"] else "unknown"}',
+                          'DOCUMENTS', *listed, '', 'CASE TEXT (cite doc and page numbers from the markers)', '',
+                          case['text']])
+
+    def packets(self, keys=None, folder=None):
+        """Write the packets of ``keys`` (by default every chosen case) for labelers and readers."""
+        folder = folder or paths().packets
+        folder.mkdir(parents=True, exist_ok=True)
+        cases = self.cases()
+        keys = keys or [r['case'] for r in self.read('manifest.json', {'cases': []})['cases']]
+        for key in keys:
+            (folder/f'{key}.txt').write_text(self.packet(key, cases))
+        return {'folder': str(folder), 'cases': len(keys)}
+
+    def approve(self, keys=None, by='person', note=''):
+        """Mark verified labels approved; any label with a problem stops the whole approval."""
+        manifest = self.read('manifest.json', {'cases': []})
+        rows = [r for r in manifest['cases'] if keys is None and r['status'] == 'verified' or keys and r['case'] in keys]
+        if keys and len(rows) != len(set(keys)):
+            raise ReferenceError(f'Not in the manifest: {sorted(set(keys) - {r["case"] for r in rows})}')
+        problems = [f'{r["case"]}: status is {r["status"]}, not verified' for r in rows if r['status'] != 'verified']
+        cases = self.cases()
+        problems += [f'{r["case"]}: {p}' for r in rows for p in self.check_label(r['case'], cases)]
+        if problems:
+            raise ReferenceError('Cannot approve:\n  ' + '\n  '.join(problems))
+        for row in rows:
+            row['status'] = 'approved'
+            row['history'].append({'step': 'approved', 'by': by, 'at': now(), 'note': note})
+        save_json(self.root/'manifest.json', manifest)
+        return {'approved': len(rows)}
 
     # Exploring -------------------------------------------------------------------
     def label(self, case_id):

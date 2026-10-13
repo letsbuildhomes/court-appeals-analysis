@@ -1,0 +1,37 @@
+{"case": "g-77-4-05-vtec",
+ "decisions": [
+  {"fact": "housing",
+   "label_value": "yes",
+   "other_value": "unknown",
+   "decision": "no",
+   "confidence": "high",
+   "why": "The application is an after-the-fact permit for a house already built in 1999-2000. Nothing in either decision says the house is unoccupied, that occupancy is barred, or that the denial prevents anyone living there; the consequences discussed are legal (merger, one residential use per lot) and a separate private enforcement action with possible liability. Under the guide, an after-the-fact permit with occupancy not stated is housing = no, so disposition is excluded (municipal_appeal stays yes).",
+   "evidence": [
+    {"doc": 1, "page": 4, "quote": "Developer seeks permit approval for the previously constructed “L‐shaped” single‐family residence on parcel 2."},
+    {"doc": 1, "page": 4, "quote": "Developer constructed a single‐family dwelling on parcel 2 in 1999‐2000 without first obtaining a final determination"},
+    {"doc": 2, "page": 2, "quote": "he is entitled to start over with a new application for a permit for the house he has already built."},
+    {"doc": 1, "page": 17, "quote": "issues remain in this enforcement action, including possible liability, that are not solely dependent upon the outcome of the permit appeal"}
+   ]},
+  {"fact": "end",
+   "label_value": {"date": "2007-05-01", "relation": "on_or_after"},
+   "other_value": {"date": "2006-06-08", "relation": "on_or_after"},
+   "decision": {"date": "2007-05-01", "relation": "on_or_after"},
+   "confidence": "high",
+   "why": "The Environmental Court's June 8, 2006 judgment was appealed and the review chain ended with the Supreme Court's affirmance, which is the final judgment. The entry order carries no date beyond its May Term 2007 heading, so the best-evidenced bound is on_or_after 2007-05-01; 2006-06-08 understates it. (Moot for scoring if the case is excluded.)",
+   "evidence": [
+    {"doc": 2, "page": 1, "quote": "MAY TERM, 2007"},
+    {"doc": 2, "page": 3, "quote": "Affirmed."},
+    {"doc": 1, "page": 18, "quote": "Done at Berlin, Vermont, this 8th day of June, 2006."}
+   ]},
+  {"fact": "review_standard",
+   "label_value": "unknown",
+   "other_value": "de_novo",
+   "decision": "unknown",
+   "confidence": "high",
+   "why": "The Environmental Court decided this docket on cross-motions for summary judgment and never states whether the appeal is de novo or on the record. The only 'de novo' is the Supreme Court's standard for a legal question, which the guide excludes. (Moot if excluded.)",
+   "evidence": [
+    {"doc": 1, "page": 2, "quote": "In the first appeal, Neighbor and Developer have filed cross‐motions for summary judgment and replies to those motions."},
+    {"doc": 2, "page": 1, "quote": "As the issue is a legal one, we review it de novo on appeal."}
+   ]}
+ ],
+ "other_errors": []}

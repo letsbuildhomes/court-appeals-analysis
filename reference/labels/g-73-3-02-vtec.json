@@ -188,14 +188,19 @@
         ],
         "duration": {
           "start": {
-            "date": "2003-05-15",
+            "date": "2003-06-09",
             "relation": "on_or_before",
-            "description": "Rodjenski affidavit filed in the summary judgment proceedings, describing this docket's application plans.",
+            "description": "The summary judgment decision in this docket; no earlier dated event is tied to this appeal (the May 15, 2003 affidavit is not).",
             "evidence": [
               {
                 "doc": 1,
-                "page": 1,
-                "quote": "See Exhibit A to the Rodjenski affidavit filed May 15, 2003."
+                "page": 4,
+                "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"
+              },
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "Done at Barre, Vermont, this 9 day of June, 2003."
               }
             ]
           },
@@ -216,9 +221,9 @@
               }
             ]
           },
-          "note": "Court filing date not stated; start is the earliest dated court filing in the proceedings (an affidavit). End is the summary judgment; no further appeal observed.",
-          "kind": "at_least",
-          "days": 25
+          "note": "Filing date not stated. The only dated event tied to this docket is the June 9, 2003 summary judgment, which also ends it, so the duration is unknown.",
+          "kind": "unknown",
+          "days": "unknown"
         },
         "restrictions": [],
         "housing_changes": [],
@@ -287,13 +292,13 @@
     },
     {
       "field": "duration",
-      "confidence": "low",
-      "note": "Filing date not stated. Start uses the Rodjenski affidavit filed May 15, 2003, which supplies exhibits about this docket's application but is not expressly tied to this docket; end is the June 9, 2003 summary judgment. A later correction (after 7/1/03) did not change the result."
+      "confidence": "high",
+      "note": "Start and end are the same decision, so the duration is unknown."
     },
     {
       "field": "start",
-      "confidence": "low",
-      "note": "Affidavit filing date used as on_or_before bound; it is not explicitly said to be filed in 73-3-02."
+      "confidence": "high",
+      "note": "Reread: the May 15, 2003 Rodjenski affidavit is cited only for site facts and isn't tied to this docket; the June 9, 2003 decision is the earliest event that is."
     },
     {
       "field": "end",
@@ -303,7 +308,7 @@
     {
       "field": "litigation",
       "confidence": "medium",
-      "note": "Summary judgment entered for the Town in this docket; the scheduled conference covers 'remaining issues in these three matters', which appear to be the enforcement penalty and the septic appeal, not this docket."
+      "note": "Reread confirms resolved: summary judgment was entered for the Town in this docket; the remaining issues belong to 102-5-02 and the septic appeal."
     },
     {
       "field": "discretion_involved",
@@ -329,6 +334,12 @@
       "by": "claude-opus labeler",
       "at": "2026-10-13T05:48:46+00:00",
       "note": "Labeled from the June 9, 2003 summary judgment decision, 73-3-02 Vtec parts only."
+    },
+    {
+      "step": "rechecked",
+      "by": "claude-opus-5.5 (Opus reread of the full text)",
+      "at": "2026-10-13T15:25:48+00:00",
+      "note": "Start moved to the June 9, 2003 decision; duration unknown"
     }
   ]
 }

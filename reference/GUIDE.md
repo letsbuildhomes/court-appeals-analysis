@@ -33,9 +33,9 @@ what it says about this docket.
   housing, or a major renovation that creates housing. This definition is the
   user's and decides scope here; it differs from the legacy pipeline's in
   places, so disagreements with the legacy run on these points are definition
-  changes, not pipeline errors. `no` when the documents establish a nonhousing
-  subject or a housing change that isn't new housing. `unknown` when the
-  documents don't establish what is proposed.
+  changes, not pipeline errors. New housing must be explicit: `yes` only when
+  the documents establish it, and otherwise `no`, including when the project's
+  use is never stated or the documents don't say what is proposed at all.
 
   | Situation | housing |
   |---|---|
@@ -45,24 +45,32 @@ what it says about this docket.
   | Replacement housing, even one unit for one, when a new structure is built or placed (a house rebuilt, a mobile home replaced) | yes |
   | Seasonal camp converted to a year-round home | yes |
   | Subdivision creating house lots, even with no house yet proposed | yes |
+  | Access, road or right-of-way approval for lots not yet subdivided | no |
   | Care home or group home (a residence) | yes |
+  | Staff or faculty residence for long-term, full-time living | yes |
   | After-the-fact permit for a house already built, when the dispute prevents its occupancy | yes |
-  | After-the-fact permit for a house already built, occupancy not at stake | no |
-  | Appeal of a notice of violation, even about where a house sits | no |
+  | After-the-fact or as-built permit, occupancy not at stake or not stated | no |
+  | Units swapped or legalized with no new construction and no net new units | no |
+  | Addition to a residential building (including a care home) that doesn't explicitly add units | no |
+  | Subdivision whose lots aren't stated to be for housing | no |
+  | Appeal of a notice of violation, or of a decision not to enforce, even about a house | no |
   | House converted to a rental, rooms let to students, any change of occupancy or tenants without construction | no |
   | Large addition to a house that adds no unit | no |
   | Deck, garage, shed, fence, driveway or other accessory work at a house | no |
   | Hotel, inn, condo-hotel | no |
   | Commercial, industrial, extraction, telecommunications and other nonresidential uses | no |
-- `value`: `excluded` when either is `no`; `in_scope` when both are `yes`;
-  `uncertain` when neither is `no` and one is `unknown`.
+- `value`: `in_scope` when both are `yes`, otherwise `excluded`. A label is
+  the answer at the end of a complete review, so it is never `uncertain`
+  (pipelines may still use `uncertain` along the way): what can't be
+  established as a municipal appeal about new housing is excluded. Details
+  in a record can be `unknown`; scope can't.
 - `reason`: one or two sentences on which facts decided it. `evidence`: the
   passages that establish the proposal and the appeal.
 
 An excluded case has no records, and no review standard or other detail.
 Labeling stops there.
 
-## The record (in-scope and uncertain cases)
+## The record (in-scope cases)
 
 One record, for this docket only. Field meanings follow the contract and the
 legacy drafting rules (`prompts/draft/legacy.md`); the points below are
@@ -101,7 +109,9 @@ where judgment is needed.
 - **Timeline and duration.** Start: the date the appeal was filed in court
   (`exact`) or the earliest dated event proving it existed (`on_or_before`).
   End: an observed conclusion of the whole review chain (`exact`) or the latest
-  dated event proving it continued (`on_or_after`). Never date a filing from
+  dated event proving it continued (`on_or_after`). The final judgment ends
+  it: later contempt, enforcement or reopening motions go in the timeline but
+  don't extend the duration. Never date a filing from
   the docket number. Compute `kind` and `days` from the endpoints as the
   contract says.
 - **Restrictions, housing changes, related dockets.** Only what is explicit:
@@ -139,7 +149,9 @@ some were left unchecked. A fact that is labeled `unknown` is a real answer
 - `judgments`: for any fact that took judgment, `{"field": fact key,
   "confidence": "high" | "medium" | "low", "note": why}`. Always include one for
   `disposition`, `review_standard`, `duration` and any low-confidence fact.
-- `disputed`: fact keys left unresolved after adjudication; they are not scored.
+- `disputed`: must be empty in a finished label. A second reader's
+  disagreement is a prompt to reread and decide, not a reason to leave a
+  fact open.
 - `questions`: anything a person should decide.
 - `history`: one entry per step, `{"step", "by", "at", "note"}`.
 

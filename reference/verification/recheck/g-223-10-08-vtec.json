@@ -1,0 +1,30 @@
+{"case": "g-223-10-08-vtec",
+ "decisions": [
+  {"fact": "housing", "label_value": "yes", "other_value": "no",
+   "decision": "no", "confidence": "high",
+   "why": "The only decision describes the project as a conditional use permit to subdivide an 83.5-acre parcel into five lots; no passage says the lots are for houses, dwellings or residential building. Location in the RD5/RD10 districts is not an explicit statement, and the applicant's 'affordable housing' question only asks whether the application was deficient for omitting it (the court has not seen the application), so under the ruling the subdivision is not new housing.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "Applicant applied on April 22, 2008, for a conditional use permit to subdivide an 83.5-acre parcel of property into five lots."},
+    {"doc": 1, "page": 14, "quote": "subdivisions are allowed in the RD5 district as a conditional use."},
+    {"doc": 1, "page": 14, "quote": "as the parties have not provided the Court with the application."}
+   ]},
+  {"fact": "disposition", "label_value": "in_scope", "other_value": "excluded",
+   "decision": "excluded", "confidence": "high",
+   "why": "municipal_appeal is yes (appeal of the Plymouth panel's denial), but housing is no because the lots are never stated to be for housing, so the case is excluded and has no records.",
+   "evidence": [
+    {"doc": 1, "page": 1, "quote": "appealed from a decision of a municipal panel1 of the Town of Plymouth (the panel), denying approval of a proposed five-lot subdivision."}
+   ]},
+  {"fact": "lots", "label_value": "unknown", "other_value": 5,
+   "decision": "not applicable (excluded); if a record were kept, unknown", "confidence": "high",
+   "why": "Moot because housing is no. Even otherwise, five is the subdivision's total lots, and the guide says total lots is not new residential building lots; nothing says any lot is for building.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "subdivide an 83.5-acre parcel of property into five lots."}
+   ]},
+  {"fact": "discretion_central", "label_value": "unknown", "other_value": null,
+   "decision": "not applicable (excluded); if a record were kept, unknown", "confidence": "medium",
+   "why": "Moot because the case is excluded. On the text, the denial rested on character-of-the-area and screening standards, but the decided issues were panel legality and plan adoption and the remaining merits questions' content is not stated, so centrality is not established.",
+   "evidence": [
+    {"doc": 1, "page": 15, "quote": "This decision leaves Amended Questions 6, 10, 12, 14, 13, 15, and 17 of the Statement of Questions to be resolved on the merits."}
+   ]}
+ ],
+ "other_errors": []}

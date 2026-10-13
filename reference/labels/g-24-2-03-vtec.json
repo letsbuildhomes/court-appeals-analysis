@@ -273,8 +273,8 @@
   },
   {
    "field": "discretion_central",
-   "confidence": "low",
-   "note": "Only post-decision motions are described; the principal grounds of the original appeal (Questions 1-3) are not set out, and Questions 1 and 2 of this docket were not presented."
+   "confidence": "medium",
+   "note": "Unknown is the answer: the original appeal's principal grounds are never set out; only post-decision motions are described."
   },
   {
    "field": "litigation",

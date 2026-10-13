@@ -1,0 +1,17 @@
+{"case": "g-169-8-02-vtec",
+ "decisions": [
+  {"fact": "decision_date", "label_value": "2002", "other_value": "2002-07-23",
+   "decision": "2002", "confidence": "medium",
+   "why": "The only document is a shared decision for 169-8-02 and 217-9-02 that names a July 23, 2002 and an August 23, 2002 Planning Commission decision without assigning either to a docket. Pairing July 23 with this docket (and August 23 with 217-9-02) would require inferring filing months from the docket numbers, which the guide forbids. The documents establish only the year 2002.",
+   "evidence": [
+    {"doc": 1, "page": 1, "quote": "Appellants John and Tina Springer-Miller appealed from a July 23, 2002 and an August 23, 2002"},
+    {"doc": 1, "page": 1, "quote": "Docket Nos. 169-8-02 and"}
+   ]},
+  {"fact": "review_standard", "label_value": "unknown", "other_value": "de_novo",
+   "decision": "unknown", "confidence": "high",
+   "why": "The decision never states the standard (no 'de novo' or 'on-the-record' language). It decides a legal preclusion question on summary judgment and only mentions deciding whether and when to set a trial, with no evidentiary hearing or site visit on the merits shown, so de_novo is not established.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "whether and when to set this matter for trial, and the relationship of these appeals to any pending ZBA proceedings"}
+   ]}
+ ],
+ "other_errors": []}

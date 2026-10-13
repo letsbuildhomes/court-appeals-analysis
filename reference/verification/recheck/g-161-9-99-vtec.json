@@ -1,0 +1,28 @@
+{"case": "g-161-9-99-vtec",
+ "decisions": [
+  {"fact": "litigation", "label_value": "resolved", "other_value": "unknown",
+   "decision": "resolved", "confidence": "medium",
+   "why": "The appeal's only subject is the ZBA's variance denial, and a variance requires all five statutory criteria; the court granted the Town summary judgment holding the appellants do not qualify for a variance, which disposes of the whole appeal. The unaddressed other four criteria are moot once one fails, and 'any other exception' is relief outside this appeal, not something left pending in it; nothing later is shown.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "In order to qualify for a variance, an applicant must meet all five requirements of 24 V.S.A. '4468(a)"},
+    {"doc": 1, "page": 4, "quote": "the Town=s Motion for Summary Judgment is GRANTED. Appellants do not qualify for a variance"},
+    {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 13 day of September, 2000."}]},
+  {"fact": "permission", "label_value": "denied", "other_value": null,
+   "decision": "denied", "confidence": "high",
+   "why": "Consistent with resolved: the variance stays denied, and no other authorization for a dwelling on Lot 7 is shown.",
+   "evidence": [
+    {"doc": 1, "page": 4, "quote": "Appellants do not qualify for a variance, as they are said to have created the hardship"}]},
+  {"fact": "end", "label_value": {"date": "2000-09-13", "relation": "exact"}, "other_value": null,
+   "decision": {"date": "2000-09-13", "relation": "exact"}, "confidence": "medium",
+   "why": "The summary judgment decision is the observed conclusion of the appeal, so it ends the duration exactly; consistent with litigation resolved. Duration kind/days remain unknown since the start is only on_or_before the same day.",
+   "evidence": [
+    {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 13 day of September, 2000."}]},
+  {"fact": "discretion_involved", "label_value": "unknown", "other_value": "no",
+   "decision": "no", "confidence": "medium",
+   "why": "The only contention litigated and decided was the self-created hardship criterion, resolved as a matter of law from undisputed facts (purchase with knowledge of the frontage rules); no evaluative standard such as character of the area was contested, and the court expressly did not reach the other criteria. The appeal is thus established to turn on a legal rule applied to fixed facts; discretion_central should follow as no.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "Only the third requirement, that the unnecessary hardship has not been created by the appellant, is at issue in the present motion."},
+    {"doc": 1, "page": 3, "quote": "by purchasing Lot 7 with actual or constructive knowledge of the frontage restrictions applicable to it, Appellants are considered to have created for themselves whatever hardship"}]}
+ ],
+ "other_errors": []
+}

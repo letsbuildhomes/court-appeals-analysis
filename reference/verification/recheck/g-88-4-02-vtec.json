@@ -1,0 +1,30 @@
+{"case": "g-88-4-02-vtec",
+ "decisions": [
+  {"fact": "permission", "label_value": "allowed", "other_value": "unknown",
+   "decision": "allowed", "confidence": "high",
+   "why": "The authorization at issue in this docket is the variance, which the documents say was granted; the December 12, 2002 decision expressly defers ruling on this docket, so the grant stands as the latest observed authorization. Whether a separate building permit exists is irrelevant; the merger ruling was made only in companion docket 19-1-02.",
+   "evidence": [
+     {"doc": 1, "page": 1, "quote": "applied for and was granted a variance"},
+     {"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision"},
+     {"doc": 1, "page": 5, "quote": "we will rule in this decision and order only on the motions filed in Docket No 19-1-02"}]},
+  {"fact": "start", "label_value": {"date": "2002-09-23", "relation": "on_or_before"}, "other_value": {"date": "2002-12-12", "relation": "on_or_before"},
+   "decision": {"date": "2002-09-23", "relation": "on_or_before"}, "confidence": "medium",
+   "why": "Footnote 1 says the September 23, 2002 letter about not yet filing memoranda on the variance issue was not filed under the variance case's docket number, which shows the variance case (this docket) already existed with its own number and pending briefing on that date. No earlier dated event concerns this docket, and the filing date is not stated.",
+   "evidence": [
+     {"doc": 1, "page": 5, "quote": "search of the files shows that Attorney Smith filed a letter on September 23, 2002 under only"},
+     {"doc": 1, "page": 5, "quote": "because that letter was not filed under the docket number of the"}]},
+  {"fact": "appellants", "label_value": ["Brian W. Blair", "Danielle C. Devlin"], "other_value": "1 appellant",
+   "decision": ["Brian W. Blair", "Danielle C. Devlin"], "confidence": "high",
+   "why": "The decision names two people as bringing this docket's appeal, and the guide says a couple is two entries. They are represented by Robert J. Perry.",
+   "evidence": [
+     {"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision"},
+     {"doc": 1, "page": 1, "quote": "Mr. Blair and Ms. Devlin are represented by Robert J."}]},
+  {"fact": "discretion_involved", "label_value": "unknown", "other_value": null,
+   "decision": "unknown", "confidence": "medium",
+   "why": "The appellants seek summary judgment that the house fails the five variance criteria, but the documents never say which criteria they contest or on what grounds; the merits of the variance are not briefed or ruled on. The court's 'minimum variance' and 'steps into the shoes' remarks are its own suggestions, so neither an evaluative contention ('yes') nor one turning only on fixed rules ('no') is established.",
+   "evidence": [
+     {"doc": 1, "page": 1, "quote": "construction of the proposed house on Lot 9 meets all of the five variance criteria"},
+     {"doc": 1, "page": 4, "quote": "the parties did not supply either the application for or the decision granting the variance"},
+     {"doc": 1, "page": 5, "quote": "Applicant has not responded to this issue in its memoranda in either docket number"}]}
+ ],
+ "other_errors": []}

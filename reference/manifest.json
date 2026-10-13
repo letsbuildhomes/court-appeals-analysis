@@ -1,2444 +1,2824 @@
 {
- "source": "d-9db5520d7922da34",
- "cases": [
-  {
-   "case": "g-134-6-00-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "134-6-00 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 11449,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
+  "source": "d-9db5520d7922da34",
+  "cases": [
     {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
+      "case": "g-134-6-00-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "134-6-00 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 11449,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T04:52:37+00:00",
+          "note": "calibration batch 1"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T04:55:24+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
     },
     {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T04:52:37+00:00",
-     "note": "calibration batch 1"
+      "case": "g-24-env-00022",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "24-ENV-00022",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 10621,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
     },
     {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T04:55:24+00:00",
-     "note": "blind second reading; disagreements adjudicated"
+      "case": "g-24-env-00051",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "24-ENV-00051",
+        "era": "2015-2026",
+        "composition": "uniform",
+        "documents": 4,
+        "chars": 40945,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-64-6-18-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "64-6-18 Vtec",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 17201,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-114-7-99-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "114-7-99 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 18874,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-130-8-14-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "130-8-14 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 12947,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-85-4-02-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "85-4-02 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 7130,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-143-9-10-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "143-9-10 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 31620,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-132-12-18-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "132-12-18 Vtec",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 70447,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-116-9-16-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "116-9-16 Vtec",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 41549,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-103-9-16-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "103-9-16 Vtec",
+        "era": "2015-2026",
+        "composition": "uniform",
+        "documents": 7,
+        "chars": 367319,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-35-2-10-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "35-2-10 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 22544,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-105-6-10-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-excluded",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "105-6-10 Vtec",
+        "era": "2005-2014",
+        "composition": "uniform",
+        "documents": 3,
+        "chars": 28148,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-126-6-07-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "126-6-07 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 2,
+        "chars": 95047,
+        "legacy": "in_scope",
+        "unknown_share": 0.06,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T04:52:37+00:00",
+          "note": "calibration batch 1"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T04:55:24+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-116-6-09-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "116-6-09 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 54635,
+        "legacy": "in_scope",
+        "unknown_share": 0.06,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-231-10-07-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "231-10-07 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 32224,
+        "legacy": "in_scope",
+        "unknown_share": 0.29,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T04:52:37+00:00",
+          "note": "calibration batch 1"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T04:55:24+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-110-6-04-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "110-6-04 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 22906,
+        "legacy": "in_scope",
+        "unknown_share": 0.06,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-75-7-18-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "75-7-18 Vtec",
+        "era": "2015-2026",
+        "composition": "uniform",
+        "documents": 5,
+        "chars": 121420,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-180-12-13-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "180-12-13 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 6944,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-74-5-10-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "74-5-10 Vtec",
+        "era": "2005-2014",
+        "composition": "uniform",
+        "documents": 2,
+        "chars": 56036,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-250-12-99-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "250-12-99 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 2,
+        "chars": 13843,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-71-4-07-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "71-4-07 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 24576,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-150-7-02-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "150-7-02 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 8966,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-208-12-01-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "208-12-01 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 6,
+        "chars": 66106,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-158-9-04-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-in-scope",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "158-9-04 Vtec",
+        "era": "1996-2004",
+        "composition": "uniform",
+        "documents": 3,
+        "chars": 58773,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-223-10-08-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-uncertain",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "223-10-08 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 32138,
+        "legacy": "uncertain",
+        "unknown_share": 0.29,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-35-3-04-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-uncertain",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "35-3-04 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 16251,
+        "legacy": "uncertain",
+        "unknown_share": 0.29,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13",
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-183-11-97-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-uncertain",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "183-11-97 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 17014,
+        "legacy": "uncertain",
+        "unknown_share": 0.35,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-228-11-99-vtec",
+      "split": "development",
+      "layer": "random",
+      "category": "random-uncertain",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "228-11-99 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 4,
+        "chars": 48781,
+        "legacy": "uncertain",
+        "unknown_share": 0.12,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-243-11-07-vtec",
+      "split": "holdout",
+      "layer": "random",
+      "category": "random-uncertain",
+      "status": "approved",
+      "reason": "Random draw within the legacy run's answer; taken in pool order",
+      "hints": {
+        "docket": "243-11-07 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 4156,
+        "legacy": "uncertain",
+        "unknown_share": 0.47,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Random draw within the legacy run's answer; taken in pool order"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-24-2-03-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "Seven single-family houses; post-decision motions; 47% of the legacy run's facts unknown",
+      "hints": {
+        "docket": "24-2-03 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 12896,
+        "legacy": "in_scope",
+        "unknown_share": 0.47,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Seven single-family houses; post-decision motions; 47% of the legacy run's facts unknown"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T04:52:37+00:00",
+          "note": "calibration batch 1"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T04:55:24+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-159-7-08-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "One house with garage and septic; mediation ordered; 41% unknown, in scope",
+      "hints": {
+        "docket": "159-7-08 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 4794,
+        "legacy": "in_scope",
+        "unknown_share": 0.41,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Eight-lot subdivision, appeal of plat conditions; substantive text with many unknowns"
+        },
+        {
+          "step": "replaced",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:33:15+00:00",
+          "note": "g-177-8-02-vtec replaced by g-159-7-08-vtec to bring in-scope cases toward half of the set"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-198-9-08-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "Proposed house on a building permit; three linked neighbor dockets; 41% unknown, in scope",
+      "hints": {
+        "docket": "198-9-08 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 4794,
+        "legacy": "in_scope",
+        "unknown_share": 0.41,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Six building lots, frontage dispute; unknowns despite a substantive decision"
+        },
+        {
+          "step": "replaced",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:33:15+00:00",
+          "note": "g-199-9-02-vtec replaced by g-198-9-08-vtec to bring in-scope cases toward half of the set"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-169-8-02-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "One dwelling; caption also names 217-9-02; tests counts and decision dates",
+      "hints": {
+        "docket": "169-8-02 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 9971,
+        "legacy": "in_scope",
+        "unknown_share": 0.35,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "One dwelling; caption also names 217-9-02; tests counts and decision dates"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-92-8-19-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "75 units; permit vacated after withdrawal, appeal moot; outcome and status facts",
+      "hints": {
+        "docket": "92-8-19 Vtec",
+        "era": "2015-2026",
+        "composition": "uniform",
+        "documents": 2,
+        "chars": 14511,
+        "legacy": "in_scope",
+        "unknown_share": 0.41,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "75 units; permit vacated after withdrawal, appeal moot; outcome and status facts"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-21-env-00023",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "16-unit apartment building; dismissed for standing; tests what a dismissal establishes",
+      "hints": {
+        "docket": "21-ENV-00023",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 8159,
+        "legacy": "in_scope",
+        "unknown_share": 0.35,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "16-unit apartment building; dismissed for standing; tests what a dismissal establishes"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-68-6-19-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "Short on-the-record remand order; most facts may truly be absent",
+      "hints": {
+        "docket": "68-6-19 Vtec",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 1699,
+        "legacy": "uncertain",
+        "unknown_share": 0.59,
+        "review_mentions": [
+          "on the record"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Short on-the-record remand order; most facts may truly be absent"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-72-5-03-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "On-the-record appeal of a DRB decision; review-standard example with unknowns",
+      "hints": {
+        "docket": "72-5-03 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 15306,
+        "legacy": "in_scope",
+        "unknown_share": 0.41,
+        "review_mentions": [
+          "on the record"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "On-the-record appeal of a DRB decision; review-standard example with unknowns"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-182-8-02-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "House converted to three dwelling units; decided alongside enforcement; 35% unknown",
+      "hints": {
+        "docket": "182-8-02 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 12046,
+        "legacy": "in_scope",
+        "unknown_share": 0.35,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Four-lot subdivision; interim ruling on a 1980s permit; many unknowns"
+        },
+        {
+          "step": "replaced",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:33:15+00:00",
+          "note": "g-194-10-99-vtec replaced by g-182-8-02-vtec to bring in-scope cases toward half of the set"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-161-9-99-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "high-unknown",
+      "status": "approved",
+      "reason": "Two lots lacking road frontage; hardship variance; 35% unknown, in scope",
+      "hints": {
+        "docket": "161-9-99 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 8846,
+        "legacy": "in_scope",
+        "unknown_share": 0.35,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "One additional back lot; frontage and variance after a hearing"
+        },
+        {
+          "step": "replaced",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:33:15+00:00",
+          "note": "g-193-8-02-vtec replaced by g-161-9-99-vtec to bring in-scope cases toward half of the set"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-243-10-00-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "near-miss",
+      "status": "approved",
+      "reason": "Excluded, but a mobile home replacing a dwelling may be replacement housing",
+      "hints": {
+        "docket": "243-10-00 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 6651,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Excluded, but a mobile home replacing a dwelling may be replacement housing"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T04:52:37+00:00",
+          "note": "calibration batch 1"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T04:55:24+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-132-6-00-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "near-miss",
+      "status": "approved",
+      "reason": "Excluded; seven-bedroom house shared by students: occupancy versus new dwelling units",
+      "hints": {
+        "docket": "132-6-00 Vtec",
+        "era": "1996-2004",
+        "composition": "uniform",
+        "documents": 2,
+        "chars": 16637,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Excluded; seven-bedroom house shared by students: occupancy versus new dwelling units"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-207-11-03-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "near-miss",
+      "status": "approved",
+      "reason": "Excluded; addition to a residence, use category disputed: is a unit added?",
+      "hints": {
+        "docket": "207-11-03 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 11458,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Excluded; addition to a residence, use category disputed: is a unit added?"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-256-11-06-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "near-miss",
+      "status": "approved",
+      "reason": "Excluded as Act 250, but a residential retirement community: the municipal-appeal side of the line",
+      "hints": {
+        "docket": "256-11-06 Vtec",
+        "era": "2005-2014",
+        "composition": "uniform",
+        "documents": 2,
+        "chars": 103511,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Excluded as Act 250, but a residential retirement community: the municipal-appeal side of the line"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-56-4-10-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "near-miss",
+      "status": "approved",
+      "reason": "Excluded as Act 250 though six residential lots are proposed",
+      "hints": {
+        "docket": "56-4-10 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 19550,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Excluded as Act 250 though six residential lots are proposed"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-77-4-05-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "shared",
+      "status": "approved",
+      "reason": "Decision shared with related dockets; developer seeks a second house; Supreme Court affirmed",
+      "hints": {
+        "docket": "77-4-05 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 2,
+        "chars": 51225,
+        "legacy": "in_scope",
+        "unknown_share": 0.06,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Decision shared with related dockets; developer seeks a second house; Supreme Court affirmed"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-232-12-04-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "shared",
+      "status": "approved",
+      "reason": "Two setback denials for single-family houses decided together",
+      "hints": {
+        "docket": "232-12-04 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 11066,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Two setback denials for single-family houses decided together"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-218-9-00-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "shared",
+      "status": "approved",
+      "reason": "Eight-unit PRD; preliminary and final plat dockets; intervenors continue after withdrawal",
+      "hints": {
+        "docket": "218-9-00 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 2,
+        "chars": 39999,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Eight-unit PRD; preliminary and final plat dockets; intervenors continue after withdrawal"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-73-3-02-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "shared",
+      "status": "approved",
+      "reason": "One single-family house; three linked cases decided together",
+      "hints": {
+        "docket": "73-3-02 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 17830,
+        "legacy": "uncertain",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "One single-family house; three linked cases decided together"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-88-4-02-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "shared",
+      "status": "approved",
+      "reason": "Single-family house lot; consolidated variance and development appeals",
+      "hints": {
+        "docket": "88-4-02 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 1,
+        "chars": 15091,
+        "legacy": "in_scope",
+        "unknown_share": 0.12,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Single-family house lot; consolidated variance and development appeals"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-143-7-08-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "enforcement",
+      "status": "approved",
+      "reason": "Town enforcement over an added residential unit that the legacy run counted in scope; post-judgment motions",
+      "hints": {
+        "docket": "143-7-08 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 2,
+        "chars": 78971,
+        "legacy": "in_scope",
+        "unknown_share": 0.24,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13",
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Town enforcement over an added residential unit that the legacy run counted in scope; post-judgment motions"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-212-11-99-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "enforcement",
+      "status": "approved",
+      "reason": "Plain sign enforcement: no appellant, no municipal appeal",
+      "hints": {
+        "docket": "212-11-99 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 3764,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Plain sign enforcement: no appellant, no municipal appeal"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-189-10-98-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "enforcement",
+      "status": "approved",
+      "reason": "ANR enforcement (kennel, leachfield): state, not municipal",
+      "hints": {
+        "docket": "189-10-98 Vtec",
+        "era": "1996-2004",
+        "composition": "single",
+        "documents": 1,
+        "chars": 6533,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "ANR enforcement (kennel, leachfield): state, not municipal"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-33-2-19-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "interim",
+      "status": "approved",
+      "reason": "Only a scheduling-order ruling: nothing decided, so most facts should be unknown",
+      "hints": {
+        "docket": "33-2-19 Vtec",
+        "era": "2015-2026",
+        "composition": "single",
+        "documents": 1,
+        "chars": 2339,
+        "legacy": "uncertain",
+        "unknown_share": 0.47,
+        "review_mentions": []
+      },
+      "notes": [
+        "Person ruling applied 2026-10-13"
+      ],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Only a scheduling-order ruling: nothing decided, so most facts should be unknown"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-23-env-00057",
+      "split": "development",
+      "layer": "targeted",
+      "category": "interim",
+      "status": "approved",
+      "reason": "Pending appeal with motion rulings only; tests not inventing an outcome",
+      "hints": {
+        "docket": "23-ENV-00057",
+        "era": "2015-2026",
+        "composition": "uniform",
+        "documents": 4,
+        "chars": 71652,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Pending appeal with motion rulings only; tests not inventing an outcome"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-110-5-06-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "failure",
+      "status": "approved",
+      "reason": "Failed in the legacy run; 48-unit congregate housing; standing ruling",
+      "hints": {
+        "docket": "110-5-06 Vtec",
+        "era": "2005-2014",
+        "composition": "single",
+        "documents": 1,
+        "chars": 10106,
+        "legacy": "failed",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Failed in the legacy run; 48-unit congregate housing; standing ruling"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-170-12-14-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "failure",
+      "status": "approved",
+      "reason": "Failed in the legacy run; six units in three duplexes; late-appeal and merits rulings",
+      "hints": {
+        "docket": "170-12-14 Vtec",
+        "era": "2005-2014",
+        "composition": "uniform",
+        "documents": 2,
+        "chars": 52507,
+        "legacy": "failed",
+        "unknown_share": null,
+        "review_mentions": []
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "Failed in the legacy run; six units in three duplexes; late-appeal and merits rulings"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-138-8-10-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "long",
+      "status": "approved",
+      "reason": "321,000 characters, 15 documents; in scope; consolidated with Town enforcement",
+      "hints": {
+        "docket": "138-8-10 Vtec",
+        "era": "2005-2014",
+        "composition": "shared",
+        "documents": 15,
+        "chars": 321776,
+        "legacy": "in_scope",
+        "unknown_share": 0.06,
+        "review_mentions": [
+          "on the record"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "321,000 characters, 15 documents; in scope; consolidated with Town enforcement"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-169-12-16-vtec",
+      "split": "development",
+      "layer": "targeted",
+      "category": "long",
+      "status": "approved",
+      "reason": "428,000 characters, 13 documents; Act 250 and stormwater; tests long-case scope",
+      "hints": {
+        "docket": "169-12-16 Vtec",
+        "era": "2015-2026",
+        "composition": "shared",
+        "documents": 13,
+        "chars": 428545,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "428,000 characters, 13 documents; Act 250 and stormwater; tests long-case scope"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
+    },
+    {
+      "case": "g-122-7-04-vtec",
+      "split": "holdout",
+      "layer": "targeted",
+      "category": "long",
+      "status": "approved",
+      "reason": "299,000 characters; gravel extraction with Act 250; amended judgment",
+      "hints": {
+        "docket": "122-7-04 Vtec",
+        "era": "1996-2004",
+        "composition": "shared",
+        "documents": 8,
+        "chars": 299842,
+        "legacy": "excluded",
+        "unknown_share": null,
+        "review_mentions": [
+          "on the record",
+          "de novo"
+        ]
+      },
+      "notes": [],
+      "history": [
+        {
+          "step": "chosen",
+          "by": "claude-opus-5.5",
+          "at": "2026-10-13T04:30:21+00:00",
+          "note": "299,000 characters; gravel extraction with Act 250; amended judgment"
+        },
+        {
+          "step": "labeled",
+          "by": "claude-opus labeler",
+          "at": "2026-10-13T05:49:36+00:00",
+          "note": "batch labeling"
+        },
+        {
+          "step": "verified",
+          "by": "claude-sonnet verifier + claude-opus-5.5",
+          "at": "2026-10-13T05:55:29+00:00",
+          "note": "blind second reading; disagreements adjudicated"
+        },
+        {
+          "step": "approved",
+          "by": "person",
+          "at": "2026-10-13T15:32:51+00:00",
+          "note": "Reviewed in the web app; all judgment calls and disputes resolved"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "case": "g-24-env-00022",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "24-ENV-00022",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 10621,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-24-env-00051",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "24-ENV-00051",
-    "era": "2015-2026",
-    "composition": "uniform",
-    "documents": 4,
-    "chars": 40945,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-64-6-18-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "64-6-18 Vtec",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 17201,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-114-7-99-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "114-7-99 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 18874,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-130-8-14-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "130-8-14 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 12947,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-85-4-02-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "85-4-02 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 7130,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-143-9-10-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "143-9-10 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 31620,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-132-12-18-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "132-12-18 Vtec",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 70447,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-116-9-16-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "116-9-16 Vtec",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 41549,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-103-9-16-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "103-9-16 Vtec",
-    "era": "2015-2026",
-    "composition": "uniform",
-    "documents": 7,
-    "chars": 367319,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-35-2-10-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "35-2-10 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 22544,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-105-6-10-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-excluded",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "105-6-10 Vtec",
-    "era": "2005-2014",
-    "composition": "uniform",
-    "documents": 3,
-    "chars": 28148,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-126-6-07-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "126-6-07 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 2,
-    "chars": 95047,
-    "legacy": "in_scope",
-    "unknown_share": 0.06,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T04:52:37+00:00",
-     "note": "calibration batch 1"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T04:55:24+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-116-6-09-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "116-6-09 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 54635,
-    "legacy": "in_scope",
-    "unknown_share": 0.06,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-231-10-07-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "231-10-07 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 32224,
-    "legacy": "in_scope",
-    "unknown_share": 0.29,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T04:52:37+00:00",
-     "note": "calibration batch 1"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T04:55:24+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-110-6-04-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "110-6-04 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 22906,
-    "legacy": "in_scope",
-    "unknown_share": 0.06,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-75-7-18-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "75-7-18 Vtec",
-    "era": "2015-2026",
-    "composition": "uniform",
-    "documents": 5,
-    "chars": 121420,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-180-12-13-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "180-12-13 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 6944,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-74-5-10-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "74-5-10 Vtec",
-    "era": "2005-2014",
-    "composition": "uniform",
-    "documents": 2,
-    "chars": 56036,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-250-12-99-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "250-12-99 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 2,
-    "chars": 13843,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-71-4-07-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "71-4-07 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 24576,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-150-7-02-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "150-7-02 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 8966,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-208-12-01-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "208-12-01 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 6,
-    "chars": 66106,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-158-9-04-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-in-scope",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "158-9-04 Vtec",
-    "era": "1996-2004",
-    "composition": "uniform",
-    "documents": 3,
-    "chars": 58773,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-223-10-08-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-uncertain",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "223-10-08 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 32138,
-    "legacy": "uncertain",
-    "unknown_share": 0.29,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-35-3-04-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-uncertain",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "35-3-04 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 16251,
-    "legacy": "uncertain",
-    "unknown_share": 0.29,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-183-11-97-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-uncertain",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "183-11-97 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 17014,
-    "legacy": "uncertain",
-    "unknown_share": 0.35,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-228-11-99-vtec",
-   "split": "development",
-   "layer": "random",
-   "category": "random-uncertain",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "228-11-99 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 4,
-    "chars": 48781,
-    "legacy": "uncertain",
-    "unknown_share": 0.12,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-243-11-07-vtec",
-   "split": "holdout",
-   "layer": "random",
-   "category": "random-uncertain",
-   "status": "verified",
-   "reason": "Random draw within the legacy run's answer; taken in pool order",
-   "hints": {
-    "docket": "243-11-07 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 4156,
-    "legacy": "uncertain",
-    "unknown_share": 0.47,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Random draw within the legacy run's answer; taken in pool order"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-24-2-03-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "Seven single-family houses; post-decision motions; 47% of September facts unknown",
-   "hints": {
-    "docket": "24-2-03 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 12896,
-    "legacy": "in_scope",
-    "unknown_share": 0.47,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Seven single-family houses; post-decision motions; 47% of September facts unknown"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T04:52:37+00:00",
-     "note": "calibration batch 1"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T04:55:24+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-159-7-08-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "One house with garage and septic; mediation ordered; 41% unknown, in scope",
-   "hints": {
-    "docket": "159-7-08 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 4794,
-    "legacy": "in_scope",
-    "unknown_share": 0.41,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Eight-lot subdivision, appeal of plat conditions; substantive text with many unknowns"
-    },
-    {
-     "step": "replaced",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:33:15+00:00",
-     "note": "g-177-8-02-vtec replaced by g-159-7-08-vtec to bring in-scope cases toward half of the set"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-198-9-08-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "Proposed house on a building permit; three linked neighbor dockets; 41% unknown, in scope",
-   "hints": {
-    "docket": "198-9-08 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 4794,
-    "legacy": "in_scope",
-    "unknown_share": 0.41,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Six building lots, frontage dispute; unknowns despite a substantive decision"
-    },
-    {
-     "step": "replaced",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:33:15+00:00",
-     "note": "g-199-9-02-vtec replaced by g-198-9-08-vtec to bring in-scope cases toward half of the set"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-169-8-02-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "One dwelling; caption also names 217-9-02; tests counts and decision dates",
-   "hints": {
-    "docket": "169-8-02 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 9971,
-    "legacy": "in_scope",
-    "unknown_share": 0.35,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "One dwelling; caption also names 217-9-02; tests counts and decision dates"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-92-8-19-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "75 units; permit vacated after withdrawal, appeal moot; outcome and status facts",
-   "hints": {
-    "docket": "92-8-19 Vtec",
-    "era": "2015-2026",
-    "composition": "uniform",
-    "documents": 2,
-    "chars": 14511,
-    "legacy": "in_scope",
-    "unknown_share": 0.41,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "75 units; permit vacated after withdrawal, appeal moot; outcome and status facts"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-21-env-00023",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "16-unit apartment building; dismissed for standing; tests what a dismissal establishes",
-   "hints": {
-    "docket": "21-ENV-00023",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 8159,
-    "legacy": "in_scope",
-    "unknown_share": 0.35,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "16-unit apartment building; dismissed for standing; tests what a dismissal establishes"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-68-6-19-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "Short on-the-record remand order; most facts may truly be absent",
-   "hints": {
-    "docket": "68-6-19 Vtec",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 1699,
-    "legacy": "uncertain",
-    "unknown_share": 0.59,
-    "review_mentions": [
-     "on the record"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Short on-the-record remand order; most facts may truly be absent"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-72-5-03-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "On-the-record appeal of a DRB decision; review-standard example with unknowns",
-   "hints": {
-    "docket": "72-5-03 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 15306,
-    "legacy": "in_scope",
-    "unknown_share": 0.41,
-    "review_mentions": [
-     "on the record"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "On-the-record appeal of a DRB decision; review-standard example with unknowns"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-182-8-02-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "House converted to three dwelling units; decided alongside enforcement; 35% unknown",
-   "hints": {
-    "docket": "182-8-02 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 12046,
-    "legacy": "in_scope",
-    "unknown_share": 0.35,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Four-lot subdivision; interim ruling on a 1980s permit; many unknowns"
-    },
-    {
-     "step": "replaced",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:33:15+00:00",
-     "note": "g-194-10-99-vtec replaced by g-182-8-02-vtec to bring in-scope cases toward half of the set"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-161-9-99-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "high-unknown",
-   "status": "verified",
-   "reason": "Two lots lacking road frontage; hardship variance; 35% unknown, in scope",
-   "hints": {
-    "docket": "161-9-99 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 8846,
-    "legacy": "in_scope",
-    "unknown_share": 0.35,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "One additional back lot; frontage and variance after a hearing"
-    },
-    {
-     "step": "replaced",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:33:15+00:00",
-     "note": "g-193-8-02-vtec replaced by g-161-9-99-vtec to bring in-scope cases toward half of the set"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-243-10-00-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "near-miss",
-   "status": "verified",
-   "reason": "Excluded, but a mobile home replacing a dwelling may be replacement housing",
-   "hints": {
-    "docket": "243-10-00 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 6651,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Excluded, but a mobile home replacing a dwelling may be replacement housing"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T04:52:37+00:00",
-     "note": "calibration batch 1"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T04:55:24+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-132-6-00-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "near-miss",
-   "status": "verified",
-   "reason": "Excluded; seven-bedroom house shared by students: occupancy versus new dwelling units",
-   "hints": {
-    "docket": "132-6-00 Vtec",
-    "era": "1996-2004",
-    "composition": "uniform",
-    "documents": 2,
-    "chars": 16637,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Excluded; seven-bedroom house shared by students: occupancy versus new dwelling units"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-207-11-03-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "near-miss",
-   "status": "verified",
-   "reason": "Excluded; addition to a residence, use category disputed: is a unit added?",
-   "hints": {
-    "docket": "207-11-03 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 11458,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Excluded; addition to a residence, use category disputed: is a unit added?"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-256-11-06-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "near-miss",
-   "status": "verified",
-   "reason": "Excluded as Act 250, but a residential retirement community: the municipal-appeal side of the line",
-   "hints": {
-    "docket": "256-11-06 Vtec",
-    "era": "2005-2014",
-    "composition": "uniform",
-    "documents": 2,
-    "chars": 103511,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Excluded as Act 250, but a residential retirement community: the municipal-appeal side of the line"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-56-4-10-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "near-miss",
-   "status": "verified",
-   "reason": "Excluded as Act 250 though six residential lots are proposed",
-   "hints": {
-    "docket": "56-4-10 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 19550,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Excluded as Act 250 though six residential lots are proposed"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-77-4-05-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "shared",
-   "status": "verified",
-   "reason": "Decision shared with related dockets; developer seeks a second house; Supreme Court affirmed",
-   "hints": {
-    "docket": "77-4-05 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 2,
-    "chars": 51225,
-    "legacy": "in_scope",
-    "unknown_share": 0.06,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Decision shared with related dockets; developer seeks a second house; Supreme Court affirmed"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-232-12-04-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "shared",
-   "status": "verified",
-   "reason": "Two setback denials for single-family houses decided together",
-   "hints": {
-    "docket": "232-12-04 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 11066,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Two setback denials for single-family houses decided together"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-218-9-00-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "shared",
-   "status": "verified",
-   "reason": "Eight-unit PRD; preliminary and final plat dockets; intervenors continue after withdrawal",
-   "hints": {
-    "docket": "218-9-00 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 2,
-    "chars": 39999,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Eight-unit PRD; preliminary and final plat dockets; intervenors continue after withdrawal"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-73-3-02-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "shared",
-   "status": "verified",
-   "reason": "One single-family house; three linked cases decided together",
-   "hints": {
-    "docket": "73-3-02 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 17830,
-    "legacy": "uncertain",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "One single-family house; three linked cases decided together"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-88-4-02-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "shared",
-   "status": "verified",
-   "reason": "Single-family house lot; consolidated variance and development appeals",
-   "hints": {
-    "docket": "88-4-02 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 1,
-    "chars": 15091,
-    "legacy": "in_scope",
-    "unknown_share": 0.12,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Single-family house lot; consolidated variance and development appeals"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-143-7-08-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "enforcement",
-   "status": "verified",
-   "reason": "Town enforcement over an added residential unit that September counted in scope; post-judgment motions",
-   "hints": {
-    "docket": "143-7-08 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 2,
-    "chars": 78971,
-    "legacy": "in_scope",
-    "unknown_share": 0.24,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Town enforcement over an added residential unit that September counted in scope; post-judgment motions"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-212-11-99-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "enforcement",
-   "status": "verified",
-   "reason": "Plain sign enforcement: no appellant, no municipal appeal",
-   "hints": {
-    "docket": "212-11-99 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 3764,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Plain sign enforcement: no appellant, no municipal appeal"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-189-10-98-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "enforcement",
-   "status": "verified",
-   "reason": "ANR enforcement (kennel, leachfield): state, not municipal",
-   "hints": {
-    "docket": "189-10-98 Vtec",
-    "era": "1996-2004",
-    "composition": "single",
-    "documents": 1,
-    "chars": 6533,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "ANR enforcement (kennel, leachfield): state, not municipal"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-33-2-19-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "interim",
-   "status": "verified",
-   "reason": "Only a scheduling-order ruling: nothing decided, so most facts should be unknown",
-   "hints": {
-    "docket": "33-2-19 Vtec",
-    "era": "2015-2026",
-    "composition": "single",
-    "documents": 1,
-    "chars": 2339,
-    "legacy": "uncertain",
-    "unknown_share": 0.47,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Only a scheduling-order ruling: nothing decided, so most facts should be unknown"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-23-env-00057",
-   "split": "development",
-   "layer": "targeted",
-   "category": "interim",
-   "status": "verified",
-   "reason": "Pending appeal with motion rulings only; tests not inventing an outcome",
-   "hints": {
-    "docket": "23-ENV-00057",
-    "era": "2015-2026",
-    "composition": "uniform",
-    "documents": 4,
-    "chars": 71652,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Pending appeal with motion rulings only; tests not inventing an outcome"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-110-5-06-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "failure",
-   "status": "verified",
-   "reason": "Failed in September; 48-unit congregate housing; standing ruling",
-   "hints": {
-    "docket": "110-5-06 Vtec",
-    "era": "2005-2014",
-    "composition": "single",
-    "documents": 1,
-    "chars": 10106,
-    "legacy": "failed",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Failed in September; 48-unit congregate housing; standing ruling"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-170-12-14-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "failure",
-   "status": "verified",
-   "reason": "Failed in September; six units in three duplexes; late-appeal and merits rulings",
-   "hints": {
-    "docket": "170-12-14 Vtec",
-    "era": "2005-2014",
-    "composition": "uniform",
-    "documents": 2,
-    "chars": 52507,
-    "legacy": "failed",
-    "unknown_share": null,
-    "review_mentions": []
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "Failed in September; six units in three duplexes; late-appeal and merits rulings"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-138-8-10-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "long",
-   "status": "verified",
-   "reason": "321,000 characters, 15 documents; in scope; consolidated with Town enforcement",
-   "hints": {
-    "docket": "138-8-10 Vtec",
-    "era": "2005-2014",
-    "composition": "shared",
-    "documents": 15,
-    "chars": 321776,
-    "legacy": "in_scope",
-    "unknown_share": 0.06,
-    "review_mentions": [
-     "on the record"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "321,000 characters, 15 documents; in scope; consolidated with Town enforcement"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-169-12-16-vtec",
-   "split": "development",
-   "layer": "targeted",
-   "category": "long",
-   "status": "verified",
-   "reason": "428,000 characters, 13 documents; Act 250 and stormwater; tests long-case scope",
-   "hints": {
-    "docket": "169-12-16 Vtec",
-    "era": "2015-2026",
-    "composition": "shared",
-    "documents": 13,
-    "chars": 428545,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "428,000 characters, 13 documents; Act 250 and stormwater; tests long-case scope"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  },
-  {
-   "case": "g-122-7-04-vtec",
-   "split": "holdout",
-   "layer": "targeted",
-   "category": "long",
-   "status": "verified",
-   "reason": "299,000 characters; gravel extraction with Act 250; amended judgment",
-   "hints": {
-    "docket": "122-7-04 Vtec",
-    "era": "1996-2004",
-    "composition": "shared",
-    "documents": 8,
-    "chars": 299842,
-    "legacy": "excluded",
-    "unknown_share": null,
-    "review_mentions": [
-     "on the record",
-     "de novo"
-    ]
-   },
-   "notes": [],
-   "history": [
-    {
-     "step": "chosen",
-     "by": "claude-opus-5.5",
-     "at": "2026-10-13T04:30:21+00:00",
-     "note": "299,000 characters; gravel extraction with Act 250; amended judgment"
-    },
-    {
-     "step": "labeled",
-     "by": "claude-opus labeler",
-     "at": "2026-10-13T05:49:36+00:00",
-     "note": "batch labeling"
-    },
-    {
-     "step": "verified",
-     "by": "claude-sonnet verifier + claude-opus-5.5",
-     "at": "2026-10-13T05:55:29+00:00",
-     "note": "blind second reading; disagreements adjudicated"
-    }
-   ]
-  }
- ]
+  ]
 }

@@ -36,6 +36,11 @@ class Paths:
         return self.root/'reference'
 
     @property
+    def packets(self):
+        """Reference cases' text for labelers and readers, written by ``reference packets``."""
+        return self.data/'reference'/'packets'
+
+    @property
     def datasets(self):
         return self.data/'datasets'
 

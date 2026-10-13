@@ -285,14 +285,19 @@
         ],
         "duration": {
           "start": {
-            "date": "2002-03-25",
+            "date": "2001-12-31",
             "relation": "on_or_before",
-            "description": "Earliest dated order in this docket",
+            "description": "The PUD application 'resulted in the two 2001 appeals', of which this docket's appeal of the PUD decision is one, so it existed by the end of 2001.",
             "evidence": [
               {
-                "doc": 1,
-                "page": 2,
-                "quote": "Done at Barre, Vermont, this 25th day of March, 2002."
+                "doc": 4,
+                "page": 1,
+                "quote": "the zoning ordinance; that application resulted in the two 2001 appeals."
+              },
+              {
+                "doc": 6,
+                "page": 1,
+                "quote": "zoning ordinance; the PUD application resulted in the two 2001 appeals."
               }
             ]
           },
@@ -315,7 +320,7 @@
           },
           "note": "Filing date not stated; start is the earliest dated order. End is the final order concluding the docket.",
           "kind": "at_least",
-          "days": 269
+          "days": 353
         },
         "restrictions": [],
         "housing_changes": [],
@@ -385,12 +390,12 @@
     {
       "field": "units",
       "confidence": "medium",
-      "note": "6-unit Senior Citizen Residence; the court flagged it might instead be assisted living. Dormitory/visitor residences excluded as rooms let."
+      "note": "Reread confirms 6: the dormitory with overnight accommodations for 6 persons is an establishment letting rooms, not dwelling units."
     },
     {
       "field": "appellants",
       "confidence": "medium",
-      "note": "The court calls SEVCA and The Community Alliance 'two additional appellants' alongside the Applicant, though they were not applicants below; classed as developer since they would own and operate the project."
+      "note": "Reread confirms 3: later decisions call SEVCA and The Community Alliance 'two additional appellants' with Green Meadows Center."
     },
     {
       "field": "discretion_involved",
@@ -421,6 +426,11 @@
       "field": "decision_date",
       "confidence": "high",
       "note": "Planning Commission denial date not stated."
+    },
+    {
+      "field": "start",
+      "confidence": "medium",
+      "note": "Reread: the documents say the PUD application resulted in two 2001 appeals; this docket appeals the PUD decision, so the appeal existed by the end of 2001 (year only, so the bound is December 31)."
     }
   ],
   "disputed": [],
@@ -431,6 +441,12 @@
       "by": "claude-opus labeler",
       "at": "2026-10-13T05:49:10+00:00",
       "note": "Labeled from all six shared decisions, taking only what concerns 208-12-01 Vtec."
+    },
+    {
+      "step": "rechecked",
+      "by": "claude-opus-5.5 (Opus reread of the full text)",
+      "at": "2026-10-13T15:25:48+00:00",
+      "note": "Start tightened to 2001; units, appellants and discretion confirmed"
     }
   ]
 }

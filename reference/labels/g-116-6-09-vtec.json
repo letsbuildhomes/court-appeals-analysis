@@ -152,7 +152,7 @@
       {
        "doc": 1,
        "page": 3,
-       "quote": "address only the authority of the DRB\u2014and hence, the authority of this Court in this de novo appeal\u2014to impose the contested conditions."
+       "quote": "address only the authority of the DRB—and hence, the authority of this Court in this de novo appeal—to impose the contested conditions."
       },
       {
        "doc": 1,
@@ -171,7 +171,7 @@
       {
        "doc": 1,
        "page": 24,
-       "quote": "GRANTED and Applicants\u2019 Motion for Summary Judgment is DENIED on Questions 1 and 2 of the Statement of Questions, in that the DRB has authority to impose Condition B on the 9-unit proposal."
+       "quote": "GRANTED and Applicants’ Motion for Summary Judgment is DENIED on Questions 1 and 2 of the Statement of Questions, in that the DRB has authority to impose Condition B on the 9-unit proposal."
       },
       {
        "doc": 1,
@@ -234,7 +234,7 @@
        {
         "doc": 1,
         "page": 20,
-        "quote": "See Town\u2019s Motion for Summary Judgment, Docket No. 116-6-09"
+        "quote": "See Town’s Motion for Summary Judgment, Docket No. 116-6-09"
        },
        {
         "doc": 1,
@@ -336,7 +336,7 @@
   {
    "field": "lots",
    "confidence": "medium",
-   "note": "The application subdivides the property into two lots, but both contain existing housing and the PRD units' lot arrangement is not stated, so new residential building lots are unknown."
+   "note": "Reread: the application divides the 7.2-acre property into two lots, one keeping the existing Hood house and barn; neither is stated to be a new residential building lot, so lots stay unknown rather than 2."
   },
   {
    "field": "discretion_involved",
@@ -373,6 +373,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Appellants: one entry per named person or organization"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T15:26:25+00:00",
+   "note": "Lots unknown confirmed on reread"
   }
  ]
 }

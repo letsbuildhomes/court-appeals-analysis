@@ -563,8 +563,8 @@
     },
     {
       "field": "duration",
-      "confidence": "medium",
-      "note": "Start: filed August 17, 2010 (exact, June 2018 recusal order). End: judgment final August 12, 2013 after affirmance (June 14, 2013) and denial of reargument. If post-judgment proceedings counted, the end would be on or after 2020-03-26."
+      "confidence": "high",
+      "note": "Start: filed August 17, 2010 (exact, June 2018 recusal order). End: judgment final August 12, 2013 after affirmance (June 14, 2013) and denial of reargument. If post-judgment proceedings counted, the end would be on or after 2020-03-26. Person ruling: post-judgment proceedings do not extend the duration."
     },
     {
       "field": "restrictions",
@@ -578,15 +578,19 @@
     }
   ],
   "disputed": [],
-  "questions": [
-    "Should post-judgment contempt and enforcement proceedings captioned in this docket (2014-2020) extend its duration and keep litigation ongoing? This label ends it at the 2013 final judgment."
-  ],
+  "questions": [],
   "history": [
     {
       "step": "labeled",
       "by": "claude-opus labeler",
       "at": "2026-10-13T05:48:49Z",
       "note": "Labeled from all 15 documents; in scope for the single-family dwelling application; de novo trial."
+    },
+    {
+      "step": "adjudicated",
+      "by": "person",
+      "at": "2026-10-13T14:08:03+00:00",
+      "note": "Post-judgment proceedings do not extend the duration; end at the 2013 final judgment confirmed"
     }
   ]
 }

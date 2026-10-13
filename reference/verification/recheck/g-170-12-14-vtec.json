@@ -1,0 +1,31 @@
+{"case": "g-170-12-14-vtec",
+ "decisions": [
+  {"fact": "appellants",
+   "label_value": "11 entries: Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, Catherine Stevens; neighbor; represented",
+   "other_value": "1 entry (11 appellants in one group)",
+   "decision": {"names": ["Kevin Trout", "Dorothy Wilson", "Graham McAfee", "Linda McAfee", "Steven Wyatt", "Donna Wyatt", "Jeff Marshall", "Jack Manning", "Suba Luck", "Brian Stevens", "Catherine Stevens"], "relationship": "neighbor", "seeks": "overturn_approval", "representation": "represented"},
+   "confidence": "medium",
+   "why": "Both decisions name the same 11 individuals as Appellants, and the guide requires one entry per named person, so a single group entry is wrong; the label's list is right (the notification block's variant names John Wilson and Marilyn Marshall are not in either decision's text of who appeals). All were represented by attorney Carl Lisman. Neighbor status is never stated outright but is the most likely reading: Appellants pressed the project's impact on the adjoining Foothills development's water supply, argued notice should have been posted on Meadow Drive (a road inside Foothills), and the town mailed them the decision; confidence is medium only on the relationship.",
+   "evidence": [
+     {"doc": 2, "page": 1, "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna"},
+     {"doc": 1, "page": 1, "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"},
+     {"doc": 2, "page": 3, "quote": "the Project’s impact on the Foothills Development’s water supply"},
+     {"doc": 2, "page": 12, "quote": "they suggest that the notice should have been posted near Meadow Drive at the intersection with the proposed access drive"},
+     {"doc": 2, "page": 6, "quote": "Meadow Drive, which is a public road within the Foothills Residential Development"},
+     {"doc": 1, "page": 1, "quote": "was not mailed by the Town and received by Appellants until November 17, 2014"}
+   ]},
+  {"fact": "discretion_central",
+   "label_value": "unknown",
+   "other_value": "unknown (low confidence)",
+   "decision": "no",
+   "confidence": "medium",
+   "why": "The trial centered on the notice-posting question, a fixed statutory location/visibility requirement under 24 V.S.A. 4464(a)(1)(B); on PUD compliance Appellants identified no specific conflicting provisions, their density-bonus point was definitional (elderly housing), and the Town Plan question drew little evidence. The only evaluative contention, pedestrian connectivity 'wherever possible', was a minor argument rejected in one sentence, so it was not a principal part of the challenge.",
+   "evidence": [
+     {"doc": 2, "page": 11, "quote": "The evidence offered at trial centered on the requirement that Applicant post notice of the application and the related public hearing"},
+     {"doc": 2, "page": 14, "quote": "they do not highlight any specific areas of the Regulations that conflict with the Project."},
+     {"doc": 2, "page": 16, "quote": "Appellants suggest that Applicant is not entitled to the density bonus because the development does not meet the definition of elderly housing"},
+     {"doc": 2, "page": 17, "quote": "During trial, the parties provided little evidence on the Project’s compliance with the Town Plan."}
+   ]}
+ ],
+ "other_errors": []
+}

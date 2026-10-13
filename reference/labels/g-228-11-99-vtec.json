@@ -459,6 +459,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Mixed board decision: outcome other, permission unknown"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Reread confirms in scope (a new office-apartment building to be constructed), decision outcome other, permission unknown, start on or before 2000-03-27."
   }
  ]
 }

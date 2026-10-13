@@ -1,0 +1,29 @@
+{"case": "g-71-4-07-vtec",
+ "decisions": [
+  {"fact": "discretion_involved", "label_value": "yes", "other_value": "no", "decision": "yes", "confidence": "medium",
+   "why": "Most questions (8, 11, 18 road width/design; 10, 12, 19 slope gradients; 9 legal rights) turn on fixed rules, but Question 15 asks whether the road upgrade will cause 'significantly and unreasonably' increased stormwater and sedimentation, and Question 16 whether added permit provisions are needed to prevent adverse effects. Those are evaluative standards actually contested in this appeal (with a conditional-use stormwater standard acknowledged to apply), so the appeal is not established to turn only on fixed rules; the second reader overlooked Questions 15-16.",
+   "evidence": [
+    {"doc": 1, "page": 11, "quote": "Question 15 asks whether the proposal to improve Old Center Fayston Road will"},
+    {"doc": 1, "page": 11, "quote": "result in significantly and unreasonably increased flows of storm water and sedimentation"},
+    {"doc": 1, "page": 11, "quote": "additional provisions should be included in the approved permit under § 16.5 of the Land Use Regulations to prevent such adverse"}
+   ]},
+  {"fact": "discretion_central", "label_value": "unknown", "other_value": "not_applicable", "decision": "unknown", "confidence": "medium",
+   "why": "Discretion is involved, so not_applicable is wrong. The stormwater contention is one of about eighteen questions; the decision gives most of its analysis to the fixed road-width rule (the only question actually decided) and treats stormwater on the same footing as the road-design and slope questions. Appellants' downhill runoff problem hints at motive, but nothing establishes the evaluative contention was a principal part of the challenge, nor that it was peripheral.",
+   "evidence": [
+    {"doc": 1, "page": 11, "quote": "summary judgment on Questions 15 and 16 will be granted in favor of Applicants at the"},
+    {"doc": 1, "page": 2, "quote": "Appellants’ property is subject to existing water runoff and sedimentation problems."}
+   ]},
+  {"fact": "units", "label_value": "unknown", "other_value": 7, "decision": "unknown", "confidence": "medium",
+   "why": "The decision states seven residential building lots and that each lot is limited to a single-family residence, a per-lot cap, not a stated count of dwellings to be built; no house construction is proposed in this application. Seven comes only from multiplying lots by the cap, which the guide forbids (never derive units from lots).",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "Each lot is proposed to be limited to a single-family, five-bedroom residence."}
+   ]},
+  {"fact": "housing", "label_value": "yes", "other_value": "yes", "decision": "yes", "confidence": "high",
+   "why": "The subdivision creates seven lots expressly called residential building lots, each limited to a single-family residence with its own well and septic system; a subdivision creating house lots is housing = yes under the guide.",
+   "evidence": [
+    {"doc": 1, "page": 3, "quote": "Applicants propose to subdivide thirty-five acres in the easterly portion of the"},
+    {"doc": 1, "page": 3, "quote": "project property into seven residential building lots"},
+    {"doc": 1, "page": 3, "quote": "Each lot is proposed to be limited to a single-family, five-bedroom residence."}
+   ]}
+ ],
+ "other_errors": []}

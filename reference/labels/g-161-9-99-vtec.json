@@ -119,9 +119,20 @@
     ],
     "discretion": {
      "description": "The appellants challenge the denial of a variance; the Town's motion contested only whether the hardship was self-created, which the court decided from the appellants' knowledge at purchase. The appellants' own grounds and the other four variance criteria are not described.",
-     "involved": "unknown",
-     "evidence": [],
-     "central": "unknown",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "Only the third requirement, that the unnecessary hardship has not been created by the appellant, is at issue in the present motion."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "by purchasing Lot 7 with actual or constructive knowledge of the frontage restrictions applicable to it, Appellants are considered to have created for themselves whatever hardship"
+      }
+     ],
+     "central": "not_applicable",
      "central_evidence": []
     },
     "observed_status": {
@@ -253,7 +264,7 @@
   {
    "field": "discretion_involved",
    "confidence": "medium",
-   "note": "Only the self-created hardship criterion was decided, on the owners' knowledge at purchase; the appellants' own contentions are not described, so unknown."
+   "note": "Reread: the only issue contested and decided is whether the owners created their own hardship, settled as a matter of law on undisputed facts; no evaluative standard was contested."
   },
   {
    "field": "discretion_central",
@@ -263,7 +274,7 @@
   {
    "field": "litigation",
    "confidence": "medium",
-   "note": "Granting the Town's summary judgment motion decides that the appellants do not qualify for the variance, which disposes of the appeal; no further proceedings are shown, though no separate judgment entry is in the documents."
+   "note": "Reread confirms resolved: the court ruled the appellants do not qualify for a variance, which ends the appeal; unaddressed criteria no longer matter."
   },
   {
    "field": "permission",
@@ -296,6 +307,12 @@
    "by": "claude-opus-5.5",
    "at": "2026-10-13T05:55:18+00:00",
    "note": "Lots unknown: the documents do not say no new lots are created"
+  },
+  {
+   "step": "rechecked",
+   "by": "claude-opus-5.5 (Opus reread of the full text)",
+   "at": "2026-10-13T15:25:48+00:00",
+   "note": "Discretion set to no; litigation resolved confirmed"
   }
  ]
 }
