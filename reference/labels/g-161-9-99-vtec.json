@@ -1,0 +1,301 @@
+{
+ "case": "g-161-9-99-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-161-9-99-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "The owners appealed the Fairfield zoning board's denial of a road-frontage variance they sought in order to build a new dwelling on their vacant Lot 7.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "Appellants appealed from a decision of the Zoning Board of Adjustment (ZBA) of the Town of Fairfield denying their request for a variance from the lot access requirements"
+    },
+    {
+     "doc": 1,
+     "page": 3,
+     "quote": "In 1999, Appellants applied for a building permit to construct a dwelling on Lot 7."
+    },
+    {
+     "doc": 1,
+     "page": 4,
+     "quote": "whether they may qualify for any other exception which would allow them to build a dwelling on Lot 7."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "161-9-99 Vtec",
+    "project": {
+     "description": "A variance from the 200-foot road frontage requirement so that the appellants can build a single-family dwelling on Lot 7, a vacant 1.80-acre lot with 30 feet of frontage on Rugg Road.",
+     "municipality": "Fairfield",
+     "proposed_units": 1,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "caused them to apply to the ZBA for a variance from the 200-foot road frontage requirement"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Lot 7 is 1.80 acres in area, and has 30 feet of frontage on Rugg Road, a public road in the Town of Fairfield."
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Lot 7 is unimproved."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "In 1999, Appellants applied for a building permit to construct a dwelling on Lot 7."
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "The Fairfield Zoning Board of Adjustment denied the request for a variance from the lot access (road frontage) requirements.",
+     "date": "unknown",
+     "outcome": "denied",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Appellants appealed from a decision of the Zoning Board of Adjustment (ZBA) of the Town of Fairfield denying their request for a variance from the lot access requirements"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Thomas Bachelder",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Thomas and Jeanice Bachelder"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Robert E. Farrar, Esq.;"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Mr. Lussier conveyed the vacant Lot 7 to Appellants in May of 1982."
+       }
+      ]
+     },
+     {
+      "name": "Jeanice Bachelder",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Thomas and Jeanice Bachelder"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Robert E. Farrar, Esq.;"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Mr. Lussier conveyed the vacant Lot 7 to Appellants in May of 1982."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The appellants challenge the denial of a variance; the Town's motion contested only whether the hardship was self-created, which the court decided from the appellants' knowledge at purchase. The appellants' own grounds and the other four variance criteria are not described.",
+     "involved": "unknown",
+     "evidence": [],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "denied",
+     "description": "Summary judgment for the Town: the appellants do not qualify for the variance because they created the hardship; nothing is shown pending.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "the Town=s Motion for Summary Judgment is GRANTED. Appellants do not qualify for a variance"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "161-9-99 Vtec"
+      ],
+      "description": "Appeal of the ZBA's variance denial filed; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants appealed from a decision of the Zoning Board of Adjustment (ZBA) of the Town of Fairfield"
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "2000-09-13",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "161-9-99 Vtec"
+      ],
+      "description": "Summary judgment granted to the Town; the appellants do not qualify for a variance because the hardship was self-created.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "the Town=s Motion for Summary Judgment is GRANTED. Appellants do not qualify for a variance"
+       },
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Done at Barre, Vermont, this 13 day of September, 2000."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2000-09-13",
+      "relation": "on_or_before",
+      "description": "The summary judgment decision is the earliest dated event showing the appeal existed; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Done at Barre, Vermont, this 13 day of September, 2000."
+       }
+      ]
+     },
+     "end": {
+      "date": "2000-09-13",
+      "relation": "exact",
+      "description": "Summary judgment for the Town disposing of the variance appeal.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "the Town=s Motion for Summary Judgment is GRANTED. Appellants do not qualify for a variance"
+       },
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Done at Barre, Vermont, this 13 day of September, 2000."
+       }
+      ]
+     },
+     "note": "Only one dated document; the start and end fall on the same day, so a zero-day minimum establishes nothing.",
+     "kind": "unknown",
+     "days": "unknown"
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [],
+    "appeal_review": {
+     "standard": "unknown",
+     "evidence": []
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "161-9-99 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a ZBA variance denial; the variance is sought so the owners can build a dwelling on vacant Lot 7, which is new housing."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The decision rules on summary judgment and never says whether the appeal is heard de novo or on the record."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Filing date not stated (docket number not used); the only dated event is the September 13, 2000 decision, giving a zero-day interval, so unknown."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "One dwelling on Lot 7, from the building permit application that presumably prompted the variance request; the variance application itself was not in the record."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "Only the self-created hardship criterion was decided, on the owners' knowledge at purchase; the appellants' own contentions are not described, so unknown."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "medium",
+   "note": "Follows from involved unknown."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Granting the Town's summary judgment motion decides that the appellants do not qualify for the variance, which disposes of the appeal; no further proceedings are shown, though no separate judgment entry is in the documents."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "Variance denied; the court notes other exceptions might still allow a dwelling but none is shown granted."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "high",
+   "note": "The ZBA decision date is not stated."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:47:52Z",
+   "note": "Labeled from the single September 13, 2000 summary judgment decision."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants: one entry per named person or organization"
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Lots unknown: the documents do not say no new lots are created"
+  }
+ ]
+}

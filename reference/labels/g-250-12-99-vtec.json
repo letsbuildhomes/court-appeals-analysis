@@ -1,0 +1,393 @@
+{
+ "case": "g-250-12-99-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-250-12-99-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Docket 250-12-99 Vtec appeals the Town of New Haven's building permit #46-99 for lot 2 of an approved residential subdivision; the permits at issue are building permits for single-family residences, i.e. a new house.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining to lot number 2."
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "The three present appeals involve appeals of building permits issued for three of the lots in the subdivision"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "failed to meet any of the standards in the Zoning Regulations for issuance of building permits for single-family residences"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "250-12-99 Vtec",
+    "project": {
+     "description": "Building permit #46-99 for a single-family residence on lot 2 of John and Deborah Sherlock's residential subdivision of the former Phelps Farm on Hunt Road (application originally in the name of prospective purchaser Orebaugh).",
+     "municipality": "New Haven",
+     "proposed_units": 1,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining to lot number 2."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "residential subdivision proposed by John and Deborah Sherlock on the former Phelps Farm on Hunt Road in New Haven"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "failed to meet any of the standards in the Zoning Regulations for issuance of building permits for single-family residences"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants also argue that the initial application was in the name of Orebaugh, a prospective purchaser who did not actually purchase that lot."
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Issuance of building permit #46-99 for lot 2 (the documents do not state the issuing officer's or any Zoning Board of Adjustment decision date).",
+     "date": "unknown",
+     "outcome": "approved",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining to lot number 2."
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "John A.G. Madden",
+      "relationship": "unknown",
+      "seeks": "overturn_approval",
+      "representation": "pro_se",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In all three cases, Appellants John Madden and Melissa Winborn appeared and represented themselves"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "The Court finds no reason that any of the three building permits should be disapproved or revoked"
+       }
+      ]
+     },
+     {
+      "name": "Melissa Winborn",
+      "relationship": "unknown",
+      "seeks": "overturn_approval",
+      "representation": "pro_se",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In all three cases, Appellants John Madden and Melissa Winborn appeared and represented themselves"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "The Court finds no reason that any of the three building permits should be disapproved or revoked"
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Appellants argued the permit was invalid because the underlying subdivision approval was still on appeal, and that the application was in the name of a prospective purchaser who did not buy the lot; they also challenged the Town's $300 ZBA appeal filing fee. They presented no evidence that the application failed any zoning standard.",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants= primary argument against the issuance of the building permits in each of these three appeals was that the underlying subdivision approval was on appeal to the Vermont Supreme Court"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "In Docket No. 250-12-99 Vtec, Appellants also argue that the initial application was in the name of Orebaugh"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants presented no other evidence that the applications for building permits failed to meet any of the standards in the Zoning Regulations"
+      }
+     ],
+     "central": "not_applicable",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "allowed",
+     "description": "The Environmental Court approved building permit #46-99 and denied the appellant's motion to amend; no further proceeding in this docket is shown pending.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "each of them is therefore approved in this appeal"
+      },
+      {
+       "doc": 2,
+       "page": 3,
+       "quote": "Accordingly, Appellant=s Motion to Amend the April 24, 2000 Decision and Order is DENIED."
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "250-12-99 Vtec"
+      ],
+      "description": "Madden and Winborn appealed building permit #46-99 (filing date not stated).",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining to lot number 2."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2000-04-24",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "227-11-99 Vtec",
+       "250-12-99 Vtec",
+       "15-1-00 Vtec"
+      ],
+      "description": "Decision and Order approving the building permits after an evidentiary hearing, and ruling for appellants on the $300 filing fee without affecting the permits.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "each of them is therefore approved in this appeal"
+       },
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Dated at Barre, Vermont, this 24th day of April, 2000."
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "2000-05-23",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "227-11-99 Vtec",
+       "250-12-99 Vtec",
+       "15-1-00 Vtec"
+      ],
+      "description": "Appellant Madden's May 3, 2000 motion to amend the decision denied.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "Accordingly, Appellant=s Motion to Amend the April 24, 2000 Decision and Order is DENIED."
+       },
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "Dated at Barre, Vermont, this 23rd day of May, 2000."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2000-04-24",
+      "relation": "on_or_before",
+      "description": "Filing date not stated; the April 24, 2000 decision is the earliest dated event proving the appeal existed.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Dated at Barre, Vermont, this 24th day of April, 2000."
+       }
+      ]
+     },
+     "end": {
+      "date": "2000-05-23",
+      "relation": "exact",
+      "description": "Denial of the motion to amend, the last observed order; no further review shown.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "Accordingly, Appellant=s Motion to Amend the April 24, 2000 Decision and Order is DENIED."
+       },
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "Dated at Barre, Vermont, this 23rd day of May, 2000."
+       }
+      ]
+     },
+     "note": "Start is the first dated order (filing undated); end is the denial of the motion to amend.",
+     "kind": "at_least",
+     "days": 29
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "227-11-99 Vtec",
+      "relationship": "Companion appeal of building permit #51-99 (lot 4), decided in the same decision",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Docket No. 227-11-99 Vtec is the appeal of building permit #51-99, pertaining to lot number 4."
+       }
+      ]
+     },
+     {
+      "docket": "15-1-00 Vtec",
+      "relationship": "Companion appeal of building permit #62-99 (lot 1), decided in the same decision",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Docket No. 15-1-00 Vtec is the appeal of building permit #62-99, pertaining to lot number 1."
+       }
+      ]
+     },
+     {
+      "docket": "53-4-99 Vtec",
+      "relationship": "Earlier Environmental Court appeal of the underlying subdivision site plan",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket Nos. 53-4-99 Vtec and 54-4-99 Vtec, the Court ruled on the site plan for a residential subdivision"
+       }
+      ]
+     },
+     {
+      "docket": "54-4-99 Vtec",
+      "relationship": "Earlier Environmental Court appeal of the underlying subdivision site plan",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket Nos. 53-4-99 Vtec and 54-4-99 Vtec, the Court ruled on the site plan for a residential subdivision"
+       }
+      ]
+     },
+     {
+      "docket": "99-449",
+      "relationship": "Vermont Supreme Court affirmance of the subdivision decision",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "affirmed by the Vermont Supreme Court under Docket Number 99-449"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "entered an appearance but did not participate in the evidentiary hearing"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "each of them is therefore approved in this appeal"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "250-12-99 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a municipal building permit for a single-family residence on a subdivision lot: new housing. The shared decision also decides 227-11-99 and 15-1-00; only the lot 2 / permit #46-99 parts are used."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "medium",
+   "note": "No explicit 'de novo' statement, but the court held an evidentiary hearing, weighed the evidence against the zoning standards and itself approved the permits 'in this appeal'; no on-the-record procedure mentioned."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing date not stated (not taken from the docket number); start bounded by the April 24, 2000 decision. End is the May 23, 2000 denial of the motion to amend; no further appeal is mentioned, but one cannot be ruled out."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Decision and denial of motion to amend observed; nothing pending shown. The decision notes a possible future Rule 60(b) motion only if the federal suit succeeds."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "The decision speaks of the permits collectively as building permits for single-family residences; one dwelling for lot 2."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "The permit was issued; any intervening ZBA decision and its date are not described. Date unknown."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "Madden and Winborn, self-represented; their relationship to the property (neighbors?) is not stated, so unknown."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "Contentions were legal (pending subdivision appeal, applicant identity) and the filing fee; appellants offered no evidence on any zoning standard."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T12:00:00Z",
+   "note": "Labeled from both shared decisions, lot 2 / permit #46-99 only."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Lots unknown: the documents do not say no new lots are created"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+  "case": "g-64-6-18-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-64-6-18-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "The Town of Halifax brought this enforcement action to compel removal of a temporary shed after an unappealed notice of violation; no municipal decision was appealed to the court in this docket, and the subject is a shed, not new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "The Town of Halifax (Town) brings this enforcement action against Defendants Bonnie LeMay and Richard Jeffrey, alleging that a shed on Defendant LeMay's property has outlasted its temporary permit"},
+        {"doc": 1, "page": 3, "quote": "Defendants did not appeal the ZBA decision."},
+        {"doc": 1, "page": 3, "quote": "The Town filed its Complaint with this Court on June 22, 2018."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Town-initiated enforcement under 24 V.S.A. 4451/4452 after defendants failed to appeal the January 2018 NOV and the ZBA decision; nothing in this docket appeals a municipal decision."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Enforcement the town brought without an appeal of a municipal decision; the guide classes this as no."},
+    {"field": "housing", "confidence": "high", "note": "The dispute is removal of a 10-by-12 storage shed (accessory structure). A separate temporary-housing permit after the 2016 fire is mentioned only as background and is not at issue."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:37Z", "note": "Excluded: town enforcement action over a shed, no municipal appeal, not new housing."}
+  ]
+}

@@ -1,0 +1,310 @@
+{
+ "case": "g-71-4-07-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-71-4-07-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Neighbors appealed the Fayston Planning Commission's approval of a seven-lot subdivision creating residential building lots, each limited to a single-family residence; a subdivision creating house lots is new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "appealed from a decision of the Planning Commission of the Town of Fayston"
+    },
+    {
+     "doc": 1,
+     "page": 3,
+     "quote": "Applicants propose to subdivide thirty-five acres in the easterly portion of the project property into seven residential building lots"
+    },
+    {
+     "doc": 1,
+     "page": 3,
+     "quote": "Each lot is proposed to be limited to a single-family, five-bedroom residence."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "71-4-07 Vtec",
+    "project": {
+     "description": "Seven-lot residential subdivision of 35 acres of a 130.5-acre hillside parcel on Old Center Fayston Road, each lot limited to a single-family, five-bedroom residence, with about 95 acres restricted as conservation land and an upgrade of the Class 4 road for access.",
+     "municipality": "Fayston",
+     "proposed_units": "unknown",
+     "proposed_lots": 7,
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "Applicants propose to subdivide thirty-five acres in the easterly portion of the project property into seven residential building lots"
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "Each lot is proposed to be limited to a single-family, five-bedroom residence."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Planning Commission of the Town of Fayston"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Fayston Planning Commission approval of the seven-lot subdivision application.",
+     "date": "2007-03-06",
+     "outcome": "approved",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "The Planning Commission approved the subdivision application10 on March 6, 2007."
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Evelyn Kennedy Kelley",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants Evelyn Kennedy Kelley and the Evelyn Kennedy Kelley Trust appealed"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by John G. Hutton, Jr., Esq."
+       },
+       {
+        "doc": 1,
+        "page": 7,
+        "quote": "Question 18 asks whether the permit should be denied due to lack of compliance with the right-of-way width or design standards."
+       }
+      ]
+     },
+     {
+      "name": "Evelyn Kennedy Kelley Trust",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants Evelyn Kennedy Kelley and the Evelyn Kennedy Kelley Trust appealed"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Appellant Trust owns a 2.2-acre parcel of property on the east side of Old Center Fayston Road"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by John G. Hutton, Jr., Esq."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Appellants challenged the subdivision on road right-of-way width and design standards, steep-slope rules, and whether the project would cause significant and unreasonable stormwater and sedimentation onto their downhill property, seeking added permit provisions.",
+     "involved": "yes",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 11,
+       "quote": "Question 15 asks whether the proposal to improve Old Center Fayston Road will result in significantly and unreasonably increased flows of storm water and sedimentation onto Appellants\u2019 property."
+      }
+     ],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "allowed",
+     "description": "The Planning Commission's subdivision approval is the latest observed authorization; the court granted partial summary judgment to the applicants and left the remaining questions for a later hearing.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "The Planning Commission approved the subdivision application10 on March 6, 2007."
+      },
+      {
+       "doc": 1,
+       "page": 12,
+       "quote": "the remaining questions in the Statement of Questions, as discussed above, will be addressed on the record of the telephone motion hearing scheduled for December 3, 2007"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "71-4-07 Vtec"
+      ],
+      "description": "Kelley and the Kelley Trust appealed the Planning Commission's subdivision approval; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants Evelyn Kennedy Kelley and the Evelyn Kennedy Kelley Trust appealed"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2007-11-26",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "71-4-07 Vtec"
+      ],
+      "description": "Decision on cross-motions for summary judgment: granted as to Questions 1-7 facts and Question 8 for the applicants; remaining questions set for a telephone motion hearing.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 12,
+        "quote": "summary judgment is GRANTED in favor of Appellee-Applicants as to Question 8 of the Statement of Questions"
+       },
+       {
+        "doc": 1,
+        "page": 12,
+        "quote": "Done at Berlin, Vermont, this 26th day of November, 2007."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2007-11-26",
+      "relation": "on_or_before",
+      "description": "Filing date not stated; the summary judgment decision is the earliest dated event proving the appeal existed.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 12,
+        "quote": "Done at Berlin, Vermont, this 26th day of November, 2007."
+       }
+      ]
+     },
+     "end": {
+      "date": "2007-11-26",
+      "relation": "on_or_after",
+      "description": "The appeal was still pending at the November 26, 2007 decision, with remaining questions set for a later hearing.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 12,
+        "quote": "Done at Berlin, Vermont, this 26th day of November, 2007."
+       }
+      ]
+     },
+     "note": "Only one dated court event; both bounds fall on the same day, so a zero-day minimum establishes nothing.",
+     "kind": "unknown",
+     "days": "unknown"
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "The application is now before the Court in this appeal de novo."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "71-4-07 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Neighbors' appeal of a Planning Commission subdivision approval creating seven residential building lots; subdivision creating house lots is new housing per the guide."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The decision states the application is before the Court in this appeal de novo; footnote 12 also refers to the Court in a de novo appeal."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Filing date not stated; the only dated court event is the November 26, 2007 decision, so start and end coincide and duration is unknown."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "Each of seven lots is limited to a single-family residence, which suggests seven houses, but no dwelling count is stated and the guide forbids deriving units from lots."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "Seven residential building lots stated; Lot 7 is 75.3 acres including conservation land but is still described among the residential building lots, and no existing housing is mentioned on any lot."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "Question 15 contends the project would cause significantly and unreasonably increased stormwater and sedimentation, an evaluative test; most other questions turn on fixed road-width, design and slope rules."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "low",
+   "note": "The stormwater contention is one of many questions (most about fixed road and slope standards); nothing shows whether it was principal or peripheral."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "Planning Commission approval is the latest observed authorization; the de novo appeal was pending with partial summary judgment for the applicants. Conditions of the approval are not described, so allowed rather than allowed_with_conditions."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "Approved; the decision does not say whether conditions were attached. Page 1 calls it site plan approval, page 5 approval of the subdivision application."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "Remaining questions were set for a December 3, 2007 telephone motion hearing; no conclusion observed."
+  }
+ ],
+ "disputed": [
+  "discretion_central",
+  "discretion_involved"
+ ],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:47:31Z",
+   "note": "Labeled from the single November 2007 summary judgment decision; in scope, de novo, ongoing."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Discretion disputed: labeler yes (stormwater \"significantly and unreasonably\"), verifier no (fixed road-width rules)"
+  }
+ ]
+}

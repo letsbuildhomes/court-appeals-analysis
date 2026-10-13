@@ -1,0 +1,168 @@
+{
+ "g-24-env-00022": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "This is an enforcement action brought by the Town of Pittsford (Town) against Travis Bovey",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "commercial hauling/trucking and towing",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "This is an enforcement action brought by the Town of Pittsford (Town) against Travis Bovey",
+   "doc": 1,
+   "page": 1,
+   "note": "town enforcement, commercial use"
+  }
+ },
+ "g-24-env-00051": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "In this on the record proceeding, John McPartland (Appellant) appeals a June 5, 2024 decision",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "It is undisputed that Property is no longer being used to house college students.",
+   "doc": 1,
+   "page": 2,
+   "note": "dispute is enforcement over student rooming use, screening, grading; no new housing"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "Mr. Tinsley has cured any past zoning violations",
+   "doc": 1,
+   "page": 2
+  }
+ },
+ "g-64-6-18-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "brings this enforcement action against Defendants Bonnie",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "alleging that a shed on Defendant LeMay’s property has outlasted its",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "brings this enforcement action against Defendants Bonnie",
+   "doc": 1,
+   "page": 1,
+   "note": "Town-brought enforcement over a shed"
+  }
+ },
+ "g-114-7-99-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "decision of the ZBA denying their request for a stay of enforcement.",
+   "doc": 1,
+   "page": 1,
+   "note": "this docket appeals a ZBA decision"
+  },
+  "housing": {
+   "value": "no",
+   "quote": "These four consolidated cases all involve a mobile home display and sales facility",
+   "doc": 1,
+   "page": 1,
+   "note": "commercial sales business, not housing"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "These four consolidated cases all involve a mobile home display and sales facility",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-130-8-14-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "landowner Jennifer Falvey timely appealed that decision to this Court and filed a",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "fencing, remove and replace goutweed with conservation mix, and remove a hollowed out",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "fencing, remove and replace goutweed with conservation mix, and remove a hollowed out",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-85-4-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellants appealed from a decision of the Development Review Board (DRB) of the Town of",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "twenty-foot high base section for an existing telecommunications tower located in the village",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "twenty-foot high base section for an existing telecommunications tower located in the village",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-143-9-10-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "appealed from a decision by the District 4 Environmental Commission (District",
+   "doc": 1,
+   "page": 1,
+   "note": "Act 250 appeal"
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "proposed 34-lot residential development to be located on the sites of the Fontaine",
+   "doc": 1,
+   "page": 5
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "appealed from a decision by the District 4 Environmental Commission (District",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-132-12-18-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "decision of the Town of Weathersfield (“Town”) Zoning Board of Adjustment",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "for a commercial firewood",
+   "doc": 1,
+   "page": 2
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "for a commercial firewood",
+   "doc": 1,
+   "page": 2
+  }
+ }
+}

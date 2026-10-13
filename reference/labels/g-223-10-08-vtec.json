@@ -1,0 +1,157 @@
+{
+  "case": "g-223-10-08-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-223-10-08-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "The applicant appeals the Plymouth panel's denial of a conditional use permit for a five-lot subdivision of an 83.5-acre parcel in rural residential districts; a subdivision creating house lots is new housing under the guide.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "appealed from a decision of a municipal panel1 of the Town of Plymouth (the panel), denying approval of a proposed five-lot subdivision."},
+        {"doc": 1, "page": 3, "quote": "Applicant applied on April 22, 2008, for a conditional use permit to subdivide an 83.5-acre parcel of property into five lots."},
+        {"doc": 1, "page": 14, "quote": "Applicant has raised the question of whether the application was deficient for failure to include “affordable housing.”"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "223-10-08 Vtec",
+        "project": {
+          "description": "Conditional use permit to subdivide an 83.5-acre parcel on Pine Hill Road (RD5 and RD10 districts) into five lots; the number of new residential building lots and dwelling units is not stated.",
+          "municipality": "Town of Plymouth",
+          "proposed_units": "unknown",
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 3, "quote": "Applicant applied on April 22, 2008, for a conditional use permit to subdivide an 83.5-acre parcel of property into five lots."},
+            {"doc": 1, "page": 3, "quote": "The property is located in the RD5 and RD10 zoning districts of the Town of Plymouth"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "The combined Plymouth Planning Commission/Zoning Board of Adjustment voted on September 2, 2008 to deny the application, issuing a written decision dated September 10, 2008, for failure to meet conditional use standards on landscaping and screening and character of the area.",
+          "date": "2008-09-10",
+          "outcome": "denied",
+          "evidence": [
+            {"doc": 1, "page": 3, "quote": "The panel issued an unsigned written decision internally dated September 10, 2008. The decision denied the application"},
+            {"doc": 1, "page": 9, "quote": "The members voted unanimously to deny the application."}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "General Land Company",
+            "relationship": "developer",
+            "seeks": "overturn_denial",
+            "representation": "represented",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant-Applicant General Land Company (“Applicant” or “General Land”) appealed from a decision of a municipal panel1"},
+              {"doc": 1, "page": 1, "quote": "Appellant-Applicant is represented by A. Jeffry Taylor, Esq.;"}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "The applicant challenges a denial based on conditional use standards for landscaping and screening and for the character of the area (§ 4.16.2(c), (g)); it also raised challenges to the panel's legality and the Town Plan and ordinance adoption (decided against it), and merits questions remain for trial, including the scope of § 4.16.2(g).",
+          "involved": "yes",
+          "evidence": [
+            {"doc": 1, "page": 3, "quote": "The decision denied the application on the basis that it fails to meet conditional use standard § 4.16.2(c), regarding landscaping and screening"},
+            {"doc": 1, "page": 3, "quote": "“[t]he character of the area affected[,] as defined by the purposes of the zoning district"},
+            {"doc": 1, "page": 15, "quote": "Please be prepared to discuss the parties’ positions as to the degree to which § 4.16.2(g)"}
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "ongoing",
+          "permission": "denied",
+          "description": "The municipal denial stands; the court decided pretrial motions largely for the Town and left merits questions for mediation and trial.",
+          "evidence": [
+            {"doc": 1, "page": 15, "quote": "This decision leaves Amended Questions 6, 10, 12, 14, 13, 15, and 17 of the Statement of Questions to be resolved on the merits."},
+            {"doc": 1, "page": 15, "quote": "to discuss the timing of mediation, and trial."}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Environmental Court",
+            "dockets": ["223-10-08 Vtec"],
+            "description": "General Land Company appealed the panel's denial to the Environmental Court; the filing date is not stated.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "appealed from a decision of a municipal panel1 of the Town of Plymouth (the panel), denying approval of a proposed five-lot subdivision."}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2009-09-11",
+            "court_or_body": "Environmental Court",
+            "dockets": ["223-10-08 Vtec"],
+            "description": "Decision on motions: dismissed Amended Question 16, granted the Town summary judgment on Questions 1, 2, 3, 4, 5, 8, 9 and 11, denied it on Question 13, and left merits questions for trial.",
+            "evidence": [
+              {"doc": 1, "page": 15, "quote": "Otherwise, the Town’s Motion for Summary Judgment is GRANTED, and Appellant- Applicant’s Motion for Summary Judgment is DENIED"},
+              {"doc": 1, "page": 16, "quote": "Done at Berlin, Vermont, this 11th day of September, 2009."}
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2009-01-12",
+            "relation": "on_or_before",
+            "description": "Appellant withdrew Recast Question 3 by letter of January 12, 2009, so the appeal existed by then.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Recast Question 3 was withdrawn by Appellant- Applicant by letter of January 12, 2009"}
+            ]
+          },
+          "end": {
+            "date": "2009-09-11",
+            "relation": "on_or_after",
+            "description": "The September 11, 2009 motions decision left merits questions for trial, so the appeal continued past it.",
+            "evidence": [
+              {"doc": 1, "page": 16, "quote": "Done at Berlin, Vermont, this 11th day of September, 2009."},
+              {"doc": 1, "page": 15, "quote": "This decision leaves Amended Questions 6, 10, 12, 14, 13, 15, and 17 of the Statement of Questions to be resolved on the merits."}
+            ]
+          },
+          "note": "Filing date not stated; start is the earliest dated appellant filing (a January 12, 2009 letter). End is the latest order, which left the appeal pending.",
+          "kind": "at_least",
+          "days": 242
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "194-9-08 Vtec",
+            "relationship": "Separate appeal (In re Gilmore Road, LLC) raising similar motions about the Plymouth panel; the applicant incorporated its summary judgment memorandum.",
+            "evidence": [
+              {"doc": 1, "page": 2, "quote": "March 13, 2009 summary judgment memorandum of Gilmore Road, LLC in Docket No."},
+              {"doc": 1, "page": 3, "quote": "A decision has also been issued regarding similar motions in In re Gilmore Road, LLC, No. 194-9-08 Vtec"}
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {"doc": 1, "page": 2, "quote": "they must be related to the merits of the present application, which is de novo before this Court."},
+            {"doc": 1, "page": 2, "quote": "Amended Question 16 is incompatible with the de novo task before this Court."}
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"223-10-08 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "medium", "note": "Municipal appeal of a denial is clear. Housing rests on the guide's rule that a subdivision creating house lots is new housing; the decision does not say the five lots are for houses, but the parcel is in rural residential districts with 5- and 10-acre minimum lots, and the applicant raised an affordable housing question."},
+    {"field": "housing", "confidence": "medium", "note": "Residential purpose of the five lots is implied (affordable housing question, RD districts) rather than stated outright."},
+    {"field": "review_standard", "confidence": "high", "note": "The court says the application 'is de novo before this Court' and refers to 'the de novo task before this Court'."},
+    {"field": "duration", "confidence": "medium", "note": "Court filing date not stated (not taken from the docket number). Start is the appellant's January 12, 2009 letter withdrawing a question; end is the September 11, 2009 motions decision, which leaves trial pending. at_least 242 days."},
+    {"field": "decision_date", "confidence": "medium", "note": "Panel voted September 2, 2008; written decision is internally dated September 10, 2008. Used the written decision date."},
+    {"field": "lots", "confidence": "medium", "note": "Five total lots, but the guide says total lots is not new residential lots and the documents don't say whether any lot is retained or nonbuilding; left unknown."},
+    {"field": "units", "confidence": "high", "note": "No dwelling count stated; not derived from lots."},
+    {"field": "discretion_involved", "confidence": "medium", "note": "The denial rested on landscaping/screening and character-of-the-area standards, the applicant appeals that denial de novo, and the court directs the parties to address the scope of § 4.16.2(g); the remaining merits questions are not quoted, so the specific merits contentions are only partly visible."},
+    {"field": "discretion_central", "confidence": "low", "note": "Much of the decided portion concerned the panel's legality and the Town Plan's adoption; the content of the remaining merits questions is not stated, so centrality is unknown."},
+    {"field": "permission", "confidence": "medium", "note": "Latest observed authorization is the municipal denial; the de novo appeal on the merits is still pending."},
+    {"field": "related", "confidence": "medium", "note": "Gilmore Road, LLC, No. 194-9-08 Vtec is a distinct appeal named in the decision whose memorandum the applicant incorporated."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:19Z", "note": "Labeled from the single September 11, 2009 motions decision; in scope as a five-lot subdivision denial, de novo, pending."}
+  ]
+}

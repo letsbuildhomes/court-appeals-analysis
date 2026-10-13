@@ -60,3 +60,13 @@ with reasons for approval before spending anything on labeling.
   No new questions: the court's effect and who prevailed follow from the
   board's decision and the final permission, and can be derived in code for
   the dashboard and snapshot.
+- 2026-10-13: All 60 cases labeled by Opus (one labeler per case, blind to
+  every pipeline's answers), checked, verified blind by Sonnet (scope for
+  excluded cases, key facts for the rest) and adjudicated. Scope agreed in 44
+  of 50 verified cases; the rest were settled by rereading or kept with a
+  judgment note. Rulings added to the guide: one appellant entry per named
+  person, "et al." leaves the count unknown, and representation by a
+  non-lawyer is unknown. Open for the user: whether an access approval whose
+  only purpose is new house lots counts as new housing; whether post-judgment
+  proceedings years later extend an appeal's duration; whether a faculty
+  residence at an institute is housing. Then the user's review and approval.

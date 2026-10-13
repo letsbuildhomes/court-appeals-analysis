@@ -1,0 +1,32 @@
+{
+  "case": "g-256-11-06-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-256-11-06-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is an appeal of an Act 250 permit issued by the District #9 Environmental Commission, a state land-use permit, not a municipal land-use decision. The project (a retirement community with 30 cottages and independent living apartments) is new housing, but the appeal is not municipal.",
+      "municipal_appeal": "no",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "(Appeal of Act 250 Permit #9A0314)"},
+        {"doc": 1, "page": 1, "quote": "On October 6, 2006, the District #9 Environmental Commission (“District Commission”) issued Act 250 Permit #9A0314 for the Eastview Project"},
+        {"doc": 1, "page": 1, "quote": "Eastview at Middlebury, Inc. (“Eastview”) seeks to develop a multi-level residential retirement community adjacent to the Porter Hospital on South Street in Middlebury"},
+        {"doc": 1, "page": 8, "quote": "The Project will also include 30 detached single-story cottages, which will each serve as single family residences."},
+        {"doc": 1, "page": 3, "quote": "Act 250 appeals are heard de novo by this Court. 10 V.S.A. § 8504(h)."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Both documents are captioned as an appeal of Act 250 Permit #9A0314 issued by the District #9 Environmental Commission; the guide makes Act 250 appeals municipal_appeal=no, so the case is excluded regardless of housing."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The challenged decision is a District Environmental Commission Act 250 permit (state), not a board's or administrative officer's municipal decision; the Town appears only as a party."},
+    {"field": "housing", "confidence": "high", "note": "New retirement community with 30 detached single-family cottages and 37 independent living apartments plus assisted living units is new housing; it does not change the exclusion."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:49:39Z", "note": "Excluded: Act 250 permit appeal (state), not a municipal appeal; project is new housing."}
+  ]
+}

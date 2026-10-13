@@ -84,7 +84,9 @@ where judgment is needed.
   application is incomplete, or a refusal to reconsider, is `other`, and the
   appellant then `seeks` `other`.
 - **Appellants.** Who brought this docket's appeal or cross-appeal, not every
-  party. An enforcement action has no appellants: leave the list empty and
+  party. One entry per named person or organization (a couple is two
+  entries); "X, et al." with the others unnamed leaves the list empty
+  (unknown count). An enforcement action has no appellants: leave the list empty and
   note it. `pro_se` only when the documents say so.
 - **Discretion.** `involved` is `yes` only when an actual contention in this
   appeal turns on an evaluative standard (compatibility, adequacy, character of

@@ -1,0 +1,26 @@
+{
+  "case": "g-122-7-04-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-122-7-04-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Neighbors appealed the Bristol ZBA's July 6, 2004 conditional use approval, a municipal land-use decision, but the proposal is a gravel extraction project on a 65-acre tract, a nonresidential extraction use, not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 2, "page": 2, "quote": "Applicant has proposed the development of a gravel extraction project on an approximately 65-acre tract of land that abuts South Street and Rounds Road"},
+        {"doc": 2, "page": 2, "quote": "the ZBA issued approval on July 6, 2004. A number of individuals, including some of the Movants here, appealed that decision; their appeal was assigned Docket No. 122-7-04 Vtec."},
+        {"doc": 1, "page": 1, "quote": "remanded to the Bristol Zoning Board of Adjustment (ZBA) for consideration on the merits of the conditional use application"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Docket 122-7-04 is the neighbors' appeal of the ZBA's conditional use approval (municipal appeal = yes); every version of the project is gravel extraction, a nonresidential use (housing = no). Shared decisions also decide 210-9-08 Vtec (second conditional use denial) and 136-8-10 Vtec (Act 250); only their statements about 122-7-04 were used. Scope established from docs 1-2; remaining text not needed for an excluded case."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: appeal of Bristol ZBA conditional use approval for a gravel extraction project, not housing."}]
+}

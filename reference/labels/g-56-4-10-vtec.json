@@ -1,0 +1,31 @@
+{
+  "case": "g-56-4-10-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-56-4-10-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Docket 56-4-10 Vtec appeals a District 6 Environmental Commission coordinator's ruling that an Act 250 subdivision application for the McBride parcel was incomplete; it is an Act 250 appeal, not an appeal of a municipal land-use decision, and the Town of South Hero subdivision permit is expressly not at issue.",
+      "municipal_appeal": "no",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "decision of the District Coordinator of the District 6 Environmental Commission"},
+        {"doc": 1, "page": 1, "quote": "determining that their Act 250 applications to subdivide and auction three lots from each of two large parcels were incomplete."},
+        {"doc": 1, "page": 3, "quote": "Town of South Hero subdivision permit, not at issue in this appeal."},
+        {"doc": 1, "page": 4, "quote": "sized to serve the standard four-bedroom single family house, on each lot."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "The appeal is from the Act 250 District Coordinator's incompleteness ruling (Jurisdictional Opinion # 6-007), a state Act 250 proceeding; the municipal subdivision permit was not appealed. The shared decision also decides 55-4-10 Vtec (Wright parcel); only the McBride parcel facts concern this docket."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Act 250 appeal from a District Commission coordinator; the town subdivision permit is 'not at issue in this appeal'."},
+    {"field": "housing", "confidence": "medium", "note": "The McBride parcel is to be subdivided into three lots (one containing an existing house), each with state water/wastewater permits sized for a four-bedroom single-family house, which reads as a subdivision creating house lots; but the applicants say they do not intend residential development themselves and sell at auction. Does not affect the exclusion."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T12:00:00Z", "note": "Excluded: Act 250 completeness appeal (McBride parcel), not a municipal appeal."}
+  ]
+}

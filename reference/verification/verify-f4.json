@@ -1,0 +1,506 @@
+{
+ "g-161-9-99-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellants appealed from a decision of the Zoning Board of Adjustment (ZBA) of the Town of Fairfield denying their request for a variance",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "In 1999, Appellants applied for a building permit to construct a dwelling on Lot 7.",
+   "doc": 1,
+   "page": 3,
+   "note": "New dwelling on a vacant lot; variance is what would allow it. Variance application itself not in the record."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "denying their request for a variance from the lot access requirements",
+   "doc": 1,
+   "page": 1,
+   "note": "Moderately confident: housing rests on the variance being sought to build a dwelling."
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "Decision and Order on Motion for Summary Judgment",
+   "doc": 1,
+   "page": 1,
+   "note": "No statement of how the court hears the appeal."
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "denying their request for a variance from the lot access requirements of the zoning ordinance",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "denying their request for a variance",
+   "doc": 1,
+   "page": 1,
+   "note": "ZBA decision date not stated."
+  },
+  "litigation": {
+   "value": "unknown",
+   "quote": "the Town=s Motion for Summary Judgment is GRANTED",
+   "doc": 1,
+   "page": 4,
+   "note": "Summary judgment granted but decision says other variance criteria and exceptions are not addressed; no observed final conclusion or appeal status."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "the Town=s Motion for Summary Judgment is GRANTED. Appellants do not qualify for a variance",
+   "doc": 1,
+   "page": 4
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "applied for a building permit to construct a dwelling on Lot 7",
+   "doc": 1,
+   "page": 3,
+   "note": "Single dwelling implied; variance application not supplied."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "Lot 7 is 1.80 acres in area",
+   "doc": 1,
+   "page": 2,
+   "note": "No new lots; not stated that none are created."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Thomas and Jeanice Bachelder",
+     "relationship": "developer",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Appellants are represented by Robert E. Farrar, Esq.",
+   "doc": 1,
+   "page": 1,
+   "note": "Landowners/applicants seeking to build; 2 appellants."
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "the hardship must result from circumstances beyond the control of the property owner",
+   "doc": 1,
+   "page": 3,
+   "note": "Turns on legal hardship test applied on undisputed facts."
+  },
+  "duration_start": {
+   "value": "2000-09-13 on_or_before",
+   "quote": "Done at Barre, Vermont, this 13 day of September, 2000.",
+   "doc": 1,
+   "page": 4,
+   "note": "Court filing date not stated."
+  },
+  "duration_end": {
+   "value": "2000-09-13 on_or_after",
+   "quote": "Done at Barre, Vermont, this 13 day of September, 2000.",
+   "doc": 1,
+   "page": 4
+  }
+ },
+ "g-207-11-03-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant Kevin Fisher appealed from a decision of the Development Review Board (DRB) of the City of Burlington",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "The Center provides a residence for a maximum of 20 clients at any time.",
+   "doc": 1,
+   "page": 2,
+   "note": "Residential treatment program (care-home-like) is part of an addition to an existing building; documents do not establish that the addition creates new housing/units."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "granting Major Impact Development approval and site plan approval for an addition to Appellee-Applicant Lund Family Center, Inc.",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "the merits hearing has been scheduled for June 23 and 24, 2005",
+   "doc": 1,
+   "page": 2,
+   "note": "Court to hold evidentiary merits hearing on the application itself; 'de novo' never stated. Medium confidence."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "granting Major Impact Development approval and site plan approval",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "granting Major Impact Development approval and site plan approval",
+   "doc": 1,
+   "page": 1,
+   "note": "DRB decision date not stated."
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "both Motions for Summary Judgment are denied at the present time in that material facts remain in dispute",
+   "doc": 1,
+   "page": 7
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "granting Major Impact Development approval and site plan approval",
+   "doc": 1,
+   "page": 1,
+   "note": "Latest observed authorization is the DRB approval; conditions not stated."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "residential treatment program for parenting or pregnant women and girls",
+   "doc": 1,
+   "page": 2
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "an addition to Appellee-Applicant Lund Family Center, Inc.’s existing building",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Kevin Fisher",
+     "relationship": "unknown",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Appellant is represented by Lisa B. Shelkrot, Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "whether the proposal is eligible for consideration within the use category of",
+   "doc": 1,
+   "page": 1,
+   "note": "Cross-motions turn on use-category interpretation and usage numbers (fixed rules); low-medium confidence."
+  },
+  "duration_start": {
+   "value": "2005-06-07 on_or_before",
+   "quote": "Done at Berlin, Vermont, this 7th day of June, 2005.",
+   "doc": 1,
+   "page": 7,
+   "note": "Filing date not stated."
+  },
+  "duration_end": {
+   "value": "2005-06-07 on_or_after",
+   "quote": "Done at Berlin, Vermont, this 7th day of June, 2005.",
+   "doc": 1,
+   "page": 7
+  }
+ },
+ "g-77-4-05-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Docket No. 77‐4‐05 Vtec concerns an appeal filed by Developer from a decision of the Town of Norwich Development Review Board (DRB)",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "an after‐the‐fact zoning permit to construct a single‐family dwelling at 84 Elm Street",
+   "doc": 1,
+   "page": 2,
+   "note": "After-the-fact permit for a house already built; documents do not show occupancy at stake (a private enforcement action is pending), so rule is not clearly met either way."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "an after‐the‐fact zoning permit to construct a single‐family dwelling at 84 Elm Street",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "Each party seeks a resolution, in their",
+   "doc": 1,
+   "page": 2,
+   "note": "Only summary judgment and Supreme Court de novo review of a legal question; no statement of the court's standard on the DRB decision."
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "which granted his appeal and overturned the permit approval by its Decision on",
+   "doc": 1,
+   "page": 5,
+   "note": "DRB overturned the zoning administrator's approval, i.e. denied the permit."
+  },
+  "decision_date": {
+   "value": "2005-04-01",
+   "quote": "overturned the permit approval by its Decision on",
+   "doc": 1,
+   "page": 5
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "we review it de novo on appeal",
+   "doc": 2,
+   "page": 1,
+   "note": "Supreme Court affirmed ('Affirmed.' p.3) the denial in this docket; nothing pending shown. Enforcement docket 156-8-05 continues separately."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "Developer’s zoning permit application cannot be granted under any factual scenario",
+   "doc": 1,
+   "page": 17
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "to construct a single‐family dwelling at 84 Elm Street",
+   "doc": 1,
+   "page": 2,
+   "note": "Already built."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "The lot at 84 Elm Street is approximately 24,000 square feet",
+   "doc": 1,
+   "page": 3,
+   "note": "No new lot created; not stated explicitly."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Paul Nowicki",
+     "relationship": "developer",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Appellant Paul Nowicki (hereinafter Developer) is represented by Gerald R. Tarrant, Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "Do recent changes in 24 V.S.A. Ch. 117 allow this Court to issue",
+   "doc": 1,
+   "page": 2,
+   "note": "Purely legal/statutory merger questions."
+  },
+  "duration_start": {
+   "value": "2005-04-15 exact",
+   "quote": "Developer filed his notice of appeal of the DRB’s denial with this Court",
+   "doc": 1,
+   "page": 5
+  },
+  "duration_end": {
+   "value": "2006-06-08 on_or_after",
+   "quote": "Done at Berlin, Vermont, this 8th day of June, 2006.",
+   "doc": 1,
+   "page": 18,
+   "note": "Supreme Court affirmed in May Term 2007 (2007 VT 76) but the entry order is undated in the text."
+  }
+ },
+ "g-232-12-04-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "LaBounty Enterprises, Inc. (LaBounty) appeals from two decisions of the Town of Grand Isle (Town) Development Review Board",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "The proposed dwelling on Sturgeon Road would have 120 feet of frontage",
+   "doc": 1,
+   "page": 1,
+   "note": "New dwelling on existing lot; this docket is the Sturgeon Road permit (decision of Nov. 18, 2004)."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "the DRB affirmed the Administrative Officer‟s",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "The issue presented by these consolidated appeals in this de novo proceeding is",
+   "doc": 1,
+   "page": 3
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "On November 18, 2004, the DRB affirmed the Administrative Officer‟s",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "2004-11-18",
+   "quote": "On November 18, 2004, the DRB affirmed the Administrative Officer‟s",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This decision concludes the pending appeals.",
+   "doc": 1,
+   "page": 5
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "LaBounty‟s two zoning applications are DENIED",
+   "doc": 1,
+   "page": 4,
+   "note": "Without prejudice to resubmission if variances obtained."
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "The proposed dwelling on Sturgeon Road",
+   "doc": 1,
+   "page": 1,
+   "note": "Keel Road dwelling belongs to docket 85-5-05."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "an L-shaped 0.41-acre lot at 23 Sturgeon Road",
+   "doc": 1,
+   "page": 1,
+   "note": "Existing lot; no new lots stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "LaBounty Enterprises, Inc.",
+     "relationship": "developer",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Appellant is represented by John W.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "does the phrase “minimum lot dimensional requirements” refer only to the minimum lot size",
+   "doc": 1,
+   "page": 3,
+   "note": "Bylaw interpretation; setbacks fixed rules."
+  },
+  "duration_start": {
+   "value": "2005-05-04 on_or_before",
+   "quote": "On May 4, 2005, this Court granted LaBounty‟s unopposed Motion to Consolidate",
+   "doc": 1,
+   "page": 2,
+   "note": "Appeal filing date not stated; consolidation includes 85-5-05 but shows the Sturgeon appeal existed."
+  },
+  "duration_end": {
+   "value": "2005-09-16 exact",
+   "quote": "This decision concludes the pending appeals.",
+   "doc": 1,
+   "page": 5,
+   "note": "Decision dated Sept. 16, 2005; no further review shown."
+  }
+ },
+ "g-218-9-00-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from two decisions of the Development Review Board (DRB) of the City of Burlington granting preliminary plat approval (Docket No. 218-9-00",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "an eight-unit planned residential development",
+   "doc": 2,
+   "page": 1,
+   "note": "Docket 218-9-00 is the preliminary plat appeal, treated as essentially moot and merged into the final plat appeal; same project."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "an eight-unit planned residential development",
+   "doc": 2,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "this Court in this de novo appeal",
+   "doc": 1,
+   "page": 3
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "granting preliminary plat approval (Docket No. 218-9-00",
+   "doc": 1,
+   "page": 1,
+   "note": "Conditions imposed by DRB incorporated by applicants."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "granting preliminary plat approval (Docket No. 218-9-00",
+   "doc": 1,
+   "page": 1,
+   "note": "DRB date not stated."
+  },
+  "litigation": {
+   "value": "unknown",
+   "quote": "the project is approved as designed, with the above conditions",
+   "doc": 2,
+   "page": 7,
+   "note": "Court approved Aug. 1, 2003; no observed end of review chain or appeal status."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "the project is approved as designed, with the above conditions",
+   "doc": 2,
+   "page": 7
+  },
+  "proposed_units": {
+   "value": 8,
+   "quote": "an eight-unit planned residential development",
+   "doc": 2,
+   "page": 1,
+   "note": "Four single-family houses and two duplexes."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "The remainder of A Lot 2@ consists of 1.2 acres on which the six residential buildings",
+   "doc": 2,
+   "page": 2,
+   "note": "Condominium PRD; new lot count not stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "David and June Garen (original appellants, withdrew)",
+     "relationship": "unknown",
+     "representation": "unknown"
+    },
+    {
+     "name": "Katherine W. and John Desautels (intervenors continuing appeal)",
+     "relationship": "unknown",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Intervenors Katherine W. Desautels and John E. Desautels are represented by Michael J. Straub, Esq.",
+   "doc": 2,
+   "page": 1,
+   "note": "Relationships not stated explicitly."
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "Will the project have an undue adverse effect on the scenic or natural beauty of the area",
+   "doc": 1,
+   "page": 3
+  },
+  "duration_start": {
+   "value": "2002-09-10 on_or_before",
+   "quote": "By entry order dated September 10, 2002",
+   "doc": 1,
+   "page": 1,
+   "note": "Filing date not stated."
+  },
+  "duration_end": {
+   "value": "2003-08-01 on_or_after",
+   "quote": "Done at Barre, Vermont, this 1 day of August, 2003.",
+   "doc": 2,
+   "page": 7
+  }
+ }
+}

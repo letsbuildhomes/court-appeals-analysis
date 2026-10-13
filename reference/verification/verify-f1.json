@@ -1,0 +1,466 @@
+{
+ "g-180-12-13-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Neighboring property owner William Lyons (Appellant) timely appealed the 2013 permit to this Court.",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "In December 2013, Applicant applied for and received a permit amendment for the “as-built” structures",
+   "doc": 1,
+   "page": 1,
+   "note": "After-the-fact permit for a house and garage apartment; nothing shows whether occupancy is at stake, so unknown."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "applied for and received a permit amendment for the “as-built” structures",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "the sole issue currently before the Court is a de novo review of the December 2013 permit amendment",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "In December 2013, Applicant applied for and received a permit amendment",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "2013-12",
+   "quote": "In December 2013, Applicant applied for and received a permit amendment",
+   "doc": 1,
+   "page": 1,
+   "note": "only month stated"
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "establish a schedule for this matter proceeding to trial",
+   "doc": 1,
+   "page": 1
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "applied for and received a permit amendment for the “as-built” structures",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_units": {
+   "value": 2,
+   "quote": "construction of a single family residence and a detached garage with an apartment",
+   "doc": 1,
+   "page": 1,
+   "note": "house plus garage apartment; derived count, medium confidence"
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": 1,
+   "quote": "Neighboring property owner William Lyons (Appellant) timely appealed the 2013 permit to this Court.",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_1_relationship": {
+   "value": "neighbor",
+   "quote": "Neighboring property owner William Lyons (Appellant)",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_1_representation": {
+   "value": "represented",
+   "quote": "Attorney for Appellant William Lyons",
+   "doc": 1,
+   "page": 3
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_start": {
+   "value": "2014-06-06 on_or_before",
+   "quote": "Filed Date:   June 6, 2014",
+   "doc": 1,
+   "page": 1,
+   "note": "appeal filing date not stated; earliest dated event (motion in the appeal)"
+  },
+  "duration_end": {
+   "value": "2014-10-02 on_or_after",
+   "quote": "Electronically signed on October 02, 2014",
+   "doc": 1,
+   "page": 3
+  }
+ },
+ "g-150-7-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from the June 13, 2002 decision of the Zoning Board of Adjustment (ZBA) of the Town of St. Albans",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "all that is before the Court in this appeal is the proposed extension of the 50-foot-wide right-of-way",
+   "doc": 1,
+   "page": 2,
+   "note": "Subdivision itself held not before the court; only a ROW extension. Ambiguous: ROW is to serve a proposed 2-lot subdivision."
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "any application for approval of the two-lot subdivision itself is not before the Court in the current appeal",
+   "doc": 1,
+   "page": 2
+  }
+ },
+ "g-250-12-99-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "standards in the Zoning Regulations for issuance of building permits for single-family residences",
+   "doc": 1,
+   "page": 2
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "building permits for single-family residences",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "Appellants= primary argument against the issuance of the building permits in each of",
+   "doc": 1,
+   "page": 2,
+   "note": "No explicit de novo wording; court held an evidentiary hearing and itself approved the permits (\"each of them is therefore approved in this appeal\"). Medium confidence."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "Docket No. 250-12-99 Vtec is the appeal of building permit #46-99, pertaining",
+   "doc": 1,
+   "page": 1,
+   "note": "permit issued by town (building permit #46-99); date not stated"
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "Motion to Amend the April 24, 2000 Decision and Order is",
+   "doc": 2,
+   "page": 3,
+   "note": "Merits decided and reconsideration denied; no further proceeding shown; possible later appeal not shown. Medium-low confidence."
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "each of them is therefore approved in this appeal",
+   "doc": 1,
+   "page": 2
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "building permits for single-family residences",
+   "doc": 1,
+   "page": 2,
+   "note": "one single-family residence on lot 2"
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "building permit on an existing subdivision lot; no new lots stated for this docket"
+  },
+  "appellants": {
+   "value": 2,
+   "quote": "Appellants John Madden and Melissa Winborn appeared and",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_1_relationship": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Madden: relationship to property not stated"
+  },
+  "appellant_1_representation": {
+   "value": "pro_se",
+   "quote": "represented themselves",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_2_relationship": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Winborn: not stated"
+  },
+  "appellant_2_representation": {
+   "value": "pro_se",
+   "quote": "represented themselves",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "Appellants presented no other evidence that the applications for building permits",
+   "doc": 1,
+   "page": 2,
+   "note": "issues were finality of subdivision appeal, applicant name, and filing fee"
+  },
+  "duration_start": {
+   "value": "2000-04-24 on_or_before",
+   "quote": "Dated at Barre, Vermont, this 24th day of April, 2000.",
+   "doc": 1,
+   "page": 4,
+   "note": "filing date not stated"
+  },
+  "duration_end": {
+   "value": "2000-05-23 on_or_after",
+   "quote": "Dated at Barre, Vermont, this 23rd day of May, 2000.",
+   "doc": 2,
+   "page": 3,
+   "note": "possible Supreme Court appeal not shown"
+  }
+ },
+ "g-71-4-07-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision of the Planning Commission of the Town of Fayston, granting site plan",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "Applicants propose to subdivide thirty-five acres in the easterly portion of the",
+   "doc": 1,
+   "page": 3
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "seven residential building lots",
+   "doc": 1,
+   "page": 3
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "The application is now before the Court in this appeal de novo.",
+   "doc": 1,
+   "page": 5
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "The Planning Commission approved the subdivision application",
+   "doc": 1,
+   "page": 5
+  },
+  "decision_date": {
+   "value": "2007-03-06",
+   "quote": "The Planning Commission approved the subdivision application",
+   "doc": 1,
+   "page": 5
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "will be addressed on the",
+   "doc": 1,
+   "page": 12,
+   "note": "remaining questions pending at Dec 3, 2007 hearing"
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "The Planning Commission approved the subdivision application",
+   "doc": 1,
+   "page": 5,
+   "note": "conditions of the Planning Commission approval not stated"
+  },
+  "proposed_units": {
+   "value": 7,
+   "quote": "Each lot is proposed to be limited to a single-family, five-bedroom residence.",
+   "doc": 1,
+   "page": 3,
+   "note": "explicit per-lot single-family limit; derived count, medium confidence"
+  },
+  "proposed_lots": {
+   "value": 7,
+   "quote": "seven residential building lots, each of which will consist of",
+   "doc": 1,
+   "page": 3
+  },
+  "appellants": {
+   "value": 2,
+   "quote": "Appellants Evelyn Kennedy Kelley and the Evelyn Kennedy Kelley Trust appealed",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_1_relationship": {
+   "value": "neighbor",
+   "quote": "Appellant Trust owns a 2.2-acre parcel of property on the east side of Old Center",
+   "doc": 1,
+   "page": 2,
+   "note": "Kelley and Trust treated as one neighbor interest; the Trust owns the nearby parcel"
+  },
+  "appellant_1_representation": {
+   "value": "represented",
+   "quote": "Appellants are represented by John G. Hutton, Jr., Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_2_relationship": {
+   "value": "neighbor",
+   "quote": "Appellant Trust owns a 2.2-acre parcel of property on the east side of Old Center",
+   "doc": 1,
+   "page": 2
+  },
+  "appellant_2_representation": {
+   "value": "represented",
+   "quote": "Appellants are represented by John G. Hutton, Jr., Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "Appellee-Applicants’ Motion for Summary Judgment as to Question",
+   "doc": 1,
+   "page": 6,
+   "note": "questions turn on fixed regulation text (road width), engineer affidavits; low-medium confidence"
+  },
+  "duration_start": {
+   "value": "2007-11-26 on_or_before",
+   "quote": "Done at Berlin, Vermont, this 26th day of November, 2007.",
+   "doc": 1,
+   "page": 12,
+   "note": "filing date not stated"
+  },
+  "duration_end": {
+   "value": "2007-11-26 on_or_after",
+   "quote": "Done at Berlin, Vermont, this 26th day of November, 2007.",
+   "doc": 1,
+   "page": 12
+  }
+ },
+ "g-74-5-10-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant Stephen Durkee (“Appellant”) appeals to this Court a decision by",
+   "doc": 2,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "up to 328 independently occupied residential dwelling units",
+   "doc": 2,
+   "page": 1
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "up to 328 independently occupied residential dwelling units",
+   "doc": 2,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "This de novo appeal arises from the Commission’s issuance of its April 7,",
+   "doc": 2,
+   "page": 4
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "granting Applicant “conceptual Master Plan Approval” and “partial affirmative",
+   "doc": 2,
+   "page": 4,
+   "note": "conceptual master plan approval with partial findings; no conditions listed"
+  },
+  "decision_date": {
+   "value": "2010-04-07",
+   "quote": "signatures dated April 7, 2010.4",
+   "doc": 2,
+   "page": 4,
+   "note": "Commission Order signed April 7, 2010"
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This completes the current proceedings before this Court concerning the pending application.",
+   "doc": 2,
+   "page": 19,
+   "note": "Supreme Court appeal not shown"
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "is NULL and VOID and of no further force or effect.",
+   "doc": 2,
+   "page": 19,
+   "note": "commission approval voided; no authorization remains"
+  },
+  "proposed_units": {
+   "value": 328,
+   "quote": "up to 328 independently occupied residential dwelling units",
+   "doc": 2,
+   "page": 1,
+   "note": "up to 328; conceptual"
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 2,
+   "page": 1
+  },
+  "appellants": {
+   "value": 1,
+   "quote": "Appellant Stephen Durkee (“Appellant”) appeals to this Court a decision by",
+   "doc": 2,
+   "page": 1
+  },
+  "appellant_1_relationship": {
+   "value": "neighbor",
+   "quote": "Appellant does “own[] or occupy[] property in the immediate neighborhood”",
+   "doc": 2,
+   "page": 6
+  },
+  "appellant_1_representation": {
+   "value": "represented",
+   "quote": "Appellant is represented by Daniel C. Hershenson, Esq.",
+   "doc": 2,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "whether the Commission has authority to issue “conceptual",
+   "doc": 2,
+   "page": 4,
+   "note": "principal issues: authority of commission, regulations' compliance with statute"
+  },
+  "duration_start": {
+   "value": "2010-05-10 exact",
+   "quote": "On May 10, 2010, Appellant filed a timely appeal with this Court.",
+   "doc": 2,
+   "page": 4
+  },
+  "duration_end": {
+   "value": "2011-01-27 on_or_after",
+   "quote": "Done at Newfane, Vermont, this 27th day of January 2011.",
+   "doc": 2,
+   "page": 19,
+   "note": "later Supreme Court appeal not shown"
+  }
+ }
+}

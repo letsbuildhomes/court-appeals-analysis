@@ -1,0 +1,159 @@
+{
+  "case": "g-92-8-19-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-92-8-19-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "A neighbor appealed City of Winooski DRB decisions on a lot consolidation permit and a zoning permit for a four-story mixed-use building with 75 dwelling units; both permits serve the same new housing project.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellant then appealed both of the DRB determinations to this Court."},
+        {"doc": 1, "page": 1, "quote": "Applicant intends to construct a four-story building with three commercial spaces on the first level, 75 residential dwelling units in the remainder of the building"},
+        {"doc": 1, "page": 1, "quote": "an application for a zoning permit to construct and use a four-story building on the consolidated lot for both commercial and residential use"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "92-8-19 Vtec",
+        "project": {
+          "description": "Consolidation of three adjoining lots (101 and 109 Main Street, 18 Mansion Street) into one lot (Permit No. 19-082) and a zoning permit (Permit No. 19-060) to build a four-story building with three commercial spaces and 75 residential dwelling units plus parking.",
+          "municipality": "Winooski",
+          "proposed_units": 75,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "owns three adjoining properties on or adjoining Main Street in the City of Winooski (“City”) that it wishes to consolidate into one lot for future development."},
+            {"doc": 1, "page": 1, "quote": "75 residential dwelling units in the remainder of the building, and associated parking."}
+          ]
+        },
+        "municipal_decision": {
+          "description": "The Winooski DRB, on appeal of the Zoning Administrator's approvals, affirmed the lot consolidation permit (No. 19-082) and denied the appeal as to the G District portion of the construction permit (No. 19-060), but remanded the R-C District portion to the Zoning Administrator.",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "The DRB affirmed the lot consolidation permit (“Permit No. 19-082”), but concluded that the application for a zoning permit to develop the consolidated new lot (“Permit No. 19-060”) should be remanded, in part"},
+            {"doc": 1, "page": 3, "quote": "While the DRB does address and deny the appeal challenging the Certificate of Conformity over the G District portion of the project"}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "David E. Carter",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "unknown",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "a Mansion Street neighbor, David E. Carter (“Appellant”), appealed those approvals to the City of Winooski Development Review Board (“DRB”)."},
+              {"doc": 1, "page": 1, "quote": "After the DRB decision, Mr. Carter file the only appeal with this Court."}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "The neighbor challenged the approvals of the lot consolidation and the construction permit; the grounds of his challenge are not stated in the documents.",
+          "involved": "unknown",
+          "evidence": [],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "unknown",
+          "description": "The construction permit appeal was dismissed as non-final; the applicant then withdrew the lot consolidation application, the consolidation permit was vacated and the appeal declared moot. The construction permit's fate after the DRB's further review is not shown in this docket.",
+          "evidence": [
+            {"doc": 1, "page": 4, "quote": "the motion to dismiss the Permit No. 19-060 appeal is GRANTED without prejudice to any future appeal taken by these parties from any DRB action taken on this same application."},
+            {"doc": 2, "page": 1, "quote": "Permit No. ZON-082 is hereby RECINDED and VACATED and the appeal in the above referenced Court Docket is declared MOOT."}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": ["92-8-19 Vtec"],
+            "description": "David E. Carter appealed both DRB determinations to the Environmental Division; filing date not stated.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant then appealed both of the DRB determinations to this Court."}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2019-10-02",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": ["92-8-19 Vtec"],
+            "description": "Court dismissed the appeal of Permit No. 19-060 for lack of a final DRB decision, without prejudice, and stayed the appeal of Permit No. 19-082.",
+            "evidence": [
+              {"doc": 1, "page": 4, "quote": "the motion to stay the appeal of Permit No. 19-082 for coordination with any future appeal of Permit No. 19-060 before this Court is GRANTED."},
+              {"doc": 1, "page": 4, "quote": "Electronically signed on October 2, 2019 at Newfane, Vermont"}
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2020-06-03",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": ["92-8-19 Vtec"],
+            "description": "Court approved the applicant's withdrawal of the lot consolidation application, vacated the consolidation permit and declared the appeal moot.",
+            "evidence": [
+              {"doc": 2, "page": 1, "quote": "the appeal in the above referenced Court Docket is declared MOOT."},
+              {"doc": 2, "page": 1, "quote": "Electronically signed on June 3, 2020 at Brattleboro, Vermont"}
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2019-08-14",
+            "relation": "on_or_before",
+            "description": "The applicant's motion to dismiss in this appeal was filed August 14, 2019, so the appeal existed by then.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Filer: Mongeon Bay Properties, LLC Attorney: Alexander J. LaRosa Filed Date: August 14, 2019"}
+            ]
+          },
+          "end": {
+            "date": "2020-06-03",
+            "relation": "exact",
+            "description": "Entry order vacating the consolidation permit on withdrawal and declaring the appeal moot.",
+            "evidence": [
+              {"doc": 2, "page": 1, "quote": "Electronically signed on June 3, 2020 at Brattleboro, Vermont"}
+            ]
+          },
+          "note": "Court filing date not stated; start bounded by the motion to dismiss filed August 14, 2019.",
+          "kind": "at_least",
+          "days": 294
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "unknown",
+            "relationship": "H. Gamache's appeal to the DRB of the Zoning Administrator's supplemental approval of Permit No. 19-060 on remand, pending when this docket's first order issued.",
+            "evidence": [
+              {"doc": 1, "page": 2, "quote": "A neighbor of Appellant’s, H. Gamache filed an appeal of the Zoning Administrator’s supplemental approval of Permit No. 19-060"}
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "unknown",
+          "evidence": []
+        }
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"92-8-19 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Neighbor's appeal of DRB decisions on a lot consolidation and a zoning permit for a building with 75 dwelling units; the consolidation is part of the same housing project."},
+    {"field": "review_standard", "confidence": "high", "note": "Only motion rulings on finality, stay and withdrawal; nothing says whether Winooski appeals are heard on the record or de novo."},
+    {"field": "duration", "confidence": "high", "note": "Filing date not stated; start is the August 14, 2019 motion filing (on_or_before); end is the June 3, 2020 mootness order (exact); at_least 294 days."},
+    {"field": "decision_outcome", "confidence": "medium", "note": "DRB affirmed the consolidation permit and denied the appeal on the G District portion, but remanded the R-C District portion of the construction permit; coded approved since the appellant sought to overturn approvals."},
+    {"field": "decision_date", "confidence": "high", "note": "DRB decision date not given."},
+    {"field": "representation", "confidence": "medium", "note": "No attorney is named for Carter, who filed his own response, but the documents never say he is pro se."},
+    {"field": "discretion_involved", "confidence": "medium", "note": "Carter's grounds for the appeal are never stated; rulings concern only finality and a stay."},
+    {"field": "discretion_central", "confidence": "medium", "note": "Unknown because involvement is unknown."},
+    {"field": "permission", "confidence": "medium", "note": "The applicant withdrew the consolidation application and that permit was vacated; the construction permit was pending further DRB review outside this docket. Withdrawal is not a denial, so unknown."},
+    {"field": "lots", "confidence": "medium", "note": "Three lots consolidated into one; no new residential building lots are created by subdivision, but the documents call it a consolidated new lot, so left unknown."},
+    {"field": "related", "confidence": "medium", "note": "Gamache's DRB appeal of the supplemental approval is a distinct named proceeding with no court docket number; no later court docket appears."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T01:48:00-04:00", "note": "In scope: neighbor appeal of Winooski lot consolidation and 75-unit building permits; resolved as moot after withdrawal."}
+  ]
+}

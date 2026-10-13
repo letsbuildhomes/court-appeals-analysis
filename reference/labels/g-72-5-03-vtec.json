@@ -1,0 +1,29 @@
+{
+  "case": "g-72-5-03-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-72-5-03-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "The appeal challenges the DRB's decision upholding the zoning administrator's determination of the zoning status of the property, that it had been in violation by having two dwellings on one lot. It concerns whether existing dwelling uses were grandfathered, not permission for new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellant Kevin Blakeman appealed from a decision of the Development Review Board (DRB) of the Town of Randolph, upholding the zoning administrator= s determination of the &gt; zoning status= of Appellant= s property"},
+        {"doc": 1, "page": 3, "quote": "was then informed by the Zoning Administrator that the property had been in violation of its permits by having two dwellings on one lot"},
+        {"doc": 1, "page": 3, "quote": "Appellant appealed this determination to the DRB and then to this Court."},
+        {"doc": 1, "page": 3, "quote": "If the two dwellings on the property were grandfathered and were not abandoned, then Appellant has the right to continue that use of the property, although not to expand it."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a zoning administrator's violation/zoning-status determination (two dwellings on one lot), upheld by the DRB; the question is grandfathering of existing dwelling uses, with no new structure or unit proposed. Under the guide, an appeal of a notice of violation is not new housing, so excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal from a DRB decision upholding the zoning administrator's determination."},
+    {"field": "housing", "confidence": "high", "note": "Continuation of existing dwelling uses (grandfathered status), not construction or placement of new housing; the second mobile home had already been removed."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: appeal of a zoning-status/violation determination about existing dwellings, not new housing."}]
+}

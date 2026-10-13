@@ -1,0 +1,28 @@
+{
+  "case": "g-23-env-00057",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-23-env-00057",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket appeals a Waitsfield DRB decision upholding a notice of violation for an unpermitted storage container placed within the front setback; it is a municipal appeal, but a notice-of-violation appeal about a storage container, not permission for new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "This is an appeal of a Town of Waitsfield Development Review Board (DRB) decision denying Edward and Courtney Spaulding’s (Appellants) appeal of a February 13, 2023 Notice of Violation"},
+        {"doc": 1, "page": 1, "quote": "regarding the placement of a storage container on their property at 31 Center Fayston Road, Waitsfield,"},
+        {"doc": 4, "page": 4, "quote": "which involves an allegedly unpermitted structure in a front yard setback pursuant to local zoning."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "All four decisions describe the docket as an appeal of a DRB decision upholding a notice of violation for a storage container in the front setback; the guide treats NOV appeals and accessory storage as not new housing, so excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal of a DRB decision on a zoning administrator's NOV under 24 V.S.A. Chapter 117."},
+    {"field": "housing", "confidence": "high", "note": "Subject is a storage container at an existing home; no housing is proposed."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:09Z", "note": "Excluded: NOV appeal over a storage container in the front setback, not new housing."}]
+}

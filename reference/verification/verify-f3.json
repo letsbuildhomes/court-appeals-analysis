@@ -1,0 +1,558 @@
+{
+ "g-228-11-99-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Applicants appealed from the November 5, 1999",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "center and office/apartment building proposal",
+   "doc": 2,
+   "page": 7,
+   "note": "Mixed-use office/apartment building plus hotel; apartment count not stated; PUD also includes residential housing on the rest. Medium confidence."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "center and office/apartment building proposal",
+   "doc": 2,
+   "page": 7,
+   "note": "Hotel dominates; apartments in a new mixed building make it housing under the table, but ambiguous."
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "Court in this de novo proceeding",
+   "doc": 2,
+   "page": 6
+  },
+  "decision_outcome": {
+   "value": "other",
+   "quote": "denied the Phase I hotel/conference and office/apartment buildings and parking lot revised site plans",
+   "doc": 1,
+   "page": 4,
+   "note": "Mixed: PUD master plan approved with conditions, use approvals on traffic and downtown, site plans denied."
+  },
+  "decision_date": {
+   "value": "1999-11-05",
+   "quote": "Applicants appealed from the November 5, 1999",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "Applicants do not wish to do so, and instead have filed an appeal",
+   "doc": 4,
+   "page": 2,
+   "note": "Last observed: collateral appeal to Supreme Court permitted; no conclusion."
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Planning Commission denied site plans; court has not ruled on merits."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Apartment count in the office/apartment building not stated."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Two commercial lots in 4.1-acre parcel; new residential lots not stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Middlebury College",
+     "relationship": "developer",
+     "representation": "represented"
+    },
+    {
+     "name": "Robert Karol and Dan Wolf d/b/a KW Middlebury, LLC",
+     "relationship": "developer",
+     "representation": "represented"
+    },
+    {
+     "name": "group of interested parties (cross-appellants)",
+     "relationship": "unknown",
+     "representation": "represented"
+    }
+   ],
+   "quote": "represented by Jon Anderson, Esq.; Cross-Appellant-Interested Parties are represented by",
+   "doc": 1,
+   "page": 2,
+   "note": "Cross-appeal in this docket per doc 1 p1: 'In this case, the group of interested parties'. Count 3 (or 2 if College and KW counted as one applicant)."
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "character of the area affected",
+   "doc": 2,
+   "page": 5,
+   "note": "Town Plan conformance, aesthetics and character of the area are key criteria in this appeal."
+  },
+  "duration_start": {
+   "value": "2000-05-15 on_or_before",
+   "quote": "Done at Barre, Vermont, this 15th day of May, 2000.",
+   "doc": 1,
+   "page": 5,
+   "note": "Filing date not stated; earliest dated decision in this docket."
+  },
+  "duration_end": {
+   "value": "2001-07-27 on_or_after",
+   "quote": "Done at Barre, Vermont, this 27th day of July, 2001.",
+   "doc": 4,
+   "page": 3,
+   "note": "Litigation continuing."
+  }
+ },
+ "g-243-11-07-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "(appeal from municipal planning commission determination)",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Title says 5-lot subdivision preliminary plat; documents never say the lots are residential. Likely yes."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "Perras & Sons Inc. 5-Lot Subdiv. Prelim. Plat",
+   "doc": 1,
+   "page": 1,
+   "note": "Subdivision use not stated as residential."
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "decision_outcome": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Planning commission determination not described."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "the Court placed the pending preliminary plat appeal on inactive status",
+   "doc": 1,
+   "page": 1
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Five-lot subdivision but residential lot count not stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Richard Babcock",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Karen Babcock",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Rodolphe Vallee",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Elizabeth Vallee",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Gary Kupperblatt",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Sandra Kupperblatt",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Dan Jodoin",
+     "relationship": "unknown",
+     "representation": "represented"
+    },
+    {
+     "name": "Lisa Jodoin",
+     "relationship": "unknown",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Attorney Thomas G. Walsh for Appellants Richard & Karen Babcock, Rodolphe",
+   "doc": 1,
+   "page": 2,
+   "note": "8 individual appellants, represented by Walsh; relationship (likely neighbors) not stated."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Issues not described."
+  },
+  "duration_start": {
+   "value": "2008-12-19 on_or_before",
+   "quote": "This appeal was the subject of a December 19, 2008 Entry Order",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_end": {
+   "value": "2009-04-14 on_or_after",
+   "quote": "_____April 14, 2009______",
+   "doc": 1,
+   "page": 2
+  }
+ },
+ "g-21-env-00023": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Craig Santenello (“Appellant”) filed a timely appeal of the DRB approval with this Court.",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "replaced with a 16-unit residential apartment building",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "replaced with a 16-unit residential apartment building",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Only a standing dismissal; standard of review not stated."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "approved Applicant’s site plan application",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "DRB decision date not stated."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This concludes the matter before the Court.",
+   "doc": 1,
+   "page": 3
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "received site plan approval for its proposed",
+   "doc": 1,
+   "page": 1,
+   "note": "Appeal dismissed so approval stands."
+  },
+  "proposed_units": {
+   "value": 16,
+   "quote": "replaced with a 16-unit residential apartment building",
+   "doc": 1,
+   "page": 1,
+   "note": "Replaces an existing duplex."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Craig Santenello",
+     "relationship": "unknown",
+     "representation": "unknown"
+    }
+   ],
+   "quote": "Craig Santenello (“Appellant”) filed a timely appeal of the DRB approval with this Court.",
+   "doc": 1,
+   "page": 1,
+   "note": "Court found he had not alleged he lives nearby; no counsel mentioned."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Dismissed on standing only."
+  },
+  "duration_start": {
+   "value": "2021-05-03 on_or_before",
+   "quote": "Filed Date:       May 03, 2021",
+   "doc": 1,
+   "page": 1,
+   "note": "Motion filing date; appeal existed by then."
+  },
+  "duration_end": {
+   "value": "2021-06-04 exact",
+   "quote": "Electronically signed on June 4, 2021",
+   "doc": 1,
+   "page": 3
+  }
+ },
+ "g-92-8-19-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant then appealed both of the DRB determinations",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "residential dwelling units in the remainder of the building, and associated parking.",
+   "doc": 1,
+   "page": 1,
+   "note": "Four-story building with 75 apartments plus commercial; footnote 1."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "residential dwelling units in the remainder of the building, and associated parking.",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "The DRB affirmed the lot consolidation permit",
+   "doc": 1,
+   "page": 1,
+   "note": "Remaining appeal (Permit 19-082) is of this DRB decision; the other permit appeal was dismissed as non-final."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "DRB decision date not stated."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "the appeal in the above referenced Court Docket is declared MOOT",
+   "doc": 2,
+   "page": 1
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Consolidation permit rescinded and vacated on withdrawal; building permit not before the court."
+  },
+  "proposed_units": {
+   "value": 75,
+   "quote": "residential dwelling units in the remainder of the building, and associated parking.",
+   "doc": 1,
+   "page": 1,
+   "note": "Text: 'three commercial spaces on the first level, 75' in prior line."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Consolidation of three lots into one; no new lots stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "David E. Carter",
+     "relationship": "neighbor",
+     "representation": "unknown"
+    }
+   ],
+   "quote": "a Mansion Street neighbor, David E. Carter (“Appellant”), appealed those",
+   "doc": 1,
+   "page": 1,
+   "note": "Only Carter appealed to court (footnote 2). Not stated pro se."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not described."
+  },
+  "duration_start": {
+   "value": "2019-08-14 on_or_before",
+   "quote": "Filed Date:      August 14, 2019",
+   "doc": 1,
+   "page": 1,
+   "note": "Motion filing date; appeal pending by then."
+  },
+  "duration_end": {
+   "value": "2020-06-03 exact",
+   "quote": "Electronically signed on June 3, 2020",
+   "doc": 2,
+   "page": 1
+  }
+ },
+ "g-182-8-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Defendant appealed the ZBA= s decision in",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Docket concerns ZBA decision on validity of 1990 PRD permit that would have made the house a three-unit dwelling; what permission is sought is not established. The enforcement docket 77-4-00 is not this docket."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "regarding the validity of the 1990 Planned Residential",
+   "doc": 1,
+   "page": 1,
+   "note": "Housing nature of this docket unclear."
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "decision_outcome": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "ZBA decision outcome not stated."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "will be dismissed effective December 31, 2002.",
+   "doc": 1,
+   "page": 1,
+   "note": "Dismissal conditional on filings; no conclusion observed."
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated for this docket."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Carol Aube-Hinsdale",
+     "relationship": "other",
+     "representation": "unknown"
+    }
+   ],
+   "quote": "Defendant appealed the ZBA= s decision in",
+   "doc": 1,
+   "page": 1,
+   "note": "Owner of the house. Represented by ex-husband Clark Hinsdale III (not stated to be an attorney)."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": null,
+   "page": null,
+   "note": "Not described."
+  },
+  "duration_start": {
+   "value": "2002-10-08 on_or_before",
+   "quote": "On October 8, 2002, the Clerk of the",
+   "doc": 1,
+   "page": 1,
+   "note": "Appeal filed mid-August 2002 (not exact)."
+  },
+  "duration_end": {
+   "value": "2002-12-05 on_or_after",
+   "quote": "Dated at Barre, Vermont, this 5",
+   "doc": 1,
+   "page": 3
+  }
+ }
+}

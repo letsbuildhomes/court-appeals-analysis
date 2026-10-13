@@ -1,0 +1,27 @@
+{
+  "case": "g-212-11-99-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-212-11-99-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is a zoning enforcement action the Village of Ludlow brought against the defendants over signs, not an appeal of a municipal decision, and it concerns signs rather than new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "The Village of Ludlow filed a complaint alleging that Defendants have violated the Village=s Zoning Ordinance pertaining to signs."},
+        {"doc": 1, "page": 1, "quote": "the present enforcement action is brought to enforce the Village=s Zoning and Flood Hazard Regulations adopted in 1990"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "The only document is a decision denying a motion to dismiss a village enforcement complaint about signs; no appeal of a municipal decision and no housing proposal."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The village brought this docket as an enforcement action. The decision mentions a disputed notice of appeal of the underlying notice of violation, but that appeal is not this docket, and a notice-of-violation appeal would not be new housing in any case."},
+    {"field": "housing", "confidence": "high", "note": "The subject is sign regulation; nothing about housing appears."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:12Z", "note": "Excluded: village sign-enforcement action, not a municipal appeal and not housing."}]
+}

@@ -1,0 +1,25 @@
+{
+  "case": "g-103-9-16-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-103-9-16-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket appeals a water quality certification issued by the Agency of Natural Resources for the Morrisville Hydroelectric Project, a state-agency permit, not a municipal land-use decision; the subject is a hydroelectric facility, not new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 2, "page": 1, "quote": "This is an appeal from a water quality certification issued by the Agency of Natural Resources to Morrisville Water and Light for the Morrisville Hydroelectric Project"},
+        {"doc": 1, "page": 1, "quote": "Count 1, ANR Decision Other (103-9-16 Vtec)"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "All seven documents concern the ANR § 401 water quality certification for the Morrisville hydroelectric project (FERC licensing); no municipal decision or housing is involved. Scope established from docs 1-2; remaining text not read in full since exclusion is clear."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: ANR water quality certification appeal for a hydroelectric project."}]
+}

@@ -1,0 +1,303 @@
+{
+ "case": "g-198-9-08-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-198-9-08-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "This docket appeals a Planning Commission decision on the applicants' application to amend a final subdivision plat for a revised location of a proposed house and its septic system; the permission at stake governs where a new house may be built.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "The issues before the Planning Commission flow from Appellee-Applicants\u2019 application for an amendment to the final subdivision plat for a revised location of the septic system and house."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "the merits of the new locations for the house and septic system, under the final plat approval standards, are also before the Court in this appeal"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "involving the building permit for the proposed house, garage, and septic system construction"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "198-9-08 Vtec",
+    "project": {
+     "description": "Kibbe Subdivision Amendment: application to amend a final subdivision plat for a revised location of a proposed house and its septic system.",
+     "municipality": "unknown",
+     "proposed_units": "unknown",
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Kibbe Subdivision Amendment"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "application for an amendment to the final subdivision plat for a revised location of the septic system and house"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Planning Commission decision on the plat amendment application; the order implies the Commission concluded that an amendment was not required for the revised house and septic locations.",
+     "date": "unknown",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Issues as to whether such a revision is or is not required are before the Court, and, if the Court disagrees with the Planning Commission and concludes that such an amendment is required"
+      }
+     ]
+    },
+    "appellants": [],
+    "discretion": {
+     "description": "Whether a plat amendment is required for the revised house and septic locations and, if so, the merits of the new locations under the final plat approval standards; the content of the remaining Questions 2 through 5 is not stated.",
+     "involved": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "the merits of the new locations for the house and septic system, under the final plat approval standards, are also before the Court in this appeal"
+      }
+     ],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "Question 1 dismissed; Questions 2 through 5 remain, and court-ordered mediation is to be completed with a report due by January 7, 2009. No ruling on the merits is observed.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Question 1 of the Restated Statement of Questions is hereby DISMISSED; Questions 2 through 5 remain as the scope of this appeal."
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "mediation is to be completed, and a report of the results of the mediation submitted to the Court, by January 7, 2009"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "198-9-08 Vtec"
+      ],
+      "description": "Appeal of the Planning Commission's decision on the subdivision plat amendment filed; filing date not stated.",
+      "evidence": []
+     },
+     {
+      "kind": "judgment",
+      "date": "2008-10-06",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "198-9-08 Vtec"
+      ],
+      "description": "At a conference the Court ordered mediation and set a schedule for it.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "At an earlier conference, on October 6, 2008"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "the Court ordered mediation and set a schedule for it in Docket No. 198-9-08 Vtec"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2008-11",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "198-9-08 Vtec"
+      ],
+      "description": "Following the November 24, 2008 motion hearing, entry order dismissing Restated Question 1 and denying the applicants' motion to be relieved from the order to mediate.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "held a conference and motion hearing by telephone in these three matters on November 24, 2008"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Kibbe\u2019s motion to be relieved from the order to mediate in Docket No 198-9-08 Vtec is DENIED"
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2008-10-06",
+      "relation": "on_or_before",
+      "description": "Conference at which the Court ordered mediation in this docket; earliest dated event proving the appeal existed.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "At an earlier conference, on October 6, 2008"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "the Court ordered mediation and set a schedule for it in Docket No. 198-9-08 Vtec"
+       }
+      ]
+     },
+     "end": {
+      "date": "2008-11-24",
+      "relation": "on_or_after",
+      "description": "Motion hearing in this docket; the appeal continued with mediation due by January 7, 2009.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "held a conference and motion hearing by telephone in these three matters on November 24, 2008"
+       }
+      ]
+     },
+     "note": "Filing date not stated; start is the October 6, 2008 conference and end the November 24, 2008 hearing, with the appeal still pending.",
+     "kind": "at_least",
+     "days": 49
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "173-8-07 Vtec",
+      "relationship": "Kibbe Building Permit appeal for the proposed house, garage and septic system, heard together by the same entry order",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Kibbe Building Permit                                           Docket No. 173-8-07 Vtec"
+       }
+      ]
+     },
+     {
+      "docket": "159-7-08 Vtec",
+      "relationship": "Kibbe Non-Enforcement Decision appeal, placed on inactive status, heard together by the same entry order",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Kibbe Non-Enforcement Decision                                  Docket No. 159-7-08 Vtec"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "because this appeal is de novo, Restated Question 1, involving whether the Planning Commission\u2019s decision was consistent with its regulations and past practices, is not before the Court"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "198-9-08 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "medium",
+   "note": "Municipal appeal of a Planning Commission plat-amendment decision is clear. Housing rests on the amendment fixing the location of a house that the same order calls 'the proposed house' (building permit docket), i.e. permission bearing on new housing; the order does not itself restate in this docket that the house is unbuilt."
+  },
+  {
+   "field": "housing",
+   "confidence": "medium",
+   "note": "Subject is the revised location of a house and septic system under final plat standards; the house is described as proposed in the companion building permit docket. Treated as permission for a new house."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court states 'because this appeal is de novo' and dismisses a question about the Commission's consistency with its own practices on that basis."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "No filing date; start on_or_before the 2008-10-06 conference ordering mediation in this docket; end on_or_after the 2008-11-24 hearing. At least 49 days."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "One house is at issue, but this docket concerns relocating it and no unit count is stated for this docket; left unknown."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "Plat amendment for revised house/septic location; no new lots stated, but not stated that none are created; unknown."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "low",
+   "note": "Remaining Questions 2-5 are not described; 'final plat approval standards' are not shown to be evaluative."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "Mediation ordered with report due January 7, 2009; Questions 2-5 remain."
+  },
+  {
+   "field": "municipality",
+   "confidence": "medium",
+   "note": "The town is not named in the document."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "This docket names no appellant; Lamb is named only in the sibling building-permit docket"
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "The Commission's ruling is only implied"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T00:00:00Z",
+   "note": "Labeled from the single shared entry order; only the 198-9-08 Vtec parts used."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "This docket only: appellant from a sibling docket removed; outcome unknown"
+  }
+ ]
+}

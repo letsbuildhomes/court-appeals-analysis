@@ -1,0 +1,30 @@
+{
+  "case": "g-35-2-10-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-35-2-10-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "A neighbor appealed the Shaftsbury DRB's grant of a setback variance for an already-built extension to a shed; it is a municipal appeal, but the subject is accessory work at a house, not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "granted William and Andrea Hogan (“Applicants”) a variance for an already-constructed extension to their shed on property located at 1264 Old Depot Road"},
+        {"doc": 1, "page": 1, "quote": "Michael A. Carver appealed the DRB’s decision to this Court on behalf of Mary Anne Peterson (“Neighbor”), who is an adjoining landowner"},
+        {"doc": 1, "page": 3, "quote": "This de novo appeal involves Applicants’ efforts to secure a variance for an already- constructed shed extension"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a DRB variance for an as-built shed extension at an existing house; the housing table classes sheds and other accessory work as not new housing, so the case is excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Neighbor appealed the Town of Shaftsbury DRB's variance decision to the Environmental Court."},
+    {"field": "housing", "confidence": "high", "note": "Only a shed extension is at issue; no dwelling is created or rebuilt."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: neighbor's appeal of a variance for an as-built shed extension, not new housing."}
+  ]
+}

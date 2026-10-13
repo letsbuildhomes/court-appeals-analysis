@@ -1,0 +1,29 @@
+{
+  "case": "g-24-env-00051",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-24-env-00051",
+    "disposition": {
+      "value": "excluded",
+      "reason": "A neighbor appeals the Middlebury DRB's decision upholding the Zoning Administrator's refusal to take enforcement action (screening, grading, future student rentals) at an existing residence. It is a municipal appeal, but no new housing is proposed or permitted.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "John McPartland (Appellant) appeals a June 5, 2024 decision by the Middlebury Development Review Board (DRB) denying his appeal"},
+        {"doc": 1, "page": 1, "quote": "determination by the Zoning Administrator (Zoning Administrator) declining to take enforcement action against Richard Tinsley for alleged zoning violations"},
+        {"doc": 4, "page": 3, "quote": "enforcement actions that would require Mr. Tinsley to screen a dumpster and parking area on the Property, to submit a zoning plan for grading and stormwater management"},
+        {"doc": 2, "page": 2, "quote": "it is undisputed that such student housing is not presently occurring at the Property, nor it is presently proposed for future use/approval."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a DRB decision upholding a zoning administrator's refusal to enforce against an existing residence; subjects are screening, grading/drainage and possible future student rentals (change of occupancy), none of which is new housing. Excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal to the Environmental Division of a Middlebury DRB decision on a zoning administrator determination."},
+    {"field": "housing", "confidence": "high", "note": "No construction or new unit is proposed; the only housing aspect is past/possible future rental to students, a change of occupancy without construction, which the guide classes as not new housing."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:49:21Z", "note": "Excluded: enforcement-refusal appeal about screening and grading at an existing house; no new housing."}]
+}

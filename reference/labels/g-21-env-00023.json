@@ -1,0 +1,261 @@
+{
+  "case": "g-21-env-00023",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-21-env-00023",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Craig Santenello appealed the Morrisville DRB's site plan approval of a new 16-unit apartment building replacing a duplex, which is new housing.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "The approved plan calls for an existing residential duplex to be razed and replaced with a 16-unit residential apartment building."
+        },
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "Craig Santenello (“Appellant”) filed a timely appeal of the DRB approval with this Court."
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "21-ENV-00023",
+        "project": {
+          "description": "Site plan for a 16-unit residential apartment building replacing an existing duplex to be razed, a second development on a parcel where a separate 9-unit building is under construction",
+          "municipality": "Morrisville",
+          "proposed_units": 16,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "The approved plan calls for an existing residential duplex to be razed and replaced with a 16-unit residential apartment building."
+            },
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "in the Town of Morrisville"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "Town of Morrisville Development Review Board approved AHL Investments LP's site plan application",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "When the Town of Morrisville Development Review Board (“DRB”) approved Applicant’s site plan application"
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Craig Santenello",
+            "relationship": "unknown",
+            "seeks": "overturn_approval",
+            "representation": "unknown",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Craig Santenello (“Appellant”) filed a timely appeal of the DRB approval with this Court."
+              },
+              {
+                "doc": 1,
+                "page": 2,
+                "quote": "Appellant here has not alleged that he lives in the immediate area."
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "The appellant's grounds for challenging the approval are not stated; the only decided issue was his standing, on which he filed no response.",
+          "involved": "unknown",
+          "evidence": [],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "allowed",
+          "description": "The appeal was dismissed for lack of standing, leaving the DRB site plan approval in place; nothing further is shown pending.",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "Appellant Craig Santenello lacks standing to bring this appeal and that this appeal must therefore be DISMISSED."
+            },
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "This concludes the matter before the Court."
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "21-ENV-00023"
+            ],
+            "description": "Craig Santenello appealed the DRB site plan approval; filing date not stated.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Craig Santenello (“Appellant”) filed a timely appeal of the DRB approval with this Court."
+              }
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2021-06-04",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "21-ENV-00023"
+            ],
+            "description": "Applicant's motion to dismiss granted for lack of standing; appeal dismissed and matter concluded.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Electronically signed on June 4, 2021"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "This concludes the matter before the Court."
+              }
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2021-05-03",
+            "relation": "on_or_before",
+            "description": "Applicant's motion to dismiss the appeal was filed May 3, 2021, proving the appeal existed; the notice of appeal date is not stated.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Motion to Dismiss Appeal (Motion: 1)"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Filed Date: May 03, 2021"
+              }
+            ]
+          },
+          "end": {
+            "date": "2021-06-04",
+            "relation": "exact",
+            "description": "Entry order dismissing the appeal and concluding the matter.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "This concludes the matter before the Court."
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Electronically signed on June 4, 2021"
+              }
+            ]
+          },
+          "note": "Start bounded by the motion to dismiss filing date; the appeal itself was filed earlier on an unstated date.",
+          "kind": "at_least",
+          "days": 32
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [],
+        "appeal_review": {
+          "standard": "unknown",
+          "evidence": []
+        }
+      }
+    ]
+  },
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "21-ENV-00023": "all"
+    }
+  },
+  "judgments": [
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "Appeal of a municipal DRB site plan approval for a new 16-unit apartment building (replacing a duplex): new housing."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "high",
+      "note": "Dismissed on standing before any merits proceeding; nothing says whether the appeal would be heard on the record or de novo."
+    },
+    {
+      "field": "duration",
+      "confidence": "medium",
+      "note": "Notice of appeal date not given; start bounded on_or_before by the May 3, 2021 motion to dismiss filing; end is the June 4, 2021 dismissal, which states it concludes the matter. 32 days at least."
+    },
+    {
+      "field": "units",
+      "confidence": "medium",
+      "note": "The new building has 16 units; it replaces a duplex, so net new units would be 14, but the guide counts dwelling units the new housing creates. The separate 9-unit building was approved earlier and is not part of this application."
+    },
+    {
+      "field": "lots",
+      "confidence": "medium",
+      "note": "No subdivision is mentioned, but the documents do not say none is proposed, so unknown."
+    },
+    {
+      "field": "decision_date",
+      "confidence": "high",
+      "note": "DRB approval date is not stated."
+    },
+    {
+      "field": "appellants",
+      "confidence": "medium",
+      "note": "Relationship unknown: the court notes he did not allege living in the immediate area, so he cannot be classed as a neighbor. Representation not stated."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "The appellant's grounds are not stated; only standing was decided."
+    },
+    {
+      "field": "permission",
+      "confidence": "medium",
+      "note": "Dismissal leaves the DRB approval standing; whether it carried conditions is not stated, so allowed."
+    },
+    {
+      "field": "litigation",
+      "confidence": "medium",
+      "note": "Order says it concludes the matter; no further appeal is shown."
+    }
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T12:00:00Z",
+      "note": "Labeled from the single June 4, 2021 entry order dismissing the appeal for lack of standing."
+    }
+  ]
+}

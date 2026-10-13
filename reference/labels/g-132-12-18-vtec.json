@@ -1,0 +1,29 @@
+{
+  "case": "g-132-12-18-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-132-12-18-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "The Reeds appeal the Weathersfield ZBA's denial of conditional use approval for a commercial firewood processing operation, together with a notice of violation against it; this is a municipal appeal but concerns a nonresidential (industrial) use, not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Douglas Reed Sr. and Douglas Reed Jr. (together “Appellants” or “the Reeds”) appeal from a decision of the Town of Weathersfield (“Town”) Zoning Board of Adjustment (“ZBA”)."},
+        {"doc": 1, "page": 2, "quote": "Appellants submitted the application for conditional use approval for a commercial firewood processing operation run by Mr. Reed Jr."},
+        {"doc": 1, "page": 2, "quote": "The ZBA denied their conditional use application and did not overturn the NOV. This appeal followed shortly thereafter."},
+        {"doc": 1, "page": 14, "quote": "No residential structure was ever constructed on the property."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a ZBA conditional use denial and an NOV for a commercial firewood processing operation, classified by the court as industrial; no housing is proposed (a 2002 mobile home permit on an adjacent parcel was never used and is not at issue)."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal from the ZBA's November 5, 2018 decision; the parties stipulated the court may treat the NOV as upheld by the ZBA."},
+    {"field": "housing", "confidence": "high", "note": "Nonresidential commercial/industrial use; also partly an NOV appeal, which is not new housing."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: appeal of conditional use denial and NOV for a commercial firewood processing operation, not housing."}]
+}

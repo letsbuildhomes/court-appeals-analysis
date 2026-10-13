@@ -1,0 +1,30 @@
+{
+  "case": "g-116-9-16-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-116-9-16-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is a state enforcement action: the Agency of Natural Resources filed its Administrative Order against an unpermitted salvage yard, not an appeal of a municipal decision. The subject is junk vehicle storage at a towing business, not new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 2, "quote": "That AO was filed with the Court on September 27, 2016, thereby commencing this enforcement action."},
+        {"doc": 1, "page": 2, "quote": "received a complaint alleging use of the Tunbridge property as a salvage yard."},
+        {"doc": 1, "page": 1, "quote": "Respondent Kyle Blakeman operates an automobile towing and recovery business known as Blakeman’s Towing and Recovery on the Tunbridge property."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "ANR enforcement of the state salvage yard law commenced by filing its Administrative Order; the only municipal action mentioned (the Town's December 2017 COAL denial) is background and not appealed in this docket. Nonresidential subject."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "State-brought enforcement without an appeal of a municipal decision."},
+    {"field": "housing", "confidence": "high", "note": "Salvage yard and towing business; no housing proposed."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:16Z", "note": "Excluded: ANR salvage-yard enforcement and contempt proceedings, not a municipal housing appeal."}
+  ]
+}

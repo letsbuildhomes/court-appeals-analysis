@@ -1,0 +1,334 @@
+{
+  "case": "g-73-3-02-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-73-3-02-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Cowan appealed the DRB's affirmance of the denial of a zoning permit for a new single-family house, a municipal appeal about new housing.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "affirming the Zoning Administrator"
+        },
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "denial of Appellant"
+        },
+        {
+          "doc": 1,
+          "page": 3,
+          "quote": "Appellant applied for a permit to construct a 27' x 66' single-family house on the parcel"
+        },
+        {
+          "doc": 1,
+          "page": 3,
+          "quote": "In Docket No. 73-3-02 Vtec, Appellant appealed the DRB"
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "73-3-02 Vtec",
+        "project": {
+          "description": "Zoning permit for a new 27' x 66' single-family house on a one-acre parcel at 420 Snipe Ireland Road, partly in the flood hazard overlay district.",
+          "municipality": "Richmond",
+          "proposed_units": 1,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "Appellant applied for a permit to construct a 27' x 66' single-family house on the parcel"
+            },
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "Appellant owns a one-acre parcel of land located at 420 Snipe Ireland Road"
+            },
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "Development Review Board (DRB) of the Town of Richmond"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "The DRB upheld the Zoning Administrator's denial of the zoning permit for the single-family house.",
+          "date": "unknown",
+          "outcome": "denied",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "The Zoning Administrator denied the permit on the basis of the matters stated in the Town Attorney"
+            },
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "The DRB upheld the denial on appeal."
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Isaac Cowan",
+            "relationship": "developer",
+            "seeks": "overturn_denial",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Appellant Isaac Cowan appealed from a decision of the Development Review Board (DRB) of the Town of Richmond"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Appellant is represented by John W. O"
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "Appellant challenged the denial, arguing it rested on the existing retaining wall being part of the house foundation and that he now proposes moving the wall; the court decided that the wall and house lie in the flood hazard overlay district and are not a use category approvable under §§ 6.8.4 or 6.8.5, a fixed use-category rule.",
+          "involved": "no",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "lie within the flood hazard overlay district and do not fall within a use category approvable under"
+            },
+            {
+              "doc": 1,
+              "page": 2,
+              "quote": "specifically prohibits any but the listed uses to be allowed in the floodplain"
+            }
+          ],
+          "central": "not_applicable",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "denied",
+          "description": "Summary judgment entered for the Town upholding denial of the house permit, without prejudice to a revised application; remaining issues concern the companion enforcement and septic matters.",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 4,
+              "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"
+            },
+            {
+              "doc": 1,
+              "page": 3,
+              "quote": "This denial is specifically without prejudice to Appellant"
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": [
+              "73-3-02 Vtec"
+            ],
+            "description": "Cowan appealed the DRB decision upholding denial of his house permit.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "In Docket No. 73-3-02 Vtec, Appellant appealed the DRB"
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2003-06-09",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": [
+              "73-3-02 Vtec",
+              "102-5-02 Vtec"
+            ],
+            "description": "Appellant's summary judgment motion denied and summary judgment entered for the Town in 73-3-02.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"
+              },
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "Done at Barre, Vermont, this 9 day of June, 2003."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "unknown",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": [
+              "73-3-02 Vtec",
+              "102-5-02 Vtec"
+            ],
+            "description": "Decision corrected on pages 2, 3 and 8 per motion to alter and the 7/1/03 telephone conference, without changing the result.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "as corrected on pages 2, 3 and 8 per motion to alter and 7/1/03 telephone conference"
+              }
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2003-05-15",
+            "relation": "on_or_before",
+            "description": "Rodjenski affidavit filed in the summary judgment proceedings, describing this docket's application plans.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "See Exhibit A to the Rodjenski affidavit filed May 15, 2003."
+              }
+            ]
+          },
+          "end": {
+            "date": "2003-06-09",
+            "relation": "exact",
+            "description": "Summary judgment entered for the Town in 73-3-02.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "summary judgment is hereby ENTERED for the Town in Docket No. 73-3-02 Vtec"
+              },
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "Done at Barre, Vermont, this 9 day of June, 2003."
+              }
+            ]
+          },
+          "note": "Court filing date not stated; start is the earliest dated court filing in the proceedings (an affidavit). End is the summary judgment; no further appeal observed.",
+          "kind": "at_least",
+          "days": 25
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "102-5-02 Vtec",
+            "relationship": "Town's enforcement action over the retaining wall, decided in the same decision",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Docket No. 102-5-02 Vtec is the Town"
+              }
+            ]
+          },
+          {
+            "docket": "S145-03 CnC",
+            "relationship": "Appellant's Superior Court appeal of the septic permit denial for the house, decided in the same decision",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Appellant appealed the denial of his application for approval of the septic system"
+              }
+            ]
+          },
+          {
+            "docket": "74-3-02 Vtec",
+            "relationship": "Original Environmental Court septic appeal, dismissed for lack of jurisdiction and refiled as S145-03 CnC",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 4,
+                "quote": "The septic system appeal was originally filed in Environmental Court under Docket No. 74-3-"
+              }
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "unknown",
+          "evidence": []
+        }
+      }
+    ]
+  },
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "73-3-02 Vtec": "all"
+    }
+  },
+  "judgments": [
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "This docket (not the companion enforcement action 102-5-02) is an appeal of a DRB decision upholding denial of a permit for a new single-family house."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "medium",
+      "note": "Decided on summary judgment; the decision never says whether the appeal is de novo or on the record."
+    },
+    {
+      "field": "duration",
+      "confidence": "low",
+      "note": "Filing date not stated. Start uses the Rodjenski affidavit filed May 15, 2003, which supplies exhibits about this docket's application but is not expressly tied to this docket; end is the June 9, 2003 summary judgment. A later correction (after 7/1/03) did not change the result."
+    },
+    {
+      "field": "start",
+      "confidence": "low",
+      "note": "Affidavit filing date used as on_or_before bound; it is not explicitly said to be filed in 73-3-02."
+    },
+    {
+      "field": "end",
+      "confidence": "medium",
+      "note": "Summary judgment for the Town concludes this docket in the Environmental Court; no further appeal is observed but none is excluded."
+    },
+    {
+      "field": "litigation",
+      "confidence": "medium",
+      "note": "Summary judgment entered for the Town in this docket; the scheduled conference covers 'remaining issues in these three matters', which appear to be the enforcement penalty and the septic appeal, not this docket."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "The appeal turned on whether the house and wall lie in the flood hazard overlay district and the permitted use categories, fixed rules and facts; no evaluative standard is contested."
+    },
+    {
+      "field": "decision_date",
+      "confidence": "high",
+      "note": "Neither the ZA denial nor the DRB decision is dated."
+    },
+    {
+      "field": "lots",
+      "confidence": "medium",
+      "note": "No subdivision is mentioned, but the documents do not state that none is proposed."
+    }
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T05:48:46+00:00",
+      "note": "Labeled from the June 9, 2003 summary judgment decision, 73-3-02 Vtec parts only."
+    }
+  ]
+}

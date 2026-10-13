@@ -1,0 +1,164 @@
+{
+ "g-212-11-99-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "The Village of Ludlow filed a complaint alleging that Defendants have violated the",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "Village=s Zoning Ordinance pertaining to signs",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "Village=s Zoning Ordinance pertaining to signs",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-189-10-98-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "filed an amended complaint under 10 V.S.A. ' 8014(a) to enforce a final",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "dog kennel business",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "dog kennel business",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-23-env-00057": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "This is an appeal of a Town of Waitsfield Development Review Board (DRB) decision",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "regarding the placement of a storage container on their property",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "regarding the placement of a storage container on their property",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-169-12-16-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "The Act 250 appeal was not in play at that time",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "Diverging Diamond Interchange A250",
+   "doc": 1,
+   "page": 1,
+   "note": "Interchange highway project."
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "Diverging Diamond Interchange A250",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-122-7-04-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appeal from conditional use approval",
+   "doc": 2,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "proposed gravel extraction",
+   "doc": 2,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "proposed gravel extraction",
+   "doc": 2,
+   "page": 1
+  }
+ },
+ "g-35-2-10-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "granted William and Andrea Hogan (“Applicants”) a variance for an already-constructed",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "extension to their shed",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "extension to their shed",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-103-9-16-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "This is an appeal from a water quality certification issued by the Agency of Natural",
+   "doc": 2,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "Morrisville Hydroelectric Project",
+   "doc": 2,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "Morrisville Hydroelectric Project",
+   "doc": 2,
+   "page": 1
+  }
+ },
+ "g-256-11-06-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "(Appeal of Act 250 Permit #9A0314)",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "multi-level residential retirement community",
+   "doc": 1,
+   "page": 1,
+   "note": "Housing likely yes (retirement community) but excluded anyway because Act 250 appeal."
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "(Appeal of Act 250 Permit #9A0314)",
+   "doc": 1,
+   "page": 1
+  }
+ }
+}

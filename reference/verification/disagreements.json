@@ -1,0 +1,421 @@
+{
+ "g-103-9-16-vtec": [],
+ "g-105-6-10-vtec": [],
+ "g-110-5-06-vtec": [
+  [
+   "start",
+   "unknown",
+   "2006-09-25 on_or_before",
+   "Filing date not stated."
+  ]
+ ],
+ "g-110-6-04-vtec": [
+  [
+   "permission",
+   "denied",
+   "unknown",
+   "No authorization in this docket; the merits denial (Jan 27, 2005) belongs to docket 44-2-05."
+  ],
+  [
+   "appellants",
+   1,
+   2,
+   "James and Janet Harrison"
+  ]
+ ],
+ "g-114-7-99-vtec": [],
+ "g-116-6-09-vtec": [
+  [
+   "proposed_lots",
+   "unknown",
+   2,
+   "Subdivision of the project property into two lots (one holds existing duplex and barn); whether both count as new residential building lots is a judgment."
+  ],
+  [
+   "appellants",
+   2,
+   3,
+   "Dana Hood, Brenda Hood and Jeff Atwood (Hood and Atwood as two 'Applicants'; could be counted as 2)."
+  ]
+ ],
+ "g-116-9-16-vtec": [],
+ "g-122-7-04-vtec": [],
+ "g-130-8-14-vtec": [],
+ "g-132-12-18-vtec": [],
+ "g-132-6-00-vtec": [],
+ "g-138-8-10-vtec": [],
+ "g-143-7-08-vtec": [
+  [
+   "permission",
+   "allowed",
+   "allowed_with_conditions",
+   ""
+  ],
+  [
+   "appellants",
+   1,
+   2,
+   "Gregory and Deborah Benoit (owners/applicants). Representation is stated for 2021 filings; for the 2008 appeal not stated."
+  ]
+ ],
+ "g-143-9-10-vtec": [],
+ "g-150-7-02-vtec": [
+  [
+   "housing",
+   "yes",
+   "no",
+   "Subdivision itself held not before the court; only a ROW extension. Ambiguous: ROW is to serve a proposed 2-lot subdivision."
+  ],
+  [
+   "disposition",
+   "in_scope",
+   "excluded",
+   ""
+  ]
+ ],
+ "g-158-9-04-vtec": [],
+ "g-159-7-08-vtec": [
+  [
+   "municipal_appeal",
+   "yes",
+   "unknown",
+   "Entry order only; caption names 'Kibbe Non-Enforcement Decision' but the text does not say what municipal decision is appealed"
+  ],
+  [
+   "housing",
+   "no",
+   "unknown",
+   "Text says only that the docket is inactive; what it concerns is not established (sibling dockets concern a house and septic)"
+  ],
+  [
+   "disposition",
+   "excluded",
+   "uncertain",
+   "Neither fact established; a non-enforcement decision would likely be excluded as an NOV-type matter"
+  ]
+ ],
+ "g-161-9-99-vtec": [
+  [
+   "litigation",
+   "resolved",
+   "unknown",
+   "Summary judgment granted but decision says other variance criteria and exceptions are not addressed; no observed final conclusion or appeal status."
+  ],
+  [
+   "proposed_lots",
+   0,
+   "unknown",
+   "No new lots; not stated that none are created."
+  ],
+  [
+   "discretion_involved",
+   "unknown",
+   "no",
+   "Turns on legal hardship test applied on undisputed facts."
+  ]
+ ],
+ "g-169-12-16-vtec": [],
+ "g-169-8-02-vtec": [
+  [
+   "review_standard",
+   "de_novo",
+   "unknown",
+   ""
+  ],
+  [
+   "decision_date",
+   "2002",
+   "2002-07-23",
+   "Two decisions are named (also Aug 23, 2002, probably the sibling docket 217-9-02); which belongs to this docket is not stated. Low confidence."
+  ]
+ ],
+ "g-170-12-14-vtec": [
+  [
+   "appellants",
+   11,
+   1,
+   "Relationship inferred from abutting Foothills residential development; 11 appellants in one group."
+  ]
+ ],
+ "g-180-12-13-vtec": [
+  [
+   "proposed_units",
+   "unknown",
+   2,
+   "house plus garage apartment; derived count, medium confidence"
+  ]
+ ],
+ "g-182-8-02-vtec": [
+  [
+   "housing",
+   "yes",
+   "unknown",
+   "Docket concerns ZBA decision on validity of 1990 PRD permit that would have made the house a three-unit dwelling; what permission is sought is not established. The enforcement docket 77-4-00 is not this docket."
+  ],
+  [
+   "disposition",
+   "in_scope",
+   "uncertain",
+   "Housing nature of this docket unclear."
+  ],
+  [
+   "decision_date",
+   "2002",
+   "unknown",
+   "Not stated."
+  ],
+  [
+   "proposed_units",
+   1,
+   "unknown",
+   "Not stated for this docket."
+  ],
+  [
+   "start",
+   "2002-08-31 on_or_before",
+   "2002-10-08 on_or_before",
+   "Appeal filed mid-August 2002 (not exact)."
+  ]
+ ],
+ "g-183-11-97-vtec": [],
+ "g-189-10-98-vtec": [],
+ "g-198-9-08-vtec": [
+  [
+   "decision_outcome",
+   "other",
+   "unknown",
+   ""
+  ]
+ ],
+ "g-207-11-03-vtec": [
+  [
+   "permission",
+   "unknown",
+   "allowed",
+   "Latest observed authorization is the DRB approval; conditions not stated."
+  ],
+  [
+   "discretion_involved",
+   "unknown",
+   "no",
+   "Cross-motions turn on use-category interpretation and usage numbers (fixed rules); low-medium confidence."
+  ],
+  [
+   "start",
+   "2005-05-11 on_or_before",
+   "2005-06-07 on_or_before",
+   "Filing date not stated."
+  ]
+ ],
+ "g-208-12-01-vtec": [
+  [
+   "proposed_units",
+   6,
+   12,
+   "Could be read as 6 (6-unit senior residence, doc 4 p4) if visitor residences/dormitory for 6 are not counted as dwelling units. Ambiguous."
+  ],
+  [
+   "discretion_involved",
+   "unknown",
+   "yes",
+   "Low-medium: PUD criteria and Town Plan conformance (doc 2 p3) are evaluative, but contentions in this docket mostly turn on use categories. Could be unknown."
+  ],
+  [
+   "appellants",
+   3,
+   1,
+   "Appeal of Green Meadows Center, LLC (developer/applicant, for-profit LLC). Docs 4-6 also call SEVCA and The Community Alliance 'additional appellants' although the court says they had not applied; ambiguous whether count is 1 or 3."
+  ]
+ ],
+ "g-21-env-00023": [],
+ "g-212-11-99-vtec": [],
+ "g-218-9-00-vtec": [
+  [
+   "litigation",
+   "resolved",
+   "unknown",
+   "Court approved Aug. 1, 2003; no observed end of review chain or appeal status."
+  ],
+  [
+   "appellants",
+   1,
+   2,
+   "Relationships not stated explicitly."
+  ]
+ ],
+ "g-223-10-08-vtec": [
+  [
+   "proposed_lots",
+   "unknown",
+   5,
+   "Five lots; not stated they are residential building lots."
+  ]
+ ],
+ "g-228-11-99-vtec": [
+  [
+   "decision_outcome",
+   "denied",
+   "other",
+   "Mixed: PUD master plan approved with conditions, use approvals on traffic and downtown, site plans denied."
+  ],
+  [
+   "permission",
+   "denied",
+   "unknown",
+   "Planning Commission denied site plans; court has not ruled on merits."
+  ],
+  [
+   "start",
+   "2000-03-27 on_or_before",
+   "2000-05-15 on_or_before",
+   "Filing date not stated; earliest dated decision in this docket."
+  ]
+ ],
+ "g-23-env-00057": [],
+ "g-232-12-04-vtec": [
+  [
+   "proposed_lots",
+   0,
+   "unknown",
+   "Existing lot; no new lots stated."
+  ]
+ ],
+ "g-24-env-00022": [],
+ "g-24-env-00051": [],
+ "g-243-11-07-vtec": [
+  [
+   "appellants",
+   6,
+   8,
+   "8 individual appellants, represented by Walsh; relationship (likely neighbors) not stated."
+  ]
+ ],
+ "g-250-12-99-vtec": [
+  [
+   "proposed_lots",
+   0,
+   "unknown",
+   "building permit on an existing subdivision lot; no new lots stated for this docket"
+  ]
+ ],
+ "g-256-11-06-vtec": [],
+ "g-33-2-19-vtec": [],
+ "g-35-2-10-vtec": [],
+ "g-35-3-04-vtec": [
+  [
+   "appellants",
+   1,
+   2,
+   ""
+  ]
+ ],
+ "g-56-4-10-vtec": [
+  [
+   "housing",
+   "yes",
+   "unknown",
+   "Subdivision into lots; no house or construction proposed and purpose not stated"
+  ]
+ ],
+ "g-64-6-18-vtec": [],
+ "g-68-6-19-vtec": [
+  [
+   "housing",
+   "no",
+   "unknown",
+   "Title 'Eller Zoning Violation' only; the order never says what is proposed or alleged. Likely an NOV (would be no) but not stated"
+  ],
+  [
+   "disposition",
+   "excluded",
+   "uncertain",
+   ""
+  ]
+ ],
+ "g-71-4-07-vtec": [
+  [
+   "proposed_units",
+   "unknown",
+   7,
+   "explicit per-lot single-family limit; derived count, medium confidence"
+  ],
+  [
+   "discretion_involved",
+   "yes",
+   "no",
+   "questions turn on fixed regulation text (road width), engineer affidavits; low-medium confidence"
+  ]
+ ],
+ "g-72-5-03-vtec": [],
+ "g-73-3-02-vtec": [
+  [
+   "litigation",
+   "resolved",
+   "ongoing",
+   "Summary judgment for Town, but remaining issues in the three matters still to be discussed; no final conclusion shown."
+  ],
+  [
+   "start",
+   "2003-05-15 on_or_before",
+   "2003-06-09 on_or_before",
+   "Court filing date not stated; earliest dated event."
+  ]
+ ],
+ "g-74-5-10-vtec": [
+  [
+   "discretion_involved",
+   "unknown",
+   "no",
+   "principal issues: authority of commission, regulations' compliance with statute"
+  ]
+ ],
+ "g-75-7-18-vtec": [],
+ "g-77-4-05-vtec": [
+  [
+   "housing",
+   "yes",
+   "unknown",
+   "After-the-fact permit for a house already built; documents do not show occupancy at stake (a private enforcement action is pending), so rule is not clearly met either way."
+  ],
+  [
+   "disposition",
+   "in_scope",
+   "uncertain",
+   ""
+  ],
+  [
+   "review_standard",
+   "de_novo",
+   "unknown",
+   "Only summary judgment and Supreme Court de novo review of a legal question; no statement of the court's standard on the DRB decision."
+  ],
+  [
+   "end",
+   "2007-05-01 on_or_after",
+   "2006-06-08 on_or_after",
+   "Supreme Court affirmed in May Term 2007 (2007 VT 76) but the entry order is undated in the text."
+  ]
+ ],
+ "g-85-4-02-vtec": [],
+ "g-88-4-02-vtec": [
+  [
+   "permission",
+   "allowed",
+   "unknown",
+   "Variance granted by municipality; whether a permit for the house exists not stated."
+  ],
+  [
+   "start",
+   "2002-09-23 on_or_before",
+   "2002-12-12 on_or_before",
+   "Filing date not stated."
+  ],
+  [
+   "appellants",
+   2,
+   1,
+   "Two individuals, one appeal; owners of adjacent Lots 7 and 8."
+  ]
+ ],
+ "g-92-8-19-vtec": []
+}

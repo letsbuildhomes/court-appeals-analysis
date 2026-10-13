@@ -1,0 +1,329 @@
+{
+ "case": "g-232-12-04-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-232-12-04-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "LaBounty appeals a Grand Isle DRB decision affirming the denial of a zoning permit for a proposed new dwelling on an existing small lot; a municipal appeal about permission for new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "appeals from two decisions of the Town of Grand Isle (Town) Development Review Board (DRB)."
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "The proposed dwelling on Sturgeon Road would have 120 feet of frontage and a front setback of twenty-seven feet."
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "the DRB affirmed the Administrative Officer\u201fs denial of the Sturgeon Road permit."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "232-12-04 Vtec",
+    "project": {
+     "description": "Zoning permit for a proposed new dwelling on LaBounty's existing 0.41-acre small lot at 23 Sturgeon Road, which does not meet the district's setback requirements (permit application #04-69).",
+     "municipality": "Grand Isle",
+     "proposed_units": 1,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "an L-shaped 0.41-acre lot at 23 Sturgeon Road"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "The proposed dwelling on Sturgeon Road would have 120 feet of frontage"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "LaBounty filed a zoning permit application for the Sturgeon Road lot with the Administrative Officer"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "The DRB affirmed the Administrative Officer's August 20, 2004 denial of the Sturgeon Road zoning permit for failure to meet the district setback requirements.",
+     "date": "2004-11-18",
+     "outcome": "denied",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "On November 18, 2004, the DRB affirmed the Administrative Officer\u201fs denial of the Sturgeon Road permit."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "The decisions, dated November 18, 2004 and April 20, 2005, denied permits for two properties"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "LaBounty Enterprises, Inc.",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicant LaBounty Enterprises, Inc. (LaBounty) appeals from two decisions"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant is represented by John W. O\u201fDonnell, Esq."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Appellant argued that the existing-small-lots provision (Bylaw \u00a7 4.6) exempts its lot from the district's front, side and rear setback requirements; a question of bylaw interpretation against fixed numerical setbacks.",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "does the phrase \u201cminimum lot dimensional requirements\u201d refer only to the minimum lot size requirement, or does it include the front, rear and side yard setback requirements"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "the proposed dwelling could not meet the setback requirements of the District"
+      }
+     ],
+     "central": "not_applicable",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "denied",
+     "description": "The court granted the Town summary judgment and denied the application, without prejudice to resubmission if variances are obtained or the bylaw is revised; no further proceedings are shown.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "The result of these adjudications is that Appellant-Applicant LaBounty\u201fs two zoning applications are DENIED, without prejudice to resubmit such"
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "This decision concludes the pending appeals."
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "232-12-04 Vtec"
+      ],
+      "description": "LaBounty appealed the DRB's denial of the Sturgeon Road permit to the Environmental Court; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "LaBounty appealed both denials to this Court."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2005-05-04",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "232-12-04 Vtec",
+       "85-5-05 Vtec"
+      ],
+      "description": "The court granted LaBounty's unopposed motion to consolidate the Sturgeon Road and Keel Road appeals.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "On May 4, 2005, this Court granted LaBounty\u201fs unopposed Motion to Consolidate the two appeals."
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "2005-09-16",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "232-12-04 Vtec",
+       "85-5-05 Vtec"
+      ],
+      "description": "Decision on cross-motions for summary judgment: Town's motion granted, application denied without prejudice; the decision concludes the appeals.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "the Town\u201fs Cross-Motion for Summary Judgment is GRANTED, and the Appellant\u201fs Cross-Motion for Summary Judgment is DENIED."
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "This decision concludes the pending appeals."
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Berlin, Vermont, this 16th day of September, 2005."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2005-05-04",
+      "relation": "on_or_before",
+      "description": "The appeal existed by the May 4, 2005 consolidation order; its filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "On May 4, 2005, this Court granted LaBounty\u201fs unopposed Motion to Consolidate the two appeals."
+       }
+      ]
+     },
+     "end": {
+      "date": "2005-09-16",
+      "relation": "exact",
+      "description": "The summary judgment decision concluded the appeal.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "This decision concludes the pending appeals."
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Berlin, Vermont, this 16th day of September, 2005."
+       }
+      ]
+     },
+     "note": "Filing date not stated; start bounded by the consolidation order. End is the concluding decision; no further appeal is shown.",
+     "kind": "at_least",
+     "days": 135
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "85-5-05 Vtec",
+      "relationship": "Consolidated appeal of the DRB's denial of LaBounty's Keel Road permit, decided in the same decision.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "this Court granted LaBounty\u201fs unopposed Motion to Consolidate the two appeals."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "LaBounty filed a zoning permit application for the Keel Road lot with the Administrative Officer"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "The issue presented by these consolidated appeals in this de novo proceeding is"
+      },
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "Therefore, Appellant-Applicant\u201fs application must be denied."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "232-12-04 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a DRB decision affirming denial of a zoning permit for a proposed new dwelling: municipal appeal about new housing."
+  },
+  {
+   "field": "municipality",
+   "confidence": "high",
+   "note": "Town of Grand Isle DRB."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "medium",
+   "note": "The decision does not say which docket is which property. Assigned 232-12-04 to Sturgeon Road (DRB decision Nov 18, 2004) because both the caption and the list of decisions name it first and the Keel Road DRB decision (April 2005) is the later one; not derived from the docket number alone. The opinion gives the Keel Road DRB date as both April 20 and April 26, 2005; irrelevant to this docket."
+  },
+  {
+   "field": "units",
+   "confidence": "high",
+   "note": "One proposed dwelling on the Sturgeon Road lot."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "high",
+   "note": "The dispute is whether \u00a7 4.6 exempts small lots from fixed numerical setbacks; pure bylaw interpretation against fixed rules."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court calls the consolidated appeals a 'de novo proceeding' and decides the application itself (application denied); not merely the summary-judgment standard."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing date not stated; start is on_or_before the May 4, 2005 consolidation order. End is the Sept 16, 2005 decision, which says it concludes the appeals. at_least 135 days."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "Decision states it concludes the pending appeals; no further appeal shown."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:48:17Z",
+   "note": "Labeled from the single shared decision, Sturgeon Road appeal only (Keel Road is 85-5-05)."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Lots unknown: the documents do not say no new lots are created"
+  }
+ ]
+}

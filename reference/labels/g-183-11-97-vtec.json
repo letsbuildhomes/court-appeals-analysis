@@ -1,0 +1,260 @@
+{
+ "case": "g-183-11-97-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-183-11-97-vtec",
+  "disposition": {
+   "value": "uncertain",
+   "reason": "The docket is an appeal by a group of interested persons from a Town of Manchester permit decision, so it is a municipal appeal; but the only decision is a sanctions-discovery order that never says what the Walker II project is, so whether it is new housing is not established.",
+   "municipal_appeal": "yes",
+   "housing": "unknown",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "A group of interested persons (the Appellant Group) appealed from a decision on a Town of Manchester permit issued to Appellee-Applicant H.B. Partners for the so-called Walker II project."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "183-11-97 Vtec",
+    "project": {
+     "description": "The so-called Walker II project of H.B. Partners in Manchester; its nature (housing or otherwise) is not described.",
+     "municipality": "Manchester",
+     "proposed_units": "unknown",
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "a Town of Manchester permit issued to Appellee-Applicant H.B. Partners for the so-called Walker II project"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "A Town of Manchester decision issuing a permit to H.B. Partners for the Walker II project; the deciding body and date are not stated.",
+     "date": "unknown",
+     "outcome": "approved",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "appealed from a decision on a Town of Manchester permit issued to Appellee-Applicant H.B. Partners"
+      }
+     ]
+    },
+    "appellants": [],
+    "discretion": {
+     "description": "The grounds of the merits appeal are not stated; the merits were resolved by consent order and the decision addresses only discovery for sanctions motions.",
+     "involved": "unknown",
+     "evidence": [],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "The merits were resolved by a consent order whose terms are not given, so the permit's final status is unknown; the parties' sanctions motions remained pending, with scheduling filings due.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The merits of the appeal were resolved by a consent order filed in February of 1999."
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The parties determined to proceed with their sanctions motions"
+      },
+      {
+       "doc": 1,
+       "page": 7,
+       "quote": "the parties shall file with the Court either a stipulated schedule for discovery on and briefing of the motions for sanctions"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "183-11-97 Vtec"
+      ],
+      "description": "The Appellant Group appealed the Town of Manchester permit decision; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "A group of interested persons (the Appellant Group) appealed from a decision on a Town of Manchester permit"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "1998-11-12",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "183-11-97 Vtec"
+      ],
+      "description": "Order on H.B. Partners' motion for a protective order limiting the Appellant Group's sanctions discovery; sanctions issues postponed pending the merits.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "The Court had issued an order on November 12, 1998 (Athe November 1998 Order@) with respect to that motion."
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "1999-02",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "183-11-97 Vtec"
+      ],
+      "description": "Consent order resolving the merits of the appeal (sanctions motions remained).",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "The merits of the appeal were resolved by a consent order filed in February of 1999."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2000-03-29",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "183-11-97 Vtec"
+      ],
+      "description": "Decision and order on the scope of discovery on the motions for sanctions, limiting discovery on topics 2 and 3 and ordering scheduling filings by April 10, 2000.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 7,
+        "quote": "Done at Barre, Vermont, this 29th day of March, 2000."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "1998-11-12",
+      "relation": "on_or_before",
+      "description": "The November 12, 1998 order on a motion in this appeal shows the appeal existed by then (a motion was also made in October 1998, undated by day).",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "The Court had issued an order on November 12, 1998"
+       }
+      ]
+     },
+     "end": {
+      "date": "2000-03-29",
+      "relation": "on_or_after",
+      "description": "The March 29, 2000 discovery order shows the sanctions proceedings still pending.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 7,
+        "quote": "Done at Barre, Vermont, this 29th day of March, 2000."
+       }
+      ]
+     },
+     "note": "Filing date not stated; the merits ended by consent order in February 1999 but sanctions motions continued, so the review chain had not concluded by the last observed order.",
+     "kind": "at_least",
+     "days": 503
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [],
+    "appeal_review": {
+     "standard": "unknown",
+     "evidence": []
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "183-11-97 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Clearly an appeal of a Town of Manchester permit, but the only document never describes the Walker II project, so housing is unknown and the case is uncertain."
+  },
+  {
+   "field": "municipal_appeal",
+   "confidence": "high",
+   "note": "The Appellant Group appealed a decision on a Town of Manchester permit."
+  },
+  {
+   "field": "housing",
+   "confidence": "high",
+   "note": "Nothing in the document says what Walker II is (housing, commercial or otherwise)."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "A permit was issued to the applicant and the appellants opposed it; whether conditions were attached is not stated, so approved rather than approved_with_conditions."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Merits resolved by consent order in February 1999, but sanctions motions were still pending with filings due April 10, 2000, so ongoing."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "The consent order's terms are not given, so the latest authorization is unknown."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The merits were settled by consent order and the document never says how the court heard the appeal."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Start on or before the November 12, 1998 order (earliest exact date; an October 1998 motion has no day); end on or after the March 29, 2000 order since sanctions remained pending. at_least 503 days."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "high",
+   "note": "Grounds of the merits appeal are not described."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "\"Sparkman, et al.\" names an unknown number of appellants"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:47:34Z",
+   "note": "Uncertain: Manchester permit appeal over the undescribed Walker II project; sanctions-discovery order only."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants unknown: et al."
+  }
+ ]
+}

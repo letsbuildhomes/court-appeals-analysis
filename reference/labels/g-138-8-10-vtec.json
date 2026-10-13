@@ -1,0 +1,592 @@
+{
+  "case": "g-138-8-10-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-138-8-10-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Marc Wood appealed Hartford ZBA decisions, including one upholding the return as incomplete of his application to construct and use a single-family dwelling on the former diner parcel; the docket also covers a wall application and an NOV.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 5,
+          "page": 1,
+          "quote": "Docket No. 138-8-10 Vtec concerns Marc Wood’s (“Appellant”) appeal from decisions rejecting his two recent zoning permit applications"
+        },
+        {
+          "doc": 5,
+          "page": 2,
+          "quote": "Appellant now seeks authority to construct and use a single-family dwelling on the Diner Parcel."
+        },
+        {
+          "doc": 5,
+          "page": 11,
+          "quote": "his appeal of the ZBA decision on these three applications was assigned Docket No. 138-8-10 Vtec"
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "138-8-10 Vtec",
+        "project": {
+          "description": "Application #13-10 to construct and use a single-family dwelling on the Diner Parcel (1472 Maple Street), whether by remodeling the fire-damaged former Hartford Diner commercial building or replacing it; the same appeal also covers Application #12-10 for the as-built retaining wall and the March 19, 2010 notice of violation.",
+          "municipality": "Hartford",
+          "proposed_units": 1,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 5,
+              "page": 10,
+              "quote": "By this application, Appellant sought authority to construct and use a single-family dwelling on the Diner Parcel"
+            },
+            {
+              "doc": 5,
+              "page": 10,
+              "quote": "It is unclear to the Court whether Appellant intended to remodel the former Hartford Diner building into a single-family dwelling"
+            },
+            {
+              "doc": 5,
+              "page": 2,
+              "quote": "located at 1472 Maple Street and held solely in Marc Wood’s name"
+            },
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "(Appeal from Town of Hartford Zoning Board of Adjustment decision)"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "Hartford ZBA decisions upholding the Zoning Administrator: Applications #12-10 (retaining wall) and #13-10 (single-family dwelling) were incomplete and returned, and the 2010 NOV had a sufficient factual and legal basis.",
+          "date": "2010-07-19",
+          "outcome": "other",
+          "evidence": [
+            {
+              "doc": 5,
+              "page": 11,
+              "quote": "issued three separate decisions on Appellant’s appeals on July 19, 2010."
+            },
+            {
+              "doc": 5,
+              "page": 11,
+              "quote": "The ZBA concluded that Application #13-10 was incomplete, that there was a sufficient factual and legal basis for the 2010 NOV"
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Marc Wood",
+            "relationship": "developer",
+            "seeks": "other",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Currently before the Court in Docket No. 138-8-10 Vtec is an appeal by Mr. Wood"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Filed By: Paul S. Gillies, Attorney for Appellant/Applicant Marc Wood"
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "Wood challenged the incompleteness rulings and the NOV: whether a permit was required for the wall, whether engineering certification and independent technical review were required, whether the club use was discontinued, whether the NOV was proper, and whether the technical review cost policy was enforceable.",
+          "involved": "no",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 2,
+              "quote": "whether the use of the club lot as a “private club” has been discontinued under the Town’s standards addressing nonconforming uses; whether a permit is required for the retaining wall or walls"
+            },
+            {
+              "doc": 1,
+              "page": 2,
+              "quote": "whether independent technical review of the retaining wall or walls is required and whether such review has already been completed; and whether the Town’s Notice of Violation is proper"
+            }
+          ],
+          "central": "not_applicable",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "denied",
+          "description": "Both applications, including the single-family dwelling, were deemed incomplete and the NOV upheld; affirmed by the Vermont Supreme Court. Later post-judgment contempt proceedings enforced the judgment; no review of the municipal decision remains pending.",
+          "evidence": [
+            {
+              "doc": 11,
+              "page": 1,
+              "quote": "This Court denied the applications that were the subject of Docket No. 138-8-10 Vtec"
+            },
+            {
+              "doc": 5,
+              "page": 21,
+              "quote": "We therefore DEEM BOTH APPLICATIONS INCOMPLETE."
+            },
+            {
+              "doc": 13,
+              "page": 4,
+              "quote": "That Decision closed this appeal."
+            },
+            {
+              "doc": 15,
+              "page": 2,
+              "quote": "Though the matters are resolved, these closed Dockets have been revisited periodically"
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "2010-08-17",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec"
+            ],
+            "description": "Wood appealed the ZBA decisions on the NOV and both applications.",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 4,
+                "quote": "On August 17, 2010, the Woods appealed the NOV and the permit denials in a single appeal to this Court."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2012-02-22",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Merits decision after trial: both applications deemed incomplete, NOV upheld.",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 23,
+                "quote": "Done at Berlin, Vermont, this 22nd day of February, 2012."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2012-03-27",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Corrected merits decision fixing typographical errors without changing the result.",
+            "evidence": [
+              {
+                "doc": 6,
+                "page": 1,
+                "quote": "None of these corrections affect the substantive Findings, Conclusions or Order."
+              },
+              {
+                "doc": 6,
+                "page": 23,
+                "quote": "this 27th day of March, 2012."
+              }
+            ]
+          },
+          {
+            "kind": "further_appeal",
+            "date": "2012-04-25",
+            "court_or_body": "Vermont Supreme Court",
+            "dockets": [
+              "138-8-10 Vtec"
+            ],
+            "description": "Appeal to the Vermont Supreme Court.",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 4,
+                "quote": "The Woods appealed to the Vermont Supreme Court on April 25, 2012."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2013-06-14",
+            "court_or_body": "Vermont Supreme Court",
+            "dockets": [
+              "138-8-10 Vtec"
+            ],
+            "description": "Supreme Court affirmed (2013 VT 40).",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 4,
+                "quote": "The Supreme Court issued its Decision affirming this Court on June 14, 2013."
+              }
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2013-08-12",
+            "court_or_body": "Vermont Supreme Court",
+            "dockets": [
+              "138-8-10 Vtec"
+            ],
+            "description": "Judgment became final after reargument was denied.",
+            "evidence": [
+              {
+                "doc": 7,
+                "page": 1,
+                "quote": "became final on August 12, 2013, after the Vermont Supreme Court issued its affirmation and denied Defendant Wood’s motion for reargument"
+              }
+            ]
+          },
+          {
+            "kind": "reopening",
+            "date": "2014-05-30",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Town moved to enforce the judgment and for contempt.",
+            "evidence": [
+              {
+                "doc": 7,
+                "page": 1,
+                "quote": "Title: Motion to Enforce and for Contempt Filed: May 30, 2014"
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2014-08-12",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Woods held in contempt; Wood's Rule 60(b)(3) motion denied.",
+            "evidence": [
+              {
+                "doc": 7,
+                "page": 2,
+                "quote": "we find both Mr. and Mrs. Wood in CONTEMPT of this Court’s March 27, 2012 Corrected Judgment Order"
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2017-04-03",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Revised post-judgment decision: further contempt, removal of the Diner remnants ordered.",
+            "evidence": [
+              {
+                "doc": 12,
+                "page": 9,
+                "quote": "Electronically signed on April 3, 2017 at Newfane, Vermont"
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2018-09-19",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Wood's motion for relief from the 2017 decision denied; matters re-closed.",
+            "evidence": [
+              {
+                "doc": 14,
+                "page": 19,
+                "quote": "we DENY Mr. Wood’s motion for relief from our 2017 Revised Decision. As such, we re-close these matters."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2020-03-26",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "138-8-10 Vtec",
+              "1-1-11 Vtec"
+            ],
+            "description": "Wood held in contempt again; wall removal and slope stabilization ordered by September 30, 2020.",
+            "evidence": [
+              {
+                "doc": 15,
+                "page": 5,
+                "quote": "we hold Mr. Wood in CONTEMPT of the 2012 and 2017 Orders."
+              },
+              {
+                "doc": 15,
+                "page": 6,
+                "quote": "Electronically signed on March 26, 2020 at Brattleboro, Vermont"
+              }
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2010-08-17",
+            "relation": "exact",
+            "description": "Appeal filed with the Environmental Court.",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 4,
+                "quote": "On August 17, 2010, the Woods appealed the NOV and the permit denials in a single appeal to this Court."
+              }
+            ]
+          },
+          "end": {
+            "date": "2013-08-12",
+            "relation": "exact",
+            "description": "Judgment became final after the Supreme Court affirmed and denied reargument.",
+            "evidence": [
+              {
+                "doc": 7,
+                "page": 1,
+                "quote": "became final on August 12, 2013, after the Vermont Supreme Court issued its affirmation and denied Defendant Wood’s motion for reargument"
+              }
+            ]
+          },
+          "note": "Ends at finality of the review chain; later post-judgment contempt proceedings (2014-2020) enforced the judgment and are not counted.",
+          "kind": "exact",
+          "days": 1091
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "1-1-11 Vtec",
+            "relationship": "Town's enforcement action on the same NOV, consolidated for trial and decided together",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 1,
+                "quote": "Docket No. 1-1-11 Vtec concerns the Town’s prosecution of Marc and Susan Wood based on that NOV."
+              }
+            ]
+          },
+          {
+            "docket": "unknown",
+            "relationship": "Vermont Supreme Court appeal, affirmed as 2013 VT 40",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 1,
+                "quote": "Respondent appealed that Decision to the Vermont Supreme Court, which affirmed our Decision."
+              }
+            ]
+          },
+          {
+            "docket": "72-3-00 Vtec",
+            "relationship": "earlier Town enforcement action about the wall",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 3,
+                "quote": "Town of Hartford v. Wood, Docket No. 72-3-00 Vtec. This enforcement action was filed on March 30, 2000"
+              }
+            ]
+          },
+          {
+            "docket": "91-5-00 Vtec",
+            "relationship": "earlier appeal of a prior NOV, consolidated with 72-3-00 Vtec",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 5,
+                "quote": "(In re Appeal of Marc and Susan Wood, Docket No. 91-5-00 Vtec)"
+              }
+            ]
+          },
+          {
+            "docket": "219-5-00 Wrcv",
+            "relationship": "easement dispute consolidated with 72-3-00 Vtec",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 5,
+                "quote": "a property easement dispute between the Woods and the Town that was originally filed in Windsor Superior Court"
+              }
+            ]
+          },
+          {
+            "docket": "121-7-03 Vtec",
+            "relationship": "earlier appeal of a permit denial for the as-built wall",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 3,
+                "quote": "Mr. and Mrs. Wood filed this appeal on July 14, 2003 from a denial of a permit for their as-built retaining wall"
+              }
+            ]
+          },
+          {
+            "docket": "185-10-04 Vtec",
+            "relationship": "earlier appeal concerning the same development",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 3,
+                "quote": "Docket No. 185-10-04 Vtec. On October 6, 2004, Marc Wood filed this appeal"
+              }
+            ]
+          },
+          {
+            "docket": "174-8-05 Vtec",
+            "relationship": "earlier appeal on incomplete permit applications",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 8,
+                "quote": "See In re Appeal of Wood, Nos. 185-10-04 Vtec and 174-8-05 Vtec"
+              }
+            ]
+          },
+          {
+            "docket": "81-4-07 Vtec",
+            "relationship": "earlier appeal of a denied permit amendment",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 3,
+                "quote": "In re Wood Zoning Permit Amendment, Docket No. 81-4-07 Vtec."
+              }
+            ]
+          },
+          {
+            "docket": "176-8-07 Vtec",
+            "relationship": "earlier appeal of a denied certificate of occupancy",
+            "evidence": [
+              {
+                "doc": 13,
+                "page": 3,
+                "quote": "In re Wood Certificate of Occupancy, Docket No. 176-8-07 Vtec."
+              }
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {
+              "doc": 5,
+              "page": 1,
+              "quote": "These proceedings were consolidated for trial, which was conducted over three days. The Court accompanied the parties on a site visit prior to trial."
+            },
+            {
+              "doc": 5,
+              "page": 2,
+              "quote": "zoning permit applications Appellant submitted for consideration that are now the subject of the combined appeal in Docket No. 138-8-10 Vtec."
+            },
+            {
+              "doc": 5,
+              "page": 2,
+              "quote": "Based upon the evidence admitted at trial, including that which was put into context by the site visit"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "138-8-10 Vtec": "all"
+    }
+  },
+  "judgments": [
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "Appeal of ZBA decisions (municipal). One of the three decisions concerns a permit application for a single-family dwelling on a parcel with a fire-damaged commercial diner: either new construction or a conversion creating housing, so new housing even though the NOV and wall parts are not."
+    },
+    {
+      "field": "housing",
+      "confidence": "medium",
+      "note": "The housing application is one of three subjects (with a wall application and an NOV), and the court notes it is unclear whether the diner would be remodeled or replaced; either way a dwelling unit is created where there was a commercial building."
+    },
+    {
+      "field": "units",
+      "confidence": "medium",
+      "note": "One single-family dwelling; not a replacement of housing (the existing building was a commercial diner)."
+    },
+    {
+      "field": "lots",
+      "confidence": "medium",
+      "note": "No subdivision is mentioned, but the documents never state that none is proposed, so unknown per the lots rule."
+    },
+    {
+      "field": "decision_outcome",
+      "confidence": "high",
+      "note": "ZBA upheld incompleteness rulings (and the NOV); an incompleteness ruling is 'other', so the appellant seeks 'other'."
+    },
+    {
+      "field": "appellants",
+      "confidence": "medium",
+      "note": "Most documents call it Marc Wood's appeal; one later order says 'the Woods appealed', but Susan Wood did not participate below or at trial, and Docket 1-1-11 is the Town's enforcement action (no appellants), so only Marc Wood is listed."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "The Statement of Questions (as listed in the summary judgment order) turns on whether permits and engineering certification/technical review were required, discontinuance of a nonconforming use, NOV validity and enforceability of a cost policy: fixed rules, facts and legal questions, not evaluative standards."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "medium",
+      "note": "No explicit 'de novo' phrase, but the court held a three-day evidentiary trial with a site visit, made its own findings on the applications and itself deemed them incomplete; no on-the-record procedures mentioned."
+    },
+    {
+      "field": "permission",
+      "confidence": "medium",
+      "note": "Applications deemed incomplete rather than denied on the merits, but later orders say the court 'denied the applications' and the diner building was later ordered removed; no authorization observed."
+    },
+    {
+      "field": "litigation",
+      "confidence": "medium",
+      "note": "Supreme Court affirmed 2013 and the court calls the matters resolved/closed; later post-judgment contempt proceedings (through March 2020) enforce the judgment rather than review the municipal decision."
+    },
+    {
+      "field": "duration",
+      "confidence": "medium",
+      "note": "Start: filed August 17, 2010 (exact, June 2018 recusal order). End: judgment final August 12, 2013 after affirmance (June 14, 2013) and denial of reargument. If post-judgment proceedings counted, the end would be on or after 2020-03-26."
+    },
+    {
+      "field": "restrictions",
+      "confidence": "medium",
+      "note": "The cease-development and removal injunctions were relief granted to the Town in enforcement Docket 1-1-11 Vtec (per the post-judgment decisions), so not attributed to this docket."
+    },
+    {
+      "field": "related",
+      "confidence": "high",
+      "note": "1-1-11 Vtec decided jointly; Supreme Court appeal docket number not given; prior Wood dockets about the same parcels are named."
+    }
+  ],
+  "disputed": [],
+  "questions": [
+    "Should post-judgment contempt and enforcement proceedings captioned in this docket (2014-2020) extend its duration and keep litigation ongoing? This label ends it at the 2013 final judgment."
+  ],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T05:48:49Z",
+      "note": "Labeled from all 15 documents; in scope for the single-family dwelling application; de novo trial."
+    }
+  ]
+}

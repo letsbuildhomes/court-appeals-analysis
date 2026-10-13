@@ -1,0 +1,624 @@
+{
+ "g-198-9-08-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "The issues before the Planning Commission flow from Appellee-Applicants",
+   "doc": 1,
+   "page": 2
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "application for an amendment to the final subdivision plat for a revised location of the septic system and house",
+   "doc": 1,
+   "page": 2,
+   "note": "Docket concerns the revised location of the house (a proposed house) under a subdivision plat amendment; the proposal is not described in detail for this docket. Medium confidence; could be unknown."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "application for an amendment to the final subdivision plat for a revised location of the septic system and house",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "because this appeal is de novo",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_outcome": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "mediation is to be completed, and a report of the results of the mediation submitted to the Court, by January 7, 2009",
+   "doc": 1,
+   "page": 2
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": {
+    "count": 1,
+    "relationship": "neighbor",
+    "representation": "unknown"
+   },
+   "quote": "the parties are neighboring landowners",
+   "doc": 1,
+   "page": 1,
+   "note": "Appellant is not named for this docket; Lamb is the appellant in the sibling docket. Relationship inferred from neighbors statement."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2008-10-06",
+     "kind": "on_or_before"
+    },
+    "quote": "At an earlier conference, on October 6, 2008",
+    "doc": 1,
+    "page": 1
+   },
+   "end": {
+    "value": {
+     "date": "2008-11-24",
+     "kind": "on_or_after"
+    },
+    "quote": "held a conference and motion hearing by telephone in these three matters on November 24, 2008",
+    "doc": 1,
+    "page": 1
+   }
+  }
+ },
+ "g-169-8-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "They plan to construct a single family dwelling with attached apartment on the property.",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "They plan to construct a single family dwelling with attached apartment on the property.",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "approved_with_conditions",
+   "quote": "The Planning Commission approved the application, but with conditions",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_date": {
+   "value": "2002-07-23",
+   "quote": "appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe",
+   "doc": 1,
+   "page": 1,
+   "note": "Two decisions are named (also Aug 23, 2002, probably the sibling docket 217-9-02); which belongs to this docket is not stated. Low confidence."
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "whether and when to set this matter for trial",
+   "doc": 1,
+   "page": 3
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "The Planning Commission approved the application, but with conditions",
+   "doc": 1,
+   "page": 2
+  },
+  "proposed_units": {
+   "value": 2,
+   "quote": "single family dwelling with attached apartment",
+   "doc": 1,
+   "page": 1,
+   "note": "House plus attached apartment counted as 2; could be argued 1."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": {
+    "count": 2,
+    "relationship": "developer",
+    "representation": "represented"
+   },
+   "quote": "Appellants are represented by",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Decision resolves only a preclusion question (Question 1); conditions concern viewshed but contention is res judicata/collateral estoppel."
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2002-12-13",
+     "kind": "on_or_before"
+    },
+    "quote": "Done at Barre, Vermont, this 13th day of December, 2002.",
+    "doc": 1,
+    "page": 3
+   },
+   "end": {
+    "value": {
+     "date": "2002-12-13",
+     "kind": "on_or_after"
+    },
+    "quote": "Done at Barre, Vermont, this 13th day of December, 2002.",
+    "doc": 1,
+    "page": 3,
+    "note": "Filing date not stated; appeal from July/Aug 2002 decision(s)."
+   }
+  }
+ },
+ "g-110-6-04-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appeal from decisions of the Development Review Board (DRB) of the Town of Berkshire",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "into six2[2] lots as a PRD",
+   "doc": 1,
+   "page": 2,
+   "note": "Planned Residential Development subdivision into house lots; no houses described. Treated as housing by the subdivision-creating-house-lots rule."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "into six2[2] lots as a PRD",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "other",
+   "quote": "not accept [the] site plan application at this time",
+   "doc": 1,
+   "page": 3,
+   "note": "Docket 110-6-04 challenges the DRB refusal to accept/hear the application, not a merits denial."
+  },
+  "decision_date": {
+   "value": "2004-05-20",
+   "quote": "On June 18, 2004, Appellants appealed to this Court from all",
+   "doc": 1,
+   "page": 3,
+   "note": "Refusal at the May 20, 2004 DRB hearing (stated on p.1 and p.3)."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This decision concludes Docket No. 110-6-04 Vtec.",
+   "doc": 1,
+   "page": 14
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "No authorization in this docket; the merits denial (Jan 27, 2005) belongs to docket 44-2-05."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": 6,
+   "quote": "into six2[2] lots as a PRD",
+   "doc": 1,
+   "page": 2,
+   "note": "Footnote 2 says it may actually be a seven-lot subdivision (6 plus the 52.6-acre remainder); 6 is the stated count."
+  },
+  "appellants": {
+   "value": {
+    "count": 2,
+    "relationship": "developer",
+    "representation": "represented"
+   },
+   "quote": "Appellants are represented by Eric A. Poehlmann, Esq.",
+   "doc": 1,
+   "page": 1,
+   "note": "James and Janet Harrison"
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "lack of prior Act 250 approval for the project does not in and of itself render a site plan application incomplete",
+   "doc": 1,
+   "page": 14
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2004-06-18",
+     "kind": "exact"
+    },
+    "quote": "On June 18, 2004, Appellants appealed to this Court from all",
+    "doc": 1,
+    "page": 3
+   },
+   "end": {
+    "value": {
+     "date": "2005-11-29",
+     "kind": "exact"
+    },
+    "quote": "Done at Berlin, Vermont, this 29th day of November, 2005.",
+    "doc": 1,
+    "page": 15,
+    "note": "Decision concludes this docket; no further appeal shown."
+   }
+  }
+ },
+ "g-116-6-09-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Development Review Board (DRB) of the Town of Williston",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "consisting of four new single-family dwellings, the existing Hood single-family dwelling, and two duplex buildings",
+   "doc": 1,
+   "page": 5
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "consisting of four new single-family dwellings, the existing Hood single-family dwelling, and two duplex buildings",
+   "doc": 1,
+   "page": 5
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "whether the Court in this de novo appeal",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_outcome": {
+   "value": "approved_with_conditions",
+   "quote": "granted Discretionary Permit approval to Applicants for a nine-unit Planned Residential Development (PRD), with conditions",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_date": {
+   "value": "2009-04-28",
+   "quote": "On April 28, 2009, based on the growth management allocations",
+   "doc": 1,
+   "page": 11,
+   "note": "Footnote 3 on p.2 calls the minutes 'April 29, 2009'; p.2 and p.11 say April 28."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This Decision and Order appears to conclude both appeals",
+   "doc": 1,
+   "page": 25,
+   "note": "Says 'appears to'; final judgment order to be entered effective March 26, 2010 (not observed)."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "In approving each project, the DRB imposed several conditions",
+   "doc": 1,
+   "page": 11
+  },
+  "proposed_units": {
+   "value": 8,
+   "quote": "the eight new residential units (four single-family dwellings, and",
+   "doc": 1,
+   "page": 10,
+   "note": "Nine-unit PRD includes the existing Hood dwelling; 8 are new. 9 if existing counted."
+  },
+  "proposed_lots": {
+   "value": 2,
+   "quote": "the 9-Unit Application proposes to subdivide the 7.2-acre overall project property into two lots",
+   "doc": 1,
+   "page": 4,
+   "note": "Subdivision of the project property into two lots (one holds existing duplex and barn); whether both count as new residential building lots is a judgment."
+  },
+  "appellants": {
+   "value": {
+    "count": 3,
+    "relationship": "developer",
+    "representation": "represented"
+   },
+   "quote": "are represented by L. Randolph Amis, Esq.",
+   "doc": 1,
+   "page": 2,
+   "note": "Dana Hood, Brenda Hood and Jeff Atwood (Hood and Atwood as two 'Applicants'; could be counted as 2)."
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "address only the authority of the DRB",
+   "doc": 1,
+   "page": 3,
+   "note": "Appeal challenges only the authority to impose conditions (legal question)."
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2009-11-20",
+     "kind": "on_or_before"
+    },
+    "quote": "Docket No. 116-6-09 Vtec, at 2 (Nov. 20, 2009)",
+    "doc": 1,
+    "page": 20
+   },
+   "end": {
+    "value": {
+     "date": "2010-03-18",
+     "kind": "on_or_after"
+    },
+    "quote": "Done at Berlin, Vermont, this 18th day of March, 2010.",
+    "doc": 1,
+    "page": 25,
+    "note": "Filing date of appeal not stated; Town's motion in Oct 2009 is also referenced for the sibling docket."
+   }
+  }
+ },
+ "g-143-7-08-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court",
+   "doc": 2,
+   "page": 8
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "a permit to convert the main apartment building back to four units and a permit authorizing the use of the rear building as a residential unit",
+   "doc": 2,
+   "page": 8,
+   "note": "Conversion of an existing rear building to a dwelling unit (after-the-fact; use enjoined by court), not construction. Borderline: could be 'no' (occupancy/enforcement history) or unknown. Low-medium confidence."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "a permit to convert the main apartment building back to four units and a permit authorizing the use of the rear building as a residential unit",
+   "doc": 2,
+   "page": 8
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "The DRB denied their application and the Benoits appealed to the Environmental Court",
+   "doc": 2,
+   "page": 8
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "DRB denial date not given; after Hayford I (Feb 2007) and before 2009 stipulated judgment."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "That agreement was entered as a stipulated judgment and order by the Environmental Court.",
+   "doc": 2,
+   "page": 8,
+   "note": "2009 stipulated judgment; docket reopened 2021 by Rule 60 motion, denied Apr 2021 and Oct 2021."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "allowed the Benoits to use the rear building as a residential unit so long as they only rented four units in the main building",
+   "doc": 2,
+   "page": 8
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "a permit to convert the main apartment building back to four units and a permit authorizing the use of the rear building as a residential unit",
+   "doc": 2,
+   "page": 8,
+   "note": "One unit (rear building) is added; main building to return to four units. Low confidence."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": {
+    "count": 2,
+    "relationship": "developer",
+    "representation": "represented"
+   },
+   "quote": "Appellants are represented by Michael S. Gawne, Esq.",
+   "doc": 1,
+   "page": 2,
+   "note": "Gregory and Deborah Benoit (owners/applicants). Representation is stated for 2021 filings; for the 2008 appeal not stated."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2009-02-05",
+     "kind": "on_or_before"
+    },
+    "quote": "Envtl. Ct. Feb. 5, 2009) (Wright, J.)",
+    "doc": 2,
+    "page": 8
+   },
+   "end": {
+    "value": {
+     "date": "2021-10-14",
+     "kind": "exact"
+    },
+    "quote": "Therefore, that motion is DENIED.",
+    "doc": 2,
+    "page": 16,
+    "note": "Last order in the reopened proceedings (signed Oct 14, 2021, p.17); original conclusion was the Feb 5, 2009 stipulated judgment. Appeal filing date not stated."
+   }
+  }
+ },
+ "g-138-8-10-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "rejecting his two recent zoning permit applications",
+   "doc": 5,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "Appellant now seeks authority to construct and use a single-family dwelling on the Diner Parcel.",
+   "doc": 5,
+   "page": 2,
+   "note": "Docket also covers a retaining-wall permit and an NOV, but includes appeal of the single-family dwelling application. Unclear whether remodel of the diner building or new house (fn 9, p.10). Medium-low confidence."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "Appellant now seeks authority to construct and use a single-family dwelling on the Diner Parcel.",
+   "doc": 5,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "These proceedings were consolidated for trial, which was conducted over three days.",
+   "doc": 5,
+   "page": 1,
+   "note": "No explicit 'de novo' wording anywhere; inferred from trial with site visit and the court's own findings of fact."
+  },
+  "decision_outcome": {
+   "value": "other",
+   "quote": "The ZBA concluded that Application #13-10 was incomplete",
+   "doc": 5,
+   "page": 11,
+   "note": "ZBA upheld the zoning administrator's returning the dwelling application as incomplete; also upheld NOV and wall application incompleteness."
+  },
+  "decision_date": {
+   "value": "2010-07-19",
+   "quote": "appeals on July 19, 2010",
+   "doc": 5,
+   "page": 11
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "became final on August 12, 2013",
+   "doc": 7,
+   "page": 1,
+   "note": "Supreme Court affirmed (2013 VT 40); post-judgment enforcement (contempt) continued through 2020 under the same caption, mostly docket 1-1-11."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "This Court denied the applications that were the subject of Docket No. 138-8-10 Vtec",
+   "doc": 15,
+   "page": 1,
+   "note": "Court 'deemed incomplete' the applications (doc 5 p.21), later characterized as denied."
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "Appellant now seeks authority to construct and use a single-family dwelling on the Diner Parcel.",
+   "doc": 5,
+   "page": 2
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": {
+    "count": 1,
+    "relationship": "developer",
+    "representation": "represented"
+   },
+   "quote": "Docket No. 138-8-10 Vtec concerns Marc Wood",
+   "doc": 5,
+   "page": 1,
+   "note": "Marc Wood, owner/applicant; counsel Paul Gillies (doc 1 p.1 'Attorney for Appellant/Applicant Marc Wood'). Susan Wood did not participate below (doc 5 fn 1)."
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "Application #13-10 is materially deficient.",
+   "doc": 5,
+   "page": 21,
+   "note": "Turns on missing engineering certifications required by regulations."
+  },
+  "duration": {
+   "start": {
+    "value": {
+     "date": "2011-02-18",
+     "kind": "on_or_before"
+    },
+    "quote": "Filed: February 18, 2011",
+    "doc": 1,
+    "page": 1
+   },
+   "end": {
+    "value": {
+     "date": "2013-08-12",
+     "kind": "exact"
+    },
+    "quote": "became final on August 12, 2013",
+    "doc": 7,
+    "page": 1,
+    "note": "Appeal filing date not stated (ZBA decisions July 19, 2010). Post-judgment enforcement continued to 2020."
+   }
+  }
+ }
+}

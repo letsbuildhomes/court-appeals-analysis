@@ -1,0 +1,30 @@
+{
+  "case": "g-114-7-99-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-114-7-99-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Docket 114-7-99 Vtec appeals the ZBA's denial of a stay of enforcement of a notice of violation for operating a commercial mobile home display and sales business without a permit. It is a municipal appeal, but it concerns a nonresidential commercial use and enforcement of a notice of violation, not permission for new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "In Docket No. 114-7-99 Vtec, Defendant-Appellants appealed from a decision of the ZBA denying their request for a stay of enforcement."},
+        {"doc": 1, "page": 1, "quote": "These four consolidated cases all involve a mobile home display and sales facility"},
+        {"doc": 1, "page": 6, "quote": "citing him for carrying on a commercial business without a permit, directing him to cease operation and take corrective action within seven days"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "The shared decision covers four dockets; 114-7-99 is only the appeal of the ZBA's denial of a stay of enforcement of the commercial-use notice of violation (decided in 113-7-99). The subject is a mobile home sales business (commercial use), and the docket is a notice-of-violation enforcement matter, both non-housing under the guide. The single permitted double-wide residence is not at issue in this docket. The court held the docket moot and entered final judgment."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal from a ZBA decision (denial of a stay of enforcement)."},
+    {"field": "housing", "confidence": "high", "note": "Commercial mobile home display and sales use; notice-of-violation enforcement; no new housing permission sought."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:45Z", "note": "Excluded: appeal of ZBA denial of a stay of enforcement of an NOV against a commercial mobile home sales business."}
+  ]
+}

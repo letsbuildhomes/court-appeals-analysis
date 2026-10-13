@@ -1,0 +1,30 @@
+{
+  "case": "g-132-6-00-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-132-6-00-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "A neighbor appealed the Burlington ZBA's affirmance of the Zoning Administrator's refusal to take enforcement action against seven students renting an existing single-family house. It is a municipal appeal, but it concerns occupancy of an existing house without construction, which is not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellant John Mentes appealed from the May 31, 2000 decision of the then-Zoning Board of Adjustment (ZBA) of the City of Burlington"},
+        {"doc": 1, "page": 1, "quote": "affirming the Zoning Administrator= s decision not to take enforcement action1 against Appellees Charles and Cynthia Burns"},
+        {"doc": 1, "page": 1, "quote": "Appellees own a seven-bedroom single-family residence at 36 North Willard Street"},
+        {"doc": 1, "page": 1, "quote": "Appellees rented the house as a whole, that is, not divided into separate apartments or rented out as separate rooms, to seven students"},
+        {"doc": 2, "page": 2, "quote": "the shared student housing use of Appellees= house is prohibited under the 1999 ordinance, concludes the above-captioned appeal."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a ZBA decision upholding the refusal to enforce against students renting an existing house; GUIDE's table treats rooms let to students or change of occupancy without construction as not new housing, so excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The docket appeals the City of Burlington ZBA's May 31, 2000 decision."},
+    {"field": "housing", "confidence": "high", "note": "Existing seven-bedroom house; dispute is only whether occupancy by seven unrelated students is permitted. No construction or new units."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: enforcement appeal over student occupancy of an existing house, not new housing."}]
+}

@@ -1,0 +1,132 @@
+{
+  "case": "g-88-4-02-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-88-4-02-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Neighbors Blair and Devlin appealed the variance granted to Green Mountain Habitat for Humanity to build a new single-family house on Lot 9 in Burlington; a municipal variance approval for new housing.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "That appeal was put on hold while Green Mountain Habitat for Humanity applied for and was granted a variance."},
+        {"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision in Docket No. 88-4-02 Vtec."},
+        {"doc": 1, "page": 1, "quote": "whether the construction of the proposed house on Lot 9 meets all of the five variance criteria"},
+        {"doc": 1, "page": 3, "quote": "to construct a single-family residence on Lot 9"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "88-4-02 Vtec",
+        "project": {
+          "description": "Variance for Green Mountain Habitat for Humanity to build a new 1 1/2-story, four-bedroom single-family house on undersized corner Lot 9 (44 Batchelder Street).",
+          "municipality": "Burlington",
+          "proposed_units": 1,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 3, "quote": "to construct a single-family residence on Lot 9"},
+            {"doc": 1, "page": 3, "quote": "four- bedroom house, measuring 24' x 42'"},
+            {"doc": 1, "page": 1, "quote": "decision of the City of Burlington Development Review Board (DRB)"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "Grant of a variance to build the proposed house on nonconforming Lot 9 (granting body and date not stated).",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "applied for and was granted a variance"},
+            {"doc": 1, "page": 4, "quote": "the parties did not supply either the application for or the decision granting the variance"}
+          ]
+        },
+        "appellants": [
+          {"name": "Brian W. Blair", "relationship": "neighbor", "seeks": "overturn_approval", "representation": "represented",
+           "evidence": [
+             {"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision in Docket No. 88-4-02 Vtec."},
+             {"doc": 1, "page": 1, "quote": "Mr. Blair and Ms. Devlin are represented by Robert J. Perry"},
+             {"doc": 1, "page": 2, "quote": "Sellers sold Lots 7 and 8, including the house, to Mr. Blair and Ms. Devlin"}
+           ]},
+          {"name": "Danielle C. Devlin", "relationship": "neighbor", "seeks": "overturn_approval", "representation": "represented",
+           "evidence": [
+             {"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision in Docket No. 88-4-02 Vtec."},
+             {"doc": 1, "page": 1, "quote": "Mr. Blair and Ms. Devlin are represented by Robert J. Perry"},
+             {"doc": 1, "page": 2, "quote": "Sellers sold Lots 7 and 8, including the house, to Mr. Blair and Ms. Devlin"}
+           ]}
+        ],
+        "discretion": {
+          "description": "The adjoining owners contend the proposed house does not meet the five statutory and ordinance variance criteria; which criteria are disputed and how is not stated, though the court asks the parties to address whether the variance is the minimum that could provide relief.",
+          "involved": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "whether the construction of the proposed house on Lot 9 meets all of the five variance criteria"},
+            {"doc": 1, "page": 4, "quote": "whether whatever variance was requested is the minimum variance that could provide relief"}
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "ongoing",
+          "permission": "allowed",
+          "description": "The variance granted by the city is under appeal; the court has not yet ruled on the neighbors' summary judgment motion in this docket, with briefing still to be scheduled. (In the companion docket the court ruled Lot 9 had merged with neighboring lots.)",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "applied for and was granted a variance"},
+            {"doc": 1, "page": 5, "quote": "we will rule in this decision and order only on the motions filed in Docket No 19-1-02"},
+            {"doc": 1, "page": 4, "quote": "to discuss the briefing schedule on Lot 7 &amp; 8 Owners= Motion in Docket No. 88-4-02 Vtec"}
+          ]
+        },
+        "timeline": [
+          {"kind": "filing", "date": "unknown", "court_or_body": "Vermont Environmental Court", "dockets": ["88-4-02 Vtec"],
+           "description": "Blair and Devlin appeal the variance granted to Green Mountain Habitat for Humanity.",
+           "evidence": [{"doc": 1, "page": 1, "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision in Docket No. 88-4-02 Vtec."}]},
+          {"kind": "judgment", "date": "2002-12-12", "court_or_body": "Vermont Environmental Court", "dockets": ["19-1-02 Vtec", "88-4-02 Vtec"],
+           "description": "Decision on summary judgment rules only on the merger issue in the companion docket; the variance motion in this docket is deferred pending the applicant's response, with a telephone conference set for December 20, 2002.",
+           "evidence": [
+             {"doc": 1, "page": 5, "quote": "will allow Applicant to file a responsive memorandum on the variance case as soon as reasonably possible"},
+             {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 12th day of December, 2002."}
+           ]}
+        ],
+        "duration": {
+          "start": {"date": "2002-09-23", "relation": "on_or_before",
+                    "description": "By September 23, 2002 the variance case already had its own docket number, as the court notes a letter filed that day was not filed under it.",
+                    "evidence": [
+                      {"doc": 1, "page": 5, "quote": "Attorney Smith filed a letter on September 23, 2002 under only Docket No. 19-1-02"},
+                      {"doc": 1, "page": 5, "quote": "because that letter was not filed under the docket number of the variance case"}
+                    ]},
+          "end": {"date": "2002-12-12", "relation": "on_or_after",
+                  "description": "The December 12, 2002 decision leaves this docket's motion undecided and pending further briefing.",
+                  "evidence": [
+                    {"doc": 1, "page": 4, "quote": "Done at Barre, Vermont, this 12th day of December, 2002."},
+                    {"doc": 1, "page": 5, "quote": "we will rule in this decision and order only on the motions filed in Docket No 19-1-02"}
+                  ]},
+          "note": "Filing date not stated; start bounded by the September 23, 2002 letter that references the separately docketed variance case. No conclusion observed.",
+          "kind": "at_least",
+          "days": 80
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {"docket": "19-1-02 Vtec", "relationship": "Companion appeal by Green Mountain Habitat for Humanity of the DRB decision on its permit application for the same house; decided in the same shared decision.",
+           "evidence": [{"doc": 1, "page": 1, "quote": "In Docket No. 19-1-02 Vtec, Green Mountain Habitat for Humanity appealed from the December 18, 2001 decision"}]}
+        ],
+        "appeal_review": {"standard": "unknown", "evidence": []}
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"88-4-02 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Neighbors appeal a municipal variance granted for a new single-family house on Lot 9; new housing under the guide's table."},
+    {"field": "municipal_appeal", "confidence": "medium", "note": "The decision says only that the applicant 'was granted a variance' and the neighbors appealed; the granting body is not named, though the context (Burlington DRB proceedings) makes it a municipal decision."},
+    {"field": "review_standard", "confidence": "medium", "note": "No passage states whether the appeal is on the record or de novo; the court's request for the variance application and decision is suggestive but not established."},
+    {"field": "duration", "confidence": "medium", "note": "Start inferred from footnote 1: a September 23, 2002 letter was 'not filed under the docket number of the variance case', implying 88-4-02 existed then. End is the December 12, 2002 decision, which left this docket's motion pending. 80 days at least."},
+    {"field": "start", "confidence": "medium", "note": "See duration; the filing date itself is not given."},
+    {"field": "decision_outcome", "confidence": "high", "note": "Variance was granted; conditions, if any, not stated."},
+    {"field": "decision_date", "confidence": "high", "note": "Date of the variance grant not stated."},
+    {"field": "permission", "confidence": "medium", "note": "Latest observed authorization in this docket is the variance grant (allowed); the court has not ruled on it. The merger ruling against the applicant was in the companion docket 19-1-02 and is not carried here."},
+    {"field": "litigation", "confidence": "high", "note": "Court expressly deferred ruling on this docket's motion and scheduled briefing."},
+    {"field": "discretion_involved", "confidence": "low", "note": "Appeal turns on the five variance criteria, but the decision does not state which criteria are contested or their evaluative content; the court's 'minimum variance' remark is its own suggestion, not an established contention."},
+    {"field": "discretion_central", "confidence": "low", "note": "Follows discretion_involved = unknown."},
+    {"field": "lots", "confidence": "medium", "note": "House on an existing lot of record; no subdivision proposed, but the documents don't say so explicitly, so unknown per the guide."},
+    {"field": "appellants", "confidence": "high", "note": "Blair and Devlin, owners of adjoining Lots 7 and 8, represented by Robert J. Perry."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Labeled 88-4-02 Vtec (neighbors' appeal of variance for Habitat house) from the shared decision with 19-1-02 Vtec."}]
+}

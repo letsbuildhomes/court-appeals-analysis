@@ -1,0 +1,29 @@
+{
+  "case": "g-143-9-10-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-143-9-10-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Docket 143-9-10 Vtec appeals the District 4 Environmental Commission's refusal to reconsider its Act 250 Rule 34(E) ruling, a state Act 250 proceeding rather than a municipal land-use decision. The proposal is a 34-lot residential development, so housing is yes, but the appeal is not municipal.",
+      "municipal_appeal": "no",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "In re Fontaine Act 250 Reconsideration }       Docket No. 143-9-10 Vtec"},
+        {"doc": 1, "page": 1, "quote": "They also appealed from the District Commission’s subsequent decision declining to reconsider its decision, and the two appeals were consolidated."},
+        {"doc": 1, "page": 1, "quote": "appealed from a decision by the District 4 Environmental Commission (District Commission) ruling that Act 250 Rule 34(E) prevented its consideration"},
+        {"doc": 1, "page": 5, "quote": "Appellants seek partial findings under Act 250 Criterion 8(A) for a proposed 34-lot residential development"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "The only document is a consolidated decision for 12-1-10 Vtec and 143-9-10 Vtec; 143-9-10 Vtec is the appeal of the District 4 Environmental Commission's refusal to reconsider its Act 250 Rule 34(E) ruling. Act 250 appeals are not municipal appeals under the guide, so the case is excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The appealed body is the District 4 Environmental Commission acting under Act 250; no municipal board or officer decision is challenged."},
+    {"field": "housing", "confidence": "high", "note": "The application concerns partial findings for a proposed 34-lot residential development, which is new housing (house lots), though the Act 250 subject excludes the case regardless."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: Act 250 reconsideration appeal from the District Commission, not a municipal appeal."}]
+}

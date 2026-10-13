@@ -1,0 +1,30 @@
+{
+  "case": "g-75-7-18-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-75-7-18-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is the owners' appeal of a Burlington DRB decision upholding a notice of violation for an unpermitted duplex use at an existing building; it is a municipal appeal, but an appeal of a notice of violation about an existing use is not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "appeal a decision of the City of Burlington Development Review Board (“DRB”) upholding a Notice of Violation (“NOV”)"},
+        {"doc": 1, "page": 1, "quote": "The NOV alleges an unpermitted duplex use at property owned by Appellants at 12 Weston Street in Burlington, Vermont"},
+        {"doc": 5, "page": 13, "quote": "continuously used the Property as a two-unit apartment building, that such use began when the Gadue family converted the Property from a four-unit to a two-unit apartment building in 1977"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Every document describes this docket as the owners' appeal of a DRB decision upholding a March 1, 2018 NOV for an unpermitted duplex use; the guide's housing table makes a notice-of-violation appeal not new housing, so the case is excluded."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Appeal of a DRB decision upholding an administrative officer's NOV is a municipal land-use appeal under the guide."},
+    {"field": "housing", "confidence": "high", "note": "The dispute is whether the City may enforce against a long-standing two-unit use of an existing building (estoppel and the 15-year limit); no new structure or new unit is proposed in this docket. The 2014 interior reconfiguration belonged to the separate docket 120-8-14 Vtec and did not add a unit."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:25Z", "note": "Excluded: appeal of a DRB decision upholding an NOV for unpermitted duplex use; not new housing."}
+  ]
+}

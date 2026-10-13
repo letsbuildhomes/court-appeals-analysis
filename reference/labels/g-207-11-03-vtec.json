@@ -1,0 +1,150 @@
+{
+  "case": "g-207-11-03-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-207-11-03-vtec",
+    "disposition": {
+      "value": "uncertain",
+      "reason": "An appeal of a Burlington DRB approval (municipal appeal) for an addition to the existing building of a residential treatment center that houses up to 20 clients; the documents do not say whether the addition creates any new residential capacity or is only for program, school, child care and office space, so whether it is new housing is not established.",
+      "municipal_appeal": "yes",
+      "housing": "unknown",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellant Kevin Fisher appealed from a decision of the Development Review Board"},
+        {"doc": 1, "page": 1, "quote": "granting Major Impact Development approval and site plan approval for an addition to Appellee-Applicant Lund Family Center, Inc.’s existing building,"},
+        {"doc": 1, "page": 2, "quote": "The Center provides a residence for a maximum of 20 clients at any time."},
+        {"doc": 1, "page": 4, "quote": "The parties dispute how certain uses of the new addition and existing space in the facility should be categorized as principal or accessory uses"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "207-11-03 Vtec",
+        "project": {
+          "description": "Addition to the Lund Family Center's existing building at 76 Glen Road (a residential treatment program for pregnant or parenting women and girls, residence for up to 20 clients, with on-site school, child care, counseling and offices) and related site work; whether the addition adds any residential capacity is not stated.",
+          "municipality": "Burlington",
+          "proposed_units": "unknown",
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "(DRB) of the City of Burlington, granting Major Impact Development approval and site plan"},
+            {"doc": 1, "page": 1, "quote": "approval for an addition to Appellee-Applicant Lund Family Center, Inc.’s existing building, and for related site work."},
+            {"doc": 1, "page": 2, "quote": "It has operated its program in its current building at 76 Glen Road for"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "Burlington Development Review Board granted Major Impact Development approval and site plan approval for the addition and related site work.",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "(DRB) of the City of Burlington, granting Major Impact Development approval and site plan"}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Kevin Fisher",
+            "relationship": "unknown",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant Kevin Fisher appealed from a decision of the Development Review Board"},
+              {"doc": 1, "page": 1, "quote": "Appellant is represented by Lisa B. Shelkrot, Esq.;"}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "The decided motions concern whether the proposal fits the ordinance's \"community house\" use category and whether the Center's activities are principal, accessory, or disallowed uses in the RL district; the merits contentions to be heard later are not described.",
+          "involved": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "issue of whether the proposal is eligible for consideration within the use category of “community house.”"}
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "ongoing",
+          "permission": "unknown",
+          "description": "Cross-motions for partial summary judgment were denied because material facts remain in dispute; a factual hearing and a merits hearing were scheduled, so the DRB approval remained under appeal with no court decision on the application.",
+          "evidence": [
+            {"doc": 1, "page": 7, "quote": "both Motions for Summary Judgment are denied at the present time in that material facts remain in dispute."},
+            {"doc": 1, "page": 7, "quote": "if necessary, for the hearing scheduled for June 23 and 24."}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": ["207-11-03 Vtec"],
+            "description": "Kevin Fisher appealed the DRB approval to the Environmental Court; the filing date is not stated.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant Kevin Fisher appealed from a decision of the Development Review Board"}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2005-06-07",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": ["207-11-03 Vtec"],
+            "description": "Decision and Order denying both cross-motions for partial summary judgment on the community-house question because material facts remain in dispute.",
+            "evidence": [
+              {"doc": 1, "page": 7, "quote": "both Motions for Summary Judgment are denied at the present time in that material facts remain in dispute."},
+              {"doc": 1, "page": 7, "quote": "Done at Berlin, Vermont, this 7th day of June, 2005."}
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2005-05-11",
+            "relation": "on_or_before",
+            "description": "The applicant filed a revised usage chart in the appeal on May 11, 2005, so the appeal was pending by then.",
+            "evidence": [
+              {"doc": 1, "page": 5, "quote": "Based on the revised usage chart filed on May 11, 2005, we can make a preliminary estimate as follows."}
+            ]
+          },
+          "end": {
+            "date": "2005-06-07",
+            "relation": "on_or_after",
+            "description": "The June 7, 2005 order denied the cross-motions and left hearings pending, so the appeal continued past that date.",
+            "evidence": [
+              {"doc": 1, "page": 7, "quote": "Done at Berlin, Vermont, this 7th day of June, 2005."}
+            ]
+          },
+          "note": "Filing date not stated; the earliest dated event proving the appeal existed is the May 11, 2005 filing of a revised usage chart. No conclusion is observed; the latest dated event is the June 7, 2005 order.",
+          "kind": "at_least",
+          "days": 27
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {"doc": 1, "page": 2, "quote": "allows the Center to proceed with the application on its merits before this Court, the merits hearing has been scheduled for June 23 and 24, 2005."},
+            {"doc": 1, "page": 2, "quote": "certain issues would require an evidentiary hearing."}
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"207-11-03 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "medium", "note": "Clearly an appeal of a municipal DRB approval. The subject is an addition to an existing residential treatment center (a care home), but the decision never says whether the addition adds residential beds or only program, school, child-care and office space; the dispute is about non-residential uses. Housing is therefore unknown, making the case uncertain rather than excluded."},
+    {"field": "housing", "confidence": "low", "note": "If the addition adds no residential capacity it is like a large addition that adds no unit (no); if it expands the residence it could be new housing (care home). The documents do not say which."},
+    {"field": "review_standard", "confidence": "medium", "note": "The court takes evidence at evidentiary hearings and schedules a merits hearing on the application 'before this Court', which is de novo review; the words 'de novo' do not appear."},
+    {"field": "duration", "confidence": "medium", "note": "Filing date not given; start is the May 11, 2005 revised usage chart filed in the appeal (on_or_before); end is the June 7, 2005 order with hearings still pending (on_or_after); 27 days at least."},
+    {"field": "start", "confidence": "medium", "note": "The revised usage chart filed May 11, 2005 is the earliest dated event in the appeal; the docket number is not used to date the filing."},
+    {"field": "decision_date", "confidence": "high", "note": "The DRB decision date is not stated."},
+    {"field": "decision_outcome", "confidence": "medium", "note": "The DRB granted approval; whether conditions were attached is not stated, so 'approved'."},
+    {"field": "appellants", "confidence": "medium", "note": "Kevin Fisher is the appellant; his relationship to the property (likely a neighbor) is not stated, so unknown."},
+    {"field": "discretion_involved", "confidence": "medium", "note": "The decided motions concern use classification (community house, principal vs accessory uses), largely rule and fact based, but the merits contentions for the later hearing (which may include conditional-use or major-impact criteria) are not described, so unknown."},
+    {"field": "discretion_central", "confidence": "medium", "note": "Follows involved=unknown."},
+    {"field": "permission", "confidence": "medium", "note": "The DRB approval is on de novo appeal with the merits undecided; no in-docket authorization stands observed, so unknown."},
+    {"field": "units", "confidence": "high", "note": "No unit or bed count for the addition is stated; the 20-client maximum describes current operations."},
+    {"field": "lots", "confidence": "medium", "note": "No subdivision is mentioned, but the documents do not state that none is proposed, so unknown."}
+  ],
+  "disputed": [],
+  "questions": [
+    "Is an addition to an existing residential treatment center (a care home for up to 20 residents), where the documents do not say whether the addition adds residential space, new housing? Labeled housing=unknown (uncertain)."
+  ],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:48Z", "note": "Uncertain: Burlington DRB approval of an addition to a residential treatment center; whether it adds housing is not stated; de novo; ongoing."}
+  ]
+}

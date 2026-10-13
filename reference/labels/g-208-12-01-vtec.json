@@ -1,0 +1,436 @@
+{
+  "case": "g-208-12-01-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-208-12-01-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Appeal of the Wilmington Planning Commission's denial of a mixed-use PUD that includes a 6-unit senior residence ruled a multiple family dwelling.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 2,
+          "page": 1,
+          "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of a Planned Unit Development (PUD) for the property."
+        },
+        {
+          "doc": 2,
+          "page": 5,
+          "quote": "the project proposes residential uses (six senior residences and six visitor residences)"
+        },
+        {
+          "doc": 4,
+          "page": 4,
+          "quote": "is a A multiple family dwelling@ entitled to be reviewed as a conditional use in the Residential zoning district"
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "208-12-01 Vtec",
+        "project": {
+          "description": "Mixed-use Planned Unit Development at the former Green Meadows residential school property, including community group service uses, a 6-unit senior citizen residence and a dormitory with overnight accommodations for 6 persons",
+          "municipality": "Wilmington",
+          "proposed_units": 6,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 1,
+              "page": 1,
+              "quote": "All three of the above-captioned cases involve the same property in Wilmington, Vermont."
+            },
+            {
+              "doc": 2,
+              "page": 5,
+              "quote": "the project proposes residential uses (six senior residences and six visitor residences)"
+            },
+            {
+              "doc": 4,
+              "page": 4,
+              "quote": "6-unit Senior Citizen Residence - The October 2001 order ruled that this proposed use"
+            },
+            {
+              "doc": 4,
+              "page": 4,
+              "quote": "is a A multiple family dwelling@ entitled to be reviewed as a conditional use in the Residential zoning district"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "Wilmington Planning Commission denied approval of the Planned Unit Development",
+          "date": "unknown",
+          "outcome": "denied",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 1,
+              "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of a Planned Unit Development (PUD) for the property."
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Green Meadows Center, LLC",
+            "relationship": "developer",
+            "seeks": "overturn_denial",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 4,
+                "page": 1,
+                "quote": "Applicant Green Meadows Center, LLC, and two additional appellants: Southeast Vermont Community Action, Inc. and The Community Alliance are represented by Richard D. Perra, Esq."
+              },
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Because the Applicants are appellants in the most recent case, and are appellees in the two earlier cases"
+              }
+            ]
+          },
+          {
+            "name": "Southeast Vermont Community Action, Inc.",
+            "relationship": "developer",
+            "seeks": "overturn_denial",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 4,
+                "page": 1,
+                "quote": "Applicant Green Meadows Center, LLC, and two additional appellants: Southeast Vermont Community Action, Inc. and The Community Alliance are represented by Richard D. Perra, Esq."
+              },
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Because the Applicants are appellants in the most recent case, and are appellees in the two earlier cases"
+              }
+            ]
+          },
+          {
+            "name": "The Community Alliance",
+            "relationship": "developer",
+            "seeks": "overturn_denial",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 4,
+                "page": 1,
+                "quote": "Applicant Green Meadows Center, LLC, and two additional appellants: Southeast Vermont Community Action, Inc. and The Community Alliance are represented by Richard D. Perra, Esq."
+              },
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Because the Applicants are appellants in the most recent case, and are appellees in the two earlier cases"
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "Applicants appeal the Planning Commission's denial of the PUD; the grounds they raised are not described. The court noted the PUD standards require analysis of conformance with the Town Plan and density, but no specific contention in this docket is shown.",
+          "involved": "unknown",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 3,
+              "quote": "the standards applicable to the Planned Unit Development decision at issue in Docket No. 208-12-01 Vtec do require an analysis of the project= s conformance with the Town Plan"
+            }
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "denied",
+          "description": "The Planning Commission's PUD denial was never reversed; the court remanded so the municipal bodies could consider an amended application and closed the docket as concluded, without prejudice to reopening.",
+          "evidence": [
+            {
+              "doc": 5,
+              "page": 2,
+              "quote": "Accordingly, Docket Nos. 152-9-01 and 208-12-01 Vtec are hereby entered on the Court= s Docket as CONCLUDED by the decisions and orders issued in these matters."
+            },
+            {
+              "doc": 5,
+              "page": 2,
+              "quote": "the matter is REMANDED to the extent necessary for the Planning Commission and ZBA to consider any such amended applications."
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec"
+            ],
+            "description": "Applicants appealed the Planning Commission's denial of the PUD; filing date not stated",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of a Planned Unit Development (PUD) for the property."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2002-03-25",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec",
+              "179-10-99 Vtec"
+            ],
+            "description": "Granted Applicant's motion to dismiss two citizens as parties",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 2,
+                "quote": "Done at Barre, Vermont, this 25th day of March, 2002."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2002-05-13",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec",
+              "179-10-99 Vtec"
+            ],
+            "description": "Cross-motions for judgment as a matter of law granted and denied in part; questions in this docket left for the merits hearing",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "Done at Barre, Vermont, this 13th day of May, 2002."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2002-06-24",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec"
+            ],
+            "description": "Neighbors' motion for reconsideration granted on PUD use limits, denied on notice",
+            "evidence": [
+              {
+                "doc": 3,
+                "page": 2,
+                "quote": "Done at Barre, Vermont, this 24th day of June, 2002."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2002-08-07",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec"
+            ],
+            "description": "Partial decision after evidentiary hearing categorizing which proposed uses may be considered in the PUD",
+            "evidence": [
+              {
+                "doc": 4,
+                "page": 4,
+                "quote": "Done at Barre, Vermont, this 7th day of August, 2002."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2002-12-09",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec",
+              "179-10-99 Vtec"
+            ],
+            "description": "Denied adding two applicants without municipal review; ruled the consolidated appeals would be remanded unless Applicant proceeded alone",
+            "evidence": [
+              {
+                "doc": 6,
+                "page": 5,
+                "quote": "Done at Barre, Vermont, this 9th day of December, 2002."
+              }
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2002-12-19",
+            "court_or_body": "Environmental Court",
+            "dockets": [
+              "208-12-01 Vtec",
+              "152-9-01 Vtec"
+            ],
+            "description": "Final order remanded to the municipal bodies for amended applications and entered the docket as concluded, without prejudice to reopening",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 3,
+                "quote": "Done at Barre, Vermont, this 19th day of December, 2002."
+              },
+              {
+                "doc": 5,
+                "page": 2,
+                "quote": "Accordingly, Docket Nos. 152-9-01 and 208-12-01 Vtec are hereby entered on the Court= s Docket as CONCLUDED"
+              }
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2002-03-25",
+            "relation": "on_or_before",
+            "description": "Earliest dated order in this docket",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 2,
+                "quote": "Done at Barre, Vermont, this 25th day of March, 2002."
+              }
+            ]
+          },
+          "end": {
+            "date": "2002-12-19",
+            "relation": "exact",
+            "description": "Final order entering the docket as concluded",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 3,
+                "quote": "Done at Barre, Vermont, this 19th day of December, 2002."
+              },
+              {
+                "doc": 5,
+                "page": 2,
+                "quote": "Accordingly, Docket Nos. 152-9-01 and 208-12-01 Vtec are hereby entered on the Court= s Docket as CONCLUDED"
+              }
+            ]
+          },
+          "note": "Filing date not stated; start is the earliest dated order. End is the final order concluding the docket.",
+          "kind": "at_least",
+          "days": 269
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "152-9-01 Vtec",
+            "relationship": "Consolidated appeal of the ZBA's conditional use approval (#844) for the PUD uses",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Docket Nos. 208-12-01 Vtec and 152-9-01 Vtec have been consolidated with each other."
+              }
+            ]
+          },
+          {
+            "docket": "179-10-99 Vtec",
+            "relationship": "Earlier appeal of a 1999 conditional use permit for the same property, dismissed as moot",
+            "evidence": [
+              {
+                "doc": 5,
+                "page": 1,
+                "quote": "It is hereby ORDERED and ADJUDGED that Docket No. 179-10-99 Vtec is hereby DISMISSED as moot."
+              }
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 5,
+              "quote": "In this de novo proceeding the Court will determine to what extent the project as described in the Act 250 permit"
+            },
+            {
+              "doc": 2,
+              "page": 5,
+              "quote": "Both applications that are the subject of Docket Nos. 152-9-01 and 208-12-01 Vtec will be addressed on their merits under the Town ordinances."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "208-12-01 Vtec": "all"
+    }
+  },
+  "judgments": [
+    {
+      "field": "disposition",
+      "confidence": "medium",
+      "note": "Municipal appeal of a PUD denial is clear. Housing rests on the 6-unit senior residence (multiple family dwelling, or at worst assisted living, a care home) within a mixed-use PUD; documents do not say whether it is new construction or a conversion of the former school, but either creates housing."
+    },
+    {
+      "field": "housing",
+      "confidence": "medium",
+      "note": "Same as disposition; the six visitor residences/dormitory are letting rooms, not counted."
+    },
+    {
+      "field": "units",
+      "confidence": "medium",
+      "note": "6-unit Senior Citizen Residence; the court flagged it might instead be assisted living. Dormitory/visitor residences excluded as rooms let."
+    },
+    {
+      "field": "appellants",
+      "confidence": "medium",
+      "note": "The court calls SEVCA and The Community Alliance 'two additional appellants' alongside the Applicant, though they were not applicants below; classed as developer since they would own and operate the project."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "The appellants' grounds against the PUD denial are never described; Town Plan conformance is a standard, not an observed contention."
+    },
+    {
+      "field": "litigation",
+      "confidence": "medium",
+      "note": "Final order entered the docket as CONCLUDED; the remand is for municipal consideration of an amended application and reopening is only a possibility, so resolved."
+    },
+    {
+      "field": "permission",
+      "confidence": "medium",
+      "note": "The Planning Commission denial was never reversed; the court remanded without deciding the merits."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "high",
+      "note": "The court states this is a de novo proceeding and that both applications, including 208-12-01, will be addressed on their merits; it held an evidentiary hearing."
+    },
+    {
+      "field": "duration",
+      "confidence": "medium",
+      "note": "Filing date not given; start is the earliest dated order (2002-03-25, on_or_before); end is the 2002-12-19 final order concluding the docket."
+    },
+    {
+      "field": "decision_date",
+      "confidence": "high",
+      "note": "Planning Commission denial date not stated."
+    }
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T05:49:10+00:00",
+      "note": "Labeled from all six shared decisions, taking only what concerns 208-12-01 Vtec."
+    }
+  ]
+}

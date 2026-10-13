@@ -1,0 +1,300 @@
+{
+ "case": "g-182-8-02-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-182-8-02-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Docket 182-8-02 Vtec appeals a ZBA decision (on appeal from the Zoning Administrator) about the validity of the 1990 PRD permit, which would have authorized converting the duplex house to a three-dwelling-unit house; the dispute decides whether the existing third unit may be occupied.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "the ZBA heard Defendant= s appeal of a decision of the Zoning Administrator regarding the validity of the 1990 Planned Residential Development permit"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 182-8-02 Vtec, Defendant appealed the ZBA= s decision in that matter to the Environmental Court"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "a 1990 permit for a Planned Residential Development that would have incorporated the house in question as a three-unit dwelling"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "to convert the house from a duplex with a home occupation office to a three-dwelling-unit house"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "182-8-02 Vtec",
+    "project": {
+     "description": "Validity of the 1990 Planned Residential Development permit and approvals that would have converted Carol Aube-Hinsdale's historic farmhouse on Route 7 from a duplex with a home occupation office to a three-dwelling-unit house (one added unit), as part of a PRD amendment.",
+     "municipality": "Charlotte",
+     "proposed_units": 1,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "owns and occupies an historic brick farmhouse on Route 7 in Charlotte, now on a four-acre lot"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The ZBA granted conditional use approval to convert the duplex with home office to three dwelling units"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "so that the PRD would constitute 7 lots on at least 35 acres of land"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "ZBA decision on Carol Aube-Hinsdale's appeal of a Zoning Administrator decision regarding the validity of the 1990 Planned Residential Development permit; its content is not stated.",
+     "date": "2002",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "After that evidentiary hearing had taken place, the ZBA heard Defendant= s appeal of a decision of the Zoning Administrator"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "filed with the Court in mid-August 2002"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Carol Aube-Hinsdale",
+      "relationship": "developer",
+      "seeks": "unknown",
+      "representation": "unknown",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Defendant Carol Aube-Hinsdale appeared and authorized her ex-husband Clark Hinsdale III to represent her"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Nothing has been received from Appellant= s representative Mr. Hinsdale."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The appeal concerns the validity of the 1990 PRD permit; no statement of questions had been filed, so the contentions are not established.",
+     "involved": "unknown",
+     "evidence": [],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "The appeal was stalled for want of filing fee, statement of questions and notice to interested persons; the court set a deadline with conditional dismissal, and no conclusion is observed. The third unit had not been authorized (an injunction in the companion enforcement docket required its merger).",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "If they are not filed, Docket No. 182-8-02 Vtec will be dismissed effective December 31, 2002."
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "2002-08",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "182-8-02 Vtec"
+      ],
+      "description": "Carol Aube-Hinsdale appealed the ZBA decision to the Environmental Court, filed in mid-August 2002 (filing fee check made out to the Town).",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "filed with the Court in mid-August 2002"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2002-12-05",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "182-8-02 Vtec",
+       "77-4-00 Vtec"
+      ],
+      "description": "Order requiring the appellant to file the filing fee, statement of questions and notice to interested parties by December 27, 2002, or the docket will be dismissed effective December 31, 2002.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant shall file the filing fee, her statement of questions, and a copy of the notice to interested parties"
+       },
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "Dated at Barre, Vermont, this 5 day of December, 2002."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2002-08-31",
+      "relation": "on_or_before",
+      "description": "Appeal filed with the court in mid-August 2002; exact day not stated, so bounded by the end of August.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "filed with the Court in mid-August 2002"
+       }
+      ]
+     },
+     "end": {
+      "date": "2002-12-05",
+      "relation": "on_or_after",
+      "description": "Decision and Order of December 5, 2002 left the appeal pending subject to a conditional dismissal.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "Dated at Barre, Vermont, this 5 day of December, 2002."
+       }
+      ]
+     },
+     "note": "Start bounded by the end of the stated filing month; the conditional dismissal effective December 31, 2002 is not observed to have occurred.",
+     "kind": "at_least",
+     "days": 96
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "77-4-00 Vtec",
+      "relationship": "Town's enforcement action over the conversion of the house to three dwelling units, decided in the same Decision and Order.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 77-4-00 Vtec, the Town brought an enforcement action for the conversion of Defendant= s house to three dwelling units without zoning approval."
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "unknown",
+     "evidence": []
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "182-8-02 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "medium",
+   "note": "Municipal appeal is clear (appeal of a ZBA decision). Housing rests on the permit at issue being the 1990 PRD approval that would convert the duplex to three units, with occupancy of the existing third unit at stake (enforcement injunction in 77-4-00); the order says nothing more about what the ZBA decided."
+  },
+  {
+   "field": "housing",
+   "confidence": "medium",
+   "note": "Duplex-to-three-units conversion is new housing per the table; the unit already physically exists, but its occupancy depends on the permit's validity."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The appeal never got past filing-fee and statement-of-questions stage; nothing states on-the-record or de novo review."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Start: only 'mid-August 2002' is stated, so on_or_before 2002-08-31. End: on_or_after the 2002-12-05 order, which set a conditional dismissal that is not observed. 96 days at least."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "The 1990 proposal converts a duplex (two units) to three dwelling units: one added unit. Not stated how the ZBA ruling bears on it."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "The amended PRD would have 7 lots (versus the 1987 four-lot PRD), but new residential building lots are not stated."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "medium",
+   "note": "ZBA heard the appeal after the April 26, 2002 hearing in 77-4-00 and was appealed in mid-August 2002, so the decision was in 2002; no exact date."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "What the ZBA decided about the permit's validity is not stated."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "Owner Carol Aube-Hinsdale appealed; classified developer as the owner seeking housing permission. What she seeks is not stated."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Conditional dismissal set for December 31, 2002 if filings not received; no conclusion observed, so ongoing."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "high",
+   "note": "No statement of questions filed; contentions unknown."
+  },
+  {
+   "field": "related",
+   "confidence": "high",
+   "note": "77-4-00 Vtec is decided in the same decision; its injunction and penalty belong to that docket, not this one."
+  },
+  {
+   "field": "representation",
+   "confidence": "medium",
+   "note": "She acts through her ex-husband, who is not said to be a lawyer"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:48:01Z",
+   "note": "Labeled from the shared 2002-12-05 decision, using only what it says about 182-8-02 Vtec."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Representation unknown"
+  }
+ ]
+}

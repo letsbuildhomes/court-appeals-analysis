@@ -1,0 +1,331 @@
+{
+ "case": "g-110-6-04-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-110-6-04-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "The applicants appeal the Berkshire DRB's refusal to accept their site plan application for a Planned Residential Development subdivision of a 25.1-acre portion of their parcel into six lots, a subdivision creating house lots.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 110-6-04 Vtec, Appellants appealed from the DRB=s May 20, 2004 refusal to accept Appellants= application for site plan review and for approval of the subdivision"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "Appellants propose to subdivide a 25.1-acre portion of that 77.7-acre parcel into six2[2] lots as a PRD."
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "proposed Planned Residential Development (PRD) subdivision."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "110-6-04 Vtec",
+    "project": {
+     "description": "Planned Residential Development (PRD) subdivision of a 25.1-acre portion of a 77.7-acre parcel off Route 108 in the Rural Lands district into six lots, served by a private road on a 50-foot right-of-way.",
+     "municipality": "Berkshire",
+     "proposed_units": "unknown",
+     "proposed_lots": 6,
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants propose to subdivide a 25.1-acre portion of that 77.7-acre parcel into six2[2] lots as a PRD."
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants own an approximately 77.7-acre parcel of land located off Route 108, in the Rural Lands zoning district of the Town of Berkshire."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "proposed Planned Residential Development (PRD) subdivision."
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "At its May 20, 2004 hearing the DRB refused to accept or hear the site plan/PRD subdivision application until an Act 250 permit was approved.",
+     "date": "2004-05-20",
+     "outcome": "other",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "ABoard will not accept [the] site plan application at this time because as previously voted the Board would not review [it] until [an] Act 250 permit was approved.@"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Appellants appealed from the DRB=s May 20, 2004 refusal to accept Appellants= application for site plan review"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "James Harrison",
+      "relationship": "developer",
+      "seeks": "other",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicants James and Janet Harrison (Appellants) appeal from decisions"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Eric A. Poehlmann, Esq."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "plans should be deemed to be approved, based on the sequence of applications and DRB"
+       }
+      ]
+     },
+     {
+      "name": "Janet Harrison",
+      "relationship": "developer",
+      "seeks": "other",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicants James and Janet Harrison (Appellants) appeal from decisions"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Eric A. Poehlmann, Esq."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "plans should be deemed to be approved, based on the sequence of applications and DRB"
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The appeal challenged the DRB's refusal to accept the application without an Act 250 permit (a completeness question under the bylaws) and sought deemed approval under the 60-day rule of section 235(f); both turn on bylaw interpretation and dates, not evaluative standards.",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "lack of prior Act 250 approval for the project does not in and of itself render a site plan application incomplete"
+      },
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "site plan application made on May 20, 2004, does not qualify for deemed approval under '235(f)"
+      }
+     ],
+     "central": "not_applicable",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "unknown",
+     "description": "The court held the Act 250 permit was not a completeness prerequisite but denied deemed approval of the May 2004 application, and concluded this docket; the project's merits continued in a separate docket.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "This decision concludes Docket No. 110-6-04 Vtec."
+      },
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "Summary Judgment is GRANTED in favor of the Town as to Question 4 of the Statement of Questions"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "2004-06-18",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "110-6-04 Vtec"
+      ],
+      "description": "Appellants appealed the DRB's May 20, 2004 actions and refusals to act.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "On June 18, 2004, Appellants appealed to this Court from all Adecisions, actions and refusals to act@ taken by the DRB at its May 20, 2004 hearing"
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "2005-11-29",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "110-6-04 Vtec",
+       "44-2-05 Vtec"
+      ],
+      "description": "Decision on summary judgment dismissing Questions 1 and 2, granting Appellants Question 3, granting the Town Question 4 (no deemed approval), and concluding this docket.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "This decision concludes Docket No. 110-6-04 Vtec."
+       },
+       {
+        "doc": 1,
+        "page": 15,
+        "quote": "Done at Berlin, Vermont, this 29th day of November, 2005."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2004-06-18",
+      "relation": "exact",
+      "description": "Appeal filed in the Environmental Court.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "On June 18, 2004, Appellants appealed to this Court"
+       }
+      ]
+     },
+     "end": {
+      "date": "2005-11-29",
+      "relation": "exact",
+      "description": "Decision that concludes this docket.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "This decision concludes Docket No. 110-6-04 Vtec."
+       },
+       {
+        "doc": 1,
+        "page": 15,
+        "quote": "Done at Berlin, Vermont, this 29th day of November, 2005."
+       }
+      ]
+     },
+     "note": "From the June 18, 2004 filing to the November 29, 2005 decision that expressly concludes this docket; the appeal was inactive for part of that time by agreement.",
+     "kind": "exact",
+     "days": 529
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "44-2-05 Vtec",
+      "relationship": "Companion appeal of the DRB's January 27, 2005 denial of the same site plan and PRD application; decided in the same decision and still pending.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 44-2-05 Vtec, Appellants appealed from a January 27, 2005 decision of the DRB denying Appellants= application"
+       }
+      ]
+     },
+     {
+      "docket": "199-9-02 Vtec",
+      "relationship": "Earlier Environmental Court appeal that may have concerned the same parcel.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "if the parcel is the same land as was at issue in an earlier appeal before the Environmental Court, Docket No. 199-9-02 Vtec"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "unknown",
+     "evidence": []
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "110-6-04 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a DRB refusal to accept an application for a six-lot Planned Residential Development subdivision; a subdivision creating house lots is new housing."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "medium",
+   "note": "Decided on summary judgment on completeness and deemed-approval questions; the decision never says whether the appeal is on the record or de novo."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Filing date stated (June 18, 2004); the November 29, 2005 decision says it concludes this docket."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "Six lots proposed as a PRD; footnote 2 notes a possible seventh remainder lot retained by the applicants, which is not a new residential lot. That the six are residential building lots rests on the PRD label."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "All four questions concern completeness under the bylaws and the deemed-approval clock; no evaluative standard is at issue in this docket."
+  },
+  {
+   "field": "related",
+   "confidence": "medium",
+   "note": "199-9-02 Vtec is named only conditionally as an earlier appeal possibly about the same land."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "Only deemed approval was at stake here and was refused; the merits denial is in 44-2-05"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:49:26Z",
+   "note": "Labeled from the single November 2005 summary judgment decision."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants: one entry per named person or organization"
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Permission unknown"
+  }
+ ]
+}

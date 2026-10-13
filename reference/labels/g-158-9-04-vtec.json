@@ -1,0 +1,212 @@
+{
+  "case": "g-158-9-04-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-158-9-04-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Neighbors appealed the St. Albans DRB's approval of a PRD amendment allowing a new single-family house to be built in place of a previously approved but unbuilt duplex; a new structure serving as housing is new housing.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "appealed from a decision of the Development Review Board (DRB) of the Town of St. Albans approving a site plan amendment of a planned residential development"},
+        {"doc": 2, "page": 1, "quote": "The pending amendment application is limited to the Cioffis' request to be allowed to construct a single family residence instead of the approved duplex on Lots 3 and 4"},
+        {"doc": 1, "page": 2, "quote": "the PRD has been fully built out except for Units 3 and 4"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "158-9-04 Vtec",
+        "project": {
+          "description": "Amendment of the Eastview planned residential development to build one new single-family residence (Unit 35) in place of a previously approved, unbuilt duplex (Units 3 and 4), with a modification of the Congress Street perimeter/front setback.",
+          "municipality": "Town of St. Albans",
+          "proposed_units": 1,
+          "proposed_lots": 0,
+          "evidence": [
+            {"doc": 2, "page": 2, "quote": "applied for an amendment to the pre-existing site plan approval, so as to allow them to build a single family residence in place of a previously-approved duplex."},
+            {"doc": 2, "page": 10, "quote": "The proposed new single family residence will be sited on one lot that encompasses what were two lots upon which the previously-approved duplex would sit."},
+            {"doc": 2, "page": 8, "quote": "That amendment in no way seeks a modification of the lot sizes or density which were previously approved"},
+            {"doc": 1, "page": 1, "quote": "Town of St. Albans"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "The Town of St. Albans DRB approved the PRD site plan amendment to build a single-family residence instead of a duplex, modifying the bylaws to allow construction 34 feet from the Congress Street right-of-way within the 50-foot perimeter.",
+          "date": "2004-08-12",
+          "outcome": "approved",
+          "evidence": [
+            {"doc": 2, "page": 3, "quote": "By its August 12, 2004 Decision, the DRB approved Appellees' amendment application for site plan approval to build a single family residence instead of a duplex"},
+            {"doc": 2, "page": 3, "quote": "In its August 12, 2004 Decision, which is the subject of the pending appeal"}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Milton H. Yates",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "pro_se",
+            "evidence": [
+              {"doc": 2, "page": 3, "quote": "Appellant Yates, with his wife, Elizabeth A. Yates, owns and resides in an Eastview residence, known as Unit 19"},
+              {"doc": 2, "page": 1, "quote": "Appellant is an attorney and represents himself"},
+              {"doc": 3, "page": 1, "quote": "Appellant Milton Yates challenges the approval of Robert and Nancy Cioffi's amendment application"}
+            ]
+          },
+          {
+            "name": "Elizabeth A. Yates",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {"doc": 2, "page": 1, "quote": "Milton H. Yates, Elizabeth A. Yates, and Marsha Leete appealed1 the DRB approval of the Cioffis' amendment application."},
+              {"doc": 2, "page": 3, "quote": "Appellant Yates, with his wife, Elizabeth A. Yates, owns and resides in an Eastview residence, known as Unit 19"},
+              {"doc": 1, "page": 1, "quote": "Appellants are represented by Appellant Milton H. Yates, Esq."},
+              {"doc": 2, "page": 1, "quote": "Elizabeth A. Yates and Marsha Leete have since withdrawn from the appeal, leaving Milton Yates as the sole Appellant."}
+            ]
+          },
+          {
+            "name": "Marsha N. Leete",
+            "relationship": "unknown",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {"doc": 2, "page": 1, "quote": "Milton H. Yates, Elizabeth A. Yates, and Marsha Leete appealed1 the DRB approval of the Cioffis' amendment application."},
+              {"doc": 1, "page": 1, "quote": "Appellants are represented by Appellant Milton H. Yates, Esq."},
+              {"doc": 2, "page": 1, "quote": "Elizabeth A. Yates and Marsha Leete have since withdrawn from the appeal, leaving Milton Yates as the sole Appellant."}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "Of the appellant's surviving questions, Question 16 contends the new house's appearance would not blend with the existing PRD (an \"ugly duckling\" unit), to be judged under the site plan criteria, and Question 12 challenges the setback reduction, judged under the PRD provisions' goal of the most appropriate use of land; other questions (prior approvals, ownership, notice, applicant identity, density) were dismissed.",
+          "involved": "yes",
+          "evidence": [
+            {"doc": 2, "page": 13, "quote": "Appellant's Question 16 essentially raises the issue of what the proposed Unit 35 will look like and whether it will blend with the existing PRD or be an \"ugly duckling\" unit."},
+            {"doc": 2, "page": 13, "quote": "it is impossible to determine the specific characteristic of the proposed new single family residence, how it compares with the approved duplex and whether it warrants positive findings under the Bylaws § 303(1) criteria."},
+            {"doc": 2, "page": 13, "quote": "Thus, the pending question is whether a sixteen-foot reduction in the front yard setback should be permitted for Appellees' proposed new single family residence under Bylaws § 417"}
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "allowed_with_conditions",
+          "description": "After a site visit and merits hearing the court approved the amendment (single-family home replacing the duplex, with setback modification) subject to conditions; no further proceedings are shown.",
+          "evidence": [
+            {"doc": 3, "page": 1, "quote": "is hereby APPROVED, subject to the following conditions:"},
+            {"doc": 3, "page": 2, "quote": "The proposed single family home shall be constructed and completed as shown on Applicants' revised site plan (Exhibit B), floor plan (Exhibit H)"}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "2004-09-09",
+            "court_or_body": "Environmental Court",
+            "dockets": ["158-9-04 Vtec"],
+            "description": "Appellant filed his notice of appeal of the DRB decision with the Environmental Court.",
+            "evidence": [
+              {"doc": 2, "page": 3, "quote": "On September 9, 2004, Appellant filed his notice of appeal of the DRB Decision with this Court."}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2005-05-04",
+            "court_or_body": "Environmental Court",
+            "dockets": ["158-9-04 Vtec"],
+            "description": "Court granted the motion to dismiss all 67 questions, with leave to file amended questions.",
+            "evidence": [
+              {"doc": 1, "page": 7, "quote": "Accordingly, Appellee-Applicants= Motion to Dismiss is GRANTED, without prejudice to Appellants= filing amended questions"},
+              {"doc": 1, "page": 7, "quote": "Done at Berlin, Vermont, this 4th day of May, 2005."}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2007-04-17",
+            "court_or_body": "Environmental Court",
+            "dockets": ["158-9-04 Vtec"],
+            "description": "Court granted summary judgment on 14 of 17 amended questions and denied it on Questions 11, 12 and 16, leaving them for trial.",
+            "evidence": [
+              {"doc": 2, "page": 14, "quote": "DENIED with respect to Questions 11, 12 and 16."},
+              {"doc": 2, "page": 14, "quote": "Done at Berlin, Vermont this 17th day of April, 2007."}
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2007-08-29",
+            "court_or_body": "Environmental Court",
+            "dockets": ["158-9-04 Vtec"],
+            "description": "After a site visit and merits hearing on August 28, 2007, Judgment Order approved the amendment application subject to conditions.",
+            "evidence": [
+              {"doc": 3, "page": 1, "quote": "is hereby APPROVED, subject to the following conditions:"},
+              {"doc": 3, "page": 2, "quote": "Done at Berlin, Vermont this 29th day of August, 2007."}
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2004-09-09",
+            "relation": "exact",
+            "description": "Notice of appeal filed with the Environmental Court.",
+            "evidence": [
+              {"doc": 2, "page": 3, "quote": "On September 9, 2004, Appellant filed his notice of appeal of the DRB Decision with this Court."}
+            ]
+          },
+          "end": {
+            "date": "2007-08-29",
+            "relation": "exact",
+            "description": "Judgment Order approving the application with conditions; no further review shown.",
+            "evidence": [
+              {"doc": 3, "page": 2, "quote": "Done at Berlin, Vermont this 29th day of August, 2007."}
+            ]
+          },
+          "note": "Filing date stated in doc 2; final Judgment Order dated August 29, 2007, with no further appeal observed.",
+          "kind": "exact",
+          "days": 1084
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "2006-139",
+            "relationship": "Vermont Supreme Court appeal (Bouchard v. Cioffi Real Estate) from the appellant's Franklin County Superior Court action over ownership of the PRD common elements and the 10.89-acre parcel; this appeal was stayed while it was pending.",
+            "evidence": [
+              {"doc": 2, "page": 4, "quote": "The Supreme Court affirmed the Franklin County Superior Court's decision in Bouchard, et. al., v. Cioffi Real Estate, et. al., Docket No. 2006-139"},
+              {"doc": 2, "page": 4, "quote": "The present appeal, Docket No. 158-9-04 Vtec, was stayed during the pendency of the Supreme Court appeal."}
+            ]
+          },
+          {
+            "docket": "unknown",
+            "relationship": "Franklin County Superior Court declaratory action the appellant brought in May 2005 over ownership of the PRD common elements and the adjoining 10.89-acre parcel.",
+            "evidence": [
+              {"doc": 2, "page": 3, "quote": "In May 2005, Appellant commenced an action in Franklin County Superior Court, seeking declaratory relief regarding, among other issues, the ownership of the \"Common Elements\" of the Eastview PRD"}
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {"doc": 1, "page": 4, "quote": "The matter before the Environmental Court is de novo. The Court will consider the relevant evidence and make its own determination of any issue material to the application"},
+            {"doc": 2, "page": 6, "quote": "In municipal appeals such as this, the Court conducts a de novo proceeding on the application that was considered below."},
+            {"doc": 3, "page": 1, "quote": "This matter came on for a merits hearing on Tuesday, August 28, 2007 at the Franklin County Superior Courthouse. The hearing was preceded by a site visit"}
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"158-9-04 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Neighbors' appeal of a DRB approval to build a new single-family house where an approved duplex was never built; constructing a new house is new housing under the guide's table."},
+    {"field": "review_standard", "confidence": "high", "note": "Both pre-trial decisions state the appeal is de novo, and the court held a site visit and evidentiary merits hearing and approved the application itself."},
+    {"field": "duration", "confidence": "high", "note": "Filing date stated explicitly (Sept 9, 2004); Judgment Order of Aug 29, 2007 concludes the appeal with nothing pending shown."},
+    {"field": "units", "confidence": "medium", "note": "One new house is authorized in place of a never-built approved duplex; counted as 1 newly authorized dwelling. Not a replacement of existing housing, since the duplex was not built."},
+    {"field": "lots", "confidence": "medium", "note": "The house sits on one lot combining the two lots planned for the duplex and the amendment does not modify lot sizes; no new residential lot is created, so 0."},
+    {"field": "decision_outcome", "confidence": "medium", "note": "The DRB approved the amendment and granted the requested setback modification; no conditions are quoted, so approved rather than approved_with_conditions."},
+    {"field": "appellants", "confidence": "medium", "note": "Three appellants filed; Elizabeth Yates and Marsha Leete later withdrew. Leete's relationship to the property is not stated. Milton Yates represented himself and the other appellants (doc 1), so they are counted as represented."},
+    {"field": "representation", "confidence": "medium", "note": "Milton Yates is pro se (an attorney representing himself); the co-appellants were represented by him per doc 1."},
+    {"field": "discretion_central", "confidence": "medium", "note": "Aesthetic compatibility (Q16) and the setback reduction (Q12) were two of the three questions surviving to trial, but no passage says they were the principal part of the challenge, which originally spanned 67 mostly ownership and prior-approval questions."},
+    {"field": "housing_changes", "confidence": "medium", "note": "The judgment conditions require building per the applicants' own plans and renderings and grant the requested setback modification; no change to the proposal itself is shown."},
+    {"field": "related", "confidence": "medium", "note": "The Superior Court declaratory action and its Supreme Court appeal (2006-139) are distinct proceedings that stayed this appeal; the Superior Court docket number is not given."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:59Z", "note": "Labeled from all three decisions: in scope, de novo, approved with conditions after merits hearing."}
+  ]
+}

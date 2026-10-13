@@ -1,0 +1,342 @@
+{
+ "case": "g-35-3-04-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-35-3-04-vtec",
+  "disposition": {
+   "value": "uncertain",
+   "reason": "This docket appeals the Planning Commission's denial of site plan approval, a municipal decision. The project is an educational facility expansion that includes a new separate residential building with faculty bedrooms (called an apartment on the site plan form); whether that is new housing or institutional lodging is not established.",
+   "municipal_appeal": "yes",
+   "housing": "unknown",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 35-3-04 Vtec, Appellant-Applicants appealed the January 28, 2004 decision of the Planning Commission of the Town of Dummerston, denying site plan approval for the same project."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "CZMI is a not-for-profit educational facility providing graduate level instruction in psychoanalysis"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "to construct a new, separate residential building to house faculty bedrooms, student and faculty lounges, and a kitchen"
+    },
+    {
+     "doc": 1,
+     "page": 3,
+     "quote": "construct new entrance drive, parking, apartment/[illegible], convert shed to lab."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "35-3-04 Vtec",
+    "project": {
+     "description": "Seven-year master plan expansion of the Cyril Z. Meadow Institute's graduate psychoanalytic training facility: porch roof, ramp and fire door on the existing barn, conversion of a shed to a clinical studies lab, a new separate residential building housing faculty bedrooms, lounges and a kitchen (described on the site plan form as an apartment), sewer and water upgrades, new parking, and increased class size, hours and events. Site plan approval is at issue in this docket.",
+     "municipality": "Dummerston",
+     "proposed_units": "unknown",
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "requesting conditional use and site plan approval for new construction and for increased use of the facility"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "to construct a new, separate residential building to house faculty bedrooms, student and faculty lounges, and a kitchen"
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "construct new entrance drive, parking, apartment/[illegible], convert shed to lab."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "located in a Rural Residential zoning district in the Town"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Dummerston Planning Commission denied site plan approval, noting the applicants had not submitted a sufficiently specific site plan.",
+     "date": "2004-01-28",
+     "outcome": "denied",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "In Docket No. 35-3-04 Vtec, Appellant-Applicants appealed the January 28, 2004 decision of the Planning Commission of the Town of Dummerston, denying site plan approval for the same project."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "The Planning Commission issued a decision on January 28, 2004 denying site plan approval"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Cyril Z. Meadow Institute",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 35-3-04 Vtec, Appellant-Applicants appealed the January 28, 2004 decision of the Planning Commission of the Town of Dummerston, denying site plan approval for the same project."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicants are represented by Christopher D. Roy, Esq."
+       }
+      ]
+     },
+     {
+      "name": "Phyllis Meadow",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 35-3-04 Vtec, Appellant-Applicants appealed the January 28, 2004 decision of the Planning Commission of the Town of Dummerston, denying site plan approval for the same project."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicants are represented by Christopher D. Roy, Esq."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Appellants seek site plan approval of the expansion de novo and argued the site plan was deemed approved by Planning Commission inaction (rejected). Appellees argued prior conditions protecting the character of the area should stand, but the court left the merits for hearing; the contested site plan standards in this docket are not described.",
+     "involved": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "Appellees also argue that the conditions imposed in previous permits to protect the character of the area should not be altered"
+      }
+     ],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "denied",
+     "description": "Site plan approval was denied by the Planning Commission and the claim of deemed approval was rejected; the de novo merits hearing remained pending.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "The Planning Commission issued a decision on January 28, 2004 denying site plan approval"
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "Appellant-Applicants\" Motion for Partial Summary Judgment is DENIED."
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "the hearing on the merits remains scheduled for September 7 and 8, 2004"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "35-3-04 Vtec"
+      ],
+      "description": "Appellant-Applicants appealed the Planning Commission's denial of site plan approval.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 35-3-04 Vtec, Appellant-Applicants appealed the January 28, 2004 decision of the Planning Commission of the Town of Dummerston, denying site plan approval for the same project."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2004-08-13",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "17-1-04 Vtec",
+       "35-3-04 Vtec"
+      ],
+      "description": "Court denied Appellees' motion for summary judgment on preclusion and Appellant-Applicants' motion for partial summary judgment on deemed site plan approval; merits hearing remained scheduled.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "it is hereby ORDERED and ADJUDGED that Appellees' Motion for Summary Judgment is DENIED"
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Appellant-Applicants\" Motion for Partial Summary Judgment is DENIED."
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Barre, Vermont, this 13th day of August, 2004."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2004-08-13",
+      "relation": "on_or_before",
+      "description": "Summary judgment decision, the earliest dated event showing the appeal existed; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Barre, Vermont, this 13th day of August, 2004."
+       }
+      ]
+     },
+     "end": {
+      "date": "2004-08-13",
+      "relation": "on_or_after",
+      "description": "Summary judgment decision with the merits hearing still pending.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Barre, Vermont, this 13th day of August, 2004."
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "the hearing on the merits remains scheduled for September 7 and 8, 2004"
+       }
+      ]
+     },
+     "note": "Only one dated event (2004-08-13); filing and conclusion dates are not in the documents, so the duration is not established.",
+     "kind": "unknown",
+     "days": "unknown"
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "17-1-04 Vtec",
+      "relationship": "Companion appeal of the ZBA's December 30, 2003 denial of conditional use approval for the same project, decided in the same order.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 17-1-04 Vtec, Appellant-Applicants Cyril Z. Meadow Institute (CZMI) and Phyllis Meadow appealed the December 30, 2003 decision"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "Appellant-Applicants are entitled to have the present application considered on its merits de novo in the present appeals."
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "the hearing on the merits remains scheduled for September 7 and 8, 2004"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "35-3-04 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "low",
+   "note": "Municipal appeal is clear. Housing hinges on whether the new 'residential building to house faculty bedrooms, student and faculty lounges, and a kitchen' for a psychoanalytic institute is new housing (a residence) or institutional lodging akin to a dormitory/inn; the site plan form says 'apartment' but no dwelling units are described. Left housing unknown, so uncertain."
+  },
+  {
+   "field": "housing",
+   "confidence": "low",
+   "note": "See disposition; the primary use is a nonresidential educational facility, but a new residential building is part of the proposal."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court states appellants are entitled to have the application considered on its merits de novo in the present appeals, with a merits hearing scheduled."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Filing date not stated; the only dated event is the 2004-08-13 decision, which leaves a zero-day minimum, so kind and days are unknown."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "The residential building's number of dwelling units (if any) is not stated."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "No subdivision is mentioned, but the documents do not state that none is proposed."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "The decided issues (preclusion, deemed approval) are legal; the merits contentions on site plan standards are not described, and the character-of-the-area argument is aimed at prior permit conditions generally, not shown as a site plan contention in this docket."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "Latest observed authorization in this docket is the Planning Commission's denial; deemed approval was rejected and the de novo merits hearing was pending."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "Merits hearing still scheduled; only interim summary judgment rulings observed."
+  }
+ ],
+ "disputed": [],
+ "questions": [
+  "Does a new separate building with faculty bedrooms, lounges and a kitchen for a graduate psychoanalytic institute (called an 'apartment' on the site plan form) count as new housing under the user's definition?"
+ ],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:49:15+00:00",
+   "note": "Labeled 35-3-04 Vtec (site plan denial appeal) from the shared 2004-08-13 summary judgment decision; housing left unknown."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants: one entry per named person or organization"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+  "case": "g-24-env-00022",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-24-env-00022",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is an enforcement action the Town of Pittsford brought against Travis Bovey and Boondock Motors, not an appeal of a municipal decision; the permit at issue authorizes commercial hauling, towing and an autobody shop, not housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "This is an enforcement action brought by the Town of Pittsford (Town) against Travis Bovey and Boondock Motors (together, Respondents)"},
+        {"doc": 1, "page": 1, "quote": "which authorized with conditions Respondents’ commercial hauling/trucking and towing services and operation of an autobody shop"},
+        {"doc": 1, "page": 1, "quote": "This action follows an appeal of an April 1, 2022 notice of violation issued to Respondents by the Town"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "The only document is a post-judgment contempt decision in a town-initiated enforcement action over a commercial trucking/autobody permit; the NOV appeal it follows was a different docket (22-ENV-00062)."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The court calls this docket an enforcement action brought by the Town; the earlier appeal of the notice of violation was docket 22-ENV-00062, not this one."},
+    {"field": "housing", "confidence": "high", "note": "The permit covers commercial hauling/trucking, towing and an autobody shop; no housing is involved."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: town enforcement action over a commercial trucking/autobody permit."}]
+}

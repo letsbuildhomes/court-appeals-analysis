@@ -1,0 +1,28 @@
+{
+  "case": "g-159-7-08-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-159-7-08-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Docket 159-7-08 Vtec is the appeal of a municipal non-enforcement decision about the Kibbe property, an enforcement matter rather than permission for new housing; the house's permission is decided in the separate building-permit and subdivision-amendment dockets.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Kibbe Non-Enforcement Decision Docket No. 159-7-08 Vtec"},
+        {"doc": 1, "page": 1, "quote": "the parties agreed to place Docket No. 159-7-08 Vtec on inactive status until the other matters are resolved"},
+        {"doc": 1, "page": 1, "quote": "In Docket No. 173-8-07 Vtec, involving the building permit for the proposed house, garage, and septic system construction"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "medium", "note": "The only document is a shared entry order for three dockets; for 159-7-08 it says only that the docket is the 'Kibbe Non-Enforcement Decision' and was placed on inactive status. It decides nothing in this docket. An appeal of a decision not to enforce is the counterpart of a notice-of-violation appeal, which the guide treats as not new housing, so excluded. The order's substance (de novo scope ruling, mediation) concerns 198-9-08 and 173-8-07 only."},
+    {"field": "municipal_appeal", "confidence": "medium", "note": "Caption names a non-enforcement decision appealed to the Environmental Court with the Town a party for interpretation of its ordinances; the deciding body (likely the zoning administrator or board) is not named."},
+    {"field": "housing", "confidence": "medium", "note": "The non-enforcement decision's subject is not stated; it likely concerns the neighboring house/septic location at issue in the companion dockets, but an enforcement decision is not permission for new housing under the guide's notice-of-violation rule."}
+  ],
+  "disputed": [],
+  "questions": ["Should an appeal of a municipal non-enforcement decision (here apparently about a neighbor's house under construction) be treated like a notice-of-violation appeal (housing = no), or as housing = unknown/uncertain because the decision's subject is not stated?"],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:48:35Z", "note": "Excluded: appeal of a non-enforcement decision, treated like a notice-of-violation appeal; shared order decides only the companion dockets."}]
+}

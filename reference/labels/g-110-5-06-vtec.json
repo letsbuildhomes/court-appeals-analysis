@@ -1,0 +1,130 @@
+{
+  "case": "g-110-5-06-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-110-5-06-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "A town resident appealed the Essex Planning Commission's final plan approval of a proposed 48-unit congregate housing facility, a new residential building.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellant Mary E. Post appealed from a decision of the Planning Commission of the Town of Essex granting final plan approval"},
+        {"doc": 1, "page": 1, "quote": "proposed 48‐unit “congregate housing facility” located at 9 Center Road"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "110-5-06 Vtec",
+        "project": {
+          "description": "Proposed 48-unit congregate housing facility (with 89 parking spaces) by Yandow-Dousevicz and Town Meadow LLC at 9 Center Road / 16 Carmichael Street in the Mixed Use Commercial district.",
+          "municipality": "Essex",
+          "proposed_units": 48,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "proposed 48‐unit “congregate housing facility” located at 9 Center Road in the Town’s Mixed Use Commercial zoning district"},
+            {"doc": 1, "page": 1, "quote": "Planning Commission of the Town of Essex"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "Town of Essex Planning Commission granted final plan approval for the 48-unit congregate housing facility.",
+          "date": "unknown",
+          "outcome": "approved",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "a decision of the Planning Commission of the Town of Essex granting final plan approval to Appellee‐Applicants Yandow‐Dousevicz and Town Meadow LLC’s"}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Mary E. Post",
+            "relationship": "other",
+            "seeks": "overturn_approval",
+            "representation": "pro_se",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant Mary E. Post appealed from a decision of the Planning Commission of the Town of Essex granting final plan approval"},
+              {"doc": 1, "page": 1, "quote": "Appellant has appeared and represents herself"},
+              {"doc": 1, "page": 3, "quote": "The project property is nine‐ tenths of a mile from Ms. Post’s property ‘as the crow flies;’"}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "The only contentions shown concern standing; the appellant argued the project obstructs a scenic vista (the panoramic view from Route 15) protected by the regulations and plans, and raised traffic effects, but the merits grounds of the appeal are not otherwise set out.",
+          "involved": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 4, "quote": "the “panoramic view from Route 15” that she argues is specifically protected by the zoning and subdivision regulations, the Town Plan and the Town Center Master Plan"}
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "allowed",
+          "description": "The appeal was dismissed for the appellant's lack of standing, leaving the Planning Commission's final plan approval in place; nothing is shown pending.",
+          "evidence": [
+            {"doc": 1, "page": 5, "quote": "Appellee‐Applicants’ Motion to Dismiss Appellant as a Party, and hence to dismiss the appeal, is GRANTED, concluding this appeal."}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": ["110-5-06 Vtec"],
+            "description": "Mary E. Post appealed the Planning Commission's final plan approval; filing date not stated.",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellant Mary E. Post appealed from a decision of the Planning Commission of the Town of Essex"}
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2006-09-25",
+            "court_or_body": "Vermont Environmental Court",
+            "dockets": ["110-5-06 Vtec"],
+            "description": "After an evidentiary hearing on standing, the court granted the motion to dismiss the appellant for lack of party status, concluding the appeal.",
+            "evidence": [
+              {"doc": 1, "page": 5, "quote": "hence to dismiss the appeal, is GRANTED, concluding this appeal."},
+              {"doc": 1, "page": 5, "quote": "Done at Berlin, Vermont, this 25th day of September, 2006."}
+            ]
+          }
+        ],
+        "duration": {
+          "start": "unknown",
+          "end": {
+            "date": "2006-09-25",
+            "relation": "exact",
+            "description": "Order dismissing the appeal for lack of standing, concluding the appeal.",
+            "evidence": [
+              {"doc": 1, "page": 5, "quote": "hence to dismiss the appeal, is GRANTED, concluding this appeal."},
+              {"doc": 1, "page": 5, "quote": "Done at Berlin, Vermont, this 25th day of September, 2006."}
+            ]
+          },
+          "note": "The filing date is not stated and no earlier dated event in the documents proves the appeal existed; the docket number is not used to date it, so the start and duration are unknown.",
+          "kind": "unknown",
+          "days": "unknown"
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [],
+        "appeal_review": {
+          "standard": "unknown",
+          "evidence": []
+        }
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"110-5-06 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a Planning Commission final plan approval for a new 48-unit congregate housing facility (a residence), so municipal appeal and new housing are both yes."},
+    {"field": "review_standard", "confidence": "high", "note": "The appeal was dismissed on standing before any merits hearing; the evidentiary hearing was on standing only and 24 V.S.A. 4471 is cited only for participation, so neither on-the-record nor de novo review is established."},
+    {"field": "duration", "confidence": "high", "note": "End is the 2006-09-25 dismissal concluding the appeal; no filing date or earlier dated event appears, so start is unknown and kind/days are unknown."},
+    {"field": "appellants", "confidence": "medium", "note": "Relationship coded other: Post is a town resident 0.9 miles away whom the court found not in the immediate neighborhood; she claimed to represent Essex citizens generally. Neighbor is arguable."},
+    {"field": "discretion_involved", "confidence": "medium", "note": "Only standing arguments are described; the scenic-vista argument suggests an evaluative merits contention but the appeal's merits grounds and tests are not set out."},
+    {"field": "permission", "confidence": "medium", "note": "Dismissal leaves the Planning Commission's final plan approval standing; whether it carried conditions is not stated, so allowed rather than allowed_with_conditions."},
+    {"field": "decision_date", "confidence": "high", "note": "The date of the Planning Commission decision is not stated."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:24Z", "note": "Labeled from the single 2006-09-25 decision dismissing the appeal for lack of standing."}
+  ]
+}

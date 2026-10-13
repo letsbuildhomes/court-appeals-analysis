@@ -1,0 +1,355 @@
+{
+ "case": "g-169-8-02-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-169-8-02-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "The appellants appeal a Stowe Planning Commission decision conditionally approving their zoning permit application for a new single family dwelling with attached apartment.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "Appellants John and Tina Springer-Miller appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe."
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "They plan to construct a single family dwelling with attached apartment on the property."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "169-8-02 Vtec",
+    "project": {
+     "description": "New single family dwelling with attached apartment on a 170-acre parcel off Haul Road, in the Ridgeline and Hillside Overlay District (2002 application, house relocated about 150 feet north of the 2000 site).",
+     "municipality": "Stowe",
+     "proposed_units": 2,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "They plan to construct a single family dwelling with attached apartment on the property."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "submitted a new application for a zoning permit to construct the house and attached apartment"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Stowe Planning Commission classified the 2002 project as significant under the Ridgeline and Hillside Overlay regulations (Section 16) and approved it with conditions on exterior colors, clearing and landscaping, and window placement. The decision does not say which of the July 23 or August 23, 2002 decisions this docket appeals.",
+     "date": "2002",
+     "outcome": "approved_with_conditions",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The Planning Commission approved the application, but with conditions requiring"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "John Springer-Miller",
+      "relationship": "developer",
+      "seeks": "change_conditions",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants John and Tina Springer-Miller appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Edward B. French, Jr., Esq."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Appellants argue that the Planning Commission is precluded from classifying the 2002 project as significant"
+       }
+      ]
+     },
+     {
+      "name": "Tina Springer-Miller",
+      "relationship": "developer",
+      "seeks": "change_conditions",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants John and Tina Springer-Miller appealed from a July 23, 2002 and an August 23, 2002 decision of the Planning Commission of the Town of Stowe."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Edward B. French, Jr., Esq."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Appellants argue that the Planning Commission is precluded from classifying the 2002 project as significant"
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The decided question is whether res judicata or collateral estoppel bars the Planning Commission from classifying the project as significant rather than minor, as it had in 2000; the decision says this resolves only Question 1, and the other questions are not described.",
+     "involved": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellants argue that the Planning Commission is precluded from classifying the 2002 project as significant, both for reasons of res judicata and for reasons of collateral estoppel."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "This ruling appears to the Court only to resolve Question 1 of the Statement of Questions."
+      }
+     ],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "allowed_with_conditions",
+     "description": "The Planning Commission's conditional approval stands; the court granted the Town summary judgment on Question 1, and remaining issues and a possible trial were still to be discussed.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "Appellants= Motion for Summary Judgment is DENIED and the Town= s Motion for Summary Judgment is GRANTED."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "to discuss whether any other issues in this matter can be resolved prior to trial, whether and when to set this matter for trial"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "169-8-02 Vtec"
+      ],
+      "description": "Appeal of the Stowe Planning Commission decision filed; date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants John and Tina Springer-Miller appealed from a July 23, 2002 and an August 23, 2002 decision"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2002-12-13",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "169-8-02 Vtec",
+       "217-9-02 Vtec"
+      ],
+      "description": "Summary judgment for the Town on Question 1: the Planning Commission was not precluded from classifying the relocated project as significant.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "Done at Barre, Vermont, this 13th day of December, 2002."
+       },
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "the Town= s Motion for Summary Judgment is GRANTED."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2002-12-13",
+      "relation": "on_or_before",
+      "description": "Summary judgment decision shows the appeal existed; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "Done at Barre, Vermont, this 13th day of December, 2002."
+       }
+      ]
+     },
+     "end": {
+      "date": "2002-12-13",
+      "relation": "on_or_after",
+      "description": "Latest dated event: the summary judgment decision, with further proceedings pending.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 3,
+        "quote": "Done at Barre, Vermont, this 13th day of December, 2002."
+       }
+      ]
+     },
+     "note": "Only one dated event in the court proceeding (the 2002-12-13 decision); the filing date is not stated and the case was still pending, so the interval is zero days and establishes nothing.",
+     "kind": "unknown",
+     "days": "unknown"
+    },
+    "restrictions": [],
+    "housing_changes": [
+     {
+      "description": "Planning Commission conditions on the house's design: muted exterior colors and placement of windows to minimize off-site glare and night lighting (plus a clearing and landscaping plan).",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "muted exterior colors"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "placement of windows to minimize off-site impact from glare and lights at night."
+       }
+      ]
+     }
+    ],
+    "related_dockets": [
+     {
+      "docket": "217-9-02 Vtec",
+      "relationship": "Companion appeal by the same appellants of the Stowe Planning Commission decisions, decided together in this decision.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Docket Nos. 169-8-02 and"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "217-9-02 Vtec"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "unknown",
+     "evidence": []
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "169-8-02 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a Planning Commission decision on a zoning permit for a new house with attached apartment: municipal appeal, new housing."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Only dated court event is the 2002-12-13 decision; filing undated and case pending, so zero-day interval gives kind/days unknown."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "medium",
+   "note": "The caption covers two dockets and two Planning Commission decisions (July 23 and August 23, 2002) without saying which this docket appeals; only the year 2002 is established."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "The 2002 Planning Commission decision described approved the application with conditions; not stated which of the two decisions is this docket's, though both appear to concern the same approval and classification."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "Single family dwelling with attached apartment counted as 2 dwelling units; the 2000 permit expired, so both are new authorizations."
+  },
+  {
+   "field": "lots",
+   "confidence": "high",
+   "note": "No subdivision mentioned; not stated that none is proposed, so unknown."
+  },
+  {
+   "field": "appellants",
+   "confidence": "high",
+   "note": "John and Tina Springer-Miller, owners, represented by Edward B. French, Jr.; listed as two appellants."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "The decided contention is legal (claim/issue preclusion), but the ruling resolves only Question 1 and the remaining questions are not described, so unknown."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "medium",
+   "note": "Follows involved=unknown."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "Court expects to discuss remaining issues and a possible trial; ongoing."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "Latest observed authorization is the Planning Commission's conditional approval; not altered by the summary judgment ruling."
+  },
+  {
+   "field": "housing_changes",
+   "confidence": "medium",
+   "note": "Exterior color and window placement conditions bear on the house's design; the clearing/landscaping plan is a site condition."
+  },
+  {
+   "field": "related",
+   "confidence": "high",
+   "note": "217-9-02 Vtec is named in the caption and decided in the same decision; pending ZBA proceedings are mentioned without a docket and not listed."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "medium",
+   "note": "Inferred only from a possible trial; no statement of the standard"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T05:49:57+00:00",
+   "note": "Labeled from the 2002-12-13 summary judgment decision shared with 217-9-02 Vtec."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Review standard unknown: not established"
+  }
+ ]
+}

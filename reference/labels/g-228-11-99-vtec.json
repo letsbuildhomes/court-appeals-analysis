@@ -1,0 +1,464 @@
+{
+ "case": "g-228-11-99-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-228-11-99-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Applicants appealed the Middlebury Planning Commission's November 5, 1999 decision on a PUD whose Phase I includes a new office/apartment building (a mixed-use building with apartments) alongside a hotel/conference center, with residential housing planned on the retained land.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 228-11-99 Vtec Applicants appealed from the November 5, 1999 decision of the Planning Commission of the Town of Middlebury ruling on their application"
+    },
+    {
+     "doc": 2,
+     "page": 4,
+     "quote": "sell the remainder of the 4.1-acre parcel with an office-apartment building5 to be constructed on it."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "a subdivision of two lots for commercial development on the parcel to be purchased by KW Middlebury and residential housing in the area to be retained by Middlebury College."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "228-11-99 Vtec",
+    "project": {
+     "description": "PUD on a 31-acre Middlebury College parcel off Court Street/Route 7: Phase I on a 4.1-acre parcel to be bought by KW Middlebury, with a hotel/conference center (replacing the former Maple Manor Motel) and a new office/apartment building; residential housing planned on the land retained by the College. Number of apartments and residential lots not stated.",
+     "municipality": "Middlebury",
+     "proposed_units": "unknown",
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The overall project consists of a Planned Unit Development (PUD) consisting of a subdivision of two lots for commercial development"
+      },
+      {
+       "doc": 2,
+       "page": 4,
+       "quote": "KW Middlebury plans to build a motel on a portion of the 4.1-acre parcel"
+      },
+      {
+       "doc": 3,
+       "page": 1,
+       "quote": "for KW Middlebury to develop a hotel/conference center and an office/apartment building on the 4.1-acre portion of the site fronting on Route 7"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Middlebury Planning Commission decision of November 5, 1999 (amending and replacing its May 21, 1999 decision): approved the PUD Master Plan with conditions; approved the Phase I uses as to traffic impact and downtown impact; denied the Phase I hotel/conference and office/apartment buildings and parking lot site plans because their scale and form do not conform with the Town Plan.",
+     "date": "1999-11-05",
+     "outcome": "other",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "denied the Phase I hotel/conference and office/apartment buildings and parking lot revised site plans on the basis that their scale and form do not conform with the Town Plan"
+      },
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "The Planning Commission=s decision of November 5, 1999, approved the PUD Master Plan with conditions and provided for future amendments to it"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Middlebury College",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 228-11-99 Vtec Applicants appealed from the November 5, 1999 decision"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "represented by Jon Anderson, Esq.;"
+       }
+      ]
+     },
+     {
+      "name": "Robert Karol and Dan Wolf, d/b/a KW Middlebury, LLC",
+      "relationship": "developer",
+      "seeks": "overturn_denial",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants Middlebury College and Robert Karol and Dan Wolf, d/b/a KW Middlebury, LLC, (AApplicants@)"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "represented by Jon Anderson, Esq.;"
+       }
+      ]
+     },
+     {
+      "name": "Group of interested parties (Cross-Appellant-Interested Parties)",
+      "relationship": "unknown",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In this case, the group of interested parties filed a cross-appeal of the decision, and specifically raised the Traffic Impact criterion in its Statement of Questions."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Cross-Appellant-Interested Parties are represented by Gerald R. Tarrant, Esq."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Applicants challenged the denial of the Phase I buildings and site plans for nonconformance of their scale and form with the Town Plan (with related aesthetics and character-of-the-area issues); the cross-appellants raised the traffic impact criterion. The court found the master plan inadequate under the PUD standard requiring an efficient and unified treatment of the site.",
+     "involved": "yes",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "denied the Phase I hotel/conference and office/apartment buildings and parking lot revised site plans on the basis that their scale and form do not conform with the Town Plan"
+      },
+      {
+       "doc": 2,
+       "page": 5,
+       "quote": "conformance with the Town Plan ('540(C)(2)(h) and '550(III)(a) and (e)), including related issues of aesthetics ('540(C)(2)(e)) and character of the area affected ('540(C)(1)(b));"
+      }
+     ],
+     "central": "yes",
+     "central_evidence": [
+      {
+       "doc": 2,
+       "page": 9,
+       "quote": "The next appropriate criterion in the sequence should be the project=s conformance with the Town Plan, including related issues of aesthetics and character of the area affected."
+      },
+      {
+       "doc": 2,
+       "page": 9,
+       "quote": "All the evidence has been presented on that criterion, as it relates to the design of the buildings before the Court to date"
+      }
+     ]
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "The Planning Commission's denial of the Phase I buildings stands; the court has made no merits ruling, required master plan, subdivision and design review before ruling on design, and granted permission for a collateral final order appeal to the Supreme Court, which is pending.",
+     "evidence": [
+      {
+       "doc": 4,
+       "page": 2,
+       "quote": "Accordingly, permission to take a collateral final order appeal on these three issues is GRANTED."
+      },
+      {
+       "doc": 4,
+       "page": 2,
+       "quote": "none of the claims has been finally adjudicated, and therefore the Court cannot enter final judgment as to any of the claims."
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "228-11-99 Vtec"
+      ],
+      "description": "Applicants appealed the November 5, 1999 Planning Commission decision; interested parties cross-appealed. Consolidated with 124-7-99 Vtec.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 228-11-99 Vtec Applicants appealed from the November 5, 1999 decision of the Planning Commission"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2000-05-15",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "124-7-99 Vtec",
+       "228-11-99 Vtec"
+      ],
+      "description": "Applicants' motion for partial summary judgment denied; the traffic impact criterion is before the court through the cross-appeal of the November 1999 decision.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "That issue is therefore before this Court by virtue of Cross- Appellants appeal of the November 1999 Decision"
+       },
+       {
+        "doc": 1,
+        "page": 5,
+        "quote": "Done at Barre, Vermont, this 15th day of May, 2000."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2000-07-24",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "124-7-99 Vtec",
+       "228-11-99 Vtec",
+       "103-5-00 Vtec"
+      ],
+      "description": "Motions for judgment at the close of Applicants' case granted in part: master plan inadequate, subdivision application required, design must go to the Design Advisory Committee; motion to dismiss denied.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 10,
+        "quote": "The Master Plan for the 31-acre parcel is inadequate to allow the Court to rule on whether it can be approved"
+       },
+       {
+        "doc": 2,
+        "page": 10,
+        "quote": "Done at Barre, Vermont, this 24th day of July, 2000."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2001-05-07",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "124-7-99 Vtec",
+       "228-11-99 Vtec",
+       "103-5-00 Vtec"
+      ],
+      "description": "KW Middlebury's motion for reconsideration of the July 2000 order denied.",
+      "evidence": [
+       {
+        "doc": 3,
+        "page": 2,
+        "quote": "Accordingly, Applicant KW Middlebury= s Motion for Reconsideration of the July 24, 2000 Decision and Order is DENIED."
+       },
+       {
+        "doc": 3,
+        "page": 2,
+        "quote": "Done at Barre, Vermont, this 7th day of May, 2001."
+       }
+      ]
+     },
+     {
+      "kind": "further_appeal",
+      "date": "unknown",
+      "court_or_body": "Vermont Supreme Court",
+      "dockets": [],
+      "description": "Applicants filed an appeal of the July 2000 order and the May 2001 denial of reconsideration under V.R.A.P. 3.",
+      "evidence": [
+       {
+        "doc": 4,
+        "page": 2,
+        "quote": "instead have filed an appeal of the July 2000 Order and the May 2001 denial of reconsideration, under the provisions of V.R.A.P. 3."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2001-07-27",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "124-7-99 Vtec",
+       "228-11-99 Vtec",
+       "103-5-00 Vtec"
+      ],
+      "description": "Permission for a collateral final order appeal granted; interlocutory appeal and Rule 54(b) partial final judgment denied.",
+      "evidence": [
+       {
+        "doc": 4,
+        "page": 2,
+        "quote": "Accordingly, permission to take a collateral final order appeal on these three issues is GRANTED."
+       },
+       {
+        "doc": 4,
+        "page": 3,
+        "quote": "Done at Barre, Vermont, this 27th day of July, 2001."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2000-03-27",
+      "relation": "on_or_before",
+      "description": "Merits hearing in the consolidated appeals of the May and November 1999 decisions, for which Applicants prepared exhibits; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "the exhibits prepared by Applicants for the merits hearing on March 27, 2000"
+       }
+      ]
+     },
+     "end": {
+      "date": "2001-07-27",
+      "relation": "on_or_after",
+      "description": "Latest order: collateral final order appeal permitted, no claim finally adjudicated, appeal pending.",
+      "evidence": [
+       {
+        "doc": 4,
+        "page": 3,
+        "quote": "Done at Barre, Vermont, this 27th day of July, 2001."
+       }
+      ]
+     },
+     "note": "Filing date not stated; start is the merits hearing date. No conclusion observed; the case continued past the July 27, 2001 order.",
+     "kind": "at_least",
+     "days": 487
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "124-7-99 Vtec",
+      "relationship": "Consolidated appeal of the May 21, 1999 Planning Commission decision, which the November 1999 decision amended and replaced.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "The two appeals were consolidated in this Court."
+       }
+      ]
+     },
+     {
+      "docket": "103-5-00 Vtec",
+      "relationship": "Consolidated appeal of the May 12, 2000 Planning Commission decision, which replaced the November 5, 1999 decision.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "In Docket No. 103-5-00 Vtec, Applicants appealed from the May 12, 2000 decision3"
+       },
+       {
+        "doc": 2,
+        "page": 3,
+        "quote": "The three appeals were consolidated in this Court."
+       }
+      ]
+     },
+     {
+      "docket": "unknown",
+      "relationship": "Applicants' appeal to the Vermont Supreme Court of the July 2000 order and May 2001 denial of reconsideration (collateral final order appeal).",
+      "evidence": [
+       {
+        "doc": 4,
+        "page": 2,
+        "quote": "instead have filed an appeal of the July 2000 Order and the May 2001 denial of reconsideration, under the provisions of V.R.A.P. 3."
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 7,
+       "quote": "because the appeal is de novo before the Court, Applicants still have the burden of presenting evidence in support of that criterion."
+      },
+      {
+       "doc": 2,
+       "page": 6,
+       "quote": "the Court sits in the place of the Planning Commission in any appeal."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "228-11-99 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a Planning Commission decision; Phase I includes a new office/apartment building (mixed-use with apartments), which the housing table counts as new housing."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The July 2000 order says the appeal is de novo, the court sits in place of the Planning Commission, and it held eight days of evidentiary hearings."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing date not stated. Start uses the March 27, 2000 merits hearing (the earliest dated event in the court proceedings), which may fall after the actual filing in late 1999. End is the July 27, 2001 order with a Supreme Court appeal pending."
+  },
+  {
+   "field": "start",
+   "confidence": "medium",
+   "note": "The hearing date is mentioned in passing in the May 2000 order; it was a hearing in the consolidated appeals, so this docket existed by then."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "Doc 1 says the interested parties cross-appealed in this docket; doc 2 instead attributes the cross-appeal to 124-7-99, but doc 2 also says 124-7-99 had no cross-appeal, so doc 2 appears to be a slip. Their relationship (neighbors or otherwise) is not stated; they raised traffic impact, which the Commission approved, so they seek overturn_approval."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "medium",
+   "note": "The only adverse ruling Applicants appealed was the Town Plan scale-and-form denial; the court treats Town Plan conformance, aesthetics and character of the area as key criteria on which all evidence was presented."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "A two-lot subdivision for commercial development is described and residential housing on the retained land is undefined; no count of new residential lots."
+  },
+  {
+   "field": "units",
+   "confidence": "high",
+   "note": "Number of apartments in the office/apartment building is never stated."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "Mixed: master plan approved with conditions, site plans denied"
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "The court had not ruled on the merits"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T01:50:00-04:00",
+   "note": "Labeled from all four shared decisions, keeping only what concerns 228-11-99 Vtec."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Mixed board decision: outcome other, permission unknown"
+  }
+ ]
+}

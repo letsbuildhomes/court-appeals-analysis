@@ -1,0 +1,666 @@
+{
+  "case": "g-170-12-14-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-170-12-14-vtec",
+    "disposition": {
+      "value": "in_scope",
+      "reason": "Neighbors appeal the Jericho DRB's approval of a PUD subdivision for three new duplexes (six dwelling units), which is new housing.",
+      "municipal_appeal": "yes",
+      "housing": "yes",
+      "evidence": [
+        {
+          "doc": 1,
+          "page": 1,
+          "quote": "appeal the Jericho Development Review Board’s (DRB) October 27, 2014 final plat subdivision approval authorizing a six-unit, three-duplex planned unit development (PUD)"
+        },
+        {
+          "doc": 2,
+          "page": 14,
+          "quote": "upon which three duplexes (six units) will be constructed and is thus subject to PUD review"
+        }
+      ]
+    },
+    "records": [
+      {
+        "docket": "170-12-14 Vtec",
+        "project": {
+          "description": "Six-unit, age-restricted (55+) planned unit development of three new duplexes on a 28.5-acre portion of a 143-acre parcel at 44 Raceway Road, Jericho; final plat subdivision approval.",
+          "municipality": "Jericho",
+          "proposed_units": 6,
+          "proposed_lots": "unknown",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 1,
+              "quote": "final plat subdivision approval authorizing Atwood Enterprises, Ltd. to develop a six-unit, three-duplex planned unit development (PUD) subdivision"
+            },
+            {
+              "doc": 2,
+              "page": 14,
+              "quote": "upon which three duplexes (six units) will be constructed and is thus subject to PUD review"
+            },
+            {
+              "doc": 2,
+              "page": 5,
+              "quote": "The Project is a two-lot subdivision; one lot contains three “footprint” lots, each with a duplex structure"
+            }
+          ]
+        },
+        "municipal_decision": {
+          "description": "Jericho Development Review Board final plat subdivision (PUD) approval with 19 conditions.",
+          "date": "2014-10-27",
+          "outcome": "approved_with_conditions",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 1,
+              "quote": "2014 final plat subdivision approval authorizing Atwood Enterprises, Ltd. to develop a six-unit, three-duplex planned unit development"
+            },
+            {
+              "doc": 2,
+              "page": 8,
+              "quote": "The Jericho DRB’s October 27, 2014 approval sets forth the following 19 conditions:"
+            }
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Kevin Trout",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Dorothy Wilson",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Graham McAfee",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Linda McAfee",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Steven Wyatt",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Donna Wyatt",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Jeff Marshall",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Jack Manning",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Suba Luck",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Brian Stevens",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          },
+          {
+            "name": "Catherine Stevens",
+            "relationship": "neighbor",
+            "seeks": "overturn_approval",
+            "representation": "represented",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 1,
+                "quote": "Kevin Trout, Dorothy Wilson, Graham McAfee, Linda McAfee, Steven Wyatt, Donna Wyatt, Jeff Marshall, Jack Manning, Suba Luck, Brian Stevens, and Catherine Stevens"
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Carl H. Lisman (ERN 3882), Attorney for Appellants Kevin Trout"
+              },
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Response in Opposition filed on 01/12/2015 by Attorney Carl H. Lisman for Appellants"
+              },
+              {
+                "doc": 2,
+                "page": 6,
+                "quote": "clustered at the eastern edge of the parcel, adjacent to the nearby Foothills Residential Development"
+              },
+              {
+                "doc": 2,
+                "page": 3,
+                "quote": "Appellants’ concerns with the wetland setbacks, the Project’s wastewater systems, and the Project’s impact on the Foothills Development’s water supply"
+              }
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "Neighbors challenged the approval on notice posting, compliance with the PUD provisions (elderly-housing density bonus, pedestrian connectivity with neighboring developments 'wherever possible') and conformance with the Town Plan.",
+          "involved": "yes",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 16,
+              "quote": "Section 10.13.9.7 requires that a PUD provide for vehicular and pedestrian connectivity with neighboring developments wherever possible."
+            },
+            {
+              "doc": 2,
+              "page": 16,
+              "quote": "Appellants argue the Project fails to provide for pedestrian connectivity because it lacks sidewalks"
+            },
+            {
+              "doc": 2,
+              "page": 12,
+              "quote": "Specifically, Appellants challenge the adequacy of the chosen location in two ways."
+            }
+          ],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "resolved",
+          "permission": "allowed_with_conditions",
+          "description": "The court approved the PUD subdivision subject to the DRB's 19 conditions and remanded only for the ministerial issuance of a zoning permit; no further review is shown.",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 18,
+              "quote": "We therefore impose these conditions. We REMAND this matter to the Town Zoning Administer for the ministerial act of issuing a zoning permit"
+            },
+            {
+              "doc": 2,
+              "page": 18,
+              "quote": "A Judgment Order accompanies this Decision. This completes the current proceedings before this Court."
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "2014-12-03",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "170-12-14 Vtec"
+            ],
+            "description": "Neighbors filed their notice of appeal of the DRB approval.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Appellants filed their notice of appeal with the Environmental Division on December 3, 2014."
+              }
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2015-02-18",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "170-12-14 Vtec"
+            ],
+            "description": "Applicants' motion to dismiss the appeal as untimely denied.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "For all of the above reasons, we DENY the motion to Dismiss."
+              },
+              {
+                "doc": 1,
+                "page": 3,
+                "quote": "Electronically signed on February 18, 2015 at 10:15 AM"
+              }
+            ]
+          },
+          {
+            "kind": "resolution",
+            "date": "2016-02-04",
+            "court_or_body": "Vermont Superior Court, Environmental Division",
+            "dockets": [
+              "170-12-14 Vtec"
+            ],
+            "description": "Decision on the merits approving the project with the DRB's 19 conditions and remanding for ministerial issuance of the zoning permit; completes proceedings.",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 18,
+                "quote": "A Judgment Order accompanies this Decision. This completes the current proceedings before this Court."
+              },
+              {
+                "doc": 2,
+                "page": 18,
+                "quote": "Electronically signed on February 04, 2016 at 03:51 PM"
+              }
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2014-12-03",
+            "relation": "exact",
+            "description": "Notice of appeal filed with the Environmental Division.",
+            "evidence": [
+              {
+                "doc": 1,
+                "page": 1,
+                "quote": "Appellants filed their notice of appeal with the Environmental Division on December 3, 2014."
+              }
+            ]
+          },
+          "end": {
+            "date": "2016-02-04",
+            "relation": "exact",
+            "description": "Decision on the merits and judgment order completing the proceedings.",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 18,
+                "quote": "A Judgment Order accompanies this Decision. This completes the current proceedings before this Court."
+              },
+              {
+                "doc": 2,
+                "page": 18,
+                "quote": "Electronically signed on February 04, 2016 at 03:51 PM"
+              }
+            ]
+          },
+          "note": "Filing to the merits decision that completed the Environmental Division proceedings; no further appeal observed.",
+          "kind": "exact",
+          "days": 428
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [
+          {
+            "docket": "unknown",
+            "relationship": "Separate appeal by Brian and Catherine Stevens of the project's state wastewater and water supply permit, dismissed as untimely on February 18, 2015.",
+            "evidence": [
+              {
+                "doc": 2,
+                "page": 7,
+                "quote": "Brian and Catherine Stevens appealed WW-4-4309 to this Court. In a February 18, 2015 Order, this Court dismissed their appeal as untimely."
+              }
+            ]
+          }
+        ],
+        "appeal_review": {
+          "standard": "de_novo",
+          "evidence": [
+            {
+              "doc": 2,
+              "page": 4,
+              "quote": "Based upon the evidence presented at trial, which was put into context by the site visit, the Court renders the following Findings of Fact."
+            },
+            {
+              "doc": 2,
+              "page": 18,
+              "quote": "Applicant proposes to be subject to all 19 conditions of the Jericho DRB’s October 27, 2014 Approval set out above as Finding of Fact number 48. We therefore impose these conditions."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "labeled": {
+    "case": [
+      "disposition",
+      "municipal_appeal",
+      "housing"
+    ],
+    "records": {
+      "170-12-14 Vtec": "all"
+    }
+  },
+  "judgments": [
+    {
+      "field": "disposition",
+      "confidence": "high",
+      "note": "Appeal of a DRB final plat approval for three new duplexes (six units): municipal appeal about new housing."
+    },
+    {
+      "field": "review_standard",
+      "confidence": "high",
+      "note": "No literal 'de novo', but the court held a trial and site visit, made its own findings, decided compliance itself and imposed conditions: a de novo hearing."
+    },
+    {
+      "field": "duration",
+      "confidence": "high",
+      "note": "Filing date stated (Dec 3, 2014); merits decision of Feb 4, 2016 'completes the current proceedings'; no further appeal shown."
+    },
+    {
+      "field": "lots",
+      "confidence": "medium",
+      "note": "Described as a two-lot subdivision (one lot with three duplex 'footprint' lots, one common-land lot); the count of new residential building lots is not clearly stated, so unknown."
+    },
+    {
+      "field": "appellants",
+      "confidence": "medium",
+      "note": "Names are from the merits decision caption; the motion-entry notification list differs slightly (John Wilson, Marilyn Marshall). Neighbor status inferred from concerns about the adjacent Foothills development and its water supply, not stated outright."
+    },
+    {
+      "field": "discretion_involved",
+      "confidence": "medium",
+      "note": "The pedestrian-connectivity argument under a 'wherever possible' PUD standard and the notice-adequacy challenge are actual contentions that involve judgment; Appellants otherwise cited no specific conflicting provisions."
+    },
+    {
+      "field": "discretion_central",
+      "confidence": "low",
+      "note": "The decision does not show which contention was principal; notice posting and the density bonus also figured prominently."
+    },
+    {
+      "field": "litigation",
+      "confidence": "medium",
+      "note": "The merits decision completes the Environmental Division proceedings; remand is only for the ministerial permit issuance; no Supreme Court appeal observed, but one cannot be ruled out."
+    },
+    {
+      "field": "related",
+      "confidence": "medium",
+      "note": "The Stevens' appeal of the wastewater permit is a distinct proceeding in this court with no docket number given."
+    }
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {
+      "step": "labeled",
+      "by": "claude-opus labeler",
+      "at": "2026-10-13T05:49:17+00:00",
+      "note": "Labeled from the 2015 motion entry and the 2016 merits decision."
+    }
+  ]
+}

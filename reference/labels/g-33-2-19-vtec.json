@@ -1,0 +1,143 @@
+{
+  "case": "g-33-2-19-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-33-2-19-vtec",
+    "disposition": {
+      "value": "uncertain",
+      "reason": "The docket appeals a municipal ZBA conditional use decision, but the only document (an entry denying a scheduling motion) never says what was proposed; the appellee is a housing trust, which suggests but does not establish new housing.",
+      "municipal_appeal": "yes",
+      "housing": "unknown",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Count 1, Municipal ZBA Conditional Use (33-2-19 Vtec)"},
+        {"doc": 1, "page": 1, "quote": "Response filed on 09/25/2019 by Attorney Nathan H. Stearns for Appellee Twin Pines Housing Trust"}
+      ]
+    },
+    "records": [
+      {
+        "docket": "33-2-19 Vtec",
+        "project": {
+          "description": "Conditional use application (Ninety-Three South Main, LLC CU) defended by appellee Twin Pines Housing Trust; the proposal itself is not described",
+          "municipality": "Hartford",
+          "proposed_units": "unknown",
+          "proposed_lots": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "Ninety-Three South Main, LLC CU"},
+            {"doc": 1, "page": 2, "quote": "William F. Ellis (ERN 3412), Attorney for Interested Person Town of Hartford"}
+          ]
+        },
+        "municipal_decision": {
+          "description": "Zoning Board of Adjustment conditional use decision; its date and outcome are not stated",
+          "date": "unknown",
+          "outcome": "unknown",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "Count 1, Municipal ZBA Conditional Use (33-2-19 Vtec)"}
+          ]
+        },
+        "appellants": [
+          {
+            "name": "Cynthia Monroe",
+            "relationship": "unknown",
+            "seeks": "unknown",
+            "representation": "pro_se",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellants Cynthia Monroe and Catherine Melocik seek an amendment to the pre-trial scheduling order in this matter."},
+              {"doc": 1, "page": 1, "quote": "to allow for motion practice, and to potentially retain legal representation."}
+            ]
+          },
+          {
+            "name": "Catherine Melocik",
+            "relationship": "unknown",
+            "seeks": "unknown",
+            "representation": "pro_se",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Appellants Cynthia Monroe and Catherine Melocik seek an amendment to the pre-trial scheduling order in this matter."},
+              {"doc": 1, "page": 1, "quote": "to allow for motion practice, and to potentially retain legal representation."}
+            ]
+          }
+        ],
+        "discretion": {
+          "description": "unknown",
+          "involved": "unknown",
+          "evidence": [],
+          "central": "unknown",
+          "central_evidence": []
+        },
+        "observed_status": {
+          "litigation": "ongoing",
+          "permission": "unknown",
+          "description": "Appeal pending; mediation scheduled and a further status conference on the pre-trial schedule to follow. The proposal's authorization is not stated.",
+          "evidence": [
+            {"doc": 1, "page": 1, "quote": "Mediation is scheduled for October 2, 2019."},
+            {"doc": 1, "page": 1, "quote": "The Court will schedule a status conference subsequent to October 11 to address any remaining issues with the pre-trial schedule."}
+          ]
+        },
+        "timeline": [
+          {
+            "kind": "filing",
+            "date": "unknown",
+            "court_or_body": "Superior Court, Environmental Division",
+            "dockets": ["33-2-19 Vtec"],
+            "description": "Appeal of the ZBA conditional use decision filed; filing date not stated",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Count 1, Municipal ZBA Conditional Use (33-2-19 Vtec)"}
+            ]
+          },
+          {
+            "kind": "judgment",
+            "date": "2019-09-26",
+            "court_or_body": "Superior Court, Environmental Division",
+            "dockets": ["33-2-19 Vtec"],
+            "description": "Court denied appellants' motion to amend the scheduling order; mediation deadline of October 11 left unchanged",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "The motion is DENIED."},
+              {"doc": 1, "page": 1, "quote": "Electronically signed on September 26, 2019 at 10:26 AM"}
+            ]
+          }
+        ],
+        "duration": {
+          "start": {
+            "date": "2019-08-19",
+            "relation": "on_or_before",
+            "description": "Status conference with the Court in this appeal, the earliest dated event proving the appeal existed",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "The parties participated in an August 19, 2019 status conference with the Court."}
+            ]
+          },
+          "end": {
+            "date": "2019-09-26",
+            "relation": "on_or_after",
+            "description": "Order denying the scheduling motion, with mediation and a status conference still to come",
+            "evidence": [
+              {"doc": 1, "page": 1, "quote": "Electronically signed on September 26, 2019 at 10:26 AM"},
+              {"doc": 1, "page": 1, "quote": "The Court will schedule a status conference subsequent to October 11"}
+            ]
+          },
+          "note": "Filing date and conclusion not observed; bounded by the August 19, 2019 status conference and the September 26, 2019 order.",
+          "kind": "at_least",
+          "days": 38
+        },
+        "restrictions": [],
+        "housing_changes": [],
+        "related_dockets": [],
+        "appeal_review": {"standard": "unknown", "evidence": []}
+      }
+    ]
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {"33-2-19 Vtec": "all"}},
+  "judgments": [
+    {"field": "disposition", "confidence": "medium", "note": "Municipal ZBA conditional use appeal is clear; the only document is a scheduling entry that never describes the proposal. An appellee named Twin Pines Housing Trust hints at housing but does not establish new housing, so housing is unknown and the case uncertain."},
+    {"field": "housing", "confidence": "medium", "note": "Nothing states what the conditional use is for; the housing trust's role suggests housing but is not evidence of the proposal."},
+    {"field": "municipality", "confidence": "medium", "note": "Town of Hartford appears as interested person; the ZBA is not named as Hartford's in so many words."},
+    {"field": "representation", "confidence": "medium", "note": "No attorney listed for the appellants (filer's attorney line blank, notified directly) and they sought time 'to potentially retain legal representation', which says they are currently unrepresented."},
+    {"field": "appellants", "confidence": "medium", "note": "Names are explicit; relationship (likely neighbors) and what they seek (likely overturning an approval) are not stated, so unknown."},
+    {"field": "review_standard", "confidence": "high", "note": "Nothing says whether the appeal is on the record or de novo; discovery and mediation hint at de novo but do not establish it."},
+    {"field": "duration", "confidence": "high", "note": "Start on or before the August 19, 2019 status conference; end on or after the September 26, 2019 order with mediation pending; 38 days at least."},
+    {"field": "litigation", "confidence": "high", "note": "Mediation and a further status conference are pending as of the order."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T01:47:47-04:00", "note": "Labeled from the single scheduling-motion entry; uncertain because the proposal is not described."}
+  ]
+}

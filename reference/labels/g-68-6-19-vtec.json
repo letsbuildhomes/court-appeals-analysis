@@ -1,0 +1,29 @@
+{
+  "case": "g-68-6-19-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-68-6-19-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "The docket appeals a Town of Norwich DRB decision, but the matter is captioned a zoning violation, so it concerns enforcement of a violation rather than permission for new housing; no housing proposal is described.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Eller Zoning Violation"},
+        {"doc": 1, "page": 1, "quote": "This matter is an appeal from a Town of Norwich (Town) Development Review Board (DRB) decision."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "medium", "note": "Excluded because housing is no: the only document is a one-page remand order captioned 'Eller Zoning Violation', i.e. an appeal of a DRB decision on a zoning violation, which the housing table treats as not new housing. The order never describes the underlying use or structure, so the exclusion rests on the caption."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "The order states the matter is an appeal from a Town of Norwich DRB decision."},
+    {"field": "housing", "confidence": "medium", "note": "The caption identifies a zoning-violation matter (an appeal of a violation upheld or decided by the DRB), not a permit for new housing; no proposal is described anywhere. If the caption is not taken as establishing the subject, housing would be unknown and the case uncertain."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:17Z", "note": "Excluded: appeal of a Norwich DRB decision in a zoning-violation matter, remanded to recreate the record; no new housing described."}
+  ]
+}

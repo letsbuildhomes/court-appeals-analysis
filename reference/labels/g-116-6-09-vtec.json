@@ -1,0 +1,378 @@
+{
+ "case": "g-116-6-09-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-116-6-09-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Applicants appeal conditions the Williston DRB imposed when it approved a nine-unit planned residential development, including eight new dwelling units (four new single-family houses and two duplexes); this is a municipal appeal about permission for new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 116- 6-09 Vtec, Appellant-Applicants Atwood and Hood (Applicants) appeal certain"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "conditions imposed in a decision of the DRB, in which the DRB granted Discretionary Permit approval to Applicants for a nine-unit Planned Residential Development (PRD), with conditions."
+    },
+    {
+     "doc": 1,
+     "page": 5,
+     "quote": "consisting of four new single-family dwellings, the existing Hood single-family dwelling, and two duplex buildings."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "116-6-09 Vtec",
+    "project": {
+     "description": "Nine-unit planned residential development (the 9-Unit Application, DP 09-07) on a 5.37-acre parcel off North Williston Road and Lefebvre Lane: four new single-family dwellings and two duplex buildings (eight new units) plus the existing Hood house, with a subdivision of the 7.2-acre project property into two lots and an access road across a Class II wetland.",
+     "municipality": "Williston",
+     "proposed_units": 8,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "Applicants propose to develop a nine-unit PRD on the 5.37-acre parcel,"
+      },
+      {
+       "doc": 1,
+       "page": 10,
+       "quote": "for the eight new residential units (four single-family dwellings, and two duplexes) proposed in the 9-Unit Application."
+      },
+      {
+       "doc": 1,
+       "page": 4,
+       "quote": "the 9-Unit Application proposes to subdivide the 7.2-acre overall project property into two lots."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "proposed to be constructed on property in the Town of Williston,"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "The Williston Development Review Board granted Discretionary Permit approval to the 9-Unit Application with conditions, including Condition B (make every effort to relocate the access road off the wetland) and Conditions F and G (affordable-housing details and a homeowners agreement).",
+     "date": "2009-04-28",
+     "outcome": "approved_with_conditions",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 11,
+       "quote": "On April 28, 2009, based on the growth management allocations to the proposed projects, the DRB approved both the 3-Unit and the 9-Unit application."
+      },
+      {
+       "doc": 1,
+       "page": 11,
+       "quote": "With respect to the 9-Unit Application, the DRB imposed the following conditions that are contested by Applicants in Docket No. 116-6-09:"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Jeff Atwood",
+      "relationship": "developer",
+      "seeks": "change_conditions",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "one owned by Appellant-Applicants Dana and Brenda Hood and two owned by Appellant-Applicant Jeff Atwood."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Applicants are represented by L. Randolph Amis, Esq.;"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "the issue of whether the DRB had legal authority to impose several conditions included in the two Discretionary Permit approvals."
+       }
+      ]
+     },
+     {
+      "name": "Dana Hood",
+      "relationship": "developer",
+      "seeks": "change_conditions",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Applicants Hood are included in the proposal, and therefore are parties to Docket No."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Applicants are represented by L. Randolph Amis, Esq.;"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "the issue of whether the DRB had legal authority to impose several conditions included in the two Discretionary Permit approvals."
+       }
+      ]
+     },
+     {
+      "name": "Brenda Hood",
+      "relationship": "developer",
+      "seeks": "change_conditions",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Applicants Hood are included in the proposal, and therefore are parties to Docket No."
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "Applicants are represented by L. Randolph Amis, Esq.;"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "the issue of whether the DRB had legal authority to impose several conditions included in the two Discretionary Permit approvals."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Applicants challenged only the DRB's legal authority to impose Condition B (relocating the access road off the wetland) and Conditions F and G (affordable housing); they did not ask the court to delete or modify the conditions or to decide the application on its merits.",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "address only the authority of the DRB\u2014and hence, the authority of this Court in this de novo appeal\u2014to impose the contested conditions."
+      },
+      {
+       "doc": 1,
+       "page": 12,
+       "quote": "the questions in the Statement of Questions ask the Court solely to determine whether the DRB had the authority to impose the contested conditions."
+      }
+     ],
+     "central": "not_applicable",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "allowed_with_conditions",
+     "description": "The DRB's conditional approval of the nine-unit PRD stands; the court upheld the DRB's authority to impose Condition B and dismissed the challenges to the affordable-housing conditions, and the decision concludes the appeal with final judgment to be entered.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 24,
+       "quote": "GRANTED and Applicants\u2019 Motion for Summary Judgment is DENIED on Questions 1 and 2 of the Statement of Questions, in that the DRB has authority to impose Condition B on the 9-unit proposal."
+      },
+      {
+       "doc": 1,
+       "page": 24,
+       "quote": "Questions 3 and 4 of the Statement of Questions are DISMISSED, as they raise issues that are beyond the scope of the current appeal."
+      },
+      {
+       "doc": 1,
+       "page": 25,
+       "quote": "This Decision and Order appears to conclude both appeals,"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "116-6-09 Vtec"
+      ],
+      "description": "Atwood and Hood appeal conditions of the DRB's approval of the 9-Unit Application; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 116- 6-09 Vtec, Appellant-Applicants Atwood and Hood (Applicants) appeal certain"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2010-03-18",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "116-6-09 Vtec",
+       "117-6-09 Vtec"
+      ],
+      "description": "Decision on cross-motions for summary judgment: Town granted summary judgment on Questions 1 and 2 (authority for Condition B); Questions 3 and 4 dismissed; the court states the decision concludes the appeals and a final judgment order will be entered effective March 26, 2010.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 25,
+        "quote": "Done at Berlin, Vermont, this 18th day of March, 2010."
+       },
+       {
+        "doc": 1,
+        "page": 25,
+        "quote": "the Court will enter a final judgment order in this matter, effective on March 26, 2010."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2009-10-22",
+      "relation": "on_or_before",
+      "description": "The Town's motion for summary judgment in Docket No. 116-6-09 Vtec, dated October 22, 2009, proves the appeal existed by then.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 20,
+        "quote": "See Town\u2019s Motion for Summary Judgment, Docket No. 116-6-09"
+       },
+       {
+        "doc": 1,
+        "page": 21,
+        "quote": "Vtec, at 2 (Oct. 22, 2009)"
+       }
+      ]
+     },
+     "end": {
+      "date": "2010-03-18",
+      "relation": "exact",
+      "description": "Decision and Order of March 18, 2010, which the court states concludes the appeal.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 25,
+        "quote": "This Decision and Order appears to conclude both appeals,"
+       },
+       {
+        "doc": 1,
+        "page": 25,
+        "quote": "Done at Berlin, Vermont, this 18th day of March, 2010."
+       }
+      ]
+     },
+     "note": "Filing date not stated; start is the earliest dated filing in this docket. End is the concluding decision; the final judgment order was to be effective March 26, 2010, but that order is not in the documents.",
+     "kind": "at_least",
+     "days": 147
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "117-6-09 Vtec",
+      "relationship": "Consolidated companion appeal by Atwood of conditions on the 3-Unit Application (DP 09-05), decided in the same decision.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "These two consolidated appeals involve a twelve-unit residential development"
+       },
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "In Docket No. 117-6-09, Applicant Atwood appeals certain conditions"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "whether the Court in this de novo appeal should approve either the three-unit or the nine-unit portion of the development,"
+      },
+      {
+       "doc": 1,
+       "page": 25,
+       "quote": "the Statement of Questions did not ask this Court to take any action with regard to the applications in these de novo appeals."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "116-6-09 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a DRB approval with conditions of a nine-unit PRD with eight new dwellings; new housing and a municipal appeal. Only the 9-Unit Application parts of the shared decision are used; 117-6-09 concerns the separate 3-Unit Application."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court repeatedly calls this a de novo appeal (pp. 2, 3, 12, 25). No evidentiary hearing occurred because only legal-authority questions were raised, but the appeal itself is de novo, not on the record."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing date not stated. Start: Town's summary judgment motion in this docket dated Oct. 22, 2009 (on_or_before). End: the March 18, 2010 decision, which says it concludes the appeals; the final judgment order effective March 26, 2010 is announced but not observed. 147 days at least."
+  },
+  {
+   "field": "units",
+   "confidence": "high",
+   "note": "Eight new units (four single-family houses and two duplexes) stated directly; the existing Hood house is excluded."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "The application subdivides the property into two lots, but both contain existing housing and the PRD units' lot arrangement is not stated, so new residential building lots are unknown."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "The court says all questions address only the DRB's legal authority to impose the conditions; Applicants did not ask to delete or modify them. Applicants also argued Condition B was arbitrary for lacking a reasonable standard, but the court treated it as premature and the questions remained about authority."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "The court states the decision appears to conclude both appeals and that final judgment will be entered; no further review is shown."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "medium",
+   "note": "Page 11 says the DRB approved on April 28, 2009; footnote 3 refers to April 29, 2009 meeting minutes, apparently a slip since page 2 places the decisions in the minutes of the April 28 meeting."
+  },
+  {
+   "field": "housing_changes",
+   "confidence": "medium",
+   "note": "Contested conditions concern access road relocation (site) and affordability details derived from the applicants' own growth management commitments; none changes the units, size or design."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T01:49:34-04:00",
+   "note": "Labeled from the March 18, 2010 summary judgment decision shared with 117-6-09 Vtec; only 9-Unit Application facts used."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants: one entry per named person or organization"
+  }
+ ]
+}

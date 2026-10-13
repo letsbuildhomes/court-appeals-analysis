@@ -1,0 +1,28 @@
+{
+  "case": "g-85-4-02-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-85-4-02-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Neighbors appealed a Hyde Park DRB ruling that relocating a 160-foot telecommunications tower is exempt under the Telecommunications Facilities Interim Bylaw; a telecommunications tower is a nonresidential use, not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "Appellants appealed from a decision of the Development Review Board (DRB) of the Town of Hyde Park"},
+        {"doc": 1, "page": 1, "quote": "ruling that the relocation of the so-called Village Communication Tower falls within the exemption"},
+        {"doc": 1, "page": 1, "quote": "to relocate the upper 140 feet of that tower from the village location to its property in the Rural Residential 2 district"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a DRB decision (municipal) about relocating a telecommunications tower; telecommunications is a nonresidential use, so housing is no and the case is excluded. The houses and mobile homes on page 2 are only the court's analogies."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [
+    {"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:47:43Z", "note": "Excluded: municipal appeal about a telecommunications tower relocation, not housing."}
+  ]
+}

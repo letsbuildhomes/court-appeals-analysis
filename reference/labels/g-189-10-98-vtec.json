@@ -1,0 +1,28 @@
+{
+  "case": "g-189-10-98-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-189-10-98-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is an enforcement action by the Secretary of the Agency of Natural Resources to enforce a state administrative order about a failed leach field and a dog kennel business, not an appeal of a municipal land-use decision, and it concerns no new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "the Secretary of the Vermont Agency of Natural Resources (the Secretary) filed an amended complaint under 10 V.S.A. ' 8014(a) to enforce a final administrative order"},
+        {"doc": 1, "page": 1, "quote": "Defendant agreed to replace the failed leach field on her property"},
+        {"doc": 1, "page": 1, "quote": "Decision and Order on Contempt Petition"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "State ANR enforcement of an administrative order (10 V.S.A. 8014) with a contempt ruling; no municipal decision is appealed and the subject is a leach field and dog kennel, not new housing."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Enforcement brought by a state agency, not an appeal of a municipal decision."},
+    {"field": "housing", "confidence": "high", "note": "Subject is wastewater compliance (leach field replacement) and a kennel business at an existing property; no new housing proposed."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T05:49:30Z", "note": "Excluded: ANR enforcement and contempt proceeding, not a municipal housing appeal."}]
+}

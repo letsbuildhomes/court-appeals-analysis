@@ -1,0 +1,29 @@
+{
+  "case": "g-105-6-10-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-105-6-10-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "This docket is an enforcement action the Town of Georgia brought against the Kings for placing a second dwelling (a mobile trailer) without a permit; the Kings never appealed the notice of violation, so no municipal decision is under appeal. The only dispute is over penalties for a violation, not permission for new housing.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "The Town of Georgia (“Town”) has brought an enforcement action against Ronald King and Laurie King (“Defendants”)"},
+        {"doc": 1, "page": 2, "quote": "Defendants did not appeal the issuance of the NOV."},
+        {"doc": 1, "page": 2, "quote": "On June 20, 2010, the Town instituted the present enforcement action against Defendants based on the violation alleged in the NOV."},
+        {"doc": 2, "page": 1, "quote": "leaving for trial only the question of what penalties should be assessed upon Defendants based on their violation of the Town’s zoning ordinance"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Town-brought zoning enforcement action; the NOV was never appealed (doc 1 p2) and the trailer later received a certificate of occupancy as an accessory dwelling outside this docket. Remaining issue is penalties only."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Enforcement the town brought without an appeal of a municipal decision; GUIDE says no. References to 'this appeal' in doc 2 are loose wording for the enforcement proceeding."},
+    {"field": "housing", "confidence": "high", "note": "Subject is a violation/penalty proceeding over an unpermitted second dwelling, not permission for new housing; NOV-related disputes are 'no' under the housing table."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: town zoning enforcement action over unappealed NOV; penalties only."}]
+}

@@ -1,0 +1,533 @@
+{
+ "g-208-12-01-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of",
+   "doc": 2,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "because the project proposes residential uses (six senior residences and six visitor residences)",
+   "doc": 2,
+   "page": 5,
+   "note": "Mixed-use PUD; the 6-unit senior residence is a multiple family dwelling (doc 4 p4). Whether it is new construction is not stated, but apartments/care residence are housing under the guide. Medium confidence."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "6-unit Senior Citizen Residence - The October 2001 order ruled that this proposed use",
+   "doc": 4,
+   "page": 4,
+   "note": "Medium confidence on housing; PUD is predominantly community-center uses with residential components."
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "In this de novo proceeding the Court will determine to what extent the project",
+   "doc": 2,
+   "page": 5,
+   "note": "Same page: both applications in 152-9-01 and 208-12-01 'will be addressed on their merits'."
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of",
+   "doc": 2,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 2,
+   "page": 1,
+   "note": "Date of Planning Commission denial not stated in any document."
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "Docket Nos. 152-9-01 and 208-12-01 Vtec are hereby entered on the Court= s",
+   "doc": 5,
+   "page": 2,
+   "note": "Docket CONCLUDED 12/19/2002 and remanded for amended applications; new action would be a new docket; reopen possible within 30 days after action on new proposal. Medium."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "Docket No. 208-12-01 Vtec is an appeal from the Planning Commission= s denial of approval of",
+   "doc": 2,
+   "page": 1,
+   "note": "Latest authorization in this docket: PUD denied below; court did not approve; remanded."
+  },
+  "proposed_units": {
+   "value": 12,
+   "quote": "six senior residences and six visitor residences",
+   "doc": 2,
+   "page": 5,
+   "note": "Could be read as 6 (6-unit senior residence, doc 4 p4) if visitor residences/dormitory for 6 are not counted as dwelling units. Ambiguous."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 2,
+   "page": 5,
+   "note": "Not stated."
+  },
+  "appellants": {
+   "value": 1,
+   "quote": "Applicant Green Meadows Center,",
+   "doc": 5,
+   "page": 1,
+   "note": "Appeal of Green Meadows Center, LLC (developer/applicant, for-profit LLC). Docs 4-6 also call SEVCA and The Community Alliance 'additional appellants' although the court says they had not applied; ambiguous whether count is 1 or 3."
+  },
+  "appellant_relationship": {
+   "value": "developer",
+   "quote": "Although Applicant is a for-profit entity,",
+   "doc": 5,
+   "page": 2
+  },
+  "representation": {
+   "value": "represented",
+   "quote": "Community Alliance are represented by Richard D. Perra, Esq.",
+   "doc": 5,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "whether or not the project meets the criteria for approval as a Planned Unit Development",
+   "doc": 2,
+   "page": 4,
+   "note": "Low-medium: PUD criteria and Town Plan conformance (doc 2 p3) are evaluative, but contentions in this docket mostly turn on use categories. Could be unknown."
+  },
+  "duration_start": {
+   "value": "2002-03-25 on_or_before",
+   "quote": "Docket No. 208-12-01 Vtec",
+   "doc": 1,
+   "page": 1,
+   "note": "Filing date not in documents; earliest dated decision naming this docket is 25 March 2002 (doc 1 p2 'Done at Barre, Vermont, this 25th day of March, 2002.')."
+  },
+  "duration_end": {
+   "value": "2002-12-19 exact",
+   "quote": "Docket Nos. 152-9-01 and 208-12-01 Vtec are hereby entered on the Court= s",
+   "doc": 5,
+   "page": 2,
+   "note": "Final Order dated 19 Dec 2002 (p3). Remand to municipal bodies; chain may continue under new docket."
+  }
+ },
+ "g-158-9-04-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision of the Development Review Board (DRB) of the Town of St. Albans",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "request to be allowed to construct a single family residence instead of the approved",
+   "doc": 2,
+   "page": 1,
+   "note": "New single-family house replacing an unbuilt approved duplex (never built per doc 1 p2), so a new structure; housing yes."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "request to be allowed to construct a single family residence instead of the approved",
+   "doc": 2,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "the Court conducts a de novo proceeding on the",
+   "doc": 2,
+   "page": 6
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "the DRB approved Appellees’ amendment application for site plan approval to build a single family residence",
+   "doc": 2,
+   "page": 3,
+   "note": "DRB also modified bylaws for a 34' setback; treated as approved."
+  },
+  "decision_date": {
+   "value": "2004-08-12",
+   "quote": "In its August 12, 2004 Decision, which is the subject of the pending appeal",
+   "doc": 2,
+   "page": 3
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "Based upon such Findings and Conclusions, the Court enters this Judgment Order.",
+   "doc": 3,
+   "page": 1,
+   "note": "Merits judgment 29 Aug 2007; no further appeal shown."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "is hereby APPROVED, subject to the following conditions:",
+   "doc": 3,
+   "page": 1
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "replacing the previously approved duplex with a single family home",
+   "doc": 3,
+   "page": 1,
+   "note": "Replacement counted as one."
+  },
+  "proposed_lots": {
+   "value": 0,
+   "quote": "will be sited on one lot that encompasses what",
+   "doc": 2,
+   "page": 10,
+   "note": "Two lots merged into one; no new lots, no exterior boundary change."
+  },
+  "appellants": {
+   "value": 3,
+   "quote": "Appellants Milton H. Yates, Elizabeth A. Yates, and Marsha N. Leete appealed",
+   "doc": 1,
+   "page": 1,
+   "note": "Yates and Leete later withdrew, leaving Milton Yates sole appellant (doc 3 p1 fn 1)."
+  },
+  "appellant_relationship": {
+   "value": "neighbor",
+   "quote": "Appellant Yates, with his wife, Elizabeth A. Yates, owns and resides in an Eastview",
+   "doc": 2,
+   "page": 3
+  },
+  "representation": {
+   "value": "pro_se",
+   "quote": "Appellant is an attorney and represents himself;",
+   "doc": 2,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "Appellant raised concerns in his brief about the appearance and design of Unit 35",
+   "doc": 2,
+   "page": 6,
+   "note": "Appearance/aesthetic conditions (Question 16, 'ugly duckling') and PRD setback modification are evaluative issues tried on the merits (doc 2 p13)."
+  },
+  "duration_start": {
+   "value": "2004-09-09 exact",
+   "quote": "On September 9, 2004, Appellant filed his notice of appeal of the DRB Decision with this",
+   "doc": 2,
+   "page": 3
+  },
+  "duration_end": {
+   "value": "2007-08-29 exact",
+   "quote": "Done at Berlin, Vermont this 29th day of August, 2007.",
+   "doc": 3,
+   "page": 2,
+   "note": "Judgment Order; no appeal shown."
+  }
+ },
+ "g-223-10-08-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "denying approval of a proposed five-lot subdivision.",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "for a conditional use permit to subdivide an 83.5-acre parcel of property into five lots.",
+   "doc": 1,
+   "page": 3,
+   "note": "Subdivision in RD5/RD10 districts; the documents never say the lots are for houses, though Question 13 concerns affordable housing. Low-medium; could be unknown."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "for a conditional use permit to subdivide an 83.5-acre parcel of property into five lots.",
+   "doc": 1,
+   "page": 3,
+   "note": "Depends on reading five-lot subdivision as house lots."
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "application, which is de novo before this Court.",
+   "doc": 1,
+   "page": 2
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "The decision denied the application on the basis that it fails to meet",
+   "doc": 1,
+   "page": 3
+  },
+  "decision_date": {
+   "value": "2008-09-10",
+   "quote": "The panel issued an unsigned written decision internally dated",
+   "doc": 1,
+   "page": 3,
+   "note": "Internal date September 10, 2008; vote taken September 2, 2008."
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "to be resolved on the merits.",
+   "doc": 1,
+   "page": 15
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "The decision denied the application on the basis that it fails to meet",
+   "doc": 1,
+   "page": 3
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 3,
+   "note": "No dwellings proposed in documents."
+  },
+  "proposed_lots": {
+   "value": 5,
+   "quote": "to subdivide an 83.5-acre parcel of property into five lots.",
+   "doc": 1,
+   "page": 3,
+   "note": "Five lots; not stated they are residential building lots."
+  },
+  "appellants": {
+   "value": 1,
+   "quote": "Appellant-Applicant General Land Company",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_relationship": {
+   "value": "developer",
+   "quote": "Appellant-Applicant General Land Company",
+   "doc": 1,
+   "page": 1
+  },
+  "representation": {
+   "value": "represented",
+   "quote": "represented by A. Jeffry Taylor, Esq.;",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "§ 4.16.2(g): “[t]he character of the area affected[,] as defined by the purposes of the",
+   "doc": 1,
+   "page": 3,
+   "note": "Denial rested on landscaping/screening and character of the area; Questions 6, 10, 12 etc. remain for merits (p15)."
+  },
+  "duration_start": {
+   "value": "2009-01-12 on_or_before",
+   "quote": "Recast Question 3 was withdrawn by Appellant-",
+   "doc": 1,
+   "page": 1,
+   "note": "Filing date not stated; earliest dated event proving the appeal existed: letter of Jan 12, 2009 (statement of questions pending)."
+  },
+  "duration_end": {
+   "value": "2009-09-11 on_or_after",
+   "quote": "Done at Berlin, Vermont, this 11th day of September, 2009.",
+   "doc": 1,
+   "page": 16
+  }
+ },
+ "g-35-3-04-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "In Docket No. 35-3-04",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "to construct a new, separate residential building to",
+   "doc": 1,
+   "page": 2,
+   "note": "Application is an educational institute expansion; a new residential building for faculty bedrooms/lounges/kitchen is part of it and site plan form says 'apartment', but number of units and whether it is housing as defined are not established. Judgment call (yes is plausible)."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "to construct a new, separate residential building to",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "considered on its merits de novo in the present appeals.",
+   "doc": 1,
+   "page": 4
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "denying site plan approval for the same project.",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "2004-01-28",
+   "quote": "the January 28, 2004 decision of the Planning Commission",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "the hearing on the merits remains scheduled for September 7 and",
+   "doc": 1,
+   "page": 5
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "denying site plan approval for the same project.",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 2,
+   "note": "Residential building described by bedrooms/lounges; no unit count."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 2
+  },
+  "appellants": {
+   "value": 2,
+   "quote": "Appellant-Applicants Cyril Z. Meadow Institute (CZMI) and",
+   "doc": 1,
+   "page": 1
+  },
+  "appellant_relationship": {
+   "value": "developer",
+   "quote": "Appellant-Applicants Cyril Z. Meadow Institute (CZMI) and",
+   "doc": 1,
+   "page": 1,
+   "note": "Applicants; CZMI is a non-profit educational facility, Phyllis Meadow the landowner."
+  },
+  "representation": {
+   "value": "represented",
+   "quote": "Applicants are represented by Christopher D. Roy, Esq.;",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 4,
+   "note": "Character-of-area argument appears only as appellees' SJ argument; court says it is not before it on this motion."
+  },
+  "duration_start": {
+   "value": "2004-08-13 on_or_before",
+   "quote": "Done at Barre, Vermont, this 13th day of August, 2004.",
+   "doc": 1,
+   "page": 5,
+   "note": "Filing date not stated; earliest dated event in this docket's documents."
+  },
+  "duration_end": {
+   "value": "2004-08-13 on_or_after",
+   "quote": "Done at Barre, Vermont, this 13th day of August, 2004.",
+   "doc": 1,
+   "page": 5
+  }
+ },
+ "g-183-11-97-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision on a",
+   "doc": 1,
+   "page": 1,
+   "note": "'decision on a Town of Manchester permit issued to Appellee-Applicant H.B. Partners'; text wraps across lines."
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "for the so-called",
+   "doc": 1,
+   "page": 1,
+   "note": "'Walker II project' is never described; nothing on what is proposed."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "Walker II project",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "Town of Manchester permit issued to Appellee-Applicant H.B. Partners for the so-called",
+   "doc": 1,
+   "page": 1,
+   "note": "A permit was issued; conditions/date unknown. 'other' or 'unknown' also defensible."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "The merits of the appeal were resolved by a consent order filed in February of 1999.",
+   "doc": 1,
+   "page": 2,
+   "note": "Merits resolved Feb 1999 but sanctions motions still pending in March 2000 order."
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 2,
+   "note": "Consent order content not described."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": 1,
+   "quote": "A group of interested persons (the Appellant Group) appealed from a decision on a",
+   "doc": 1,
+   "page": 1,
+   "note": "One group (at least ten members implied by footnote 1, exact number unknown)."
+  },
+  "appellant_relationship": {
+   "value": "neighbor",
+   "quote": "A group of interested persons (the Appellant Group) appealed from a decision on a",
+   "doc": 1,
+   "page": 1,
+   "note": "Interested persons; relationship to site not stated, so 'other' also defensible."
+  },
+  "representation": {
+   "value": "represented",
+   "quote": "The Appellant Group is represented by David Putter, Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_start": {
+   "value": "1998-11-12 on_or_before",
+   "quote": "The Court had issued an order on November 12, 1998",
+   "doc": 1,
+   "page": 1,
+   "note": "Filing date not stated."
+  },
+  "duration_end": {
+   "value": "2000-03-29 on_or_after",
+   "quote": "Done at Barre, Vermont, this 29th day of March, 2000.",
+   "doc": 1,
+   "page": 7,
+   "note": "Sanctions motions still pending."
+  }
+ }
+}

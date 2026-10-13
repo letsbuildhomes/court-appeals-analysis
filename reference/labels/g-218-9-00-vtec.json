@@ -1,0 +1,394 @@
+{
+ "case": "g-218-9-00-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-218-9-00-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "This docket appeals the Burlington Development Review Board's preliminary plat approval of an eight-unit planned residential development of four single-family houses and two duplexes, which is new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 2,
+     "page": 1,
+     "quote": "Board (DRB) of the City of Burlington granting preliminary plat approval (Docket No. 218-9-00 Vtec)"
+    },
+    {
+     "doc": 2,
+     "page": 1,
+     "quote": "Habitat for Humanity, Inc. and Burlington Housing Authority (BHA) for an eight-unit planned residential development."
+    },
+    {
+     "doc": 2,
+     "page": 1,
+     "quote": "consisting of four single-family houses and two side-by-side duplex houses, to be operated as a condominium."
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "218-9-00 Vtec",
+    "project": {
+     "description": "Eight-unit planned residential development (four single-family houses and two duplexes, operated as a condominium) on a cul-de-sac extension of Venus Avenue, by Green Mountain Habitat for Humanity and Burlington Housing Authority, with surrounding land preserved as open space.",
+     "municipality": "Burlington",
+     "proposed_units": 8,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 1,
+       "quote": "Appellee-Applicants propose to construct an eight-unit planned residential development (PRD),"
+      },
+      {
+       "doc": 2,
+       "page": 1,
+       "quote": "consisting of four single-family houses and two side-by-side duplex houses, to be operated as a condominium."
+      },
+      {
+       "doc": 2,
+       "page": 1,
+       "quote": "Board (DRB) of the City of Burlington granting preliminary plat approval (Docket No. 218-9-00 Vtec)"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "The Burlington Development Review Board granted preliminary plat approval for the planned residential development.",
+     "date": "unknown",
+     "outcome": "approved",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 1,
+       "quote": "Board (DRB) of the City of Burlington granting preliminary plat approval (Docket No. 218-9-00 Vtec)"
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "David Garen",
+      "relationship": "unknown",
+      "seeks": "overturn_approval",
+      "representation": "unknown",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "Appellants David and June Garen appealed from two decisions of the Development Review"
+       },
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "The original appellants withdrew"
+       }
+      ]
+     },
+     {
+      "name": "June Garen",
+      "relationship": "unknown",
+      "seeks": "overturn_approval",
+      "representation": "unknown",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "Appellants David and June Garen appealed from two decisions of the Development Review"
+       },
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "The original appellants withdrew"
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The challenge, carried in the consolidated appeal, contested whether the project preserved open space and scenic qualities, achieved high design quality, was compatible with the single-family neighborhood pattern, had adequate landscaping and screening, and would unduly affect a rare wetland and park and recreation needs.",
+     "involved": "yes",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "(b) Does the project achieve a high level of design quality and amenities?"
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "Is the siting of two duplex units in direct conflict with the pattern of single-family residences along Venus Avenue and Meridian Street."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "(d) Will the project have an undue adverse effect on the scenic or natural beauty of the area,"
+      }
+     ],
+     "central": "yes",
+     "central_evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "1. Does the project fail to satisfy the A intent@ criteria of ' 11.1.1 by failing to satisfy either of the following subsections?"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "2. Does the project fail to satisfy the Design Review Criteria of ' 6.1.10 by failing to satisfy any of the following subsections?"
+      }
+     ]
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "allowed_with_conditions",
+     "description": "The court granted the application with the DRB's conditions and an added condition eliminating basements (or seeking an amendment); no further proceedings in this docket are shown.",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 7,
+       "quote": "it is hereby ORDERED and ADJUDGED that the project is approved as designed, with the above conditions,"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "218-9-00 Vtec"
+      ],
+      "description": "David and June Garen appealed the DRB's preliminary plat approval; the appeal was later consolidated with the final plat appeal.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "Appellants David and June Garen appealed from two decisions of the Development Review"
+       },
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "The two appeals were consolidated, and Appellants recognized that the preliminary plat appeal was essentially moot"
+       }
+      ]
+     },
+     {
+      "kind": "further_appeal",
+      "date": "unknown",
+      "court_or_body": "Vermont Supreme Court",
+      "dockets": [],
+      "description": "After the original appellants withdrew, an appeal to the Supreme Court resulted in the Desautels intervenors being allowed to continue the appeal on the issues timely raised.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "The original appellants withdrew and, after appeal to the Supreme Court, the Intervenors Katherine W. Desautels"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2002-11-07",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "42-3-01 Vtec",
+       "218-9-00 Vtec"
+      ],
+      "description": "Order on the motion to amend the statement of questions, narrowing and restating the issues for trial.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 4,
+        "quote": "Done at Burlington, Vermont, this 7th day of November, 2002."
+       }
+      ]
+     },
+     {
+      "kind": "resolution",
+      "date": "2003-08-01",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "42-3-01 Vtec",
+       "218-9-00 Vtec"
+      ],
+      "description": "After an evidentiary hearing, the court approved the project and granted the application with the DRB's conditions and an added basement condition.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 7,
+        "quote": "it is hereby ORDERED and ADJUDGED that the project is approved as designed, with the above conditions,"
+       },
+       {
+        "doc": 2,
+        "page": 7,
+        "quote": "Done at Barre, Vermont, this 1 day of August, 2003."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2002-09-10",
+      "relation": "on_or_before",
+      "description": "The court's entry order of September 10, 2002 changing two persons' party status shows the appeal was pending by then; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "By entry order dated September 10, 2002, the Court changed the party status of two other individuals"
+       }
+      ]
+     },
+     "end": {
+      "date": "2003-08-01",
+      "relation": "exact",
+      "description": "Decision and order granting the application with conditions; nothing pending is shown afterwards.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 7,
+        "quote": "Done at Barre, Vermont, this 1 day of August, 2003."
+       }
+      ]
+     },
+     "note": "Filing date unknown; start is the earliest dated event showing the appeal existed. End is the final decision in the consolidated appeals.",
+     "kind": "at_least",
+     "days": 325
+    },
+    "restrictions": [],
+    "housing_changes": [
+     {
+      "description": "Approval conditioned on eliminating the basements from the building design (footing drains no deeper than the road underdrains), or else applying to the City for an amendment with engineering support.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 6,
+        "quote": "approval is hereby conditioned on Appellee-Applicants= either eliminating the basements from the building design,"
+       }
+      ]
+     }
+    ],
+    "related_dockets": [
+     {
+      "docket": "42-3-01 Vtec",
+      "relationship": "Consolidated appeal of the DRB's final plat approval of the same project; the matter proceeded as that appeal.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "final plat approval (Docket No. 42-3-01 Vtec)"
+       },
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "the matter was to proceed as an appeal of the final plat approval."
+       }
+      ]
+     },
+     {
+      "docket": "unknown",
+      "relationship": "Supreme Court appeal concerning whether the intervenors could continue the appeal after the original appellants withdrew.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 1,
+        "quote": "after appeal to the Supreme Court, the Intervenors Katherine W. Desautels"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "discretionary with the Board (and hence this Court in this de novo appeal)."
+      },
+      {
+       "doc": 2,
+       "page": 1,
+       "quote": "An evidentiary hearing was held in this matter before Merideth"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "218-9-00 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a DRB preliminary plat approval for an eight-unit PRD of new houses and duplexes: municipal appeal about new housing."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court calls it 'this de novo appeal', held an evidentiary hearing and itself granted the application."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing undated; start is the Sept. 10, 2002 entry order (on_or_before). End is the Aug. 1, 2003 final decision in the consolidated appeals; no later proceedings are shown. This docket's preliminary plat appeal was treated as essentially moot and merged into the final plat appeal, so the decision concludes both."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "The decisions describe both the preliminary and final plat approvals as for the eight-unit PRD (four single-family plus two duplexes = 8 units). Lots are not stated (condominium), so lots unknown."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "Preliminary plat approval was 'granted'; whether it carried conditions and its date are not stated for this docket."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "The Garens brought this docket's appeal and later withdrew; their relationship and representation are not stated. Intervenors Desautels (represented neighbors on Venus Avenue) continued the consolidated appeal, which by then proceeded as the final plat appeal, so they are not listed as appellants of this docket."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "The statement of questions, issued under both dockets, turns on evaluative criteria (design quality, neighborhood pattern, undue adverse effect). This docket's own appeal was treated as essentially moot and merged into the final plat appeal."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "medium",
+   "note": "The leading questions (intent criteria, design review criteria, compatibility with single-family pattern) are evaluative; same caveat about the merged moot docket."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Final decision granting the application under both dockets; nothing pending shown, though this docket was merged as essentially moot rather than separately decided."
+  },
+  {
+   "field": "housing_changes",
+   "confidence": "medium",
+   "note": "The basement-elimination condition changes the buildings' design; it is offered with an alternative (apply for an amendment)."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T00:00:00Z",
+   "note": "Labeled from both decisions; this preliminary plat docket merged into the final plat appeal (42-3-01 Vtec), which ended in a de novo approval with conditions."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:55:18+00:00",
+   "note": "Appellants: one entry per named person or organization"
+  }
+ ]
+}

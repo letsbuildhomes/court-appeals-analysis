@@ -1,0 +1,502 @@
+{
+ "g-73-3-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision of the Development Review Board (DRB) of the Town of Richmond",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "denial of Appellant= s zoning permit application for a single-family residence",
+   "doc": 1,
+   "page": 1,
+   "note": "Application for a new 27x66 single-family house."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "denial of Appellant= s zoning permit application for a single-family residence",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Only summary judgment decision; no statement of how the appeal is heard."
+  },
+  "decision_outcome": {
+   "value": "denied",
+   "quote": "The DRB upheld the denial on appeal.",
+   "doc": 1,
+   "page": 3,
+   "note": "Zoning Administrator denied; DRB upheld denial. DRB decision date not stated."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 3
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "We will hold a telephone conference on July 1, 2003 to discuss the",
+   "doc": 1,
+   "page": 4,
+   "note": "Summary judgment for Town, but remaining issues in the three matters still to be discussed; no final conclusion shown."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "summary judgment is hereby ENTERED for",
+   "doc": 1,
+   "page": 4,
+   "note": "Summary judgment for the Town in 73-3-02."
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "construct a 27' x 66' single-family house",
+   "doc": 1,
+   "page": 3
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 3
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Isaac Cowan",
+     "relationship": "developer",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Appellant is represented by John W. O= Donnell, Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "discretion_involved": {
+   "value": "no",
+   "quote": "do not fall within a use category approvable under",
+   "doc": 1,
+   "page": 3,
+   "note": "Turns on fixed flood-hazard district use lists."
+  },
+  "duration_start": {
+   "value": "2003-06-09 on_or_before",
+   "quote": "Done at Barre, Vermont, this 9 day of June, 2003.",
+   "doc": 1,
+   "page": 4,
+   "note": "Court filing date not stated; earliest dated event."
+  },
+  "duration_end": {
+   "value": "2003-06-09 on_or_after",
+   "quote": "Done at Barre, Vermont, this 9 day of June, 2003.",
+   "doc": 1,
+   "page": 4
+  },
+  "note": "Shared decision with enforcement docket 102-5-02 and Superior Court septic case; only 73-3-02 counted."
+ },
+ "g-88-4-02-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Brian W. Blair and Danielle C. Devlin appealed from that decision in Docket No. 88-4-02 Vtec.",
+   "doc": 1,
+   "page": 1,
+   "note": "Appeal of the (zoning) variance granted to Habitat; deciding body not named but follows DRB/ZBA proceedings."
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "denial of its application to construct a single-family dwelling",
+   "doc": 1,
+   "page": 1,
+   "note": "New single-family house on Lot 9."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "denial of its application to construct a single-family dwelling",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Only motions for summary judgment; hearing mode not stated."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "applied for and was granted a variance",
+   "doc": 1,
+   "page": 1,
+   "note": "Variance granted; date and body not stated. The Court decision in this docket concerns the variance criteria."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "to discuss the briefing schedule on Lot 7 &amp; 8 Owners= Motion in Docket No. 88-4-02 Vtec",
+   "doc": 1,
+   "page": 4
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Variance granted by municipality; whether a permit for the house exists not stated."
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "to construct a single-family residence on Lot 9",
+   "doc": 1,
+   "page": 3
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 3,
+   "note": "Existing lot 9; no new lots stated."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Brian W. Blair and Danielle C. Devlin",
+     "relationship": "neighbor",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Mr. Blair and Ms. Devlin are represented by Robert J. Perry, Esq",
+   "doc": 1,
+   "page": 1,
+   "note": "Two individuals, one appeal; owners of adjacent Lots 7 and 8."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Variance criteria are statutory; no evaluative contention shown."
+  },
+  "duration_start": {
+   "value": "2002-12-12 on_or_before",
+   "quote": "Done at Barre, Vermont, this 12th day of December, 2002.",
+   "doc": 1,
+   "page": 4,
+   "note": "Filing date not stated."
+  },
+  "duration_end": {
+   "value": "2002-12-12 on_or_after",
+   "quote": "Done at Barre, Vermont, this 12th day of December, 2002.",
+   "doc": 1,
+   "page": 4
+  }
+ },
+ "g-33-2-19-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Count 1, Municipal ZBA Conditional Use (33-2-19 Vtec)",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Only appellee Twin Pines Housing Trust hints at housing; proposal not described."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "Count 1, Municipal ZBA Conditional Use (33-2-19 Vtec)",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "Mediation is scheduled for October 2, 2019.",
+   "doc": 1,
+   "page": 1
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Cynthia Monroe",
+     "relationship": "unknown",
+     "representation": "unknown"
+    },
+    {
+     "name": "Catherine Melocik",
+     "relationship": "unknown",
+     "representation": "unknown"
+    }
+   ],
+   "quote": "Appellants Cynthia Monroe and Catherine Melocik seek an amendment",
+   "doc": 1,
+   "page": 1,
+   "note": "Representation: they ask time 'to potentially retain legal representation' (suggests none) but pro_se not stated."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_start": {
+   "value": "2019-08-19 on_or_before",
+   "quote": "The parties participated in an August 19, 2019 status conference with the Court.",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_end": {
+   "value": "2019-09-26 on_or_after",
+   "quote": "Electronically signed on September 26, 2019",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-110-5-06-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision of the Planning Commission of the",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "proposed 48‐unit “congregate housing facility”",
+   "doc": 1,
+   "page": 1,
+   "note": "Congregate housing residence, treated as care home type."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "proposed 48‐unit “congregate housing facility”",
+   "doc": 1,
+   "page": 1,
+   "note": "Medium: congregate facility could be argued non-housing, but a residence."
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Only a standing dismissal; not established."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "granting final plan approval to Appellee‐Applicants",
+   "doc": 1,
+   "page": 1,
+   "note": "Date not stated."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "is GRANTED, concluding this appeal.",
+   "doc": 1,
+   "page": 5
+  },
+  "permission": {
+   "value": "allowed",
+   "quote": "granting final plan approval to Appellee‐Applicants",
+   "doc": 1,
+   "page": 1,
+   "note": "Approval stands after dismissal."
+  },
+  "proposed_units": {
+   "value": 48,
+   "quote": "proposed 48‐unit “congregate housing facility”",
+   "doc": 1,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Mary E. Post",
+     "relationship": "other",
+     "representation": "pro_se"
+    }
+   ],
+   "quote": "Appellant has\nappeared and represents herself",
+   "doc": 1,
+   "page": 1,
+   "note": "Court found her not in the immediate neighborhood (lives 0.9 mile away)."
+  },
+  "discretion_involved": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Only standing decided."
+  },
+  "duration_start": {
+   "value": "2006-09-25 on_or_before",
+   "quote": "Done at Berlin, Vermont, this 25th day of September, 2006.",
+   "doc": 1,
+   "page": 5,
+   "note": "Filing date not stated."
+  },
+  "duration_end": {
+   "value": "2006-09-25 exact",
+   "quote": "is GRANTED, concluding this appeal.",
+   "doc": 1,
+   "page": 5
+  }
+ },
+ "g-170-12-14-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appeal the Jericho Development Review Board’s (DRB) October 27, 2014 final plat",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "authorizing a six-unit, three-duplex planned unit development (PUD)",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "authorizing a six-unit, three-duplex planned unit development (PUD)",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "Based upon the evidence presented at trial, which was put into context by the site visit,",
+   "doc": 2,
+   "page": 4,
+   "note": "Court held trial and site visit and made own findings and imposed conditions; no explicit 'de novo' phrase."
+  },
+  "decision_outcome": {
+   "value": "approved_with_conditions",
+   "quote": "The Jericho DRB’s October 27, 2014 approval sets forth the following 19 conditions:",
+   "doc": 2,
+   "page": 8,
+   "note": "Final plat subdivision approval."
+  },
+  "decision_date": {
+   "value": "2014-10-27",
+   "quote": "October 27, 2014 final plat subdivision approval",
+   "doc": 2,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "This completes the current proceedings before this Court.",
+   "doc": 2,
+   "page": 18,
+   "note": "No further appeal shown; ministerial remand."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "We therefore impose these",
+   "doc": 2,
+   "page": 18,
+   "note": "Court imposes the 19 DRB conditions and remands for zoning permit."
+  },
+  "proposed_units": {
+   "value": 6,
+   "quote": "six-unit, three-duplex PUD",
+   "doc": 2,
+   "page": 1
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 2,
+   "page": 5,
+   "note": "Two-lot subdivision: one lot with three duplex footprint lots, one common land; count of new residential lots not clear."
+  },
+  "appellants": {
+   "value": [
+    {
+     "name": "Kevin Trout et al. (11 individuals)",
+     "relationship": "neighbor",
+     "representation": "represented"
+    }
+   ],
+   "quote": "Attorney for Appellants Kevin Trout",
+   "doc": 1,
+   "page": 3,
+   "note": "Relationship inferred from abutting Foothills residential development; 11 appellants in one group."
+  },
+  "discretion_involved": {
+   "value": "yes",
+   "quote": "The Project is compatible with the existing character of the",
+   "doc": 2,
+   "page": 14,
+   "note": "Compatibility with surrounding rural land under PUD Section 10.13.1.3."
+  },
+  "duration_start": {
+   "value": "2014-12-03 exact",
+   "quote": "Appellants filed their notice of appeal with the Environmental Division on December 3, 2014.",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_end": {
+   "value": "2016-02-04 exact",
+   "quote": "This completes the current proceedings before this Court.",
+   "doc": 2,
+   "page": 18,
+   "note": "Decision signed Feb 4, 2016; no appeal shown."
+  }
+ }
+}

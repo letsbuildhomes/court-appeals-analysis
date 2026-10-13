@@ -1,0 +1,174 @@
+{
+ "g-116-9-16-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "thereby commencing this enforcement action",
+   "doc": 1,
+   "page": 2,
+   "note": "ANR enforcement of administrative order; no municipal decision appealed"
+  },
+  "housing": {
+   "value": "no",
+   "quote": "operates an automobile towing and recovery business",
+   "doc": 1,
+   "page": 1
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "operates an automobile towing and recovery business",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-105-6-10-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "The Town of Georgia (“Town”) has brought an enforcement action",
+   "doc": 1,
+   "page": 1,
+   "note": "Defendants did not appeal the NOV; town enforcement"
+  },
+  "housing": {
+   "value": "no",
+   "quote": "Defendants did not appeal the issuance of the NOV.",
+   "doc": 1,
+   "page": 2,
+   "note": "NOV/enforcement about a second dwelling (trailer); not new housing under the guide"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "Defendants did not appeal the issuance of the NOV.",
+   "doc": 1,
+   "page": 2
+  }
+ },
+ "g-75-7-18-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appeal a decision of the City of Burlington Development Review Board",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "upholding a Notice of Violation",
+   "doc": 1,
+   "page": 1,
+   "note": "Appeal of NOV alleging unpermitted duplex use"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "upholding a Notice of Violation",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-159-7-08-vtec": {
+  "municipal_appeal": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Entry order only; caption names 'Kibbe Non-Enforcement Decision' but the text does not say what municipal decision is appealed"
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Text says only that the docket is inactive; what it concerns is not established (sibling dockets concern a house and septic)"
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "the parties agreed to place Docket No. 159-7-08 Vtec on inactive status",
+   "doc": 1,
+   "page": 1,
+   "note": "Neither fact established; a non-enforcement decision would likely be excluded as an NOV-type matter"
+  }
+ },
+ "g-68-6-19-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "This matter is an appeal from a Town of Norwich (Town) Development Review Board",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Title 'Eller Zoning Violation' only; the order never says what is proposed or alleged. Likely an NOV (would be no) but not stated"
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "This matter is an appeal from a Town of Norwich (Town) Development Review Board",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-72-5-03-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant Kevin Blakeman appealed from a decision of the Development Review Board (DRB) of",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "upholding the zoning administrator= s determination of the &gt; zoning",
+   "doc": 1,
+   "page": 1,
+   "note": "Zoning-status/grandfathering dispute over existing dwellings and violations; no new housing proposed"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "The record does not contain adequate evidence from which the",
+   "doc": 1,
+   "page": 4
+  }
+ },
+ "g-132-6-00-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "affirming the Zoning Administrator= s decision not",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "use by seven unrelated students of",
+   "doc": 1,
+   "page": 1,
+   "note": "Student occupancy of an existing house; no construction"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "use by seven unrelated students of",
+   "doc": 1,
+   "page": 1
+  }
+ },
+ "g-56-4-10-vtec": {
+  "municipal_appeal": {
+   "value": "no",
+   "quote": "determining that their Act 250 applications to subdivide and auction three lots from",
+   "doc": 1,
+   "page": 1,
+   "note": "Act 250 district coordinator, not municipal"
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "",
+   "doc": 1,
+   "page": 1,
+   "note": "Subdivision into lots; no house or construction proposed and purpose not stated"
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "determining that their Act 250 applications to subdivide and auction three lots from",
+   "doc": 1,
+   "page": 1
+  }
+ }
+}

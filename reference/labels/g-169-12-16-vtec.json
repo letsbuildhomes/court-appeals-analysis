@@ -1,0 +1,28 @@
+{
+  "case": "g-169-12-16-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-169-12-16-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "Docket 169-12-16 Vtec is an appeal of an Act 250 permit issued by the District #4 Environmental Commission to VTrans for a highway interchange (the Diverging Diamond Interchange at I-89 Exit 16), not a municipal land-use decision, and the project is nonresidential road infrastructure.",
+      "municipal_appeal": "no",
+      "housing": "no",
+      "evidence": [
+        {"doc": 11, "page": 1, "quote": "RL Vallee, Inc. (Vallee) and Timberlake Associates, LLC (Timberlake) appeal Act 250 permit #4C1271"},
+        {"doc": 11, "page": 1, "quote": "issued jointly on November 28, 2016 by the District #4 Environmental Commission to the Vermont Agency of Transportation (VTrans) for the construction of the Diverging Diamond Interchange and related improvements (the Project)."},
+        {"doc": 3, "page": 1, "quote": "Timberlake seeks to appeal an Act 250 permit granted to the Vermont Agency of Transportation (VTrans) to construct a Diverging Diamond Interchange and related improvements (the DDI project) at I-89 Exit 16 in Colchester."}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Every document headed 169-12-16 Vtec (docs 3, 9-13) describes an appeal of Act 250 permit #4C1271 issued by the District #4 Environmental Commission to VTrans for a highway interchange; no municipal decision and no housing. Shared decisions with 50-6-16 Vtec (stormwater permit) and 122-10-16 Vtec (MS4) concern separate state-permit dockets; nothing taken from them. Read in part; scope established early per instructions."},
+    {"field": "municipal_appeal", "confidence": "high", "note": "Act 250 District Commission permit appeal, which the guide classifies as no."},
+    {"field": "housing", "confidence": "high", "note": "Project is a road interchange and related improvements; no housing terms appear in the case text."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T00:00:00Z", "note": "Excluded: Act 250 appeal of VTrans Diverging Diamond Interchange permit; read in part once scope was clear."}]
+}

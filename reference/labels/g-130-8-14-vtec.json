@@ -1,0 +1,26 @@
+{
+  "case": "g-130-8-14-vtec",
+  "result": {
+    "schema": "appeal-result-2",
+    "case": "g-130-8-14-vtec",
+    "disposition": {
+      "value": "excluded",
+      "reason": "A neighbor appealed the Village of Woodstock DRB's conditional use approval for fencing, goutweed replacement and removal of a maple tree at an existing house: a municipal appeal, but about landscaping and accessory work, not new housing.",
+      "municipal_appeal": "yes",
+      "housing": "no",
+      "evidence": [
+        {"doc": 1, "page": 1, "quote": "seek conditional use approval to install fencing, remove and replace goutweed with conservation mix, and remove a hollowed out sugar maple tree on their property."},
+        {"doc": 1, "page": 1, "quote": "Neighboring landowner Jennifer Falvey timely appealed that decision to this Court"},
+        {"doc": 1, "page": 1, "quote": "Applicants Kevin and Diane Dugan own the house and property located at 37 Elm Street"}
+      ]
+    },
+    "records": []
+  },
+  "labeled": {"case": ["disposition", "municipal_appeal", "housing"], "records": {}},
+  "judgments": [
+    {"field": "disposition", "confidence": "high", "note": "Appeal of a DRB conditional use approval (municipal appeal = yes) for fencing, landscaping and a vent at an existing house; the disputed items were a terrace, fire pit and pathway. Accessory work at a house is not new housing, so excluded."}
+  ],
+  "disputed": [],
+  "questions": [],
+  "history": [{"step": "labeled", "by": "claude-opus labeler", "at": "2026-10-13T12:00:00Z", "note": "Excluded: neighbor appeal of fencing/landscaping approval at an existing house; no new housing."}]
+}
