@@ -464,15 +464,16 @@ class Models:
         return any(e['event'] == 'sent' and e['key'] == key and e.get('resend') for e in self.entries)
 
     # Calls -----------------------------------------------------------------
-    def ask(self, provider, request, accept, on_attempt=None, step=None):
+    def ask(self, provider, request, accept, on_attempt=None, step=None, items=None):
         """Call, then ``accept(value)``; on rejection try further samples within the run's limit.
 
         Returns ``(accepted, value, key)``. ``accept`` raises to reject.
-        ``on_attempt(key, kind, error)`` is told about every attempt; ``step`` labels its ledger entries.
+        ``on_attempt(key, kind, error)`` is told about every attempt; ``step`` labels its ledger entries,
+        and ``items`` names the items a sent call is for.
         """
         errors = []
         for sample in range(self.resamples+1):
-            value, key, kind = self.call(provider, request, sample, step=step)
+            value, key, kind = self.call(provider, request, sample, step=step, items=items)
             try:
                 accepted = accept(value)
             except Exception as exc:
@@ -485,7 +486,7 @@ class Models:
             return accepted, value, key
         raise Rejected('; '.join(errors[-3:]))
 
-    def call(self, provider, request, sample=0, allow_repair=True, step=None):
+    def call(self, provider, request, sample=0, allow_repair=True, step=None, items=None):
         """Return ``(value, key, kind)``; kind is reused, new, resent or repaired."""
         key = call_key(provider, request, sample)
         request_file, result_file = self.store.file(key, '.request.json'), self.store.file(key, '.result.json')
@@ -549,7 +550,8 @@ class Models:
                 save_json(result_file, state)
                 save_json(request_file, request)
                 save_json(self.store.file(key, '.sent.json'), sent)
-                self.log(event='sent', key=key, attempt=attempt, usd=bound, resend=resending or None, step=step)
+                self.log(event='sent', key=key, attempt=attempt, usd=bound, resend=resending or None, step=step,
+                         items=list(items) if items else None)
         if repair is not None:
             return self._repair(provider, key, request, repair, step), key, 'repaired'
         return self._send(provider, key, request, sent, state, allow_repair, lock, step), key, \
@@ -652,11 +654,12 @@ def _in_flight(store, key):
 
 
 def ledger_summary(entries, since=None, points=240):
-    """Spending, calls and tokens from a run's ledger: totals, per step, and spending over time.
+    """Spending, calls and tokens from a run's ledger: totals, per step, spending over time and calls in flight.
 
     Spending counts each attempt's final charge, or its reservation while it is
-    still outstanding. ``since`` (an ISO time) also reports the part of the run
-    after it, such as the current execution.
+    still outstanding; ``charged_usd`` is the charges alone and
+    ``outstanding_usd`` the reservations. ``since`` (an ISO time) also reports
+    the part of the run after it, such as the current execution.
     """
     reserved, charged, steps = {}, {}, {}
     totals = {'spent_usd': 0.0, 'outstanding_usd': 0.0, 'reused_value_usd': 0.0, 'would_spend_usd': 0.0,
@@ -666,8 +669,8 @@ def ledger_summary(entries, since=None, points=240):
 
     def step_of(entry):
         name = entry.get('step') or '(unlabeled)'
-        return steps.setdefault(name, {'step': name, 'spent_usd': 0.0, 'calls': {'reused': 0, 'sent': 0, 'failed': 0,
-                                                                                 'would_send': 0},
+        return steps.setdefault(name, {'step': name, 'spent_usd': 0.0, 'charged_usd': 0.0, 'outstanding_usd': 0.0,
+                                       'in_flight': 0, 'calls': {'reused': 0, 'sent': 0, 'failed': 0, 'would_send': 0},
                                        'tokens': {'input': 0, 'cached': 0, 'output': 0}, 'seconds': 0.0})
     for e in entries:
         event = e['event']
@@ -679,6 +682,7 @@ def ledger_summary(entries, since=None, points=240):
             charged[e['attempt']] = e
             step = step_of(e)
             step['spent_usd'] += e['usd']
+            step['charged_usd'] += e['usd']
             step['seconds'] += e.get('seconds') or 0
             running += e['usd']
             timeline.append([e['at'], round(running, 6)])
@@ -700,13 +704,20 @@ def ledger_summary(entries, since=None, points=240):
             step_of(e)['calls']['would_send'] += 1
     outstanding = {a: e for a, e in reserved.items() if a not in charged}
     totals['outstanding_usd'] = sum(e['usd'] for e in outstanding.values())
-    totals['spent_usd'] = sum(e['usd'] for e in charged.values()) + totals['outstanding_usd']
+    totals['charged_usd'] = sum(e['usd'] for e in charged.values())
+    totals['spent_usd'] = totals['charged_usd'] + totals['outstanding_usd']
     totals['reused_value_usd'] = sum(reused_keys.values())
     for e in outstanding.values():
-        step_of(e)['spent_usd'] += e['usd']
+        step = step_of(e)
+        step['spent_usd'] += e['usd']
+        step['outstanding_usd'] += e['usd']
+        step['in_flight'] += 1
+    in_flight = sorted(({'step': e.get('step'), 'items': e.get('items') or [], 'sent_at': e['at'], 'usd': e['usd'],
+                         'resend': bool(e.get('resend'))} for e in outstanding.values()), key=lambda c: c['sent_at'])
     if len(timeline) > points:
         stride = len(timeline)/points
         timeline = [timeline[int(i*stride)] for i in range(points)] + [timeline[-1]]
     rounded = {k: round(v, 6) if isinstance(v, float) else v for k, v in totals.items()}
-    return {**rounded, 'steps': sorted(({**s, 'spent_usd': round(s['spent_usd'], 6)} for s in steps.values()),
-                                       key=lambda s: s['step']), 'timeline': timeline}
+    money = ('spent_usd', 'charged_usd', 'outstanding_usd')
+    return {**rounded, 'steps': sorted(({**s, **{k: round(s[k], 6) for k in money}} for s in steps.values()),
+                                       key=lambda s: s['step']), 'timeline': timeline, 'in_flight': in_flight}

@@ -80,7 +80,8 @@ class Api:
                 'mode': record['options']['mode'], 'limit_usd': record['options']['limit_usd'],
                 'keys': len(record['keys']) if record.get('keys') else None, 'total': total, 'done': done,
                 'failed': (record.get('items') or {}).get('failed') or {},
-                'spent_usd': spending['spent_usd'], 'would_spend_usd': spending['would_spend_usd'],
+                'spent_usd': spending['spent_usd'], 'charged_usd': spending['charged_usd'],
+                'outstanding_usd': spending['outstanding_usd'], 'would_spend_usd': spending['would_spend_usd'],
                 'reused_value_usd': spending['reused_value_usd'], 'calls': spending['calls'],
                 'started_at': record.get('execution_started_at') or record.get('started_at'),
                 'finished_at': record.get('finished_at'), 'executions': record.get('executions'),
@@ -123,8 +124,13 @@ class Api:
                 entry['eta_seconds'] = eta(step)
             steps.append(entry)
         known = {s['path'] for s in steps}
-        tree = self.lab.descriptor(self.pipelines.load(record['pipeline']))
-        return {'record': record, 'state': live['state'], 'running': live['running'],
+        resolved = self.pipelines.load(record['pipeline'])
+        tree = self.lab.descriptor(resolved)
+        base = (resolved.get('definition') or {}).get('base')
+        return {'pipeline': {'name': resolved.get('name'), 'base': base,
+                             'base_name': self.pipelines.load(base).get('name') if base else None,
+                             'base_tags': self.tags().get(base, []) if base else []},
+                'record': record, 'state': live['state'], 'running': live['running'],
                 'updated_at': progress.get('updated_at'), 'total': progress.get('total'), 'steps': steps,
                 'spending': {k: v for k, v in live['spending'].items() if k != 'steps'},
                 'unlabeled_steps': [s for s in live['spending']['steps'] if s['step'] not in known],
@@ -137,6 +143,10 @@ class Api:
         live = self.runner.live(name)
         record, progress = live['record'], live['progress'] or {}
         items = {k: {**v, 'state': item_state(v)} for k, v in progress.get('items', {}).items()}
+        # A step noting something under its own name, not an item's, such as a download it skipped.
+        for key, item in items.items():
+            if key == item.get('step') and not item.get('failed'):
+                item['state'] = 'note'
         if live['state'] != 'running' and record.get('output'):
             output = self.dataset(record['output'])[1]
             for key, value in output.items():

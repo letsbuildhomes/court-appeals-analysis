@@ -170,6 +170,10 @@ input[type=search] { height:38px; background:white; border:1px solid var(--line)
 table.cases th:first-child,table.cases td:first-child { width:24%; }
 table.cases td:nth-child(3) { width:150px; }
 table.cases td:nth-child(4) { width:90px; }
+table.run-items th:first-child,table.run-items td:first-child { width:26%; }
+table.run-items td:nth-child(2) { width:130px; }
+table.run-items td:nth-child(3) { width:170px; }
+table.run-items td:nth-child(4) { width:auto; }
 .case-link { font-size:13px; font-weight:620; text-decoration:none; }
 .case-link:hover { text-decoration:underline; }
 .cell-sub { display:block; color:var(--muted); font-size:11px; font-weight:400; }
@@ -367,8 +371,13 @@ mark { background:#fff0a6; color:inherit; }
 .track.small { height:6px; min-width:110px; }
 table.runs td, table.steps td { vertical-align:middle; }
 tr.click:hover { background:#f7faf8; }
-.step-name { display:flex; align-items:center; font-weight:550; }
-.indent-1 { width:14px; } .indent-2 { width:28px; } .indent-3 { width:42px; } .indent-4 { width:56px; }
+.step-name { font-weight:550; }
+table.steps tr.lineage td { background:#f1f6f4; }
+table.steps tr.lineage .step-name { color:var(--accent); }
+table.steps tr.lineage-self td { background:#e3efea; }
+.track.split { display:flex; }
+.track.split .fill { border-radius:0; }
+.track .fill.reserved { background:repeating-linear-gradient(135deg, #b9cde3 0 4px, #dbe6f1 4px 8px); }
 .step-state { font-size:12px; font-weight:600; color:var(--muted); }
 .step-state.running, .step-state.working { color:#245a9a; }
 .step-state.done { color:var(--better); }

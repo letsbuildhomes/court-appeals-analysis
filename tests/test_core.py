@@ -312,6 +312,22 @@ class ModelsTests(unittest.TestCase):
         self.assertEqual([s['step'] for s in summary['steps']], ['extract/triage'])
         self.assertEqual(len(summary['timeline']), 1)
 
+    def test_the_ledger_summary_separates_charges_from_calls_in_flight(self):
+        from court.core.models import ledger_summary
+        entries = [{'event': 'sent', 'key': 'a', 'attempt': '1', 'usd': 0.05, 'step': 'extract/triage', 'items': ['g-1'],
+                    'at': '2026-10-12T00:00:00+00:00'},
+                   {'event': 'charged', 'key': 'a', 'attempt': '1', 'usd': 0.01, 'status': 'ok', 'step': 'extract/triage',
+                    'at': '2026-10-12T00:00:10+00:00'},
+                   {'event': 'sent', 'key': 'b', 'attempt': '2', 'usd': 0.04, 'step': 'extract/triage', 'items': ['g-2'],
+                    'at': '2026-10-12T00:00:11+00:00'}]
+        summary = ledger_summary(entries)
+        self.assertAlmostEqual(summary['charged_usd'], 0.01)
+        self.assertAlmostEqual(summary['outstanding_usd'], 0.04)
+        self.assertAlmostEqual(summary['spent_usd'], 0.05)
+        self.assertEqual([(c['step'], c['items']) for c in summary['in_flight']], [('extract/triage', ['g-2'])])
+        step = summary['steps'][0]
+        self.assertEqual((step['charged_usd'], step['outstanding_usd'], step['in_flight']), (0.01, 0.04, 1))
+
     def test_failed_deliveries_are_resent_only_when_allowed_and_once_per_run(self):
         self.models(replies=[answer('{"x"', reason='length')], mode='send', limit=1.0)
         with self.assertRaises(DeliveryFailed):

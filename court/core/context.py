@@ -135,7 +135,8 @@ class Context:
         def attempt(key, kind, error):
             self.note(keys, 'call', call=key, kind=kind, rejected=error, batch=list(keys) if len(keys) > 1 else None)
         try:
-            accepted, _, _ = self.services.models.ask(provider, request, accept, attempt, step=self.path)
+            accepted, _, _ = self.services.models.ask(provider, request, accept, attempt, step=self.path,
+                                                      items=keys)
             return accepted
         except (Unavailable, Rejected) as exc:
             self.note(keys, 'unavailable' if isinstance(exc, Unavailable) else 'rejected', reason=str(exc),
