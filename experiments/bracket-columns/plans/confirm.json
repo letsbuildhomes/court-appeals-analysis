@@ -1,0 +1,30 @@
+{
+  "experiment": "bracket-columns",
+  "round": "confirm",
+  "focus": "extract",
+  "keys": 1392,
+  "removed": [],
+  "candidate": "p-c21a61044470",
+  "baseline": "p-a2cede8df35f",
+  "changes": [
+    {
+      "path": "cases/group",
+      "change": "changed",
+      "step": [
+        "cases/group:caption-dockets",
+        "cases/group:caption-dockets-bracket-columns"
+      ]
+    }
+  ],
+  "estimate": {
+    "spent_usd": 0,
+    "reused_value_usd": 12.084324,
+    "would_spend_usd": 1.829466,
+    "events": {
+      "reused": 2212,
+      "would_send": 34
+    }
+  },
+  "not_sent": 67,
+  "planned_at": "2026-10-13T00:34:35.912212+00:00"
+}

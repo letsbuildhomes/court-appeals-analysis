@@ -1,0 +1,977 @@
+{
+  "experiment": "bracket-columns",
+  "round": "probe",
+  "keys": [
+    "g-10-1-96-vtec",
+    "g-10-1-97-vtec",
+    "g-100-5-02-vtec",
+    "g-165-9-99-vtec",
+    "g-202-10-99-vtec",
+    "g-212-11-98-vtec",
+    "g-283-12-00-vtec",
+    "g-283-22-01-vtec",
+    "g-284-12-02-vtec",
+    "g-31-2-03-vtec",
+    "g-37-2-02-vtec",
+    "g-37-3-03-vtec",
+    "g-38-2-00-vtec",
+    "g-41-2-02-vtec",
+    "g-58-4-99-vtec",
+    "g-pdf-1d6a247e32ec"
+  ],
+  "selection": "changed",
+  "focus": "extract",
+  "inputs": {
+    "g-10-1-96-vtec": "changed",
+    "g-10-1-97-vtec": "changed",
+    "g-100-5-02-vtec": "changed",
+    "g-165-9-99-vtec": "changed",
+    "g-202-10-99-vtec": "changed",
+    "g-212-11-98-vtec": "changed",
+    "g-283-12-00-vtec": "changed",
+    "g-283-22-01-vtec": "removed",
+    "g-284-12-02-vtec": "changed",
+    "g-31-2-03-vtec": "removed",
+    "g-37-2-02-vtec": "changed",
+    "g-37-3-03-vtec": "changed",
+    "g-38-2-00-vtec": "changed",
+    "g-41-2-02-vtec": "changed",
+    "g-58-4-99-vtec": "changed",
+    "g-pdf-1d6a247e32ec": "removed"
+  },
+  "candidate": {
+    "pipeline": "p-c21a61044470",
+    "run": "bracket-columns-probe-c21a6104",
+    "output": "d-51c6fb69c86871c4"
+  },
+  "baseline": {
+    "pipeline": "p-a2cede8df35f",
+    "run": "september",
+    "output": "d-bff4b12fc8f0912c",
+    "settled": true
+  },
+  "changes": [
+    {
+      "path": "cases/group",
+      "change": "changed",
+      "step": [
+        "cases/group:caption-dockets",
+        "cases/group:caption-dockets-bracket-columns"
+      ]
+    }
+  ],
+  "summary": {
+    "cases": 16,
+    "verdicts": {
+      "unchanged": 8,
+      "worsened": 4,
+      "improved": 2,
+      "changed": 2
+    },
+    "flows": {
+      "ok": 11,
+      "missing": 3,
+      "broke": 2
+    },
+    "inputs": {
+      "changed": 13,
+      "removed": 3
+    },
+    "baseline": {
+      "cases": 16,
+      "processed": 16,
+      "failed": 0,
+      "uncertain": 1,
+      "records": 15,
+      "duration_known": 9,
+      "duration_exact": 1,
+      "facts_known": 197,
+      "fact_slots": 255
+    },
+    "candidate": {
+      "cases": 16,
+      "processed": 11,
+      "failed": 2,
+      "uncertain": 1,
+      "records": 8,
+      "duration_known": 6,
+      "duration_exact": 1,
+      "facts_known": 115,
+      "fact_slots": 136
+    },
+    "stability": {
+      "unchanged": 134,
+      "compared": 150
+    },
+    "records": {
+      "gained": 0,
+      "lost": 7
+    },
+    "fact_map": [
+      {
+        "key": "disposition",
+        "question": "Scope",
+        "label": "Disposition",
+        "total": 11,
+        "less_specific": 0,
+        "different": 1,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 10,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "municipal_appeal",
+        "question": "Scope",
+        "label": "Municipal appeal",
+        "total": 11,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 11,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "housing",
+        "question": "Scope",
+        "label": "Housing",
+        "total": 11,
+        "less_specific": 1,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 10,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "duration",
+        "question": "Duration",
+        "label": "Appeal duration",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "start",
+        "question": "Duration",
+        "label": "Start date",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "end",
+        "question": "Duration",
+        "label": "End date",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "decision_outcome",
+        "question": "Decision & status",
+        "label": "Municipal decision",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "decision_date",
+        "question": "Decision & status",
+        "label": "Decision date",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "litigation",
+        "question": "Decision & status",
+        "label": "Litigation status",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "permission",
+        "question": "Decision & status",
+        "label": "Permission status",
+        "total": 8,
+        "less_specific": 0,
+        "different": 1,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 7,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "discretion_involved",
+        "question": "Discretion",
+        "label": "Discretion involved",
+        "total": 8,
+        "less_specific": 1,
+        "different": 0,
+        "more_specific": 1,
+        "newly_measured": 0,
+        "unchanged": 6,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "discretion_central",
+        "question": "Discretion",
+        "label": "Discretion central",
+        "total": 8,
+        "less_specific": 1,
+        "different": 0,
+        "more_specific": 2,
+        "newly_measured": 0,
+        "unchanged": 5,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "appellants",
+        "question": "Appellants",
+        "label": "Appellants",
+        "total": 8,
+        "less_specific": 0,
+        "different": 2,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 6,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "representation",
+        "question": "Appellants",
+        "label": "Representation",
+        "total": 8,
+        "less_specific": 0,
+        "different": 2,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 6,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "municipality",
+        "question": "Project",
+        "label": "Municipality",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "units",
+        "question": "Project",
+        "label": "Proposed units",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 1,
+        "newly_measured": 0,
+        "unchanged": 7,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "lots",
+        "question": "Project",
+        "label": "Proposed lots",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "restrictions",
+        "question": "Effects",
+        "label": "Restrictions",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "housing_changes",
+        "question": "Effects",
+        "label": "Housing changes",
+        "total": 8,
+        "less_specific": 0,
+        "different": 3,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 5,
+        "corrected": 0,
+        "regressed": 0
+      },
+      {
+        "key": "related",
+        "question": "Links",
+        "label": "Related dockets",
+        "total": 8,
+        "less_specific": 0,
+        "different": 0,
+        "more_specific": 0,
+        "newly_measured": 0,
+        "unchanged": 8,
+        "corrected": 0,
+        "regressed": 0
+      }
+    ],
+    "headline": "2 broke; 2 improved; 2 worsened; 2 need judgment; 8 unchanged."
+  },
+  "accuracy": null,
+  "regressions": [
+    "g-100-5-02-vtec",
+    "g-202-10-99-vtec",
+    "g-38-2-00-vtec",
+    "g-58-4-99-vtec"
+  ],
+  "unfinished": [],
+  "cases": [
+    {
+      "case_id": "g-10-1-96-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-10-1-97-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-100-5-02-vtec",
+      "verdict": "worsened",
+      "chips": [
+        "1 less specific",
+        "Disposition in scope → uncertain",
+        "−4 records",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [
+        {
+          "label": "Housing",
+          "record": null,
+          "baseline": "yes",
+          "candidate": null,
+          "change": "less_specific",
+          "verified": null
+        },
+        {
+          "label": "Disposition",
+          "record": null,
+          "baseline": "in scope",
+          "candidate": "uncertain",
+          "change": "different",
+          "verified": null
+        }
+      ],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-165-9-99-vtec",
+      "verdict": "improved",
+      "chips": [
+        "1 more specific",
+        "3 different answers",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [
+        {
+          "label": "Appellants",
+          "record": "43-2-00 Vtec",
+          "baseline": 2,
+          "candidate": 1,
+          "change": "different",
+          "verified": null
+        },
+        {
+          "label": "Representation",
+          "record": "43-2-00 Vtec",
+          "baseline": "2 represented",
+          "candidate": "1 represented",
+          "change": "different",
+          "verified": null
+        },
+        {
+          "label": "Housing changes",
+          "record": "190-9-00 Vtec",
+          "baseline": 0,
+          "candidate": 1,
+          "change": "different",
+          "verified": null
+        }
+      ],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-202-10-99-vtec",
+      "verdict": "worsened",
+      "chips": [
+        "2 less specific",
+        "1 different answer",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [
+        {
+          "label": "Discretion involved",
+          "record": "33-2-01 Vtec",
+          "baseline": "no",
+          "candidate": null,
+          "change": "less_specific",
+          "verified": null
+        },
+        {
+          "label": "Discretion central",
+          "record": "33-2-01 Vtec",
+          "baseline": "not applicable",
+          "candidate": null,
+          "change": "less_specific",
+          "verified": null
+        },
+        {
+          "label": "Housing changes",
+          "record": "202-10-99 Vtec",
+          "baseline": 1,
+          "candidate": 0,
+          "change": "different",
+          "verified": null
+        }
+      ],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-212-11-98-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-283-12-00-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-283-22-01-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Only in baseline",
+        "Not in the candidate's input: merged into another case or removed before this step"
+      ],
+      "processing": {
+        "flow": "missing",
+        "baseline": "complete",
+        "candidate": null
+      },
+      "highlights": [],
+      "input": "removed"
+    },
+    {
+      "case_id": "g-284-12-02-vtec",
+      "verdict": "improved",
+      "chips": [
+        "3 more specific",
+        "4 different answers",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [
+        {
+          "label": "Permission status",
+          "record": "284-12-02 Vtec",
+          "baseline": "allowed",
+          "candidate": "allowed with conditions",
+          "change": "different",
+          "verified": null
+        },
+        {
+          "label": "Appellants",
+          "record": "284-12-02 Vtec",
+          "baseline": 9,
+          "candidate": 1,
+          "change": "different",
+          "verified": null
+        },
+        {
+          "label": "Representation",
+          "record": "284-12-02 Vtec",
+          "baseline": "9 pro se",
+          "candidate": "1 pro se",
+          "change": "different",
+          "verified": null
+        }
+      ],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-31-2-03-vtec",
+      "verdict": "changed",
+      "chips": [
+        "−1 record",
+        "Only in baseline",
+        "Not in the candidate's input: merged into another case or removed before this step"
+      ],
+      "processing": {
+        "flow": "missing",
+        "baseline": "complete",
+        "candidate": null
+      },
+      "highlights": [],
+      "input": "removed"
+    },
+    {
+      "case_id": "g-37-2-02-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-37-3-03-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-38-2-00-vtec",
+      "verdict": "worsened",
+      "chips": [
+        "Broke: delivery failure",
+        "−1 record",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "broke",
+        "baseline": "complete",
+        "candidate": "failed"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-41-2-02-vtec",
+      "verdict": "unchanged",
+      "chips": [
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "ok",
+        "baseline": "complete",
+        "candidate": "complete"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-58-4-99-vtec",
+      "verdict": "worsened",
+      "chips": [
+        "Broke: delivery failure",
+        "Input changed before this step"
+      ],
+      "processing": {
+        "flow": "broke",
+        "baseline": "complete",
+        "candidate": "failed"
+      },
+      "highlights": [],
+      "input": "changed"
+    },
+    {
+      "case_id": "g-pdf-1d6a247e32ec",
+      "verdict": "changed",
+      "chips": [
+        "−1 record",
+        "Only in baseline",
+        "Not in the candidate's input: merged into another case or removed before this step"
+      ],
+      "processing": {
+        "flow": "missing",
+        "baseline": "complete",
+        "candidate": null
+      },
+      "highlights": [],
+      "input": "removed"
+    }
+  ],
+  "steps": {
+    "(root)": {
+      "identical": 0,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "cases": {
+      "identical": 1379,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "cases/group": {
+      "identical": 1379,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "cases/render": {
+      "identical": 1379,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "extract": {
+      "identical": 0,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "extract/assemble": {
+      "identical": 0,
+      "changed": 11,
+      "removed": 5,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-41-2-02-vtec"
+      ]
+    },
+    "extract/draft": {
+      "identical": 0,
+      "changed": 5,
+      "removed": 2,
+      "added": 1,
+      "changed_keys": [
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-284-12-02-vtec",
+        "g-38-2-00-vtec"
+      ]
+    },
+    "extract/duration": {
+      "identical": 0,
+      "changed": 3,
+      "removed": 4,
+      "added": 0,
+      "changed_keys": [
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-284-12-02-vtec"
+      ]
+    },
+    "extract/review": {
+      "identical": 0,
+      "changed": 5,
+      "removed": 2,
+      "added": 1,
+      "changed_keys": [
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-284-12-02-vtec",
+        "g-38-2-00-vtec"
+      ]
+    },
+    "extract/size-limit": {
+      "identical": 0,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "extract/triage": {
+      "identical": 0,
+      "changed": 13,
+      "removed": 3,
+      "added": 0,
+      "changed_keys": [
+        "g-10-1-96-vtec",
+        "g-10-1-97-vtec",
+        "g-100-5-02-vtec",
+        "g-165-9-99-vtec",
+        "g-202-10-99-vtec",
+        "g-212-11-98-vtec",
+        "g-283-12-00-vtec",
+        "g-284-12-02-vtec",
+        "g-37-2-02-vtec",
+        "g-37-3-03-vtec",
+        "g-38-2-00-vtec",
+        "g-41-2-02-vtec",
+        "g-58-4-99-vtec"
+      ]
+    },
+    "fetch": {
+      "identical": 2560,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    },
+    "text": {
+      "identical": 18809,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    },
+    "text/native": {
+      "identical": 18809,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    },
+    "text/ocr": {
+      "identical": 534,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    },
+    "text/select": {
+      "identical": 18809,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    },
+    "text/usability": {
+      "identical": 18809,
+      "changed": 0,
+      "removed": 0,
+      "added": 0,
+      "changed_keys": []
+    }
+  },
+  "cost": {
+    "spent_usd": 0.296019,
+    "reused_value_usd": 0.211603,
+    "would_spend_usd": 0,
+    "events": {
+      "sent": 25,
+      "charged": 25,
+      "reused": 69,
+      "archived": 1
+    }
+  },
+  "status": "stopped",
+  "finished_at": "2026-10-13T00:33:39.260445+00:00"
+}

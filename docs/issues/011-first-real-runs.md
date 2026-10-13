@@ -14,3 +14,11 @@ stand-ins:
 
 **Recommendation:** Make the first real run of each small and capped (about
 $1 for model calls), and watch it in the web app.
+
+## Progress
+
+- 2026-10-12: Paid model calls work. The bracket-columns probe sent 25 real
+  calls under a $2 cap and was charged $0.30; the web app showed it live.
+  One review call ran out of output room twice, which the run reported as a
+  failed delivery rather than a wrong answer. Live downloading from the court
+  website is still untested.

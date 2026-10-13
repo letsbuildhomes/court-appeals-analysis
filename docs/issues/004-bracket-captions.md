@@ -39,3 +39,11 @@ through the lab. It's a good first experiment, but the lab needs
   tested by the experiment `bracket-columns`. Its plan picks 13 changed cases
   plus the 3 merged away. The probe needs real model calls for those 13,
   probably about $1; a $2 cap leaves room.
+- 2026-10-12: The probe ran on the 13 changed cases and the 3 merged away, for
+  $0.30. 2 improved, 2 worsened, 2 need judgment, 8 unchanged. Two cases,
+  `g-38-2-00-vtec` and `g-58-4-99-vtec`, broke: review checks them together
+  in one call, and its answer ran out of room (the output limit) twice, the
+  second time when resent. They need a larger output limit
+  (`--resend-max-tokens`) before the verdicts are complete. The confirm
+  round's plan picks every case; 67 need new calls, estimated at up to $1.83
+  for the first calls.
