@@ -14,6 +14,7 @@
     /api/lab/...                  the lab's views (court.lab.dashboard)
 """
 from collections import Counter
+from datetime import datetime, timezone
 import re
 import subprocess
 import tempfile
@@ -85,6 +86,9 @@ class Api:
                 'reused_value_usd': spending['reused_value_usd'], 'calls': spending['calls'],
                 'started_at': record.get('execution_started_at') or record.get('started_at'),
                 'finished_at': record.get('finished_at'), 'executions': record.get('executions'),
+                'history': [execution_row(e) for e in live['executions']],
+                'working_seconds': sum(execution_row(e)['seconds'] or 0 for e in live['executions']),
+                'unrecorded': max(0, (record.get('executions') or 1) - len(live['executions'])),
                 'current': [s['path'] for s in (progress or {}).get('steps', []) if not s.get('finished_at')]
                 if live['state'] == 'running' else []}
 
@@ -112,15 +116,18 @@ class Api:
         rest = sorted([r for r in rows if r['state'] != 'running'], key=lambda r: r['started_at'] or '', reverse=True)
         return {'runs': running + rest, 'tags': self.tags()}
 
-    def run(self, name):
+    def run(self, name, execution=''):
+        """One run, as one of its executions (the latest by default), with the run's totals."""
         live = self.runner.live(name)
         record = live['record']
-        progress = live['progress'] or {}
+        chosen, latest = pick_execution(live['executions'], execution)
+        progress = (live['progress'] or {}) if latest else {'steps': chosen.get('steps') or []}
+        spending = chosen['spending']
         steps = []
         for step in progress.get('steps', []):
-            spent = next((s for s in live['spending']['steps'] if s['step'] == step['path']), None)
+            spent = next((s for s in spending['steps'] if s['step'] == step['path']), None)
             entry = {**step, 'spending': spent}
-            if not step.get('finished_at') and live['state'] == 'running' and step.get('inputs'):
+            if latest and not step.get('finished_at') and live['state'] == 'running' and step.get('inputs'):
                 entry['eta_seconds'] = eta(step)
             steps.append(entry)
         known = {s['path'] for s in steps}
@@ -130,24 +137,36 @@ class Api:
         return {'pipeline': {'name': resolved.get('name'), 'base': base,
                              'base_name': self.pipelines.load(base).get('name') if base else None,
                              'base_tags': self.tags().get(base, []) if base else []},
-                'record': record, 'state': live['state'], 'running': live['running'],
+                'record': record, 'state': live['state'] if latest else chosen['status'], 'running': live['running'],
                 'updated_at': progress.get('updated_at'), 'total': progress.get('total'), 'steps': steps,
-                'spending': {k: v for k, v in live['spending'].items() if k != 'steps'},
-                'unlabeled_steps': [s for s in live['spending']['steps'] if s['step'] not in known],
+                'execution': execution_row(chosen), 'latest': latest,
+                'executions': [execution_row(e) for e in live['executions']],
+                'unrecorded': max(0, (record.get('executions') or 1) - len(live['executions'])),
+                'spending': {k: v for k, v in spending.items() if k != 'steps'},
+                'run_spending': {k: v for k, v in live['spending'].items() if k not in ('steps', 'timeline')},
+                'unlabeled_steps': [s for s in spending['steps'] if s['step'] not in known],
                 'items': dict(Counter(item_state(i) for i in progress.get('items', {}).values())),
                 'tree': tree, 'tags': self.tags().get(record['pipeline'], []),
                 'datasets': {path: {'id': i, 'kind': self.datasets.open(i).kind}
-                             for path, i in (record.get('outputs') or {}).items()}}
+                             for path, i in (record.get('outputs') or {}).items()} if latest else {}}
 
-    def run_items(self, name, q='', state='', offset='0', limit='100'):
+    def run_items(self, name, q='', state='', offset='0', limit='100', execution=''):
         live = self.runner.live(name)
         record, progress = live['record'], live['progress'] or {}
+        chosen, latest = pick_execution(live['executions'], execution)
+        if not latest:
+            # A past execution: its items are its final output, plus what its trace noted outside it.
+            record, progress = {'output': chosen.get('output')}, {'items': {}}
+            if chosen.get('traces'):
+                traces = self.dataset(chosen['traces'])[1]
+                progress['items'] = {k: {'step': e[-1]['step'], 'event': e[-1]['event'], 'kind': e[-1].get('kind')}
+                                     for k, e in traces.items() if e}
         items = {k: {**v, 'state': item_state(v)} for k, v in progress.get('items', {}).items()}
         # A step noting something under its own name, not an item's, such as a download it skipped.
         for key, item in items.items():
             if key == item.get('step') and not item.get('failed'):
                 item['state'] = 'note'
-        if live['state'] != 'running' and record.get('output'):
+        if (live['state'] != 'running' or not latest) and record.get('output'):
             output = self.dataset(record['output'])[1]
             for key, value in output.items():
                 base = items.get(key, {})
@@ -160,12 +179,15 @@ class Api:
         return {**page_of(rows, offset, limit), 'output': record.get('output'),
                 'states': dict(Counter(v['state'] for v in items.values()))}
 
-    def run_trace(self, name, key):
-        record = self.runner.load(name)
+    def run_trace(self, name, key, execution=''):
+        live = self.runner.live(name)
+        record, (chosen, latest) = live['record'], pick_execution(live['executions'], execution)
+        if not latest:
+            record = {'traces': chosen.get('traces')}
         if record.get('traces'):
             traces = self.datasets.open(record['traces'])
             return {'key': key, 'events': traces.get(key) if key in traces else [], 'final': True}
-        progress = self.runner.live(name)['progress'] or {}
+        progress = live['progress'] or {}
         return {'key': key, 'events': [progress.get('items', {}).get(key)] if key in progress.get('items', {}) else [],
                 'final': False}
 
@@ -304,12 +326,32 @@ class Api:
 
 def eta(step):
     """Seconds left for a running step, from how many of its items it has touched so far."""
-    from datetime import datetime, timezone
     touched, inputs = step.get('touched') or 0, step.get('inputs') or 0
     if touched < 3 or touched >= inputs:
         return None
     elapsed = (datetime.now(timezone.utc) - datetime.fromisoformat(step['started_at'])).total_seconds()
     return round(elapsed * (inputs - touched) / touched)
+
+
+def pick_execution(executions, number=''):
+    """The execution numbered ``number``, or the latest; and whether it is the latest."""
+    chosen = next((e for e in executions if str(e['number']) == str(number)), executions[-1])
+    return chosen, chosen is executions[-1]
+
+
+def execution_row(entry):
+    """An execution's summary: when, how long, how it was started and ended, and what it sent and charged."""
+    spending = entry.get('spending') or {}
+    start, end = entry.get('started_at'), entry.get('finished_at')
+    seconds = None
+    if start and (end or entry.get('status') == 'running'):
+        finish = datetime.fromisoformat(end) if end else datetime.now(timezone.utc)
+        seconds = round((finish - datetime.fromisoformat(start)).total_seconds(), 1)
+    return {'number': entry['number'], 'started_at': start, 'finished_at': end, 'seconds': seconds,
+            'status': entry.get('status'), 'options': entry.get('options') or {}, 'items': entry.get('items'),
+            'error': entry.get('error'), 'charged_usd': spending.get('charged_usd', 0),
+            'outstanding_usd': spending.get('outstanding_usd', 0), 'calls': spending.get('calls') or {},
+            'tokens': spending.get('tokens') or {}}
 
 
 def item_state(item):

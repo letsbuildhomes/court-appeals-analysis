@@ -196,6 +196,26 @@ class RunnerTests(unittest.TestCase):
             subset = f.runner.run('subset', pipeline['id'], {'input': words.id}, keys=['a'])
             self.assertEqual(list(f.datasets.open(subset['output']).load()), ['a'])
 
+    def test_each_execution_of_a_run_is_kept(self):
+        with TemporaryDirectory() as tmp:
+            f = Fixture(tmp)
+            pipeline = f.pipelines.resolve({'root': f.tree()})
+            words = f.datasets.write('words', {'a': 'hi', 'b': 'bad', 'c': 'there'})
+            f.runner.run('first', pipeline['id'], {'input': words.id})
+            # A run from before executions were kept: its latest execution comes from the record.
+            path = f.runner.root/'first/run.json'
+            legacy = json.loads(path.read_text())
+            path.write_text(json.dumps({k: v for k, v in legacy.items() if k != 'history'} | {'executions': 3}))
+            again = f.runner.run('first', pipeline['id'], {'input': words.id}, resamples=1)
+            self.assertEqual([e['number'] for e in again['history']], [3, 4])
+            self.assertEqual(again['history'][0]['started_at'], legacy['execution_started_at'])
+            latest = again['history'][1]
+            self.assertEqual((latest['status'], latest['options']['resamples'], latest['items']['total']), ('complete', 1, 3))
+            self.assertTrue(latest['finished_at'] and latest['steps'])
+            live = f.runner.live('first')
+            self.assertEqual([e['number'] for e in live['executions']], [3, 4])
+            self.assertIn('charged_usd', live['executions'][1]['spending'])
+
     def test_runs_report_live_progress_and_state(self):
         with TemporaryDirectory() as tmp:
             f = Fixture(tmp)

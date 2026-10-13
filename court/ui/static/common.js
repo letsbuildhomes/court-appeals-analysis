@@ -65,7 +65,7 @@ function section(title, sub, ...children) {
 }
 function pill(text, cls = '') { return node('span', text, 'pill ' + cls); }
 
-const state = {seq: 0, overviews: {}, source: 0, returnFocus: null, last: null, refreshing: false};
+const state = {seq: 0, overviews: {}, source: 0, returnFocus: null, last: null, refreshing: false, openRuns: new Set()};
 
 // ---------------------------------------------------------------- source drawer
 function findQuote(text, quote) {

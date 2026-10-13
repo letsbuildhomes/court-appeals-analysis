@@ -6,6 +6,7 @@ const ITEM_STATES = {working: 'Not finished yet', failing: 'Failing', done: 'Don
 
 function duration(seconds) {
   if (seconds == null || !isFinite(seconds)) return '—';
+  if (seconds > 0 && seconds < 1) return '<1s';
   seconds = Math.max(0, Math.round(seconds));
   const h = Math.floor(seconds / 3600), m = Math.floor(seconds / 60) % 60, s = seconds % 60;
   return h ? `${h}h ${m}m` : m ? `${m}m ${s}s` : `${s}s`;
@@ -24,12 +25,36 @@ function runKind(r) {
 }
 // Charges, with the reservations of calls still in flight lighter beside them.
 function spendBar(charged, reserved, limit, mode) {
-  if (mode !== 'send') return node('span', mode === 'dry' ? 'dry run: no calls sent' : 'cache only: no calls sent', 'muted small');
+  // A run whose latest execution sends nothing may still have charges from earlier ones.
+  if (mode !== 'send') return node('span', charged ? `${money(charged)} charged` + (mode === 'dry' ? '; now a dry run' : '; now cache only')
+    : mode === 'dry' ? 'dry run: no calls sent' : 'cache only: no calls sent', 'muted small');
   const share = v => (limit ? Math.min(100, 100 * v / limit) : 0) + '%';
   const fill = node('span', null, 'fill' + (limit && (charged + reserved) / limit > .9 ? ' hot' : '')); fill.style.width = share(charged);
   const held = node('span', null, 'fill reserved'); held.style.width = share(reserved);
   return el('div', 'spend', el('div', 'track split', fill, held),
     node('span', `${money(charged)} of ${money(limit)}` + (reserved ? ` · ${money(reserved)} reserved` : ''), 'small'));
+}
+// How an execution was started, in a few words.
+function executionHow(ex) {
+  const o = ex.options || {};
+  const mode = o.mode === 'send' ? `sending, cap ${money(o.limit_usd)}` : o.mode === 'dry' ? 'dry run' : 'cache only';
+  return [mode, o.resend_failed ? 'resending failed calls' + (o.resend_max_tokens ? ` (up to ${fmt(o.resend_max_tokens)} tokens)` : '') : null,
+    o.resamples ? `${o.resamples} resamples` : null].filter(Boolean).join(' · ');
+}
+function executionItems(ex) {
+  if (!ex.items) return ex.status === 'running' ? 'running' : '—';
+  const failed = Object.entries(ex.items.failed || {});
+  return `${fmt(ex.items.total)} items` + (failed.length ? ' · ' + failed.map(([k, n]) => `${n} ${plain(k)}`).join(', ') : '');
+}
+// An execution's sub-row under its run; opening one shows that execution's page.
+function executionRow(r, ex) {
+  const to = '#/runs/' + encodeURIComponent(r.name) + '?execution=' + ex.number;
+  return el('tr', 'execution-row', el('td', null, link(`Execution ${ex.number}`, to, 'case-link'), node('span', executionHow(ex), 'cell-sub')),
+    el('td', null, stateBadge(ex.status)), node('td', ''), node('td', executionItems(ex), 'small'),
+    node('td', ex.charged_usd ? money(ex.charged_usd) : '—', 'small'),
+    node('td', `${fmt(ex.calls.reused || 0)} reused · ${fmt(ex.calls.sent || 0)} sent`, 'numeric small'),
+    node('td', ex.started_at ? new Date(ex.started_at).toLocaleString() : '—', 'small'),
+    node('td', duration(ex.seconds), 'numeric small'));
 }
 function runRow(r) {
   const progress = r.state === 'running' ? (r.current.length ? 'at ' + r.current[r.current.length - 1] : 'starting') :
@@ -39,12 +64,21 @@ function runRow(r) {
     el('td', null, spendBar(r.charged_usd, r.outstanding_usd, r.limit_usd, r.mode)),
     node('td', `${fmt(r.calls.reused)} reused · ${fmt(r.calls.sent)} sent`, 'numeric small'),
     node('td', r.started_at ? new Date(r.started_at).toLocaleString() : '—', 'small'),
-    node('td', duration(since(r.started_at, r.state === 'running' ? null : r.finished_at)), 'numeric'));
+    el('td', 'numeric', duration(r.working_seconds), r.executions > 1 ? button(`${state.openRuns.has(r.name) ? '▾' : '▸'} ${r.executions} executions`, () => {
+      state.openRuns.has(r.name) ? state.openRuns.delete(r.name) : state.openRuns.add(r.name);
+      render(true);
+    }, 'text-button cell-sub') : null));
 }
 function runsTable(rows) {
-  const table = el('table', 'runs', el('thead', null, el('tr', null, ...['Run', 'State', 'Starts at', 'Progress', 'Spending', 'Calls', 'Started', 'Time'].map(t => node('th', t)))));
+  const table = el('table', 'runs', el('thead', null, el('tr', null, ...['Run', 'State', 'Starts at', 'Progress', 'Spending', 'Calls', 'Last started', 'Time'].map(t => node('th', t)))));
   const body = node('tbody');
-  for (const r of rows) body.append(runRow(r));
+  for (const r of rows) {
+    body.append(runRow(r));
+    if (!state.openRuns.has(r.name)) continue;
+    for (const ex of [...r.history].reverse()) body.append(executionRow(r, ex));
+    if (r.unrecorded) body.append(el('tr', 'execution-row', el('td', 'muted small', r.unrecorded === 1 ? 'Execution 1' : `Executions 1–${r.unrecorded}`),
+      el('td', 'muted small', 'ran before executions were recorded; their time is not in the total'), ...Array.from({length: 6}, () => node('td', ''))));
+  }
   if (!rows.length) body.append(el('tr', null, el('td', 'empty', 'No runs yet.')));
   table.append(body);
   return el('div', 'table-wrap', table);
@@ -149,10 +183,10 @@ function inFlightTable(calls) {
 }
 
 async function renderRun(seq, r) {
-  const d = await api('run', {name: r.name}); if (seq !== state.seq) return;
-  const rec = d.record, sp = d.spending, live = d.state === 'running';
+  const d = await api('run', {name: r.name, execution: r.params.execution || ''}); if (seq !== state.seq) return;
+  const rec = d.record, sp = d.spending, live = d.state === 'running' && d.latest, ex = d.execution, opts = ex.options;
   crumbs(link('Runs', '#/runs'), node('span', rec.name, 'crumb-current'));
-  state.live = live ? () => renderRun(state.seq, r) : null;
+  state.live = d.state === 'running' ? () => renderRun(state.seq, r) : null;
   const l = rec.labels || {};
   const head = el('div', 'dataset-head', el('div', 'dataset-title', node('h1', rec.name), stateBadge(d.state)),
     rec.note ? node('p', rec.note, 'hypothesis-line') : null);
@@ -163,36 +197,49 @@ async function renderRun(seq, r) {
   add('Inputs', Object.entries(rec.inputs || {}).length ? el('span', null, ...Object.entries(rec.inputs).map(([n, id]) => link(`${n} ${id}`, '#/data/' + id, 'pill status'))) : 'none');
   add('Cases', rec.keys ? `${fmt(rec.keys.length)} chosen` : 'every input');
   add('Experiment', l.experiment ? link(`${l.experiment} · ${l.round} round · ${l.side}`, `#/x/${encodeURIComponent('experiment:' + l.experiment + ':' + l.round)}`) : null);
-  add('Mode', rec.options.mode === 'send' ? `sends new calls, capped at ${money(rec.options.limit_usd)}` : rec.options.mode === 'dry' ? 'dry run: estimates new calls' : 'cache only: sends nothing');
-  add('Executions', rec.executions > 1 ? `${rec.executions} (continued)` : null);
+  add('Mode', opts.mode === 'send' ? `sends new calls, capped at ${money(opts.limit_usd)}` : opts.mode === 'dry' ? 'dry run: estimates new calls' : 'cache only: sends nothing');
   head.append(meta);
-  const failed = rec.items?.failed || {};
+  // A run can be executed several times, continuing each time; the page shows one execution, the latest by default.
+  if (rec.executions > 1) {
+    const to = n => '#/runs/' + encodeURIComponent(rec.name) + (n === d.executions[d.executions.length - 1].number ? '' : '?execution=' + n);
+    const picker = el('div', 'segmented executions');
+    for (const e of d.executions) {
+      const choice = link('', to(e.number), e.number === ex.number ? 'active' : '');
+      choice.append(node('span', `Execution ${e.number}` + (e === d.executions[d.executions.length - 1] ? ' (latest)' : '')), node('span', duration(e.seconds), 'count'));
+      picker.append(choice);
+    }
+    const total = d.executions.reduce((a, e) => a + (e.seconds || 0), 0);
+    head.append(el('div', 'execution-picker', picker,
+      node('span', `${fmt(rec.executions)} executions · ${duration(total)} working time` + (d.unrecorded ? ` (executions 1–${d.unrecorded} ran before executions were recorded)` : '') + ` · ${money(d.run_spending.charged_usd)} charged in all`, 'muted small')));
+  }
+  const failed = ex.items?.failed || {};
   const why = [
     failed.budget ? `The spending cap stopped ${fmt(failed.budget)} items: each call reserves its worst-case cost before it is sent.` : null,
-    failed.not_sent ? `${fmt(failed.not_sent)} items need calls this run did not send (${rec.options.mode === 'dry' ? 'a dry run' : 'cache only'}).` : null,
+    failed.not_sent ? `${fmt(failed.not_sent)} items need calls this run did not send (${opts.mode === 'dry' ? 'a dry run' : 'cache only'}).` : null,
     failed.delivery ? `${fmt(failed.delivery)} items had a failed or uncertain delivery; --resend-failed resends each once.` : null].filter(Boolean);
   if (d.state === 'stopped' && why.length) head.append(el('p', 'context-note', node('strong', 'Stopped. '), why.join(' '),
     ' Running the same name again continues it: finished calls are reused for free.'));
-  if (d.state === 'failed' || d.state === 'interrupted') head.append(el('p', 'message danger', node('strong', d.state === 'failed' ? 'The run failed. ' : 'The run stopped without finishing. '), rec.error || 'Its process ended while running. Running the same name again continues it.'));
+  if (d.state === 'failed' || d.state === 'interrupted') head.append(el('p', 'message danger', node('strong', d.state === 'failed' ? 'The run failed. ' : 'The run stopped without finishing. '), ex.error || 'Its process ended while running. Running the same name again continues it.'));
 
-  const elapsed = since(rec.execution_started_at || rec.started_at, live ? null : rec.finished_at);
+  const elapsed = since(ex.started_at, live ? null : ex.finished_at);
   const tiles = el('div', 'tiles');
   const tile = (label, value, note) => tiles.append(el('div', 'tile', node('span', label), node('strong', value), note ? node('small', note) : null));
   const states = d.items || {};
-  tile('Elapsed', duration(elapsed), live ? `updated ${new Date(d.updated_at || Date.now()).toLocaleTimeString()}` : rec.finished_at ? 'finished ' + new Date(rec.finished_at).toLocaleString() : null);
-  tile('Items', fmt(d.total), live ? `${fmt(states.working || 0)} in progress · ${fmt(states.failing || 0)} failing` : rec.items ? `${fmt(Object.values(rec.items.failed || {}).reduce((a, b) => a + b, 0))} failed` : null);
+  tile('Elapsed', duration(elapsed), live ? `updated ${new Date(d.updated_at || Date.now()).toLocaleTimeString()}` : ex.finished_at ? 'finished ' + new Date(ex.finished_at).toLocaleString() : null);
+  tile('Items', fmt(live ? d.total : ex.items?.total), live ? `${fmt(states.working || 0)} in progress · ${fmt(states.failing || 0)} failing` : ex.items ? `${fmt(Object.values(ex.items.failed || {}).reduce((a, b) => a + b, 0))} failed` : null);
   const flying = live ? sp.in_flight || [] : [];
-  tile('Charged', money(sp.charged_usd), rec.options.mode === 'send' ? `cap ${money(rec.options.limit_usd)}` + (rec.executions > 1 ? ` · ${money(sp.since_usd)} this execution` : '') + (sp.outstanding_usd ? ` · ${money(sp.outstanding_usd)} reserved for ${fmt(sp.in_flight.length)} calls in flight` : '') : rec.options.mode === 'dry' ? `would spend up to ${money(sp.would_spend_usd)}` : 'nothing sent');
+  const runTotal = rec.executions > 1 ? ` · ${money(d.run_spending.charged_usd)} for the whole run` : '';
+  tile('Charged', money(sp.charged_usd), opts.mode === 'send' ? `cap ${money(opts.limit_usd)}` + runTotal + (sp.outstanding_usd ? ` · ${money(sp.outstanding_usd)} reserved for ${fmt(sp.in_flight.length)} calls in flight` : '') : opts.mode === 'dry' ? `would spend up to ${money(sp.would_spend_usd)}` : 'nothing sent' + runTotal);
   tile('Reused', money(sp.reused_value_usd), `${fmt(sp.calls.reused)} saved calls, free`);
   tile('Calls sent', fmt(sp.calls.sent), sp.calls.failed ? `${fmt(sp.calls.failed)} failed deliveries` : 'none failed');
   tile('Tokens', fmt(sp.tokens.input + sp.tokens.output), `${fmt(sp.tokens.input)} in (${fmt(sp.tokens.cached)} cached) · ${fmt(sp.tokens.output)} out`);
-  const blocks = [head, section(live ? 'Now' : 'Summary', null, tiles)];
-  if (rec.options.mode === 'send') {
-    const near = sp.timeline.length && sp.charged_usd >= rec.options.limit_usd / 2;
+  const blocks = [head, section(live ? 'Now' : rec.executions > 1 ? `Execution ${ex.number}` : 'Summary', null, tiles)];
+  if (opts.mode === 'send') {
+    const near = sp.timeline.length && sp.charged_usd >= opts.limit_usd / 2;
     blocks.push(section('Spending over time', 'Charges as calls return, cumulative. Each call in flight reserves its worst-case cost against the cap until it returns; the real charge is usually much less.' + (near ? ' The dashed line is the cap.' : ' The chart is scaled to the charges; the cap is far above.'),
-      spendBar(sp.charged_usd, sp.outstanding_usd, rec.options.limit_usd, 'send'), sparkline(sp.timeline, rec.options.limit_usd)));
+      spendBar(sp.charged_usd, sp.outstanding_usd, opts.limit_usd, 'send'), sparkline(sp.timeline, opts.limit_usd)));
   }
-  blocks.push(section('Steps', 'The pipeline\'s steps from where this run starts. Items and progress are this execution\'s; calls, spending and tokens cover every execution of the run. A step touches an item when it calls a model or notes something for it; a batching step touches several at once.', stepsTable(d)));
+  blocks.push(section('Steps', 'The pipeline\'s steps from where this run starts, in this execution. A step touches an item when it calls a model or notes something for it; a batching step touches several at once.', stepsTable(d)));
   if (flying.length) blocks.push(section(`In flight · ${fmt(flying.length)} calls`, 'Model calls sent and not yet returned, oldest first. Answers are not streamed, so time out is the only progress there is.', inFlightTable(flying)));
   if (Object.keys(d.datasets).length) {
     blocks.push(section('Saved outputs', live ? 'From the last finished execution; this one saves its own when it finishes.' : null, el('div', 'status-chips', ...Object.entries(d.datasets).map(([path, x]) => link(`${path || '(root)'} · ${x.kind} · ${x.id}`, '#/data/' + x.id, 'pill status')))));
@@ -200,7 +247,7 @@ async function renderRun(seq, r) {
   const items = section('Items', 'Where each case is, or how it ended. Select one for its trace.');
   blocks.push(items);
   // Stable IDs let a live refresh match each section with itself as others come and go.
-  const ids = {'Now': 'run-now', 'Summary': 'run-now', 'Spending over time': 'run-spending', 'Steps': 'run-steps',
+  const ids = {'Now': 'run-now', 'Summary': 'run-now', [`Execution ${ex.number}`]: 'run-now', 'Spending over time': 'run-spending', 'Steps': 'run-steps',
     'Saved outputs': 'run-outputs', 'Items': 'run-items'};
   for (const block of blocks) {
     const title = block.querySelector?.('.section-heading h2')?.textContent || '';
@@ -214,7 +261,8 @@ async function renderRun(seq, r) {
 
 async function renderItems(seq, r, target) {
   const p = r.params;
-  const d = await api('run/items', {name: r.name, q: p.q || '', state: p.state || '', offset: p.offset || 0, limit: 50}); if (seq !== state.seq) return false;
+  const execution = p.execution || '';
+  const d = await api('run/items', {name: r.name, q: p.q || '', state: p.state || '', offset: p.offset || 0, limit: 50, execution}); if (seq !== state.seq) return false;
   const go = changes => { location.hash = '#/runs/' + encodeURIComponent(r.name) + '?' + new URLSearchParams(Object.entries({...p, offset: '', ...changes}).filter(([, v]) => v)); };
   const toolbar = el('div', 'case-toolbar');
   const segmented = el('div', 'segmented');
@@ -231,7 +279,7 @@ async function renderItems(seq, r, target) {
   const table = el('table', 'cases run-items', el('thead', null, el('tr', null, ...['Item', 'State', 'Last step', 'Detail'].map(t => node('th', t)))));
   const body = node('tbody');
   for (const row of d.rows) {
-    const open = button(row.key, () => showTrace(r.name, row.key, d.output), 'text-button mono');
+    const open = button(row.key, () => showTrace(r.name, row.key, d.output, execution), 'text-button mono');
     body.append(el('tr', null, el('td', null, open), el('td', null, node('span', ITEM_STATES[row.state] || plain(row.state), 'step-state ' + row.state)),
       node('td', row.step || '—', 'mono small'), node('td', [row.kind ? plain(row.kind) : null, row.reason, row.event && row.state !== 'done' ? plain(row.event) : null].filter(Boolean).join(' · '), 'small')));
   }
@@ -242,19 +290,19 @@ async function renderItems(seq, r, target) {
     el('div', null, button('← Previous', () => go({offset: Math.max(0, d.offset - d.limit)})), button('Next →', () => go({offset: d.offset + d.limit})))) : null;
   target.append(...[toolbar, el('div', 'table-wrap flat', table), pager, trace].filter(Boolean));
   const open = state.trace;
-  if (open && open.name === r.name) { try { await fillTrace(trace, open.name, open.key, d.output); } catch { state.trace = null; } }
+  if (open && open.name === r.name && open.execution === execution) { try { await fillTrace(trace, open.name, open.key, d.output, execution); } catch { state.trace = null; } }
   return seq === state.seq;
 }
 
-async function showTrace(name, key, output) {
-  state.trace = {name, key};
+async function showTrace(name, key, output, execution = '') {
+  state.trace = {name, key, execution};
   const panel = $('trace-panel');
-  await fillTrace(panel, name, key, output);
+  await fillTrace(panel, name, key, output, execution);
   panel.scrollIntoView({block: 'nearest'});
 }
 
-async function fillTrace(panel, name, key, output) {
-  const d = await api('run/trace', {name, key});
+async function fillTrace(panel, name, key, output, execution = '') {
+  const d = await api('run/trace', {name, key, execution});
   const table = el('table', 'executions', el('thead', null, el('tr', null, ...['Step', 'Event', 'Detail'].map(t => node('th', t)))));
   const body = node('tbody');
   for (const e of d.events.filter(Boolean)) body.append(el('tr', null, node('td', e.step, 'mono'), node('td', plain(e.event)),

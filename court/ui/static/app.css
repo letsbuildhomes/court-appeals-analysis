@@ -388,6 +388,12 @@ tr.waiting td { color:var(--muted); }
 .sparkline .line { fill:none; stroke:#2f7fd6; stroke-width:2; vector-effect:non-scaling-stroke; }
 .sparkline .cap { stroke:var(--worse); stroke-dasharray:5 4; stroke-width:1; vector-effect:non-scaling-stroke; }
 .trace-panel:empty { display:none; }
+table.runs tr.execution-row td { background:#fafcfb; padding-top:6px; padding-bottom:6px; }
+table.runs tr.execution-row td:first-child { padding-left:32px; }
+.execution-picker { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:14px; }
+.segmented.executions a { border-radius:6px; padding:6px 11px; font-size:12px; display:flex; align-items:center; gap:7px; color:var(--ink); text-decoration:none; }
+.segmented.executions a.active { background:var(--ink); color:white; }
+.segmented.executions a.active .count { color:#c8d3ce; }
 
 /* Stage viewers */
 .page-viewer { border:1px solid var(--line); border-radius:10px; background:white; overflow:hidden; margin-top:12px; }

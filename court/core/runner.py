@@ -64,6 +64,22 @@ def check_items(kind, output, path):
     return checked
 
 
+def history(record, folder=None):
+    """A run's executions, oldest first: one entry each, appended as it starts and completed as it ends.
+
+    Runs from before the history was kept get one entry for their latest execution, from the record and
+    its last progress file; earlier executions are counted in ``executions`` but not described.
+    """
+    if 'history' in record:
+        return [dict(e) for e in record['history']]
+    progress = Path(folder)/'progress.json' if folder else None
+    steps = read_json(progress).get('steps') if progress and progress.exists() else None
+    return [{'number': record.get('executions', 1), 'started_at': record.get('execution_started_at') or record['started_at'],
+             'finished_at': record.get('finished_at'), 'status': record.get('status'), 'options': record.get('options'),
+             'items': record.get('items'), 'output': record.get('output'), 'traces': record.get('traces'),
+             'error': record.get('error'), 'steps': steps}]
+
+
 class Runner:
     def __init__(self, pipelines=None, datasets=None, runs_root=None, store=None, cache=None, raw=None):
         self.pipelines = pipelines or Pipelines()
@@ -136,8 +152,11 @@ class Runner:
             if previous:
                 record = {**{k: v for k, v in previous.items() if k in ('outputs', 'output', 'traces', 'items', 'cost')},
                           **record}
-            record.update(status='running', execution_started_at=datetime.now(timezone.utc).isoformat(),
-                          pid=os.getpid(), finished_at=None)
+            record['history'] = history(previous, folder) if previous else []
+            started = datetime.now(timezone.utc).isoformat()
+            record['history'].append({'number': record['executions'], 'started_at': started, 'finished_at': None,
+                                      'status': 'running', 'options': record['options']})
+            record.update(status='running', execution_started_at=started, pid=os.getpid(), finished_at=None)
             save_json(folder/'run.json', record)
             try:
                 return self._execute(folder, record, resolved, node, step, opened, keys, name, limit, mode,
@@ -145,6 +164,7 @@ class Runner:
             except BaseException as exc:
                 record.update(status='failed', error=f'{type(exc).__name__}: {exc}',
                               finished_at=datetime.now(timezone.utc).isoformat())
+                record['history'][-1].update({k: record[k] for k in ('status', 'error', 'finished_at')})
                 save_json(folder/'run.json', record)
                 raise
 
@@ -203,6 +223,8 @@ class Runner:
                       focused={'keys': sorted(focus.chosen), 'removed': sorted(focus.removed)} if focus else None,
                       status='stopped' if any(k in failures for k in ('not_sent', 'budget', 'delivery'))
                       else 'complete', cost=models.summary(), error=None)
+        record['history'][-1].update({k: record[k] for k in ('finished_at', 'status', 'items', 'output', 'traces')},
+                                     steps=progress.snapshot()['steps'])
         save_json(folder/'run.json', record)
         return record
 
@@ -225,8 +247,16 @@ class Runner:
         ledger = folder/'ledger.jsonl'
         entries = [json.loads(line) for line in ledger.read_text().splitlines() if line.strip()] \
             if ledger.exists() else []
+        executions = history(record, folder)
+        for i, entry in enumerate(executions):
+            # Executions never overlap (the run is locked), so each one's calls are those between its start and the next.
+            end = executions[i+1]['started_at'] if i+1 < len(executions) else None
+            entry['spending'] = ledger_summary([e for e in entries if e['at'] >= entry['started_at']
+                                                and (end is None or e['at'] < end)])
+        if executions and executions[-1]['status'] == 'running' and state == 'interrupted':
+            executions[-1]['status'] = 'interrupted'
         return {'record': record, 'state': state, 'running': running, 'progress': progress,
-                'spending': ledger_summary(entries, record.get('execution_started_at'))}
+                'spending': ledger_summary(entries, record.get('execution_started_at')), 'executions': executions}
 
     def load(self, name):
         path = self.root/name/'run.json'
