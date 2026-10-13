@@ -44,7 +44,7 @@ court/              the Python package
   ui/               the web app: its API and static pages
   research/         snapshot builder, MCP server, remote check
   web/              small shared helpers for the read-only web tools
-  migrate/          the one-time import of the September 2026 data
+  migrate/          the one-time import of the legacy (September 2026) data
   config.py         paths and settings
   cli.py            the single command-line entry point (python -m court)
 steps/              the step library; the file for family:variant is family/variant.py
@@ -176,9 +176,9 @@ directly. A few notes on today's steps:
   (cached per page) and selection.
 - **Cases.** Grouping is an entry made of small named rules applied in
   order. Rendering case text is another. The first milestone is
-  reproducing September's case set with identical hashes.
+  reproducing the legacy case set with identical hashes.
 - **Extract.** Model steps build a request, check the answer and produce a
-  value per item. The `legacy` variants reproduce September's extraction,
+  value per item. The `legacy` variants reproduce the legacy extraction,
   and that reproduction is the main regression test. Providers, one per
   API style, belong to the models service in core.
 
@@ -235,8 +235,8 @@ viewer read only snapshots.
   results map. It shows the steps fit together and that dataset IDs are
   deterministic.
 - **Regression tests** run against real data when it's present:
-  - September's case set must rebuild identically.
-  - The `legacy` extraction must reproduce production's results map.
+  - The legacy case set must rebuild identically.
+  - The `legacy` extraction must reproduce the legacy results map.
 - **The dependency test** enforces the import rules.
 - No test reads credentials or calls a paid model.
 
@@ -256,10 +256,11 @@ over the private network.
 All seven steps are done:
 
 - `core`, `contracts`, and the dependency and library-integrity tests.
-- Fetch, text, cases and the September extraction as library entries, in one
-  definition (`pipelines/definitions/september.json`), tagged `production`.
-- Run end to end from the saved September listing snapshot, text results and
-  model calls, it reproduces September's documents, pages and case set as
+- Fetch, text, cases and the legacy extraction as library entries, in one
+  definition (`pipelines/definitions/legacy.json`), tagged `legacy` and
+  `production`.
+- Run end to end from the saved September 22 listing snapshot, text results and
+  model calls, it reproduces the legacy documents, pages and case set as
   identical datasets, and its 1,385 results exactly; the same 10 cases fail
   at review.
 - The lab, reports, web app and research access on datasets; the old scripts

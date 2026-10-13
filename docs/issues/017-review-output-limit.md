@@ -6,7 +6,7 @@
 
 **What:** Review answers use 37,000 output tokens at the median and 60,000 at
 the 90th percentile, almost all of it reasoning, against a 65,536 limit. In
-September about 40 of 277 review attempts hit the limit; resending at the
+the legacy run about 40 of 277 review attempts hit the limit; resending at the
 same limit worked for all but 3. Input size barely matters (correlation
 0.22). The calls that fail loop: the `bracket-columns` probe's failed call
 spent its whole allowance reasoning, ending in thousands of "Hmm", on whether

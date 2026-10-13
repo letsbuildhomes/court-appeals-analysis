@@ -17,7 +17,7 @@ MAX_SPEND ?=
 RESULTS ?=
 SNAPSHOT ?=
 
-.PHONY: help test test-all image docker import-september run run-send runs pipelines tags datasets \
+.PHONY: help test test-all image docker import-legacy run run-send runs pipelines tags datasets \
 	lab-list lab-plan lab-run lab-run-send lab-adopt web grouping-report text-audit \
 	research-setup research-build research-describe research-query research-serve research-test
 
@@ -28,12 +28,12 @@ help:
 test:
 	uv run --inexact python -m unittest discover -s tests
 
-# Also replays all 1,395 September cases from the call cache (about 20 seconds).
+# Also replays all 1,395 legacy cases from the call cache (about 20 seconds).
 test-all:
 	REPLAY_ALL=1 uv run --inexact python -m unittest discover -s tests
 
 # The whole system with Poppler and Tesseract; run any command inside it:
-#   make docker ARGS='run september production'
+#   make docker ARGS='run legacy legacy'
 # Rootless engines (Podman) map the container's root to you; others run as your user.
 # Files the container writes in the repository are then yours either way.
 DOCKER_USER = $(if $(shell docker info 2>/dev/null | grep -i rootless),,--user "$$(id -u):$$(id -g)")
@@ -43,11 +43,11 @@ docker: image
 	docker run --rm --pids-limit=-1 $(DOCKER_USER) --mount type=bind,source="$(CURDIR)",target=/workspace \
 		--publish "$(LISTEN_HOST):8771:8771" $(IMAGE) python -m court $(ARGS)
 
-# Wrap the September 2026 data as datasets and seed the caches (once; changes nothing it reads).
-import-september:
-	$(COURT) import-september
+# Wrap the legacy pipeline's September 2026 data as datasets and seed the caches (once; changes nothing it reads).
+import-legacy:
+	$(COURT) import-legacy
 
-# Runs: make run RUN=name PIPELINE=production ARGS='--at extract --input cases=september-cases'
+# Runs: make run RUN=name PIPELINE=production ARGS='--at extract --input cases=legacy-cases'
 run:
 	@test -n "$(RUN)" || { echo 'Set RUN to a run name'; exit 2; }
 	$(COURT) run $(RUN) $(PIPELINE) $(ARGS)
@@ -87,9 +87,9 @@ WEB_PORT ?= 8771
 web:
 	$(COURT) web --host $(LISTEN_HOST) --port $(WEB_PORT) $(ARGS)
 grouping-report:
-	$(COURT) report grouping $(or $(CASES),september-cases)
+	$(COURT) report grouping $(or $(CASES),legacy-cases)
 text-audit:
-	$(COURT) report text-audit $(or $(PAGES),september-pages)
+	$(COURT) report text-audit $(or $(PAGES),legacy-pages)
 
 # Research snapshots and the MCP server; no pipeline data or credentials reach the server.
 research-setup:

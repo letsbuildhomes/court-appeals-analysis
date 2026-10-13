@@ -1,7 +1,7 @@
 # Output contract: one result per case
 
 Every pipeline, whatever its steps, produces a results map: one result per
-case under `appeal-result-2`, or the September pipeline's `appeal-result-1`
+case under `appeal-result-2`, or the legacy pipeline's `appeal-result-1`
 (`court/contracts/results.py`). Comparisons are
 always `case ID → result`, across pipelines. Citations point into the case
 text of the case set the results came from (`court/contracts/cases.py`). A
@@ -94,13 +94,13 @@ uncertain model call), `not_sent` (a call the run did not send), `budget`,
 reused or new, warnings, rejections, quotation checks) is in the run's
 `traces` dataset, not in the results.
 
-## The September results
+## The legacy results
 
-`september-results` is the September 2026 production run's outputs converted
+`legacy-results` is the legacy pipeline's production run (September 2026), converted
 to this contract once: scope categories became dispositions (confirmed → in
 scope; a review's scope flag → uncertain with the review's reason), `unclear`
 and `null` became `unknown`, and its 10 failed cases became failures. The
-`production` pipeline reproduces its 1,385 results exactly from the saved
+`legacy` pipeline reproduces its 1,385 results exactly from the saved
 calls.
 
 ## Fact catalog and schema versions

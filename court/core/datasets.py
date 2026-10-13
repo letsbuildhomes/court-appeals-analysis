@@ -15,7 +15,7 @@ in it.
 A dataset is written as a draft, which may be resumed, and becomes immutable
 when finished. Finishing a draft whose contents match an existing dataset
 returns that dataset. Names (``refs.jsonl``) are an append-only log of
-readable names for dataset IDs.
+readable names for dataset IDs; retiring a name logs it with no dataset.
 """
 from datetime import datetime, timezone
 import json
@@ -212,7 +212,7 @@ class Datasets:
         current = {}
         for entry in entries:
             current[entry['name']] = entry['dataset']
-        return current
+        return {name: identity for name, identity in current.items() if identity is not None}
 
     def name(self, name, identity, note=''):
         if not NAME.fullmatch(name):
@@ -221,6 +221,14 @@ class Datasets:
         self.root.mkdir(parents=True, exist_ok=True)
         with (self.root/'refs.jsonl').open('a') as f:
             f.write(json.dumps({'name': name, 'dataset': identity, 'note': note,
+                                'at': datetime.now(timezone.utc).isoformat()})+'\n')
+
+    def retire(self, name, note=''):
+        """Stop using a name; the log keeps its history."""
+        if name not in self.names():
+            raise KeyError(f'No dataset named {name}')
+        with (self.root/'refs.jsonl').open('a') as f:
+            f.write(json.dumps({'name': name, 'dataset': None, 'note': note,
                                 'at': datetime.now(timezone.utc).isoformat()})+'\n')
 
     def resolve(self, name):

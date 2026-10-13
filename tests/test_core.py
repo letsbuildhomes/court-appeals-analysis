@@ -97,6 +97,10 @@ class DatasetTests(unittest.TestCase):
             a = store.write('words', {'a': 1})
             store.name('first', a.id)
             self.assertEqual(store.open('first').id, a.id)
+            store.retire('first')
+            self.assertNotIn('first', store.names())
+            with self.assertRaises(KeyError):
+                store.open('first')
             with self.assertRaises(ValueError):
                 store.write('words', {'../x': 1})
 
@@ -195,6 +199,18 @@ class RunnerTests(unittest.TestCase):
                 f.runner.run('first', pipeline['id'], {'input': words.id}, keys=['a'])
             subset = f.runner.run('subset', pipeline['id'], {'input': words.id}, keys=['a'])
             self.assertEqual(list(f.datasets.open(subset['output']).load()), ['a'])
+
+    def test_a_renamed_run_is_still_found_by_its_old_name(self):
+        with TemporaryDirectory() as tmp:
+            f = Fixture(tmp)
+            pipeline = f.pipelines.resolve({'root': f.tree()})
+            words = f.datasets.write('words', {'a': 'hi'})
+            record = f.runner.run('first', pipeline['id'], {'input': words.id})
+            self.assertEqual(f.runner.rename('first', 'second')['name'], 'second')
+            self.assertEqual(f.runner.load('first')['output'], record['output'])
+            self.assertEqual([r['name'] for r in f.runner.all()], ['second'])
+            again = f.runner.run('first', pipeline['id'], {'input': words.id})
+            self.assertEqual((again['name'], again['executions']), ('second', 2))
 
     def test_each_execution_of_a_run_is_kept(self):
         with TemporaryDirectory() as tmp:

@@ -38,8 +38,8 @@ SPLITS = ('development', 'holdout')
 CONFIDENCE = ('high', 'medium', 'low')
 FACT_KEYS = {f['key'] for f in contract.RECORD_FACTS}
 CASE_KEYS = {f['key'] for f in contract.CASE_FACTS}
-# The September run: its case set and results give each candidate's hints.
-SEPTEMBER = {'cases': 'd-8705e8d4cd7fee83', 'results': 'd-bff4b12fc8f0912c'}
+# The legacy run: its case set and results give each candidate's hints.
+LEGACY = {'cases': 'd-8705e8d4cd7fee83', 'results': 'd-bff4b12fc8f0912c'}
 ENFORCEMENT = re.compile(r'\b(Town|City|Village|ANR|Agency|State)\b[^,]*\bv\.?\s', re.I)
 ON_RECORD = re.compile(r'on[\s-]+the[\s-]+record', re.I)
 DE_NOVO = re.compile(r'de\s+novo', re.I)
@@ -87,10 +87,10 @@ class Workspace:
 
     # Hints and pools ----------------------------------------------------------
     def hints(self):
-        """Per case, what September and the case text suggest: never the answer, only where to look."""
+        """Per case, what the legacy run and the case text suggest: never the answer, only where to look."""
         cases = self.cases().load()
-        old_cases = self.datasets.open(SEPTEMBER['cases']).load()
-        old = self.datasets.open(SEPTEMBER['results']).load()
+        old_cases = self.datasets.open(LEGACY['cases']).load()
+        old = self.datasets.open(LEGACY['results']).load()
         group_of = {d['sha256']: k for k, c in old_cases.items() for d in c['documents']}
         records = {}
         for key, value in old.items():
@@ -101,14 +101,14 @@ class Workspace:
         for key, case in cases.items():
             own = old.get(key)
             if own is not None:
-                september, source = ('failed' if is_failure(own) else own['disposition']['value']), 'same case'
+                legacy, source = ('failed' if is_failure(own) else own['disposition']['value']), 'same case'
                 reason = '' if is_failure(own) else own['disposition']['reason']
                 scope = {} if is_failure(own) else own['disposition']
             else:
                 groups = sorted({group_of.get(d['sha256']) for d in case['documents']} - {None})
                 values = [old.get(g) for g in groups]
                 answers = sorted({'failed' if is_failure(v) else v['disposition']['value'] for v in values if v is not None})
-                september, source = ('/'.join(answers) or 'none'), 'old group'
+                legacy, source = ('/'.join(answers) or 'none'), 'old group'
                 reason = ' | '.join(v['disposition']['reason'] for v in values if v is not None and not is_failure(v))
                 scope = next((v['disposition'] for v in values if v is not None and not is_failure(v)), {})
             docket = case['dockets'][0] if case['dockets'] else None
@@ -119,9 +119,9 @@ class Workspace:
             found[key] = {
                 'docket': docket, 'documents': len(case['documents']), 'composition': case['composition'],
                 'chars': len(case['text']), 'era': era(year), 'titles': titles[:6],
-                'september': september, 'september_source': source, 'september_reason': reason[:600],
-                'september_municipal': scope.get('municipal_appeal'), 'september_housing': scope.get('housing'),
-                'september_records': len(mine),
+                'legacy': legacy, 'legacy_source': source, 'legacy_reason': reason[:600],
+                'legacy_municipal': scope.get('municipal_appeal'), 'legacy_housing': scope.get('housing'),
+                'legacy_records': len(mine),
                 'unknown_share': round(sum(not known(v) for v in slots)/len(slots), 2) if slots else None,
                 'enforcement': any(ENFORCEMENT.search(t) for t in titles),
                 'motions_only': all(re.search(r'motion|entry|order', t, re.I) for t in titles)
@@ -148,20 +148,20 @@ class Workspace:
         # An exclusion that turned on housing, for a municipal appeal whose reason talks about dwellings.
         housing = re.compile(r'dwelling|residential|housing|apartment|single-family|two-family|condominium', re.I)
         rules = {
-            'random-excluded': [k for k in order if hints[k]['september'] == 'excluded'],
-            'random-in-scope': [k for k in order if hints[k]['september'] == 'in_scope'],
-            'random-uncertain': [k for k in order if hints[k]['september'] == 'uncertain'],
-            'high-unknown': sorted((k for k in hints if hints[k]['september'] in ('in_scope', 'uncertain')
+            'random-excluded': [k for k in order if hints[k]['legacy'] == 'excluded'],
+            'random-in-scope': [k for k in order if hints[k]['legacy'] == 'in_scope'],
+            'random-uncertain': [k for k in order if hints[k]['legacy'] == 'uncertain'],
+            'high-unknown': sorted((k for k in hints if hints[k]['legacy'] in ('in_scope', 'uncertain')
                                     and (hints[k]['unknown_share'] or 0) >= 0.3),
                                    key=lambda k: -hints[k]['unknown_share']),
-            'near-miss': [k for k in order if hints[k]['september'] == 'excluded'
-                          and hints[k]['september_municipal'] == 'yes' and hints[k]['september_housing'] == 'no'
-                          and housing.search(hints[k]['september_reason'])],
+            'near-miss': [k for k in order if hints[k]['legacy'] == 'excluded'
+                          and hints[k]['legacy_municipal'] == 'yes' and hints[k]['legacy_housing'] == 'no'
+                          and housing.search(hints[k]['legacy_reason'])],
             'shared': [k for k in order if hints[k]['composition'] == 'shared'
-                       and hints[k]['september'] not in ('excluded', 'none')],
+                       and hints[k]['legacy'] not in ('excluded', 'none')],
             'enforcement': [k for k in order if hints[k]['enforcement']],
             'interim': [k for k in order if hints[k]['motions_only']],
-            'failure': [k for k in order if 'failed' in hints[k]['september']],
+            'failure': [k for k in order if 'failed' in hints[k]['legacy']],
             'long': sizes,
         }
         written = {}

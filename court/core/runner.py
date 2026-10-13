@@ -13,6 +13,9 @@ and only the focused step is limited (see ``context.Focus``): a grouping
 change, for example, regroups every document while extraction runs only for
 chosen cases.
 
+A run can be renamed; its old name still finds it, because datasets record
+the run that made them (``renamed.json``).
+
 Running a run name again continues it: the same pipeline, position, inputs,
 keys and focus are required, and the ledger, and so the spending cap, carry on.
 Finished work comes back from the caches for free.
@@ -130,6 +133,7 @@ class Runner:
             missing = [k for k in keys if not any(k in d for d in opened.values())]
             if missing:
                 raise RunError(f'{len(missing)} keys are in no input, e.g. {missing[:3]}')
+        name = self.current(name)
         folder = self.root/name
         record = {'name': name, 'pipeline': resolved['id'], 'at': at, 'step': node['step'],
                   'inputs': {n: d.id for n, d in sorted(opened.items())}, 'keys': keys,
@@ -230,7 +234,7 @@ class Runner:
 
     def live(self, name):
         """A run's record with its live state: running, finished or interrupted, progress and spending."""
-        folder = self.root/name
+        folder = self.root/self.current(name)
         record = self.load(name)
         running = False
         if (folder/'.lock').exists():
@@ -258,8 +262,30 @@ class Runner:
         return {'record': record, 'state': state, 'running': running, 'progress': progress,
                 'spending': ledger_summary(entries, record.get('execution_started_at')), 'executions': executions}
 
+    def current(self, name):
+        """A run's name now, following renames."""
+        renamed = read_json(self.root/'renamed.json') if (self.root/'renamed.json').exists() else {}
+        while name in renamed:
+            name = renamed[name]
+        return name
+
+    def rename(self, old, new):
+        if not NAME.fullmatch(new):
+            raise RunError('Run names use lowercase letters, numbers, dots, dashes and underscores')
+        old = self.current(old)
+        if self.live(old)['running']:
+            raise RunError(f'{old} is running')
+        if (self.root/new).exists():
+            raise RunError(f'A run named {new} exists')
+        record = self.load(old)
+        (self.root/old).rename(self.root/new)
+        save_json(self.root/new/'run.json', {**record, 'name': new})
+        renamed = read_json(self.root/'renamed.json') if (self.root/'renamed.json').exists() else {}
+        save_json(self.root/'renamed.json', {**renamed, old: new})
+        return self.load(new)
+
     def load(self, name):
-        path = self.root/name/'run.json'
+        path = self.root/self.current(name)/'run.json'
         if not path.exists():
             raise RunError(f'No run {name}')
         return read_json(path)

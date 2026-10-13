@@ -11,11 +11,11 @@ handled differently:
 - When review flags the scope decision as doubtful, the case becomes uncertain
   with *no* records, and the review's corrected draft is thrown away.
 
-September did this, and the reproduction keeps it. But `PIPELINE_CONTRACT.md`
+The legacy run did this, and the reproduction keeps it. But `PIPELINE_CONTRACT.md`
 says uncertain cases keep their records.
 
 **Why it matters:** Researchers can't decide for themselves whether to
-include flagged cases, because there's nothing to include. In September,
+include flagged cases, because there's nothing to include. In the legacy run,
 117 cases ended up uncertain.
 
 **Recommendation:** A new version of the final assembly step that keeps the

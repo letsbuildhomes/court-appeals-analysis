@@ -12,7 +12,7 @@ Choose a snapshot explicitly. If it has not been built yet:
 ```sh
 make research-setup
 .venv/bin/python -m court research build \
-  --results september-results --cases september-cases --output data/research/experiment-v1
+  --results legacy-results --cases legacy-cases --output data/research/experiment-v1
 ```
 
 Serve it:

@@ -192,7 +192,7 @@ Extract turns a case set into a results map. Every result follows one
 
 Extract is where most experiments happen, so its inner steps are ordinary
 library entries with declared inputs and outputs: triage, record
-extraction, review, duration and so on. The September production extraction
+extraction, review, duration and so on. The legacy production extraction
 is preserved step for step as `legacy` variants, with its prompts.
 
 ## Datasets
@@ -217,12 +217,12 @@ hash means it changed. A missing key means the item was added or removed.
 **Results maps** are the datasets the lab and research access depend on most.
 Every map has the same format, however it was produced:
 
-- the September production run, converted once into a map
+- the legacy production run, converted once into a map
 - a candidate pipeline's run on 12 cases
 - the hand-checked reference answers, described below
 - the final full run
 
-A pipeline rewritten from scratch can still be compared with the September
+A pipeline rewritten from scratch can still be compared with the legacy
 run. Both produce maps, and the comparison is by case ID.
 
 ## The lab
@@ -311,13 +311,13 @@ mounted. No stage requires Docker.
 
 ## Where things stand
 
-- **Reproduced.** The `production` pipeline runs from the September listing
+- **Reproduced.** The `legacy` pipeline runs from the September 22 listing
   snapshot through results without network access or model calls: documents,
-  pages and the case set are identical to September's datasets, its 1,385
+  pages and the case set are identical to the legacy datasets, its 1,385
   results identical, and the same 10 cases fail at review. Saved downloads,
-  page text and OCR results were imported into the caches; the September run
-  is recorded as the run `september`.
-- **Text in the image.** The Docker image has September's tool versions
+  page text and OCR results were imported into the caches; the legacy run
+  is recorded as the run `legacy`.
+- **Text in the image.** The Docker image has the legacy run's tool versions
   (Poppler 22.12.0, Tesseract 5.3.0). Rerun from scratch on 40 documents
   (311 pages), the text stage gives every page the same status and source;
   native, blank and unresolved pages are identical, and 83 of 85 OCR pages
@@ -335,5 +335,5 @@ mounted. No stage requires Docker.
   git stash (`git stash list`: "walkthrough: sandbox…"; commit `3d7cef0`).
   Rebuild it as a fake models service: the tests already use one.
 
-Existing September data was never modified. It is read where it is, and
+Existing legacy data was never modified. It is read where it is, and
 new datasets are written beside it.

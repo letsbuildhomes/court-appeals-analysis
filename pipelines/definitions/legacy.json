@@ -1,6 +1,6 @@
 {
-  "name": "september",
-  "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+  "name": "legacy",
+  "description": "The legacy pipeline, production from September 2026: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
   "root": {
     "name": "september",
     "step": "flow:sequence",

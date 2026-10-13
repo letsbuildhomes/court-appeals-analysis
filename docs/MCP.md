@@ -16,10 +16,10 @@ municipality and appellant names).
 
 ```sh
 make research-setup
-python -m court research build --results september-results --cases september-cases \
-  --output data/research/september
-python -m court research describe --snapshot data/research/september
-python -m court research query --snapshot data/research/september \
+python -m court research build --results legacy-results --cases legacy-cases \
+  --output data/research/legacy
+python -m court research describe --snapshot data/research/legacy
+python -m court research query --snapshot data/research/legacy \
   --sql 'SELECT disposition, count(*) FROM cases GROUP BY 1'
 ```
 
@@ -36,7 +36,7 @@ Python as the command:
 
 ```json
 {"command": "/absolute/path/to/repo/.venv/bin/python",
- "args": ["-m", "court", "research", "serve", "--snapshot", "/absolute/path/to/repo/data/research/september"],
+ "args": ["-m", "court", "research", "serve", "--snapshot", "/absolute/path/to/repo/data/research/legacy"],
  "cwd": "/absolute/path/to/repo"}
 ```
 

@@ -40,15 +40,15 @@ Makefile has shortcuts.
 | `in/` | raw inputs: PDFs by hash and saved listing pages (not in git) |
 | `data/` | datasets, runs, the call and work caches, research snapshots (not in git) |
 
-## The September data
+## The legacy data
 
-The September 2026 production run is reproduced exactly by the `production`
-pipeline from saved inputs and calls. On a fresh checkout with the data
+The legacy pipeline's production run (September 2026) is reproduced exactly
+by the `legacy` pipeline from saved inputs and calls. On a fresh checkout with the data
 synced (`scripts/sync-pipeline-data.sh`):
 
 ```sh
-make import-september          # wrap it as datasets; seed the caches
-make run RUN=september         # documents, pages, cases and results, with no network or model calls
+make import-legacy             # wrap it as datasets; seed the caches
+make run RUN=legacy PIPELINE=legacy  # documents, pages, cases and results, with no network or model calls
 make web                       # http://SERVER:8771/: live runs, the lab, data and pipelines (password: docs/WEB.md)
 ```
 

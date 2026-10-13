@@ -119,6 +119,8 @@ def dataset(args):
         show({k: len(v) for k, v in counts.items()} | {'changed_keys': counts['changed'][:50]})
     elif args.action == 'name':
         store.name(args.name, store.open(args.ref).id, note=args.note or '')
+    elif args.action == 'retire':
+        store.retire(args.ref, note=args.note or '')
 
 
 def lab(args):
@@ -236,11 +238,11 @@ def reference(args):
         show(space.export(args.name, args.split))
 
 
-def import_september(args):
-    from court.migrate import september
-    september.run()
-    september.seed_downloads()
-    september.seed_text()
+def import_legacy(args):
+    from court.migrate import legacy
+    legacy.run()
+    legacy.seed_downloads()
+    legacy.seed_text()
 
 
 # Arguments --------------------------------------------------------------------
@@ -276,6 +278,10 @@ def parser():
     p.set_defaults(func=run)
 
     sub.add_parser('runs', help='List runs').set_defaults(func=runs)
+    p = sub.add_parser('rename-run', help='Rename a run; its old name still finds it')
+    p.add_argument('old')
+    p.add_argument('new')
+    p.set_defaults(func=lambda args: show(Runner().rename(args.old, args.new)['name']))
     sub.add_parser('pipelines', help='List resolved pipelines and their tags').set_defaults(func=pipelines)
 
     p = sub.add_parser('pipeline', help='Resolve, show or diff pipelines')
@@ -294,8 +300,8 @@ def parser():
     p = sub.add_parser('datasets', help='List datasets')
     p.add_argument('--all', action='store_true', help='Include traces')
     p.set_defaults(func=datasets)
-    p = sub.add_parser('dataset', help='Show, diff or name datasets')
-    p.add_argument('action', choices=('show', 'diff', 'name'))
+    p = sub.add_parser('dataset', help='Show, diff, name datasets, or retire a name')
+    p.add_argument('action', choices=('show', 'diff', 'name', 'retire'))
     p.add_argument('ref')
     p.add_argument('other', nargs='?')
     p.add_argument('--key')
@@ -363,8 +369,8 @@ def parser():
     p.add_argument('--allowed-host', action='append', help='Additional exact Host for HTTP, e.g. server:8770')
     p.set_defaults(func=research)
 
-    sub.add_parser('import-september', help='Wrap the September 2026 data as datasets and seed the caches'
-                   ).set_defaults(func=import_september)
+    sub.add_parser('import-legacy', help='Wrap the legacy pipeline\'s September 2026 data as datasets and seed the caches'
+                   ).set_defaults(func=import_legacy)
     return top
 
 

@@ -9,12 +9,13 @@ targets pass `.env`).
 
 ## The starting point
 
-`production` names the September pipeline, reproduced from its saved data:
+`production` names the pipeline in use; today that is `legacy`, the pipeline
+that made the September 2026 data, reproduced from its saved data:
 
 ```sh
 python -m court tags                       # tag history
 python -m court pipeline show production   # the step tree, with settings and prompts
-python -m court runs                       # runs, including "september" over every case
+python -m court runs                       # runs, including "legacy" over every case
 make web                                   # http://SERVER:8771/: production's quality profile, live runs
 ```
 
@@ -34,7 +35,7 @@ A change is new library entries plus a pipeline definition:
 ```sh
 python -m court lab new strict-review \
   --hypothesis 'Requiring a quote for every change stops unsupported edits' \
-  --at extract --input cases=september-cases \
+  --at extract --input cases=legacy-cases \
   --keys g-50-3-07-vtec,g-209-11-04-vtec \
   --confirm reference --reference reference \
   --changes '[{"at": "extract/review", "prompts": {"review": "review:strict-citations"}}]'
@@ -86,7 +87,7 @@ make lab-run-send EXPERIMENT=strict-review MAX_SPEND=0.50  # the probe round, ca
 
 A round runs the candidate on its keys and compares its results with the
 baseline's, read from the baseline's complete run: one over every case with
-every step saved, such as `september` or a confirm round's run. Nothing is
+every step saved, such as `legacy` or a confirm round's run. Nothing is
 run for the baseline side. The round saves the comparison in
 `experiments/NAME/rounds/ROUND.json` and every step's output, so the web app
 shows where the change took effect. When the baseline has no complete run,
@@ -131,10 +132,10 @@ answers yes without asking.
 
 ## Batching
 
-The September review step reviews cases in pairs. Run on a subset, cases
+The legacy review step reviews cases in pairs. Run on a subset, cases
 are paired differently than in production, so their review calls are new
 even when nothing about review changed. A cached run reports those cases as
-not run; a sending run pays for them. Pipelines after September review one
+not run; a sending run pays for them. Pipelines after the legacy one review one
 case per call (`batch_cases: 1`), which removes this and lets a baseline run
 over just the reference set.
 
@@ -142,8 +143,8 @@ over just the reference set.
 
 ```sh
 make web                                     # Data: PDF pages beside their text; cases with grouping flags
-python -m court report grouping september-cases
-python -m court report case-diff september-cases d-...
+python -m court report grouping legacy-cases
+python -m court report case-diff legacy-cases d-...
 python -m court dataset diff A B             # any two datasets of a kind, item by item
 python -m court pipeline diff production p-...
 ```

@@ -7,7 +7,7 @@ Labels use the results contract (`PIPELINE_CONTRACT.md`, `appeal-result-2`);
 this guide says how to fill it. Read every document in the case, not only the
 first pages.
 
-Don't look at September's or any pipeline's answers while labeling. They are
+Don't look at the legacy run's or any pipeline's answers while labeling. They are
 compared afterwards; seeing them first anchors the label.
 
 ## The case
@@ -31,8 +31,8 @@ what it says about this docket.
 - `housing`: `yes` when the appeal concerns permission (including its
   conditions) for **new housing**: building a new structure that will serve as
   housing, or a major renovation that creates housing. This definition is the
-  user's and decides scope here; it differs from the September pipeline's in
-  places, so disagreements with September on these points are definition
+  user's and decides scope here; it differs from the legacy pipeline's in
+  places, so disagreements with the legacy run on these points are definition
   changes, not pipeline errors. `no` when the documents establish a nonhousing
   subject or a housing change that isn't new housing. `unknown` when the
   documents don't establish what is proposed.
@@ -65,7 +65,7 @@ Labeling stops there.
 ## The record (in-scope and uncertain cases)
 
 One record, for this docket only. Field meanings follow the contract and the
-September drafting rules (`prompts/draft/legacy.md`); the points below are
+legacy drafting rules (`prompts/draft/legacy.md`); the points below are
 where judgment is needed.
 
 - **Project.** `proposed_units` counts the dwelling units the new housing

@@ -272,7 +272,7 @@ class Api:
                 if self.datasets.open(identity).kind == 'cases':
                     return identity
         names = self.datasets.names()
-        return names.get('september-cases') if results.id == names.get('september-results') else None
+        return names.get('legacy-cases') if results.id == names.get('legacy-results') else None
 
     def case_set_for(self, results):
         identity = self.case_set_id(results)

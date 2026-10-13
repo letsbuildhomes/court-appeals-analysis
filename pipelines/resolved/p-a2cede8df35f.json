@@ -262,11 +262,11 @@
     "system:legacy": "6d8fd07f78383653b7a4152a5708a562120f5d6536335f8350d87ca1cb043a40",
     "triage:legacy": "62aa9a29c104a58d2ae065d75e6ce39646994cb38677f7ec2023f357dcd1f395"
   },
-  "name": "september",
-  "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+  "name": "legacy",
+  "description": "The legacy pipeline, production from September 2026: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
   "definition": {
-    "name": "september",
-    "description": "The September 2026 production pipeline: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
+    "name": "legacy",
+    "description": "The legacy pipeline, production from September 2026: the Environmental Division listing snapshot of September 22, page text with OCR where needed, cases from caption dockets, then per-case triage and drafting, batched review and duration.",
     "root": {
       "name": "september",
       "step": "flow:sequence",

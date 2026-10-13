@@ -13,7 +13,7 @@
 
 ## Historical records
 
-These record how the September 2026 data and earlier designs were made. The
+These record how the legacy (September 2026) data and earlier designs were made. The
 code they describe has been replaced; commands in them no longer run.
 
 - [INGEST.md](INGEST.md), [TEXT-PIPELINE.md](TEXT-PIPELINE.md), [IMAGE-INVENTORY.md](IMAGE-INVENTORY.md),
@@ -22,7 +22,7 @@ code they describe has been replaced; commands in them no longer run.
 - [APPEALS.md](APPEALS.md), [APPEALS-RESEARCH.md](APPEALS-RESEARCH.md),
   [APPEALS-RELEASE-CHECK.md](APPEALS-RELEASE-CHECK.md), [APPEALS-FINISHING-SANITY.md](APPEALS-FINISHING-SANITY.md),
   [APPEALS-DELETION-PLAN.md](APPEALS-DELETION-PLAN.md), [DOCUMENT-ANALYSIS-PLAN.md](DOCUMENT-ANALYSIS-PLAN.md):
-  the September extraction and how it was chosen
+  the legacy extraction and how it was chosen
 - [MCP-ACCEPTANCE.md](MCP-ACCEPTANCE.md): the research MCP's first acceptance checks
 - [evaluation-framework.md](evaluation-framework.md), [PIPELINE-REDESIGN-PLAN.md](PIPELINE-REDESIGN-PLAN.md):
   earlier evaluation and pipeline designs, superseded by ARCHITECTURE.md

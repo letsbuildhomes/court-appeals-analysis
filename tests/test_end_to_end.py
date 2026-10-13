@@ -2,7 +2,7 @@
 
 A saved listing page links two one-page PDFs. Fetching reads the saved
 listing and finds the downloads in the cache; text comes from Poppler; the
-fake model answers the September prompts. The results must match the
+fake model answers the legacy prompts. The results must match the
 checked-in map, and every dataset ID must be the same on a second run.
 """
 import json
@@ -64,7 +64,7 @@ CITE = None
 
 
 class FakeModel:
-    """Answers the September prompts: triage, draft, batched review and duration."""
+    """Answers the legacy prompts: triage, draft, batched review and duration."""
 
     def __init__(self):
         self.requests = []
@@ -130,7 +130,7 @@ class EndToEndTests(unittest.TestCase):
                            'content_type': 'application/pdf', 'etag': None, 'last_modified': None,
                            'file': f'in/pdfs/{sha}.pdf'})
             (root/'models.json').write_text((ROOT/'pipelines/models.json').read_text())
-            definition = json.loads((ROOT/'pipelines/definitions/september.json').read_text())
+            definition = json.loads((ROOT/'pipelines/definitions/legacy.json').read_text())
             definition['root']['children'][0]['settings']['snapshot'] = 'fixture'
             pipelines = Pipelines(root/'pipelines', Library())
             pipeline = pipelines.resolve(definition)

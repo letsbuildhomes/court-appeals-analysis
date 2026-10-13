@@ -62,7 +62,7 @@ Evidence: agents read about 60 decisions in full, in four random samples.
   longer reads body mentions (188 documents). 69 documents name no docket in
   their heading and use the listing; 61 listing dockets that no heading names
   are flagged rather than made into cases, and Supreme Court numbers
-  (`eo05-120`, `22-AP-00296`) never become cases. Only 2 of September's 513
+  (`eo05-120`, `22-AP-00296`) never become cases. Only 2 of the legacy run's 513
   records have a docket that no longer has a case (one a Superior Court
   number).
 - 2026-10-13: Agents checked the result. Of 34 documents whose reading changed
@@ -73,7 +73,7 @@ Evidence: agents read about 60 decisions in full, in four random samples.
   enforcement actions with no appellant, multi-docket orders that decide only
   some of their dockets) and none wrong.
 - 2026-10-13: The probe picks 682 cases whose input changed, plus 39 removed.
-  Expected cost from September's averages: about $7 off-peak for the probe and
+  Expected cost from the legacy run's averages: about $7 off-peak for the probe and
   $9 more for the confirm round, double at peak hours. The dry-run plan's
   worst-case reservations are much higher ($64 for the probe at peak).
 - 2026-10-13: A reader summarizing reference candidates found the Leikert

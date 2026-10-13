@@ -14,7 +14,7 @@ than unknown.
 ``appeal-result-2`` adds one record field, ``appeal_review``: whether the
 court heard the appeal on the record of the municipal proceeding or de novo,
 with the evidence. Version 1 results remain valid, and ``result`` makes them
-by default, because the September steps that call it can't change; a
+by default, because the legacy steps that call it can't change; a
 producer that answers the new question passes ``schema=SCHEMA``.
 """
 from collections import Counter

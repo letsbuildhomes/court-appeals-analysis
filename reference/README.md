@@ -8,14 +8,14 @@ the commands are `python -m court reference freeze|pools|check|export`.
 
 `profile.json` sets the counts. Two layers:
 
-- **Random** (30): drawn at random within September's answer (excluded, in
+- **Random** (30): drawn at random within the legacy run's answer (excluded, in
   scope, uncertain), so results can be reweighted to the whole corpus and the
   set holds ordinary cases. Candidates are taken in their pool's random order;
   one is skipped only when unusable (unreadable, no text), and the skip is
   noted.
-- **Targeted** (30): cases with many unknowns in September, exclusions that
+- **Targeted** (30): cases with many unknowns in the legacy run, exclusions that
   turned on housing, decisions shared by several dockets, enforcement actions,
-  cases with only interim orders, September's failures and very long cases.
+  cases with only interim orders, the legacy run's failures and very long cases.
 
 12 are held back (`split: holdout`) and used only to confirm a change before
 adopting it. Held-back and development cases share no document. Across the

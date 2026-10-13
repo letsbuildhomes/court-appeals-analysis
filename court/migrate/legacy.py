@@ -1,9 +1,9 @@
-"""Wrap the September 2026 data as datasets, without modifying it.
+"""Wrap the legacy pipeline's data (its September 2026 production run) as datasets, without modifying it.
 
-    september-documents  the archive's downloaded PDFs and their listing entries
-    september-pages      the text stage's selected page text
-    september-cases      the case set the production run used (its frozen sources)
-    september-results    the production run's results, converted to the results contract;
+    legacy-documents     the archive's downloaded PDFs and their listing entries
+    legacy-pages         the text stage's selected page text
+    legacy-cases         the case set the production run used (its frozen sources)
+    legacy-results       the production run's results, converted to the results contract;
                          its failed cases are failure items
 
 Each is written once; importing again finds the same dataset IDs.
@@ -77,6 +77,7 @@ def results():
             found[case] = read_json(CONVERTED/'results'/f'{case}.json')
         else:
             error = status['errors'][0]
+            # The step name is part of the imported items, so it stays as it was imported.
             found[case] = Failure(error['type'], error['error'], 'september')
     return found
 
@@ -85,10 +86,10 @@ def run(store=None, log=print):
     store = store or Datasets()
     made = {}
     producer = {'pipeline': None, 'imported_from': 'September 2026 production data'}
-    for name, build, kind, source in [('september-documents', documents, 'documents', str(ARCHIVE)),
-                                      ('september-pages', pages, 'pages', str(TEXT)),
-                                      ('september-cases', cases, 'cases', str(FULL_RUN)),
-                                      ('september-results', results, 'results', str(CONVERTED))]:
+    for name, build, kind, source in [('legacy-documents', documents, 'documents', str(ARCHIVE)),
+                                      ('legacy-pages', pages, 'pages', str(TEXT)),
+                                      ('legacy-cases', cases, 'cases', str(FULL_RUN)),
+                                      ('legacy-results', results, 'results', str(CONVERTED))]:
         values = build()
         problems = [p for key, value in values.items() if not isinstance(value, Failure)
                     for p in contracts.check(kind, key, value)]
@@ -103,7 +104,7 @@ def run(store=None, log=print):
 
 
 def seed_downloads(cache=None, log=print):
-    """Record the archive's downloads in the cache, so fetching the September snapshot sends nothing."""
+    """Record the archive's downloads in the cache, so fetching the legacy listing snapshot sends nothing."""
     import duckdb
     from court.core.context import Cache
     cache = cache or Cache()
@@ -118,7 +119,7 @@ def seed_downloads(cache=None, log=print):
 
 
 def seed_text(cache=None, log=print):
-    """Record the text stage's September results in the cache, so the text steps replay them.
+    """Record the legacy text stage's results in the cache, so the text steps replay them.
 
     Native text, usability decisions and OCR results are stored under the same
     keys the text steps compute, with the tool versions that produced them.

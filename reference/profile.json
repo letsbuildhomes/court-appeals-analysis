@@ -1,6 +1,6 @@
 {
   "total": 60,
-  "note": "Two layers. The random layer is drawn at random within September's answer, so results can be reweighted to the corpus; the targeted layer goes where errors and unknowns concentrate. Report the layers separately. Held-back cases are never tuned against.",
+  "note": "Two layers. The random layer is drawn at random within the legacy run's answer, so results can be reweighted to the corpus; the targeted layer goes where errors and unknowns concentrate. Report the layers separately. Held-back cases are never tuned against.",
   "targets": [
     {"split": "development", "layer": "random", "category": "random-excluded", "count": 10},
     {"split": "development", "layer": "random", "category": "random-in-scope", "count": 10},

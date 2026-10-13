@@ -21,7 +21,7 @@ missed docket can leave a case split in two or fail to join related appeals.
 
 **Findings (2026-10-12):** A narrow rule that allows bracket columns and line
 breaks between the number and "Vtec", and changes nothing else, was tested on
-the September documents. It changes 14 of 2,560 documents. Every newly found
+the legacy documents. It changes 14 of 2,560 documents. Every newly found
 docket matches the document's own court listing or is plainly in the caption,
 and no document loses a docket. 1,389 cases keep the same documents; three
 pairs merge, all correctly:
