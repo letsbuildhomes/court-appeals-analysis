@@ -5,7 +5,7 @@
     steps/ entries    import court.core and court.contracts (helpers come through ``use``)
     court.lab, court.research, court.reference
                       import court.config, court.core, court.contracts, court.web and themselves
-    court.ui          the web app; may also import court.lab and court.reports
+    court.ui          the web app; may also import court.lab, court.reports and court.reference
     nothing but court.cli and court.ui imports court.lab, court.reports, court.research or court.reference
 """
 import ast
@@ -28,7 +28,8 @@ ALLOWED = {
     'court/reference': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.reference'},
     'court/web': {'court.config', 'court.web'},
     'court/reports': {'court.config', 'court.core', 'court.contracts', 'court.reports', 'court.web'},
-    'court/ui': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.lab', 'court.reports', 'court.ui'},
+    'court/ui': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.lab', 'court.reports',
+                 'court.reference', 'court.ui'},
 }
 
 

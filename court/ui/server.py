@@ -17,6 +17,8 @@ def routes(api):
         '/api/page-text': api.page_text, '/api/pipelines': api.pipelines_list, '/api/pipeline': api.pipeline,
         '/api/lab/catalog': lab.catalog, '/api/lab/overview': lab.overview, '/api/lab/cases': lab.cases,
         '/api/lab/case': lab.detail, '/api/lab/source': lab.source,
+        '/api/reference': api.reference_list, '/api/reference/case': api.reference_case,
+        '/api/reference/source': api.reference_source,
     }
 
 

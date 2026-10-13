@@ -257,6 +257,13 @@ class Workspace:
             problems += [f'quotation not found on its page: {path}' for path in unverified]
         return problems
 
+    # Exploring -------------------------------------------------------------------
+    def label(self, case_id):
+        label = self.read(f'labels/{case_id}.json')
+        if label is None:
+            raise KeyError(case_id)
+        return label
+
     # Export ----------------------------------------------------------------------
     def export(self, name='reference', split=None):
         """Approved labels as a reference dataset: case → {result, labeled}, disputed facts left unscored."""

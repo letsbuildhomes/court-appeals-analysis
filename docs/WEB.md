@@ -135,6 +135,7 @@ it.
 | **Runs** | Every run, full or an experiment's subset, newest first; running ones refresh every two seconds |
 | **Lab** | Experiment rounds (verdicts, quality measures, what changed, cost) and production's quality profile |
 | **Data** | Every dataset by kind, with its report (grouping report, text audit, results profile) and items |
+| **Reference** | The hand-labeled reference cases: one table of what each label says (in scope first, then by how much is known), the open questions, and each case's answers beside the text they cite |
 | **Pipelines** | Resolved pipelines, their step trees, prompts and settings, tag history, and diffs between any two |
 
 ## Watching a run

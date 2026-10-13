@@ -1,7 +1,7 @@
 'use strict';
 
 // The router, the home overview and live refresh.
-// Routes: #/  ·  #/runs[/NAME]  ·  #/lab  ·  #/x/...  ·  #/data[/ID[/KEY]]  ·  #/pipelines[/ID]
+// Routes: #/  ·  #/runs[/NAME]  ·  #/lab  ·  #/x/...  ·  #/reference[/CASE]  ·  #/data[/ID[/KEY]]  ·  #/pipelines[/ID]
 function currentRoute() {
   const [path, query] = location.hash.replace(/^#\/?/, '').split('?');
   const parts = path.split('/').filter(Boolean).map(decodeURIComponent);
@@ -10,7 +10,7 @@ function currentRoute() {
   if (section === 'x') return {section: 'lab', page: 'dataset', dataset: parts[1], view: parts[2] || '', id: parts[3], params};
   if (section === 'runs') return {section, name: parts[1], params};
   if (section === 'data') return {section, id: parts[1], key: parts.slice(2).join('/'), params};
-  if (section === 'pipelines') return {section, id: parts[1], params};
+  if (section === 'pipelines' || section === 'reference') return {section, id: parts[1], params};
   return {section, params};
 }
 
@@ -45,7 +45,7 @@ async function renderHome(seq) {
   page(...blocks);
 }
 
-const NAV = [['home', 'Overview', '#/'], ['runs', 'Runs', '#/runs'], ['lab', 'Lab', '#/lab'], ['data', 'Data', '#/data'], ['pipelines', 'Pipelines', '#/pipelines']];
+const NAV = [['home', 'Overview', '#/'], ['runs', 'Runs', '#/runs'], ['lab', 'Lab', '#/lab'], ['reference', 'Reference', '#/reference'], ['data', 'Data', '#/data'], ['pipelines', 'Pipelines', '#/pipelines']];
 function navigation(current) {
   $('nav').replaceChildren(...NAV.map(([key, label, to]) => {
     const a = link(label, to, key === current ? 'active' : ''); if (key === current) a.setAttribute('aria-current', 'page'); return a;
@@ -57,11 +57,13 @@ async function render(liveRefresh = false) {
   if (!liveRefresh && $('source').hidden === false) closeSource();
   if (!liveRefresh) state.live = null;
   navigation(r.section);
+  document.body.classList.toggle('wide', r.section === 'reference');
   state.refreshing = liveRefresh;
   try {
     if (r.section === 'home') await renderHome(seq);
     else if (r.section === 'runs') await (r.name ? renderRun(seq, r) : renderRuns(seq));
     else if (r.section === 'lab') await (r.page === 'dataset' ? renderDataset_lab(seq, r) : renderIndex(seq));
+    else if (r.section === 'reference') await (r.id ? renderReferenceCase(seq, r) : renderReference(seq, r));
     else if (r.section === 'data') await (r.key ? renderItem(seq, r) : r.id ? renderDataset(seq, r) : renderDatasets(seq));
     else if (r.section === 'pipelines') await (r.id ? renderPipeline(seq, r) : renderPipelines(seq));
     else page(el('div', 'empty', 'No such page. ', link('Go to the overview', '#/')));

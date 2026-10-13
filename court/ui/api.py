@@ -12,6 +12,9 @@
     /api/pipelines                resolved pipelines with tags and runs
     /api/pipeline?id=[&other=]    a step tree, or two trees and their diff
     /api/lab/...                  the lab's views (court.lab.dashboard)
+    /api/reference                the reference cases, one row each of what its label says
+    /api/reference/case?id=       one reference case: its label, how it was made, its neighbors in order
+    /api/reference/source?id=     the case text its quotations cite
 """
 from collections import Counter
 from datetime import datetime, timezone
@@ -23,13 +26,16 @@ from pathlib import Path
 
 from court.contracts import cases as case_contract, pages as page_contract, results as contract
 from court.core.datasets import Datasets, is_failure
+from court.core.hashing import sha256
 from court.core.pipelines import Pipelines
 from court.core.raw import Raw
 from court.core.runner import Runner
 from court.lab import compare
 from court.lab.dashboard import Dashboard
+from court.reference.workspace import Workspace
 from court.reports import cases as case_report, text as text_report
 
+SCOPE_ORDER = {'in_scope': 0, 'uncertain': 1, 'excluded': 2}
 SHA = re.compile(r'[0-9a-f]{64}\Z')
 NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._/-]*\Z')
 
@@ -47,6 +53,7 @@ class Api:
         self.pipelines, self.datasets, self.runner = self.lab.pipelines, self.lab.datasets, self.lab.runner
         self.raw = raw or Raw()
         self.loaded, self.lock = {}, threading.Lock()
+        self.reference = Workspace(datasets=self.datasets, pipelines=self.pipelines, runner=self.runner)
 
     # Shared ------------------------------------------------------------------
     def dataset(self, ref):
@@ -303,6 +310,41 @@ class Api:
             raise KeyError(f'{doc}/{page}')
         return value
 
+    # Reference set ---------------------------------------------------------
+    def reference_rows(self):
+        """Every reference case as one row of what its label says, in reading order: in scope, then
+        uncertain, then excluded; within each, the most complete first."""
+        manifest = self.reference.read('manifest.json', {'cases': []})
+        rows = [reference_row(row, self.reference.label(row['case'])) for row in manifest['cases']]
+        rows.sort(key=lambda r: (SCOPE_ORDER.get(r['disposition'], 3), -r['known'], r['docket'] or r['case']))
+        return rows
+
+    def reference_list(self):
+        return {'cases': self.reference_rows(), 'source': self.reference.read('source.json')}
+
+    def reference_case(self, id):
+        rows = self.reference_rows()
+        keys = [r['case'] for r in rows]
+        if id not in keys:
+            raise KeyError(id)
+        at = keys.index(id)
+        manifest = {r['case']: r for r in self.reference.read('manifest.json')['cases']}
+        disagreements = self.reference.read('verification/disagreements.json', {}).get(id) or []
+        return {'row': rows[at], 'manifest': manifest[id], 'label': self.reference.label(id),
+                'problems': self.reference.check_label(id), 'disagreements': disagreements,
+                'position': at + 1, 'total': len(rows),
+                'previous': keys[at - 1] if at else None, 'next': keys[at + 1] if at + 1 < len(keys) else None}
+
+    def reference_source(self, id):
+        """The case text a label's quotations cite, verified against its hash."""
+        case = self.reference.cases().get(id)
+        if sha256(case['text']) != case['text_sha256']:
+            raise ValueError('Case text does not match its hash; withheld')
+        documents = [{'doc': n, 'title': d.get('title'), 'posted': (d.get('posted') or '')[:10],
+                      'dockets': d.get('caption_dockets') or []} for n, d in enumerate(case['documents'], 1)]
+        return {'case_id': id, 'text': case['text'], 'sha256': case['text_sha256'], 'verified': True,
+                'documents': documents}
+
     # Pipelines ------------------------------------------------------------
     def pipelines_list(self):
         tags = self.tags()
@@ -402,3 +444,47 @@ def pages_for(api, sha, pages_ref):
     found, values = api.dataset(ref)
     numbers = sorted(v['page'] for k, v in values.items() if k.startswith(sha+'/') and not is_failure(v))
     return {'dataset': found.id, 'pages': numbers}
+
+
+def known_value(value):
+    return value not in (None, 'unknown', '', [])
+
+
+def reference_row(row, label):
+    """One reference case as the cells the reference table shows; ``None`` where the label says unknown.
+
+    ``flags`` maps each fact whose answer took judgment (medium or low confidence) or is disputed to why.
+    """
+    result = label['result']
+    disposition = result['disposition']
+    record = result['records'][0] if result['records'] else None
+    flags = {j['field']: {'confidence': j['confidence'], 'note': j['note']} for j in label['judgments']
+             if j['confidence'] != 'high'}
+    flags.update({key: {'confidence': 'disputed', 'note': 'Left unresolved; not scored.'} for key in label['disputed']})
+    found = {'case': row['case'], 'docket': row['hints'].get('docket'), 'layer': row['layer'], 'split': row['split'],
+             'status': row['status'], 'disposition': disposition['value'], 'reason': disposition['reason'],
+             'municipal_appeal': disposition['municipal_appeal'], 'housing': disposition['housing'],
+             'questions': label['questions'], 'flags': flags, 'record': None, 'known': 0, 'slots': 0}
+    if record is None:
+        return found
+    slots = [spec['value'](record) for spec in contract.RECORD_FACTS]
+    project, decision, status = record['project'], record['municipal_decision'], record['observed_status']
+    appellants, duration = record['appellants'], record['duration']
+    kinds = Counter(a['relationship'] for a in appellants)
+    represented = sorted({a['representation'] for a in appellants} - {'unknown'})
+    bound = lambda end: None if end == 'unknown' else {'date': end['date'], 'relation': end['relation']}
+    found.update(known=sum(map(known_value, slots)), slots=len(slots), record={
+        'municipality': project['municipality'], 'description': project['description'],
+        'units': project['proposed_units'], 'lots': project['proposed_lots'],
+        'decision': decision['outcome'], 'decision_date': decision['date'],
+        'review': (record.get('appeal_review') or {}).get('standard', 'unknown'),
+        'appellants': len(appellants), 'appellant_kinds': dict(kinds),
+        'representation': represented[0] if len(represented) == 1 else 'mixed' if represented else 'unknown',
+        'seeks': sorted({a['seeks'] for a in appellants} - {'unknown'}),
+        'discretion': record['discretion']['involved'], 'discretion_central': record['discretion']['central'],
+        'start': bound(duration['start']), 'end': bound(duration['end']),
+        'days': duration['days'], 'duration_kind': duration['kind'],
+        'litigation': status['litigation'], 'permission': status['permission'],
+        'restrictions': len(record['restrictions']), 'housing_changes': len(record['housing_changes']),
+        'related': len(record['related_dockets'])})
+    return found
