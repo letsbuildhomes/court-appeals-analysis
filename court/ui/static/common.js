@@ -33,16 +33,26 @@ async function api(path, params = {}) {
 }
 // A live refresh patches the page in place (idiomorph), so the reader keeps their place, hover and
 // selection; the browser keeps what they are reading still when something above it changes height.
-// Elements it keeps take the new build's handlers, so handlers read their event, not the build's elements.
+// Handlers are properties, which idiomorph doesn't carry: elements it keeps take the new build's
+// handlers, and elements it adds (copies of the new build's) take their original's. Handlers read their
+// event, not the build's elements.
 const HANDLERS = ['onclick', 'oninput', 'onchange', 'onmouseover', 'onmouseleave', 'onkeydown'];
 function keepHandlers(old, built) {
   if (old.nodeType === Node.ELEMENT_NODE) for (const name of HANDLERS) if (old[name] !== built[name]) old[name] = built[name];
   return true;
 }
+function copyHandlers(built, added) {
+  keepHandlers(added, built);
+  for (let i = 0; i < built.children?.length; i++) if (added.children[i]) copyHandlers(built.children[i], added.children[i]);
+}
 function page(...children) {
   const items = children.flat().filter(Boolean);
-  if (state.refreshing) Idiomorph.morph($('content'), items, {morphStyle: 'innerHTML', callbacks: {beforeNodeMorphed: keepHandlers}});
-  else $('content').replaceChildren(...items);
+  if (!state.refreshing) return $('content').replaceChildren(...items);
+  const adding = [];
+  Idiomorph.morph($('content'), items, {morphStyle: 'innerHTML', callbacks: {
+    beforeNodeMorphed: keepHandlers,
+    beforeNodeAdded: built => { adding.push(built); return true; },
+    afterNodeAdded: added => copyHandlers(adding.pop(), added)}});
 }
 function crumbs(...items) {
   const nav = $('crumbs'); nav.replaceChildren();
