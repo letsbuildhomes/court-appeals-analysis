@@ -41,3 +41,22 @@ with reasons for approval before spending anything on labeling.
   over the reference set alone (`lab baseline`, about $1), and experiments
   such as a Jev triage are compared against it. The user wants to discuss the
   selection criteria before a slate is drafted.
+- 2026-10-13: The workspace is `reference/` (`court/reference/workspace.py`,
+  `python -m court reference freeze|pools|check|export`), with a labeling
+  guide that includes the new review-standard question. The case set is
+  frozen (`reference/source.json`). Haiku readers summarized 175 pooled
+  candidates; the slate of 60 was chosen by reading them (`SLATE.md`):
+  27 in scope, 23 excluded, 8 uncertain and 2 failed by September's answers;
+  every era and grouping shape represented; no document shared across the
+  development and held-back splits. It awaits the user's approval.
+- 2026-10-13: Five development cases labeled by Opus, checked, verified blind
+  by Sonnet and adjudicated. The user's rulings are in `GUIDE.md`: new housing
+  means building or majorly renovating a structure that serves as housing
+  (including duplex conversions, accessory apartments, seasonal-to-year-round
+  conversions, house lots, care homes, and replacements of a new structure);
+  violation-notice appeals are out of scope; lots are 0 only when the
+  documents make clear none are created; housing changes are changes to the
+  housing itself; facts never cross dockets; excluded cases carry no detail.
+  No new questions: the court's effect and who prevailed follow from the
+  board's decision and the final permission, and can be derived in code for
+  the dashboard and snapshot.

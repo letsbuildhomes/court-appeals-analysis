@@ -76,3 +76,12 @@ Evidence: agents read about 60 decisions in full, in four random samples.
   Expected cost from September's averages: about $7 off-peak for the probe and
   $9 more for the confirm round, double at peak hours. The dry-run plan's
   worst-case reservations are much higher ($64 for the probe at peak).
+- 2026-10-13: A reader summarizing reference candidates found the Leikert
+  decision still in the Doyle and Lussier & Noe cases: body text wraps, so a
+  citation's "Docket No." can start a line and pass for a caption label.
+  `cases/group:docket-headings` replaces `docket-cases` in the pipeline: a
+  label is a heading only when its line doesn't continue as a sentence and,
+  at the left margin, the line before doesn't end with a comma; a
+  parenthetical note between stacked heading dockets no longer ends the
+  column. It changes 19 documents' readings, each checked: 17 drop a body
+  mention, 2 add a real heading docket (Madden, Woodstock). 1,729 cases.

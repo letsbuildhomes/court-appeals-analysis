@@ -1,0 +1,71 @@
+{
+ "case": "g-134-6-00-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-134-6-00-vtec",
+  "disposition": {
+   "value": "excluded",
+   "reason": "This docket appeals the Colchester Planning Commission's denial of site plan approval, a municipal land-use decision, but the proposal is to use an existing single-family house as a boarding house for multiple tenants with no changes to the structure, a change of occupancy without construction, which is not new housing.",
+   "municipal_appeal": "yes",
+   "housing": "no",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "denying his application for site plan approval to convert a single family residence to a boarding house"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "No changes to the structure have been made."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "The Planning Commission denied site plan approval and Appellant appealed to this Court."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "multiple tenants (running a boarding house without Planning Commission approval)"
+    }
+   ]
+  },
+  "records": []
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {}
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a Planning Commission site plan denial (municipal appeal yes); the use sought is renting an existing four-bedroom house to multiple tenants as a boarding house, with no structural changes, which the guide's housing table classes as a change of occupancy or tenants without construction (housing no), so the case is excluded."
+  },
+  {
+   "field": "municipal_appeal",
+   "confidence": "high",
+   "note": "Appellant appealed the Planning Commission's denial of site plan approval to the Environmental Court."
+  },
+  {
+   "field": "housing",
+   "confidence": "high",
+   "note": "Boarding-house use of an existing house; the decision states no changes to the structure have been made and no construction or new unit is proposed."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T12:00:00Z",
+   "note": "Excluded: appeal of site plan denial for boarding-house use of an existing house without construction."
+  }
+ ]
+}

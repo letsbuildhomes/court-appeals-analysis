@@ -32,6 +32,10 @@ class Paths:
         return self.root/'experiments'
 
     @property
+    def reference(self):
+        return self.root/'reference'
+
+    @property
     def datasets(self):
         return self.data/'datasets'
 

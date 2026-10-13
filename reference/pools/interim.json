@@ -1,0 +1,214 @@
+{
+  "category": "interim",
+  "needed": 2,
+  "seed": 20261013,
+  "available": 257,
+  "candidates": [
+    {
+      "case": "g-24-env-00022",
+      "docket": "24-ENV-00022",
+      "documents": 1,
+      "composition": "single",
+      "chars": 10621,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Pittsford v Bovey & Boondock Motors - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a post-judgment contempt decision in an enforcement action, not an appeal of a municipal land-use decision. The underlying permit authorizes commercial hauling/trucking, towing, and an autobody shop, not residential dwellings.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-64-6-18-vtec",
+      "docket": "64-6-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 17201,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Halifax v LeMay & Jeffrey - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a Town-initiated enforcement decision, not an appeal of a municipal land-use approval or denial. It references unappealed notices of violation and a prior ZBA appeal, but those are distinct from this enforcement matter. The subject is a shed and its removal, not permission for a new, replacement, or additionally authorized dwelling unit.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-132-12-18-vtec",
+      "docket": "132-12-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 70447,
+      "era": "2015-2026",
+      "titles": [
+        "Reed CU Denial - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns a commercial firewood processing operation and notice of violation, not residential dwellings or new/replacement/additional dwelling units; no housing permission is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-75-7-18-vtec",
+      "docket": "75-7-18 Vtec",
+      "documents": 5,
+      "composition": "uniform",
+      "chars": 121420,
+      "era": "2015-2026",
+      "titles": [
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motions",
+        "Burns 12 Weston Street NOV - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The source documents identify the property as a two-unit residential building/duplex and the dispute concerns legal authorization for the two dwelling units: initially whether interior reconfiguration requires a permit, and later whether the duplex use is an enforceable unpermitted use. Residential use is established, and legal authorization of the duplex units is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-23-env-00057",
+      "docket": "23-ENV-00057",
+      "documents": 4,
+      "composition": "uniform",
+      "chars": 71652,
+      "era": "2015-2026",
+      "titles": [
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV Appeal - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This matter is an appeal of a municipal land-use decision — a Development Review Board decision on a zoning Notice of Violation (24 V.S.A. § 4451) — so it is a municipal appeal. However, the subject of the challenged decision is a storage/ISO container's placement within a front setback, a nonhousing subject. The litigation concerns whether the container is a 'structure,' setback measurement, selective enforcement, and procedural/venue issues; it does not seek permission for a new, replacement, converted, or additional dwelling unit or house lot. The property contains the Spaulings' existing h",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-109-9-19-vtec",
+      "docket": "109-9-19 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 27190,
+      "era": "2015-2026",
+      "titles": [
+        "R.L. Vallee Determination Request - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a municipal zoning appeal involving the Town of Colchester's refusal to allow Vallee's DRB appeal concerning a Costco gas station and municipal final plat/site plan amendment requirements. The proposed use is a gas station, not residential dwellings, so housing is no.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-54-5-17-vtec",
+      "docket": "54-5-17 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 88410,
+      "era": "2015-2026",
+      "titles": [
+        "Comtuck LLC East Tract Rd JO - Decision on Motion",
+        "Comtuck East Tract Act 250 JO - Decision on Motions (Revised)",
+        "Comtuck LLC East Tract Rd JO - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The appeal is an Act 250 jurisdictional opinion appeal to the Environmental Division, not an appeal of a municipal land-use decision. The proposal is for 100 residential home sites/lots, so it concerns residential housing, but no municipal decision is challenged.",
+      "september_municipal": "no",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-3-1-19-vtec",
+      "docket": "3-1-19 Vtec",
+      "documents": 5,
+      "composition": "shared",
+      "chars": 142148,
+      "era": "2015-2026",
+      "titles": [
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan/Capitol Plaza Act 250 - Decision on Motion",
+        "Capitol Plaza 2 Lot Subdivision & Capitol Plaza Major Site Plan - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "Municipal appeal element is satisfied: documents 2–4, 8, and 9 concern appeals of the Montpelier Development Review Board's approval of the City's subdivision and Major Site Plan for a parking garage. The proposal, however, is a municipal parking garage and an 81-room hotel; neither is a residential dwelling or residential building lot, and no new or additional dwelling units or house lots are sought. The subdivision creates a lot for the garage, not housing.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "4-1-19 Vtec",
+        "59-5-19 Vtec"
+      ]
+    }
+  ]
+}

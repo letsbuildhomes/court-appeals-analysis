@@ -1,0 +1,544 @@
+{
+ "case": "g-126-6-07-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-126-6-07-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Neighbors appealed the Woodstock DRB's final approval of a 36-unit planned residential development of new duplexes and triplexes plus units in a renovated Grange building: a municipal appeal about new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "The application for a 36-unit PRD in multiple-unit buildings requires approval under"
+    },
+    {
+     "doc": 2,
+     "page": 3,
+     "quote": "which propose an affordable housing development,"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "126-6-07 Vtec",
+    "project": {
+     "description": "Planned Residential Development of 36 dwelling units (affordable and market-rate, rental and for sale) by Woodstock Community Trust and Housing Vermont at 473 Woodstock Road, West Woodstock: twelve new duplexes and three new triplexes (33 units) plus three units in the renovated former Grange building; final PRD, site plan and conditional use approval; no subdivision.",
+     "municipality": "Woodstock",
+     "proposed_units": 36,
+     "proposed_lots": 0,
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The application for a 36-unit PRD in multiple-unit buildings requires approval under"
+      },
+      {
+       "doc": 2,
+       "page": 5,
+       "quote": "Appellee-Applicants refer to the project as now proposing thirty-six dwelling units in sixteen structures on an eight-acre parcel."
+      },
+      {
+       "doc": 2,
+       "page": 5,
+       "quote": "which totals thirty-three units, making thirty-six including the Grange building triplex."
+      },
+      {
+       "doc": 2,
+       "page": 5,
+       "quote": "supports a count of thirty-six dwelling units in the proposal before the Court."
+      },
+      {
+       "doc": 2,
+       "page": 10,
+       "quote": "The project is not proposed for subdivision, but instead intends the sale of ten of the units and the rental of the remaining twenty-six units."
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Development Review Board (DRB) of the Town2 of Woodstock"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Development3 located at 473 Woodstock Road"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Town of Woodstock Development Review Board decision granting final approval of the PRD application, with conditions (permits and state stormwater design before construction, lighting, fencing, landscaping, construction hours).",
+     "date": "2007-06-04",
+     "outcome": "approved_with_conditions",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+      },
+      {
+       "doc": 1,
+       "page": 8,
+       "quote": "Conditions 2 through 5 require that certain lights, proposed on the plans but"
+      },
+      {
+       "doc": 1,
+       "page": 8,
+       "quote": "a completed state[-]approved storm water design shall be reviewed and approved by the TDRB."
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "David Roy",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants David Roy, Richard Roy, Michael"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Kaveh S. Shahi, Esq."
+       },
+       {
+        "doc": 2,
+        "page": 4,
+        "quote": "located behind those of Appellants' properties which have access themselves directly onto Route 4"
+       },
+       {
+        "doc": 2,
+        "page": 21,
+        "quote": "adjacent to the rear lot lines of Appellants Hirschbuhl, David Roy, and Barr"
+       }
+      ]
+     },
+     {
+      "name": "Richard Roy",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants David Roy, Richard Roy, Michael"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Kaveh S. Shahi, Esq."
+       },
+       {
+        "doc": 2,
+        "page": 4,
+        "quote": "located behind those of Appellants' properties which have access themselves directly onto Route 4"
+       },
+       {
+        "doc": 2,
+        "page": 8,
+        "quote": "The water line serving the Richard and Roberta Roy residence"
+       }
+      ]
+     },
+     {
+      "name": "Michael Hirschbuhl",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants David Roy, Richard Roy, Michael"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Kaveh S. Shahi, Esq."
+       },
+       {
+        "doc": 2,
+        "page": 4,
+        "quote": "located behind those of Appellants' properties which have access themselves directly onto Route 4"
+       },
+       {
+        "doc": 2,
+        "page": 21,
+        "quote": "adjacent to the rear lot lines of Appellants Hirschbuhl, David Roy, and Barr"
+       }
+      ]
+     },
+     {
+      "name": "Tod Minotti",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants David Roy, Richard Roy, Michael"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Kaveh S. Shahi, Esq."
+       },
+       {
+        "doc": 2,
+        "page": 4,
+        "quote": "located behind those of Appellants' properties which have access themselves directly onto Route 4"
+       }
+      ]
+     },
+     {
+      "name": "Mark Stanglin",
+      "relationship": "neighbor",
+      "seeks": "overturn_approval",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants David Roy, Richard Roy, Michael"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellants are represented by Kaveh S. Shahi, Esq."
+       },
+       {
+        "doc": 2,
+        "page": 4,
+        "quote": "located behind those of Appellants' properties which have access themselves directly onto Route 4"
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "Neighbors' Statement of Questions (Question I, 19 subsections) challenged whether the project met PRD, site plan and conditional use standards: adequacy of stormwater drainage, harmony and compatibility with adjacent uses and the character of the area, protection of natural resources and open space, traffic, parking and access, ownership and management, and municipal services; Questions II and III (duplication; DRB deferral of stormwater review via a condition) were resolved by motion.",
+     "involved": "yes",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 17,
+       "quote": "relate to whether the proposed project meets the requirements for harmony with the surrounding area and adjacent uses."
+      },
+      {
+       "doc": 2,
+       "page": 17,
+       "quote": "The proposed project must not have an adverse effect on the character of the area affected by the project."
+      },
+      {
+       "doc": 2,
+       "page": 18,
+       "quote": "\u201a*a+dequacy of landscaping, screening, and setbacks in regard to achieving maximum compatibility and protection of adjacent properties.\u201b"
+      },
+      {
+       "doc": 2,
+       "page": 19,
+       "quote": "Appellants also argue that the proposed project is not compatible with portions of the Town Plan discussing housing,"
+      }
+     ],
+     "central": "yes",
+     "central_evidence": [
+      {
+       "doc": 2,
+       "page": 2,
+       "quote": "of which Question I addressed the merits of whether the application met the requirements of \u00a7\u00a7 709, 710, and 313 of the Zoning Regulations."
+      },
+      {
+       "doc": 2,
+       "page": 3,
+       "quote": "All references to the remaining question numbers in this decision are to the various subsections of Question I that remained in the appeal"
+      },
+      {
+       "doc": 2,
+       "page": 12,
+       "quote": "Questions 2, 8(a), 13(h), 13(i) and 17(e) relate to whether the proposed project meets the requirements for the management of stormwater on the project site."
+      }
+     ]
+    },
+    "observed_status": {
+     "litigation": "resolved",
+     "permission": "denied",
+     "description": "After a de novo trial the Environmental Court denied final planned development approval; the applicants may file a revised application with the DRB. No further proceeding in this docket is shown.",
+     "evidence": [
+      {
+       "doc": 2,
+       "page": 34,
+       "quote": "and therefore final planned development approval is DENIED."
+      },
+      {
+       "doc": 2,
+       "page": 34,
+       "quote": "Nothing about this decision precludes Appellee-Applicant from making a future application to the Town of Woodstock DRB"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "126-6-07 Vtec"
+      ],
+      "description": "Neighbors appealed the DRB's June 4, 2007 final approval; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2007-10-03",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "263-11-06 Vtec",
+       "126-6-07 Vtec"
+      ],
+      "description": "Decision on motions: Question II dismissed as duplicative; summary judgment granted in part to each side on Question III (stormwater condition; application is de novo before the Court); motion to clarify granted.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 7,
+        "quote": "Question II of the Statement of Questions is DISMISSED as duplicating Question I."
+       },
+       {
+        "doc": 1,
+        "page": 10,
+        "quote": "Done at Berlin, Vermont, this 3rd day of October, 2007."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2008-10-15",
+      "court_or_body": "Vermont Environmental Court",
+      "dockets": [
+       "126-6-07 Vtec",
+       "263-11-06 Vtec"
+      ],
+      "description": "Decision and Order after a six-day evidentiary hearing and site visit denying final planned development approval.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 34,
+        "quote": "and therefore final planned development approval is DENIED."
+       },
+       {
+        "doc": 2,
+        "page": 35,
+        "quote": "Dated at Berlin, Vermont, this 15th day of October, 2008."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2007-07-20",
+      "relation": "on_or_before",
+      "description": "Appellants filed a revised Statement of Questions in this docket on July 20, 2007; the notice of appeal's date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "In Docket No. 126-6-07 Vtec, Appellants filed a revised Statement"
+       }
+      ]
+     },
+     "end": {
+      "date": "2008-10-15",
+      "relation": "exact",
+      "description": "Environmental Court Decision and Order denying final approval; no further review shown.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 35,
+        "quote": "Dated at Berlin, Vermont, this 15th day of October, 2008."
+       },
+       {
+        "doc": 2,
+        "page": 34,
+        "quote": "and therefore final planned development approval is DENIED."
+       }
+      ]
+     },
+     "note": "Start bounded by the revised Statement of Questions (July 20, 2007); filing date itself not in the documents. End is the final merits decision.",
+     "kind": "at_least",
+     "days": 453
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "263-11-06 Vtec",
+      "relationship": "Same appellants' appeal of the DRB's November 3, 2006 preliminary approval of the same project; tried together and decided in the same decisions.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 2,
+        "quote": "these questions were consolidated with the merits of Docket No. 126-6-07 Vtec regarding final approval of the proposed project."
+       }
+      ]
+     },
+     {
+      "docket": "99-5-06 Vtec",
+      "relationship": "Applicants' earlier appeal of the DRB's initial denial of preliminary approval; withdrawn when the DRB reconsidered.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 2,
+        "quote": "received Docket No. 99-5-06 Vtec; it was withdrawn when the DRB took up the"
+       }
+      ]
+     },
+     {
+      "docket": "152-6-06 Vtec",
+      "relationship": "Appellants' earlier appeal of the preliminary approval after first reconsideration; remanded to the DRB at its request.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 2,
+        "quote": "No. 152-6-06 Vtec, which was remanded at the request of the DRB pursuant to"
+       }
+      ]
+     },
+     {
+      "docket": "678-10-07 Wrcv",
+      "relationship": "Windsor Superior Court suit by the Roys, Hirschbuhls and others against Woodstock Community Trust over rights to the access land and water-line easements.",
+      "evidence": [
+       {
+        "doc": 2,
+        "page": 7,
+        "quote": "Docket No. 678-10-07 Wrcv5) in"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 9,
+       "quote": "No remand is necessary regarding the issue of stormwater (or any other issue) because the application is de novo before the Court"
+      },
+      {
+       "doc": 2,
+       "page": 3,
+       "quote": "An evidentiary hearing was held in this matter over the course of six days, before Merideth Wright, Environmental Judge. A site visit was taken before the hearing"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "126-6-07 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of the DRB's June 4, 2007 final approval of a 36-unit PRD with fifteen new residential buildings; both shared decisions decide this docket (doc 1 Questions I-III of 126-6-07; doc 2 final-approval merits)."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "Court repeatedly says the application is de novo before it; held a six-day evidentiary hearing with site visit and decided the application itself."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "Filing date not stated; start bounded by the July 20, 2007 revised Statement of Questions (on_or_before). End is the October 15, 2008 final decision; no Supreme Court appeal is observed, but one could exist outside these documents."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Final merits decision denying approval with nothing pending in this docket shown; possible later appeal not observable here."
+  },
+  {
+   "field": "units",
+   "confidence": "high",
+   "note": "Court resolved the 36 vs 39 confusion: 33 units in 15 new buildings plus 3 in the renovated Grange building = 36. The 3 Grange units are a renovation creating housing, counted."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "Court states the project is not proposed for subdivision; land stays with the Trust, so 0 new residential lots."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "Five named appellants; neighbor status is explicit for Hirschbuhl and David Roy (rear lot lines), Richard Roy (residence water line), and the court refers to 'Appellants' properties' near Route 4. Minotti and Stanglin's properties are not individually described (a 'Menotti property' near the brook may be Minotti's)."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "medium",
+   "note": "The whole surviving appeal was Question I's merits challenge under \u00a7\u00a7 313, 709, 710, whose standards (adequacy of drainage, harmony, compatibility, character of area) are evaluative; the denial rested on them."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "high",
+   "note": "DRB granted final approval with Conditions 1-5 (text taken from parties' memoranda)."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T04:52:17+00:00",
+   "note": "Initial label from both shared decisions; in scope, de novo, final approval denied after trial."
+  }
+ ]
+}

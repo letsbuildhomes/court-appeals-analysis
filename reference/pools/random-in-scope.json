@@ -1,0 +1,1199 @@
+{
+  "category": "random-in-scope",
+  "needed": 12,
+  "seed": 20261013,
+  "available": 395,
+  "candidates": [
+    {
+      "case": "g-126-6-07-vtec",
+      "docket": "126-6-07 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 95023,
+      "era": "2005-2014",
+      "titles": [
+        "Woodstock Community Trust, Inc. & Housing VT",
+        "Woodstock Community Trust & Housing Vermont PRD"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Document 1 identifies the appeal of the Woodstock DRB’s November 3, 2006 decision granting reconsideration and preliminary approval of a 36-unit affordable housing project. Documents 2 and 3 continue and coordinate the same municipal appeals, including Docket No. 126-6-07 Vtec for final approval. The proposed use is 36 residential dwelling units, and the appeals concern permission for those new units at preliminary and final approval stages.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "263-11-06 Vtec"
+      ]
+    },
+    {
+      "case": "g-116-6-09-vtec",
+      "docket": "116-6-09 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 54635,
+      "era": "2005-2014",
+      "titles": [
+        "Atwood-Hood PRD"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decisions are municipal DRB Discretionary Permit approvals for a proposed twelve-unit residential development in Williston. Appellants Atwood and Hood appeal conditions imposed on permission for new residential units, so the appeal concerns municipal permission for residential dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "117-6-09 Vtec"
+      ]
+    },
+    {
+      "case": "g-231-10-07-vtec",
+      "docket": "231-10-07 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 32224,
+      "era": "2005-2014",
+      "titles": [
+        "Sorrentino Building Site Application"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is a municipal DRB completeness determination for a building-site application, appealed de novo to the Environmental Court, so it is an appeal of a municipal land-use decision. The proposal is a single-family house (a new residential dwelling) requiring conditional use approval and a zoning/administrative permit, so the appeal concerns permission for a new dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-110-6-04-vtec",
+      "docket": "110-6-04 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 22906,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Harrison"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decisions are municipal DRB site plan/PRD subdivision decisions. The proposal is for residential development lots/houses within a six-lot PRD, so the appeal concerns permission for new residential building lots.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-75-7-18-vtec",
+      "docket": "75-7-18 Vtec",
+      "documents": 5,
+      "composition": "uniform",
+      "chars": 121420,
+      "era": "2015-2026",
+      "titles": [
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motion",
+        "Burns 12 Weston Street NOV - Decision on Motions",
+        "Burns 12 Weston Street NOV - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The source documents identify the property as a two-unit residential building/duplex and the dispute concerns legal authorization for the two dwelling units: initially whether interior reconfiguration requires a permit, and later whether the duplex use is an enforceable unpermitted use. Residential use is established, and legal authorization of the duplex units is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-180-12-13-vtec",
+      "docket": "180-12-13 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6944,
+      "era": "2005-2014",
+      "titles": [
+        "Savoy Permit Revision to \"As Built\""
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal DRB permit amendment concerns as-built structures including a single-family residence and detached garage with an apartment, so the appeal involves legal authorization for dwelling units even though they already exist.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-74-5-10-vtec",
+      "docket": "74-5-10 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 56036,
+      "era": "2005-2014",
+      "titles": [
+        "S.P. Land Co., LLC Golf Course PUD",
+        "SP Land Co., LLC Golf Course PUD"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision approved a conceptual PUD master plan for a proposal expressly including up to 328 independently occupied residential dwelling units; the appeal concerns that municipal permission step for new dwellings, even though final PUD/site plan approval remained pending.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-250-12-99-vtec",
+      "docket": "250-12-99 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 13843,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Madden & Winborn",
+        "Appeals of Madden & Winborn"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The Environmental Court decisions review appeals of municipal building permits for three lots in a residential subdivision, and the permits sought authorization for single-family residences; both municipal land-use appeal and residential dwelling permission are established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "15-1-00 Vtec",
+        "227-11-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-71-4-07-vtec",
+      "docket": "71-4-07 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 24576,
+      "era": "2005-2014",
+      "titles": [
+        "Morris 7-Lot Subdivision"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source shows an appeal from a municipal Planning Commission decision granting subdivision/site plan approval for seven residential building lots, each proposed for a single-family residence, so the appeal concerns permission for new residential house lots.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-150-7-02-vtec",
+      "docket": "150-7-02 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 8966,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Susan M. Coleman"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The document is an Environmental Court appeal from a municipal ZBA decision. The application at issue sought a right-of-way extension to serve two single-family dwellings/a two-lot subdivision, so the appeal concerns municipal permission for access to residential house lots, even though only the right-of-way extension was before the Court rather than the subdivision approval itself.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-208-12-01-vtec",
+      "docket": "208-12-01 Vtec",
+      "documents": 6,
+      "composition": "shared",
+      "chars": 66122,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Motion to Dismiss Parties)",
+        "Appeal of Green Meadows Center, LLChttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Pending Motions)",
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Motion for Reconsideration)",
+        "Appeal of Green Meadows Center, LLChttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Partial Decision and Order Categorizing the Uses proposed in the PUD Applications)",
+        "Appeal of Green Meadows Center. LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org (Final Order)",
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org (Decision and Order on Pending Motions)"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "This matter is an appeal of municipal land-use decisions: ZBA conditional use approvals (#803, #844) and a Planning Commission PUD denial. Housing=yes because the proposal itself contains residential dwellings-a '6-unit Senior Citizen Residence' ruled a 'multiple family dwelling' entitled to conditional use review, and a proposed 6-person dormitory-and these appeals seek permission (conditional use approval #844 and PUD approval) for those residential units; the parties themselves describe 'residential uses (six senior residences and six visitor residences).'",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "152-9-01 Vtec",
+        "179-10-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-158-9-04-vtec",
+      "docket": "158-9-04 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 58773,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Yates, et al",
+        "Appeal of Yates, et al",
+        "Appeal of Yates, et al"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The documents are the same Environmental Court docket reviewing a municipal DRB decision. The challenged application sought permission to construct a single-family residence instead of an approved duplex, a residential replacement dwelling authorization.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-122-7-99-vtec",
+      "docket": "122-7-99 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 28428,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Marcelino"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The source shows appeals from municipal ZBA decisions and identifies the proposed use as a single-family house replacing a mobile home, with the variance/permit dispute concerning the dwelling's authorized location.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "181-11-97 Vtec"
+      ]
+    },
+    {
+      "case": "g-128-6-02-vtec",
+      "docket": "128-6-02 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 12612,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Rowley"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The Rowleys appealed DRB denials of municipal zoning approvals: conditional use boundary relocation and a septic-system setback variance. The proposal includes new residential house sites on Lots 2 and 3 and two residential lots, and the approvals at issue are authorizations/conditions for that residential development.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "96-6-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-165-9-98-vtec",
+      "docket": "165-9-98 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 34751,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Jericho Ctr. Citizens"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The document is an appeal of a municipal Planning Commission subdivision approval under Jericho regulations. The proposal concerns residential building lots: a related state subdivision permit approved one four-bedroom single-family residence on each Lindholm lot, and the subdivision decision addresses the proposed house site, well, and septic system for those lots.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-283-12-02-vtec",
+      "docket": "283-12-02 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6785,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Champlin & Broughton"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source shows an appeal from a municipal DRB decision concerning a building permit for a house on Lot 17, so it is a municipal land-use appeal involving authorization of a new single-family dwelling.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-47-3-98-vtec",
+      "docket": "47-3-98 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 21902,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Gregoire",
+        "In re Appeal of Gary and Suzanne Gregoire"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal from a municipal ZBA decision, later reviewed by the Vermont Supreme Court on the same Environmental Court docket. The challenged determination concerns legal authorization to use two existing cottage units as seasonal residential dwellings; the Gregoires seek to renovate and reside in them, so residential authorization is at stake rather than settled existing housing or mere occupancy of already authorized dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-21-env-00129",
+      "docket": "21-ENV-00129",
+      "documents": 1,
+      "composition": "single",
+      "chars": 4864,
+      "era": "2015-2026",
+      "titles": [
+        "12 Old Orchard Lane Administrative Action Appeal - Revised Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The Environmental Division matter arises from the Town of Jericho's zoning permit and DRB review for the Project, and Applicants appealed the DRB's municipal postponement decision. The Project is described as seeking permission to establish a residence, so a residential use and housing permission are at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-pdf-85b1f76def7c",
+      "docket": null,
+      "documents": 1,
+      "composition": "single",
+      "chars": 16651,
+      "era": "unknown",
+      "titles": [
+        "In re Appeal of Allen Mulheron"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source shows a municipal zoning/building-permit dispute over a new modular home on lot six of a Highgate subdivision. The ZBA upheld a notice of violation and denied a variance, and the Environmental Court and Supreme Court reviewed those municipal decisions, so this is an appeal of a municipal land-use decision involving residential dwelling permission and conditions.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-74-5-03-vtec",
+      "docket": "74-5-03 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 24730,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of West",
+        "In re West"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Both documents concern an appeal of a municipal DRB decision about whether a residence may be used as a two-family dwelling (residential use) without conditional use approval, i.e. authorization for a second dwelling unit. Doc 1 is the Environmental Court decision; Doc 2 is the Supreme Court review of the same matter (same docket 74-5-03 Vtec). The dispute is whether the second unit is legally authorized (conditional use approval) or grandfathered, so permission for an additional/continued dwelling unit is at stake, not merely tenancy or occupancy.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-48-2-05-vtec",
+      "docket": "48-2-05 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 14610,
+      "era": "2005-2014",
+      "titles": [
+        "In re Appeal of Frederick LeBlanc",
+        "In re Appeal of Frederick LeBlanc"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Both documents concern Frederick LeBlanc's appeal of a municipal Colchester DRB land-use approval, and doc 2 identifies the approved proposal as a two-lot residential subdivision, i.e., new residential building lots. The disputes concern timeliness of the notice of appeal (V.R.E.C.P. 5(b)(1)), not Act 250 or state-only matters.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-143-7-08-vtec",
+      "docket": "143-7-08 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 78971,
+      "era": "2005-2014",
+      "titles": [
+        "Benoit Conversion Application - Decision on Motion",
+        "City of St. Albans v Hayford - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Docket 148-8-04 Vtec is an appeal of a Development Review Board decision denying approval to convert the rear building to residential use, and the enforcement matters (126-7-04, 161-9-03) and 143-7-08 reopening concern authorization to use the rear building and fifth main-building apartment as residential dwelling units. The proposal is residential and seeks permission for additional/after-the-fact authorized dwelling units (the sixth rear unit and the fifth main-building unit), so housing is established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": [
+        "126-7-04 Vtec",
+        "148-8-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-25-env-00004",
+      "docket": "25-ENV-00004",
+      "documents": 1,
+      "composition": "single",
+      "chars": 15662,
+      "era": "2015-2026",
+      "titles": [
+        "1417 Joes Brook Road CU Permit Application - Decision on Merits"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source is an Environmental Division merits decision on Grace Gershuny's appeal of the Town of Barnet Planning/Zoning Board's denial of her zoning permit application. The proposal is a 1,300 sq. ft. accessory dwelling unit with attached garage, a residential dwelling unit, so the appeal concerns permission for an additional dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-223-12-98-vtec",
+      "docket": "223-12-98 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 23704,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Laferriere"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The Laferrieres appealed the Lyndon Planning and Zoning Board's conditional use approval to the Howlands. The 1998 application proposed placing a 14' x 66' mobile home and was treated as a conditional use request for reduced setbacks, so the appeal concerns authorization of a residential dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-88-4-02-vtec",
+      "docket": "88-4-02 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 15091,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of Green Mountain Habitat for Humanity and In re: Appeal of Blair and Devlin (Decision and Order on Motions for Summary Judgment)"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The challenged decision is a municipal Development Review Board ruling on a zoning permit application. The proposed use is a new single-family dwelling on a vacant undersized lot, so the appeal concerns permission for a new dwelling unit. Merger and variance issues go to whether that new-home permission stands.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "19-1-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-261-11-07-vtec",
+      "docket": "261-11-07 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 51166,
+      "era": "2005-2014",
+      "titles": [
+        "Tenney Notices of Violation",
+        "Tenney Notices of Violation"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Doc 1 is a direct appeal of a Town of Lincoln Zoning Board of Adjustment decision denying a zoning permit for a replacement mobile home (single-family dwelling) on the site of a preexisting residence, so the challenged municipal decision concerns permission for a replacement dwelling. Docs 2-3 are the same property/dispute, coordinated NOV appeals/enforcement, retaining the underlying identity. Residential use (mobile home/dwelling) and replacement permission are both established by the source.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "169-9-03 Vtec",
+        "186-9-07 Vtec",
+        "226-12-03 Vtec",
+        "70-4-08 Vtec"
+      ]
+    },
+    {
+      "case": "g-113-5-02-vtec",
+      "docket": "113-5-02 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11639,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Vesosky"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source establishes an appeal of a municipal DRB decision and states that the permission at stake concerned development of vacant Lot 2 for a septic system and a single-family house/residence.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-40-2-06-vtec",
+      "docket": "40-2-06 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 32366,
+      "era": "2005-2014",
+      "titles": [
+        "Beebe 9-Lot Subdivision"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Both documents are appeals of municipal Planning Commission subdivision/site-plan decisions for Beebe's Highgate property; the proposed use is creation of residential building lots (existing Beebe residence on Lot #4 plus eight new house lots) in the nine-lot subdivision.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.0,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "204-11-04 Vtec",
+        "218-11-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-43-3-09-vtec",
+      "docket": "43-3-09 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 2347,
+      "era": "2005-2014",
+      "titles": [
+        "Bouffard Family PRD Preliminary Plat"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The judgment order identifies an appeal from a municipal Planning Commission preliminary approval concerning a 48-unit planned residential development, establishing both municipal land-use review and a residential dwelling-unit proposal.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-123-6-00-vtec",
+      "docket": "123-6-00 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 19652,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of Thomas J. Baribault (Decision and Order on Motion for Summary Judgment)",
+        "In re: Appeal of Thomas Baribault (Decision and Order)"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Both documents concern the same Environmental Court appeal of a Jericho DRB decision granting a five-lot planned residential subdivision. The proposal includes residential house sites/lots and the appeal challenges municipal subdivision/PRD approval, so both municipal-appeal and housing facts are established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-143-9-01-vtec",
+      "docket": "143-9-01 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 13948,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of Watker, et al",
+        "In re: Appeal of Watker, et al."
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision is a DRB resubdivision approval, and the proposal is expressly for four new single-family residential building lots, so both housing facts are established; doc 2 is the later reconsideration ruling in the same matter.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-218-9-00-vtec",
+      "docket": "218-9-00 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 39999,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Garen",
+        "Appeal of Garen (Plat Approval)"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "All three documents concern the same consolidated Environmental Court appeals of municipal DRB plat approvals for a proposed eight-unit PRD. The municipal decision challenged is the Burlington DRB's grant of preliminary (218-9-00 Vtec) and final (42-3-01 Vtec) plat approval. The proposed use is residential dwellings (four single-family houses and two duplexes), so permission for new dwelling units is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "42-3-01 Vtec"
+      ]
+    },
+    {
+      "case": "g-23-env-00081",
+      "docket": "23-ENV-00081",
+      "documents": 1,
+      "composition": "single",
+      "chars": 20228,
+      "era": "2015-2026",
+      "titles": [
+        "Bourne Final Plat Application - Decision on Motions"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The document is an Environmental Division appeal of a municipal DRB decision denying a PUD application. The proposal expressly includes 30 dwelling units and a 27-unit multifamily residential building, so permission for new residential units is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-194-10-03-vtec",
+      "docket": "194-10-03 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 124497,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Highlands Dev. Co, LLC & JAM Golf, LLC",
+        "Highland Development Co., LLC & JAM Golf, LLC Master Plan",
+        "Highlands Development Co., LLC & JAM Golf, LLC Master Plan Application"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is a municipal Development Review Board master plan determination for a residential planned unit development, appealed by the developer-applicants. The proposal is residential: the master plan sought authorization for hundreds of residential dwelling units (297 approved, more sought), and the appeal concerns the permission (number/placement of units) for those dwellings, not merely occupancy.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-24-env-00061",
+      "docket": "24-ENV-00061",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 38207,
+      "era": "2015-2026",
+      "titles": [
+        "3 Gill Terrace DRB Decision Appeal - Decision on Motions",
+        "3 Gill Terrace DRB Decision Appeal - On the Record Decision"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision approved a building permit for a single-family residence, and the appeal concerns permission for that new dwelling unit in Ludlow.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-52-4-19-vtec",
+      "docket": "52-4-19 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 42439,
+      "era": "2015-2026",
+      "titles": [
+        "Clark & Castle Final Plan Amendment - Decision on the Merits"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The document is an Environmental Division on-the-record appeal of a Town of Shelburne DRB decision denying a subdivision permit amendment. The proposal includes a 6-acre single-family dwelling lot, so permission for a residential building lot is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-226-12-98-vtec",
+      "docket": "226-12-98 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 23740,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Bergeron"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The decision concerns municipal review of a notice of violation and a conditional-use denial for seasonal-to-year-round occupancy of an existing single-family dwelling. That is a residential conversion requiring additional legal authorization, so it qualifies as housing.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "40-3-98 Vtec"
+      ]
+    },
+    {
+      "case": "g-25-env-00025",
+      "docket": "25-ENV-00025",
+      "documents": 1,
+      "composition": "single",
+      "chars": 13069,
+      "era": "2015-2026",
+      "titles": [
+        "46 Makalas Way ZA Permit Decision - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source states this is an appeal of a Town of Thetford DRB decision denying an appeal of the ZA’s issuance of a 2022 zoning permit. That permit authorized construction of a new residence, so the challenged municipal permission concerned a new dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-232-12-04-vtec",
+      "docket": "232-12-04 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 11066,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of LaBounty Enterprises, Inc."
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Source identifies consolidated appeals of DRB zoning permit denials for proposed dwellings on two lots; the dispute concerns permission to build new residential dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "85-5-05 Vtec"
+      ]
+    },
+    {
+      "case": "g-34-2-09-vtec",
+      "docket": "34-2-09 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 38456,
+      "era": "2005-2014",
+      "titles": [
+        "McDermott Site Plan Review"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The document is an appeal of a municipal Planning Commission decision denying site plan approval for a proposed nine-unit multi-family housing development, so it concerns permission for new residential dwelling units.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-133-10-13-vtec",
+      "docket": "133-10-13 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 8326,
+      "era": "2005-2014",
+      "titles": [
+        "Bilotta Revised Permit"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source identifies a municipal DRB approval of a revised permit for a replacement single-family dwelling, and the Wolins timely appealed that approval to the Environmental Division.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-237-11-07-vtec",
+      "docket": "237-11-07 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 39088,
+      "era": "2005-2014",
+      "titles": [
+        "White Major Subdivision Application",
+        "White Major Subdivision Application"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Both documents are decisions in the same Environmental Court appeal from a municipal DRB denial of a subdivision application. The proposal creates five lots, and the source states that all five lots are intended for single-family residential use.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-104-5-06-vtec",
+      "docket": "104-5-06 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 21606,
+      "era": "2005-2014",
+      "titles": [
+        "Ploof & Loney ZBA Application"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The appeal challenges municipal ZBA decisions denying a permit to replace the Ploofs’ existing RV with a larger RV and denying their appeal of a side-yard setback notice of violation. The current and proposed RVs function as a seasonal dwelling with residential facilities, and the appeal concerns permission for that replacement dwelling use.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "247-10-06 Vtec"
+      ]
+    },
+    {
+      "case": "g-150-10-14-vtec",
+      "docket": "150-10-14 Vtec",
+      "documents": 5,
+      "composition": "uniform",
+      "chars": 68727,
+      "era": "2005-2014",
+      "titles": [
+        "Wagner Guay",
+        "Wagner Guay Permit",
+        "Wagner Guay Permit",
+        "Wagner & Guay",
+        "Wagner & Guay Permit"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is a municipal zoning permit for a new single-family residence on merged lots 3 and 4. Appellant Mary Bourassa, a neighboring lot owner, appealed to the Environmental Division. The proposal is residential and the appeal concerns permission for a new dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-77-4-05-vtec",
+      "docket": "77-4-05 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 51225,
+      "era": "2005-2014",
+      "titles": [
+        "Nowicki Building Permit",
+        "In re Appeal of Nowicki Building Permit and Appeal of Nowicki NOV Appeal"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Doc 1 is an Environmental Court decision on Developer Nowicki's appeal of a Norwich DRB denial of an after-the-fact zoning permit to build a single-family dwelling at 84 Elm Street, plus related enforcement and NOV dockets; doc 2 is the Supreme Court's further review (2007 VT 76) of the same matter. The challenged decision is municipal (DRB permit denial) and the permission at stake is authorization of a residential dwelling unit, so both scope questions are established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "156-8-05 Vtec",
+        "220-10-05 Vtec"
+      ]
+    },
+    {
+      "case": "g-139-12-18-vtec",
+      "docket": "139-12-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 29442,
+      "era": "2015-2026",
+      "titles": [
+        "Down River Investments, LLC CU - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is a municipal DRB denial of a conditional use permit. The proposal itself is for a new 50' x 30' duplex, i.e., residential dwelling units, so the appeal concerns permission for new dwelling units.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-89-4-00-vtec",
+      "docket": "89-4-00 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 7911,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Audet Mgmt., Association"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The source is an appeal from a municipal ZBA decision, and the requested variance concerns authorization to convert an existing two-unit residential building into a three-unit residential building, i.e., an additional authorized dwelling unit.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-54-4-03-vtec",
+      "docket": "54-4-03 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 33010,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Martin",
+        "Appeal of Martin",
+        "In re Appeal of Glenn & Elouise Martin"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is a municipal DRB denial of conditional use approval for single-family dwellings on Lots 7, 16, and 19. The appeal seeks permission for new residential dwellings on those lots, and the later Supreme Court review retains the same underlying municipal appeal.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    }
+  ]
+}

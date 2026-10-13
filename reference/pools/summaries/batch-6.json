@@ -1,0 +1,369 @@
+[
+  {
+    "case": "g-273-11-06-vtec",
+    "matter": "Janet Cote appeals a St. Albans Development Review Board decision upholding a zoning notice of violation for a drainage ditch, buried pipe and fill at 65 Sandy Cove Road.",
+    "municipality": "St. Albans",
+    "proceeding": "municipal appeal",
+    "housing": "no: drainage ditch, buried pipe and fill violations",
+    "documents_are": [
+      "motion to dismiss decision",
+      "motions to dismiss decision",
+      "continuance order and judgment order",
+      "Supreme Court entry order"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "165-8-07 Vtec"
+    ],
+    "readability": "good",
+    "note": "Supreme Court affirmed; related Town enforcement docket 165-8-07 included in the same documents."
+  },
+  {
+    "case": "g-135-7-08-vtec",
+    "matter": "Neighbors led by William Efthim appeal a Hartford ZBA decision that rejected their appeal of a zoning permit issued to Blanche Marsh for her Quechee Lakes farmstead parcel.",
+    "municipality": "Hartford",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: permit for a Farmstead parcel; dwelling count not stated",
+    "documents_are": [
+      "decision on motions to dismiss",
+      "decision on cross-motions for summary judgment",
+      "decision on motion for reconsideration"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Summary judgment for applicant in Nov 2009 concluded appeal; reconsideration ruling not in excerpts."
+  },
+  {
+    "case": "g-103-8-15-vtec",
+    "matter": "Appellants including Larsen Land Trust contest Burlington shoreline permits and certificates of appropriateness for Appletree Point Road properties.",
+    "municipality": "Burlington",
+    "proceeding": "unclear",
+    "housing": "unclear: shoreline and certificate approvals; no dwelling units described",
+    "documents_are": [
+      "entry regarding motion (oral motion to remand)"
+    ],
+    "final_outcome_in_excerpts": "unclear",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "95-8-15 Vtec",
+      "96-8-15 Vtec",
+      "104-8-15 Vtec"
+    ],
+    "readability": "good",
+    "note": "Two certificate appeals remanded to DRB; partial settlement; shoreline appeals placed on inactive status."
+  },
+  {
+    "case": "g-33-2-19-vtec",
+    "matter": "Cynthia Monroe and Catherine Melocik appeal a Hartford ZBA conditional use decision for Ninety-Three South Main, LLC; Twin Pines Housing Trust is the appellee.",
+    "municipality": "Hartford",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: conditional use for housing trust project; units not stated",
+    "documents_are": [
+      "entry regarding motion (scheduling order)"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Only a scheduling-order denial in excerpt; appeal otherwise pending."
+  },
+  {
+    "case": "g-227-12-98-vtec",
+    "matter": "Carmen Murray and other neighbors appeal a Brighton ZBA decision upholding Thomas and Robin Maule's appeal of an April 1998 notice of violation over shoreline tree removal and site work.",
+    "municipality": "Brighton",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: shoreline tree and site work; no dwelling described",
+    "documents_are": [
+      "order of clarification"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "fair",
+    "note": "Clarifies which issues remain after a 1999 hearing; excerpt ends mid-analysis; not all appellants still represented."
+  },
+  {
+    "case": "g-124-7-04-vtec",
+    "matter": "Ralph Teitscheid appeals a Cornwall Planning Commission decision granting Hoyt and Nancy Berringer a subdivision permit for about 145 acres.",
+    "municipality": "Cornwall",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: subdivision of 145 acres; lot count not stated",
+    "documents_are": [
+      "decision on summary judgment motion"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Ruling on whether a subdivision permit is required; result not in excerpt."
+  },
+  {
+    "case": "g-169-8-02-vtec",
+    "matter": "John and Tina Springer-Miller appeal Stowe Planning Commission rulings that their house project was a minor project under ridgeline overlay rules.",
+    "municipality": "Stowe",
+    "proceeding": "municipal appeal",
+    "housing": "yes: one single-family dwelling with attached apartment",
+    "documents_are": [
+      "decision on cross-motions for summary judgment"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Caption also lists 217-9-02 Vtec; summary judgment on whether prior minor determination binds."
+  },
+  {
+    "case": "g-75-7-18-vtec",
+    "matter": "Charles and Cynthia Burns appeal a Burlington DRB decision upholding a zoning notice of violation for an unpermitted duplex at 12 Weston Street; neighbors support the notice.",
+    "municipality": "Burlington",
+    "proceeding": "municipal appeal",
+    "housing": "yes: legality of a second dwelling unit (duplex) at 12 Weston St",
+    "documents_are": [
+      "decision on motions",
+      "entry regarding motions",
+      "entry regarding motion",
+      "decision on cross-motions for summary judgment"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Cross-summary-judgment pending; one of five documents not shown."
+  },
+  {
+    "case": "g-103-9-16-vtec",
+    "matter": "Morrisville Water & Light appeals ANR's Clean Water Act water quality certification for its hydroelectric project on the Lamoille River; American Whitewater, VPC and others cross-appeal.",
+    "municipality": "unknown",
+    "proceeding": "Act 250 or state permit appeal",
+    "housing": "no: hydroelectric facilities",
+    "documents_are": [
+      "entry regarding motions",
+      "decision on motions",
+      "summary judgment decision",
+      "decision on motions"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "fair",
+    "note": "Facilities span several towns; many partial rulings so far; three documents not shown."
+  },
+  {
+    "case": "g-136-8-10-vtec",
+    "matter": "Lathrop Limited Partnership and neighbors contest Bristol and Act 250 decisions on Lathrop's sand and gravel extraction project on about 65 acres off South Street and Rounds Road.",
+    "municipality": "Bristol",
+    "proceeding": "Act 250 or state permit appeal",
+    "housing": "no: gravel extraction project",
+    "documents_are": [
+      "decision on supplemental pre-trial motion",
+      "decision on the merits",
+      "amended judgment order",
+      "entry regarding motion"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "122-7-04 Vtec",
+      "210-9-08 Vtec"
+    ],
+    "readability": "good",
+    "note": "Very long consolidated Act 250 case; Environmental Court approved project; Supreme Court appeal result not in excerpts."
+  },
+  {
+    "case": "g-243-10-00-vtec",
+    "matter": "John Giroux appeals a Starksboro ZBA decision refusing to reconsider its 1998 denial of his appeal of a notice of violation over a mobile home's setbacks.",
+    "municipality": "Starksboro",
+    "proceeding": "municipal appeal",
+    "housing": "yes: mobile home placed to replace a preexisting camp",
+    "documents_are": [
+      "decision and order on Town's summary judgment motion"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Ruling on Town's summary judgment motion cut off in excerpt."
+  },
+  {
+    "case": "g-207-11-03-vtec",
+    "matter": "Kevin Fisher appeals a Burlington DRB approval of a major impact development and site plan for an addition to the Lund Family Center on Glen Road.",
+    "municipality": "Burlington",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: addition to residential treatment center; dwelling units not described",
+    "documents_are": [
+      "decision and order on cross-motions for partial summary judgment"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Partial summary judgment on use category; evidentiary hearing set; final result not in excerpts."
+  },
+  {
+    "case": "g-89-5-08-vtec",
+    "matter": "Intervale Center and Half Pint Farm appeal Agency of Agriculture conditions on a hoop house in Burlington's floodway; the Agency moved to dismiss for lack of jurisdiction.",
+    "municipality": "Burlington",
+    "proceeding": "other",
+    "housing": "no: agricultural hoop house in floodway",
+    "documents_are": [
+      "decision on motion to dismiss",
+      "entry regarding motion (motion to alter or amend)"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Dismissed for lack of jurisdiction in Feb 2009; post-judgment motion ruling not in excerpts."
+  },
+  {
+    "case": "g-62-3-07-vtec",
+    "matter": "Keystone Development appeals Burlington DRB decisions upholding zoning notices of violation for ditch maintenance and tree harvesting at Star Farm Road.",
+    "municipality": "Burlington",
+    "proceeding": "municipal appeal",
+    "housing": "no: ditch maintenance and tree harvesting",
+    "documents_are": [
+      "decision on intervention request"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Denies intervention by two homeowners associations; underlying NOV appeal continues."
+  },
+  {
+    "case": "g-231-10-07-vtec",
+    "matter": "Alfonse Sorrentino appeals a Woodstock DRB determination that his application for a residential building site in the Scenic Ridgeline overlay was incomplete.",
+    "municipality": "Woodstock",
+    "proceeding": "municipal appeal",
+    "housing": "yes: one residential building site",
+    "documents_are": [
+      "decision and order on pending motions"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "de novo",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "De novo because Woodstock lacks on-the-record procedures; excerpt cut off mid-ruling."
+  },
+  {
+    "case": "g-158-9-04-vtec",
+    "matter": "Milton Yates appeals St. Albans DRB approval of the Cioffis' amendment to the Eastview planned residential development, allowing a single-family house instead of a duplex.",
+    "municipality": "St. Albans",
+    "proceeding": "municipal appeal",
+    "housing": "yes: single-family house on Eastview lot replacing approved duplex",
+    "documents_are": [
+      "decision on motion to dismiss or summary judgment",
+      "decision on motion to dismiss or summary judgment",
+      "judgment order"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Merits judgment approved the amendment with conditions in 2007; other documents are pre-merits motions."
+  },
+  {
+    "case": "g-74-5-03-vtec",
+    "matter": "Greg and Paula West appeal a Vergennes DRB decision reversing a zoning administrator's refusal to issue a notice of violation over their two-family use of 70 Green Street.",
+    "municipality": "Vergennes",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: legal status of an existing upstairs second unit",
+    "documents_are": [
+      "decision on cross-motions for summary judgment",
+      "Supreme Court entry order"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Supreme Court reversed summary judgment for the Wests and remanded for judgment for the City and neighbors."
+  },
+  {
+    "case": "g-43-3-09-vtec",
+    "matter": "Neighbor groups appealed the Essex Junction Planning Commission's preliminary plat approval for a 48-unit planned residential development at 216 Maple Street.",
+    "municipality": "Essex Junction",
+    "proceeding": "municipal appeal",
+    "housing": "yes: 48-unit planned residential development",
+    "documents_are": [
+      "judgment order (dismissal)"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Dismissed without prejudice at parties' request; a later final plat appeal may raise the same claims."
+  },
+  {
+    "case": "g-226-12-98-vtec",
+    "matter": "The Town of Colchester sued Joanne Bergeron over year-round occupancy of her seasonal lakeshore house, and she appeals a Colchester ZBA decision upholding a notice of violation.",
+    "municipality": "Colchester",
+    "proceeding": "enforcement action",
+    "housing": "no: existing lakeshore house; dispute is year-round use",
+    "documents_are": [
+      "decision and order"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "40-3-98 Vtec"
+    ],
+    "readability": "good",
+    "note": "Findings cut off in excerpt; related NOV appeal consolidated into the enforcement docket."
+  },
+  {
+    "case": "g-77-4-05-vtec",
+    "matter": "Paul Nowicki appeals a Norwich DRB denial of an after-the-fact permit for a house at 84 Elm Street, where merged lots are disputed; neighbor Stuart Richards is party to related actions.",
+    "municipality": "Norwich",
+    "proceeding": "municipal appeal",
+    "housing": "yes: developer seeks a second house lot by recreating merged lots",
+    "documents_are": [
+      "decisions on pending motions",
+      "Supreme Court entry order"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "156-8-05 Vtec",
+      "220-10-05 Vtec"
+    ],
+    "readability": "good",
+    "note": "Supreme Court affirmed; three related dockets consolidated in one decision."
+  },
+  {
+    "case": "g-159-8-00-vtec",
+    "matter": "Christopher Denio appeals two Bennington ZBA decisions, denying an amended zoning permit and upholding a notice of violation for a residential building in the Forest zone.",
+    "municipality": "Bennington",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: residential building whose allowed use (camp) is disputed",
+    "documents_are": [
+      "decision and order"
+    ],
+    "final_outcome_in_excerpts": "no",
+    "review_standard": "not mentioned",
+    "other_dockets": [
+      "250-11-00 Vtec"
+    ],
+    "readability": "good",
+    "note": "Findings after evidentiary hearing and site visit; ruling cut off in excerpt."
+  },
+  {
+    "case": "g-49-4-14-vtec",
+    "matter": "John Madden appeals the New Haven Selectboard's majority-vote amendment of the zoning map and bylaws for a 3.45-acre parcel at River Road and Route 7.",
+    "municipality": "New Haven",
+    "proceeding": "municipal appeal",
+    "housing": "unclear: rezoning of a 3.45-acre parcel; planned use not stated",
+    "documents_are": [
+      "entry regarding motion (summary judgment)",
+      "entry regarding motion (motion to amend)",
+      "entry regarding motion (second motion to amend)"
+    ],
+    "final_outcome_in_excerpts": "yes",
+    "review_standard": "not mentioned",
+    "other_dockets": [],
+    "readability": "good",
+    "note": "Town summary judgment granted Sept 2014; later pro se motions to amend denied."
+  }
+]

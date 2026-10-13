@@ -1,0 +1,309 @@
+{
+ "case": "g-231-10-07-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-231-10-07-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Sorrentino appealed the Woodstock DRB's determination that his conditional use application to site a new single-family house in the Scenic Ridgeline overlay district was incomplete; a municipal land-use appeal concerning permission for a new house.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "Appellant Alfonse Sorrentino appealed from a decision of the Development Review Board (DRB) of the Town of Woodstock"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "his application to develop a residential building site in the Scenic Ridgeline overlay district was incomplete"
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "Appellant is an architect who intends to design the single-family house at issue in the present proceedings."
+    },
+    {
+     "doc": 1,
+     "page": 3,
+     "quote": "Appellant therefore submitted a new application for conditional use approval4 (the 2007 Plan) to place the house on a portion of his property"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "231-10-07 Vtec",
+    "project": {
+     "description": "New single-family house on Appellant's Golf Avenue property in the Residential Five Acre district, sited within the Scenic Ridgeline overlay district and screened by mature hemlocks (2007 conditional use application, relocating a house previously permitted elsewhere on the property in 2005).",
+     "municipality": "Woodstock",
+     "proposed_units": 1,
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "Appellant owns property located on Golf Avenue in the Residential Five Acre zoning district"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "intends to design the single-family house at issue in the present proceedings"
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "to place the house on a portion of his property within the Scenic Ridgeline overlay district"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "his application to develop a residential building site in the Scenic Ridgeline overlay district"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "At its September 25, 2007 meeting the Woodstock DRB determined the application incomplete for lack of floor, tree, landscape and grade plans, and continued the hearing for additional materials, which Appellant declined to provide.",
+     "date": "2007-09-25",
+     "outcome": "other",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 6,
+       "quote": "At its September 25, 2007 meeting, the DRB determined that the application was incomplete \u201cdue to a lack of floor plans"
+      },
+      {
+       "doc": 1,
+       "page": 6,
+       "quote": "The DRB continued the hearing to give Appellant an opportunity to provide additional application materials; Appellant declined to do so and this appeal followed."
+      }
+     ]
+    },
+    "appellants": [
+     {
+      "name": "Alfonse Sorrentino",
+      "relationship": "developer",
+      "seeks": "other",
+      "representation": "represented",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant Alfonse Sorrentino appealed from a decision of the Development Review Board (DRB) of the Town of Woodstock"
+       },
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "Appellant-Applicant is represented by Kirk C. Kardashian, Esq., and Robin Stern, Esq."
+       }
+      ]
+     }
+    ],
+    "discretion": {
+     "description": "The appeal challenged the DRB's incompleteness determination, turning on interpretation of the zoning regulations (whether non-visible development still needs conditional use review), which application elements the regulations require, and which body decides completeness.",
+     "involved": "no",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "One issue raised by the present motions is whether \u00a7 406 also requires conditional use review for projects in the Scenic Ridgeline overlay district"
+      },
+      {
+       "doc": 1,
+       "page": 13,
+       "quote": "the application was complete to the extent required for the Conservation Commission to make its visibility determination under \u00a7 406(E)(2)(a)"
+      },
+      {
+       "doc": 1,
+       "page": 13,
+       "quote": "it is the Zoning Administrator who has authority to determine whether an application under \u00a7 406 is complete"
+      }
+     ],
+     "central": "not_applicable",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "The court held the application complete for the visibility determination and the minimum conditional use requirements, but conditional use approval and an administrative permit are still required; a conference was scheduled to decide whether the court would hear the conditional use application or remand to the DRB.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 13,
+       "quote": "Appellant\u2019s application requires conditional use approval prior to its being considered for an administrative permit"
+      },
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "a telephone conference has been scheduled (see enclosed notice) to determine whether Appellant wishes to proceed in this Court with the conditional use application"
+      },
+      {
+       "doc": 1,
+       "page": 14,
+       "quote": "or whether the case should be concluded in this Court and remanded for the DRB to rule on the conditional use application"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "231-10-07 Vtec"
+      ],
+      "description": "Sorrentino appealed the DRB's September 25, 2007 incompleteness determination; filing date not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 6,
+        "quote": "Appellant declined to do so and this appeal followed."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2009-04-06",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "231-10-07 Vtec"
+      ],
+      "description": "Decision on pending motions: Town's motion to dismiss Questions 5 and 6 granted; cross-motions for summary judgment granted in part and denied in part; conference scheduled on whether to proceed with the conditional use application in court or remand.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 13,
+        "quote": "Both parties\u2019 Motions for Summary Judgment are GRANTED in part and DENIED in part"
+       },
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "Done at Berlin, Vermont, this 6th day of April, 2009."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2009-04-06",
+      "relation": "on_or_before",
+      "description": "The only dated event proving the appeal existed is the April 6, 2009 decision; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "Done at Berlin, Vermont, this 6th day of April, 2009."
+       }
+      ]
+     },
+     "end": {
+      "date": "2009-04-06",
+      "relation": "on_or_after",
+      "description": "The April 6, 2009 decision left the case pending a scheduled conference on whether to proceed in court or remand.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "Done at Berlin, Vermont, this 6th day of April, 2009."
+       },
+       {
+        "doc": 1,
+        "page": 14,
+        "quote": "a telephone conference has been scheduled (see enclosed notice)"
+       }
+      ]
+     },
+     "note": "Both bounds fall on the single decision date, a zero-day minimum, so no duration is established. The appeal followed the DRB's September 25, 2007 decision, but no filing date is given.",
+     "kind": "unknown",
+     "days": "unknown"
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "Because this appeal is de novo rather than on the record"
+      },
+      {
+       "doc": 1,
+       "page": 1,
+       "quote": "the Town of Woodstock has not adopted the procedures necessary for appeals from its decisions to be on the record."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "231-10-07 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Appeal of a Woodstock DRB decision on an application to site a new single-family house; new house is new housing under the guide's table."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court says the appeal is de novo rather than on the record and notes Woodstock has not adopted on-the-record procedures; this describes the appeal itself, not a summary-judgment standard."
+  },
+  {
+   "field": "duration",
+   "confidence": "high",
+   "note": "Only one dated document (April 6, 2009) and no stated filing date; start and end bounds coincide, giving a zero-day minimum, so kind and days are unknown. The docket number is not used to date the filing."
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "The DRB found the application incomplete and continued the hearing rather than denying it, so 'other' rather than 'denied'."
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "Sorrentino is the applicant (developer); he seeks reversal of an incompleteness determination, not of a denial, so seeks is 'other'. A reader treating the incompleteness ruling as a de facto denial might choose overturn_denial."
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "The decided questions are regulatory interpretation, application completeness against enumerated elements, and which body determines completeness. Questions 5 and 6 (dismissed) concerned the DRB's treatment of applicants and minutes accuracy. No evaluative standard (compatibility, adequacy) was contested."
+  },
+  {
+   "field": "litigation",
+   "confidence": "high",
+   "note": "The decision 'appears to conclude' the Statement of Questions but schedules a conference on whether to hear the conditional use application in court or conclude and remand, so the case remains pending."
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "No approval or denial of the house was issued in this docket; conditional use approval and an administrative permit remain outstanding. The 2005 permit for a different site is not the proposal at stake."
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T00:00:00Z",
+   "note": "Labeled from the April 6, 2009 decision on pending motions (single document)."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:46:02+00:00",
+   "note": "User rulings: lots unknown when no-new-lots is not stated; incomplete ruling stays other"
+  }
+ ]
+}

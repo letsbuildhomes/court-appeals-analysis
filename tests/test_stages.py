@@ -11,6 +11,7 @@ USABILITY = LIBRARY.module('text/usability:ink-check')
 OCR = LIBRARY.module('text/ocr:tesseract')
 SELECT = LIBRARY.module('text/select:prefer-native')
 DOCKETS = LIBRARY.module('cases/group:docket-cases')
+HEADINGS = LIBRARY.module('cases/group:docket-headings')
 TRIAGE = LIBRARY.module('triage:docket-target')
 DRAFT = LIBRARY.module('draft:docket-target')
 
@@ -83,6 +84,18 @@ class GroupingTests(unittest.TestCase):
         self.assertEqual(DOCKETS.heading_dockets(supreme), ['54-4-03 Vtec'])
         self.assertEqual(DOCKETS.heading_dockets('Appeal of X     }   Docket No. 147-10-13 Vtec147-10-13 Vtec1'),
                          ['147-10-13 Vtec'])
+
+    def test_a_citation_that_wraps_onto_a_new_line_is_not_a_heading(self):
+        page = ('Appeal of Michael and Mary       }\n                                 }    Docket No. 132-8-03 Vtec\n'
+                '                                        Decision and Order\n'
+                'In re Petition of Town of Sherburne, 154 Vt. 596 (1990); Appeal of Lussier and Noe,\n'
+                'Docket No. 116-5-02 Vtec (Vt. Envtl. Ct., Sept. 16, 2002). If there is\n')
+        self.assertEqual(DOCKETS.heading_dockets(page), ['132-8-03 Vtec', '116-5-02 Vtec'])
+        self.assertEqual(HEADINGS.heading_dockets(page), ['132-8-03 Vtec'])
+        stacked = ('Appeals of Madden      }     Docket Nos. 105-6-04 Vtec\n'
+                   '                       }     (from 4/27/04 ZBA decision)\n'
+                   '                       }     119-7-04 Vtec (from 6/3/04\n')
+        self.assertEqual(HEADINGS.heading_dockets(stacked), ['105-6-04 Vtec', '119-7-04 Vtec'])
 
     def test_one_case_per_docket_with_shared_documents(self):
         def described(sha, listing, heading, posted='2020-05-01T12:00:00Z'):

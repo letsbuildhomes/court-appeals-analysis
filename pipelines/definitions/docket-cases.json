@@ -5,7 +5,7 @@
   "changes": [
     {
       "at": "cases/group",
-      "step": "cases/group:docket-cases"
+      "step": "cases/group:docket-headings"
     },
     {
       "at": "extract/triage",

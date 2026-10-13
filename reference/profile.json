@@ -1,0 +1,25 @@
+{
+  "total": 60,
+  "note": "Two layers. The random layer is drawn at random within September's answer, so results can be reweighted to the corpus; the targeted layer goes where errors and unknowns concentrate. Report the layers separately. Held-back cases are never tuned against.",
+  "targets": [
+    {"split": "development", "layer": "random", "category": "random-excluded", "count": 10},
+    {"split": "development", "layer": "random", "category": "random-in-scope", "count": 10},
+    {"split": "development", "layer": "random", "category": "random-uncertain", "count": 4},
+    {"split": "development", "layer": "targeted", "category": "high-unknown", "count": 8},
+    {"split": "development", "layer": "targeted", "category": "near-miss", "count": 4},
+    {"split": "development", "layer": "targeted", "category": "shared", "count": 4},
+    {"split": "development", "layer": "targeted", "category": "enforcement", "count": 2},
+    {"split": "development", "layer": "targeted", "category": "interim", "count": 2},
+    {"split": "development", "layer": "targeted", "category": "failure", "count": 2},
+    {"split": "development", "layer": "targeted", "category": "long", "count": 2},
+    {"split": "holdout", "layer": "random", "category": "random-excluded", "count": 3},
+    {"split": "holdout", "layer": "random", "category": "random-in-scope", "count": 2},
+    {"split": "holdout", "layer": "random", "category": "random-uncertain", "count": 1},
+    {"split": "holdout", "layer": "targeted", "category": "high-unknown", "count": 2},
+    {"split": "holdout", "layer": "targeted", "category": "near-miss", "count": 1},
+    {"split": "holdout", "layer": "targeted", "category": "shared", "count": 1},
+    {"split": "holdout", "layer": "targeted", "category": "enforcement", "count": 1},
+    {"split": "holdout", "layer": "targeted", "category": "long", "count": 1}
+  ],
+  "spread": {"era": 10, "composition": 8}
+}

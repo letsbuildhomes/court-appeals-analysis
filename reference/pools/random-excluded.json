@@ -1,0 +1,1306 @@
+{
+  "category": "random-excluded",
+  "needed": 13,
+  "seed": 20261013,
+  "available": 1180,
+  "candidates": [
+    {
+      "case": "g-134-6-00-vtec",
+      "docket": "134-6-00 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11449,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of James Holmes (Decision and Order on Motions for Summary Judgment)"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "Municipal land-use appeal from Planning Commission site plan denial. The proposal is to convert an existing single-family residence to a boarding house for rental; the source does not establish permission for a new, replacement, or additionally authorized dwelling unit or house lot.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-24-env-00022",
+      "docket": "24-ENV-00022",
+      "documents": 1,
+      "composition": "single",
+      "chars": 10621,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Pittsford v Bovey & Boondock Motors - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a post-judgment contempt decision in an enforcement action, not an appeal of a municipal land-use decision. The underlying permit authorizes commercial hauling/trucking, towing, and an autobody shop, not residential dwellings.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-24-env-00051",
+      "docket": "24-ENV-00051",
+      "documents": 4,
+      "composition": "uniform",
+      "chars": 40945,
+      "era": "2015-2026",
+      "titles": [
+        "McPartland ZA Appeal - Decision on Motion",
+        "McPartland ZA Appeal - Decision on Motion",
+        "McPartland ZA Appeal - Decision on Motion",
+        "McPartland ZA Appeal - Decision on Merits"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The appeal is an on-the-record challenge to a DRB decision upholding a zoning administrator's refusal to enforce alleged violations. It concerns screening, grading/drainage, and potential future student occupancy, not permission for new, replacement, or additional dwelling units. The property is existing residential; no new housing authorization is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-64-6-18-vtec",
+      "docket": "64-6-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 17201,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Halifax v LeMay & Jeffrey - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a Town-initiated enforcement decision, not an appeal of a municipal land-use approval or denial. It references unappealed notices of violation and a prior ZBA appeal, but those are distinct from this enforcement matter. The subject is a shed and its removal, not permission for a new, replacement, or additionally authorized dwelling unit.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-114-7-99-vtec",
+      "docket": "114-7-99 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 18874,
+      "era": "1996-2004",
+      "titles": [
+        "Town of St. Albans v Deso"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The matter includes municipal land-use appeals of ZBA decisions, including denial of conditional use approval. However, the proposal at issue is a commercial mobile home display and sales facility, not permission for new, replacement, converted, or additional dwelling units; the mobile homes are used as office/model displays, and the permitted single mobile home is not the subject of the conditional use appeal.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "106-7-99 Vtec",
+        "112-7-99 Vtec",
+        "113-7-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-130-8-14-vtec",
+      "docket": "130-8-14 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 12947,
+      "era": "2005-2014",
+      "titles": [
+        "Dugan Landscape Permit"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal approval concerns fencing, vegetation replacement, and tree removal, not residential dwellings or residential building lots, and no new, replacement, converted, or additional dwelling-unit permission is at stake. The existing house at 37 Elm Street is background only.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-85-4-02-vtec",
+      "docket": "85-4-02 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 7130,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Beckstrom, et al"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns relocation/modification of a telecommunications tower under Hyde Park's interim telecommunications bylaw. No residential dwellings or residential building lots are proposed.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-143-9-10-vtec",
+      "docket": "143-9-10 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 31620,
+      "era": "2005-2014",
+      "titles": [
+        "Fontaine Act 250 Application"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The decision on review is an Act 250 Rule 34(E) ruling by the District 4 Environmental Commission, a state Act 250 body, not a municipal land-use decision. The underlying proposal is expressly a 34-lot residential development, so housing is established, but the appeal itself is state-only and outside municipal-appeal scope.",
+      "september_municipal": "no",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "12-1-10 Vtec"
+      ]
+    },
+    {
+      "case": "g-132-12-18-vtec",
+      "docket": "132-12-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 70447,
+      "era": "2015-2026",
+      "titles": [
+        "Reed CU Denial - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns a commercial firewood processing operation and notice of violation, not residential dwellings or new/replacement/additional dwelling units; no housing permission is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-116-9-16-vtec",
+      "docket": "116-9-16 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 41549,
+      "era": "2015-2026",
+      "titles": [
+        "ANR v Blakeman dba Blakeman's Towing/Recovery"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This docket is an ANR-initiated state enforcement/contempt proceeding commenced by an Administrative Order, not an appeal of a municipal land-use decision. The Tunbridge COAL application and its December 2017 denial are background facts, not the appealed decision. The subject is a salvage yard and towing business, not residential dwellings or new dwelling permission.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-103-9-16-vtec",
+      "docket": "103-9-16 Vtec",
+      "documents": 7,
+      "composition": "uniform",
+      "chars": 367319,
+      "era": "2015-2026",
+      "titles": [
+        "Morrisville Hydroelectric Project Water Quality",
+        "Morrisville Hydroelectric Proj Water Quality",
+        "Morrisville Hydroelectric Project Water Quality",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on Motions",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on the Merits",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The documents concern a state-issued §401 water quality certification for a hydroelectric project, not a municipal land-use decision. No residential dwellings or dwelling-lot permission are proposed or at issue.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-35-2-10-vtec",
+      "docket": "35-2-10 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 22544,
+      "era": "2005-2014",
+      "titles": [
+        "Hogan Variance Permit"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This is an appeal of a municipal DRB variance decision, but the permission at stake concerns an as-built shed extension, not new, replacement, or additional authorized dwelling units or house lots. The property is residential, yet the source does not establish that the appeal concerns permission for dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-105-6-10-vtec",
+      "docket": "105-6-10 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 28148,
+      "era": "2005-2014",
+      "titles": [
+        "Town of Georgia v King",
+        "Town of Georgia v King",
+        "Town of Georgia v King"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "All three documents are the same matter and property: an enforcement proceeding brought by the Town of Georgia against the Kings for unpermitted second-dwelling development. It is independently initiated enforcement, not an appeal of a municipal panel/DRB decision; the defendants never appealed the ZA's September 23, 2009 NOV, and no municipal review of a land-use decision is being reviewed by the Environmental Division. The subject is residential (a second dwelling/mobile trailer used as an accessory dwelling), satisfying the residential-use fact, but the matter concerns penalty assessment an",
+      "september_municipal": "no",
+      "september_housing": "unknown",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-181-8-02-vtec",
+      "docket": "181-8-02 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11080,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Margaret Murray (Decision and Order)"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision approved a fence, not permission for new, replacement, or additional dwelling units or residential building lots. The appeal concerns zoning/design review of a fence, so the residential-dwelling permission element is absent.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-121-7-03-vtec",
+      "docket": "121-7-03 Vtec",
+      "documents": 4,
+      "composition": "shared",
+      "chars": 101485,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Marc and Susan Wood",
+        "Wood Appeals",
+        "Appeal of Wood",
+        "Appeal of Wood"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The project is commercial, not residential: diner, private club, gas station, convenience store/retail. The municipal appeals concern site plan approval, permit amendments, a notice of violation, retaining-wall specifications, and a certificate of occupancy; no new, replacement, or additional dwelling units are at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "176-8-07 Vtec",
+        "185-10-04 Vtec",
+        "72-3-00 Vtec",
+        "81-4-07 Vtec"
+      ]
+    },
+    {
+      "case": "g-243-10-00-vtec",
+      "docket": "243-10-00 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6651,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Giroux"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal from a municipal ZBA decision on a Notice of Violation, so municipal_appeal is yes. Housing is no because the appeal concerns enforcement and reconsideration of an existing mobile home placement, not permission for new, replacement, or additionally authorized dwelling units or lots.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-114-8-12-vtec",
+      "docket": "114-8-12 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 15175,
+      "era": "2005-2014",
+      "titles": [
+        "Pizzagalli Properties, LLC Mountain View Park Act 250"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is an Act 250 Land Use Permit issued by the District 4 Environmental Commission, not a municipal land-use decision; local DRB approval is referenced but is not the order on appeal. The proposed use is a medical office building, not residential dwellings or residential building lots, so no housing permission is at stake.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-273-11-06-vtec",
+      "docket": "273-11-06 Vtec",
+      "documents": 4,
+      "composition": "shared",
+      "chars": 39256,
+      "era": "2005-2014",
+      "titles": [
+        "Cote NOV",
+        "Cote NOV",
+        "Cote NOV",
+        "Janet Cote v. Town of St. Albans/Town of St. Albans v. Janet Cote"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The municipal decisions at issue are a DRB Notice of Violation upholding decision and a DRB site plan approval for drainage/piping/fill and berm-removal work on an existing developed parcel. No new, replacement, additional, or converted dwelling unit or residential lot is proposed or authorized; the dispute concerns surface-water flow, fill, and permit compliance on an already-built property with existing structures. Residential use is not the permission at stake, so housing is not established.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "165-8-07 Vtec"
+      ]
+    },
+    {
+      "case": "g-286-12-07-vtec",
+      "docket": "286-12-07 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 37783,
+      "era": "2005-2014",
+      "titles": [
+        "Binkhorst Lake Access",
+        "Binkhorst Lake Access"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This is an appeal of a municipal land-use decision (ZBA upholding the Zoning Administrator's exemption determination), so municipal_appeal=yes. However, the subject of the appeal is exempt land-development work (landscaping, electrical conduit replacement, traveled-way improvements, and culvert installation) on a lakeshore lot, not permission for new, replacement, or additionally authorized dwelling units or residential building lots. The residential character of the proposal itself is not established; the dispute concerns permit exemptions for infrastructure/site work, so housing=no.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-39-3-03-vtec",
+      "docket": "39-3-03 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 18445,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Wesco (219 Main St., Burlington)",
+        "Wesco, Inc (219 Main St., Burlington"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns a gasoline station proposal for a canopy, parking reconfiguration, paving reduction, and street trees at 219 Main Street. The source establishes a nonresidential use; no new, replacement, or additional dwelling units or residential lots are at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-88-5-09-vtec",
+      "docket": "88-5-09 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 25094,
+      "era": "2005-2014",
+      "titles": [
+        "Kevin L. Rogers, Inc."
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The appeal concerns an Act 250 permit issued by a District Environmental Commission, not a municipal land-use decision. The project is a trucking business with a garage, parking/staging area, grading, fill, and retaining wall; the source does not establish proposed residential dwellings or new/replacement dwelling units.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-93-6-10-vtec",
+      "docket": "93-6-10 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 39327,
+      "era": "2005-2014",
+      "titles": [
+        "Bowen Conditional Use Application",
+        "Bowen CU Application",
+        "In re Bowen Conditional Use Application After Remand"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The challenged municipal decision denied conditional use approval for a proposed commercial/recreational mine-dirt sifting and sales business. Although located on residential property, the proposal is not for residential dwelling units or residential building lots, so housing scope is not established.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-181-8-07-vtec",
+      "docket": "181-8-07 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 13457,
+      "era": "2005-2014",
+      "titles": [
+        "Wellspring School, Inc. Application"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns conditional use approval to construct a school, not residential dwellings or residential building lots. No new, replacement, or additional dwelling unit or house lot permission is at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-34-3-99-vtec",
+      "docket": "34-3-99 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6578,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Martin"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This is an appeal of a municipal ZBA denial of a variance for a deck within a sideline setback. Although the existing property is residential, the permission sought is not for a new, replacement, or additional dwelling unit; it is for a deck, so housing is not implicated.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-23-env-00057",
+      "docket": "23-ENV-00057",
+      "documents": 4,
+      "composition": "uniform",
+      "chars": 71652,
+      "era": "2015-2026",
+      "titles": [
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV - Decision on Motion",
+        "Spaulding NOV Appeal - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This matter is an appeal of a municipal land-use decision — a Development Review Board decision on a zoning Notice of Violation (24 V.S.A. § 4451) — so it is a municipal appeal. However, the subject of the challenged decision is a storage/ISO container's placement within a front setback, a nonhousing subject. The litigation concerns whether the container is a 'structure,' setback measurement, selective enforcement, and procedural/venue issues; it does not seek permission for a new, replacement, converted, or additional dwelling unit or house lot. The property contains the Spaulings' existing h",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-217-12-03-vtec",
+      "docket": "217-12-03 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11967,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Parker, et al"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The source shows an appeal of a municipal DRB conditional-use decision, so municipal_appeal is yes. The proposal is a bulk water shipping business and expressly does not include a residence, so it is not a residential dwelling or dwelling-lot permission.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-132-6-00-vtec",
+      "docket": "132-6-00 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 16637,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of John Mentes",
+        "In re: Appeal of John Menters"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal of a municipal ZBA enforcement decision, but the dispute concerns occupancy/household composition of an existing single-family dwelling (whether seven students are 'group quarters'), not permission for new, replacement, additional, or converted dwelling units.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-212-11-99-vtec",
+      "docket": "212-11-99 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 3764,
+      "era": "1996-2004",
+      "titles": [
+        "Village of Ludlow v Kennedy, et al"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a Village-initiated zoning enforcement action about signs, not an appeal of a municipal land-use decision, and it does not involve residential dwellings or housing permission.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-207-11-03-vtec",
+      "docket": "207-11-03 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11458,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Fisher"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The source shows an Environmental Court appeal from a municipal DRB decision granting major impact and site plan approval for an addition to the Lund Family Center. The proposal is a residential treatment/community house facility, not permission for new, replacement, or additional dwelling units or residential building lots.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-109-9-19-vtec",
+      "docket": "109-9-19 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 27190,
+      "era": "2015-2026",
+      "titles": [
+        "R.L. Vallee Determination Request - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a municipal zoning appeal involving the Town of Colchester's refusal to allow Vallee's DRB appeal concerning a Costco gas station and municipal final plat/site plan amendment requirements. The proposed use is a gas station, not residential dwellings, so housing is no.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-185-11-10-vtec",
+      "docket": "185-11-10 Vtec",
+      "documents": 3,
+      "composition": "shared",
+      "chars": 45714,
+      "era": "2005-2014",
+      "titles": [
+        "Williamson Building Permit",
+        "Williamson Building Permit",
+        "Williamson Building Permit"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The matter includes municipal zoning appeals (ZBA denials of building permit, conditional use, variance) and related enforcement/settlement, so municipal_appeal=yes. The proposal is a third tier addition to an existing single-family residence and related camp/deck/tower; no new, replacement, or additional dwelling unit is at stake, so housing=no.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "14-2-11 Vtec",
+        "184-11-10 Vtec",
+        "248-12-09 Vtec",
+        "55-4-12 Vtec"
+      ]
+    },
+    {
+      "case": "g-32-2-04-vtec",
+      "docket": "32-2-04 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6287,
+      "era": "1996-2004",
+      "titles": [
+        "City of Newport v Giroux"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns site plan approval and a zoning permit for a municipal office building expansion, not residential dwellings or residential building lots. The source establishes a nonhousing use, so the housing facts are not met.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-54-5-17-vtec",
+      "docket": "54-5-17 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 88410,
+      "era": "2015-2026",
+      "titles": [
+        "Comtuck LLC East Tract Rd JO - Decision on Motion",
+        "Comtuck East Tract Act 250 JO - Decision on Motions (Revised)",
+        "Comtuck LLC East Tract Rd JO - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The appeal is an Act 250 jurisdictional opinion appeal to the Environmental Division, not an appeal of a municipal land-use decision. The proposal is for 100 residential home sites/lots, so it concerns residential housing, but no municipal decision is challenged.",
+      "september_municipal": "no",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-75-5-96-vtec",
+      "docket": "75-5-96 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 51467,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Wesco, Inc."
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "Documents are consolidated municipal land-use appeals concerning City of Barre zoning and site plan approvals for a commercial gasoline/convenience store conversion. The proposed use is not residential dwellings or new residential building lots, and no new, replacement, or converted dwelling-unit permission is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "10-1-96 Vtec",
+        "175-10-01 Vtec",
+        "209-12-97 Vtec",
+        "215-9-00 Vtec",
+        "24-1-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-166-8-00-vtec",
+      "docket": "166-8-00 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 15155,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of Maplewood, Ltd."
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal approvals concern a commercial convenience store, fast-food drive-through, and gas station; the existing house is to be demolished, and the source does not seek permission for new, replacement, or additional dwelling units.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-104-8-12-vtec",
+      "docket": "104-8-12 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 145716,
+      "era": "2005-2014",
+      "titles": [
+        "Costco SW Discharge Permit",
+        "Costco Final Plat & Site Plan - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The challenged proposal is a commercial Costco warehouse expansion and gas station, not residential housing; the matter includes appeals of Town of Colchester DRB site plan/final plat approvals, so municipal appeal is present.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "132-10-13 Vtec",
+        "41-4-13 Vtec",
+        "59-5-14 Vtec",
+        "75-6-12 Vtec"
+      ]
+    },
+    {
+      "case": "g-89-5-08-vtec",
+      "docket": "89-5-08 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 62579,
+      "era": "2005-2014",
+      "titles": [
+        "Intervale Ctr., Inc. & Half Pint Farm (Hoop House)",
+        "Intervale Center Inc. & Half Pint Farm (Hoop House)"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is the state Agency of Agriculture's April 2008 AAPs determination, not a municipal land-use decision; the City's separate zoning-permit-exemption determination was not the subject of this appeal. The proposed use is an agricultural hoop house (a greenhouse-like structure), not residential dwellings or residential building lots, and no new/replacement/additional dwelling-unit permission is at stake. Both scope facts therefore establish non-housing, non-municipal-appeal subject matter.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-42-3-04-vtec",
+      "docket": "42-3-04 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 16462,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Taylor's Automotive, LLC"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The appealed municipal decision concerns a Notice of Violation for an alleged prohibited junkyard and Taylor’s automobile sales, repair, towing, and vehicle-storage use. The source does not establish a residential dwelling or residential-lot proposal; the subject use is nonhousing.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-153-11-13-vtec",
+      "docket": "153-11-13 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 23279,
+      "era": "2005-2014",
+      "titles": [
+        "Harrison Quarry CU"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This is an appeal of a municipal ZBA denial of conditional use approval. The proposed use is a sand and rock quarry, not residential dwellings or residential building lots, and no new, replacement, or additional dwelling-unit permission is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-69-5-14-vtec",
+      "docket": "69-5-14 Vtec",
+      "documents": 5,
+      "composition": "shared",
+      "chars": 147103,
+      "era": "2005-2014",
+      "titles": [
+        "Hannaford SD Revision",
+        "Hinesburg Hannaford CU",
+        "Hinesburg Hannaford CU",
+        "Hinesburg Hannaford CU",
+        "Hinesburg Hannaford SD Revision"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The proposed project is a 36,000-square-foot Hannaford grocery store and pharmacy with parking, not residential dwellings or residential building lots. The coordinated municipal appeals concern commercial site plan, conditional use, subdivision, and state permits; no new, replacement, or additional dwelling-unit authorization is at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "113-8-14 Vtec",
+        "114-8-14 Vtec",
+        "129-9-12 Vtec",
+        "163-11-12 Vtec",
+        "68-5-14 Vtec",
+        "70-5-14 Vtec",
+        "73-5-14 Vtec"
+      ]
+    },
+    {
+      "case": "g-256-11-06-vtec",
+      "docket": "256-11-06 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 103511,
+      "era": "2005-2014",
+      "titles": [
+        "Eastview at Middlebury, Inc. Act 250 Permit #9A0314",
+        "Eastview at Middlebury, Inc."
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The matter is an Act 250 state permit appeal before the Environmental Court, not an appeal of a municipal land-use decision. The proposal itself is residential: a new retirement community with independent-living apartments and single-family cottages, plus assisted-living and memory-care residential units.",
+      "september_municipal": "no",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-178-11-97-vtec",
+      "docket": "178-11-97 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6620,
+      "era": "1996-2004",
+      "titles": [
+        "ANR v McLain Logging"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The caption and text show a Vermont Agency of Natural Resources enforcement/transcript proceeding against McLain Logging respondents, not an appeal of a municipal land-use decision. The subject matter concerns a missing hearing tape, water bars, and a soil erosion plan, not residential dwellings or residential building lots; neither municipal-review nor housing scope is established.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-212-12-10-vtec",
+      "docket": "212-12-10 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 68692,
+      "era": "2005-2014",
+      "titles": [
+        "Lidstone Setback Waiver"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The decision resolves municipal ZBA appeals and enforcement concerning accessory structures and setback approvals. Although the property includes a year-round residence, the current matter does not seek permission for a new, replacement, or additional dwelling unit; the replacement-home permit was previously authorized.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "10-1-11 Vtec",
+        "130-8-10 Vtec",
+        "152-9-10 Vtec",
+        "178-12-11 Vtec",
+        "33-3-12 Vtec"
+      ]
+    },
+    {
+      "case": "g-231-9-06-vtec",
+      "docket": "231-9-06 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 11062,
+      "era": "2005-2014",
+      "titles": [
+        "Deer Brook Buffer Reduction"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The Environmental Court matter is an appeal of a municipal Planning Commission approval of a buffer reduction in a seven-lot subdivision. The record states the lots were approved for commercial use and are used for sand extraction, so the proposal is not residential dwellings or new residential lots; housing is not established.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-100-5-07-vtec",
+      "docket": "100-5-07 Vtec",
+      "documents": 3,
+      "composition": "shared",
+      "chars": 66994,
+      "era": "2005-2014",
+      "titles": [
+        "R.L. Vallee PUD (Spillane's)",
+        "R.L. Vallee, Inc. PUD Preliminary Plat",
+        "R.L. Vallee, Inc PUD Preliminary Plat"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal of municipal DRB preliminary and final plat approvals for a PUD. The proposed project is nonresidential: a convenience store, short-order restaurant, and gasoline service/fueling, with no new or replacement dwelling units or residential lots at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "101-5-08 Vtec"
+      ]
+    },
+    {
+      "case": "g-3-1-19-vtec",
+      "docket": "3-1-19 Vtec",
+      "documents": 5,
+      "composition": "shared",
+      "chars": 142148,
+      "era": "2015-2026",
+      "titles": [
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan - Decision on Motions",
+        "Capitol Plaza 2-Lot Subdivision/Capitol Plaza Major Site Plan/Capitol Plaza Act 250 - Decision on Motion",
+        "Capitol Plaza 2 Lot Subdivision & Capitol Plaza Major Site Plan - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "Municipal appeal element is satisfied: documents 2–4, 8, and 9 concern appeals of the Montpelier Development Review Board's approval of the City's subdivision and Major Site Plan for a parking garage. The proposal, however, is a municipal parking garage and an 81-room hotel; neither is a residential dwelling or residential building lot, and no new or additional dwelling units or house lots are sought. The subdivision creates a lot for the garage, not housing.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "4-1-19 Vtec",
+        "59-5-19 Vtec"
+      ]
+    },
+    {
+      "case": "g-62-3-07-vtec",
+      "docket": "62-3-07 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 10251,
+      "era": "2005-2014",
+      "titles": [
+        "Keystone Development Corp. NOV Appeal"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This is an appeal of municipal notices of violation upheld by the Burlington DRB, so a municipal land-use decision is being reviewed. However, the subject of the challenged decision is ditch maintenance work and tree harvesting alleged to constitute development requiring a zoning permit; no residential dwelling units or residential building lots, and no permission for new, replacement, or additional dwellings, are at stake. The document mentions only the Associations' pre-existing residential developments as abutters, not any housing proposal.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-203-11-98-vtec",
+      "docket": "203-11-98 Vtec",
+      "documents": 3,
+      "composition": "shared",
+      "chars": 47976,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of LiCausi, et al",
+        "Appeal of LiCausi",
+        "In re Appeal of Licausi, et al."
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "Every document concerns municipal land-use appeals in Clarendon (ZBA conditional use permit grant, Planning Commission site plan denial, ZBA zoning permit reversal, and the resulting Environmental Court/Supreme Court review). The proposed use is an asphalt hot-mix plant at a stone and gravel quarry — a nonhousing industrial use — so the residential-use prong of the housing test is not met and the matter is excluded regardless of the municipal appeal being present.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "230-11-99 Vtec",
+        "77-5-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-24-env-00005",
+      "docket": "24-ENV-00005",
+      "documents": 1,
+      "composition": "single",
+      "chars": 41050,
+      "era": "2015-2026",
+      "titles": [
+        "Green Mountain Dog Camp, LLC - Decision on Motions"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged decision is an Act 250 District Environmental Commission ruling (permit amendment of LUP #5W0914), a state program, not a municipal land-use decision. The proposed use is a commercial dog training and doggie daycare facility, a nonhousing subject; the historical subdivision's residential character does not establish residential use in this appeal, which concerns authorization for the dog business.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-23-3-17-vtec",
+      "docket": "23-3-17 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 65086,
+      "era": "2015-2026",
+      "titles": [
+        "Mountain Top Inn & Resort JO (#1-391)",
+        "Mountain Top Inn & Resort JO 1-391 - Decison on Motions",
+        "Mountain Top Inn & Resort JO 1-391 - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "All three documents are the same Act 250 docket 23-3-17 Vtec (motion to compel, cross-motions for summary judgment, motion to amend judgment). The challenged decision is a District #1 Environmental Commission Coordinator jurisdictional opinion under Act 250 (10 V.S.A. § 6001 et seq.), a state-only land-use determination, not an appeal of a municipal land-use decision. On housing: the dispute concerns whether existing individually-owned homes already participating in the Resort's rental program fall within an existing Act 250 permit; no new, replacement, or additionally authorized dwelling unit",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-150-1-11-vtec",
+      "docket": "150-1-11 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 1438,
+      "era": "2005-2014",
+      "titles": [
+        "Quesnel Waiver Appeal"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The source establishes a municipal zoning waiver appeal, but the permission at stake is a porch setback encroachment, not permission for new, replacement, or additional dwelling units; the residence is described as pre-existing/rebuilt.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-56-4-10-vtec",
+      "docket": "56-4-10 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 19550,
+      "era": "2005-2014",
+      "titles": [
+        "Wright Parcel Act 250 Subdivision JO Opinion"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "This is an Act 250 completeness appeal, not a municipal land-use decision: the Willey appellants challenged District Coordinator Jurisdictional Opinion #6-007 finding their Act 250 applications incomplete for subdividing the Wright and McBride parcels into three auction lots each in South Hero. A Town of South Hero subdivision permit is mentioned but expressly not at issue. Residential use is not established; applicants disclaim developing the lots for residential or any other purposes.",
+      "september_municipal": "no",
+      "september_housing": "unknown",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "55-4-10 Vtec"
+      ]
+    }
+  ]
+}

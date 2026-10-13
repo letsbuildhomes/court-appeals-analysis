@@ -215,6 +215,27 @@ def research(args):
         show(smoke.check(args.url, args.expected_snapshot))
 
 
+def reference(args):
+    from court.reference.workspace import Workspace
+    space = Workspace()
+    if args.action == 'freeze':
+        show(space.freeze(args.definition))
+    elif args.action == 'pools':
+        show(space.pools())
+    elif args.action == 'check' and args.case:
+        problems = space.check_label(args.case)
+        show({'case': args.case, 'problems': problems})
+        if problems:
+            raise SystemExit(1)
+    elif args.action == 'check':
+        found = space.check()
+        show(found)
+        if found['problems']:
+            raise SystemExit(1)
+    elif args.action == 'export':
+        show(space.export(args.name, args.split))
+
+
 def import_september(args):
     from court.migrate import september
     september.run()
@@ -300,6 +321,14 @@ def parser():
     keyed(p)
     sending(p)
     p.set_defaults(func=lab)
+
+    p = sub.add_parser('reference', help='The reference set: freeze its cases, build candidate pools, check, export')
+    p.add_argument('action', choices=('freeze', 'pools', 'check', 'export'))
+    p.add_argument('--definition', default='docket-cases', help='Pipeline definition whose grouping to freeze')
+    p.add_argument('--name', default='reference', help='Dataset name to export under')
+    p.add_argument('--split', choices=('development', 'holdout'), help='Export only one split')
+    p.add_argument('--case', help='Check one case\'s label file only')
+    p.set_defaults(func=reference)
 
     p = sub.add_parser('web', help='Serve the web app: live runs, the lab, data viewers and pipelines (read-only)')
     p.add_argument('--host', default='0.0.0.0')

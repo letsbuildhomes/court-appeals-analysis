@@ -1,0 +1,533 @@
+{
+  "category": "shared",
+  "needed": 5,
+  "seed": 20261013,
+  "available": 159,
+  "candidates": [
+    {
+      "case": "g-126-6-07-vtec",
+      "docket": "126-6-07 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 95023,
+      "era": "2005-2014",
+      "titles": [
+        "Woodstock Community Trust, Inc. & Housing VT",
+        "Woodstock Community Trust & Housing Vermont PRD"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Document 1 identifies the appeal of the Woodstock DRB’s November 3, 2006 decision granting reconsideration and preliminary approval of a 36-unit affordable housing project. Documents 2 and 3 continue and coordinate the same municipal appeals, including Docket No. 126-6-07 Vtec for final approval. The proposed use is 36 residential dwelling units, and the appeals concern permission for those new units at preliminary and final approval stages.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "263-11-06 Vtec"
+      ]
+    },
+    {
+      "case": "g-35-3-04-vtec",
+      "docket": "35-3-04 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 16251,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Cyril Z. Meadow Institute and Phyllis Meadow (Decision and Order on Motions for Summary Judgment)"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Municipal land-use appeals are established by the two dockets. The proposal is principally an educational facility; its residential element is a new building for faculty bedrooms, lounges, and a kitchen, with no express dwelling units or house lots, so housing status is not established.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "17-1-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-228-11-99-vtec",
+      "docket": "228-11-99 Vtec",
+      "documents": 4,
+      "composition": "shared",
+      "chars": 48781,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Middlebury College & KW Middlebury LLC",
+        "Appeals of Middlebury College & KW Middlebury LLC",
+        "In re: Appeals of Middlebury College and KW Middlebury, LLC (Decision and Order on Motion for Reconsideration)",
+        "In re: Appeals of Middlebury College and KW Middlebury, LLC."
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "The matter is an appeal of municipal Planning Commission land-use decisions. The overall PUD description mentions residential housing on the retained 31-acre parcel, but the appeals and rulings focus on the commercial Phase I (hotel/conference center and office/apartment building) and on PUD master-plan/subdivision/design prerequisites; no specific new or replacement dwelling units or house lots are established as the permission at issue.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "103-5-00 Vtec",
+        "124-7-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-116-6-09-vtec",
+      "docket": "116-6-09 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 54635,
+      "era": "2005-2014",
+      "titles": [
+        "Atwood-Hood PRD"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The challenged decisions are municipal DRB Discretionary Permit approvals for a proposed twelve-unit residential development in Williston. Appellants Atwood and Hood appeal conditions imposed on permission for new residential units, so the appeal concerns municipal permission for residential dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "117-6-09 Vtec"
+      ]
+    },
+    {
+      "case": "g-250-12-99-vtec",
+      "docket": "250-12-99 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 13843,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Madden & Winborn",
+        "Appeals of Madden & Winborn"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The Environmental Court decisions review appeals of municipal building permits for three lots in a residential subdivision, and the permits sought authorization for single-family residences; both municipal land-use appeal and residential dwelling permission are established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "15-1-00 Vtec",
+        "227-11-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-208-12-01-vtec",
+      "docket": "208-12-01 Vtec",
+      "documents": 6,
+      "composition": "shared",
+      "chars": 66122,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Motion to Dismiss Parties)",
+        "Appeal of Green Meadows Center, LLChttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Pending Motions)",
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Decision and Order on Motion for Reconsideration)",
+        "Appeal of Green Meadows Center, LLChttp://www.vermontjudiciary.orghttp://www.vermontjudiciary.org. (Partial Decision and Order Categorizing the Uses proposed in the PUD Applications)",
+        "Appeal of Green Meadows Center. LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org (Final Order)",
+        "Appeal of Green Meadows Center, LLC http://www.vermontjudiciary.orghttp://www.vermontjudiciary.org (Decision and Order on Pending Motions)"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "This matter is an appeal of municipal land-use decisions: ZBA conditional use approvals (#803, #844) and a Planning Commission PUD denial. Housing=yes because the proposal itself contains residential dwellings-a '6-unit Senior Citizen Residence' ruled a 'multiple family dwelling' entitled to conditional use review, and a proposed 6-person dormitory-and these appeals seek permission (conditional use approval #844 and PUD approval) for those residential units; the parties themselves describe 'residential uses (six senior residences and six visitor residences).'",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "152-9-01 Vtec",
+        "179-10-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-71-6-15-vtec",
+      "docket": "71-6-15 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 10960,
+      "era": "2015-2026",
+      "titles": [
+        "APC Property LLC dba Burlington Bedrooms"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document is a decision on motions in APC's appeal of the Shelburne DRB's denial of a conditional use application and its related NOV appeal, so municipal land-use review is involved. The source never states the proposed use is residential dwellings or that the appeal concerns permission for new, replacement, or additional dwelling units; the only use-related clue is an operation/U-Haul contract, so housing scope is unestablished.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "116-9-15 Vtec"
+      ]
+    },
+    {
+      "case": "g-122-7-99-vtec",
+      "docket": "122-7-99 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 28428,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Marcelino"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The source shows appeals from municipal ZBA decisions and identifies the proposed use as a single-family house replacing a mobile home, with the variance/permit dispute concerning the dwelling's authorized location.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "181-11-97 Vtec"
+      ]
+    },
+    {
+      "case": "g-128-6-02-vtec",
+      "docket": "128-6-02 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 12612,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Rowley"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The Rowleys appealed DRB denials of municipal zoning approvals: conditional use boundary relocation and a septic-system setback variance. The proposal includes new residential house sites on Lots 2 and 3 and two residential lots, and the approvals at issue are authorizations/conditions for that residential development.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "96-6-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-73-3-02-vtec",
+      "docket": "73-3-02 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 35454,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Cowan",
+        "Town of Richmond v Cowan"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Review flagged the scope decision: The triage's municipal_appeal/housing classification is correct for Cowan's permit and floodplain appeals, but the candidate separately records Docket No. 102-5-02 Vtec. That docket is an independent Town enforcement action over the retaining wall, not an appeal of a municipal land-use decision; the record shows Cowan did not appeal the notice of violation. Under the scope contract, independent municipal enforcement should not be treated as a municipal housing appeal record.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "102-5-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-143-7-08-vtec",
+      "docket": "143-7-08 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 78971,
+      "era": "2005-2014",
+      "titles": [
+        "Benoit Conversion Application - Decision on Motion",
+        "City of St. Albans v Hayford - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Docket 148-8-04 Vtec is an appeal of a Development Review Board decision denying approval to convert the rear building to residential use, and the enforcement matters (126-7-04, 161-9-03) and 143-7-08 reopening concern authorization to use the rear building and fifth main-building apartment as residential dwelling units. The proposal is residential and seeks permission for additional/after-the-fact authorized dwelling units (the sixth rear unit and the fifth main-building unit), so housing is established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": [
+        "126-7-04 Vtec",
+        "148-8-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-159-8-00-vtec",
+      "docket": "159-8-00 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 15032,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeals of Christopher Denio"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "Document is an appeal of two ZBA decisions: denial of an as-built amendment to a camp permit and a notice of violation for the same Bennington property. The building is used as a secondary residence, but the zoning permission at issue is for a private recreational camp, so whether the appeal seeks authorization for a new or additional dwelling unit is unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "250-11-00 Vtec"
+      ]
+    },
+    {
+      "case": "g-88-4-02-vtec",
+      "docket": "88-4-02 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 15091,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeal of Green Mountain Habitat for Humanity and In re: Appeal of Blair and Devlin (Decision and Order on Motions for Summary Judgment)"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The challenged decision is a municipal Development Review Board ruling on a zoning permit application. The proposed use is a new single-family dwelling on a vacant undersized lot, so the appeal concerns permission for a new dwelling unit. Merger and variance issues go to whether that new-home permission stands.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "19-1-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-261-11-07-vtec",
+      "docket": "261-11-07 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 51166,
+      "era": "2005-2014",
+      "titles": [
+        "Tenney Notices of Violation",
+        "Tenney Notices of Violation"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Doc 1 is a direct appeal of a Town of Lincoln Zoning Board of Adjustment decision denying a zoning permit for a replacement mobile home (single-family dwelling) on the site of a preexisting residence, so the challenged municipal decision concerns permission for a replacement dwelling. Docs 2-3 are the same property/dispute, coordinated NOV appeals/enforcement, retaining the underlying identity. Residential use (mobile home/dwelling) and replacement permission are both established by the source.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "169-9-03 Vtec",
+        "186-9-07 Vtec",
+        "226-12-03 Vtec",
+        "70-4-08 Vtec"
+      ]
+    },
+    {
+      "case": "g-40-2-06-vtec",
+      "docket": "40-2-06 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 32366,
+      "era": "2005-2014",
+      "titles": [
+        "Beebe 9-Lot Subdivision"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Both documents are appeals of municipal Planning Commission subdivision/site-plan decisions for Beebe's Highgate property; the proposed use is creation of residential building lots (existing Beebe residence on Lot #4 plus eight new house lots) in the nine-lot subdivision.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.0,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "204-11-04 Vtec",
+        "218-11-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-218-9-00-vtec",
+      "docket": "218-9-00 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 39999,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Garen",
+        "Appeal of Garen (Plat Approval)"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "All three documents concern the same consolidated Environmental Court appeals of municipal DRB plat approvals for a proposed eight-unit PRD. The municipal decision challenged is the Burlington DRB's grant of preliminary (218-9-00 Vtec) and final (42-3-01 Vtec) plat approval. The proposed use is residential dwellings (four single-family houses and two duplexes), so permission for new dwelling units is at stake.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "42-3-01 Vtec"
+      ]
+    },
+    {
+      "case": "g-226-12-98-vtec",
+      "docket": "226-12-98 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 23740,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Bergeron"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "The decision concerns municipal review of a notice of violation and a conditional-use denial for seasonal-to-year-round occupancy of an existing single-family dwelling. That is a residential conversion requiring additional legal authorization, so it qualifies as housing.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "40-3-98 Vtec"
+      ]
+    },
+    {
+      "case": "g-232-12-04-vtec",
+      "docket": "232-12-04 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 11066,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of LaBounty Enterprises, Inc."
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Source identifies consolidated appeals of DRB zoning permit denials for proposed dwellings on two lots; the dispute concerns permission to build new residential dwellings.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "85-5-05 Vtec"
+      ]
+    },
+    {
+      "case": "g-104-5-06-vtec",
+      "docket": "104-5-06 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 21606,
+      "era": "2005-2014",
+      "titles": [
+        "Ploof & Loney ZBA Application"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "The appeal challenges municipal ZBA decisions denying a permit to replace the Ploofs’ existing RV with a larger RV and denying their appeal of a side-yard setback notice of violation. The current and proposed RVs function as a seasonal dwelling with residential facilities, and the appeal concerns permission for that replacement dwelling use.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "247-10-06 Vtec"
+      ]
+    },
+    {
+      "case": "g-77-4-05-vtec",
+      "docket": "77-4-05 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 51225,
+      "era": "2005-2014",
+      "titles": [
+        "Nowicki Building Permit",
+        "In re Appeal of Nowicki Building Permit and Appeal of Nowicki NOV Appeal"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Doc 1 is an Environmental Court decision on Developer Nowicki's appeal of a Norwich DRB denial of an after-the-fact zoning permit to build a single-family dwelling at 84 Elm Street, plus related enforcement and NOV dockets; doc 2 is the Supreme Court's further review (2007 VT 76) of the same matter. The challenged decision is municipal (DRB permit denial) and the permission at stake is authorization of a residential dwelling unit, so both scope questions are established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "156-8-05 Vtec",
+        "220-10-05 Vtec"
+      ]
+    }
+  ]
+}

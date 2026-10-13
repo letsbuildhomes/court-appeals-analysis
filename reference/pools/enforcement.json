@@ -1,0 +1,296 @@
+{
+  "category": "enforcement",
+  "needed": 3,
+  "seed": 20261013,
+  "available": 201,
+  "candidates": [
+    {
+      "case": "g-24-env-00022",
+      "docket": "24-ENV-00022",
+      "documents": 1,
+      "composition": "single",
+      "chars": 10621,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Pittsford v Bovey & Boondock Motors - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a post-judgment contempt decision in an enforcement action, not an appeal of a municipal land-use decision. The underlying permit authorizes commercial hauling/trucking, towing, and an autobody shop, not residential dwellings.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-64-6-18-vtec",
+      "docket": "64-6-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 17201,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Halifax v LeMay & Jeffrey - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a Town-initiated enforcement decision, not an appeal of a municipal land-use approval or denial. It references unappealed notices of violation and a prior ZBA appeal, but those are distinct from this enforcement matter. The subject is a shed and its removal, not permission for a new, replacement, or additionally authorized dwelling unit.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-114-7-99-vtec",
+      "docket": "114-7-99 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 18874,
+      "era": "1996-2004",
+      "titles": [
+        "Town of St. Albans v Deso"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The matter includes municipal land-use appeals of ZBA decisions, including denial of conditional use approval. However, the proposal at issue is a commercial mobile home display and sales facility, not permission for new, replacement, converted, or additional dwelling units; the mobile homes are used as office/model displays, and the permitted single mobile home is not the subject of the conditional use appeal.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "106-7-99 Vtec",
+        "112-7-99 Vtec",
+        "113-7-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-116-9-16-vtec",
+      "docket": "116-9-16 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 41549,
+      "era": "2015-2026",
+      "titles": [
+        "ANR v Blakeman dba Blakeman's Towing/Recovery"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "This docket is an ANR-initiated state enforcement/contempt proceeding commenced by an Administrative Order, not an appeal of a municipal land-use decision. The Tunbridge COAL application and its December 2017 denial are background facts, not the appealed decision. The subject is a salvage yard and towing business, not residential dwellings or new dwelling permission.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-105-6-10-vtec",
+      "docket": "105-6-10 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 28148,
+      "era": "2005-2014",
+      "titles": [
+        "Town of Georgia v King",
+        "Town of Georgia v King",
+        "Town of Georgia v King"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "All three documents are the same matter and property: an enforcement proceeding brought by the Town of Georgia against the Kings for unpermitted second-dwelling development. It is independently initiated enforcement, not an appeal of a municipal panel/DRB decision; the defendants never appealed the ZA's September 23, 2009 NOV, and no municipal review of a land-use decision is being reviewed by the Environmental Division. The subject is residential (a second dwelling/mobile trailer used as an accessory dwelling), satisfying the residential-use fact, but the matter concerns penalty assessment an",
+      "september_municipal": "no",
+      "september_housing": "unknown",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-273-11-06-vtec",
+      "docket": "273-11-06 Vtec",
+      "documents": 4,
+      "composition": "shared",
+      "chars": 39256,
+      "era": "2005-2014",
+      "titles": [
+        "Cote NOV",
+        "Cote NOV",
+        "Cote NOV",
+        "Janet Cote v. Town of St. Albans/Town of St. Albans v. Janet Cote"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The municipal decisions at issue are a DRB Notice of Violation upholding decision and a DRB site plan approval for drainage/piping/fill and berm-removal work on an existing developed parcel. No new, replacement, additional, or converted dwelling unit or residential lot is proposed or authorized; the dispute concerns surface-water flow, fill, and permit compliance on an already-built property with existing structures. Residential use is not the permission at stake, so housing is not established.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "165-8-07 Vtec"
+      ]
+    },
+    {
+      "case": "g-212-11-99-vtec",
+      "docket": "212-11-99 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 3764,
+      "era": "1996-2004",
+      "titles": [
+        "Village of Ludlow v Kennedy, et al"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The document is a Village-initiated zoning enforcement action about signs, not an appeal of a municipal land-use decision, and it does not involve residential dwellings or housing permission.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-32-2-04-vtec",
+      "docket": "32-2-04 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6287,
+      "era": "1996-2004",
+      "titles": [
+        "City of Newport v Giroux"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The challenged municipal decision concerns site plan approval and a zoning permit for a municipal office building expansion, not residential dwellings or residential building lots. The source establishes a nonhousing use, so the housing facts are not met.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-178-11-97-vtec",
+      "docket": "178-11-97 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6620,
+      "era": "1996-2004",
+      "titles": [
+        "ANR v McLain Logging"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The caption and text show a Vermont Agency of Natural Resources enforcement/transcript proceeding against McLain Logging respondents, not an appeal of a municipal land-use decision. The subject matter concerns a missing hearing tape, water bars, and a soil erosion plan, not residential dwellings or residential building lots; neither municipal-review nor housing scope is established.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-73-3-02-vtec",
+      "docket": "73-3-02 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 35454,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Cowan",
+        "Town of Richmond v Cowan"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Review flagged the scope decision: The triage's municipal_appeal/housing classification is correct for Cowan's permit and floodplain appeals, but the candidate separately records Docket No. 102-5-02 Vtec. That docket is an independent Town enforcement action over the retaining wall, not an appeal of a municipal land-use decision; the record shows Cowan did not appeal the notice of violation. Under the scope contract, independent municipal enforcement should not be treated as a municipal housing appeal record.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "102-5-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-143-7-08-vtec",
+      "docket": "143-7-08 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 78971,
+      "era": "2005-2014",
+      "titles": [
+        "Benoit Conversion Application - Decision on Motion",
+        "City of St. Albans v Hayford - Decision on Motion"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Docket 148-8-04 Vtec is an appeal of a Development Review Board decision denying approval to convert the rear building to residential use, and the enforcement matters (126-7-04, 161-9-03) and 143-7-08 reopening concern authorization to use the rear building and fifth main-building apartment as residential dwelling units. The proposal is residential and seeks permission for additional/after-the-fact authorized dwelling units (the sixth rear unit and the fifth main-building unit), so housing is established.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": true,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": [
+        "126-7-04 Vtec",
+        "148-8-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-189-10-98-vtec",
+      "docket": "189-10-98 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 6533,
+      "era": "1996-2004",
+      "titles": [
+        "Secretary, Vermont Agency of Natural Resources v. Katherine Proctor"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The opinion enforces a final administrative order under 10 V.S.A. § 8014(a) against a dog kennel and failed leach field, addressing wastewater/water-supply permitting and an exemption under 10 V.S.A. § 1954; it is not an appeal of a municipal land-use decision, and no new, replacement, or additional dwelling unit or house-lot permission is at issue.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    }
+  ]
+}

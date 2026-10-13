@@ -1,0 +1,395 @@
+{
+  "category": "long",
+  "needed": 3,
+  "seed": 20261013,
+  "available": 1731,
+  "candidates": [
+    {
+      "case": "g-169-12-16-vtec",
+      "docket": "169-12-16 Vtec",
+      "documents": 13,
+      "composition": "shared",
+      "chars": 428545,
+      "era": "2015-2026",
+      "titles": [
+        "R.L. Vallee, Inc. et a MS4",
+        "Diverging Diamond Act 250",
+        "Diverging Diamond Act 250",
+        "Diverging Diamond Interchange SW Permit/Diverging Diamond Interchange A250/R.L. Vallee, Inc.et al MS4",
+        "Diverging Diamond Interchange SW Permit",
+        "Diverging Diamond Interchange - Decision on Motion to Dismiss Questions"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The challenged decisions are an Act 250 permit and a state stormwater/MS4 permit for a roadway interchange project, not a municipal land-use decision. The proposed use is highway/interchange infrastructure, not residential dwellings or residential building lots.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "122-10-16 Vtec",
+        "50-6-16 Vtec"
+      ]
+    },
+    {
+      "case": "g-7-1-05-vtec",
+      "docket": "7-1-05 Vtec",
+      "documents": 8,
+      "composition": "shared",
+      "chars": 406025,
+      "era": "2005-2014",
+      "titles": [
+        "Appeal of Rivers Development, LLC",
+        "Appeal of Rivers Development, LLC",
+        "Rivers Development, LLC.",
+        "Rivers Development, LLC",
+        "Rivers Development, LLC",
+        "Appeal of Rivers Development, LLC CU Appeal"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The source describes a rock quarry and crushed-rock processing facility, not residential dwellings or lots; the municipal appeal concerns conditional use/zoning approval for that quarry. No new or replacement dwelling units are at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "157-7-08 Vtec",
+        "183-8-07 Vtec",
+        "248-11-07 Vtec",
+        "68-3-07 Vtec"
+      ]
+    },
+    {
+      "case": "g-68-3-07-vtec",
+      "docket": "68-3-07 Vtec",
+      "documents": 6,
+      "composition": "shared",
+      "chars": 375214,
+      "era": "2005-2014",
+      "titles": [
+        "Appeal of Rivers Development, LLC",
+        "Rivers Development, LLC.",
+        "Rivers Development, LLC",
+        "Appeal of Rivers Development, LLC CU Appeal",
+        "Rivers Development, LLC Conditional Use",
+        "Rivers Development, LLC Conditional Use Appeal"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The source describes a rock quarry and crushed-rock processing facility, not residential dwellings or lots; the municipal appeal concerns conditional use/zoning approval for that quarry. No new or replacement dwelling units are at stake.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "157-7-08 Vtec",
+        "183-8-07 Vtec",
+        "248-11-07 Vtec",
+        "7-1-05 Vtec"
+      ]
+    },
+    {
+      "case": "g-103-9-16-vtec",
+      "docket": "103-9-16 Vtec",
+      "documents": 7,
+      "composition": "uniform",
+      "chars": 367319,
+      "era": "2015-2026",
+      "titles": [
+        "Morrisville Hydroelectric Project Water Quality",
+        "Morrisville Hydroelectric Proj Water Quality",
+        "Morrisville Hydroelectric Project Water Quality",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on Motions",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on the Merits",
+        "Morrisville Hydroelectric Proj Water Quality - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The documents concern a state-issued §401 water quality certification for a hydroelectric project, not a municipal land-use decision. No residential dwellings or dwelling-lot permission are proposed or at issue.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-147-10-13-vtec",
+      "docket": "147-10-13 Vtec",
+      "documents": 7,
+      "composition": "shared",
+      "chars": 345954,
+      "era": "2005-2014",
+      "titles": [
+        "Killington Village Master Plan Act 250",
+        "Killington Resort Parking Project",
+        "Killington Village Master Plan Act 250",
+        "Killington Master Plan Act 250",
+        "Killington Village Master Plan Act 250",
+        "Killington Village Master Plan Act 250"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The supplied opinions are appeals of District #1 Environmental Commission Act 250 decisions, not municipal land-use decisions. The Master Plan/Phase I application proposes residential units and house lots, so residential permission is at issue in the coordinated matter.",
+      "september_municipal": "no",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "173-12-13 Vtec"
+      ]
+    },
+    {
+      "case": "g-105-9-19-vtec",
+      "docket": "105-9-19 Vtec",
+      "documents": 14,
+      "composition": "uniform",
+      "chars": 332114,
+      "era": "2015-2026",
+      "titles": [
+        "Town of Pawlet v Banyai - Decision on Motion",
+        "Town of Pawlet v Banyai - Decision on Motion",
+        "Town of Pawlet v Banyai - Decision on the Merits",
+        "Town of Pawlet v Banyai - Order",
+        "Town of Pawlet v Banyai - Decision on Motion",
+        "Town of Pawlet v Banyai - Decision on Motion"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The matter is an independently initiated municipal zoning enforcement action concerning unpermitted firearms training/shooting school structures and uses, not an appeal of a municipal land-use decision. The source identifies a nonresidential subject; no new, replacement, or additional dwelling units or house lots are at issue. A permitted garage/apartment is mentioned only as an existing allowed structure, not as permission sought in this matter.",
+      "september_municipal": "no",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-138-8-10-vtec",
+      "docket": "138-8-10 Vtec",
+      "documents": 15,
+      "composition": "shared",
+      "chars": 321776,
+      "era": "2005-2014",
+      "titles": [
+        "Wood NOV & Permit Application",
+        "Wood NOV and Permit Application",
+        "Wood NOV & Permit Application",
+        "Wood NOV and Permit Applications",
+        "Wood NOV & Permit Applications",
+        "Wood NOV and Permit Applications"
+      ],
+      "september": "in_scope",
+      "september_source": "same case",
+      "september_reason": "Docket 138-8-10 Vtec is an appeal from Town of Hartford ZBA decisions on permit applications and an NOV. One challenged application sought authority to construct and use a single-family dwelling on the Diner Parcel, so the matter includes permission for a residential dwelling; the retaining-wall and enforcement aspects do not negate that housing element.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 1,
+      "unknown_share": 0.06,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "1-1-11 Vtec"
+      ]
+    },
+    {
+      "case": "g-116-6-08-vtec",
+      "docket": "116-6-08 Vtec",
+      "documents": 8,
+      "composition": "shared",
+      "chars": 316278,
+      "era": "2005-2014",
+      "titles": [
+        "JLD Property Wal Mart A250 LU Permit (Altered)",
+        "JLD Property Wal Mart A250 LU Permit (Altered)",
+        "JLD Properties Wal Mart A250 LU Permit",
+        "JLD Properties Wal-Mart St. Albans",
+        "JLD Properties Wal Mart",
+        "JLD Property St. Albans Wal Mart"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The documents concern appeals of municipal and Act 250 decisions for a proposed Wal-Mart retail store. The municipal decisions include a 4-lot subdivision, site plan, and conditional use approval by the DRB. The proposed use is commercial retail, not residential housing.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "129-5-06 Vtec",
+        "221-10-07 Vtec",
+        "242-10-06 Vtec",
+        "80-4-08 Vtec",
+        "92-5-07 Vtec"
+      ]
+    },
+    {
+      "case": "g-1-1-11-vtec",
+      "docket": "1-1-11 Vtec",
+      "documents": 14,
+      "composition": "shared",
+      "chars": 314505,
+      "era": "2005-2014",
+      "titles": [
+        "Wood NOV & Permit Application",
+        "Wood NOV and Permit Application",
+        "Wood NOV & Permit Application",
+        "Wood NOV & Permit Applications",
+        "Wood NOV and Permit Applications",
+        "Wood NOV & Permit Application"
+      ],
+      "september": "in_scope",
+      "september_source": "old group",
+      "september_reason": "Docket 138-8-10 Vtec is an appeal from Town of Hartford ZBA decisions on permit applications and an NOV. One challenged application sought authority to construct and use a single-family dwelling on the Diner Parcel, so the matter includes permission for a residential dwelling; the retaining-wall and enforcement aspects do not negate that housing element.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "138-8-10 Vtec"
+      ]
+    },
+    {
+      "case": "g-210-9-08-vtec",
+      "docket": "210-9-08 Vtec",
+      "documents": 9,
+      "composition": "shared",
+      "chars": 310887,
+      "era": "2005-2014",
+      "titles": [
+        "Lathrop Limited Partnership II",
+        "Lathrop Limited Parternship I",
+        "Lathrop Ltr Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The municipal and Act 250 appeals concern conditional use approval for a sand and gravel extraction operation, not residential dwellings or residential building lots, and no new, replacement, converted, or additional dwelling authorization is at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "122-7-04 Vtec",
+        "136-8-10 Vtec"
+      ]
+    },
+    {
+      "case": "g-122-7-04-vtec",
+      "docket": "122-7-04 Vtec",
+      "documents": 8,
+      "composition": "shared",
+      "chars": 299842,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Rueger, et al",
+        "Lathrop Limited Parternship I",
+        "Lathrop Ltr Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I"
+      ],
+      "september": "excluded",
+      "september_source": "same case",
+      "september_reason": "The municipal and Act 250 appeals concern conditional use approval for a sand and gravel extraction operation, not residential dwellings or residential building lots, and no new, replacement, converted, or additional dwelling authorization is at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "136-8-10 Vtec",
+        "210-9-08 Vtec"
+      ]
+    },
+    {
+      "case": "g-136-8-10-vtec",
+      "docket": "136-8-10 Vtec",
+      "documents": 7,
+      "composition": "shared",
+      "chars": 290452,
+      "era": "2005-2014",
+      "titles": [
+        "Lathrop Limited Parternship I",
+        "Lathrop Ltr Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership I",
+        "Lathrop Limited Partnership II"
+      ],
+      "september": "excluded",
+      "september_source": "old group",
+      "september_reason": "The municipal and Act 250 appeals concern conditional use approval for a sand and gravel extraction operation, not residential dwellings or residential building lots, and no new, replacement, converted, or additional dwelling authorization is at issue.",
+      "september_municipal": "yes",
+      "september_housing": "no",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": [
+        "122-7-04 Vtec",
+        "210-9-08 Vtec"
+      ]
+    }
+  ]
+}

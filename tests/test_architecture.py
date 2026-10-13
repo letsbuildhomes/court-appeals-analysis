@@ -3,10 +3,10 @@
     court.contracts   imports nothing from the project
     court.core        imports court.config, court.core and court.contracts
     steps/ entries    import court.core and court.contracts (helpers come through ``use``)
-    court.lab, court.research
+    court.lab, court.research, court.reference
                       import court.config, court.core, court.contracts, court.web and themselves
     court.ui          the web app; may also import court.lab and court.reports
-    nothing but court.cli and court.ui imports court.lab, court.reports or court.research
+    nothing but court.cli and court.ui imports court.lab, court.reports, court.research or court.reference
 """
 import ast
 from pathlib import Path
@@ -25,6 +25,7 @@ ALLOWED = {
     'steps': {'court.core', 'court.contracts'},
     'court/lab': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.lab'},
     'court/research': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.research'},
+    'court/reference': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.reference'},
     'court/web': {'court.config', 'court.web'},
     'court/reports': {'court.config', 'court.core', 'court.contracts', 'court.reports', 'court.web'},
     'court/ui': {'court.config', 'court.core', 'court.contracts', 'court.web', 'court.lab', 'court.reports', 'court.ui'},
@@ -61,10 +62,10 @@ class ImportRules(unittest.TestCase):
     def test_only_the_command_line_imports_the_tools(self):
         problems = []
         for path in sorted((ROOT/'court').rglob('*.py')):
-            if path.name == 'cli.py' or path.parts[-2] in ('lab', 'research', 'reports', 'ui'):
+            if path.name == 'cli.py' or path.parts[-2] in ('lab', 'research', 'reports', 'ui', 'reference'):
                 continue
             for module in imports(path):
-                if module.startswith(('court.lab', 'court.research', 'court.reports')):
+                if module.startswith(('court.lab', 'court.research', 'court.reports', 'court.reference')):
                     problems.append(f'{path.relative_to(ROOT)} imports {module}')
         self.assertEqual(problems, [])
 

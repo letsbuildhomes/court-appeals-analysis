@@ -1,0 +1,331 @@
+{
+ "case": "g-24-2-03-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-24-2-03-vtec",
+  "disposition": {
+   "value": "in_scope",
+   "reason": "Docket 24-2-03 Vtec is an appeal (consolidated with 118-7-03 Vtec, whose proposal superseded it) of the Village of Essex Junction Planning Commission's site plan decision on a development of seven single-family houses, which is new housing.",
+   "municipal_appeal": "yes",
+   "housing": "yes",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "The project proposal as appealed in Docket No. 118-7-03 Vtec superseded that proposed in Docket No. 24-2-03 Vtec, and the two appeals were consolidated."
+    },
+    {
+     "doc": 1,
+     "page": 2,
+     "quote": "proposal for a development of seven single-family houses off Hubbell=s Falls Drive and Beech Street"
+    },
+    {
+     "doc": 1,
+     "page": 6,
+     "quote": "If the Planning Commission decision contained a condition that was not brought forward in evidence in this litigation"
+    }
+   ]
+  },
+  "records": [
+   {
+    "docket": "24-2-03 Vtec",
+    "project": {
+     "description": "Development of seven single-family houses held as a common-interest land condominium (house sites on a single parcel) off Hubbell's Falls Drive and Beech Street; site plan review. The proposal originally appealed in this docket was superseded by the one appealed in 118-7-03 Vtec.",
+     "municipality": "Village of Essex Junction",
+     "proposed_units": "unknown",
+     "proposed_lots": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "proposal for a development of seven single-family houses off Hubbell=s Falls Drive and Beech Street"
+      },
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "the Village of Essex Junction is represented by David A. Barra, Esq."
+      },
+      {
+       "doc": 1,
+       "page": 8,
+       "quote": "held in condominium common interest ownership as in the present proposal"
+      }
+     ]
+    },
+    "municipal_decision": {
+     "description": "Village of Essex Junction Planning Commission site plan decision on the proposal, appealed by neighbors/opponents (Noble et al.); date not stated.",
+     "date": "unknown",
+     "outcome": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 6,
+       "quote": "If the Planning Commission decision contained a condition that was not brought forward in evidence in this litigation"
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "Appellants argue that the Court should have denied the application rather than granting it with the imposed conditions"
+      }
+     ]
+    },
+    "appellants": [],
+    "discretion": {
+     "description": "Appellants challenged site plan approval, contesting traffic visibility on Beech Street, conflict at the curb cut, adequacy of the fence's height and type, missing required information, and whether multiple houses may sit on a single lot.",
+     "involved": "unknown",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "Both the height and the type of fence, if any, were at issue in the proceedings."
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "witnesses as to the adequacy of the proposed height of the fence (to keep children from climbing on and over it )"
+      },
+      {
+       "doc": 1,
+       "page": 5,
+       "quote": "Evidence was presented regarding problems with visibility of traffic around the curve of Beech Street"
+      }
+     ],
+     "central": "unknown",
+     "central_evidence": []
+    },
+    "observed_status": {
+     "litigation": "ongoing",
+     "permission": "unknown",
+     "description": "Site plan approval granted on appeal subject to conditions, some requiring further Planning Commission approval; post-decision motions decided, with a restated judgment order still to be filed and signed.",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 2,
+       "quote": "The decision on the merits granted site plan approval of Appellee-Applicant=s proposal"
+      },
+      {
+       "doc": 1,
+       "page": 9,
+       "quote": "the parties may file a restated judgment order and annotated site plan sheets, incorporating the clarifications found in this order, for Judge Wright=s signature"
+      }
+     ]
+    },
+    "timeline": [
+     {
+      "kind": "filing",
+      "date": "unknown",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "24-2-03 Vtec"
+      ],
+      "description": "Appeal of the Planning Commission site plan decision filed; date not stated. Later consolidated with 118-7-03 Vtec.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "the two appeals were consolidated."
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2005-04-04",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "118-7-03 Vtec",
+       "24-2-03 Vtec"
+      ],
+      "description": "Decision and Order on the merits granting site plan approval with conditions; Questions 1 and 2 of 24-2-03 not addressed.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "the Decision and Order on the merits of the application issued on April 4, 2005"
+       }
+      ]
+     },
+     {
+      "kind": "judgment",
+      "date": "2005-09-02",
+      "court_or_body": "Environmental Court",
+      "dockets": [
+       "118-7-03 Vtec",
+       "24-2-03 Vtec"
+      ],
+      "description": "Decision on post-decision motions: clarifies conditions, adds State and Federal holidays and strict construction hours, amends condominium references, and invites a restated judgment order.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 9,
+        "quote": "Dated at Berlin, Vermont, this 2nd day of September, 2005."
+       }
+      ]
+     }
+    ],
+    "duration": {
+     "start": {
+      "date": "2005-03-09",
+      "relation": "on_or_before",
+      "description": "A stipulation of changes to the application filed in the consolidated appeals on March 9, 2005, the earliest dated event proving the appeal existed; the filing date is not stated.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "three changes to the application submitted as a stipulation on March 9, 2005, by Appellee-Applicants and the Village"
+       }
+      ]
+     },
+     "end": {
+      "date": "2005-09-02",
+      "relation": "on_or_after",
+      "description": "Decision on post-decision motions; a restated judgment order was still to be filed.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 9,
+        "quote": "Dated at Berlin, Vermont, this 2nd day of September, 2005."
+       }
+      ]
+     },
+     "note": "Filing date not stated; the case continued at least until the September 2, 2005 order, with a final restated judgment order pending.",
+     "kind": "at_least",
+     "days": 177
+    },
+    "restrictions": [],
+    "housing_changes": [],
+    "related_dockets": [
+     {
+      "docket": "118-7-03 Vtec",
+      "relationship": "Appeal of the superseding project proposal, consolidated with this docket and decided in the same decisions.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 1,
+        "quote": "The project proposal as appealed in Docket No. 118-7-03 Vtec superseded that proposed in Docket No. 24-2-03 Vtec"
+       }
+      ]
+     },
+     {
+      "docket": "unknown",
+      "relationship": "Environmental Board (Act 250) permit proceeding on the same project, decided March 2005.",
+      "evidence": [
+       {
+        "doc": 1,
+        "page": 2,
+        "quote": "by the Environmental Board=s March 2005 decision in its permit proceeding on the same"
+       }
+      ]
+     }
+    ],
+    "appeal_review": {
+     "standard": "de_novo",
+     "evidence": [
+      {
+       "doc": 1,
+       "page": 6,
+       "quote": "The proceeding before the Court was de novo on issues raised by Appellants."
+      },
+      {
+       "doc": 1,
+       "page": 3,
+       "quote": "was not within the scope of the de novo proceeding."
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {
+   "24-2-03 Vtec": "all"
+  }
+ },
+ "judgments": [
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Consolidated appeal of a Village Planning Commission site plan decision for seven single-family houses (new housing). 24-2-03's own proposal was superseded by 118-7-03's, but both concern the same housing project."
+  },
+  {
+   "field": "review_standard",
+   "confidence": "high",
+   "note": "The court states the proceeding was de novo on issues raised by Appellants, and it took evidence at trial and imposed its own conditions."
+  },
+  {
+   "field": "duration",
+   "confidence": "medium",
+   "note": "No filing date given; start bounded by the April 4, 2005 merits decision that addressed this docket, end by the September 2, 2005 order with a restated judgment still pending. A March 9, 2005 stipulation could arguably be an earlier bound but is not clearly a filing in this docket."
+  },
+  {
+   "field": "start",
+   "confidence": "medium",
+   "note": "On_or_before April 4, 2005; filing date not stated, and the docket number is not used to date it."
+  },
+  {
+   "field": "decision_date",
+   "confidence": "high",
+   "note": "No Planning Commission decision date in the document."
+  },
+  {
+   "field": "discretion_central",
+   "confidence": "low",
+   "note": "Only post-decision motions are described; the principal grounds of the original appeal (Questions 1-3) are not set out, and Questions 1 and 2 of this docket were not presented."
+  },
+  {
+   "field": "litigation",
+   "confidence": "medium",
+   "note": "Court still expected to sign a restated judgment order after this order, so a final judgment was pending."
+  },
+  {
+   "field": "lots",
+   "confidence": "medium",
+   "note": "House sites held in land condominium on a single parcel; no new lot count stated."
+  },
+  {
+   "field": "units",
+   "confidence": "medium",
+   "note": "The seven houses are the superseding 118-7-03 proposal; this docket's own proposal is never counted"
+  },
+  {
+   "field": "decision_outcome",
+   "confidence": "medium",
+   "note": "The Planning Commission decision this docket appealed is not described"
+  },
+  {
+   "field": "permission",
+   "confidence": "medium",
+   "note": "The court approved the superseding 118-7-03 proposal; this docket's questions were never decided"
+  },
+  {
+   "field": "discretion_involved",
+   "confidence": "medium",
+   "note": "This docket's questions were not presented on the merits; the evaluative issues decided belong to 118-7-03"
+  },
+  {
+   "field": "appellants",
+   "confidence": "medium",
+   "note": "\"Noble, et al.\" names an unknown number of appellants"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T00:51:41-04:00",
+   "note": "Labeled from the September 2, 2005 post-decision order shared with 118-7-03 Vtec."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T04:55:10+00:00",
+   "note": "Reread after blind verification: facts of the superseding 118-7-03 proposal removed from this docket; start moved to the March 9, 2005 stipulation"
+  }
+ ]
+}

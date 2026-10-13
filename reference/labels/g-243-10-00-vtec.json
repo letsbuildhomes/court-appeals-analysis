@@ -1,0 +1,73 @@
+{
+ "case": "g-243-10-00-vtec",
+ "result": {
+  "schema": "appeal-result-2",
+  "case": "g-243-10-00-vtec",
+  "disposition": {
+   "value": "excluded",
+   "reason": "An appeal of the zoning board's refusal to reconsider a notice of violation about where a replacement mobile home was placed; a violation-notice appeal is not permission for new housing.",
+   "municipal_appeal": "yes",
+   "housing": "no",
+   "evidence": [
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "Appellant John Giroux appealed from a September 14, 2000 decision of the Zoning Board of Adjustment (ZBA) of the Town of Starksboro"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "denying his December 1999 request that the ZBA reconsider its March 1998 denial of his appeal from a Notice of Violation"
+    },
+    {
+     "doc": 1,
+     "page": 1,
+     "quote": "a mobile home placed on the lot to replace a preexisting camp had been placed so as to increase the degree of nonconformity of the preexisting camp with the setback requirements"
+    }
+   ]
+  },
+  "records": []
+ },
+ "labeled": {
+  "case": [
+   "disposition",
+   "municipal_appeal",
+   "housing"
+  ],
+  "records": {}
+ },
+ "judgments": [
+  {
+   "field": "housing",
+   "confidence": "high",
+   "note": "User ruling: notice-of-violation appeals are not new housing"
+  },
+  {
+   "field": "disposition",
+   "confidence": "high",
+   "note": "Excluded: housing no"
+  }
+ ],
+ "disputed": [],
+ "questions": [],
+ "history": [
+  {
+   "step": "labeled",
+   "by": "claude-opus labeler",
+   "at": "2026-10-13T04:51:36Z",
+   "note": "Labeled from the single October 15, 2001 summary judgment decision."
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T04:55:10+00:00",
+   "note": "Reread after blind verification: outcome other, permission unknown"
+  },
+  {
+   "step": "adjudicated",
+   "by": "claude-opus-5.5",
+   "at": "2026-10-13T05:46:02+00:00",
+   "note": "User ruling 1: violation-notice appeals are out of scope; record removed"
+  }
+ ]
+}

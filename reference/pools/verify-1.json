@@ -1,0 +1,443 @@
+{
+ "g-134-6-00-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant James Holmes appealed from a decision of the Planning Commission of the Town of Colchester",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "no",
+   "quote": "denying his application for site plan approval to convert a single family residence to a boarding house",
+   "doc": 1,
+   "page": 1,
+   "note": "Existing house rented out, no construction ('No changes to the structure have been made'); change of occupancy only."
+  },
+  "disposition": {
+   "value": "excluded",
+   "quote": "No changes to the structure have been made.",
+   "doc": 1,
+   "page": 1,
+   "note": "housing=no per guide table (rooms let / change of occupancy without construction); no record fields."
+  }
+ },
+ "g-243-10-00-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "Appellant John Giroux appealed from a September 14, 2000 decision of the Zoning Board of Adjustment (ZBA) of the Town of Starksboro",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "unknown",
+   "quote": "a mobile home placed on the lot to replace a preexisting camp",
+   "doc": 1,
+   "page": 1,
+   "note": "AMBIGUOUS. Replacement mobile home could be replacement housing (yes), but the appeal is only about reconsidering a setback notice of violation; the text never says the camp/mobile home is or is not a dwelling or that occupancy is at stake."
+  },
+  "disposition": {
+   "value": "uncertain",
+   "quote": "a mobile home placed on the lot to replace a preexisting camp",
+   "doc": 1,
+   "page": 1,
+   "note": "municipal=yes, housing=unknown. Could be excluded if reader treats it as a setback-only dispute with no housing permission at issue."
+  },
+  "review_standard": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Summary judgment on whether the ZBA properly declined to reconsider after a missed hearing; the court never says how it hears the matter."
+  },
+  "decision_outcome": {
+   "value": "other",
+   "quote": "denied his request to reconsider the merits of its 1998 decision upholding the Notice of Violation",
+   "doc": 1,
+   "page": 2,
+   "note": "ZBA decision of Sept 14, 2000 denied reconsideration of its NOV ruling; neither a permit approval nor denial."
+  },
+  "decision_date": {
+   "value": "2000-09-14",
+   "quote": "a September 14, 2000 decision of the Zoning Board of Adjustment",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "this appeal is hereby DISMISSED without prejudice",
+   "doc": 1,
+   "page": 2,
+   "note": "dismissed w/o prejudice; no further proceeding shown pending"
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "No permit applied for or issued for the mobile home; NOV upheld."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Not stated that the mobile home is a dwelling unit."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null
+  },
+  "appellants": {
+   "value": {
+    "count": 1,
+    "list": [
+     {
+      "name": "John R. Giroux",
+      "relationship": "owner/permittee cited by NOV",
+      "representation": "pro se"
+     }
+    ]
+   },
+   "quote": "Appellant appeared and represented himself",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_start": {
+   "value": {
+    "date": "2001-10-15",
+    "precision": "on_or_before"
+   },
+   "quote": "Done at Barre, Vermont, this 15th day of October, 2001.",
+   "doc": 1,
+   "page": 2,
+   "note": "Filing date not given; earliest dated event showing the appeal existed is this decision."
+  },
+  "duration_end": {
+   "value": {
+    "date": "2001-10-15",
+    "precision": "exact"
+   },
+   "quote": "this appeal is hereby DISMISSED without prejudice",
+   "doc": 1,
+   "page": 2,
+   "note": "Dismissal; no later review shown. Could be on_or_after if further review is considered possible."
+  }
+ },
+ "g-231-10-07-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "appealed from a decision of the Development Review Board (DRB) of the Town of Woodstock",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "Appellant is an architect who intends to design the single-family house at issue in the present proceedings.",
+   "doc": 1,
+   "page": 2,
+   "note": "New single-family house; appeal turns on completeness/conditional-use requirement rather than a housing-specific issue, but concerns permission for new housing."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "Appellant is an architect who intends to design the single-family house at issue in the present proceedings.",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "Because this appeal is de novo rather than on the record",
+   "doc": 1,
+   "page": 1
+  },
+  "decision_outcome": {
+   "value": "other",
+   "quote": "the DRB determined that the application was incomplete",
+   "doc": 1,
+   "page": 6,
+   "note": "DRB neither approved nor denied; found application incomplete and continued the hearing."
+  },
+  "decision_date": {
+   "value": "2007-09-25",
+   "quote": "At its September 25, 2007 meeting, the DRB determined that the application was",
+   "doc": 1,
+   "page": 6
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "a telephone conference has been scheduled",
+   "doc": 1,
+   "page": 14,
+   "note": "Conditional-use application still to be decided in this court or on remand."
+  },
+  "permission": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "No approval of the 2007 application observed (a 2005 administrative permit covers a different site)."
+  },
+  "proposed_units": {
+   "value": 1,
+   "quote": "intends to design the single-family house at issue",
+   "doc": 1,
+   "page": 2,
+   "note": "One single-family dwelling; count from 'single-family house'."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Single building site on existing parcel; no new lots stated."
+  },
+  "appellants": {
+   "value": {
+    "count": 1,
+    "list": [
+     {
+      "name": "Alfonse Sorrentino",
+      "relationship": "applicant/landowner",
+      "representation": "counsel (Kardashian, Stern)"
+     }
+    ]
+   },
+   "quote": "Appellant-Applicant is represented by Kirk C. Kardashian, Esq.",
+   "doc": 1,
+   "page": 1
+  },
+  "duration_start": {
+   "value": {
+    "date": "2009-04-06",
+    "precision": "on_or_before"
+   },
+   "quote": "Done at Berlin, Vermont, this 6th day of April, 2009.",
+   "doc": 1,
+   "page": 14,
+   "note": "Court filing date not stated; earliest dated event showing the appeal existed is this decision (DRB decision Sept 25, 2007 preceded it)."
+  },
+  "duration_end": {
+   "value": {
+    "date": "2009-04-06",
+    "precision": "on_or_after"
+   },
+   "quote": "Done at Berlin, Vermont, this 6th day of April, 2009.",
+   "doc": 1,
+   "page": 14
+  }
+ },
+ "g-24-2-03-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "the Court derived each of the contested conditions",
+   "doc": 1,
+   "page": 5,
+   "note": "Appeal of Village of Essex Junction Planning Commission site plan decision; court is hearing it de novo."
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "granted site plan approval of Appellee-Applicant=s proposal for a development of seven single-family houses",
+   "doc": 1,
+   "page": 2,
+   "note": "That is the proposal in 118-7-03, which superseded the 24-2-03 proposal; 24-2-03's own proposal is not described."
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "The project proposal as appealed in Docket No. 118-7-03 Vtec superseded that proposed in Docket No. 24-2-03 Vtec",
+   "doc": 1,
+   "page": 1
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "The proceeding before the Court was de novo on issues raised by Appellants.",
+   "doc": 1,
+   "page": 6
+  },
+  "decision_outcome": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "The Planning Commission decision appealed is never described."
+  },
+  "decision_date": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null
+  },
+  "litigation": {
+   "value": "ongoing",
+   "quote": "the parties may file a restated judgment order and annotated site plan sheets",
+   "doc": 1,
+   "page": 9,
+   "note": "Final judgment order not yet entered."
+  },
+  "permission": {
+   "value": "allowed_with_conditions",
+   "quote": "The decision on the merits granted site plan approval",
+   "doc": 1,
+   "page": 2,
+   "note": "Court's merits decision (Apr 4 2005) in the consolidated appeals, subject to conditions."
+  },
+  "proposed_units": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Seven single-family houses is the superseding proposal in 118-7-03; 24-2-03's own proposal is not stated. If the reader accepts the consolidated project, value would be 7."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Land condominium house sites, not stated as lots."
+  },
+  "appellants": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Only 'Appeal of Noble, et al' and 'Appellants are represented by Stephanie J. Kaplan'; number and relationship not stated."
+  },
+  "duration_start": {
+   "value": {
+    "date": "2005-04-04",
+    "precision": "on_or_before"
+   },
+   "quote": "Order on the merits of the application issued on April 4, 2005",
+   "doc": 1,
+   "page": 1,
+   "note": "Filing date not given and not inferred from docket number."
+  },
+  "duration_end": {
+   "value": {
+    "date": "2005-09-02",
+    "precision": "on_or_after"
+   },
+   "quote": "Dated at Berlin, Vermont, this 2nd day of September, 2005.",
+   "doc": 1,
+   "page": 9
+  }
+ },
+ "g-126-6-07-vtec": {
+  "municipal_appeal": {
+   "value": "yes",
+   "quote": "In Docket No. 126-6-07 Vtec, the same Appellants appealed from a decision of the DRB issued on June 4, 2007, granting final approval of the application.",
+   "doc": 1,
+   "page": 1
+  },
+  "housing": {
+   "value": "yes",
+   "quote": "propose an affordable housing development",
+   "doc": 2,
+   "page": 3
+  },
+  "disposition": {
+   "value": "in_scope",
+   "quote": "The application for a 36-unit PRD in multiple-unit buildings",
+   "doc": 1,
+   "page": 2
+  },
+  "review_standard": {
+   "value": "de_novo",
+   "quote": "whether on de novo review the project meets the requirements for preliminary approval",
+   "doc": 1,
+   "page": 2,
+   "note": "Also doc 2 p.31 'this de novo proceeding'; evidentiary hearing and site visit."
+  },
+  "decision_outcome": {
+   "value": "approved",
+   "quote": "granting final approval of the application",
+   "doc": 1,
+   "page": 1,
+   "note": "Conditions of DRB's June 4, 2007 decision not shown."
+  },
+  "decision_date": {
+   "value": "2007-06-04",
+   "quote": "a decision of the DRB issued on June 4, 2007",
+   "doc": 1,
+   "page": 1
+  },
+  "litigation": {
+   "value": "resolved",
+   "quote": "final planned development approval is DENIED",
+   "doc": 2,
+   "page": 34,
+   "note": "Court denied final approval; nothing shown pending, but appeal to the Supreme Court is not ruled out by the text."
+  },
+  "permission": {
+   "value": "denied",
+   "quote": "final planned development approval is DENIED",
+   "doc": 2,
+   "page": 34
+  },
+  "proposed_units": {
+   "value": 36,
+   "quote": "a count of thirty-six dwelling units in the proposal before the Court",
+   "doc": 2,
+   "page": 5,
+   "note": "Reconciles apparent 39 as 36 including 3 Grange-building units. Doc 2 page cited by location of text; p.28 also 'thirty-six proposed dwelling units'."
+  },
+  "proposed_lots": {
+   "value": "unknown",
+   "quote": null,
+   "doc": null,
+   "page": null,
+   "note": "Single 8.02-acre parcel; no new lots stated."
+  },
+  "appellants": {
+   "value": {
+    "count": 5,
+    "list": [
+     {
+      "name": "David Roy",
+      "relationship": "not stated (neighbor-type challengers)"
+     },
+     {
+      "name": "Richard Roy",
+      "relationship": "not stated (neighbor-type challengers)"
+     },
+     {
+      "name": "Michael Hirschbuhl",
+      "relationship": "not stated (neighbor-type challengers)"
+     },
+     {
+      "name": "Tod Minotti",
+      "relationship": "not stated (neighbor-type challengers)"
+     },
+     {
+      "name": "Mark Stanglin",
+      "relationship": "not stated (neighbor-type challengers)"
+     }
+    ]
+   },
+   "quote": "Appellants David Roy, Richard Roy, Michael Hirschbuhl, Tod Minotti, and Mark Stanglin (Appellants)",
+   "doc": 1,
+   "page": 1,
+   "note": "Represented by Kaveh S. Shahi; relationship to the property not stated in text read."
+  },
+  "duration_start": {
+   "value": {
+    "date": "2007-07-20",
+    "precision": "on_or_before"
+   },
+   "quote": "Appellants filed a revised Statement of Questions on July 20, 2007.",
+   "doc": 1,
+   "page": 2,
+   "note": "Original filing date not stated; DRB decision was June 4, 2007."
+  },
+  "duration_end": {
+   "value": {
+    "date": "2008-10-15",
+    "precision": "exact"
+   },
+   "quote": "Dated at Berlin, Vermont, this 15th day of October, 2008.",
+   "doc": 2,
+   "page": 35,
+   "note": "Trial-court conclusion; further appeal not shown. Use on_or_after if the chain may continue."
+  }
+ }
+}

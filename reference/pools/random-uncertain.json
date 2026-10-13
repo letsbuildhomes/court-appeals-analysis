@@ -1,0 +1,492 @@
+{
+  "category": "random-uncertain",
+  "needed": 5,
+  "seed": 20261013,
+  "available": 145,
+  "candidates": [
+    {
+      "case": "g-223-10-08-vtec",
+      "docket": "223-10-08 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 32138,
+      "era": "2005-2014",
+      "titles": [
+        "General Land Co. CU Application"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document establishes an appeal from a municipal panel denial of a conditional use application to subdivide an 83.5-acre parcel into five lots. The source does not state that the proposed lots are residential dwellings or residential building lots, so housing scope is unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-35-3-04-vtec",
+      "docket": "35-3-04 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 16251,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Cyril Z. Meadow Institute and Phyllis Meadow (Decision and Order on Motions for Summary Judgment)"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Municipal land-use appeals are established by the two dockets. The proposal is principally an educational facility; its residential element is a new building for faculty bedrooms, lounges, and a kitchen, with no express dwelling units or house lots, so housing status is not established.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "17-1-04 Vtec"
+      ]
+    },
+    {
+      "case": "g-183-11-97-vtec",
+      "docket": "183-11-97 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 17014,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Sparkman, et al"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document states an appeal from a decision on a Town of Manchester permit for the Walker II project, establishing a municipal land-use appeal. It does not describe the proposed use or establish that the project involves residential dwellings or dwelling-unit authorization, so housing remains unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-228-11-99-vtec",
+      "docket": "228-11-99 Vtec",
+      "documents": 4,
+      "composition": "shared",
+      "chars": 48781,
+      "era": "1996-2004",
+      "titles": [
+        "Appeals of Middlebury College & KW Middlebury LLC",
+        "Appeals of Middlebury College & KW Middlebury LLC",
+        "In re: Appeals of Middlebury College and KW Middlebury, LLC (Decision and Order on Motion for Reconsideration)",
+        "In re: Appeals of Middlebury College and KW Middlebury, LLC."
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "The matter is an appeal of municipal Planning Commission land-use decisions. The overall PUD description mentions residential housing on the retained 31-acre parcel, but the appeals and rulings focus on the commercial Phase I (hotel/conference center and office/apartment building) and on PUD master-plan/subdivision/design prerequisites; no specific new or replacement dwelling units or house lots are established as the permission at issue.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.12,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": [
+        "103-5-00 Vtec",
+        "124-7-99 Vtec"
+      ]
+    },
+    {
+      "case": "g-243-11-07-vtec",
+      "docket": "243-11-07 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 4156,
+      "era": "2005-2014",
+      "titles": [
+        "Perras & Sons Inc. 5 Lot Subdiv Prelim Plat"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "Municipal appeal is established: the case is an appeal from the Georgia Planning Commission concerning a preliminary plat for the Perras & Sons 5-lot subdivision. Housing is unclear because the source describes only a 5-lot subdivision/preliminary plat and does not state that the proposed lots or use are residential dwellings or residential building lots; subdivision alone does not establish residential use.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.47,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-170-7-06-vtec",
+      "docket": "170-7-06 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 4778,
+      "era": "2005-2014",
+      "titles": [
+        "Buck Horn Camp Change of Use"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The source confirms an appeal of a municipal ZBA land-use decision (denial of a setback variance), so municipal_appeal=yes. Housing is unclear: the proposal is a change of use of an existing nonconforming camp to a 'guest house' by adding running water and a septic connection. The text does not establish that a 'guest house' is a residential dwelling or that the variance authorizes a new, replacement, converted year-round, or additional dwelling unit, rather than merely a change in use/occupancy of the existing structure.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-71-6-15-vtec",
+      "docket": "71-6-15 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 10960,
+      "era": "2015-2026",
+      "titles": [
+        "APC Property LLC dba Burlington Bedrooms"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document is a decision on motions in APC's appeal of the Shelburne DRB's denial of a conditional use application and its related NOV appeal, so municipal land-use review is involved. The source never states the proposed use is residential dwellings or that the appeal concerns permission for new, replacement, or additional dwelling units; the only use-related clue is an operation/U-Haul contract, so housing scope is unestablished.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.35,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "116-9-15 Vtec"
+      ]
+    },
+    {
+      "case": "g-73-3-02-vtec",
+      "docket": "73-3-02 Vtec",
+      "documents": 2,
+      "composition": "shared",
+      "chars": 35454,
+      "era": "1996-2004",
+      "titles": [
+        "Appeal of Cowan",
+        "Town of Richmond v Cowan"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Review flagged the scope decision: The triage's municipal_appeal/housing classification is correct for Cowan's permit and floodplain appeals, but the candidate separately records Docket No. 102-5-02 Vtec. That docket is an independent Town enforcement action over the retaining wall, not an appeal of a municipal land-use decision; the record shows Cowan did not appeal the notice of violation. Under the scope contract, independent municipal enforcement should not be treated as a municipal housing appeal record.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": true,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": [
+        "102-5-02 Vtec"
+      ]
+    },
+    {
+      "case": "g-159-8-00-vtec",
+      "docket": "159-8-00 Vtec",
+      "documents": 1,
+      "composition": "shared",
+      "chars": 15032,
+      "era": "1996-2004",
+      "titles": [
+        "In re: Appeals of Christopher Denio"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "Document is an appeal of two ZBA decisions: denial of an as-built amendment to a camp permit and a notice of violation for the same Bennington property. The building is used as a secondary residence, but the zoning permission at issue is for a private recreational camp, so whether the appeal seeks authorization for a new or additional dwelling unit is unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": [
+        "250-11-00 Vtec"
+      ]
+    },
+    {
+      "case": "g-3-1-05-vtec",
+      "docket": "3-1-05 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 31195,
+      "era": "2005-2014",
+      "titles": [
+        "Appeal of Carroll, et al",
+        "Appeal of Carroll, et al"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal of a municipal DRB subdivision approval (five-lot subdivision) in Jericho, satisfying municipal_appeal. However, the source never states the lots are residential dwellings or house lots: it describes a 5-lot subdivision, acreage, frontage, and that Lots 1-3 lie in the 'rural residential district' and Lots 4-5 in the conservation zone. A subdivision and a zoning-district label do not by themselves establish residential use, so the residential nature of the proposed lots remains unestablished.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-186-9-05-vtec",
+      "docket": "186-9-05 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 12819,
+      "era": "2005-2014",
+      "titles": [
+        "Premire Homes of Vermont"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The source establishes a municipal Planning Commission subdivision approval and appeals/cross-appeal in Environmental Court. It does not state that the subdivision is residential or that the permission at stake authorizes new, replacement, or additional dwelling units or house lots; the developer name and subdivision plat approval alone do not establish residential use.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record",
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-32-3-18-vtec",
+      "docket": "32-3-18 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 5887,
+      "era": "2015-2026",
+      "titles": [
+        "Vermont Transco LLC Subdivision - Decision on Motion"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document confirms an appeal of a municipal DRB subdivision approval. The proposal is described only as a subdivision into 1-acre and 24-acre parcels; the source does not state that the lots or use are residential dwellings or residential building lots, so housing remains unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.41,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-218-11-09-vtec",
+      "docket": "218-11-09 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 35457,
+      "era": "2005-2014",
+      "titles": [
+        "Hitchcock 2-Lot Subdivision",
+        "Hitchcock 2-Lot Subdivision"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "The matter is an appeal of a municipal panel (Pittsford ZBA) decision on a subdivision approval, so municipal_appeal=yes. The proposal is described only as creating 'two one-acre building lots' / a 2-lot subdivision; the source never states the proposed lots/use are residential dwellings, and the guidance says a subdivision or building lot does not by itself establish residential use. Residential character is therefore unestablished, leaving housing=unclear.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-166-10-10-vtec",
+      "docket": "166-10-10 Vtec",
+      "documents": 6,
+      "composition": "uniform",
+      "chars": 39452,
+      "era": "2005-2014",
+      "titles": [
+        "Lawrence Site Plan Approval",
+        "Lawrence Site Plan Approval",
+        "Lawrence Site Plan Approval",
+        "Lawrence Site Plan Approval",
+        "Lawrence Site Plan Approval",
+        "Lawrence Site Plan Approval"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The documents identify an appeal from the Town of Brattleboro Development Review Board's site plan approval and later motions in that same appeal, so municipal appeal is established. The proposed use is not described in any supplied passage as residential dwellings or residential lots; the record mentions only a site plan approval, fire/safety conditions, and procedural rulings, so housing scope remains unestablished.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [
+        "on the record"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-157-10-11-vtec",
+      "docket": "157-10-11 Vtec",
+      "documents": 2,
+      "composition": "uniform",
+      "chars": 21548,
+      "era": "2005-2014",
+      "titles": [
+        "Foreger Revocable Trust 4-Lot Subdivison",
+        "Foregger Rev trust 4-Lot SD"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "Municipal appeal is established: neighbors Amestoy appealed the Waterbury DRB's approval of a zoning permit for the Foregger four-lot subdivision. Housing remains unclear because the source describes a subdivision and a proposed-use listing of single-family residential or agricultural uses, but the court states no particular use is being approved at this time; residential dwelling units or building lots are not definitively established.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.18,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-25-env-00107",
+      "docket": "25-ENV-00107",
+      "documents": 1,
+      "composition": "single",
+      "chars": 15108,
+      "era": "2015-2026",
+      "titles": [
+        "Corey Acres Rd. Variance & Change of Use Applications - Decision on Motion"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "Document establishes an appeal of a municipal DRB denial of variance/change-of-use applications for two Corey Acres Road addresses, but it does not identify proposed residential dwelling units or permission for new, replacement, or additional housing. The questions concern a rope gate, continued use under a certificate of occupancy, pond work, and zoning administrator approval.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [
+        "de novo"
+      ],
+      "documents_shared": []
+    },
+    {
+      "case": "g-25-env-00072",
+      "docket": "25-ENV-00072",
+      "documents": 1,
+      "composition": "single",
+      "chars": 14331,
+      "era": "2015-2026",
+      "titles": [
+        "Alta Assets, LLC Zoning Permit 2023-06-ZP - Decision on Motion"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document establishes an appeal from a municipal zoning administrator's letter voiding a zoning permit issued by the Town of Warren, and mentions related DRB and zoning permit matters. It does not establish that the proposed use is residential dwellings or residential building lots, so housing scope remains unestablished.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.29,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-49-4-14-vtec",
+      "docket": "49-4-14 Vtec",
+      "documents": 3,
+      "composition": "uniform",
+      "chars": 19376,
+      "era": "2005-2014",
+      "titles": [
+        "Madden v Town of New Haven",
+        "Madden v Town of New Haven",
+        "Madden v Town of New Haven"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The matter is an appeal of a municipal zoning map/bylaw amendment procedure. The source does not state the proposed use of parcel 788.1 or establish that the amendment concerns permission for residential dwellings or house lots.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.24,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-33-2-19-vtec",
+      "docket": "33-2-19 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 2339,
+      "era": "2015-2026",
+      "titles": [
+        "Ninety-Three South Main, LLC CU - Decision on Motion"
+      ],
+      "september": "uncertain",
+      "september_source": "same case",
+      "september_reason": "The document confirms a municipal ZBA conditional use appeal in Hartford, but it does not describe the proposed use. There is no statement that the proposal is for residential dwellings or for new, replacement, or additional dwelling units. The name Twin Pines Housing Trust and the docket title alone do not establish that the permitted use at issue is residential.",
+      "september_municipal": "yes",
+      "september_housing": "unknown",
+      "september_records": 1,
+      "unknown_share": 0.47,
+      "enforcement": false,
+      "motions_only": true,
+      "review_mentions": [],
+      "documents_shared": []
+    },
+    {
+      "case": "g-128-6-08-vtec",
+      "docket": "128-6-08 Vtec",
+      "documents": 1,
+      "composition": "single",
+      "chars": 26408,
+      "era": "2005-2014",
+      "titles": [
+        "Chandler Home Industry/Home Occupation Application"
+      ],
+      "september": "uncertain",
+      "september_source": "old group",
+      "september_reason": "Review flagged the scope decision: The group includes qualifying housing dockets, but the candidate also includes 128-6-08 Vtec, which concerns permission to operate a home industry/occupation rather than new, replacement, or additionally authorized dwelling permission; the existing dwelling is not the permission at stake. Human review is needed to confirm whether that docket belongs in the housing extraction.",
+      "september_municipal": "yes",
+      "september_housing": "yes",
+      "september_records": 0,
+      "unknown_share": null,
+      "enforcement": false,
+      "motions_only": false,
+      "review_mentions": [],
+      "documents_shared": []
+    }
+  ]
+}
