@@ -124,15 +124,15 @@ function stepsTable(d) {
   }
   table.append(body);
   // Hovering a step highlights it and every step it sits inside; kept across live refreshes.
-  const lineage = path => {
-    for (const row of body.rows) {
+  const lineage = (rows, path) => {
+    for (const row of rows.rows) {
       const p = row.dataset.path, mine = path != null && (p === path || p === '' || path.startsWith(p + '/'));
       row.classList.toggle('lineage', mine && p !== path); row.classList.toggle('lineage-self', mine && p === path);
     }
   };
-  body.onmouseover = e => { const row = e.target.closest('tr[data-path]'); if (row) lineage(state.stepHover = row.dataset.path); };
-  body.onmouseleave = () => lineage(state.stepHover = null);
-  if (state.stepHover != null) lineage(state.stepHover);
+  body.onmouseover = e => { const row = e.target.closest('tr[data-path]'); if (row) lineage(e.currentTarget, state.stepHover = row.dataset.path); };
+  body.onmouseleave = e => lineage(e.currentTarget, state.stepHover = null);
+  if (state.stepHover != null) lineage(body, state.stepHover);
   return el('div', 'table-wrap flat', table);
 }
 
@@ -192,13 +192,21 @@ async function renderRun(seq, r) {
     blocks.push(section('Spending over time', 'Charges as calls return, cumulative. Each call in flight reserves its worst-case cost against the cap until it returns; the real charge is usually much less.' + (near ? ' The dashed line is the cap.' : ' The chart is scaled to the charges; the cap is far above.'),
       spendBar(sp.charged_usd, sp.outstanding_usd, rec.options.limit_usd, 'send'), sparkline(sp.timeline, rec.options.limit_usd)));
   }
-  if (flying.length) blocks.push(section(`In flight · ${fmt(flying.length)} calls`, 'Model calls sent and not yet returned, oldest first. Answers are not streamed, so time out is the only progress there is.', inFlightTable(flying)));
   blocks.push(section('Steps', 'The pipeline\'s steps from where this run starts. Items and progress are this execution\'s; calls, spending and tokens cover every execution of the run. A step touches an item when it calls a model or notes something for it; a batching step touches several at once.', stepsTable(d)));
+  if (flying.length) blocks.push(section(`In flight · ${fmt(flying.length)} calls`, 'Model calls sent and not yet returned, oldest first. Answers are not streamed, so time out is the only progress there is.', inFlightTable(flying)));
   if (Object.keys(d.datasets).length) {
     blocks.push(section('Saved outputs', live ? 'From the last finished execution; this one saves its own when it finishes.' : null, el('div', 'status-chips', ...Object.entries(d.datasets).map(([path, x]) => link(`${path || '(root)'} · ${x.kind} · ${x.id}`, '#/data/' + x.id, 'pill status')))));
   }
   const items = section('Items', 'Where each case is, or how it ended. Select one for its trace.');
   blocks.push(items);
+  // Stable IDs let a live refresh match each section with itself as others come and go.
+  const ids = {'Now': 'run-now', 'Summary': 'run-now', 'Spending over time': 'run-spending', 'Steps': 'run-steps',
+    'Saved outputs': 'run-outputs', 'Items': 'run-items'};
+  for (const block of blocks) {
+    const title = block.querySelector?.('.section-heading h2')?.textContent || '';
+    if (block !== head) block.id = title.startsWith('In flight') ? 'run-in-flight' : ids[title] || '';
+  }
+  head.id = 'run-head';
   // Load the items before swapping the page in, so a live refresh keeps the page's height and the reader's place.
   if (!await renderItems(seq, r, items)) return;
   page(...blocks);
@@ -218,7 +226,7 @@ async function renderItems(seq, r, target) {
     segmented.append(choice);
   }
   const search = node('input'); search.type = 'search'; search.placeholder = 'Find an item…'; search.value = p.q || '';
-  let timer; search.oninput = () => { clearTimeout(timer); timer = setTimeout(() => go({q: search.value}), 300); };
+  let timer; search.oninput = e => { const q = e.target.value; clearTimeout(timer); timer = setTimeout(() => go({q}), 300); };
   toolbar.append(segmented, search);
   const table = el('table', 'cases run-items', el('thead', null, el('tr', null, ...['Item', 'State', 'Last step', 'Detail'].map(t => node('th', t)))));
   const body = node('tbody');

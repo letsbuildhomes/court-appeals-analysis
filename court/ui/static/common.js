@@ -31,7 +31,19 @@ async function api(path, params = {}) {
   if (!response.ok || value.error) throw Error(value.error || 'Unable to load this view.');
   return value;
 }
-function page(...children) { $('content').replaceChildren(...children.flat().filter(Boolean)); }
+// A live refresh patches the page in place (idiomorph), so the reader keeps their place, hover and
+// selection; the browser keeps what they are reading still when something above it changes height.
+// Elements it keeps take the new build's handlers, so handlers read their event, not the build's elements.
+const HANDLERS = ['onclick', 'oninput', 'onchange', 'onmouseover', 'onmouseleave', 'onkeydown'];
+function keepHandlers(old, built) {
+  if (old.nodeType === Node.ELEMENT_NODE) for (const name of HANDLERS) if (old[name] !== built[name]) old[name] = built[name];
+  return true;
+}
+function page(...children) {
+  const items = children.flat().filter(Boolean);
+  if (state.refreshing) Idiomorph.morph($('content'), items, {morphStyle: 'innerHTML', callbacks: {beforeNodeMorphed: keepHandlers}});
+  else $('content').replaceChildren(...items);
+}
 function crumbs(...items) {
   const nav = $('crumbs'); nav.replaceChildren();
   items.filter(Boolean).forEach((item, i) => { if (i) nav.append(node('span', '/', 'crumb-sep')); nav.append(item); });
@@ -43,7 +55,7 @@ function section(title, sub, ...children) {
 }
 function pill(text, cls = '') { return node('span', text, 'pill ' + cls); }
 
-const state = {seq: 0, overviews: {}, source: 0, returnFocus: null, last: null};
+const state = {seq: 0, overviews: {}, source: 0, returnFocus: null, last: null, refreshing: false};
 
 // ---------------------------------------------------------------- source drawer
 function findQuote(text, quote) {

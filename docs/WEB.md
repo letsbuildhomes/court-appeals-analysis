@@ -141,15 +141,17 @@ it.
 
 A run's page shows, while it runs:
 
-- **Now:** elapsed time, items, new spending against the cap (and money
-  reserved by calls still in flight), the value of saved calls reused,
-  calls sent and failed, and tokens in (cached) and out.
-- **Spending over time:** each delivered call's charge, cumulative, under the
-  cap's line.
+- **Now:** elapsed time, items, charges against the cap (and money reserved
+  by calls still in flight), the value of saved calls reused, calls sent and
+  failed, and tokens in (cached) and out.
+- **Spending over time:** each delivered call's charge, cumulative, scaled to
+  the charges; the cap's line appears once spending nears it.
 - **Steps:** the pipeline's steps from where the run starts: waiting, running
   or done; items in and out, failures by kind, how many items the running step
   has touched with an estimate of the time left; and each step's calls,
   spending and tokens.
+- **In flight:** each model call sent and not yet returned: its step, cases,
+  time out and reservation.
 - **Items:** where each case is, or how it ended; select one for its trace:
   every call (reused or new, with batch partners), warning and rejection.
 
@@ -159,6 +161,12 @@ and charge to `ledger.jsonl` as it happens; the page reads only these. A run
 whose process ended while running shows as interrupted; running the same name
 again continues it. Experiment rounds are ordinary runs labeled with their
 experiment, round and side.
+
+Live pages refresh every two seconds by patching the page in place with
+[idiomorph](https://github.com/bigskysoftware/idiomorph) 0.8.0, saved
+unmodified as `court/ui/static/idiomorph.js` with its license (0BSD) beside
+it. Patching keeps the reader's place, hover and open trace; the browser holds
+what they're reading still when a section above it changes height.
 
 ## Stage viewers
 

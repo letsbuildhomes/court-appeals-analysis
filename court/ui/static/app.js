@@ -57,7 +57,7 @@ async function render(liveRefresh = false) {
   if (!liveRefresh && $('source').hidden === false) closeSource();
   if (!liveRefresh) state.live = null;
   navigation(r.section);
-  const scroll = window.scrollY;
+  state.refreshing = liveRefresh;
   try {
     if (r.section === 'home') await renderHome(seq);
     else if (r.section === 'runs') await (r.name ? renderRun(seq, r) : renderRuns(seq));
@@ -66,8 +66,7 @@ async function render(liveRefresh = false) {
     else if (r.section === 'pipelines') await (r.id ? renderPipeline(seq, r) : renderPipelines(seq));
     else page(el('div', 'empty', 'No such page. ', link('Go to the overview', '#/')));
     document.title = (NAV.find(([k]) => k === r.section)?.[1] || 'Court review') + ' · Court review';
-    if (liveRefresh) window.scrollTo(0, scroll);
-    else if (!(state.last && state.last.section === r.section && state.last.name === r.name && state.last.id === r.id)) window.scrollTo(0, 0);
+    if (!liveRefresh && !(state.last && state.last.section === r.section && state.last.name === r.name && state.last.id === r.id)) window.scrollTo(0, 0);
   } catch (err) { if (seq === state.seq && !liveRefresh) failure(err); }
   state.last = r;
 }
