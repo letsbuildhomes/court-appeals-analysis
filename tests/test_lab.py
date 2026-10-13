@@ -99,6 +99,38 @@ class CompareTests(unittest.TestCase):
         self.assertEqual(settled['cases'][0]['processing']['flow'], 'recovered')
         self.assertEqual(compare.unfinished(settled), [])
 
+    def test_records_are_matched_by_docket_across_cases(self):
+        # The baseline held docket B twice (in x and y); the candidate split x, moving B to its own case.
+        baseline = {'x': results.result('x', disposition(), [record('A'), record('B')]),
+                    'y': results.result('y', disposition(), [record('B')])}
+        candidate = {'x': results.result('x', disposition(), [record('A')]),
+                     'g-b': results.result('g-b', disposition(), [record('B', days=10)])}
+        comparison = compare.compare(baseline, candidate, inputs={'x': 'changed', 'y': 'removed', 'g-b': 'added'})
+        summary = comparison['summary']
+        self.assertEqual((summary['baseline']['dockets'], summary['baseline']['duplicate_records']), (2, 1))
+        self.assertEqual((summary['candidate']['dockets'], summary['candidate']['duplicate_records']), (2, 0))
+        self.assertEqual(summary['records']['lost'], 0)
+        self.assertEqual(summary['records']['duplicates_removed'], 1)
+        cases = {c['case_id']: c for c in comparison['cases']}
+        self.assertEqual(cases['x']['records']['moved_out'], ['B'])
+        self.assertEqual(cases['g-b']['records']['moved_in'], ['B'])
+        self.assertEqual(cases['g-b']['records']['matched'], 1)
+        # Completeness counts the records both sides have, never a missing side.
+        self.assertEqual(summary['baseline']['matched_slots'], summary['candidate']['matched_slots'])
+
+    def test_failures_dont_raise_completeness_and_chance_isnt_a_regression(self):
+        baseline = {'a': results.result('a', disposition(), [record()]),
+                    'b': results.result('b', disposition(), [record('B', outcome='denied')])}
+        candidate = {'a': Failure('delivery', 'output limit'),
+                     'b': results.result('b', disposition(), [record('B', outcome='other')])}
+        comparison = compare.compare(baseline, candidate, inputs={'a': 'same_documents', 'b': 'same_documents'})
+        summary = comparison['summary']
+        self.assertEqual(summary['records']['lost_by_reason'], {'failed': 1})
+        self.assertEqual(summary['baseline']['matched_slots'], summary['candidate']['matched_slots'])
+        self.assertIn('answer changes are chance', ' '.join(comparison['cases'][1]['chips']))
+        # A case that broke still counts; a finished one with the same documents changed only by chance.
+        self.assertEqual(compare.regressions(comparison), ['a'])
+
     def test_only_listed_facts_are_scored(self):
         truth = results.result('c', disposition(), [record(outcome='approved')])
         baseline = {'c': results.result('c', disposition(), [record(outcome='denied')])}

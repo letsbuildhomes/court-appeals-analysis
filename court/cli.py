@@ -136,7 +136,8 @@ def lab(args):
         show(lab.plan(args.name, args.round))
     elif args.action == 'run':
         result = lab.run(args.name, args.round, mode=mode(args), limit=args.max_spend or 0.0,
-                         resamples=args.resamples, resend_failed=args.resend_failed, workers=args.workers)
+                         resamples=args.resamples, resend_failed=args.resend_failed,
+                         resend_max_tokens=args.resend_max_tokens, workers=args.workers)
         show({k: result[k] for k in ('round', 'status', 'regressions', 'accuracy', 'cost')}
              | {'headline': result['summary']['headline'], 'verdicts': result['summary']['verdicts']})
     elif args.action == 'adopt':
@@ -220,11 +221,12 @@ def import_september(args):
 def sending(parser):
     parser.add_argument('--send', action='store_true', help='Send new model calls (paid); needs --max-spend')
     parser.add_argument('--dry', action='store_true', help='Estimate new calls without sending')
-    parser.add_argument('--max-spend', type=float, help='Most this run may newly spend, in USD')
-    parser.add_argument('--resend-failed', action='store_true', help='Resend failed deliveries once per run')
-    parser.add_argument('--resend-max-tokens', type=int)
+    parser.add_argument('--max-spend', type=float,
+                        help='Most this command may spend on new calls, in USD; earlier executions of the run don\'t count')
+    parser.add_argument('--resend-failed', action='store_true', help='Resend each failed delivery once more')
+    parser.add_argument('--resend-max-tokens', type=int, help='With --resend-failed, the output limit for resent calls')
     parser.add_argument('--resamples', type=int, default=0, help='Further samples to try when an answer is rejected')
-    parser.add_argument('--workers', type=int, default=4)
+    parser.add_argument('--workers', type=int, default=16, help='Calls in flight at once, per step')
 
 
 def keyed(parser):

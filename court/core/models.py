@@ -8,13 +8,15 @@ their worst-case cost. Above them, one policy governs every call:
   key (``data/calls/objects``) and an identical call is answered from the store,
   or from a read-only index of an earlier run's calls, for free.
 - **Spending cap.** Before a new call is sent, its worst-case cost is
-  reserved against the run's cap; a call that could exceed it is refused
-  without sending. A run's spending is read from its own ledger, so each run
-  is charged exactly for the attempts it made.
+  reserved against the cap; a call that could exceed it is refused without
+  sending. The cap limits one execution: continuing a run gets a fresh cap,
+  and what earlier executions spent doesn't count against it. A run's
+  spending is read from its own ledger, so each run is charged exactly for
+  the attempts it made.
 - **No automatic resending.** A failed or uncertain delivery is never resent
-  unless the run allows it (``resend_failed``), and then once per key per run,
-  counted in the ledger so a resumed run doesn't resend again. Earlier attempts
-  are archived, never overwritten.
+  unless the execution allows it (``resend_failed``), and then once per key,
+  counted in the ledger. Continuing the run with the option again resends once
+  more. Earlier attempts are archived, never overwritten.
 - **One sender per call.** A per-key lock is held while sending; a call
   another process is sending is reported as in flight, not sent twice.
 - **Rejected answers.** A delivered answer a step rejects is final for that
@@ -58,7 +60,7 @@ class NotSent(Unavailable):
 
 
 class BudgetRefused(Unavailable):
-    """Refused before sending because it could exceed the run's spending cap."""
+    """Refused before sending because it could exceed the execution's spending cap."""
     kind = 'budget'
 
 
@@ -416,6 +418,8 @@ class Models:
         self.catalog_path, self.transport = catalog_path, transport
         self.entries = [json.loads(line) for line in self.ledger_path.read_text().splitlines() if line.strip()] \
             if self.ledger_path and self.ledger_path.exists() else []
+        # Where this execution's entries begin: the spending cap and resends count from here.
+        self.started = len(self.entries)
         self._providers, self._lock = {}, threading.RLock()
 
     # Providers -------------------------------------------------------------
@@ -438,10 +442,13 @@ class Models:
                 with self.ledger_path.open('a') as f:
                     f.write(json.dumps(entry, ensure_ascii=False)+'\n')
 
-    def spent(self):
-        """This run's new spending: final charges, or reservations still outstanding."""
+    def spent(self, execution=False):
+        """This run's new spending: final charges, or reservations still outstanding.
+
+        With ``execution``, only this execution's: what the spending cap limits.
+        """
         reserved, charged = {}, {}
-        for e in self.entries:
+        for e in self.entries[self.started if execution else 0:]:
             if e['event'] == 'sent':
                 reserved[e['attempt']] = e['usd']
             elif e['event'] == 'charged':
@@ -457,11 +464,13 @@ class Models:
             events[e['event']] = events.get(e['event'], 0)+1
         # Each distinct call reused counts once, however many times the run was continued.
         reused = sum({e['key']: e.get('usd') or 0 for e in self.entries if e['event'] == 'reused'}.values())
-        return {'spent_usd': round(self.spent(), 6), 'reused_value_usd': round(reused, 6),
+        return {'spent_usd': round(self.spent(), 6), 'execution_spent_usd': round(self.spent(execution=True), 6),
+                'reused_value_usd': round(reused, 6),
                 'would_spend_usd': round(self.would_spend(), 6), 'events': events}
 
     def _resent(self, key):
-        return any(e['event'] == 'sent' and e['key'] == key and e.get('resend') for e in self.entries)
+        """Whether this execution already resent the call; each execution may resend a failed call once."""
+        return any(e['event'] == 'sent' and e['key'] == key and e.get('resend') for e in self.entries[self.started:])
 
     # Calls -----------------------------------------------------------------
     def ask(self, provider, request, accept, on_attempt=None, step=None, items=None):
@@ -535,8 +544,10 @@ class Models:
                     raise NotSent('A new call; a dry run does not send it')
                 if self.mode != 'send':
                     raise NotSent('Not in the call cache; this run does not send new calls')
-                if self.spent()+bound > self.limit:
-                    raise BudgetRefused('The run\'s spending cap would be exceeded; raise it to continue')
+                spent = self.spent(execution=True)
+                if spent+bound > self.limit:
+                    raise BudgetRefused(f'This execution\'s spending cap of ${self.limit:.2f} would be exceeded '
+                                        f'(${spent:.4f} spent, this call reserves ${bound:.4f}); raise it to continue')
                 if resending:
                     self._archive(key)
                 attempt = uuid.uuid4().hex

@@ -8,6 +8,12 @@ and two different answers need judgment. Reference labels, when present,
 verify correctness; without them every direction is an unverified signal, and
 a more specific answer can still be wrong.
 
+Records are matched by docket across every compared case, not within one
+case: when grouping changes, a docket's record can move to another case, and
+that is a move, not a loss and a gain. A docket with records in several
+cases on one side is a duplicate. Answer completeness is measured on the
+records both sides have, so a failed or missing case can't raise it.
+
 The fact catalog comes from the results contract. A fact a
 result's schema version does not include is *newly measured* when the other
 side has it, rather than more specific. Other top-level scalar fields become
@@ -146,16 +152,26 @@ def _plural(n, word):
 
 
 INPUT_NOTES = {'removed': 'Not in the candidate\'s input: merged into another case or removed before this step',
-               'added': 'New in the candidate\'s input', 'changed': 'Input changed before this step'}
+               'added': 'New in the candidate\'s input', 'changed': 'Input changed before this step',
+               'same_documents': 'Same documents; only details such as docket labels changed, so answer changes are '
+                                 'chance'}
+# Inputs whose change can't explain a different answer: the case was rerun, but only chance moved it.
+CHANCE = ('same', 'same_documents')
 
 
-def compare_case(case_id, baseline, candidate, reference=None, settled=False, input_change=None):
+def compare_case(case_id, baseline, candidate, reference=None, settled=False, input_change=None, elsewhere=None):
     """Fact-level comparison of one case's two results, with a verdict.
 
     ``baseline`` and ``candidate`` are results, failures or None (absent); ``settled`` marks the
     baseline as a finished run (see ``state``). ``input_change`` is how the case's input to the
-    compared step differs (changed, added, removed), ``same`` when the change being tested
-    reached other cases' inputs but not this one's, or None when no input changed.
+    compared step differs (changed, added, removed, or same_documents when only details such as
+    docket labels changed), ``same`` when the change being tested reached other cases' inputs but
+    not this one's, or None when no input changed.
+
+    ``elsewhere`` maps each side to ``{docket identity: (case ID, record)}`` over every compared
+    case. With it, a candidate record whose docket this case's baseline lacks is compared with the
+    baseline's record in another case (moved in), and a baseline record whose docket went to
+    another candidate case moved out rather than being lost.
     """
     status = {'baseline': state(baseline, settled), 'candidate': state(candidate)}
     failures = {side: value.to_json() for side, value in (('baseline', baseline), ('candidate', candidate))
@@ -198,6 +214,17 @@ def compare_case(case_id, baseline, candidate, reference=None, settled=False, in
     if baseline is not None and candidate is not None:
         for spec in CASE_FACTS:
             add(None, None, spec, b, c)
+    elsewhere = elsewhere or {'baseline': {}, 'candidate': {}}
+    moved_in, moved_out = [], []
+    for key in list(records['candidate']):
+        found = elsewhere['baseline'].get(key) if key not in records['baseline'] else None
+        if found and found[0] != case_id:
+            records['baseline'][key] = found[1]
+            moved_in.append(records['candidate'][key].get('docket'))
+    for key in list(records['baseline']):
+        found = elsewhere['candidate'].get(key) if key not in records['candidate'] else None
+        if found and found[0] != case_id:
+            moved_out.append(records['baseline'].pop(key).get('docket'))
     matched = [k for k in records['baseline'] if k in records['candidate']]
     gained = [records['candidate'][k].get('docket') for k in records['candidate'] if k not in records['baseline']]
     lost = [records['baseline'][k].get('docket') for k in records['baseline'] if k not in records['candidate']]
@@ -255,6 +282,10 @@ def compare_case(case_id, baseline, candidate, reference=None, settled=False, in
         judgment.append(_plural(different, 'different answer'))
     verdict = ('mixed' if better and worse else 'worsened' if worse else 'improved' if better
                else 'changed' if judgment else 'unchanged')
+    if moved_in:
+        notes.append('Records moved in from another case: '+', '.join(moved_in))
+    if moved_out:
+        notes.append('Records moved to another case: '+', '.join(moved_out))
     if input_change in INPUT_NOTES:
         notes.append(INPUT_NOTES[input_change])
     elif input_change == 'same' and verdict != 'unchanged':
@@ -269,7 +300,9 @@ def compare_case(case_id, baseline, candidate, reference=None, settled=False, in
             'verified': bool(scored['corrected'] or scored['regressed']),
             'processing': {'flow': flow, **status},
             'records': {'baseline': len(records['baseline']), 'candidate': len(records['candidate']),
-                        'gained': gained, 'lost': lost, 'matched': len(matched), 'wording_only': wording_only},
+                        'gained': gained, 'lost': lost, 'matched': len(matched), 'wording_only': wording_only,
+                        'moved_in': moved_in, 'moved_out': moved_out},
+            'pairs': [(records['baseline'][k], records['candidate'][k]) for k in matched],
             'chips': chips,
             'signals': {'better': better, 'worse': worse, 'judgment': judgment, 'notes': notes},
             'highlights': [{k: f[k] for k in ('label', 'record', 'baseline', 'candidate', 'change', 'verified')}
@@ -278,14 +311,20 @@ def compare_case(case_id, baseline, candidate, reference=None, settled=False, in
 
 
 def record_metrics(values):
-    """Data-quality measures for one side's results (results or failures)."""
+    """Data-quality measures for one side's results (results or failures).
+
+    ``dockets`` counts distinct dockets with a record; ``duplicate_records`` the records beyond
+    one per docket, as when one docket's record sits in two cases.
+    """
     results = [v for v in values if v is not None and not is_failure(v)]
     records = [r for c in results for r in c.get('records', []) or []]
     slots = [spec['value'](r) for r in records for spec in RECORD_FACTS]
+    dockets = Counter(identity(r.get('docket')) for r in records if identity(r.get('docket')))
     return {'cases': len(values), 'processed': len(results),
             'failed': sum(is_failure(v) for v in values if v is not None),
             'uncertain': sum(_get(c, 'disposition', 'value') == 'uncertain' for c in results),
-            'records': len(records),
+            'records': len(records), 'dockets': len(dockets),
+            'duplicate_records': sum(n - 1 for n in dockets.values()),
             'duration_known': sum(_get(r, 'duration', 'kind') in ('exact', 'at_least') for r in records),
             'duration_exact': sum(_get(r, 'duration', 'kind') == 'exact' for r in records),
             'facts_known': sum(known(v) for v in slots), 'fact_slots': len(slots)}
@@ -337,8 +376,10 @@ def compare(baseline, candidate, reference=None, keys=None, settled=False, input
     """
     reference, inputs = reference or {}, inputs or {}
     ids = sorted(keys if keys is not None else set(baseline) | set(candidate))
+    elsewhere = {side: located([values.get(i) for i in ids], ids) for side, values in
+                 (('baseline', baseline), ('candidate', candidate))}
     cases = [compare_case(i, baseline.get(i), candidate.get(i), reference.get(i), settled,
-                          inputs.get(i, 'same') if inputs else None) for i in ids]
+                          inputs.get(i, 'same') if inputs else None, elsewhere) for i in ids]
     facts = [f for c in cases for f in c['facts']]
     compared = [f for f in facts if f['baseline'] is not None or f['candidate'] is not None]
     fact_map = []
@@ -351,15 +392,31 @@ def compare(baseline, candidate, reference=None, keys=None, settled=False, input
                          'corrected': sum(f['verified'] == 'corrected' for f in rows),
                          'regressed': sum(f['verified'] == 'regressed' for f in rows)})
     scored = [f for f in facts if f['verified']]
+    sides = {'baseline': record_metrics([baseline.get(i) for i in ids]),
+             'candidate': record_metrics([candidate.get(i) for i in ids])}
+    # Completeness on the records both sides have, so failures and missing cases can't move it.
+    pairs = [pair for c in cases for pair in c['pairs']]
+    for index, side in enumerate(('baseline', 'candidate')):
+        sides[side].update(matched_known=sum(known(spec['value'](pair[index])) for pair in pairs for spec in RECORD_FACTS),
+                           matched_slots=len(pairs)*len(RECORD_FACTS))
+    # A docket lost from two cases (a duplicate) is one lost docket, with the first case's reason.
+    lost = {}
+    for c in cases:
+        for docket in c['records']['lost']:
+            lost.setdefault(identity(docket), loss_reason(c))
     summary = {
         'cases': len(cases), 'verdicts': dict(Counter(c['verdict'] for c in cases)),
         'flows': dict(Counter(c['processing']['flow'] for c in cases)),
         'inputs': dict(Counter(c['input'] for c in cases if c['input'])),
-        'baseline': record_metrics([baseline.get(i) for i in ids]),
-        'candidate': record_metrics([candidate.get(i) for i in ids]),
+        **sides,
         'stability': {'unchanged': sum(f['change'] == 'unchanged' for f in compared), 'compared': len(compared)},
         'records': {'gained': sum(len(c['records']['gained']) for c in cases),
-                    'lost': sum(len(c['records']['lost']) for c in cases)},
+                    'lost': len(lost),
+                    'moved': sum(len(c['records']['moved_in']) for c in cases),
+                    'matched': len(pairs),
+                    'duplicates_removed': max(0, sides['baseline']['duplicate_records']
+                                              - sides['candidate']['duplicate_records']),
+                    'lost_by_reason': dict(Counter(lost.values()))},
         'fact_map': fact_map, 'headline': headline(cases)}
     accuracy = None
     if scored:
@@ -371,11 +428,40 @@ def compare(baseline, candidate, reference=None, keys=None, settled=False, input
     return {'cases': cases, 'summary': summary, 'questions': QUESTIONS, 'accuracy': accuracy}
 
 
+def located(values, ids):
+    """``{docket identity: (case ID, record)}`` over results, the first record found for each docket."""
+    found = {}
+    for case_id, value in zip(ids, values):
+        if value is None or is_failure(value):
+            continue
+        for record in value.get('records', []) or []:
+            key = identity(record.get('docket'))
+            if key:
+                found.setdefault(key, (case_id, record))
+    return found
+
+
+def loss_reason(case):
+    """Why a case's baseline records have no candidate counterpart."""
+    status, flow = case['processing']['candidate'], case['processing']['flow']
+    if flow in ('broke', 'still_failing') or status == 'failed':
+        return 'failed'
+    if status is None:
+        return 'case_absent'
+    if status == 'not_run':
+        return 'not_run'
+    return 'disposition_or_extraction'
+
+
 def regressions(comparison):
-    """Cases that got worse: broke, worsened, mixed, or a verified regression."""
+    """Cases that got worse: broke, worsened, mixed, or a verified regression.
+
+    A case whose input the change didn't alter in substance (``same`` or ``same_documents``) and
+    that still finished is left out: its different answers are chance, not the change's effect.
+    """
     return [c['case_id'] for c in comparison['cases']
-            if c['verdict'] in ('worsened', 'mixed') or c['processing']['flow'] == 'broke'
-            or any(f['verified'] == 'regressed' for f in c['facts'])]
+            if c['processing']['flow'] == 'broke' or any(f['verified'] == 'regressed' for f in c['facts'])
+            or c['verdict'] in ('worsened', 'mixed') and c['input'] not in CHANCE]
 
 
 def unfinished(comparison):

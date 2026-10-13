@@ -66,6 +66,15 @@ class Regressions(ExperimentError):
         super().__init__(f'{len(cases)} cases got worse in the confirm round')
 
 
+def same_documents(before, after):
+    """Whether two case items hold the same documents in the same order."""
+    def shas(item):
+        documents = item.get('documents') if isinstance(item, dict) else None
+        return [d.get('sha256') for d in documents] if isinstance(documents, list) else None
+    found = shas(before)
+    return found is not None and found == shas(after)
+
+
 class Lab:
     def __init__(self, root=None, pipelines=None, datasets=None, runner=None):
         self.root = Path(root or paths().experiments)
@@ -185,14 +194,21 @@ class Lab:
         return {'keys': keys, 'focus': focus}
 
     def input_changes(self, before, after):
-        """Per key, how its input at the focus differs between two runs: changed, added or removed."""
+        """Per key, how its input at the focus differs between two runs: changed, added or removed.
+
+        A changed case whose documents are the same, in the same order, is ``same_documents``: only
+        details such as the docket labels in its text changed, so its answers can differ only by chance.
+        """
         found = {}
         for name in sorted(set(before) | set(after)):
             if before.get(name) == after.get(name) or name not in before or name not in after:
                 continue
-            counts = dataset_diff(self.datasets.open(before[name]), self.datasets.open(after[name]))
+            old, new = self.datasets.open(before[name]), self.datasets.open(after[name])
+            counts = dataset_diff(old, new)
             for change in ('changed', 'added', 'removed'):
                 for key in counts[change]:
+                    if change == 'changed' and key not in found and same_documents(old.get(key), new.get(key)):
+                        found[key] = 'same_documents'
                     found.setdefault(key, change)
         return found
 
@@ -221,15 +237,15 @@ class Lab:
         folder = self.folder(name)/'plans'
         return {r: read_json(folder/f'{r}.json') for r in ROUNDS if (folder/f'{r}.json').exists()}
 
-    def run(self, name, round_name='probe', mode='send', limit=0.0, resamples=0, resend_failed=False, workers=4,
-            transport=None):
+    def run(self, name, round_name='probe', mode='send', limit=0.0, resamples=0, resend_failed=False, workers=16,
+            transport=None, resend_max_tokens=None):
         record = self.load(name)
         candidate, base = self.candidate(record), self.pipelines.load(record['baseline'])
         keys, focus = self.keys(record, round_name), self.focus(record)
         full = self.baseline_run(record, base)
         base_inputs = self.baseline_inputs(record, full)
         options = {'mode': mode, 'limit': limit, 'resamples': resamples, 'resend_failed': resend_failed,
-                   'workers': workers, 'transport': transport}
+                   'resend_max_tokens': resend_max_tokens, 'workers': workers, 'transport': transport}
         run = self.runner.run(f'{name}-{round_name}-{candidate["id"][2:10]}', candidate['id'], record['inputs'], at=record['start'],
                               save_all=True, note=f'Experiment {name}, {round_name} round',
                               labels={'experiment': name, 'round': round_name, 'side': 'candidate'},

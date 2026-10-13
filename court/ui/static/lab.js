@@ -171,10 +171,11 @@ async function renderDataset_lab(seq, r) {
 const MEASURES = [
   ['Cases fully processed', m => m.processed, m => 'of ' + fmt(m.cases), 1],
   ['Uncertain dispositions', m => m.uncertain, null, -1],
-  ['Docket records', m => m.records, null, 1],
+  ['Dockets with a record', m => m.dockets, m => fmt(m.records) + (m.records === 1 ? ' record' : ' records'), 1],
+  ['Duplicate records', m => m.duplicate_records, m => 'the same docket in more than one case', -1],
   ['Records with a known duration', m => m.duration_known, m => m.records ? pct(m.duration_known, m.records) + '% of records' : 'no records', 1],
   ['Exact durations', m => m.duration_exact, null, 1],
-  ['Research facts answered', m => m.facts_known, m => m.fact_slots ? pct(m.facts_known, m.fact_slots) + '% of ' + fmt(m.fact_slots) : 'no records', 1],
+  ['Facts answered, on records both sides have', m => m.matched_known, m => m.matched_slots ? pct(m.matched_known, m.matched_slots) + '% of ' + fmt(m.matched_slots) : 'no shared records', 1],
   ['Evidence warnings', m => m.warnings, null, -1],
   ['Unverified quotations', m => m.unverified_quotes, null, -1],
 ];
@@ -249,7 +250,7 @@ async function impactView(seq, o, r, head) {
   if (o.impact.groups.selected?.inputs?.same) outcome.append(el('p', 'context-note', node('strong', 'Inputs. '),
     `${fmt(o.impact.groups.selected.inputs.same)} of these cases had the same input as the baseline at ${o.experiment?.focus || 'the focus'}; any change in them came from chance or from how cases were batched, not from the change being tested.`));
   const measures = section('Quality measures', 'The round\'s cases, baseline versus candidate. Higher is better except uncertain dispositions, warnings and unverified quotations.', scorecard(g, o.impact.accuracy, o.impact.reference));
-  const moved = section('Where answers moved', 'Each research fact across compared records. Quotations and wording are excluded; records present on one side only are counted as gained or lost records instead.',
+  const moved = section('Where answers moved', 'Each research fact across compared records, matched by docket even when a record moved to another case. Quotations and wording are excluded; records present on one side only are counted as gained or lost records instead.',
     factMap(g.fact_map, o.impact.questions));
   const attention = section('Needs attention', 'Worsened, mixed and changed cases first.');
   page(head, outcome, measures, moved, attention);

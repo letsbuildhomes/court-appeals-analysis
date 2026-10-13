@@ -270,6 +270,9 @@ class ModelsTests(unittest.TestCase):
         self.assertEqual((value, kind), ({'ok': 1}, 'reused'))
         with self.assertRaises(BudgetRefused):
             self.models('r3', mode='send', limit=0.0).call(self.provider, {**self.request, 'max_tokens': 5})
+        # The cap limits each execution: continuing a run doesn't count what it spent before.
+        self.assertEqual(self.models('r1', mode='send', limit=0.0).spent(execution=True), 0)
+        self.assertGreater(self.models('r1', mode='send', limit=0.0).spent(), 0)
         with self.assertRaises(NotSent):
             self.models('r4', mode='dry').call(self.provider, {**self.request, 'max_tokens': 6})
         self.assertEqual(len(self.sent), 1)
@@ -328,7 +331,7 @@ class ModelsTests(unittest.TestCase):
         step = summary['steps'][0]
         self.assertEqual((step['charged_usd'], step['outstanding_usd'], step['in_flight']), (0.01, 0.04, 1))
 
-    def test_failed_deliveries_are_resent_only_when_allowed_and_once_per_run(self):
+    def test_failed_deliveries_are_resent_only_when_allowed_and_once_per_execution(self):
         self.models(replies=[answer('{"x"', reason='length')], mode='send', limit=1.0)
         with self.assertRaises(DeliveryFailed):
             self.models(replies=[answer('{"x"', reason='length')], mode='send', limit=1.0).call(self.provider, self.request)
@@ -338,10 +341,13 @@ class ModelsTests(unittest.TestCase):
                              resend_failed=True)
         with self.assertRaises(DeliveryFailed):
             resend.call(self.provider, self.request)
-        # The same run, resumed, does not resend the same call again.
+        # Within one execution the call is resent once; continuing the run may resend it once more.
         with self.assertRaises(DeliveryFailed):
-            self.models('r2', mode='send', limit=1.0, resend_failed=True).call(self.provider, self.request)
+            resend.call(self.provider, self.request)
         self.assertEqual(len(self.sent), 2)
+        again = self.models('r2', replies=[answer('{"x": 1}')], mode='send', limit=1.0, resend_failed=True)
+        self.assertEqual(again.call(self.provider, self.request)[2], 'resent')
+        self.assertEqual(len(self.sent), 3)
         # Each run is charged for its own attempt.
         self.assertGreater(self.models('r1').spent(), 0)
         self.assertGreater(self.models('r2').spent(), 0)
