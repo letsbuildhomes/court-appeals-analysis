@@ -1,6 +1,6 @@
 # Review checks two cases per request
 
-- Status: open
+- Status: decided
 - Opened: 2026-10-12
 - Needed: any time (deferred by choice)
 
@@ -36,3 +36,8 @@ can change for reasons unrelated to the change being tested.
   first new case changes, and most reviews will be sent again whether pairs
   stay or not. Pairs also double the damage of a review that runs out of
   output ([017](017-review-output-limit.md)): the failed call breaks both cases.
+- 2026-10-13: Decided: review checks one case per call from now on. The
+  `docket-cases` pipeline sets `batch_cases: 1`. The lab now lets a pipeline
+  that batches nothing use a baseline run over just the round's cases (`lab
+  baseline`), so experiments against the reference set don't need a run over
+  the whole corpus.

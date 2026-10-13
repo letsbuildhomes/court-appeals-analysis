@@ -25,11 +25,18 @@ at the focus differs from the baseline's, plus cases no longer there) or
 ``all``. Cases whose input at the focus is unchanged can still change, by
 chance or because a step batches cases; the comparison marks them.
 
-The baseline side is read, never run: from the baseline's complete run, one
-over everything from the same start on the same inputs with every step saved.
-Its final results give the comparison and its step outputs the step-by-step
-diff. A confirm round over every case leaves such a run for its candidate, so
-each adopted pipeline has one; otherwise the round asks for one.
+The baseline side is read, never run by a round: from the baseline's complete
+run, one over everything from the same start on the same inputs with every
+step saved. Its final results give the comparison and its step outputs the
+step-by-step diff. A confirm round over every case leaves such a run for its
+candidate, so each adopted pipeline has one.
+
+A baseline whose steps treat each case on its own, with no step batching
+several cases into one call, gives the same answers on a subset as over
+everything. For such a baseline a run over just the round's cases will do:
+``baseline`` makes one over the reference set (or given keys), so experiments
+against the reference set never pay for the whole corpus. A batching
+baseline still needs its complete run.
 
 A plan's dry run is kept under ``data/estimates``, apart from the runs that
 process data.
@@ -46,7 +53,7 @@ import re
 from court.config import paths
 from court.core.datasets import Datasets, diff as dataset_diff
 from court.core.hashing import read_json, save_json
-from court.core.pipelines import Pipelines, diff as pipeline_diff, find
+from court.core.pipelines import Pipelines, diff as pipeline_diff, find, walk
 from court.core.runner import Runner
 from court.lab import compare
 
@@ -64,6 +71,11 @@ class Regressions(ExperimentError):
     def __init__(self, cases):
         self.cases = cases
         super().__init__(f'{len(cases)} cases got worse in the confirm round')
+
+
+def batching(resolved):
+    """Whether any step of a pipeline puts several cases into one model call (``batch_cases`` above 1)."""
+    return any((node.get('settings') or {}).get('batch_cases', 1) > 1 for _, node in walk(resolved['root']))
 
 
 def same_documents(before, after):
@@ -155,24 +167,60 @@ class Lab:
             raise ExperimentError(f'The {round_name} round has no cases')
         return sorted(keys)
 
-    def baseline_run(self, record, base):
-        """The baseline's complete run: over everything from the experiment's start, every step saved.
+    def baseline_run(self, record, base, cases=None):
+        """The baseline's run to read the round's baseline side from, every step saved.
 
-        A round reads the baseline side from it rather than running the baseline again. Each
-        confirm round over every case leaves one for its candidate, which adopting makes production.
+        Its complete run, over everything from the experiment's start, comes first. A baseline
+        that batches no cases together may instead use a run over the round's ``cases`` at the
+        experiment's focus, such as one ``baseline`` made over the reference set.
         """
-        start = record['start']
-        for run in sorted(self.runner.all(), key=lambda r: r.get('finished_at') or '', reverse=True):
-            if run['pipeline'] == base['id'] and run['keys'] is None and not run.get('focus') \
-                    and run['options'].get('save_all') and run.get('status') in ('complete', 'stopped') \
-                    and self.runner.inputs_at(run, start) == record['inputs']:
+        start, focus = record['start'], self.focus(record)
+        runs = [r for r in sorted(self.runner.all(), key=lambda r: r.get('finished_at') or '', reverse=True)
+                if r['pipeline'] == base['id'] and r['options'].get('save_all')
+                and r.get('status') in ('complete', 'stopped') and self.runner.inputs_at(r, start) == record['inputs']]
+        for run in runs:
+            if run['keys'] is None and not run.get('focus'):
                 return run
+        if cases is not None and isinstance(cases, list) and not batching(base):
+            for run in runs:
+                limited = (run.get('focused') or {}).get('keys') if run.get('focus') else run['keys']
+                at = (run.get('focus') or {}).get('at') or run['at']
+                if limited is not None and at == focus and set(cases) <= set(limited):
+                    return run
+        if not batching(base):
+            raise ExperimentError(f'The baseline {base["id"]} has no run covering these cases. Make one with '
+                                  f'python -m court lab baseline {record["name"]} (free from the cache when its '
+                                  f'calls are saved; add --send --max-spend for new calls)')
         command = ' '.join(['python -m court run NAME', base['id'], '--save-all',
                             *([f'--at {start}'] if start else []),
                             *(f'--input {n}={d}' for n, d in sorted(record['inputs'].items()))])
         raise ExperimentError(f'The baseline {base["id"]} has no complete run with every step saved to compare '
-                              f'with. Run it once over everything (free from the cache when its calls are saved): '
+                              f'with, and it batches cases, so a run over some of them would answer differently. '
+                              f'Run it once over everything (free from the cache when its calls are saved): '
                               f'{command}')
+
+    def baseline(self, name, keys=None, mode='cached', limit=0.0, resend_failed=False, resend_max_tokens=None,
+                 workers=16, transport=None):
+        """Run the experiment's baseline over the reference set, or ``keys``, at its focus, every step saved.
+
+        Only for a baseline that batches no cases together; a round then reads its baseline side
+        from this run.
+        """
+        record = self.load(name)
+        base = self.pipelines.load(record['baseline'])
+        if batching(base):
+            raise ExperimentError(f'The baseline {base["id"]} batches cases, so a run over some of them would '
+                                  f'answer differently from its complete run; run it over everything instead')
+        if keys is None:
+            if not record.get('reference'):
+                raise ExperimentError('The experiment has no reference set; give the keys')
+            keys = self.datasets.open(record['reference']).keys()
+        return self.runner.run(f'{name}-baseline-{base["id"][2:10]}', base['id'], record['inputs'],
+                               at=record['start'], keys=sorted(keys), focus=self.focus(record), save_all=True,
+                               note=f'Baseline of experiment {name}, over its reference set',
+                               labels={'experiment': name, 'side': 'baseline'}, mode=mode, limit=limit,
+                               resend_failed=resend_failed, resend_max_tokens=resend_max_tokens, workers=workers,
+                               transport=transport)
 
     def baseline_inputs(self, record, full):
         """The datasets the baseline's complete run fed to the focus."""
@@ -217,7 +265,7 @@ class Lab:
         record = self.load(name)
         candidate, base = self.candidate(record), self.pipelines.load(record['baseline'])
         keys = self.keys(record, round_name)
-        base_inputs = self.baseline_inputs(record, self.baseline_run(record, base))
+        base_inputs = self.baseline_inputs(record, self.baseline_run(record, base, keys))
         # The dry run is working material, kept apart from the runs that process data.
         estimates = Runner(self.pipelines, self.datasets, self.runner.root.parent/'estimates', self.runner.store,
                            self.runner.cache, self.runner.raw)
@@ -242,7 +290,7 @@ class Lab:
         record = self.load(name)
         candidate, base = self.candidate(record), self.pipelines.load(record['baseline'])
         keys, focus = self.keys(record, round_name), self.focus(record)
-        full = self.baseline_run(record, base)
+        full = self.baseline_run(record, base, keys)
         base_inputs = self.baseline_inputs(record, full)
         options = {'mode': mode, 'limit': limit, 'resamples': resamples, 'resend_failed': resend_failed,
                    'resend_max_tokens': resend_max_tokens, 'workers': workers, 'transport': transport}

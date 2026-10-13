@@ -17,7 +17,10 @@
     },
     {
       "at": "extract/review",
-      "step": "review:docket-target"
+      "step": "review:docket-target",
+      "settings": {
+        "batch_cases": 1
+      }
     }
   ]
 }

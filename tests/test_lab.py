@@ -25,7 +25,7 @@ from court.core.step import Step
 class Judge(Step):
     inputs = {'cases': None}
     output = 'results'
-    defaults = {'longer_than': 3}
+    defaults = {'longer_than': 3, 'batch_cases': 1}
 
     def run(self, inputs, ctx):
         out = {}
@@ -231,14 +231,28 @@ class LabTests(unittest.TestCase):
         self.assertEqual(confirm['summary']['inputs'], {'changed': 1, 'removed': 1, 'same': 2})
         self.lab.adopt('longer')
 
-    def test_a_round_needs_the_baselines_complete_run(self):
-        base = self.pipelines.load('production')
-        self.runner.run('partial', base['id'], {'cases': self.words.id}, keys=['a'], save_all=True)
-        (self.runner.root/'full/run.json').unlink()
+    def test_a_baseline_that_batches_needs_its_complete_run(self):
+        batched = self.pipelines.resolve({'name': 'batched', 'root': {'name': 'judge', 'step': 'toy:judge',
+                                          'save': 'results', 'settings': {'batch_cases': 2}}})
+        self.pipelines.set_tag('production', batched['id'])
+        self.runner.run('partial', batched['id'], {'cases': self.words.id}, keys=['a'], save_all=True)
         self.lab.new('looser', 'Shorter words count', inputs={'cases': self.words.id}, probe=['a'],
                      changes=[{'at': '', 'settings': {'longer_than': 2}}])
         with self.assertRaisesRegex(ExperimentError, 'no complete run'):
             self.lab.run('looser', 'probe', mode='cached')
+        with self.assertRaisesRegex(ExperimentError, 'batches cases'):
+            self.lab.baseline('looser', keys=['a'])
+
+    def test_a_baseline_that_doesnt_batch_can_run_over_just_the_rounds_cases(self):
+        (self.runner.root/'full/run.json').unlink()
+        self.lab.new('looser', 'Shorter words count', inputs={'cases': self.words.id}, probe=['a'],
+                     confirm=['a', 'b'], changes=[{'at': '', 'settings': {'longer_than': 2}}])
+        with self.assertRaisesRegex(ExperimentError, 'lab baseline looser'):
+            self.lab.run('looser', 'probe', mode='cached')
+        made = self.lab.baseline('looser', keys=['a', 'b'])
+        probe = self.lab.run('looser', 'probe', mode='cached')
+        self.assertEqual(probe['baseline']['run'], made['name'])
+        self.assertEqual(self.lab.run('looser', 'confirm', mode='cached')['summary']['cases'], 2)
 
     def test_a_focus_limits_only_the_focused_step(self):
         tree = self.two_steps()

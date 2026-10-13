@@ -29,3 +29,15 @@ extraction experiments can't be judged.
 first so reference cases don't need relabeling. Then draft a candidate list
 with reasons for approval before spending anything on labeling.
 `docs/reference-selection-proposal.md` has a more formal sampling proposal.
+
+## Progress
+
+- 2026-10-13: Plan agreed with the user. The reference set is drawn from the
+  one-docket case list ([015](015-grouping-quality.md)). It mixes a random
+  slice of all cases, so ordinary exclusions are in it and triage can be
+  scored, with deliberately chosen hard cases. Selection uses September's
+  saved answers and case shapes as hints, without triaging the corpus again;
+  the labels establish the true scope. The baseline is the new pipeline run
+  over the reference set alone (`lab baseline`, about $1), and experiments
+  such as a Jev triage are compared against it. The user wants to discuss the
+  selection criteria before a slate is drafted.

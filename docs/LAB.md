@@ -92,12 +92,28 @@ run for the baseline side. The round saves the comparison in
 shows where the change took effect. When the baseline has no complete run,
 the round says so and gives the command for one; from the cache it is free.
 
+A baseline that reviews one case per call (no step with `batch_cases` above
+1) answers a subset exactly as it would answer everything, so it doesn't
+need a complete run. `lab baseline` runs it over the experiment's reference
+set, or `--keys`, and rounds on those cases read their baseline side from
+that run:
+
+```sh
+python -m court lab baseline strict-review --send --max-spend 2   # the baseline over the reference set
+```
+
+Probes should be small: an explicit `--keys` list of the cases the change
+targets. `--keys changed` picks every case whose input changed, which for a
+change that touches many cases is nearly a full run.
+
 A plan saves its estimate in `experiments/NAME/plans/ROUND.json`, which the
 web app shows before the round runs. Its dry run is kept in `data/estimates`,
 out of the runs list.
 
 Rerunning a round continues it: finished work comes from the cache, and
-`--resend-failed` resends failed deliveries once. `--resamples N` lets a step
+`--resend-failed` resends failed deliveries once more each time, with
+`--resend-max-tokens` for a larger output limit. `--max-spend` limits what
+one execution spends; earlier executions of the run don't count. `--resamples N` lets a step
 try up to N further samples when it rejects an answer.
 
 ## 4. Confirm and adopt
@@ -118,8 +134,9 @@ answers yes without asking.
 The September review step reviews cases in pairs. Run on a subset, cases
 are paired differently than in production, so their review calls are new
 even when nothing about review changed. A cached run reports those cases as
-not run; a sending run pays for them. Experiments on review should keep this
-in mind, and the reference set's batches should be fixed once.
+not run; a sending run pays for them. Pipelines after September review one
+case per call (`batch_cases: 1`), which removes this and lets a baseline run
+over just the reference set.
 
 ## Other tools
 

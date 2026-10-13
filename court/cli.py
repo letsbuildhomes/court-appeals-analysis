@@ -140,6 +140,11 @@ def lab(args):
                          resend_max_tokens=args.resend_max_tokens, workers=args.workers)
         show({k: result[k] for k in ('round', 'status', 'regressions', 'accuracy', 'cost')}
              | {'headline': result['summary']['headline'], 'verdicts': result['summary']['verdicts']})
+    elif args.action == 'baseline':
+        record = lab.baseline(args.name, keys=key_list(args), mode=mode(args), limit=args.max_spend or 0.0,
+                              resend_failed=args.resend_failed, resend_max_tokens=args.resend_max_tokens,
+                              workers=args.workers)
+        show({k: record[k] for k in ('name', 'pipeline', 'status', 'output', 'items', 'cost')})
     elif args.action == 'adopt':
         try:
             entry = lab.adopt(args.name, args.tag, note=args.note or '', accept_regressions=args.accept_regressions)
@@ -278,7 +283,7 @@ def parser():
     p.set_defaults(func=dataset)
 
     p = sub.add_parser('lab', help='Experiments')
-    p.add_argument('action', choices=('new', 'plan', 'run', 'adopt', 'list'))
+    p.add_argument('action', choices=('new', 'plan', 'run', 'baseline', 'adopt', 'list'))
     p.add_argument('name', nargs='?')
     p.add_argument('--hypothesis')
     p.add_argument('--baseline', default='production')
